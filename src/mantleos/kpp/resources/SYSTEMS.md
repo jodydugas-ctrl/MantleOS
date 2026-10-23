@@ -145,3 +145,11 @@ and tests, source digests and transport never grant Baker acceptance. The same
 implementation and example ship in both projects. See KPP's docs/ORGAN-SAVE.md.
 
 See [artisanal construction](docs/ARTISANAL-CONSTRUCTION.md) for role-neutral Baker responsibility, optional Chase and augmentation evidence.
+
+## Recipe-selected Engram carriers
+
+Fresh Engrams share identity, persona and append-only memory across VCW cartridge
+and Chroma PNG encodings. Select exactly one carrier ingredient with Engram
+continuity. Raven is the Engram construction default; explicit personas replace
+it. KPP workflow roles remain model-neutral. New carriers begin without inherited
+history or approval; see examples/engrams/README.md.

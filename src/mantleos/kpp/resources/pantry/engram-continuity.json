@@ -1,16 +1,15 @@
 {
   "schema": "kpp.ingredient/1",
   "id": "engram-continuity",
-  "version": "0.1.0",
-  "function": "A small append-only hash-linked memory ledger demonstration. (minimal executable example; full organ not included)",
-  "status": "reference",
+  "version": "0.2.0",
+  "function": "Shared append-only Engram memory and fresh persona-aware construction",
+  "status": "ready",
   "preferred_for": [
     "bioagent",
     "passover",
     "mantleos"
   ],
   "compatible_tissues": [
-    "anchor",
     "python",
     "mixed"
   ],
@@ -20,26 +19,33 @@
   "minimum_fidelity": 1,
   "dependencies": [],
   "capabilities": [
-    "A small append-only hash-linked memory ledger demonstration. (minimal executable example; full organ not included)"
+    "Append-only memory with provenance"
   ],
   "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
-  "verified_with": "Bundled Anchor emission and Python specimen tests; NOT complete MantleOS organ runtime",
-  "provenance": "Original KPP example inspired by privately provided MantleOS files; no MantleOS runtime source copied.",
+  "verified_with": "Carrier-specific round-trip and fresh-birth tests; recipe acceptance remains separate",
+  "provenance": "Current shared MantleOS implementation; supplied private carriers were reference data only",
+  "usage": {
+    "use_when": "Select an Engram capability or its explicit carrier encoding.",
+    "inputs": [
+      "Fresh verified Body and explicit output path"
+    ],
+    "outputs": [
+      "Verified Engram memory or selected carrier"
+    ],
+    "limits": "No imported histories, automatic activation, remote synchronization or transferred approval."
+  },
+  "source": {
+    "kind": "bundled-files",
+    "files": {
+      "src/mantleos/engram.py": "6f44b80a01c28982bf70f477984b5478c20f21b8a544439becdd70aec164a2e7",
+      "src/mantleos/kpp/engram_carriers.py": "d0382d175f21df7fd953dee3871bd12acfdf70e804a640ce447cc09d19f95158"
+    }
+  },
   "specimen": {
     "path": "specimens/mantleos/memory-ledger.anchor",
     "profile": "EMIT_TEXT/0.2",
     "emits": "python",
     "sha256": "ed9f040a3d8c74f781adf02638445c85ccbbee4cbccf99909287208f3c049924",
     "scope": "Anchor emits a runnable Python reference; the Anchor emitter itself has no dynamic state or Python effects."
-  },
-  "usage": {
-    "use_when": "Select for an example of append-only memory continuity.",
-    "inputs": [
-      "Ledger path and text records"
-    ],
-    "outputs": [
-      "Hash-linked record log and readback"
-    ],
-    "limits": "Example only; not a complete Engram continuity organ."
   }
 }

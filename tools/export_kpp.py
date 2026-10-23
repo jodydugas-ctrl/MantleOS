@@ -73,6 +73,11 @@ for _name in MODULES:
         for name, blob in files(templates):
             result[name] = blob
             result['tools/kpp_project/' + name] = blob
+    import importlib.util
+    spec=importlib.util.spec_from_file_location('reviewed_examples',package/'kpp/artifacts.py')
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    for name in module.inventory(source):
+        result[name]=(source/name).read_bytes()
     shared = {name: sha(blob) for name, blob in result.items() if name.startswith('src/mantleos/')}
     result['SHARED-SOURCE.json'] = json_bytes({
         'schema': 'mantle.shared-source/1', 'implementation': 'mantleos',

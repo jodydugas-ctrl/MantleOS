@@ -214,3 +214,6 @@ Selective augmentation and role-neutral Baker responsibility are described in
 `docs/ARTISANAL-CONSTRUCTION.md`. Run the synthetic, provider-free example with
 `python -m mantleos.augmentation --output UNUSED_DIRECTORY`. Recipe/4 can select
 `construction.techniques: []` to refine requirements without Chase.
+
+Fresh Raven Engrams support recipe-selected VCW and Chroma carriers. See
+[Engram carrier instructions](docs/ENGRAM-CARRIERS.md).

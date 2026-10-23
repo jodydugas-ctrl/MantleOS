@@ -1,0 +1,47 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "vcw-cartridge-memory",
+  "version": "0.2.0",
+  "function": "Native VCW cartridge encoding of the same portable Engram",
+  "status": "ready",
+  "preferred_for": [
+    "png-transport",
+    "bioagent",
+    "constrained-environments"
+  ],
+  "compatible_tissues": [
+    "python",
+    "mixed"
+  ],
+  "tags": [
+    "portability",
+    "memory"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [
+    "engram-continuity"
+  ],
+  "capabilities": [
+    "Fresh Engram construction",
+    "Verified portable memory transport"
+  ],
+  "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
+  "verified_with": "Carrier-specific round-trip and fresh-birth tests; recipe acceptance remains separate",
+  "provenance": "Current shared MantleOS implementation; supplied private carriers were reference data only",
+  "usage": {
+    "use_when": "Select an Engram capability or its explicit carrier encoding.",
+    "inputs": [
+      "Fresh verified Body and explicit output path"
+    ],
+    "outputs": [
+      "Verified Engram memory or selected carrier"
+    ],
+    "limits": "No imported histories, automatic activation, remote synchronization or transferred approval."
+  },
+  "source": {
+    "kind": "bundled-files",
+    "files": {
+      "src/mantleos/cartridge.py": "56e22f0fc5e3339b8a87b9d29605846db8a68f4df4d3894b3604a21f2546a896"
+    }
+  }
+}

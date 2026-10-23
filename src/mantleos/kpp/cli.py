@@ -25,6 +25,13 @@ def main(argv=None):
     if hasattr(sys.stderr,"reconfigure"):sys.stderr.reconfigure(encoding="utf-8")
     p=argparse.ArgumentParser(prog="kpp",description="Kitchen Party Protocol / local developer tools")
     sub=p.add_subparsers(dest="cmd",required=True)
+    a=sub.add_parser('engram', help='Construct a fresh Engram with a recipe-selected carrier')
+    commands=a.add_subparsers(dest='engram_cmd',required=True)
+    c=commands.add_parser('create')
+    c.add_argument('--recipe',type=Path,required=True)
+    c.add_argument('--output',type=Path,required=True)
+    c.add_argument('--persona',type=Path)
+    c.add_argument('--persona-name')
     sub.add_parser('systems', help='Describe the one shared MantleOS/KPP system')
     a=sub.add_parser('language-plan', help='Report recipe implementation choices without execution')
     a.add_argument('--recipe', type=Path, required=True)
@@ -235,7 +242,12 @@ def main(argv=None):
     try:
         if args.cmd in ("doctor","pantry","new","fit","reflex-plan"):
             repo=args.repo or find_repo_root()
-        if args.cmd=='systems':
+        if args.cmd=='engram':
+            from .engram_carriers import create
+            print_json(create(read_json(args.recipe),args.output,
+                persona=args.persona.read_text(encoding='utf-8') if args.persona else None,
+                persona_name=args.persona_name))
+        elif args.cmd=='systems':
             from .systems import describe
             print_json(describe())
         elif args.cmd=='language-plan':
