@@ -1,6 +1,6 @@
 # GitHub consolidation
 
-The intended maintained repositories are `jodydugas-ctrl/MantleOS` and `jodydugas-ctrl/Kitchen-Party-Protocol`. This candidate is prepared locally; publication and deletion require approval of the completed review package.
+The maintained repositories are [MantleOS](https://github.com/jodydugas-ctrl/MantleOS) and [Kitchen-Party-Protocol](https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol). The owner approved the concrete review package on 2026-10-23. MantleOS was published from reviewed initial commit `50c7c1544eacf2cc57bc51b1f9195860e324113e`; KPP retained its history through [ordinary PR #1](https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol/pull/1). The deletion gates below still apply to the historical repositories.
 
 MantleOS starts from `MantleOS-GitHub-Project-2026-10-23-r3.zip`, SHA-256 `af1349b8f6b58e7b2f71208d01867fa17c5242bb5971227856760a1be5eac527`. No old repository history becomes a parent of the new main branch. The four historical projects are preserved as inert archive data with independently restorable original backups. Unmerged SCAN work is preserved, not integrated.
 

@@ -82,4 +82,4 @@ techniques and augmentation tests. It is not a published upstream revision.
 
 ## Consolidated repository pin
 
-The selected clean KPP review commit is recorded in the upstream lock. Publication status remains explicit; a local commit is not a published revision. CI compares shared bytes with a checkout of the declared commit using `tools/verify_kpp_pin.py`. Future shared changes still originate in KPP and require reviewed promotion.
+The selected clean KPP review commit `aa6aceac62796aa7dc07a9dd20fe040457c109d9` is recorded in the upstream lock. It was published and retained by ordinary PR #1 on 2026-10-23. A fresh GitHub clone verified its ancestry and identical shared bytes; the merged KPP main branch passed all eight hosted jobs. The lock retains the original local-selection metadata, while `docs/provenance.json` records this subsequent publication verification. CI compares shared bytes with a checkout of the declared commit using `tools/verify_kpp_pin.py`. Future shared changes still originate in KPP and require reviewed promotion.

@@ -166,15 +166,18 @@ class LocalHandoffTests(unittest.TestCase):
         updater.check(self.root)
 
     def test_publication_exception_restores_source_and_appends_recovery(self):
+        # Runner temporary directories may have equivalent unresolved path aliases.
+        self.root = self.root/'..'/self.root.name
         directory,_ = self.proposal();before = (self.root/'src/mantleos/anchors.py').read_bytes()
         original = updater._write_target;failed = False
         def fail_once(root,name,content):
             nonlocal failed
-            if Path(root).resolve() == self.root and name == 'src/mantleos/new.py' and not failed:
+            if Path(root).resolve() == self.root.resolve() and name == 'src/mantleos/new.py' and not failed:
                 failed = True;raise OSError('injected publication failure')
             return original(root,name,content)
         with patch.object(updater,'_write_target',fail_once), self.assertRaises(OSError):
             updater.apply(self.root,directory,self.source,reviewed=True,validator=PASS)
+        self.assertTrue(failed, 'The publication failure must actually be injected')
         self.assertEqual(before,(self.root/'src/mantleos/anchors.py').read_bytes())
         updater.check(self.root);files.verify(self.root)
         self.assertFalse((self.root/updater.WORK/'pending.json').exists())

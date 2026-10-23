@@ -212,5 +212,23 @@
   "limits": [
     "Checks do not establish authentication, Baker acceptance, or general historical runtime compatibility.",
     "Hosted CI and fresh remote clones are cutover gates after review approval."
-  ]
+  ],
+  "publication_verification": {
+    "date": "2026-10-23",
+    "fresh_remote_clones": "PASS",
+    "four_public_bundles_refs_and_source_snapshots": "PASS",
+    "kpp_pin_and_exact_shared_bytes": "PASS",
+    "kpp_hosted_main": {
+      "result": "PASS",
+      "jobs": 8,
+      "url": "https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol/actions/runs/40013569868"
+    },
+    "mantle_initial_hosted": {
+      "result": "WINDOWS_TEST_FIX_REQUIRED",
+      "url": "https://github.com/jodydugas-ctrl/MantleOS/actions/runs/40013714073",
+      "detail": "Recovery test compared resolved target with unresolved TEMP path; test now resolves both, uses an explicit path alias, and asserts injection. Runtime source is unchanged."
+    },
+    "latest_hosted_evidence": "https://github.com/jodydugas-ctrl/MantleOS/actions",
+    "deletion_gate": "All current hosted jobs and preservation checks must pass before deletion"
+  }
 }

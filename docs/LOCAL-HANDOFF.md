@@ -99,4 +99,4 @@ recipe/4 and handoff receipts remain historical. Future hosted CI is unexecuted.
 
 ## Consolidated GitHub project
 
-See `docs/CONSOLIDATION.md` for the r3 baseline, full historical repository handoffs, runtime-only distribution scope, exact KPP pin and publication/deletion gates. The original handoff commands above describe the imported container; they are historical once a new repository is published.
+See `docs/CONSOLIDATION.md` for the r3 baseline, full historical repository handoffs, runtime-only distribution scope, exact KPP pin and publication/deletion gates. The original handoff commands and unexecuted-hosted-CI statements above describe the imported container. They are historical following owner-approved publication on 2026-10-23. The new repository retains reviewed initial commit `50c7c1544eacf2cc57bc51b1f9195860e324113e`; current hosted evidence is available in [GitHub Actions](https://github.com/jodydugas-ctrl/MantleOS/actions). Fresh remote clones restored all four public bundles and verified every archived source blob and retained ref.
