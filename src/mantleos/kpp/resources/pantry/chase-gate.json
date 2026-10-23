@@ -1,0 +1,47 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "chase-gate",
+  "version": "0.1.0",
+  "function": "A scope-limited target-satisfaction and redirect decision. (minimal executable example; full organ not included)",
+  "status": "reference",
+  "preferred_for": [
+    "all",
+    "agent",
+    "application"
+  ],
+  "compatible_tissues": [
+    "anchor",
+    "python",
+    "mixed"
+  ],
+  "tags": [
+    "chase",
+    "verification"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "A scope-limited target-satisfaction and redirect decision. (minimal executable example; full organ not included)"
+  ],
+  "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
+  "verified_with": "Bundled Anchor emission and Python specimen tests; NOT complete MantleOS organ runtime",
+  "provenance": "Original KPP example inspired by privately provided MantleOS files; no MantleOS runtime source copied.",
+  "specimen": {
+    "path": "specimens/mantleos/chase-stop.anchor",
+    "profile": "EMIT_TEXT/0.2",
+    "emits": "python",
+    "sha256": "455ce6b45bad7956d7c3456049d21ffec4e9471f3b33e9deb3cc0a299e374896",
+    "scope": "Anchor emits a runnable Python reference; the Anchor emitter itself has no dynamic state or Python effects."
+  },
+  "usage": {
+    "use_when": "Select when a scoped measurable target needs a stop-or-continue decision.",
+    "inputs": [
+      "Reference and candidate measurements",
+      "Behavior and test results"
+    ],
+    "outputs": [
+      "Target reached or chase active decision"
+    ],
+    "limits": "Bundled example emits Python; no universal Chase planner."
+  }
+}

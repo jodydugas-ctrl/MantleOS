@@ -1,0 +1,19 @@
+{
+  "schema": "mantle.canvas-staged-browser-check/1",
+  "result": "PASS",
+  "surface": "real Codex in-app Chromium, loopback KPP calculator, synthetic inputs",
+  "checks": [
+    "Interactive BUILDING surface before optional extension installation",
+    "2 + 3 = 5 while extension disabled",
+    "9 - 4 = 5 before extension installation",
+    "Installed extension arrives without browser reload",
+    "Inputs 9 and 4, subtraction selection and result 5 survive installation",
+    "New extension produces 25",
+    "Original subtraction still produces 5 afterward",
+    "0/3 unaccepted recipe obligations remain BUILDING after installation",
+    "No captured warning/error console messages"
+  ],
+  "live_llm_generation": "NOT_RUN",
+  "chatgpt_canvas_mount_latency": "NOT_MEASURED",
+  "baker_acceptance": "NOT_GRANTED"
+}

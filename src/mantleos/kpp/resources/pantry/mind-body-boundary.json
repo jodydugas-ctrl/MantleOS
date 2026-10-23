@@ -1,0 +1,46 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "mind-body-boundary",
+  "version": "0.1.0",
+  "function": "A bounded body-side interpreter that admits an intention but does not execute the proposed operation. (minimal executable example; full organ not included)",
+  "status": "reference",
+  "preferred_for": [
+    "bioagent",
+    "autonomy",
+    "integrity"
+  ],
+  "compatible_tissues": [
+    "anchor",
+    "python",
+    "mixed"
+  ],
+  "tags": [
+    "authority",
+    "continuity"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "A bounded body-side interpreter that admits an intention but does not execute the proposed operation. (minimal executable example; full organ not included)"
+  ],
+  "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
+  "verified_with": "Bundled Anchor emission and Python specimen tests; NOT complete MantleOS organ runtime",
+  "provenance": "Original KPP example inspired by privately provided MantleOS files; no MantleOS runtime source copied.",
+  "specimen": {
+    "path": "specimens/mantleos/intent-boundary.anchor",
+    "profile": "EMIT_TEXT/0.2",
+    "emits": "python",
+    "sha256": "17b3834021278df111d9315ba2d2863e8bbf5acd31a45a1dda1e9234781fa4de",
+    "scope": "Anchor emits a runnable Python reference; the Anchor emitter itself has no dynamic state or Python effects."
+  },
+  "usage": {
+    "use_when": "Select when intention must be separated from body actions.",
+    "inputs": [
+      "Structured intent and payload"
+    ],
+    "outputs": [
+      "Admit/reject decision and mapped body operation"
+    ],
+    "limits": "No body-side effects performed by the bundled example."
+  }
+}

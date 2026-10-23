@@ -1,0 +1,73 @@
+{
+  "execution": "not-run",
+  "requires_foreign_execution_approval": true,
+  "entrypoints": [
+    "acp_adapter/__main__.py",
+    "acp_adapter/server.py",
+    "agent/lsp/cli.py",
+    "apps/bootstrap-installer/index.html",
+    "apps/desktop/electron/main.ts",
+    "apps/desktop/index.html",
+    "apps/desktop/src/app/chat/right-rail/index.ts",
+    "apps/desktop/src/app/chat/sidebar/projects/index.ts",
+    "apps/desktop/src/app/contrib/index.ts",
+    "apps/desktop/src/app/session/hooks/use-message-stream/gateway-event/index.ts",
+    "apps/desktop/src/app/session/hooks/use-message-stream/index.ts",
+    "apps/desktop/src/app/session/hooks/use-prompt-actions/index.ts",
+    "apps/desktop/src/app/session/hooks/use-session-actions/index.ts",
+    "apps/desktop/src/components/assistant-ui/embeds/index.ts",
+    "apps/desktop/src/components/assistant-ui/embeds/providers/index.ts",
+    "apps/desktop/src/components/assistant-ui/tool/fallback-model/index.ts",
+    "apps/desktop/src/components/pane-shell/index.ts",
+    "apps/desktop/src/contrib/index.ts",
+    "apps/desktop/src/debug/index.ts",
+    "apps/desktop/src/i18n/index.ts",
+    "apps/desktop/src/lib/chat-messages/index.ts",
+    "apps/desktop/src/lib/preview-annotate/index.ts",
+    "apps/desktop/src/lib/tour/index.ts",
+    "apps/desktop/src/sdk/index.ts",
+    "apps/desktop/src/themes/index.ts",
+    "apps/shared/src/index.ts",
+    "cli.py",
+    "docs/design/kanban-dialogs/index.html",
+    "hermes_cli/main.py",
+    "hermes_cli/proxy/cli.py",
+    "hermes_cli/proxy/server.py",
+    "optional-skills/creative/tldraw-offline/scripts/main.js",
+    "plugins/google_meet/cli.py",
+    "plugins/google_meet/node/cli.py",
+    "plugins/google_meet/node/server.py",
+    "plugins/memory/honcho/cli.py",
+    "plugins/platforms/photon/cli.py",
+    "plugins/teams_pipeline/cli.py",
+    "tui_gateway/server.py",
+    "ui-tui/packages/hermes-ink/index.js",
+    "ui-tui/packages/hermes-ink/src/native-ts/yoga-layout/index.ts",
+    "ui-tui/src/sdk/apps/index.ts",
+    "ui-tui/src/sdk/index.ts",
+    "web/index.html",
+    "web/src/i18n/index.ts",
+    "web/src/plugins/index.ts",
+    "web/src/themes/index.ts"
+  ],
+  "candidate_commands": [
+    {
+      "purpose": "tests",
+      "argv": [
+        "python",
+        "-m",
+        "pytest"
+      ]
+    },
+    {
+      "purpose": "tests",
+      "argv": [
+        "npm",
+        "test"
+      ]
+    }
+  ],
+  "limitations": [
+    "commands are discovery evidence until approved and isolated"
+  ]
+}

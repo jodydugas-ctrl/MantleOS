@@ -1,0 +1,110 @@
+[
+  {
+    "id": 104047539669,
+    "run_id": 34865311621,
+    "workflow_name": "Weekly upstream compatibility",
+    "head_branch": "main",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/34865311621",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAYObd11Q",
+    "head_sha": "92f4facf16d5ebbf0d4939d5d5775325023557b2",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/104047539669",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/34865311621/job/104047539669",
+    "status": "completed",
+    "conclusion": "failure",
+    "created_at": "2026-09-14T15:55:17Z",
+    "started_at": "2026-09-14T15:55:19Z",
+    "completed_at": "2026-09-14T15:57:08Z",
+    "name": "latest-hermes",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-14T15:55:20Z",
+        "completed_at": "2026-09-14T15:55:21Z"
+      },
+      {
+        "name": "Run actions/checkout@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-14T15:55:21Z",
+        "completed_at": "2026-09-14T15:55:22Z"
+      },
+      {
+        "name": "Run actions/setup-python@v6",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-14T15:55:22Z",
+        "completed_at": "2026-09-14T15:55:25Z"
+      },
+      {
+        "name": "Run python -m pip install -e \".[dev]\"",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-14T15:55:25Z",
+        "completed_at": "2026-09-14T15:55:32Z"
+      },
+      {
+        "name": "Run mantle assimilate github.com/nousresearch/hermes-agent --destination .assimilation-work/hermes-agent",
+        "status": "completed",
+        "conclusion": "failure",
+        "number": 5,
+        "started_at": "2026-09-14T15:55:32Z",
+        "completed_at": "2026-09-14T15:57:06Z"
+      },
+      {
+        "name": "Run python scripts/verify_hermes_delta.py .assimilation-work/hermes-agent",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 6,
+        "started_at": "2026-09-14T15:57:06Z",
+        "completed_at": "2026-09-14T15:57:06Z"
+      },
+      {
+        "name": "Run python -m compileall -q .assimilation-work/hermes-agent",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 7,
+        "started_at": "2026-09-14T15:57:06Z",
+        "completed_at": "2026-09-14T15:57:06Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v6",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 13,
+        "started_at": "2026-09-14T15:57:06Z",
+        "completed_at": "2026-09-14T15:57:06Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-09-14T15:57:06Z",
+        "completed_at": "2026-09-14T15:57:06Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-09-14T15:57:06Z",
+        "completed_at": "2026-09-14T15:57:06Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/104047539669",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000002398,
+    "runner_name": "GitHub Actions 1000002398",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

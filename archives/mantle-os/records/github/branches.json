@@ -1,0 +1,71 @@
+[
+  {
+    "name": "main",
+    "commit": {
+      "sha": "8e90a4f84998518d6abd8309dfa285a9ea7e8b24",
+      "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/commits/8e90a4f84998518d6abd8309dfa285a9ea7e8b24"
+    },
+    "protected": true,
+    "protection": {
+      "enabled": true,
+      "required_status_checks": {
+        "enforcement_level": "everyone",
+        "contexts": [
+          "certify (Python 3.10)",
+          "certify (Python 3.11)",
+          "certify (Python 3.12)",
+          "certify (Python 3.13)",
+          "certify (Python 3.14)",
+          "Targeted mutation sweep (Python 3.12)",
+          "Hermes integration (Python 3.12)",
+          "demo-smoke",
+          "windows-contracts",
+          "package"
+        ],
+        "checks": [
+          {
+            "context": "certify (Python 3.10)",
+            "app_id": 15368
+          },
+          {
+            "context": "certify (Python 3.11)",
+            "app_id": 15368
+          },
+          {
+            "context": "certify (Python 3.12)",
+            "app_id": 15368
+          },
+          {
+            "context": "certify (Python 3.13)",
+            "app_id": 15368
+          },
+          {
+            "context": "certify (Python 3.14)",
+            "app_id": 15368
+          },
+          {
+            "context": "Targeted mutation sweep (Python 3.12)",
+            "app_id": 15368
+          },
+          {
+            "context": "Hermes integration (Python 3.12)",
+            "app_id": 15368
+          },
+          {
+            "context": "demo-smoke",
+            "app_id": 15368
+          },
+          {
+            "context": "windows-contracts",
+            "app_id": 15368
+          },
+          {
+            "context": "package",
+            "app_id": 15368
+          }
+        ]
+      }
+    },
+    "protection_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/branches/main/protection"
+  }
+]

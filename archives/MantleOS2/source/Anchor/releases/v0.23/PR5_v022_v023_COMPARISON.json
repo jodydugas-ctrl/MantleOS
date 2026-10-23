@@ -1,0 +1,1350 @@
+{
+  "after": {
+    "certification_state": "PASS",
+    "counts": {
+      "edges": 120102,
+      "evidence": 118593,
+      "files": 1928,
+      "materialized_files": 1928,
+      "nodes": 107886,
+      "semantic_objects": 353130,
+      "semantic_relations": 880953
+    },
+    "coverage": {
+      "budget_reason": null,
+      "budget_triggered": false,
+      "completeness_dimension_state_counts": {
+        "MAPPED": 19,
+        "PARTIAL": 35,
+        "UNKNOWN": 3
+      },
+      "content_unavailable_file_count": 0,
+      "execution_state": "COMPLETE_WITH_EXPLICIT_COVERAGE_VECTOR",
+      "parser_failure_count": 0,
+      "parser_gap_count": 311,
+      "rule": "PASS certifies mechanical integrity of this evidence package, not universal semantic completeness; consult the coverage vector."
+    },
+    "dimensions": {
+      "acquisition": {
+        "attributes": {
+          "blocked": 0,
+          "content_unavailable": 0,
+          "file_count": 1928
+        },
+        "state": "MAPPED"
+      },
+      "capability-provenance": {
+        "attributes": {
+          "extension_receptors": 34,
+          "typed_effects": 1
+        },
+        "state": "PARTIAL"
+      },
+      "conditional-compilation": {
+        "attributes": {
+          "meaning": "directives recorded; exhaustive branch truth requires full build/config context"
+        },
+        "state": "PARTIAL"
+      },
+      "cpp-compiler-ast": {
+        "attributes": {
+          "compiler_ast_mapped": 83,
+          "compiler_ast_partial": 74,
+          "meaning": "BLOCKED/PARTIAL does not suppress conservative fallback extraction",
+          "translation_units": 394
+        },
+        "state": "PARTIAL"
+      },
+      "cpp-type-dispatch": {
+        "attributes": {
+          "type_symbols": 18,
+          "virtual_dispatch_candidates": 0
+        },
+        "state": "PARTIAL"
+      },
+      "events": {
+        "attributes": {},
+        "state": "PARTIAL"
+      },
+      "evidence-integrity": {
+        "attributes": {
+          "issue_count": 13,
+          "severity_counts": {
+            "WARN": 13
+          }
+        },
+        "state": "PARTIAL"
+      },
+      "evidence-traceability": {
+        "attributes": {
+          "anchor_count": 0,
+          "anchors_with_evidence_path": 0
+        },
+        "state": "UNKNOWN"
+      },
+      "extension-receptors": {
+        "attributes": {
+          "candidate_receptors": 379,
+          "capability_factories": 6,
+          "mapped_receptors": 34
+        },
+        "state": "PARTIAL"
+      },
+      "file-census": {
+        "attributes": {
+          "file_count": 1928
+        },
+        "state": "MAPPED"
+      },
+      "guard-error-cancel": {
+        "attributes": {
+          "control_exits": 5044,
+          "error_paths": 229,
+          "guards": 17389,
+          "retry_candidates": 4
+        },
+        "state": "PARTIAL"
+      },
+      "human-surface-bindings": {
+        "attributes": {
+          "bound": 347,
+          "partial": 59,
+          "unresolved": 82
+        },
+        "state": "PARTIAL"
+      },
+      "human-surface-effect-closure": {
+        "attributes": {
+          "closed": 112,
+          "feedback_observed": 59,
+          "partial": 294,
+          "unresolved": 82
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces": {
+        "attributes": {
+          "surface_count": 488
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QAction": {
+        "attributes": {
+          "bound": 130,
+          "partial": 11,
+          "total": 147,
+          "unresolved": 6
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QCheckBox": {
+        "attributes": {
+          "bound": 0,
+          "partial": 18,
+          "total": 18,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QComboBox": {
+        "attributes": {
+          "bound": 0,
+          "partial": 5,
+          "total": 6,
+          "unresolved": 1
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QDialogButtonBox": {
+        "attributes": {
+          "bound": 3,
+          "partial": 0,
+          "total": 3,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/QFontComboBox": {
+        "attributes": {
+          "bound": 1,
+          "partial": 0,
+          "total": 1,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/QKeySequenceEdit": {
+        "attributes": {
+          "bound": 0,
+          "partial": 2,
+          "total": 2,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QLineEdit": {
+        "attributes": {
+          "bound": 3,
+          "partial": 4,
+          "total": 7,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QListView": {
+        "attributes": {
+          "bound": 0,
+          "partial": 1,
+          "total": 1,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QListWidget": {
+        "attributes": {
+          "bound": 1,
+          "partial": 0,
+          "total": 1,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/QPlainTextEdit": {
+        "attributes": {
+          "bound": 0,
+          "partial": 1,
+          "total": 1,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QPushButton": {
+        "attributes": {
+          "bound": 22,
+          "partial": 0,
+          "total": 22,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/QRadioButton": {
+        "attributes": {
+          "bound": 5,
+          "partial": 4,
+          "total": 10,
+          "unresolved": 1
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QSlider": {
+        "attributes": {
+          "bound": 1,
+          "partial": 0,
+          "total": 1,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/QSpinBox": {
+        "attributes": {
+          "bound": 1,
+          "partial": 4,
+          "total": 5,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QTableView": {
+        "attributes": {
+          "bound": 0,
+          "partial": 2,
+          "total": 2,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QTableWidget": {
+        "attributes": {
+          "bound": 1,
+          "partial": 1,
+          "total": 2,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QToolButton": {
+        "attributes": {
+          "bound": 5,
+          "partial": 2,
+          "total": 7,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QTreeView": {
+        "attributes": {
+          "bound": 1,
+          "partial": 0,
+          "total": 1,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/QTreeWidget": {
+        "attributes": {
+          "bound": 0,
+          "partial": 0,
+          "total": 2,
+          "unresolved": 2
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/cli_option": {
+        "attributes": {
+          "bound": 41,
+          "partial": 0,
+          "total": 41,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/cli_positional": {
+        "attributes": {
+          "bound": 1,
+          "partial": 0,
+          "total": 1,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/drag_drop": {
+        "attributes": {
+          "bound": 2,
+          "partial": 0,
+          "total": 2,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/drag_drop_acceptance": {
+        "attributes": {
+          "bound": 2,
+          "partial": 0,
+          "total": 2,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/focus_event": {
+        "attributes": {
+          "bound": 2,
+          "partial": 0,
+          "total": 2,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/keyboard_event": {
+        "attributes": {
+          "bound": 1,
+          "partial": 0,
+          "total": 1,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/keyboard_shortcut": {
+        "attributes": {
+          "bound": 71,
+          "partial": 0,
+          "total": 71,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/os_file_open": {
+        "attributes": {
+          "bound": 0,
+          "partial": 0,
+          "total": 1,
+          "unresolved": 1
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/pointer_event": {
+        "attributes": {
+          "bound": 5,
+          "partial": 0,
+          "total": 5,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/ui_object_reference": {
+        "attributes": {
+          "bound": 46,
+          "partial": 4,
+          "total": 121,
+          "unresolved": 71
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/window_close": {
+        "attributes": {
+          "bound": 2,
+          "partial": 0,
+          "total": 2,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "identity": {
+        "attributes": {},
+        "state": "MAPPED"
+      },
+      "lifecycle": {
+        "attributes": {
+          "reason": "requires Stage 2+ synthesis"
+        },
+        "state": "UNKNOWN"
+      },
+      "nest-boundaries": {
+        "attributes": {},
+        "state": "PARTIAL"
+      },
+      "parser-coverage": {
+        "attributes": {
+          "blocked_files": 0,
+          "partial_files": 81
+        },
+        "state": "PARTIAL"
+      },
+      "permission-guards": {
+        "attributes": {},
+        "state": "PARTIAL"
+      },
+      "persistence-paths": {
+        "attributes": {
+          "operations": 17,
+          "providers": 1,
+          "state_persistence_candidates": 0
+        },
+        "state": "PARTIAL"
+      },
+      "qt-generated-code": {
+        "attributes": {
+          "meaning": "generation contracts mapped without executing specimen build scripts"
+        },
+        "state": "PARTIAL"
+      },
+      "reconstruction-anchors": {
+        "attributes": {
+          "anchor_count": 0,
+          "anchors_with_evidence_path": 0
+        },
+        "state": "UNKNOWN"
+      },
+      "recurrence": {
+        "attributes": {},
+        "state": "PARTIAL"
+      },
+      "scan-resource-budget": {
+        "attributes": {
+          "budget_findings": 0,
+          "inventory_budget_limited_files": 0,
+          "meaning": "MAPPED means configured aggregate ceilings did not truncate the scan; PARTIAL preserves explicit bounded coverage"
+        },
+        "state": "MAPPED"
+      },
+      "scintilla-lexilla-coupling": {
+        "attributes": {
+          "framework_capabilities": 847,
+          "framework_events": 32
+        },
+        "state": "PARTIAL"
+      },
+      "structural-graph": {
+        "attributes": {
+          "edge_count": 120102
+        },
+        "state": "PARTIAL"
+      },
+      "symbols": {
+        "attributes": {
+          "node_count": 107886
+        },
+        "state": "PARTIAL"
+      }
+    },
+    "effect_closure": {
+      "closed_count": 112,
+      "closure_ratio": 0.22950819672131148,
+      "feedback_observed_count": 59,
+      "partial_count": 294,
+      "state": "PARTIAL",
+      "surface_count": 488,
+      "unresolved_count": 82
+    },
+    "engine_version": "0.23.0",
+    "integrity": {
+      "issue_count": 13,
+      "severity_counts": {
+        "WARN": 13
+      },
+      "state": "PARTIAL"
+    },
+    "llm_environment": "DISABLED",
+    "mechanical_health": {
+      "effect_closure_state": "PARTIAL",
+      "integrity_error_count": 0,
+      "integrity_state": "PARTIAL",
+      "package_state": "PASS",
+      "projection_state": "PASS",
+      "queries_passed": 12,
+      "queries_required": 12,
+      "query_state": "PASS",
+      "surface_closure_state": "PARTIAL"
+    },
+    "nest_capabilities": {
+      "boundary_count": 85,
+      "capability_count": 17,
+      "capability_factory_count": 6,
+      "control/error_object_count": 22666,
+      "effect_count": 135,
+      "extension_receptor_count": 413,
+      "persistence_object_count": 18,
+      "state": "PARTIAL"
+    },
+    "specimen": {
+      "acquisition_mode": "manifest",
+      "commit_sha": "f57db52d6760a2ce4149a37190c3adaa586845f5",
+      "fingerprint": {
+        "kind": "provider-tree",
+        "provider": "github",
+        "value": "f0995b128bf6dbc73e5d0f3ef4e4f302f8a3081b"
+      },
+      "provider": "github",
+      "repository": "dail8859/NotepadNext",
+      "specimen_id": "NotepadNext@f57db52d6760a2ce4149a37190c3adaa586845f5",
+      "tree_sha": "f0995b128bf6dbc73e5d0f3ef4e4f302f8a3081b"
+    },
+    "surface_closure": {
+      "bound_count": 347,
+      "closure_ratio": 0.7110655737704918,
+      "partial_count": 59,
+      "presented_surface_count": 13,
+      "state": "PARTIAL",
+      "surface_count": 488,
+      "unresolved_count": 82
+    }
+  },
+  "before": {
+    "certification_state": "PASS",
+    "counts": {
+      "edges": 108485,
+      "evidence": 108230,
+      "files": 1928,
+      "materialized_files": 1928,
+      "nodes": 99221,
+      "semantic_objects": 322470,
+      "semantic_relations": 802226
+    },
+    "coverage": {
+      "budget_reason": null,
+      "budget_triggered": false,
+      "completeness_dimension_state_counts": {
+        "BLOCKED": 1,
+        "MAPPED": 19,
+        "PARTIAL": 33,
+        "UNKNOWN": 4
+      },
+      "content_unavailable_file_count": 0,
+      "execution_state": "COMPLETE_WITH_EXPLICIT_COVERAGE_VECTOR",
+      "parser_failure_count": 0,
+      "parser_gap_count": 394,
+      "rule": "PASS certifies mechanical integrity of this evidence package, not universal semantic completeness; consult the coverage vector."
+    },
+    "dimensions": {
+      "acquisition": {
+        "attributes": {
+          "blocked": 0,
+          "content_unavailable": 0,
+          "file_count": 1928
+        },
+        "state": "MAPPED"
+      },
+      "capability-provenance": {
+        "attributes": {
+          "extension_receptors": 31,
+          "typed_effects": 0
+        },
+        "state": "PARTIAL"
+      },
+      "conditional-compilation": {
+        "attributes": {
+          "meaning": "directives recorded; exhaustive branch truth requires full build/config context"
+        },
+        "state": "PARTIAL"
+      },
+      "cpp-compiler-ast": {
+        "attributes": {
+          "compiler_ast_mapped": 0,
+          "meaning": "BLOCKED/PARTIAL does not suppress conservative fallback extraction",
+          "translation_units": 394
+        },
+        "state": "BLOCKED"
+      },
+      "cpp-type-dispatch": {
+        "attributes": {
+          "type_symbols": 0,
+          "virtual_dispatch_candidates": 0
+        },
+        "state": "UNKNOWN"
+      },
+      "events": {
+        "attributes": {},
+        "state": "PARTIAL"
+      },
+      "evidence-integrity": {
+        "attributes": {
+          "issue_count": 13,
+          "severity_counts": {
+            "WARN": 13
+          }
+        },
+        "state": "PARTIAL"
+      },
+      "evidence-traceability": {
+        "attributes": {
+          "anchor_count": 0,
+          "anchors_with_evidence_path": 0
+        },
+        "state": "UNKNOWN"
+      },
+      "extension-receptors": {
+        "attributes": {
+          "candidate_receptors": 379,
+          "capability_factories": 5,
+          "mapped_receptors": 31
+        },
+        "state": "PARTIAL"
+      },
+      "file-census": {
+        "attributes": {
+          "file_count": 1928
+        },
+        "state": "MAPPED"
+      },
+      "guard-error-cancel": {
+        "attributes": {
+          "control_exits": 3590,
+          "error_paths": 229,
+          "guards": 15736,
+          "retry_candidates": 4
+        },
+        "state": "PARTIAL"
+      },
+      "human-surface-bindings": {
+        "attributes": {
+          "bound": 347,
+          "partial": 59,
+          "unresolved": 82
+        },
+        "state": "PARTIAL"
+      },
+      "human-surface-effect-closure": {
+        "attributes": {
+          "closed": 112,
+          "feedback_observed": 59,
+          "partial": 294,
+          "unresolved": 82
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces": {
+        "attributes": {
+          "surface_count": 488
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QAction": {
+        "attributes": {
+          "bound": 130,
+          "partial": 11,
+          "total": 147,
+          "unresolved": 6
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QCheckBox": {
+        "attributes": {
+          "bound": 0,
+          "partial": 18,
+          "total": 18,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QComboBox": {
+        "attributes": {
+          "bound": 0,
+          "partial": 5,
+          "total": 6,
+          "unresolved": 1
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QDialogButtonBox": {
+        "attributes": {
+          "bound": 3,
+          "partial": 0,
+          "total": 3,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/QFontComboBox": {
+        "attributes": {
+          "bound": 1,
+          "partial": 0,
+          "total": 1,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/QKeySequenceEdit": {
+        "attributes": {
+          "bound": 0,
+          "partial": 2,
+          "total": 2,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QLineEdit": {
+        "attributes": {
+          "bound": 3,
+          "partial": 4,
+          "total": 7,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QListView": {
+        "attributes": {
+          "bound": 0,
+          "partial": 1,
+          "total": 1,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QListWidget": {
+        "attributes": {
+          "bound": 1,
+          "partial": 0,
+          "total": 1,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/QPlainTextEdit": {
+        "attributes": {
+          "bound": 0,
+          "partial": 1,
+          "total": 1,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QPushButton": {
+        "attributes": {
+          "bound": 22,
+          "partial": 0,
+          "total": 22,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/QRadioButton": {
+        "attributes": {
+          "bound": 5,
+          "partial": 4,
+          "total": 10,
+          "unresolved": 1
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QSlider": {
+        "attributes": {
+          "bound": 1,
+          "partial": 0,
+          "total": 1,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/QSpinBox": {
+        "attributes": {
+          "bound": 1,
+          "partial": 4,
+          "total": 5,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QTableView": {
+        "attributes": {
+          "bound": 0,
+          "partial": 2,
+          "total": 2,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QTableWidget": {
+        "attributes": {
+          "bound": 1,
+          "partial": 1,
+          "total": 2,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QToolButton": {
+        "attributes": {
+          "bound": 5,
+          "partial": 2,
+          "total": 7,
+          "unresolved": 0
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/QTreeView": {
+        "attributes": {
+          "bound": 1,
+          "partial": 0,
+          "total": 1,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/QTreeWidget": {
+        "attributes": {
+          "bound": 0,
+          "partial": 0,
+          "total": 2,
+          "unresolved": 2
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/cli_option": {
+        "attributes": {
+          "bound": 41,
+          "partial": 0,
+          "total": 41,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/cli_positional": {
+        "attributes": {
+          "bound": 1,
+          "partial": 0,
+          "total": 1,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/drag_drop": {
+        "attributes": {
+          "bound": 2,
+          "partial": 0,
+          "total": 2,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/drag_drop_acceptance": {
+        "attributes": {
+          "bound": 2,
+          "partial": 0,
+          "total": 2,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/focus_event": {
+        "attributes": {
+          "bound": 2,
+          "partial": 0,
+          "total": 2,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/keyboard_event": {
+        "attributes": {
+          "bound": 1,
+          "partial": 0,
+          "total": 1,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/keyboard_shortcut": {
+        "attributes": {
+          "bound": 71,
+          "partial": 0,
+          "total": 71,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/os_file_open": {
+        "attributes": {
+          "bound": 0,
+          "partial": 0,
+          "total": 1,
+          "unresolved": 1
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/pointer_event": {
+        "attributes": {
+          "bound": 5,
+          "partial": 0,
+          "total": 5,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "human-surfaces/ui_object_reference": {
+        "attributes": {
+          "bound": 46,
+          "partial": 4,
+          "total": 121,
+          "unresolved": 71
+        },
+        "state": "PARTIAL"
+      },
+      "human-surfaces/window_close": {
+        "attributes": {
+          "bound": 2,
+          "partial": 0,
+          "total": 2,
+          "unresolved": 0
+        },
+        "state": "MAPPED"
+      },
+      "identity": {
+        "attributes": {},
+        "state": "MAPPED"
+      },
+      "lifecycle": {
+        "attributes": {
+          "reason": "requires Stage 2+ synthesis"
+        },
+        "state": "UNKNOWN"
+      },
+      "nest-boundaries": {
+        "attributes": {},
+        "state": "PARTIAL"
+      },
+      "parser-coverage": {
+        "attributes": {
+          "blocked_files": 0,
+          "partial_files": 81
+        },
+        "state": "PARTIAL"
+      },
+      "permission-guards": {
+        "attributes": {},
+        "state": "PARTIAL"
+      },
+      "persistence-paths": {
+        "attributes": {
+          "operations": 17,
+          "providers": 1,
+          "state_persistence_candidates": 0
+        },
+        "state": "PARTIAL"
+      },
+      "qt-generated-code": {
+        "attributes": {
+          "meaning": "generation contracts mapped without executing specimen build scripts"
+        },
+        "state": "PARTIAL"
+      },
+      "reconstruction-anchors": {
+        "attributes": {
+          "anchor_count": 0,
+          "anchors_with_evidence_path": 0
+        },
+        "state": "UNKNOWN"
+      },
+      "recurrence": {
+        "attributes": {},
+        "state": "PARTIAL"
+      },
+      "scan-resource-budget": {
+        "attributes": {
+          "budget_findings": 0,
+          "inventory_budget_limited_files": 0,
+          "meaning": "MAPPED means configured aggregate ceilings did not truncate the scan; PARTIAL preserves explicit bounded coverage"
+        },
+        "state": "MAPPED"
+      },
+      "scintilla-lexilla-coupling": {
+        "attributes": {
+          "framework_capabilities": 847,
+          "framework_events": 32
+        },
+        "state": "PARTIAL"
+      },
+      "structural-graph": {
+        "attributes": {
+          "edge_count": 108485
+        },
+        "state": "PARTIAL"
+      },
+      "symbols": {
+        "attributes": {
+          "node_count": 99221
+        },
+        "state": "PARTIAL"
+      }
+    },
+    "effect_closure": {
+      "closed_count": 112,
+      "closure_ratio": 0.22950819672131148,
+      "feedback_observed_count": 59,
+      "partial_count": 294,
+      "state": "PARTIAL",
+      "surface_count": 488,
+      "unresolved_count": 82
+    },
+    "engine_version": "0.22.0",
+    "integrity": {
+      "issue_count": 13,
+      "severity_counts": {
+        "WARN": 13
+      },
+      "state": "PARTIAL"
+    },
+    "llm_environment": "DISABLED",
+    "mechanical_health": {
+      "effect_closure_state": "PARTIAL",
+      "integrity_error_count": 0,
+      "integrity_state": "PARTIAL",
+      "package_state": "PASS",
+      "projection_state": "PASS",
+      "queries_passed": 12,
+      "queries_required": 12,
+      "query_state": "PASS",
+      "surface_closure_state": "PARTIAL"
+    },
+    "nest_capabilities": {
+      "boundary_count": 84,
+      "capability_count": 17,
+      "capability_factory_count": 5,
+      "control/error_object_count": 19559,
+      "effect_count": 134,
+      "extension_receptor_count": 410,
+      "persistence_object_count": 18,
+      "state": "PARTIAL"
+    },
+    "specimen": {
+      "acquisition_mode": "manifest",
+      "commit_sha": "f57db52d6760a2ce4149a37190c3adaa586845f5",
+      "fingerprint": {
+        "kind": "provider-tree",
+        "provider": "github",
+        "value": "f0995b128bf6dbc73e5d0f3ef4e4f302f8a3081b"
+      },
+      "provider": "github",
+      "repository": "dail8859/NotepadNext",
+      "specimen_id": "NotepadNext@f57db52d6760a2ce4149a37190c3adaa586845f5",
+      "tree_sha": "f0995b128bf6dbc73e5d0f3ef4e4f302f8a3081b"
+    },
+    "surface_closure": {
+      "bound_count": 347,
+      "closure_ratio": 0.7110655737704918,
+      "partial_count": 59,
+      "presented_surface_count": 13,
+      "state": "PARTIAL",
+      "surface_count": 488,
+      "unresolved_count": 82
+    }
+  },
+  "dimension_changes": {
+    "capability-provenance": {
+      "numeric_attribute_deltas": {
+        "extension_receptors": {
+          "after": 34,
+          "before": 31,
+          "delta": 3,
+          "delta_percent": 9.677
+        },
+        "typed_effects": {
+          "after": 1,
+          "before": 0,
+          "delta": 1,
+          "delta_percent": null
+        }
+      },
+      "state_after": "PARTIAL",
+      "state_before": "PARTIAL"
+    },
+    "cpp-compiler-ast": {
+      "numeric_attribute_deltas": {
+        "compiler_ast_mapped": {
+          "after": 83,
+          "before": 0,
+          "delta": 83,
+          "delta_percent": null
+        }
+      },
+      "state_after": "PARTIAL",
+      "state_before": "BLOCKED"
+    },
+    "cpp-type-dispatch": {
+      "numeric_attribute_deltas": {
+        "type_symbols": {
+          "after": 18,
+          "before": 0,
+          "delta": 18,
+          "delta_percent": null
+        }
+      },
+      "state_after": "PARTIAL",
+      "state_before": "UNKNOWN"
+    },
+    "extension-receptors": {
+      "numeric_attribute_deltas": {
+        "capability_factories": {
+          "after": 6,
+          "before": 5,
+          "delta": 1,
+          "delta_percent": 20.0
+        },
+        "mapped_receptors": {
+          "after": 34,
+          "before": 31,
+          "delta": 3,
+          "delta_percent": 9.677
+        }
+      },
+      "state_after": "PARTIAL",
+      "state_before": "PARTIAL"
+    },
+    "guard-error-cancel": {
+      "numeric_attribute_deltas": {
+        "control_exits": {
+          "after": 5044,
+          "before": 3590,
+          "delta": 1454,
+          "delta_percent": 40.501
+        },
+        "guards": {
+          "after": 17389,
+          "before": 15736,
+          "delta": 1653,
+          "delta_percent": 10.505
+        }
+      },
+      "state_after": "PARTIAL",
+      "state_before": "PARTIAL"
+    },
+    "structural-graph": {
+      "numeric_attribute_deltas": {
+        "edge_count": {
+          "after": 120102,
+          "before": 108485,
+          "delta": 11617,
+          "delta_percent": 10.708
+        }
+      },
+      "state_after": "PARTIAL",
+      "state_before": "PARTIAL"
+    },
+    "symbols": {
+      "numeric_attribute_deltas": {
+        "node_count": {
+          "after": 107886,
+          "before": 99221,
+          "delta": 8665,
+          "delta_percent": 8.733
+        }
+      },
+      "state_after": "PARTIAL",
+      "state_before": "PARTIAL"
+    }
+  },
+  "invariants": {
+    "both_certification_pass": true,
+    "both_llm_disabled": true,
+    "same_repository": true,
+    "same_specimen_fingerprint": true,
+    "same_tree": true
+  },
+  "numeric_deltas": {
+    "counts.edges": {
+      "after": 120102,
+      "before": 108485,
+      "delta": 11617,
+      "delta_percent": 10.708
+    },
+    "counts.evidence": {
+      "after": 118593,
+      "before": 108230,
+      "delta": 10363,
+      "delta_percent": 9.575
+    },
+    "counts.files": {
+      "after": 1928,
+      "before": 1928,
+      "delta": 0,
+      "delta_percent": 0.0
+    },
+    "counts.materialized_files": {
+      "after": 1928,
+      "before": 1928,
+      "delta": 0,
+      "delta_percent": 0.0
+    },
+    "counts.nodes": {
+      "after": 107886,
+      "before": 99221,
+      "delta": 8665,
+      "delta_percent": 8.733
+    },
+    "counts.semantic_objects": {
+      "after": 353130,
+      "before": 322470,
+      "delta": 30660,
+      "delta_percent": 9.508
+    },
+    "counts.semantic_relations": {
+      "after": 880953,
+      "before": 802226,
+      "delta": 78727,
+      "delta_percent": 9.814
+    },
+    "effect_closure.closed_count": {
+      "after": 112,
+      "before": 112,
+      "delta": 0,
+      "delta_percent": 0.0
+    },
+    "effect_closure.closure_ratio": {
+      "after": 0.22950819672131148,
+      "before": 0.22950819672131148,
+      "delta": 0.0,
+      "delta_percent": 0.0
+    },
+    "effect_closure.feedback_observed_count": {
+      "after": 59,
+      "before": 59,
+      "delta": 0,
+      "delta_percent": 0.0
+    },
+    "effect_closure.partial_count": {
+      "after": 294,
+      "before": 294,
+      "delta": 0,
+      "delta_percent": 0.0
+    },
+    "effect_closure.surface_count": {
+      "after": 488,
+      "before": 488,
+      "delta": 0,
+      "delta_percent": 0.0
+    },
+    "effect_closure.unresolved_count": {
+      "after": 82,
+      "before": 82,
+      "delta": 0,
+      "delta_percent": 0.0
+    },
+    "nest_capabilities.boundary_count": {
+      "after": 85,
+      "before": 84,
+      "delta": 1,
+      "delta_percent": 1.19
+    },
+    "nest_capabilities.capability_count": {
+      "after": 17,
+      "before": 17,
+      "delta": 0,
+      "delta_percent": 0.0
+    },
+    "nest_capabilities.capability_factory_count": {
+      "after": 6,
+      "before": 5,
+      "delta": 1,
+      "delta_percent": 20.0
+    },
+    "nest_capabilities.control/error_object_count": {
+      "after": 22666,
+      "before": 19559,
+      "delta": 3107,
+      "delta_percent": 15.885
+    },
+    "nest_capabilities.effect_count": {
+      "after": 135,
+      "before": 134,
+      "delta": 1,
+      "delta_percent": 0.746
+    },
+    "nest_capabilities.extension_receptor_count": {
+      "after": 413,
+      "before": 410,
+      "delta": 3,
+      "delta_percent": 0.732
+    },
+    "nest_capabilities.persistence_object_count": {
+      "after": 18,
+      "before": 18,
+      "delta": 0,
+      "delta_percent": 0.0
+    },
+    "surface_closure.bound_count": {
+      "after": 347,
+      "before": 347,
+      "delta": 0,
+      "delta_percent": 0.0
+    },
+    "surface_closure.closure_ratio": {
+      "after": 0.7110655737704918,
+      "before": 0.7110655737704918,
+      "delta": 0.0,
+      "delta_percent": 0.0
+    },
+    "surface_closure.partial_count": {
+      "after": 59,
+      "before": 59,
+      "delta": 0,
+      "delta_percent": 0.0
+    },
+    "surface_closure.presented_surface_count": {
+      "after": 13,
+      "before": 13,
+      "delta": 0,
+      "delta_percent": 0.0
+    },
+    "surface_closure.surface_count": {
+      "after": 488,
+      "before": 488,
+      "delta": 0,
+      "delta_percent": 0.0
+    },
+    "surface_closure.unresolved_count": {
+      "after": 82,
+      "before": 82,
+      "delta": 0,
+      "delta_percent": 0.0
+    }
+  },
+  "schema_version": "scan-certification-comparison/0.1"
+}

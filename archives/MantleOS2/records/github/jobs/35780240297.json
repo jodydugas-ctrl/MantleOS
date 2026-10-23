@@ -1,0 +1,166 @@
+[
+  {
+    "id": 106923610059,
+    "run_id": 35780240297,
+    "workflow_name": "SCAN v0.36 authorized runtime validation",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35780240297",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5STPyw",
+    "head_sha": "f27504d1919ae702a55bb0363840cebbf5d81780",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106923610059",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35780240297/job/106923610059",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T20:25:54Z",
+    "started_at": "2026-09-22T20:29:13Z",
+    "completed_at": "2026-09-22T20:30:14Z",
+    "name": "authorized-runtime",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T20:29:14Z",
+        "completed_at": "2026-09-22T20:29:15Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T20:29:15Z",
+        "completed_at": "2026-09-22T20:29:16Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T20:29:16Z",
+        "completed_at": "2026-09-22T20:29:16Z"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T20:29:16Z",
+        "completed_at": "2026-09-22T20:29:17Z"
+      },
+      {
+        "name": "Install v0.36 candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T20:29:17Z",
+        "completed_at": "2026-09-22T20:29:32Z"
+      },
+      {
+        "name": "Run full inherited plus v0.36 tests",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T20:29:32Z",
+        "completed_at": "2026-09-22T20:30:10Z"
+      },
+      {
+        "name": "Prove ordinary scan remains non-executing",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T20:30:10Z",
+        "completed_at": "2026-09-22T20:30:11Z"
+      },
+      {
+        "name": "Create authorized runtime fixture and plan",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-22T20:30:11Z",
+        "completed_at": "2026-09-22T20:30:11Z"
+      },
+      {
+        "name": "Prove wrong authorization fails closed",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-22T20:30:11Z",
+        "completed_at": "2026-09-22T20:30:11Z"
+      },
+      {
+        "name": "Run explicitly authorized runtime validation with network denied",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-09-22T20:30:11Z",
+        "completed_at": "2026-09-22T20:30:11Z"
+      },
+      {
+        "name": "Audit runtime observation boundaries",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-22T20:30:11Z",
+        "completed_at": "2026-09-22T20:30:11Z"
+      },
+      {
+        "name": "Prove failed runtime observation remains a failure",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-22T20:30:11Z",
+        "completed_at": "2026-09-22T20:30:11Z"
+      },
+      {
+        "name": "Upload v0.36 runtime evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T20:30:11Z",
+        "completed_at": "2026-09-22T20:30:12Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 24,
+        "started_at": "2026-09-22T20:30:12Z",
+        "completed_at": "2026-09-22T20:30:12Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 25,
+        "started_at": "2026-09-22T20:30:12Z",
+        "completed_at": "2026-09-22T20:30:12Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 26,
+        "started_at": "2026-09-22T20:30:12Z",
+        "completed_at": "2026-09-22T20:30:13Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 27,
+        "started_at": "2026-09-22T20:30:13Z",
+        "completed_at": "2026-09-22T20:30:13Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106923610059",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000003706,
+    "runner_name": "GitHub Actions 1000003706",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

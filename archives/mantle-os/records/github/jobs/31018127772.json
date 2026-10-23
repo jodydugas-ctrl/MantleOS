@@ -1,0 +1,710 @@
+[
+  {
+    "id": 92347494868,
+    "run_id": 31018127772,
+    "workflow_name": "Zombie Body Audit",
+    "head_branch": "chore/repo-sanitization",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/runs/31018127772",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOSv-f3M8AAAAVgFbx1A",
+    "head_sha": "a0a2db0751469f1b07c225817e442871f1ab22b2",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/jobs/92347494868",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-os/actions/runs/31018127772/job/92347494868",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-05T15:00:52Z",
+    "started_at": "2026-08-05T15:00:55Z",
+    "completed_at": "2026-08-05T15:03:54Z",
+    "name": "certify (Python 3.10)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-05T15:00:56Z",
+        "completed_at": "2026-08-05T15:00:57Z"
+      },
+      {
+        "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-05T15:00:57Z",
+        "completed_at": "2026-08-05T15:00:59Z"
+      },
+      {
+        "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-05T15:00:59Z",
+        "completed_at": "2026-08-05T15:00:59Z"
+      },
+      {
+        "name": "Install Mantle (editable, with all certification extras)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-05T15:00:59Z",
+        "completed_at": "2026-08-05T15:01:04Z"
+      },
+      {
+        "name": "The whole certification, one command",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-05T15:01:04Z",
+        "completed_at": "2026-08-05T15:03:49Z"
+      },
+      {
+        "name": "Upload certification evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-05T15:03:49Z",
+        "completed_at": "2026-08-05T15:03:51Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-08-05T15:03:51Z",
+        "completed_at": "2026-08-05T15:03:51Z"
+      },
+      {
+        "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-05T15:03:51Z",
+        "completed_at": "2026-08-05T15:03:51Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-05T15:03:51Z",
+        "completed_at": "2026-08-05T15:03:51Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/check-runs/92347494868",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000001756,
+    "runner_name": "GitHub Actions 1000001756",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 92347494913,
+    "run_id": 31018127772,
+    "workflow_name": "Zombie Body Audit",
+    "head_branch": "chore/repo-sanitization",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/runs/31018127772",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOSv-f3M8AAAAVgFbyAQ",
+    "head_sha": "a0a2db0751469f1b07c225817e442871f1ab22b2",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/jobs/92347494913",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-os/actions/runs/31018127772/job/92347494913",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-05T15:00:52Z",
+    "started_at": "2026-08-05T15:01:00Z",
+    "completed_at": "2026-08-05T15:03:01Z",
+    "name": "certify (Python 3.14)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-05T15:01:00Z",
+        "completed_at": "2026-08-05T15:01:01Z"
+      },
+      {
+        "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-05T15:01:01Z",
+        "completed_at": "2026-08-05T15:01:03Z"
+      },
+      {
+        "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-05T15:01:03Z",
+        "completed_at": "2026-08-05T15:01:03Z"
+      },
+      {
+        "name": "Install Mantle (editable, with all certification extras)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-05T15:01:03Z",
+        "completed_at": "2026-08-05T15:01:11Z"
+      },
+      {
+        "name": "The whole certification, one command",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-05T15:01:11Z",
+        "completed_at": "2026-08-05T15:02:58Z"
+      },
+      {
+        "name": "Upload certification evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-05T15:02:58Z",
+        "completed_at": "2026-08-05T15:02:59Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-08-05T15:02:59Z",
+        "completed_at": "2026-08-05T15:02:59Z"
+      },
+      {
+        "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-05T15:02:59Z",
+        "completed_at": "2026-08-05T15:02:59Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-05T15:02:59Z",
+        "completed_at": "2026-08-05T15:02:59Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/check-runs/92347494913",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000001757,
+    "runner_name": "GitHub Actions 1000001757",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 92347495027,
+    "run_id": 31018127772,
+    "workflow_name": "Zombie Body Audit",
+    "head_branch": "chore/repo-sanitization",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/runs/31018127772",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOSv-f3M8AAAAVgFbycw",
+    "head_sha": "a0a2db0751469f1b07c225817e442871f1ab22b2",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/jobs/92347495027",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-os/actions/runs/31018127772/job/92347495027",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-05T15:00:52Z",
+    "started_at": "2026-08-05T15:00:55Z",
+    "completed_at": "2026-08-05T15:03:27Z",
+    "name": "certify (Python 3.12)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-05T15:00:55Z",
+        "completed_at": "2026-08-05T15:00:56Z"
+      },
+      {
+        "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-05T15:00:56Z",
+        "completed_at": "2026-08-05T15:00:57Z"
+      },
+      {
+        "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-05T15:00:57Z",
+        "completed_at": "2026-08-05T15:00:57Z"
+      },
+      {
+        "name": "Install Mantle (editable, with all certification extras)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-05T15:00:57Z",
+        "completed_at": "2026-08-05T15:01:02Z"
+      },
+      {
+        "name": "The whole certification, one command",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-05T15:01:02Z",
+        "completed_at": "2026-08-05T15:03:25Z"
+      },
+      {
+        "name": "Upload certification evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-05T15:03:25Z",
+        "completed_at": "2026-08-05T15:03:25Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-08-05T15:03:25Z",
+        "completed_at": "2026-08-05T15:03:25Z"
+      },
+      {
+        "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-05T15:03:25Z",
+        "completed_at": "2026-08-05T15:03:26Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-05T15:03:26Z",
+        "completed_at": "2026-08-05T15:03:26Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/check-runs/92347495027",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000001759,
+    "runner_name": "GitHub Actions 1000001759",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 92347495113,
+    "run_id": 31018127772,
+    "workflow_name": "Zombie Body Audit",
+    "head_branch": "chore/repo-sanitization",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/runs/31018127772",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOSv-f3M8AAAAVgFbyyQ",
+    "head_sha": "a0a2db0751469f1b07c225817e442871f1ab22b2",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/jobs/92347495113",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-os/actions/runs/31018127772/job/92347495113",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-05T15:00:52Z",
+    "started_at": "2026-08-05T15:00:55Z",
+    "completed_at": "2026-08-05T15:03:46Z",
+    "name": "certify (Python 3.13)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-05T15:00:56Z",
+        "completed_at": "2026-08-05T15:00:57Z"
+      },
+      {
+        "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-05T15:00:57Z",
+        "completed_at": "2026-08-05T15:00:59Z"
+      },
+      {
+        "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-05T15:00:59Z",
+        "completed_at": "2026-08-05T15:00:59Z"
+      },
+      {
+        "name": "Install Mantle (editable, with all certification extras)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-05T15:00:59Z",
+        "completed_at": "2026-08-05T15:01:05Z"
+      },
+      {
+        "name": "The whole certification, one command",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-05T15:01:05Z",
+        "completed_at": "2026-08-05T15:03:42Z"
+      },
+      {
+        "name": "Upload certification evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-05T15:03:42Z",
+        "completed_at": "2026-08-05T15:03:43Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-08-05T15:03:43Z",
+        "completed_at": "2026-08-05T15:03:43Z"
+      },
+      {
+        "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-05T15:03:43Z",
+        "completed_at": "2026-08-05T15:03:44Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-05T15:03:44Z",
+        "completed_at": "2026-08-05T15:03:44Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/check-runs/92347495113",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000001760,
+    "runner_name": "GitHub Actions 1000001760",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 92347495199,
+    "run_id": 31018127772,
+    "workflow_name": "Zombie Body Audit",
+    "head_branch": "chore/repo-sanitization",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/runs/31018127772",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOSv-f3M8AAAAVgFbzHw",
+    "head_sha": "a0a2db0751469f1b07c225817e442871f1ab22b2",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/jobs/92347495199",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-os/actions/runs/31018127772/job/92347495199",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-05T15:00:52Z",
+    "started_at": "2026-08-05T15:00:55Z",
+    "completed_at": "2026-08-05T15:03:21Z",
+    "name": "certify (Python 3.11)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-05T15:00:56Z",
+        "completed_at": "2026-08-05T15:00:57Z"
+      },
+      {
+        "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-05T15:00:57Z",
+        "completed_at": "2026-08-05T15:00:58Z"
+      },
+      {
+        "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-05T15:00:58Z",
+        "completed_at": "2026-08-05T15:00:58Z"
+      },
+      {
+        "name": "Install Mantle (editable, with all certification extras)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-05T15:00:58Z",
+        "completed_at": "2026-08-05T15:01:05Z"
+      },
+      {
+        "name": "The whole certification, one command",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-05T15:01:05Z",
+        "completed_at": "2026-08-05T15:03:18Z"
+      },
+      {
+        "name": "Upload certification evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-05T15:03:18Z",
+        "completed_at": "2026-08-05T15:03:18Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-08-05T15:03:18Z",
+        "completed_at": "2026-08-05T15:03:19Z"
+      },
+      {
+        "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-05T15:03:19Z",
+        "completed_at": "2026-08-05T15:03:19Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-05T15:03:19Z",
+        "completed_at": "2026-08-05T15:03:19Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/check-runs/92347495199",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000001761,
+    "runner_name": "GitHub Actions 1000001761",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 92348392664,
+    "run_id": 31018127772,
+    "workflow_name": "Zombie Body Audit",
+    "head_branch": "chore/repo-sanitization",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/runs/31018127772",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOSv-f3M8AAAAVgGSk2A",
+    "head_sha": "a0a2db0751469f1b07c225817e442871f1ab22b2",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/jobs/92348392664",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-os/actions/runs/31018127772/job/92348392664",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-05T15:03:54Z",
+    "started_at": "2026-08-05T15:03:57Z",
+    "completed_at": "2026-08-05T15:05:55Z",
+    "name": "Hermes integration (Python 3.12)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-05T15:03:58Z",
+        "completed_at": "2026-08-05T15:04:00Z"
+      },
+      {
+        "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-05T15:04:00Z",
+        "completed_at": "2026-08-05T15:04:02Z"
+      },
+      {
+        "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-05T15:04:02Z",
+        "completed_at": "2026-08-05T15:04:02Z"
+      },
+      {
+        "name": "Checkout tested Hermes plugin API",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-05T15:04:02Z",
+        "completed_at": "2026-08-05T15:04:06Z"
+      },
+      {
+        "name": "Install Mantle integration dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-05T15:04:06Z",
+        "completed_at": "2026-08-05T15:04:11Z"
+      },
+      {
+        "name": "Hermes addon behavior contracts",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-05T15:04:11Z",
+        "completed_at": "2026-08-05T15:05:51Z"
+      },
+      {
+        "name": "Hermes addon adversarial containment",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-08-05T15:05:51Z",
+        "completed_at": "2026-08-05T15:05:52Z"
+      },
+      {
+        "name": "Post Checkout tested Hermes plugin API",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-05T15:05:52Z",
+        "completed_at": "2026-08-05T15:05:52Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-05T15:05:52Z",
+        "completed_at": "2026-08-05T15:05:52Z"
+      },
+      {
+        "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-08-05T15:05:52Z",
+        "completed_at": "2026-08-05T15:05:52Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-08-05T15:05:52Z",
+        "completed_at": "2026-08-05T15:05:52Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/check-runs/92348392664",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000001772,
+    "runner_name": "GitHub Actions 1000001772",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 92348392760,
+    "run_id": 31018127772,
+    "workflow_name": "Zombie Body Audit",
+    "head_branch": "chore/repo-sanitization",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/runs/31018127772",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOSv-f3M8AAAAVgGSlOA",
+    "head_sha": "a0a2db0751469f1b07c225817e442871f1ab22b2",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/jobs/92348392760",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-os/actions/runs/31018127772/job/92348392760",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-05T15:03:54Z",
+    "started_at": "2026-08-05T15:03:57Z",
+    "completed_at": "2026-08-05T15:04:17Z",
+    "name": "Targeted mutation sweep (Python 3.12)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-05T15:03:59Z",
+        "completed_at": "2026-08-05T15:03:59Z"
+      },
+      {
+        "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-05T15:03:59Z",
+        "completed_at": "2026-08-05T15:04:01Z"
+      },
+      {
+        "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-05T15:04:01Z",
+        "completed_at": "2026-08-05T15:04:01Z"
+      },
+      {
+        "name": "Kill every doctrine-critical mutant",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-05T15:04:01Z",
+        "completed_at": "2026-08-05T15:04:12Z"
+      },
+      {
+        "name": "Upload mutation evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-05T15:04:12Z",
+        "completed_at": "2026-08-05T15:04:14Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-08-05T15:04:14Z",
+        "completed_at": "2026-08-05T15:04:14Z"
+      },
+      {
+        "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-08-05T15:04:14Z",
+        "completed_at": "2026-08-05T15:04:14Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-08-05T15:04:14Z",
+        "completed_at": "2026-08-05T15:04:14Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/check-runs/92348392760",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000001773,
+    "runner_name": "GitHub Actions 1000001773",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

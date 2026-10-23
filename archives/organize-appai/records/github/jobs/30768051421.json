@@ -1,0 +1,1046 @@
+[
+  {
+    "id": 91550202447,
+    "run_id": 30768051421,
+    "workflow_name": "tests",
+    "head_branch": "main",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/runs/30768051421",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOTqeTb88AAAAVUNE6Tw",
+    "head_sha": "e45f0ffc61197693ea7b663426e4cdb2752ebf3c",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/jobs/91550202447",
+    "html_url": "https://github.com/jodydugas-ctrl/organize-appai/actions/runs/30768051421/job/91550202447",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-02T21:30:45Z",
+    "started_at": "2026-08-02T21:30:52Z",
+    "completed_at": "2026-08-02T21:32:03Z",
+    "name": "build (windows-latest, 3.11)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-02T21:30:53Z",
+        "completed_at": "2026-08-02T21:30:55Z"
+      },
+      {
+        "name": "Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-02T21:30:55Z",
+        "completed_at": "2026-08-02T21:31:03Z"
+      },
+      {
+        "name": "Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-02T21:31:03Z",
+        "completed_at": "2026-08-02T21:31:04Z"
+      },
+      {
+        "name": "Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-02T21:31:04Z",
+        "completed_at": "2026-08-02T21:31:08Z"
+      },
+      {
+        "name": "Version info",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-02T21:31:08Z",
+        "completed_at": "2026-08-02T21:31:36Z"
+      },
+      {
+        "name": "Test with pytest",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-02T21:31:36Z",
+        "completed_at": "2026-08-02T21:31:43Z"
+      },
+      {
+        "name": "Check with MyPy",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-08-02T21:31:43Z",
+        "completed_at": "2026-08-02T21:31:56Z"
+      },
+      {
+        "name": "Post Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-02T21:31:56Z",
+        "completed_at": "2026-08-02T21:31:59Z"
+      },
+      {
+        "name": "Post Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-02T21:31:59Z",
+        "completed_at": "2026-08-02T21:31:59Z"
+      },
+      {
+        "name": "Post Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-08-02T21:31:59Z",
+        "completed_at": "2026-08-02T21:32:01Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-08-02T21:32:01Z",
+        "completed_at": "2026-08-02T21:32:02Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/check-runs/91550202447",
+    "labels": [
+      "windows-latest"
+    ],
+    "runner_id": 1000001517,
+    "runner_name": "GitHub Actions 1000001517",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 91550202458,
+    "run_id": 30768051421,
+    "workflow_name": "tests",
+    "head_branch": "main",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/runs/30768051421",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOTqeTb88AAAAVUNE6Wg",
+    "head_sha": "e45f0ffc61197693ea7b663426e4cdb2752ebf3c",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/jobs/91550202458",
+    "html_url": "https://github.com/jodydugas-ctrl/organize-appai/actions/runs/30768051421/job/91550202458",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-02T21:30:45Z",
+    "started_at": "2026-08-02T21:30:48Z",
+    "completed_at": "2026-08-02T21:31:31Z",
+    "name": "build (macos-latest, 3.10)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-02T21:30:49Z",
+        "completed_at": "2026-08-02T21:30:50Z"
+      },
+      {
+        "name": "Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-02T21:30:50Z",
+        "completed_at": "2026-08-02T21:30:52Z"
+      },
+      {
+        "name": "Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-02T21:30:52Z",
+        "completed_at": "2026-08-02T21:31:10Z"
+      },
+      {
+        "name": "Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-02T21:31:10Z",
+        "completed_at": "2026-08-02T21:31:11Z"
+      },
+      {
+        "name": "Version info",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-02T21:31:11Z",
+        "completed_at": "2026-08-02T21:31:14Z"
+      },
+      {
+        "name": "Test with pytest",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-02T21:31:14Z",
+        "completed_at": "2026-08-02T21:31:17Z"
+      },
+      {
+        "name": "Check with MyPy",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-08-02T21:31:17Z",
+        "completed_at": "2026-08-02T21:31:25Z"
+      },
+      {
+        "name": "Post Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-02T21:31:25Z",
+        "completed_at": "2026-08-02T21:31:26Z"
+      },
+      {
+        "name": "Post Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-02T21:31:26Z",
+        "completed_at": "2026-08-02T21:31:26Z"
+      },
+      {
+        "name": "Post Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-08-02T21:31:26Z",
+        "completed_at": "2026-08-02T21:31:27Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-08-02T21:31:27Z",
+        "completed_at": "2026-08-02T21:31:28Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/check-runs/91550202458",
+    "labels": [
+      "macos-latest"
+    ],
+    "runner_id": 1000001514,
+    "runner_name": "GitHub Actions 1000001514",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 91550202463,
+    "run_id": 30768051421,
+    "workflow_name": "tests",
+    "head_branch": "main",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/runs/30768051421",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOTqeTb88AAAAVUNE6Xw",
+    "head_sha": "e45f0ffc61197693ea7b663426e4cdb2752ebf3c",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/jobs/91550202463",
+    "html_url": "https://github.com/jodydugas-ctrl/organize-appai/actions/runs/30768051421/job/91550202463",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-02T21:30:45Z",
+    "started_at": "2026-08-02T21:30:48Z",
+    "completed_at": "2026-08-02T21:31:16Z",
+    "name": "build (macos-latest, 3.11)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-02T21:30:48Z",
+        "completed_at": "2026-08-02T21:30:50Z"
+      },
+      {
+        "name": "Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-02T21:30:50Z",
+        "completed_at": "2026-08-02T21:30:52Z"
+      },
+      {
+        "name": "Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-02T21:30:52Z",
+        "completed_at": "2026-08-02T21:30:52Z"
+      },
+      {
+        "name": "Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-02T21:30:52Z",
+        "completed_at": "2026-08-02T21:30:54Z"
+      },
+      {
+        "name": "Version info",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-02T21:30:54Z",
+        "completed_at": "2026-08-02T21:31:02Z"
+      },
+      {
+        "name": "Test with pytest",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-02T21:31:02Z",
+        "completed_at": "2026-08-02T21:31:05Z"
+      },
+      {
+        "name": "Check with MyPy",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-08-02T21:31:05Z",
+        "completed_at": "2026-08-02T21:31:12Z"
+      },
+      {
+        "name": "Post Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-02T21:31:12Z",
+        "completed_at": "2026-08-02T21:31:13Z"
+      },
+      {
+        "name": "Post Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-02T21:31:13Z",
+        "completed_at": "2026-08-02T21:31:13Z"
+      },
+      {
+        "name": "Post Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-08-02T21:31:13Z",
+        "completed_at": "2026-08-02T21:31:14Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-08-02T21:31:14Z",
+        "completed_at": "2026-08-02T21:31:14Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/check-runs/91550202463",
+    "labels": [
+      "macos-latest"
+    ],
+    "runner_id": 1000001513,
+    "runner_name": "GitHub Actions 1000001513",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 91550202476,
+    "run_id": 30768051421,
+    "workflow_name": "tests",
+    "head_branch": "main",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/runs/30768051421",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOTqeTb88AAAAVUNE6bA",
+    "head_sha": "e45f0ffc61197693ea7b663426e4cdb2752ebf3c",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/jobs/91550202476",
+    "html_url": "https://github.com/jodydugas-ctrl/organize-appai/actions/runs/30768051421/job/91550202476",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-02T21:30:45Z",
+    "started_at": "2026-08-02T21:30:48Z",
+    "completed_at": "2026-08-02T21:31:45Z",
+    "name": "build (windows-latest, 3.12)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-02T21:30:48Z",
+        "completed_at": "2026-08-02T21:30:50Z"
+      },
+      {
+        "name": "Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-02T21:30:50Z",
+        "completed_at": "2026-08-02T21:30:55Z"
+      },
+      {
+        "name": "Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-02T21:30:55Z",
+        "completed_at": "2026-08-02T21:30:55Z"
+      },
+      {
+        "name": "Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-02T21:30:55Z",
+        "completed_at": "2026-08-02T21:30:59Z"
+      },
+      {
+        "name": "Version info",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-02T21:30:59Z",
+        "completed_at": "2026-08-02T21:31:19Z"
+      },
+      {
+        "name": "Test with pytest",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-02T21:31:19Z",
+        "completed_at": "2026-08-02T21:31:25Z"
+      },
+      {
+        "name": "Check with MyPy",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-08-02T21:31:25Z",
+        "completed_at": "2026-08-02T21:31:39Z"
+      },
+      {
+        "name": "Post Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-02T21:31:39Z",
+        "completed_at": "2026-08-02T21:31:41Z"
+      },
+      {
+        "name": "Post Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-02T21:31:41Z",
+        "completed_at": "2026-08-02T21:31:41Z"
+      },
+      {
+        "name": "Post Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-08-02T21:31:41Z",
+        "completed_at": "2026-08-02T21:31:44Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-08-02T21:31:44Z",
+        "completed_at": "2026-08-02T21:31:44Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/check-runs/91550202476",
+    "labels": [
+      "windows-latest"
+    ],
+    "runner_id": 1000001516,
+    "runner_name": "GitHub Actions 1000001516",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 91550202482,
+    "run_id": 30768051421,
+    "workflow_name": "tests",
+    "head_branch": "main",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/runs/30768051421",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOTqeTb88AAAAVUNE6cg",
+    "head_sha": "e45f0ffc61197693ea7b663426e4cdb2752ebf3c",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/jobs/91550202482",
+    "html_url": "https://github.com/jodydugas-ctrl/organize-appai/actions/runs/30768051421/job/91550202482",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-02T21:30:45Z",
+    "started_at": "2026-08-02T21:30:48Z",
+    "completed_at": "2026-08-02T21:31:22Z",
+    "name": "build (macos-latest, 3.12)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-02T21:30:49Z",
+        "completed_at": "2026-08-02T21:30:51Z"
+      },
+      {
+        "name": "Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-02T21:30:51Z",
+        "completed_at": "2026-08-02T21:30:53Z"
+      },
+      {
+        "name": "Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-02T21:30:53Z",
+        "completed_at": "2026-08-02T21:30:53Z"
+      },
+      {
+        "name": "Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-02T21:30:53Z",
+        "completed_at": "2026-08-02T21:30:55Z"
+      },
+      {
+        "name": "Version info",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-02T21:30:55Z",
+        "completed_at": "2026-08-02T21:31:04Z"
+      },
+      {
+        "name": "Test with pytest",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-02T21:31:04Z",
+        "completed_at": "2026-08-02T21:31:08Z"
+      },
+      {
+        "name": "Check with MyPy",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-08-02T21:31:08Z",
+        "completed_at": "2026-08-02T21:31:18Z"
+      },
+      {
+        "name": "Post Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-02T21:31:18Z",
+        "completed_at": "2026-08-02T21:31:19Z"
+      },
+      {
+        "name": "Post Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-02T21:31:19Z",
+        "completed_at": "2026-08-02T21:31:19Z"
+      },
+      {
+        "name": "Post Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-08-02T21:31:19Z",
+        "completed_at": "2026-08-02T21:31:20Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-08-02T21:31:20Z",
+        "completed_at": "2026-08-02T21:31:20Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/check-runs/91550202482",
+    "labels": [
+      "macos-latest"
+    ],
+    "runner_id": 1000001515,
+    "runner_name": "GitHub Actions 1000001515",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 91550202497,
+    "run_id": 30768051421,
+    "workflow_name": "tests",
+    "head_branch": "main",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/runs/30768051421",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOTqeTb88AAAAVUNE6gQ",
+    "head_sha": "e45f0ffc61197693ea7b663426e4cdb2752ebf3c",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/jobs/91550202497",
+    "html_url": "https://github.com/jodydugas-ctrl/organize-appai/actions/runs/30768051421/job/91550202497",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-02T21:30:45Z",
+    "started_at": "2026-08-02T21:30:48Z",
+    "completed_at": "2026-08-02T21:31:21Z",
+    "name": "build (ubuntu-latest, 3.11)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-02T21:30:49Z",
+        "completed_at": "2026-08-02T21:30:52Z"
+      },
+      {
+        "name": "Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-02T21:30:52Z",
+        "completed_at": "2026-08-02T21:30:54Z"
+      },
+      {
+        "name": "Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-02T21:30:54Z",
+        "completed_at": "2026-08-02T21:30:54Z"
+      },
+      {
+        "name": "Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-02T21:30:54Z",
+        "completed_at": "2026-08-02T21:30:56Z"
+      },
+      {
+        "name": "Version info",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-02T21:30:56Z",
+        "completed_at": "2026-08-02T21:31:02Z"
+      },
+      {
+        "name": "Test with pytest",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-02T21:31:02Z",
+        "completed_at": "2026-08-02T21:31:07Z"
+      },
+      {
+        "name": "Check with MyPy",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-08-02T21:31:07Z",
+        "completed_at": "2026-08-02T21:31:17Z"
+      },
+      {
+        "name": "Post Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-02T21:31:17Z",
+        "completed_at": "2026-08-02T21:31:19Z"
+      },
+      {
+        "name": "Post Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-02T21:31:19Z",
+        "completed_at": "2026-08-02T21:31:19Z"
+      },
+      {
+        "name": "Post Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-08-02T21:31:19Z",
+        "completed_at": "2026-08-02T21:31:19Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-08-02T21:31:19Z",
+        "completed_at": "2026-08-02T21:31:19Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/check-runs/91550202497",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000001519,
+    "runner_name": "GitHub Actions 1000001519",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 91550202509,
+    "run_id": 30768051421,
+    "workflow_name": "tests",
+    "head_branch": "main",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/runs/30768051421",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOTqeTb88AAAAVUNE6jQ",
+    "head_sha": "e45f0ffc61197693ea7b663426e4cdb2752ebf3c",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/jobs/91550202509",
+    "html_url": "https://github.com/jodydugas-ctrl/organize-appai/actions/runs/30768051421/job/91550202509",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-02T21:30:45Z",
+    "started_at": "2026-08-02T21:30:51Z",
+    "completed_at": "2026-08-02T21:31:30Z",
+    "name": "build (windows-latest, 3.10)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-02T21:30:53Z",
+        "completed_at": "2026-08-02T21:30:54Z"
+      },
+      {
+        "name": "Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-02T21:30:54Z",
+        "completed_at": "2026-08-02T21:30:57Z"
+      },
+      {
+        "name": "Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-02T21:30:57Z",
+        "completed_at": "2026-08-02T21:30:58Z"
+      },
+      {
+        "name": "Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-02T21:30:58Z",
+        "completed_at": "2026-08-02T21:31:02Z"
+      },
+      {
+        "name": "Version info",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-02T21:31:02Z",
+        "completed_at": "2026-08-02T21:31:09Z"
+      },
+      {
+        "name": "Test with pytest",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-02T21:31:09Z",
+        "completed_at": "2026-08-02T21:31:15Z"
+      },
+      {
+        "name": "Check with MyPy",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-08-02T21:31:15Z",
+        "completed_at": "2026-08-02T21:31:25Z"
+      },
+      {
+        "name": "Post Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-02T21:31:25Z",
+        "completed_at": "2026-08-02T21:31:27Z"
+      },
+      {
+        "name": "Post Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-02T21:31:27Z",
+        "completed_at": "2026-08-02T21:31:27Z"
+      },
+      {
+        "name": "Post Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-08-02T21:31:27Z",
+        "completed_at": "2026-08-02T21:31:29Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-08-02T21:31:29Z",
+        "completed_at": "2026-08-02T21:31:29Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/check-runs/91550202509",
+    "labels": [
+      "windows-latest"
+    ],
+    "runner_id": 1000001518,
+    "runner_name": "GitHub Actions 1000001518",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 91550202511,
+    "run_id": 30768051421,
+    "workflow_name": "tests",
+    "head_branch": "main",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/runs/30768051421",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOTqeTb88AAAAVUNE6jw",
+    "head_sha": "e45f0ffc61197693ea7b663426e4cdb2752ebf3c",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/jobs/91550202511",
+    "html_url": "https://github.com/jodydugas-ctrl/organize-appai/actions/runs/30768051421/job/91550202511",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-02T21:30:45Z",
+    "started_at": "2026-08-02T21:30:55Z",
+    "completed_at": "2026-08-02T21:31:21Z",
+    "name": "build (ubuntu-latest, 3.10)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-02T21:30:56Z",
+        "completed_at": "2026-08-02T21:30:57Z"
+      },
+      {
+        "name": "Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-02T21:30:57Z",
+        "completed_at": "2026-08-02T21:30:58Z"
+      },
+      {
+        "name": "Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-02T21:30:58Z",
+        "completed_at": "2026-08-02T21:30:58Z"
+      },
+      {
+        "name": "Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-02T21:30:58Z",
+        "completed_at": "2026-08-02T21:31:01Z"
+      },
+      {
+        "name": "Version info",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-02T21:31:01Z",
+        "completed_at": "2026-08-02T21:31:04Z"
+      },
+      {
+        "name": "Test with pytest",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-02T21:31:04Z",
+        "completed_at": "2026-08-02T21:31:09Z"
+      },
+      {
+        "name": "Check with MyPy",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-08-02T21:31:09Z",
+        "completed_at": "2026-08-02T21:31:19Z"
+      },
+      {
+        "name": "Post Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-02T21:31:19Z",
+        "completed_at": "2026-08-02T21:31:19Z"
+      },
+      {
+        "name": "Post Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-02T21:31:19Z",
+        "completed_at": "2026-08-02T21:31:20Z"
+      },
+      {
+        "name": "Post Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-08-02T21:31:20Z",
+        "completed_at": "2026-08-02T21:31:20Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-08-02T21:31:20Z",
+        "completed_at": "2026-08-02T21:31:20Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/check-runs/91550202511",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000001523,
+    "runner_name": "GitHub Actions 1000001523",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 91550202533,
+    "run_id": 30768051421,
+    "workflow_name": "tests",
+    "head_branch": "main",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/runs/30768051421",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOTqeTb88AAAAVUNE6pQ",
+    "head_sha": "e45f0ffc61197693ea7b663426e4cdb2752ebf3c",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/actions/jobs/91550202533",
+    "html_url": "https://github.com/jodydugas-ctrl/organize-appai/actions/runs/30768051421/job/91550202533",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-02T21:30:45Z",
+    "started_at": "2026-08-02T21:30:48Z",
+    "completed_at": "2026-08-02T21:31:19Z",
+    "name": "build (ubuntu-latest, 3.12)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-02T21:30:49Z",
+        "completed_at": "2026-08-02T21:30:52Z"
+      },
+      {
+        "name": "Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-02T21:30:52Z",
+        "completed_at": "2026-08-02T21:30:53Z"
+      },
+      {
+        "name": "Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-02T21:30:53Z",
+        "completed_at": "2026-08-02T21:30:53Z"
+      },
+      {
+        "name": "Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-02T21:30:53Z",
+        "completed_at": "2026-08-02T21:30:55Z"
+      },
+      {
+        "name": "Version info",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-02T21:30:55Z",
+        "completed_at": "2026-08-02T21:31:01Z"
+      },
+      {
+        "name": "Test with pytest",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-02T21:31:01Z",
+        "completed_at": "2026-08-02T21:31:05Z"
+      },
+      {
+        "name": "Check with MyPy",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-08-02T21:31:05Z",
+        "completed_at": "2026-08-02T21:31:15Z"
+      },
+      {
+        "name": "Post Install uv",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-02T21:31:15Z",
+        "completed_at": "2026-08-02T21:31:16Z"
+      },
+      {
+        "name": "Post Setup Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-02T21:31:16Z",
+        "completed_at": "2026-08-02T21:31:17Z"
+      },
+      {
+        "name": "Post Checkout repo",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-08-02T21:31:17Z",
+        "completed_at": "2026-08-02T21:31:17Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-08-02T21:31:17Z",
+        "completed_at": "2026-08-02T21:31:17Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/organize-appai/check-runs/91550202533",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000001520,
+    "runner_name": "GitHub Actions 1000001520",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

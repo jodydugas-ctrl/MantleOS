@@ -1,0 +1,198 @@
+{
+  "schema": "mantle.paint-qualification/1",
+  "date": "2026-10-14",
+  "product": "Mantle Paint",
+  "expression": "bio-software",
+  "chase_target": "Windows XP Paint",
+  "status": "USEFUL_LOCAL_APP; CHASE_ACTIVE; BAKER_REVIEW_PENDING",
+  "source_sha256": {
+    "index.html": "e8ab2f887eee9bc0cbceead8a367e019c8bbdbe7be71dd12364e1065290e9a32",
+    "style.css": "420fd6f5da9358071e76724b95e3851b8ad8bd5b2baf1132fe7292bf803b5538",
+    "raster.js": "cb89d02cdee2a8a7c680c26f08391ce59f22c5a6603e5a8cae5adb7c11e74d42",
+    "paint.js": "d6fa2279980a84349ccf125c20dc9574837fad587f6c05bfb721ce475ce895d8",
+    "recipe.json": "1d355451cbf312e374f2c2e0977670cb6c988849b8f32619743d293a87a80869",
+    "build.py": "702022b3ca21fda51810485639348ded5b91e11ec58f2333940cb73cc70f158f",
+    "test_raster.cjs": "21ecc50fcc46a30b0e9116fb6b09e00c2c624d21e07721171d523830fa71a612",
+    "browser-tests.html": "e6d5ead5328ed2c3c368079181f759780d86531bd8c3a11275f9b618d8cf39bc"
+  },
+  "artifacts": {
+    "html_sha256": "661cfb17b1011e6cd24c3239afe87d60e755c5b7b71f57c80c5593d98c84da6a",
+    "anchor_sha256": "08bc6ad6adefc33dcacafd88e2a4728940fc1ac80d48ea99cf6ba630d9a1dac4",
+    "html_bytes": 69378,
+    "anchor_bytes": 222272
+  },
+  "newly_executed": {
+    "mantleos_python": {
+      "run": 100,
+      "passed": 100,
+      "skipped": 0,
+      "platform": "Windows CPython 3.14",
+      "seconds": 204.352
+    },
+    "paint_node": {
+      "run": 32,
+      "passed": 32,
+      "skipped": 0,
+      "runtime": "Node 24.19.0"
+    },
+    "paint_browser": {
+      "schema": "mantle.paint-browser-tests/1",
+      "result": "PASS",
+      "checks": [
+        {
+          "name": "All sixteen tools and twenty-eight palette colors are usable",
+          "result": "PASS"
+        },
+        {
+          "name": "Pencil pointer events paint connected pixels",
+          "result": "PASS"
+        },
+        {
+          "name": "Right palette click and right drawing use background",
+          "result": "PASS"
+        },
+        {
+          "name": "Rectangle filled with background and outlined in foreground",
+          "result": "PASS"
+        },
+        {
+          "name": "Shift constrains ellipse to a circle",
+          "result": "PASS"
+        },
+        {
+          "name": "Fill and eyedropper act on raster bytes",
+          "result": "PASS"
+        },
+        {
+          "name": "Brush and eraser produce distinct editable marks",
+          "result": "PASS"
+        },
+        {
+          "name": "Airbrush is stopped on pointer release",
+          "result": "PASS"
+        },
+        {
+          "name": "Rectangular selection moves pixels and leaves background",
+          "result": "PASS"
+        },
+        {
+          "name": "Free-form selection retains its polygon mask",
+          "result": "PASS"
+        },
+        {
+          "name": "Cut copy paste and undo redo preserve pixels",
+          "result": "PASS"
+        },
+        {
+          "name": "Curve accepts two bend gestures and finishes",
+          "result": "PASS"
+        },
+        {
+          "name": "Polygon closes on a double click",
+          "result": "PASS"
+        },
+        {
+          "name": "Text becomes raster pixels and can be undone",
+          "result": "PASS"
+        },
+        {
+          "name": "Zoom and grid affect view without resampling pixels",
+          "result": "PASS"
+        },
+        {
+          "name": "Image Attributes dialog pads without scaling",
+          "result": "PASS"
+        },
+        {
+          "name": "Free-form transformation preserves its mask",
+          "result": "PASS"
+        },
+        {
+          "name": "Invalid image dimensions leave active picture intact",
+          "result": "PASS"
+        },
+        {
+          "name": "Canvas PNG encoder and decoder preserve raster pixels",
+          "result": "PASS"
+        },
+        {
+          "name": "Stasis blocks drawing; resumption restores useful Body",
+          "result": "PASS"
+        },
+        {
+          "name": "Organism restore preserves identity and appends return experience",
+          "result": "PASS"
+        },
+        {
+          "name": "Corrupt incoming memory leaves active picture intact",
+          "result": "PASS"
+        }
+      ],
+      "scope": "Authored synthetic DOM-event, browser Canvas and local-memory checks; not native Windows XP equivalence or human acceptance",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    },
+    "paint_manual": {
+      "result": "PASS",
+      "delivered_html": "Served byte-identically and opened in the in-app browser",
+      "real_pointer_drawing": "PASS: rectangle, polygon, ellipse, line, text",
+      "real_keyboard_undo_redo": "PASS: sun restored visibly",
+      "real_local_bmp_open": {
+        "result": "PASS",
+        "width": 128,
+        "height": 96
+      },
+      "real_bmp_save": {
+        "result": "PASS",
+        "width": 640,
+        "height": 400,
+        "bytes": 768054,
+        "non_white_pixels": 45296,
+        "dark_text_region_pixels": 577,
+        "sha256": "762656d7944529c9862d0a7a3d1c0ea3894683bf68eb35a5e4ddb5fa11e7816e"
+      },
+      "native_xp_executed": false,
+      "scope": "Original synthetic test picture; actual browser pointer/keyboard, file chooser and Save As download. Text includes browser antialiasing."
+    },
+    "portable_anchor": {
+      "isolated_html_equal": true,
+      "isolated_python_utf8_equal": true,
+      "changed_thought_rejected": true
+    },
+    "supplied_kpp": {
+      "source_archive_sha256": "056320e9be91f9f960cdcd51fa8b7e330f48d19dcea49aea53a7534bddbdb0d9",
+      "run": 176,
+      "passed": 171,
+      "skipped": 5,
+      "seconds": 26.594,
+      "skip_reason": "Host cannot create the symlinks used by five original tests",
+      "doctor": "PASS",
+      "recipe_validation": "PASS",
+      "pantry_resolution": "PASS",
+      "workspace": "BUILDING",
+      "source_scan_and_functional_graph": "PASS; static evidence only",
+      "required_obligations": 9,
+      "baker_accepted": 0,
+      "unapproved_complete": "REFUSED_AS_REQUIRED",
+      "initial_run": "Preview server could not start under sandbox restrictions; complete rerun with loopback permissions passed."
+    }
+  },
+  "regressions_corrected": [
+    "Entirely off-canvas filled rectangles no longer paint a nearest-edge pixel.",
+    "Free-form selection masks survive transforms without overwriting unselected pixels."
+  ],
+  "scope_limits": [
+    "No native XP executable supplied or run; exact GDI/font/OS and uncommon-format parity NOT VERIFIED.",
+    "No Baker approval supplied or impersonated.",
+    "Hashes provide integrity, not authentication.",
+    "Browser local recovery is bounded and best-effort, not an OS durability guarantee.",
+    "No universal LLM/Canvas host compatibility claimed."
+  ],
+  "receipts": {
+    "python": ".work/paint-core-tests.log",
+    "node": ".work/paint-raster-verified.log",
+    "browser": ".work/paint-browser-tests.json",
+    "manual": ".work/paint-manual-checks.json",
+    "kpp": ".work/paint-kpp-upstream-verified.log",
+    "kpp_workspace": ".work/paint-kpp-bake-audit.json"
+  }
+}

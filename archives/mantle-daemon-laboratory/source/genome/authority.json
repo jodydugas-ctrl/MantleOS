@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "default": "NO",
+  "capabilities": {
+    "read_specimen": {"requested": false, "granted": true, "denied": false, "expired": false, "availability": "available", "authority": "body-authorized", "scope": "specimen-only"},
+    "write_specimen": {"requested": false, "granted": true, "denied": false, "expired": false, "availability": "available", "authority": "body-authorized", "scope": "validated-checkpoint-only"},
+    "network": {"requested": false, "granted": false, "denied": true, "expired": false, "availability": "unavailable", "authority": "unavailable", "scope": "none"},
+    "execute_foreign_code": {"requested": false, "granted": false, "denied": true, "expired": false, "availability": "available", "authority": "unavailable", "scope": "none"}
+  }
+}

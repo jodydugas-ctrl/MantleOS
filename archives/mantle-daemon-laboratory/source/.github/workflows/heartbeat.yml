@@ -1,0 +1,61 @@
+name: Mantle Daemon BODY heartbeat
+
+on:
+  workflow_dispatch:
+    inputs:
+      checkpoint_write:
+        description: "Allow the verified heartbeat to commit and push"
+        required: true
+        default: false
+        type: boolean
+
+permissions: {}
+
+jobs:
+  heartbeat_read_only:
+    if: ${{ inputs.checkpoint_write == false }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      MANTLE_CHECKPOINT_WRITE: ${{ inputs.checkpoint_write }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify durable specimen
+        run: python -m daemon verify --root .
+      - name: Run BODY-only heartbeat
+        continue-on-error: ${{ inputs.checkpoint_write == false }}
+        run: python -m daemon heartbeat --root .
+      - name: Report read-only mode
+        run: echo "BODY heartbeat completed in read-only mode; no durable checkpoint was requested."
+
+  heartbeat_write:
+    if: ${{ inputs.checkpoint_write == true }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      MANTLE_CHECKPOINT_WRITE: ${{ inputs.checkpoint_write }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify durable specimen
+        run: python -m daemon verify --root .
+      - name: Configure checkpoint identity
+        run: |
+          git config user.name "Mantle Daemon"
+          git config user.email "daemon-lab@example.invalid"
+      - name: Run BODY-only heartbeat
+        run: python -m daemon heartbeat --root .
+      - name: Commit verified checkpoint
+        run: |
+          git add STACK.json vcw receipts
+          git diff --cached --quiet || git commit -m "heartbeat: BODY-only checkpoint"
+          git push

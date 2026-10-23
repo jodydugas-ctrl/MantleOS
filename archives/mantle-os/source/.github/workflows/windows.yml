@@ -1,0 +1,28 @@
+name: Windows Mantle 2
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  windows-contracts:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.12"
+      - name: Install complete certification environment
+        run: python -m pip install -e ".[spore,multilang]" cryptography==46.0.7 pyyaml==6.0.3 pytest
+      - name: Windows resident lifecycle scanner and terminal contracts
+        run: >-
+          python -m pytest -q
+          examples/tests/test_mantle2_completion.py
+          examples/tests/test_lifecycle_activation.py
+          examples/tests/test_native_scanner.py
+          examples/tests/test_notepadnext_mantle2_candidate.py
+      - name: Strict repository certification
+        run: python -m mantle check --strict
+      - name: Release content scan
+        run: python tools/release_scan.py

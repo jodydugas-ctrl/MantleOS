@@ -1,0 +1,15 @@
+{
+  "schema": "kpp.adaptation-request/1",
+  "capability": "Session continuity records for successful task commands",
+  "existing_capabilities": [
+    "Add and list task commands",
+    "Stable add, list and invalid-command responses"
+  ],
+  "ingredient_id": "engram-continuity",
+  "trigger": {"timing": "after-success", "function_hint": "run_command"},
+  "anchors": {
+    "original": "original-commands",
+    "reflex": "after-success-reflex",
+    "optional_absent": "optional-organ-absent"
+  }
+}

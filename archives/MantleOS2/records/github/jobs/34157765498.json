@@ -1,0 +1,166 @@
+[
+  {
+    "id": 101853028378,
+    "run_id": 34157765498,
+    "workflow_name": "Hermes assimilation",
+    "head_branch": "test/native-resident-lifecycle",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/34157765498",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAXtungGg",
+    "head_sha": "ff9a24df221740c2b27298e7288bdd9960ebabc9",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/101853028378",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/34157765498/job/101853028378",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-07T20:00:59Z",
+    "started_at": "2026-09-07T20:01:02Z",
+    "completed_at": "2026-09-07T20:04:12Z",
+    "name": "Pinned Hermes delta",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-07T20:01:02Z",
+        "completed_at": "2026-09-07T20:01:03Z"
+      },
+      {
+        "name": "Run actions/checkout@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-07T20:01:03Z",
+        "completed_at": "2026-09-07T20:01:04Z"
+      },
+      {
+        "name": "Run actions/setup-python@v6",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-07T20:01:04Z",
+        "completed_at": "2026-09-07T20:01:05Z"
+      },
+      {
+        "name": "Run python -m pip install -e \".[dev]\"",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-07T20:01:05Z",
+        "completed_at": "2026-09-07T20:01:10Z"
+      },
+      {
+        "name": "Resolve certified commit",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-07T20:01:10Z",
+        "completed_at": "2026-09-07T20:01:10Z"
+      },
+      {
+        "name": "Construct candidate NEST",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-07T20:01:10Z",
+        "completed_at": "2026-09-07T20:02:50Z"
+      },
+      {
+        "name": "Verify delta and host boundary",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-07T20:02:50Z",
+        "completed_at": "2026-09-07T20:02:51Z"
+      },
+      {
+        "name": "Build and verify public direct-innervation seed",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-07T20:02:51Z",
+        "completed_at": "2026-09-07T20:02:51Z"
+      },
+      {
+        "name": "Prove host Python remains syntactically intact",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-07T20:02:51Z",
+        "completed_at": "2026-09-07T20:03:07Z"
+      },
+      {
+        "name": "Verify constructed Body remains un-born",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-09-07T20:03:07Z",
+        "completed_at": "2026-09-07T20:03:07Z"
+      },
+      {
+        "name": "Install pinned native-certification dependencies",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-07T20:03:07Z",
+        "completed_at": "2026-09-07T20:03:10Z"
+      },
+      {
+        "name": "Create pristine comparison checkout",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-07T20:03:10Z",
+        "completed_at": "2026-09-07T20:03:45Z"
+      },
+      {
+        "name": "Compare native behavior before and after innervation",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-07T20:03:45Z",
+        "completed_at": "2026-09-07T20:04:10Z"
+      },
+      {
+        "name": "Retain native-behavior evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-09-07T20:04:10Z",
+        "completed_at": "2026-09-07T20:04:10Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v6",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 27,
+        "started_at": "2026-09-07T20:04:10Z",
+        "completed_at": "2026-09-07T20:04:11Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 28,
+        "started_at": "2026-09-07T20:04:11Z",
+        "completed_at": "2026-09-07T20:04:11Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 29,
+        "started_at": "2026-09-07T20:04:11Z",
+        "completed_at": "2026-09-07T20:04:11Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/101853028378",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000002298,
+    "runner_name": "GitHub Actions 1000002298",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

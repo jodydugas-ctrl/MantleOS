@@ -1,0 +1,86 @@
+{
+  "schema_version": "scan-candidate-freeze/0.4",
+  "engine_version": "0.28.0",
+  "status": "RC1_READY_FOR_REVIEW",
+  "feature_freeze": true,
+  "source_package": {
+    "directory": "../../engine/v0.28",
+    "package_payload_commit": "9eea6ceb0268ac8abdbbcaaef4c8af30b9f4fbcd",
+    "package_manifest_sha256": "a03048a4bc54e346313f5bd32e9fb5281ee5686a18e98bd55fcc0009ebfd861e",
+    "manifest_file_count": 90,
+    "self_audit_state": "PASS",
+    "verified_file_count": 90,
+    "runtime_package_changes_after_payload_commit": 0
+  },
+  "qualification": {
+    "qualification_run_commit": "0db1c02f53cf651ee10c6225f0e85bc00c85bd4b",
+    "development_tests_run": 158,
+    "development_test_state": "PASS",
+    "llm_environment": "DISABLED",
+    "required_queries": 12,
+    "passed_queries": 12,
+    "integrity_error_count": 0,
+    "fresh_python": "3.13",
+    "wheel_install_state": "PASS",
+    "qualification_state": "PASS"
+  },
+  "artifacts": [
+    {
+      "path": "scan_software_body-0.28.0-py3-none-any.whl",
+      "bytes": 182198,
+      "sha256": "87fe51d3241d3b21627261bdb7db3ab5ad4bd69ac0b6a9de5d4fa9ccbb78aa79",
+      "deterministic_second_build_sha256": "87fe51d3241d3b21627261bdb7db3ab5ad4bd69ac0b6a9de5d4fa9ccbb78aa79",
+      "source_date_epoch": "315532800"
+    },
+    {
+      "path": "scan_software_body-0.28.0.tar.gz",
+      "bytes": 198535,
+      "sha256": "43fb8f46a1943a77cb55e73ac469049cdd408f28ec104ece3d2f89f65a17bd70"
+    },
+    {
+      "path": "scan-software-body-0.28.0.zip",
+      "bytes": 270417,
+      "sha256": "6e7d4553a07d843689ae9589b304765eea61b1cf265bebd45cc1e971e39fc9f0",
+      "independent_build_match": true
+    }
+  ],
+  "frozen_calibration": {
+    "state": "PASS",
+    "calibration_commit": "4c16827fffc64b837bec2d1b781cf6aca39e6b7c",
+    "determinism": "PASS",
+    "notepadnext": {
+      "repository": "dail8859/NotepadNext",
+      "commit": "f57db52d6760a2ce4149a37190c3adaa586845f5",
+      "tree": "f0995b128bf6dbc73e5d0f3ef4e4f302f8a3081b",
+      "baseline_surfaces": 380,
+      "candidate_surfaces": 380,
+      "new_actionable_web_surfaces": 0,
+      "integrity_errors": 0
+    },
+    "moji": {
+      "repository": "alexishida/Moji",
+      "commit": "7793dbabc880a950b5003dcfd57c1222b279b807",
+      "tree": "b4e0e6a4d2010a6d584f40b01ab5ffad7bf18fea",
+      "baseline_surfaces": 103,
+      "candidate_surfaces": 103,
+      "new_actionable_web_surfaces": 0,
+      "integrity_errors": 0
+    },
+    "runtime_scanner_code_changes_after_calibration": 0,
+    "package_tree_additions_after_calibration": [
+      "tests/test_v028_refinement_loop.py",
+      "PACKAGE_MANIFEST.json"
+    ],
+    "lineage_note": "Git compare from the successful calibration commit to the sealed payload shows no scan/ runtime source changes. Only the refinement regression test and the package manifest were added inside engine/v0.28."
+  },
+  "release_scope": {
+    "new_features_after_freeze": false,
+    "permitted_changes": [
+      "release evidence",
+      "package/distribution metadata",
+      "CI/release verification",
+      "correctness fixes only if a release gate demonstrates a defect"
+    ],
+    "merge_or_public_release_performed": false
+  }
+}

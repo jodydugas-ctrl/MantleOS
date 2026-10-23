@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <title>Mantle OS — anatomy of the organism mesh</title>
+  <desc>Nine contracted organs on one deterministic SignalBus around the VCW cube.
+Inbound only through Senses; outbound only through Limbs; every fault becomes an Immune
+event; the Brain is a dormant socket until a bounded MIND is fused after the Stage-1 gate.</desc>
+  <rect width="980" height="640" fill="#f8fafc"/>
+  <text x="490" y="36" text-anchor="middle" font-size="24" font-weight="bold" fill="#0f172a">Mantle OS — Anatomy of the Organism Mesh</text>
+  <text x="490" y="58" text-anchor="middle" font-size="13" fill="#475569">nine contracted organs · one deterministic, fail-open SignalBus · no organ reaches into another</text>
+
+  <!-- the bus -->
+  <rect x="180" y="290" width="620" height="60" rx="12" fill="#1e293b"/>
+  <text x="490" y="315" text-anchor="middle" font-size="15" font-weight="bold" fill="#f8fafc">SignalBus</text>
+  <text x="490" y="335" text-anchor="middle" font-size="11" fill="#cbd5e1">synchronous · registration order · a faulting reflex degrades to an Immune event, never a crash</text>
+
+  <!-- organs top row -->
+  <g font-size="12">
+    <rect x="60" y="120" width="200" height="120" rx="10" fill="#fee2e2" stroke="#b91c1c"/>
+    <text x="160" y="142" text-anchor="middle" font-weight="bold" fill="#7f1d1d" font-size="14">HEART</text>
+    <text x="160" y="160" text-anchor="middle" fill="#7f1d1d">the pulse (no LLM, ever):</text>
+    <text x="160" y="178" text-anchor="middle" fill="#7f1d1d">tick → sense intake → assembly</text>
+    <text x="160" y="194" text-anchor="middle" fill="#7f1d1d">→ reflexes → immune scan</text>
+    <text x="160" y="210" text-anchor="middle" fill="#7f1d1d">→ checkpoint (staged save)</text>
+    <line x1="160" y1="240" x2="280" y2="290" stroke="#b91c1c" stroke-width="2"/>
+
+    <rect x="300" y="140" width="170" height="80" rx="10" fill="#dcfce7" stroke="#15803d"/>
+    <text x="385" y="165" text-anchor="middle" font-weight="bold" fill="#14532d" font-size="14">SENSES</text>
+    <text x="385" y="183" text-anchor="middle" fill="#14532d">the ONLY way in</text>
+    <text x="385" y="199" text-anchor="middle" fill="#14532d">redact → classify → record</text>
+    <line x1="385" y1="220" x2="400" y2="290" stroke="#15803d" stroke-width="2"/>
+    <path d="M 385 95 L 385 132" stroke="#15803d" stroke-width="3" marker-end="url(#arrow)" fill="none"/>
+    <text x="385" y="88" text-anchor="middle" fill="#475569" font-size="11">inbound (the world)</text>
+
+    <rect x="510" y="140" width="170" height="80" rx="10" fill="#ffedd5" stroke="#c2410c"/>
+    <text x="595" y="165" text-anchor="middle" font-weight="bold" fill="#7c2d12" font-size="14">LIMBS</text>
+    <text x="595" y="183" text-anchor="middle" fill="#7c2d12">the ONLY way out</text>
+    <text x="595" y="199" text-anchor="middle" fill="#7c2d12">dispatch · proofs · reflex invoke</text>
+    <line x1="595" y1="220" x2="580" y2="290" stroke="#c2410c" stroke-width="2"/>
+    <path d="M 595 132 L 595 95" stroke="#c2410c" stroke-width="3" marker-end="url(#arrow)" fill="none"/>
+    <text x="595" y="88" text-anchor="middle" fill="#475569" font-size="11">outbound (the world)</text>
+
+    <rect x="720" y="120" width="200" height="120" rx="10" fill="#fef9c3" stroke="#a16207"/>
+    <text x="820" y="142" text-anchor="middle" font-weight="bold" fill="#713f12" font-size="14">IMMUNE</text>
+    <text x="820" y="160" text-anchor="middle" fill="#713f12">the failure boundary:</text>
+    <text x="820" y="178" text-anchor="middle" fill="#713f12">every dangling ref, overreach,</text>
+    <text x="820" y="194" text-anchor="middle" fill="#713f12">stalled pulse, refused write →</text>
+    <text x="820" y="210" text-anchor="middle" fill="#713f12">one immune event. Never silent.</text>
+    <line x1="820" y1="240" x2="700" y2="290" stroke="#a16207" stroke-width="2"/>
+  </g>
+
+  <!-- organs bottom row -->
+  <g font-size="10.5">
+    <rect x="58" y="400" width="160" height="100" rx="10" fill="#e0e7ff" stroke="#4338ca"/>
+    <text x="138" y="422" text-anchor="middle" font-weight="bold" fill="#312e81" font-size="12">GENOME (in the Body)</text>
+    <text x="138" y="440" text-anchor="middle" fill="#312e81">Primer sealed at birth,</text>
+    <text x="138" y="456" text-anchor="middle" fill="#312e81">NEVER inside any cube —</text>
+    <text x="138" y="472" text-anchor="middle" fill="#312e81">identity survives rebirth</text>
+    <line x1="138" y1="400" x2="240" y2="350" stroke="#4338ca" stroke-width="2"/>
+
+    <rect x="234" y="400" width="160" height="100" rx="10" fill="#cffafe" stroke="#0e7490"/>
+    <text x="314" y="422" text-anchor="middle" font-weight="bold" fill="#164e63" font-size="13">NERVOUS</text>
+    <text x="314" y="440" text-anchor="middle" fill="#164e63">resolve every &lt;reference&gt;,</text>
+    <text x="314" y="456" text-anchor="middle" fill="#164e63">assemble the veiled snapshot</text>
+    <line x1="314" y1="400" x2="330" y2="350" stroke="#0e7490" stroke-width="2"/>
+
+    <rect x="410" y="400" width="160" height="100" rx="10" fill="#f3e8ff" stroke="#7e22ce"/>
+    <text x="490" y="422" text-anchor="middle" font-weight="bold" fill="#581c87" font-size="13">MEMORY</text>
+    <text x="490" y="440" text-anchor="middle" fill="#581c87">remember · recall · metabolize</text>
+    <text x="490" y="456" text-anchor="middle" fill="#581c87">0.75 / 0.90 → compact+dedupe</text>
+    <line x1="490" y1="400" x2="490" y2="350" stroke="#7e22ce" stroke-width="2"/>
+
+    <rect x="586" y="400" width="160" height="100" rx="10" fill="#fce7f3" stroke="#be185d"/>
+    <text x="666" y="422" text-anchor="middle" font-weight="bold" fill="#831843" font-size="12">REPRODUCTION</text>
+    <text x="666" y="440" text-anchor="middle" fill="#831843">SEED / GRAFT ceremonies;</text>
+    <text x="666" y="456" text-anchor="middle" fill="#831843">the sealed seed vault ·</text>
+    <text x="666" y="472" text-anchor="middle" fill="#831843">lineage · the app-band atlas</text>
+    <line x1="666" y1="400" x2="650" y2="350" stroke="#be185d" stroke-width="2"/>
+
+    <rect x="762" y="400" width="160" height="100" rx="10" fill="#e2e8f0" stroke="#475569" stroke-dasharray="6 4"/>
+    <text x="842" y="422" text-anchor="middle" font-weight="bold" fill="#1e293b" font-size="12">BRAIN (dormant socket)</text>
+    <text x="842" y="440" text-anchor="middle" fill="#1e293b">a bounded MIND fuses here</text>
+    <text x="842" y="456" text-anchor="middle" fill="#1e293b">fresh Stage-1 + dual authority;</text>
+    <text x="842" y="472" text-anchor="middle" fill="#1e293b">writes only thoughts + brain</text>
+    <line x1="842" y1="400" x2="740" y2="350" stroke="#475569" stroke-width="2" stroke-dasharray="6 4"/>
+  </g>
+
+  <!-- the cube -->
+  <rect x="270" y="540" width="440" height="70" rx="12" fill="#0f172a"/>
+  <text x="490" y="566" text-anchor="middle" font-size="15" font-weight="bold" fill="#f8fafc">VCW CUBE — durable experiential memory</text>
+  <text x="490" y="586" text-anchor="middle" font-size="11" fill="#cbd5e1">800 real PNG layers · append-only hashed entries · veil · staged atomic save · sealed, fingerprinted ancestors</text>
+  <line x1="490" y1="490" x2="490" y2="540" stroke="#0f172a" stroke-width="3"/>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/>
+    </marker>
+  </defs>
+</svg>

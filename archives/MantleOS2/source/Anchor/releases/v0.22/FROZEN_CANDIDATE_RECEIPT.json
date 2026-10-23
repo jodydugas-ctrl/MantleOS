@@ -1,0 +1,63 @@
+{
+  "schema_version": "scan-candidate-freeze/0.1",
+  "engine_version": "0.22.0",
+  "status": "FROZEN_FOR_PR5_RECALIBRATION",
+  "frozen_at": "2026-09-14T17:40:41.1656800Z",
+  "source_package": {
+    "directory": "scan-release",
+    "package_manifest_sha256": "a30658524aed3d5b15227ac9de38d8591d625905a2db63bb0e9fdb7cfa5486fc",
+    "manifest_file_count": 68,
+    "self_audit_state": "PASS",
+    "verified_file_count": 68
+  },
+  "artifacts": [
+    {
+      "path": "dist/SCAN_ENGINE_v0.22.zip",
+      "bytes": 195729,
+      "sha256": "a97d5992a08c2cda93f0ff67a1b1fd0f20c732fec0161656894421e883e1b689",
+      "zip_entry_count": 70,
+      "bytecode_file_count": 0,
+      "extracted_self_audit_state": "PASS"
+    },
+    {
+      "path": "dist/scan_software_body-0.22.0-py3-none-any.whl",
+      "bytes": 123843,
+      "sha256": "391c886835cc5f5317bd7c8c5962f918b3ee5ceeefefcd7cf7201efbf5b190d6",
+      "fresh_python_3_12_install_state": "PASS"
+    }
+  ],
+  "qualification": {
+    "python": "3.12",
+    "tests_run": 119,
+    "tests_passed": 119,
+    "tests_skipped": 12,
+    "skip_reason": "compiler-dependent tests skipped because Clang is absent from the WSL qualification environment",
+    "clean_extracted_package_test_state": "PASS",
+    "llm_environment": "DISABLED",
+    "required_queries": 12,
+    "passed_queries": 12,
+    "integrity_state": "MAPPED",
+    "integrity_error_count": 0
+  },
+  "pr5_adapter_probe": {
+    "record_count": 1928,
+    "elapsed_seconds": 41.03,
+    "error_count": 0,
+    "generic_repository_references": 3793,
+    "generic_runtime_nest_boundaries": 9,
+    "generic_extension_candidates": 102,
+    "cpp_lexical_nest_boundaries": 53,
+    "cpp_lexical_extension_candidates": 81,
+    "cpp_direct_evidence_records": 84019,
+    "evidence_preservation_rule": "Occurrence evidence and function-level relations are retained when translation-unit capability objects are aggregated."
+  },
+  "pr5_input": {
+    "repository": "dail8859/NotepadNext",
+    "commit": "f57db52d6760a2ce4149a37190c3adaa586845f5",
+    "tree": "f0995b128bf6dbc73e5d0f3ef4e4f302f8a3081b",
+    "source_manifest_sha256": "8fca5eb6edcbf9ec2a23e38b1792ad6bc40e0a3adda7b52715ece8cde661152f",
+    "exact_acquisition_zip_sha256": "4a1343f4f56500ba850162039e7483e2f17f894be6493f5afbaacdf25c2c44a3",
+    "oracle_used_during_candidate_development": true,
+    "calibration_rule": "Only generic scanner changes are permitted; the v0.20 cold certification remains the immutable pre-oracle baseline."
+  }
+}

@@ -1,0 +1,78 @@
+[
+  {
+    "id": 90121947949,
+    "run_id": 30309618627,
+    "workflow_name": "Materialize pirate spore",
+    "head_branch": "agent/add-pirate-spore",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/runs/30309618627",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOSv-f3M8AAAAU-6_LLQ",
+    "head_sha": "c6a0d59bd7385accafd4bd1c47cb3011d3606da0",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/jobs/90121947949",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-os/actions/runs/30309618627/job/90121947949",
+    "status": "completed",
+    "conclusion": "failure",
+    "created_at": "2026-07-27T22:08:20Z",
+    "started_at": "2026-07-27T22:09:22Z",
+    "completed_at": "2026-07-27T22:09:28Z",
+    "name": "materialize",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-07-27T22:09:23Z",
+        "completed_at": "2026-07-27T22:09:24Z"
+      },
+      {
+        "name": "Check out the source branch",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-07-27T22:09:24Z",
+        "completed_at": "2026-07-27T22:09:25Z"
+      },
+      {
+        "name": "Build the Grimoire spore",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-07-27T22:09:25Z",
+        "completed_at": "2026-07-27T22:09:25Z"
+      },
+      {
+        "name": "Commit the binary carrier",
+        "status": "completed",
+        "conclusion": "failure",
+        "number": 4,
+        "started_at": "2026-07-27T22:09:25Z",
+        "completed_at": "2026-07-27T22:09:26Z"
+      },
+      {
+        "name": "Post Check out the source branch",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-07-27T22:09:26Z",
+        "completed_at": "2026-07-27T22:09:26Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-07-27T22:09:26Z",
+        "completed_at": "2026-07-27T22:09:26Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/check-runs/90121947949",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000000596,
+    "runner_name": "GitHub Actions 1000000596",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

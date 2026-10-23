@@ -1,0 +1,43 @@
+{
+  "schema_version": "scan-pr5-determinism/0.1",
+  "engine_version": "0.25.0",
+  "state": "PASS",
+  "specimen": {
+    "repository": "dail8859/NotepadNext",
+    "commit": "f57db52d6760a2ce4149a37190c3adaa586845f5",
+    "tree": "f0995b128bf6dbc73e5d0f3ef4e4f302f8a3081b",
+    "manifest_file_count": 1928,
+    "oracle_used": false
+  },
+  "cold_runs": {
+    "count": 2,
+    "files_each": 21,
+    "sha256_differences": 0,
+    "database_tables_compared": [
+      "nodes",
+      "edges",
+      "evidence",
+      "findings",
+      "semantic_objects",
+      "semantic_relations"
+    ],
+    "only_run_1_rows": 0,
+    "only_run_2_rows": 0,
+    "same_id_changed_rows": 0
+  },
+  "cache_proof": {
+    "cache_hits": 4186,
+    "cache_misses": 0,
+    "cache_independent_files_compared": 8,
+    "cache_independent_file_differences": 0,
+    "adaptive_workbench_files_compared": 9,
+    "adaptive_workbench_file_differences": 0,
+    "canonical_database_row_differences": 0
+  },
+  "final_certification_parity": {
+    "canonical_files_compared": 10,
+    "canonical_file_differences": 0,
+    "canonical_database_row_differences": 0,
+    "projection_manifest_sha256": "8ac56aea88ea2586f7eb975be071b4ce38f85a40c9684f1c499972a29277a835"
+  }
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "id": 106925095257,
+    "run_id": 35780674431,
+    "workflow_name": "SCAN v0.32 layered provenance",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35780674431",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5Tt5WQ",
+    "head_sha": "9960295d4c014c056b2fe4ad37a53c47ffcaa1a8",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106925095257",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35780674431/job/106925095257",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T20:29:57Z",
+    "started_at": "2026-09-22T20:31:20Z",
+    "completed_at": "2026-09-22T20:31:56Z",
+    "name": "layered-provenance",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T20:31:22Z",
+        "completed_at": "2026-09-22T20:31:23Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T20:31:23Z",
+        "completed_at": "2026-09-22T20:31:24Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T20:31:24Z",
+        "completed_at": "2026-09-22T20:31:25Z"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T20:31:25Z",
+        "completed_at": "2026-09-22T20:31:25Z"
+      },
+      {
+        "name": "Install v0.32 candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T20:31:25Z",
+        "completed_at": "2026-09-22T20:31:32Z"
+      },
+      {
+        "name": "Run full candidate regression suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T20:31:32Z",
+        "completed_at": "2026-09-22T20:31:51Z"
+      },
+      {
+        "name": "Prove deterministic scan-time provenance output",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T20:31:51Z",
+        "completed_at": "2026-09-22T20:31:51Z"
+      },
+      {
+        "name": "Prove read-only provenance regeneration",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-22T20:31:51Z",
+        "completed_at": "2026-09-22T20:31:52Z"
+      },
+      {
+        "name": "Audit layer reconciliation and authority boundary",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-22T20:31:52Z",
+        "completed_at": "2026-09-22T20:31:52Z"
+      },
+      {
+        "name": "Upload v0.32 provenance evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-09-22T20:31:52Z",
+        "completed_at": "2026-09-22T20:31:53Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18,
+        "started_at": "2026-09-22T20:31:53Z",
+        "completed_at": "2026-09-22T20:31:53Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19,
+        "started_at": "2026-09-22T20:31:53Z",
+        "completed_at": "2026-09-22T20:31:53Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 20,
+        "started_at": "2026-09-22T20:31:53Z",
+        "completed_at": "2026-09-22T20:31:53Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 21,
+        "started_at": "2026-09-22T20:31:53Z",
+        "completed_at": "2026-09-22T20:31:53Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106925095257",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000003738,
+    "runner_name": "GitHub Actions 1000003738",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

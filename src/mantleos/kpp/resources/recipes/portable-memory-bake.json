@@ -1,0 +1,112 @@
+{
+  "schema": "kpp.recipe/3",
+  "id": "portable-memory-bake",
+  "goal": "Bake a portable memory-bearing agent mechanism by adapting MantleOS-inspired Anchor specimens into an explicit Python implementation, without automatically running emitted code or granting the MIND direct body authority.",
+  "mode": "transformation",
+  "tissue": "mixed",
+  "fidelity": 3,
+  "target": {
+    "description": "A body-side memory interface that accepts approved intentions and persists history using explicit, append-only records",
+    "source": "Original KPP teaching bake inspired by MantleOS concepts",
+    "reference_version": "portable-memory-bake/v0.2"
+  },
+  "ingredients": [
+    "anchor-tissue",
+    "python-tissue",
+    "mind-body-boundary",
+    "engram-continuity",
+    "kernel-relative-cells",
+    "chase-gate"
+  ],
+  "transformation": {
+    "preserve": [
+      "Only admitted actions can cross the intent boundary",
+      "Existing records are never edited in-place",
+      "Acceptance is scoped to evidence for mandatory recipe Anchors"
+    ],
+    "may_change": [
+      "Memory substrate and physical cell representation",
+      "Implementation tissue when the Oven is configured for Python",
+      "Auxiliary user interface"
+    ]
+  },
+  "oven": {
+    "assumption": "Consistent execution of sufficiently explicit recipe",
+    "provider": "any capable host",
+    "iterations": "as needed",
+    "bridge": "Anchor EMIT_TEXT/0.2 emits Python text; explicit host materialization required",
+    "execution": "no automatic execution of emitted code"
+  },
+  "acceptance": "All required anchors must be tested and attested for this pinned recipe",
+  "anchors": [
+    {
+      "id": "specimen-valid",
+      "required": true,
+      "depth": 1,
+      "area": "other",
+      "statement": "All selected portable Anchor specimens have valid primers and pass strict whole-document validation",
+      "test": "kpp doctor and kpp anchor inspect on selected specimens",
+      "depends": []
+    },
+    {
+      "id": "safe-bridge",
+      "required": true,
+      "depth": 2,
+      "area": "other",
+      "statement": "Anchor specimens emit Python source reproducibly without automatically running it",
+      "test": "kpp anchor bridge-python to fresh .py output; check hash; confirm no side effect until explicit execution",
+      "depends": [
+        "specimen-valid"
+      ]
+    },
+    {
+      "id": "bounded-intent",
+      "required": true,
+      "depth": 2,
+      "area": "memory",
+      "statement": "The body rejects unrecognized actions and returns a bounded interpretation of allowed intentions",
+      "test": "Run bridged intent-boundary.py with remember and overwrite JSON; only remember is admitted as proposal",
+      "depends": [
+        "safe-bridge"
+      ],
+      "preserves": [
+        "Only admitted actions can cross the intent boundary"
+      ]
+    },
+    {
+      "id": "append-only-memory",
+      "required": true,
+      "depth": 3,
+      "area": "memory",
+      "statement": "Append-only memory preserves earlier records and detects modified record contents",
+      "test": "Explicitly run bridged memory-ledger.py to append and read, then tamper and verify rejection",
+      "depends": [
+        "safe-bridge"
+      ],
+      "preserves": [
+        "Existing records are never edited in-place"
+      ]
+    },
+    {
+      "id": "chase-gate",
+      "required": true,
+      "depth": 3,
+      "area": "other",
+      "statement": "Chase stops on tested, bounded target satisfaction and redirects otherwise",
+      "test": "Run bridged chase-stop.py with accepted and rejected performance ratios and check statuses; check that KPP cannot mark a workspace complete until every required Anchor receives scoped acceptance evidence",
+      "depends": [
+        "safe-bridge"
+      ],
+      "preserves": [
+        "Acceptance is scoped to evidence for mandatory recipe Anchors"
+      ]
+    }
+  ],
+  "product_kind": "conventional",
+  "delivery_mode": "artifact",
+  "capabilities": {
+    "agent": false,
+    "mind": false,
+    "mantleos_splice": false
+  }
+}

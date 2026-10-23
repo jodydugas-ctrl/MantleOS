@@ -1,0 +1,32 @@
+{
+  "schema_version": "scan-semantic-overlay/0.1",
+  "objects": [
+    {
+      "id": "IN-EXAMPLE-001",
+      "object_type": "INTERPRETATION",
+      "subtype": "behavior-meaning",
+      "label": "Example interpretation supported by an extracted object",
+      "coverage": "PARTIAL"
+    },
+    {
+      "id": "RA-EXAMPLE-001",
+      "object_type": "RECONSTRUCTION_ANCHOR",
+      "subtype": "behavior",
+      "label": "Example reconstruction property",
+      "coverage": "PARTIAL"
+    }
+  ],
+  "relations": [
+    {
+      "src": "REPLACE_WITH_EXISTING_OBJECT_ID",
+      "dst": "IN-EXAMPLE-001",
+      "kind": "supports"
+    },
+    {
+      "src": "IN-EXAMPLE-001",
+      "dst": "RA-EXAMPLE-001",
+      "kind": "supports_anchor"
+    }
+  ],
+  "completeness": []
+}

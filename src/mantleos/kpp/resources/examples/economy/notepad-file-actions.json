@@ -1,0 +1,15 @@
+{
+  "schema": "kpp.economy-proposal/1",
+  "merges": [
+    {
+      "from": ["open-file"],
+      "into": "save-file",
+      "coverage_rationale": "Consider one file-action organ with separate open and save operations. Shared interface must still preserve distinct file selection, permission and failure behavior.",
+      "comparison_tests": [
+        "Test Save writes exact Unicode bytes and Open reads those bytes back",
+        "Test opening a file does not discard an unsaved draft without confirmation",
+        "Test canceled file selection and failed download paths remain distinct"
+      ]
+    }
+  ]
+}

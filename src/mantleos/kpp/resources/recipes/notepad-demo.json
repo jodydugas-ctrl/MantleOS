@@ -1,0 +1,121 @@
+{
+  "schema": "kpp.recipe/3",
+  "id": "notepad-demo",
+  "goal": "Create an editable, XP-inspired notes app progressively while preserving user-entered drafts; completion requires the Baker to confirm every mandatory behavior.",
+  "mode": "chase",
+  "tissue": "javascript",
+  "fidelity": 3,
+  "target": {
+    "description": "An offline-style plain text notepad with visible controls, text editing, file open/save and draft recovery",
+    "source": "functional description, not a copied implementation",
+    "reference_version": "notepad-demo/v1",
+    "fidelity_semantics": "depth 1 surface; depth 2 direct events; depth 3 files and persistent consequences"
+  },
+  "ingredients": [
+    "interface-shell",
+    "text-editor",
+    "browser-file-io",
+    "local-draft-recovery",
+    "progressive-web-runtime",
+    "chase-gate"
+  ],
+  "oven": {
+    "assumption": "Consistent execution of sufficiently explicit recipe",
+    "provider": "any capable host",
+    "iterations": "as needed",
+    "implementation": "incremental",
+    "verification": "Baker acceptance"
+  },
+  "acceptance": "Every required anchor must carry explicit evidence; no credit for untested capabilities.",
+  "anchors": [
+    {
+      "id": "ui-surface",
+      "required": true,
+      "depth": 1,
+      "area": "view",
+      "statement": "Window, text area, menu, and stage indicator render on initial load",
+      "test": "Open browser preview; observe editor and menu and stage indicator",
+      "depends": []
+    },
+    {
+      "id": "draft-safety",
+      "required": true,
+      "depth": 1,
+      "area": "memory",
+      "statement": "Typing into the initial editor keeps working and draft survives page reload where browser storage is available",
+      "test": "Type sample, reload, verify same text; test behavior when storage is disabled",
+      "depends": [
+        "ui-surface"
+      ]
+    },
+    {
+      "id": "editing-actions",
+      "required": true,
+      "depth": 2,
+      "area": "edit",
+      "statement": "Select All, Clear and character counter behave as specified",
+      "test": "Bake through depth 2; select text, test Clear cancel/accept and count changes",
+      "depends": [
+        "ui-surface"
+      ]
+    },
+    {
+      "id": "save-file",
+      "required": true,
+      "depth": 3,
+      "area": "file",
+      "statement": "User can download exact editor content as UTF-8 plain text through Save",
+      "test": "Bake through depth 3; type multiline/Unicode, Save, inspect downloaded .txt bytes",
+      "depends": [
+        "editing-actions"
+      ]
+    },
+    {
+      "id": "open-file",
+      "required": true,
+      "depth": 3,
+      "area": "file",
+      "statement": "User can open a local UTF-8 text file without silently discarding the existing draft",
+      "test": "Open a sample text file, verify content; cancel replacement while draft is nonempty",
+      "depends": [
+        "editing-actions"
+      ]
+    },
+    {
+      "id": "no-fake-completion",
+      "required": true,
+      "depth": 3,
+      "area": "other",
+      "statement": "Unimplemented capabilities stay gated, and completion is not declared without all required Anchor evidence",
+      "test": "At F1 confirm Save disabled; before acceptance check phase BUILDING; after all accepted complete recipe",
+      "depends": [
+        "ui-surface"
+      ]
+    }
+  ],
+  "product_kind": "conventional",
+  "delivery_mode": "progressive-web",
+  "capabilities": {
+    "agent": false,
+    "mind": false,
+    "mantleos_splice": false
+  },
+  "preview": {
+    "kind": "progressive-web",
+    "assets": {
+      "index.html": {
+        "path": "previews/notepad/index.html",
+        "sha256": "b2e14ede2772a8888a45d32e938ba4e6de0389d2a5d4f073282aebd02e0de6d8"
+      },
+      "base.js": {
+        "path": "previews/notepad/base.js",
+        "sha256": "13f8a33c5a1405b8be7c76521590e14f8320db1a14349ad6d0f032262d6d67ce"
+      },
+      "style.css": {
+        "path": "previews/notepad/style.css",
+        "sha256": "0bfe4ee72ff63eaf3bc781ad4444246caa6f8dbc647d1ec89852f60fa9e0c24c"
+      }
+    },
+    "state_profile": "json-body/1"
+  }
+}

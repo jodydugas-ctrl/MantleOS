@@ -1,0 +1,742 @@
+[
+  {
+    "id": 106925112253,
+    "run_id": 35780674464,
+    "workflow_name": "SCAN v1.0 final certification",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35780674464",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5Tu7vQ",
+    "head_sha": "9960295d4c014c056b2fe4ad37a53c47ffcaa1a8",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106925112253",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35780674464/job/106925112253",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "created_at": "2026-09-22T20:30:00Z",
+    "started_at": "2026-09-22T20:30:00Z",
+    "completed_at": "2026-09-22T20:35:11Z",
+    "name": "platform-certification (windows-latest, 3.11)",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106925112253",
+    "labels": [
+      "windows-latest"
+    ],
+    "runner_id": 0,
+    "runner_name": "",
+    "runner_group_id": 0,
+    "runner_group_name": ""
+  },
+  {
+    "id": 106925112329,
+    "run_id": 35780674464,
+    "workflow_name": "SCAN v1.0 final certification",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35780674464",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5Tu8CQ",
+    "head_sha": "9960295d4c014c056b2fe4ad37a53c47ffcaa1a8",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106925112329",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35780674464/job/106925112329",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T20:30:00Z",
+    "started_at": "2026-09-22T20:32:26Z",
+    "completed_at": "2026-09-22T20:32:39Z",
+    "name": "platform-certification (ubuntu-latest, 3.11)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T20:32:27Z",
+        "completed_at": "2026-09-22T20:32:28Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T20:32:28Z",
+        "completed_at": "2026-09-22T20:32:29Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T20:32:29Z",
+        "completed_at": "2026-09-22T20:32:29Z"
+      },
+      {
+        "name": "Install v1.0 candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T20:32:29Z",
+        "completed_at": "2026-09-22T20:32:33Z"
+      },
+      {
+        "name": "Run final focused certification and hardening suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T20:32:33Z",
+        "completed_at": "2026-09-22T20:32:37Z"
+      },
+      {
+        "name": "Installed CLI smoke",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T20:32:37Z",
+        "completed_at": "2026-09-22T20:32:37Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-22T20:32:37Z",
+        "completed_at": "2026-09-22T20:32:37Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-22T20:32:37Z",
+        "completed_at": "2026-09-22T20:32:37Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T20:32:37Z",
+        "completed_at": "2026-09-22T20:32:37Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106925112329",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000003753,
+    "runner_name": "GitHub Actions 1000003753",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 106925112408,
+    "run_id": 35780674464,
+    "workflow_name": "SCAN v1.0 final certification",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35780674464",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5Tu8WA",
+    "head_sha": "9960295d4c014c056b2fe4ad37a53c47ffcaa1a8",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106925112408",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35780674464/job/106925112408",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T20:30:00Z",
+    "started_at": "2026-09-22T20:33:26Z",
+    "completed_at": "2026-09-22T20:34:42Z",
+    "name": "platform-certification (windows-latest, 3.12)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T20:33:27Z",
+        "completed_at": "2026-09-22T20:33:27Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T20:33:27Z",
+        "completed_at": "2026-09-22T20:33:33Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T20:33:33Z",
+        "completed_at": "2026-09-22T20:33:34Z"
+      },
+      {
+        "name": "Install v1.0 candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T20:33:34Z",
+        "completed_at": "2026-09-22T20:34:29Z"
+      },
+      {
+        "name": "Run final focused certification and hardening suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T20:34:29Z",
+        "completed_at": "2026-09-22T20:34:37Z"
+      },
+      {
+        "name": "Installed CLI smoke",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T20:34:37Z",
+        "completed_at": "2026-09-22T20:34:38Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-22T20:34:38Z",
+        "completed_at": "2026-09-22T20:34:38Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-22T20:34:38Z",
+        "completed_at": "2026-09-22T20:34:40Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T20:34:40Z",
+        "completed_at": "2026-09-22T20:34:40Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106925112408",
+    "labels": [
+      "windows-latest"
+    ],
+    "runner_id": 1000003768,
+    "runner_name": "GitHub Actions 1000003768",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 106925112425,
+    "run_id": 35780674464,
+    "workflow_name": "SCAN v1.0 final certification",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35780674464",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5Tu8aQ",
+    "head_sha": "9960295d4c014c056b2fe4ad37a53c47ffcaa1a8",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106925112425",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35780674464/job/106925112425",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "created_at": "2026-09-22T20:30:00Z",
+    "started_at": "2026-09-22T20:34:45Z",
+    "completed_at": "2026-09-22T20:35:22Z",
+    "name": "full-regression",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T20:34:46Z",
+        "completed_at": "2026-09-22T20:34:47Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T20:34:47Z",
+        "completed_at": "2026-09-22T20:34:48Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T20:34:48Z",
+        "completed_at": "2026-09-22T20:34:48Z"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T20:34:48Z",
+        "completed_at": "2026-09-22T20:34:49Z"
+      },
+      {
+        "name": "Install candidate and deterministic TypeScript parser dependency",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T20:34:49Z",
+        "completed_at": "2026-09-22T20:34:55Z"
+      },
+      {
+        "name": "Run complete inherited plus v1.0 regression suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T20:34:55Z",
+        "completed_at": "2026-09-22T20:35:20Z"
+      },
+      {
+        "name": "Record regression count",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T20:35:20Z",
+        "completed_at": "2026-09-22T20:35:20Z"
+      },
+      {
+        "name": "Upload regression receipt",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-22T20:35:20Z",
+        "completed_at": "2026-09-22T20:35:21Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-09-22T20:35:21Z",
+        "completed_at": "2026-09-22T20:35:21Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-09-22T20:35:21Z",
+        "completed_at": "2026-09-22T20:35:21Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16,
+        "started_at": "2026-09-22T20:35:21Z",
+        "completed_at": "2026-09-22T20:35:21Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-09-22T20:35:21Z",
+        "completed_at": "2026-09-22T20:35:21Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106925112425",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000003784,
+    "runner_name": "GitHub Actions 1000003784",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 106925112434,
+    "run_id": 35780674464,
+    "workflow_name": "SCAN v1.0 final certification",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35780674464",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5Tu8cg",
+    "head_sha": "9960295d4c014c056b2fe4ad37a53c47ffcaa1a8",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106925112434",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35780674464/job/106925112434",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "created_at": "2026-09-22T20:30:00Z",
+    "started_at": "2026-09-22T20:30:00Z",
+    "completed_at": "2026-09-22T20:35:11Z",
+    "name": "live-authorized-runtime",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106925112434",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 0,
+    "runner_name": "",
+    "runner_group_id": 0,
+    "runner_group_name": ""
+  },
+  {
+    "id": 106925112562,
+    "run_id": 35780674464,
+    "workflow_name": "SCAN v1.0 final certification",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35780674464",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5Tu88g",
+    "head_sha": "9960295d4c014c056b2fe4ad37a53c47ffcaa1a8",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106925112562",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35780674464/job/106925112562",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "created_at": "2026-09-22T20:30:00Z",
+    "started_at": "2026-09-22T20:30:00Z",
+    "completed_at": "2026-09-22T20:35:11Z",
+    "name": "platform-certification (ubuntu-latest, 3.12)",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106925112562",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 0,
+    "runner_name": "",
+    "runner_group_id": 0,
+    "runner_group_name": ""
+  },
+  {
+    "id": 106925112645,
+    "run_id": 35780674464,
+    "workflow_name": "SCAN v1.0 final certification",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35780674464",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5Tu9RQ",
+    "head_sha": "9960295d4c014c056b2fe4ad37a53c47ffcaa1a8",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106925112645",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35780674464/job/106925112645",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T20:30:00Z",
+    "started_at": "2026-09-22T20:34:49Z",
+    "completed_at": "2026-09-22T20:35:04Z",
+    "name": "platform-certification (macos-latest, 3.11)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T20:34:49Z",
+        "completed_at": "2026-09-22T20:34:49Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T20:34:49Z",
+        "completed_at": "2026-09-22T20:34:52Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T20:34:52Z",
+        "completed_at": "2026-09-22T20:34:52Z"
+      },
+      {
+        "name": "Install v1.0 candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T20:34:52Z",
+        "completed_at": "2026-09-22T20:34:56Z"
+      },
+      {
+        "name": "Run final focused certification and hardening suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T20:34:56Z",
+        "completed_at": "2026-09-22T20:35:01Z"
+      },
+      {
+        "name": "Installed CLI smoke",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T20:35:01Z",
+        "completed_at": "2026-09-22T20:35:01Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-22T20:35:01Z",
+        "completed_at": "2026-09-22T20:35:01Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-22T20:35:01Z",
+        "completed_at": "2026-09-22T20:35:02Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T20:35:02Z",
+        "completed_at": "2026-09-22T20:35:03Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106925112645",
+    "labels": [
+      "macos-latest"
+    ],
+    "runner_id": 1000003783,
+    "runner_name": "GitHub Actions 1000003783",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 106925112732,
+    "run_id": 35780674464,
+    "workflow_name": "SCAN v1.0 final certification",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35780674464",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5Tu9nA",
+    "head_sha": "9960295d4c014c056b2fe4ad37a53c47ffcaa1a8",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106925112732",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35780674464/job/106925112732",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "created_at": "2026-09-22T20:30:00Z",
+    "started_at": "2026-09-22T20:30:00Z",
+    "completed_at": "2026-09-22T20:35:11Z",
+    "name": "platform-certification (ubuntu-latest, 3.13)",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106925112732",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 0,
+    "runner_name": "",
+    "runner_group_id": 0,
+    "runner_group_name": ""
+  },
+  {
+    "id": 106925112829,
+    "run_id": 35780674464,
+    "workflow_name": "SCAN v1.0 final certification",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35780674464",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5Tu9_Q",
+    "head_sha": "9960295d4c014c056b2fe4ad37a53c47ffcaa1a8",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106925112829",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35780674464/job/106925112829",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "created_at": "2026-09-22T20:30:00Z",
+    "started_at": "2026-09-22T20:30:00Z",
+    "completed_at": "2026-09-22T20:35:11Z",
+    "name": "platform-certification (windows-latest, 3.13)",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106925112829",
+    "labels": [
+      "windows-latest"
+    ],
+    "runner_id": 0,
+    "runner_name": "",
+    "runner_group_id": 0,
+    "runner_group_name": ""
+  },
+  {
+    "id": 106925112878,
+    "run_id": 35780674464,
+    "workflow_name": "SCAN v1.0 final certification",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35780674464",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5Tu-Lg",
+    "head_sha": "9960295d4c014c056b2fe4ad37a53c47ffcaa1a8",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106925112878",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35780674464/job/106925112878",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "created_at": "2026-09-22T20:30:00Z",
+    "started_at": "2026-09-22T20:35:09Z",
+    "completed_at": "2026-09-22T20:35:30Z",
+    "name": "platform-certification (macos-latest, 3.13)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T20:35:10Z",
+        "completed_at": "2026-09-22T20:35:11Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T20:35:11Z",
+        "completed_at": "2026-09-22T20:35:14Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T20:35:14Z",
+        "completed_at": "2026-09-22T20:35:14Z"
+      },
+      {
+        "name": "Install v1.0 candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T20:35:14Z",
+        "completed_at": "2026-09-22T20:35:21Z"
+      },
+      {
+        "name": "Run final focused certification and hardening suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T20:35:21Z",
+        "completed_at": "2026-09-22T20:35:26Z"
+      },
+      {
+        "name": "Installed CLI smoke",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T20:35:26Z",
+        "completed_at": "2026-09-22T20:35:26Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-22T20:35:26Z",
+        "completed_at": "2026-09-22T20:35:26Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-22T20:35:26Z",
+        "completed_at": "2026-09-22T20:35:27Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T20:35:27Z",
+        "completed_at": "2026-09-22T20:35:28Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106925112878",
+    "labels": [
+      "macos-latest"
+    ],
+    "runner_id": 1000003790,
+    "runner_name": "GitHub Actions 1000003790",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 106925113003,
+    "run_id": 35780674464,
+    "workflow_name": "SCAN v1.0 final certification",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35780674464",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5Tu-qw",
+    "head_sha": "9960295d4c014c056b2fe4ad37a53c47ffcaa1a8",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106925113003",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35780674464/job/106925113003",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "created_at": "2026-09-22T20:30:00Z",
+    "started_at": "2026-09-22T20:30:00Z",
+    "completed_at": "2026-09-22T20:35:11Z",
+    "name": "platform-certification (macos-latest, 3.12)",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106925113003",
+    "labels": [
+      "macos-latest"
+    ],
+    "runner_id": 0,
+    "runner_name": "",
+    "runner_group_id": 0,
+    "runner_group_name": ""
+  },
+  {
+    "id": 106927102517,
+    "run_id": 35780674464,
+    "workflow_name": "SCAN v1.0 final certification",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35780674464",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5VoaNQ",
+    "head_sha": "9960295d4c014c056b2fe4ad37a53c47ffcaa1a8",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106927102517",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35780674464/job/106927102517",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "created_at": "2026-09-22T20:35:31Z",
+    "started_at": "2026-09-22T20:35:31Z",
+    "completed_at": "2026-09-22T20:35:30Z",
+    "name": "final-release-certificate",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106927102517",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  },
+  {
+    "id": 106927103086,
+    "run_id": 35780674464,
+    "workflow_name": "SCAN v1.0 final certification",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35780674464",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5Vocbg",
+    "head_sha": "9960295d4c014c056b2fe4ad37a53c47ffcaa1a8",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106927103086",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35780674464/job/106927103086",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "created_at": "2026-09-22T20:35:31Z",
+    "started_at": "2026-09-22T20:35:31Z",
+    "completed_at": "2026-09-22T20:35:30Z",
+    "name": "publish-release",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106927103086",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  }
+]

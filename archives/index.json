@@ -1,0 +1,2083 @@
+{
+  "schema": "mantle.archive-index/1",
+  "source_snapshots_included": true,
+  "sources": [
+    {
+      "default_branch": "main",
+      "git_bundle_restore": "PASS",
+      "github_counts": {
+        "artifacts": 0,
+        "branches": 1,
+        "commit-comments": 0,
+        "issue-comments": 0,
+        "issue-events": 0,
+        "issues": 0,
+        "labels": 10,
+        "milestones": 0,
+        "pulls": 0,
+        "releases": 0,
+        "review-comments": 0,
+        "runs": 6,
+        "tags": 0,
+        "workflows": 1
+      },
+      "github_records": "CAPTURED",
+      "limitations": [
+        "Historical source is inert reference data, not supported runtime.",
+        "Exact pre-redaction originals remain in the independent private backup."
+      ],
+      "omissions": [],
+      "original_backup": "A:\\GitHub-Backups\\2026-10-23\\mantle-daemon-laboratory",
+      "original_head": "2dc3a7f6a207128eb6eabeaf5a4f956b178e5696",
+      "original_url": "https://github.com/jodydugas-ctrl/mantle-daemon-laboratory",
+      "public_head": "8b79a1c93d653276d208005e955e2e9614f7d9d9",
+      "public_refs": [
+        "8b79a1c93d653276d208005e955e2e9614f7d9d9 refs/heads/main"
+      ],
+      "publication_review": "TECHNICAL_CONTENT_REVIEW_COMPLETE; OWNER_PUBLICATION_APPROVAL_PENDING",
+      "record_redactions": 0,
+      "redacted_paths": [
+        "genome/identity.json",
+        "receipts/beat-1787958403687387.json",
+        "receipts/beat-1787958405410779.json",
+        "receipts/beat-1787958407220865.json",
+        "receipts/beat-1787958408879053.json",
+        "receipts/beat-1787958410464868.json",
+        "receipts/beat-1787958412113562.json",
+        "receipts/beat-1787958413742088.json",
+        "receipts/beat-1787958415541715.json",
+        "receipts/beat-1787958417321962.json",
+        "receipts/beat-1787958419111145.json",
+        "receipts/beat-1788022649222029.json",
+        "reports/LOCAL_AUDIT_2026-08-28.json",
+        "vcw/100_identity.png",
+        "vcw/200_events.png",
+        "vcw/300_immune.png"
+      ],
+      "redaction_policy": [
+        "^genome/identity\\.json$",
+        "^vcw/",
+        "^receipts/",
+        "^reports/"
+      ],
+      "repository": "mantle-daemon-laboratory",
+      "review_limits": [
+        "Pattern review is not proof that all possible private information is absent.",
+        "Owner review of these prepared archives remains required before public publication."
+      ],
+      "schema": "mantle.archive-capture/1",
+      "snapshot": "Exact Git blob bytes; Git control filenames mapped in source-path-map.json"
+    },
+    {
+      "default_branch": "main",
+      "git_bundle_restore": "PASS",
+      "github_counts": {
+        "artifacts": 683,
+        "branches": 1,
+        "commit-comments": 0,
+        "issue-comments": 3,
+        "issue-events": 159,
+        "issues": 51,
+        "labels": 9,
+        "milestones": 0,
+        "pulls": 51,
+        "releases": 4,
+        "review-comments": 0,
+        "runs": 777,
+        "tags": 4,
+        "workflows": 6
+      },
+      "github_records": "CAPTURED_WITH_DOCUMENTED_OMISSIONS",
+      "limitations": [
+        "Historical source is inert reference data, not supported runtime.",
+        "Exact pre-redaction originals remain in the independent private backup."
+      ],
+      "omissions": [
+        {
+          "reason": "Cloning into bare repository 'A:\\GitHub-Backups\\2026-10-23\\mantle-os\\wiki.git'...\nremote: Repository not found.\nfatal: repository 'https://github.com/jodydugas-ctrl/mantle-os.wiki.git/' not found\n",
+          "resource": "wiki (may not have been created)"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30064573155/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30064573114/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30064073956/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30064073969/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30062055316/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30062055294/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30060602370/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30060602373/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30060041997/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30060041983/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30059750319/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30059089880/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30059750287/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30059089862/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30058772487/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30058772439/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30057835165/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30057835150/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30052363368/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30052363355/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30045236493/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30045236430/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30044914107/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30044914103/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30044639394/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30044639269/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30044614204/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30044613984/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30044585769/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30044585766/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30039436674/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30039436632/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30029812193/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30029812105/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30029130144/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30029130121/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30028337139/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30028337066/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30023107323/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30017571249/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30017569226/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30023107301/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30015028976/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30015028239/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30013739340/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30013737180/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30011305487/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/30011305417/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29990597991/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29990597976/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29988828730/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29988828710/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29988529880/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29988529829/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29988511640/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29988511613/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29987548874/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29987548868/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29987427999/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29987427969/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29979711955/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29979711943/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29977804798/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29977804792/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29977608998/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29977608988/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29977303250/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29977303236/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29964888614/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29964888559/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29962522335/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29962522325/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29788047014/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29788047051/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29787343952/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29787343898/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29787331231/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29787331236/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29787284778/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29787284774/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29719289973/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29719289966/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29719289763/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29719289749/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29718385240/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29718385206/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29718384783/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29718384791/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29717290083/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29717290063/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29717289449/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29717289427/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29716655859/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29716655812/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29716655101/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29716655099/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29490827725/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29490827661/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29447784922/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29447784914/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29447570882/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29447570863/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29442285982/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29442285921/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29441234104/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29441231358/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29391223353/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29391223351/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29329264431/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29329264398/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29329081857/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29329079779/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29329081838/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29329079693/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29326848047/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29326811875/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29326848045/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29326811791/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29131535328/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29131535280/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29129728312/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29129728295/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29129281233/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29129281202/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29128837725/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29128837713/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29127712401/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29127712385/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29127125450/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29127125447/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29126170167/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29126170161/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29125550472/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29125550426/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29124787536/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29124787508/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29124277286/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29124277281/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29123502983/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29123502820/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29092194754/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29092194705/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29091717542/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29091717517/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29091217829/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29091217824/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29090749156/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29090749193/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29090210143/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29090210082/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29089810888/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29089810856/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29089483554/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29089483543/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29067623391/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29067623400/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29067399164/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29067399112/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29067189010/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29067189019/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29066942400/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29066942365/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29066760689/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29066760682/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29066479919/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29066479903/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29066243156/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29066243188/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29066074449/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29066074439/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29063051400/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29063051395/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29062788611/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29062788609/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29062649156/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29062649188/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29062413015/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29062413014/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29056074353/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29056074303/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29055337165/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29055337142/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29055266967/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29055266943/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29055249092/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29055249086/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29053724760/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29053724739/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29050065489/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/29050065483/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28818610285/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28818610299/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28812695583/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28812695581/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28801295095/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28801295061/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28801111364/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28801111151/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28801110918/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28800418053/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28801110910/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28800418035/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28797929398/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28797929220/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28795469167/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28795469109/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28756324475/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28756324482/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28742322651/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28742322649/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28713310946/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28713310931/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28713271683/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28713271679/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28713262638/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28713262632/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28705141832/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28691460549/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28705141808/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28691460535/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684650060/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684650001/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684160066/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684160097/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684150061/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684150050/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684140622/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684140597/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684136122/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684136055/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684116667/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684116656/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684105706/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684105697/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684102318/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684096927/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684102319/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684096925/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684068890/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28684068888/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28683257761/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28683257729/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28683231325/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28683231320/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28671078890/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28671078879/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28670391774/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28670391653/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28614680141/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28614680130/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28557845746/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28557730728/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28557845740/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28555714083/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28557730720/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28555714047/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28553094280/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28553094249/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28553032322/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28553032314/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28552927082/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28552927078/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28237067104/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28237067099/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28236596088/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28234425099/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28236596068/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28234425080/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28233980815/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28233980803/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28210921459/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28210921438/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28202577905/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28202577891/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28202475734/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28190437938/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28202475682/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28190437715/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28183675072/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28182248674/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28183675030/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28182248634/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28182228930/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28182228770/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28173000280/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28173000238/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28172975945/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28172975908/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28171181274/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28171180738/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28169315683/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28169315678/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28169266558/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28169266525/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28168987998/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28168987950/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28168175534/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28168175514/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28168135536/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28167885815/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28168135494/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28167885814/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28167821586/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28167821382/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28167752401/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28167752410/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28007708272/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28007708256/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28005334243/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28005334226/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28005332234/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28005332226/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28004199964/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28004199961/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28004187036/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/28004186524/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27999801154/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27999801151/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27999722918/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27999722912/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27999709291/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27999709310/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27999568236/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27999568234/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27999566593/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27999566599/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27998952249/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27998952246/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27998943106/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27998943110/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27998820593/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27998820555/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27998809209/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27998809206/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27919384500/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27919384490/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27919360394/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27919360387/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27919353733/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27919353730/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27919123644/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27919123660/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27919086848/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27919079361/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27919079362/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27919086847/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27918730471/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27918711770/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27918706696/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27916898135/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27916877075/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27916867702/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27907906594/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27907886776/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27907865985/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27907319257/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27907308669/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27907296280/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27906629884/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27906614934/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27906605180/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27899806891/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27899820464/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27899798564/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27899462376/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27899447111/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27899439218/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27890680193/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27890669355/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27889648156/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27890664343/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27889635462/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27889274847/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27889259325/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27889629424/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27889253376/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27889085741/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27889047309/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27888989492/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27889046581/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27304522349/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27888978239/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27176044425/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27286268019/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27176036721/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/27176019186/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26976467902/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26976494196/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26976400507/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26976285678/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26976281641/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26976269744/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26971759969/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26971753766/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26971742950/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26971005405/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26971001617/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26970233498/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26970924177/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26969754917/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26965966831/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26965178610/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26961980871/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26958557697/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26957874844/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26954401251/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26951562951/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26951266830/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26951110391/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26950649385/logs"
+        },
+        {
+          "reason": "gh: Server Error (HTTP 410)\n",
+          "resource": "repos/jodydugas-ctrl/mantle-os/actions/runs/26924735132/logs"
+        }
+      ],
+      "original_backup": "A:\\GitHub-Backups\\2026-10-23\\mantle-os",
+      "original_head": "8e90a4f84998518d6abd8309dfa285a9ea7e8b24",
+      "original_url": "https://github.com/jodydugas-ctrl/mantle-os",
+      "public_head": "a4c423706631be7c2c67d3a83f5eed41b301d187",
+      "public_refs": [
+        "09d1d7308b04a3953f0f5f5a49e24c6f7bf91c86 refs/pull/17/head",
+        "0cdb2ce069596ddbad11590282ea6eaa8bb009af refs/pull/43/head",
+        "1128c0409878af8ab15813c1d5f839ed44d8008e refs/pull/32/head",
+        "124521a1db0cbe1681f8009aa7a3871331844cc3 refs/pull/15/head",
+        "1476568e1c21ce5b9d9eeff35aaa9cd978376a4b refs/pull/23/head",
+        "2c6279851601e65585332f5eac0b9a92af20b22d refs/pull/10/head",
+        "340d6c2582afb0cd6444ebf4f94c60d8f6efe8b2 refs/pull/48/head",
+        "36d79d1e0c15a643b45f95878e53f48270120f61 refs/pull/42/head",
+        "3a3e305031eb7c3c13b68a15608a9e36dbfe939d refs/pull/49/head",
+        "43df7637494de4df2b24bdc2e424eb52fe7c819b refs/pull/37/head",
+        "445a1f64bc0faf61c912879b6c7a476a17c9baeb refs/pull/26/head",
+        "4531055a290a464f6aba163084254192aac569f3 refs/pull/39/head",
+        "4708f82ce7d88f4b962c90952723e5eba9414108 refs/pull/40/head",
+        "4e18fe0f0121da48cda331e7c981c318610306c2 refs/pull/30/head",
+        "50b5b7237016112668ca95a5b01527da9e9f1db3 refs/pull/34/head",
+        "54953f3f355c2352a37ca7205a47bba0e9cbe5f4 refs/pull/44/head",
+        "6083447402181d65f4c9641592d667f0b8e0c237 refs/pull/20/head",
+        "618cd4fc0439b0e43c012c1679433fb1650f5d74 refs/pull/50/head",
+        "63e16665e8aabf047689711cc6b6c98f01d1ff45 refs/pull/51/head",
+        "65398f738183e389617e0129110ca166eb114d58 refs/tags/v0.1.0",
+        "66bdf49f4db8b2d1761c79538690bfc4bbe15dc2 refs/pull/47/head",
+        "6d576cf42f9b428d1f70279e60e2195a234d36e6 refs/pull/1/head",
+        "7300399529439e7bd5a314796b37a246ff4be998 refs/pull/21/head",
+        "7c87771cffe1703357461cfa0329e16fae9003ea refs/pull/18/head",
+        "8cd9b658cf040af5695062a755ab1a883a914f59 refs/pull/29/head",
+        "953fb558febe3eeff7fb3b33b74bc59d8d6a0405 refs/pull/9/head",
+        "96c312613511c32ce7c33b5651f6258c69f5d775 refs/pull/33/head",
+        "96e75904529afbfdcaa7fe69f957bd9cfee49fa1 refs/tags/v2.0.0rc1",
+        "97ad8134abec6f0c278bb0795f939d7b84af480f refs/pull/31/head",
+        "97b404605d0c09bbd74b043cd6ebc1afe577b6fc refs/pull/25/head",
+        "99851d6a2e4ede00582a7eb73f6f85da5a0e2597 refs/pull/27/head",
+        "9b542d348a56f2392423caf7e7be6fafe0ddf313 refs/pull/6/head",
+        "9be68878693676a9260efb9e7a8343db8a52f96d refs/tags/v1.3.0",
+        "9de57c2a1f7012815b3a0476ce322c9bea1b99ce refs/pull/41/head",
+        "a4c423706631be7c2c67d3a83f5eed41b301d187 refs/heads/main",
+        "aa6f9d9f67ce35551ee7940d26a811ca7fa1e167 refs/pull/4/head",
+        "aa6f9d9f67ce35551ee7940d26a811ca7fa1e167 refs/pull/5/head",
+        "b46658e7f9dc35b4ac51ead83c2f43d1ab57cb72 refs/pull/36/head",
+        "b8e5b75c5837dd0873e02a12841495b85ede3711 refs/pull/7/head",
+        "bc6b7420fdc0cb49108be1d400fef2c4451eb39d refs/pull/38/head",
+        "bcae29bfdaeb41bfd7f3ff29ded2509ba3bfb7ba refs/pull/24/head",
+        "bf56c0007991287451e8a250e2d417e99c9026de refs/pull/13/head",
+        "c2b3c4e1d53ba366b77520c3603158621c579a3d refs/pull/8/head",
+        "c31de4f5b846988667363e18f708c93b9907b5c9 refs/pull/46/head",
+        "c6ba3a31f09c28f97f8bd4c52fdfc3fb0a27fa45 refs/pull/2/head",
+        "daab6627a608300531db1840343022a5a68f6297 refs/pull/19/head",
+        "e3c4320625725fc35dea4569827a774afd38feb0 refs/pull/12/head",
+        "e3f46a0425a180298f97ce64ed0496bde744b147 refs/pull/14/head",
+        "eea1c71dadd294dbe1b34beabb966e3a688091e7 refs/pull/45/head",
+        "f2b2fa677b286b5b0675c46ffe06967c5d19091d refs/tags/v1.0.0",
+        "f2ea2042420a80c3d538f0db3c96f47250bd26d4 refs/pull/16/head",
+        "f49fddb70834be88977b70440105ea451273a4de refs/pull/3/head",
+        "f522f112233a5590dd8eb66609403d89665957b3 refs/pull/22/head",
+        "fa6470a38a8eee1c912987271d23cd62e6a9165c refs/pull/35/head",
+        "fcbdc5da9d3089b52d5877d2dcbccc8d44db73f4 refs/pull/11/head",
+        "fd7ad53f9f0e1f681c492dc85dab3bf46f610644 refs/pull/28/head"
+      ],
+      "publication_review": "TECHNICAL_CONTENT_REVIEW_COMPLETE; OWNER_PUBLICATION_APPROVAL_PENDING",
+      "record_redactions": 126,
+      "redacted_paths": [
+        "Files.AppAI.nest",
+        "Files.AppAI.nest/hatch_report.json",
+        "Files.AppAI.spore.png",
+        "examples/files_appai/Files.AppAI.nest",
+        "examples/files_appai/Files.AppAI.nest/body.json",
+        "examples/files_appai/Files.AppAI.nest/face.png",
+        "examples/files_appai/Files.AppAI.nest/hatch_report.json",
+        "examples/files_appai/Files.AppAI.nest/organism.json",
+        "examples/files_appai/Files.AppAI.nest/self_seal.json",
+        "examples/files_appai/Files.AppAI.spore.png",
+        "examples/notepadnext_appai_lifecycle/notepadnext_appai_seed_package.zip",
+        "examples/spore/example_spore.png",
+        "examples/spore/pirate_spore.png",
+        "mantle/__pycache__",
+        "mantle/__pycache__/__init__.cpython-310.pyc",
+        "mantle/core/__pycache__",
+        "mantle/core/__pycache__/__init__.cpython-310.pyc",
+        "mantle/core/__pycache__/body.cpython-310.pyc",
+        "mantle/core/__pycache__/events.cpython-310.pyc",
+        "mantle/core/__pycache__/organism.cpython-310.pyc",
+        "mantle/core/__pycache__/redact.cpython-310.pyc",
+        "mantle/core/__pycache__/refs.cpython-310.pyc",
+        "mantle/organs/__pycache__",
+        "mantle/organs/__pycache__/__init__.cpython-310.pyc",
+        "mantle/organs/__pycache__/brain.cpython-310.pyc",
+        "mantle/organs/__pycache__/contract.cpython-310.pyc",
+        "mantle/organs/__pycache__/genome.cpython-310.pyc",
+        "mantle/organs/__pycache__/heart.cpython-310.pyc",
+        "mantle/organs/__pycache__/immune.cpython-310.pyc",
+        "mantle/organs/__pycache__/limbs.cpython-310.pyc",
+        "mantle/organs/__pycache__/memory.cpython-310.pyc",
+        "mantle/organs/__pycache__/nervous.cpython-310.pyc",
+        "mantle/organs/__pycache__/senses.cpython-310.pyc",
+        "mantle/vcw/__pycache__",
+        "mantle/vcw/__pycache__/__init__.cpython-310.pyc",
+        "mantle/vcw/__pycache__/bands.cpython-310.pyc",
+        "mantle/vcw/__pycache__/cube.cpython-310.pyc",
+        "mantle/vcw/__pycache__/drivers.cpython-310.pyc",
+        "mantle/vcw/__pycache__/entry.cpython-310.pyc",
+        "mantle/vcw/__pycache__/indexes.cpython-310.pyc",
+        "mantle/vcw/__pycache__/metabolism.cpython-310.pyc",
+        "mantle/vcw/__pycache__/png.cpython-310.pyc",
+        "vcw/__pycache__",
+        "vcw/__pycache__/__main__.cpython-314.pyc",
+        "vcw/__pycache__/audit.cpython-314.pyc",
+        "vcw/__pycache__/audit_mind.cpython-314.pyc",
+        "vcw/__pycache__/body.cpython-314.pyc",
+        "vcw/__pycache__/boot.cpython-314.pyc",
+        "vcw/__pycache__/drivers.cpython-314.pyc",
+        "vcw/__pycache__/entry.cpython-314.pyc",
+        "vcw/__pycache__/examples.cpython-314.pyc",
+        "vcw/__pycache__/examples_boot.cpython-314.pyc",
+        "vcw/__pycache__/examples_mind.cpython-314.pyc",
+        "vcw/__pycache__/lineage.cpython-314.pyc",
+        "vcw/__pycache__/mind.cpython-314.pyc",
+        "vcw/__pycache__/redact.cpython-314.pyc",
+        "vcw/__pycache__/refs.cpython-314.pyc",
+        "vcw/__pycache__/skills.cpython-314.pyc",
+        "vcw/__pycache__/test_invariants.cpython-314.pyc",
+        "vcw/__pycache__/vcw_cube.cpython-314.pyc",
+        "vcw/organs/__pycache__",
+        "vcw/organs/__pycache__/__init__.cpython-314.pyc",
+        "vcw/organs/__pycache__/heart.cpython-314.pyc",
+        "vcw/organs/__pycache__/limbs.cpython-314.pyc",
+        "vcw/organs/__pycache__/nervous.cpython-314.pyc",
+        "vcw/organs/__pycache__/senses.cpython-314.pyc"
+      ],
+      "redaction_policy": [
+        "(^|/)[^/]*\\.nest(/|$)",
+        "(^|/)(?:\\.mantle|\\.nest)(/|$)",
+        "\\.(?:vcw|rvcar)$",
+        "(?i)(?:spore[^/]*\\.png|[^/]*spore\\.png)$",
+        "(?i)notepadnext_appai_seed_package\\.zip$",
+        "(^|/)__pycache__(/|$)",
+        "\\.py[co]$"
+      ],
+      "repository": "mantle-os",
+      "review_limits": [
+        "Pattern review is not proof that all possible private information is absent.",
+        "Owner review of these prepared archives remains required before public publication."
+      ],
+      "schema": "mantle.archive-capture/1",
+      "snapshot": "Exact Git blob bytes; Git control filenames mapped in source-path-map.json"
+    },
+    {
+      "default_branch": "main",
+      "git_bundle_restore": "PASS",
+      "github_counts": {
+        "artifacts": 1163,
+        "branches": 13,
+        "commit-comments": 0,
+        "issue-comments": 39,
+        "issue-events": 193,
+        "issues": 59,
+        "labels": 17,
+        "milestones": 1,
+        "pulls": 43,
+        "releases": 3,
+        "review-comments": 3,
+        "runs": 1002,
+        "tags": 3,
+        "workflows": 28
+      },
+      "github_records": "CAPTURED_WITH_DOCUMENTED_OMISSIONS",
+      "limitations": [
+        "Historical source is inert reference data, not supported runtime.",
+        "Exact pre-redaction originals remain in the independent private backup."
+      ],
+      "omissions": [
+        {
+          "reason": "gh: Not Found (HTTP 404)\n",
+          "resource": "repos/jodydugas-ctrl/MantleOS2/actions/runs/35780528788/logs"
+        },
+        {
+          "reason": "gh: Not Found (HTTP 404)\n",
+          "resource": "repos/jodydugas-ctrl/MantleOS2/actions/runs/35780232648/logs"
+        }
+      ],
+      "original_backup": "A:\\GitHub-Backups\\2026-10-23\\MantleOS2",
+      "original_head": "a624546a57abf463c8e160a17d34f0ea12e8646b",
+      "original_url": "https://github.com/jodydugas-ctrl/MantleOS2",
+      "public_head": "a624546a57abf463c8e160a17d34f0ea12e8646b",
+      "public_refs": [
+        "01f3748bdf76753f30548425bbb181a522137bd4 refs/heads/scan-v0.33-parity-distribution",
+        "01f3748bdf76753f30548425bbb181a522137bd4 refs/pull/53/head",
+        "0588d70f05db291a270ee579db258829f6ff10e7 refs/pull/43/head",
+        "0ec392c645928e72361f06e99c4b5ad747a07301 refs/pull/44/head",
+        "111ebfbe5c206e62f079eef990b469ddd95a011d refs/pull/13/head",
+        "1787069f4ea49ba1bb556bff76230f231a70bfee refs/heads/scan-v0.30-uncertainty-challenger",
+        "1787069f4ea49ba1bb556bff76230f231a70bfee refs/pull/50/head",
+        "17c17e1efe4fae8580dbc9fc9151a1af40b86f89 refs/pull/25/head",
+        "1e6bbf2556746e91035957431a2ad815fb07899a refs/heads/anchor-v0.29-coverage-gaps",
+        "1e6bbf2556746e91035957431a2ad815fb07899a refs/pull/48/head",
+        "1fc0d1c6d151b95cff6f66b6a0f348f8b3574478 refs/heads/scan-v0.29-coverage-gaps",
+        "1fc0d1c6d151b95cff6f66b6a0f348f8b3574478 refs/pull/49/head",
+        "2348d7993ede3843b6aec39dea6750bacbde8f8a refs/pull/29/head",
+        "39a43a9ef8e6fe5725ae8b83761eb308168bcb9c refs/pull/31/head",
+        "3b705bcc2f9a2c2caf53094f32d18834d3780cbb refs/heads/scan-v024-bounded-ast",
+        "3b705bcc2f9a2c2caf53094f32d18834d3780cbb refs/pull/42/head",
+        "44aceedc5bbaf1a5b65043f93df9d0a5bfbd61a1 refs/pull/26/head",
+        "451770f9aaa391900364d6747217a2819fb8eb8e refs/tags/v2.0.0-alpha.2",
+        "478d95615c1a955f8dc839c4e8dca47f86e44d36 refs/pull/23/head",
+        "49cfeb4e7e306be4b67537945069a708df7bf01f refs/heads/scan-v0.31-triage-ranking",
+        "49cfeb4e7e306be4b67537945069a708df7bf01f refs/pull/51/head",
+        "54e82cac9cb68155f94e9f2943bb9f75b8d670da refs/pull/11/head",
+        "5b8ac8b46f7e557ff31f99f63271dc31e7739780 refs/pull/36/head",
+        "5c3b43f9ffee6288baad789b83ba5464de9e6d88 refs/pull/37/head",
+        "5cb6754585ec2a25793651660ced11cc8c07ab01 refs/pull/24/head",
+        "633ceba881ce0464d7d29cebdc8eb1cb905d33cb refs/pull/35/head",
+        "76ef5808632bc17482831c03667c88d023f6658b refs/pull/1/head",
+        "7863b390482a4882464a3c5178b8360a93d20b90 refs/heads/scan-v1.0-certification",
+        "7863b390482a4882464a3c5178b8360a93d20b90 refs/pull/59/head",
+        "791165156c63d972184e0d149aafc496e2850b70 refs/pull/45/head",
+        "7d76df15ad29a950e5089746121e65cd77e239c2 refs/pull/32/head",
+        "8955c96a261af8d96555327de78451cddd3be601 refs/heads/scan-v0.37-operational-hardening",
+        "8955c96a261af8d96555327de78451cddd3be601 refs/pull/57/head",
+        "8e423453f1f9fed412574b71545008b2dff4c6d0 refs/pull/10/head",
+        "96ec0f0b24ab7cab817c6e089b8b78124aa8a80d refs/pull/58/head",
+        "a5bf4e9e55661f26d4422e233b9684ff43407235 refs/pull/30/head",
+        "a624546a57abf463c8e160a17d34f0ea12e8646b refs/heads/main",
+        "a624546a57abf463c8e160a17d34f0ea12e8646b refs/tags/v0.28.0",
+        "ac4b2508d6a541c08c35b4341b2fb0adb7f386f9 refs/heads/scan-v0.32-layered-provenance",
+        "ac4b2508d6a541c08c35b4341b2fb0adb7f386f9 refs/pull/52/head",
+        "acd1f774c21135e0674002665b37b720674297d0 refs/pull/12/head",
+        "b68c989a1ce58fd0d8e78737ef2078d0a4938a3d refs/pull/41/head",
+        "b95d7741f7688a3787cf7f39b961e3116520719e refs/pull/27/head",
+        "baa786934a24df08b47d79dd83b36aa97d9a26b7 refs/heads/scan-v0.34-broader-calibration",
+        "baa786934a24df08b47d79dd83b36aa97d9a26b7 refs/pull/54/head",
+        "bf070a39fd83c32e68f72a643bdb348d18caa462 refs/heads/scan-v0.36-authorized-runtime",
+        "bf070a39fd83c32e68f72a643bdb348d18caa462 refs/pull/56/head",
+        "c040ed62fcff5d820d094a396b87e6afb42675fb refs/pull/28/head",
+        "ccfed87d14fd4b5e910925127a6aa6bb1a799044 refs/heads/scan-v0.35-independent-reconstruction",
+        "ccfed87d14fd4b5e910925127a6aa6bb1a799044 refs/pull/55/head",
+        "d1a7eed40f7bb7ca3ae99bc5bc923d568c099450 refs/pull/22/head",
+        "d667e02e7272afe7dc6e27d719b3a81f1a035ad5 refs/pull/39/head",
+        "d9b323adfcda845b7adaf3a06eab74329babe6de refs/pull/59/merge",
+        "db41e8544069efad9df34e92d29a92a98c77a420 refs/pull/38/head",
+        "e439157fa917e1938e031453e2cc176de4d8fc6c refs/pull/40/head",
+        "e75b0950a2d93f2b22edee2d8b3ab8ce341542d1 refs/pull/47/head",
+        "ec1bcecc1b300a347376fd7f83bad986727c4741 refs/tags/v2.0.0-alpha.1",
+        "f2e76f6d9eeedb4c8698bc2b83d9e6b6a137ee45 refs/pull/33/head",
+        "ff233a37901d98c3782f99190776260e55209a5b refs/pull/46/head",
+        "ff9a24df221740c2b27298e7288bdd9960ebabc9 refs/pull/34/head"
+      ],
+      "publication_review": "TECHNICAL_CONTENT_REVIEW_COMPLETE; OWNER_PUBLICATION_APPROVAL_PENDING",
+      "record_redactions": 0,
+      "redacted_paths": [],
+      "redaction_policy": [],
+      "repository": "MantleOS2",
+      "review_limits": [
+        "Pattern review is not proof that all possible private information is absent.",
+        "Owner review of these prepared archives remains required before public publication."
+      ],
+      "schema": "mantle.archive-capture/1",
+      "snapshot": "Exact Git blob bytes; Git control filenames mapped in source-path-map.json"
+    },
+    {
+      "default_branch": "main",
+      "git_bundle_restore": "PASS",
+      "github_counts": {
+        "artifacts": 0,
+        "branches": 11,
+        "commit-comments": 0,
+        "issue-comments": 0,
+        "issue-events": 44,
+        "issues": 11,
+        "labels": 12,
+        "milestones": 0,
+        "pulls": 11,
+        "releases": 0,
+        "review-comments": 0,
+        "runs": 60,
+        "tags": 0,
+        "workflows": 4
+      },
+      "github_records": "CAPTURED",
+      "limitations": [
+        "Historical source is inert reference data, not supported runtime.",
+        "Exact pre-redaction originals remain in the independent private backup."
+      ],
+      "omissions": [],
+      "original_backup": "A:\\GitHub-Backups\\2026-10-23\\organize-appai",
+      "original_head": "e45f0ffc61197693ea7b663426e4cdb2752ebf3c",
+      "original_url": "https://github.com/jodydugas-ctrl/organize-appai",
+      "public_head": "e45f0ffc61197693ea7b663426e4cdb2752ebf3c",
+      "public_refs": [
+        "0f357710254afdb6e42d7e1846e8c7f89d59e306 refs/heads/dependabot/pip/pyfakefs-gte-5.3.1-and-lt-7.0.0",
+        "0f357710254afdb6e42d7e1846e8c7f89d59e306 refs/pull/3/head",
+        "1373778a0613427722469bcdf458916bdbf1e998 refs/pull/5/merge",
+        "38a58a41c83acc01474fdafd6fec42c734f0c9ed refs/heads/dependabot/github_actions/actions/setup-python-7",
+        "38a58a41c83acc01474fdafd6fec42c734f0c9ed refs/pull/1/head",
+        "41fc4686635975a0e90684870969f16756c2b629 refs/heads/dependabot/pip/mkdocs-include-markdown-plugin-gte-6.0.4-and-lt-8.0.0",
+        "41fc4686635975a0e90684870969f16756c2b629 refs/pull/7/head",
+        "4267bb2eae0bc65612be59aa4b73004fb2074b63 refs/heads/dependabot/pip/rich-gte-13.4.2-and-lte-15.0.0",
+        "4267bb2eae0bc65612be59aa4b73004fb2074b63 refs/pull/5/head",
+        "4bac3a1ad1bf240ebd05055af1c45d5af480d665 refs/pull/2/merge",
+        "649ce3e827f32fce5a9d947fb68372a1d6dcc1a7 refs/pull/6/merge",
+        "69c297e2d9c343f3cb6afeea819ed8eda0484029 refs/heads/dependabot/github_actions/docker/metadata-action-703896b4f30f62d53f5530a80bcdc589a3f702bc",
+        "69c297e2d9c343f3cb6afeea819ed8eda0484029 refs/pull/2/head",
+        "6cb26392685304a119e01f5101c7d996b07a057b refs/pull/10/merge",
+        "72090993f95ded5de9f165fb0422d5cb72dac933 refs/pull/4/merge",
+        "78abb93af6cf112af9298636d9190801fe463fd7 refs/heads/dependabot/github_actions/astral-sh/setup-uv-7",
+        "78abb93af6cf112af9298636d9190801fe463fd7 refs/pull/9/head",
+        "7d2a29d3116140994f2513b7c3b3bf249b14b89d refs/heads/dependabot/github_actions/docker/login-action-4",
+        "7d2a29d3116140994f2513b7c3b3bf249b14b89d refs/pull/4/head",
+        "7e04d7c75afceb94b48b6a8db86ee94f49e402f6 refs/heads/dependabot/pip/mkdocstrings-gte-0.24.0-and-lt-2.0.0",
+        "7e04d7c75afceb94b48b6a8db86ee94f49e402f6 refs/pull/10/head",
+        "86a66e60476edf01acb4e3170b9168dece2ef5c9 refs/heads/dependabot/github_actions/actions/checkout-7",
+        "86a66e60476edf01acb4e3170b9168dece2ef5c9 refs/pull/6/head",
+        "899f1bca46144011af2683b86b7bd61853b7eeeb refs/heads/dependabot/pip/markupsafe-3.0.3",
+        "899f1bca46144011af2683b86b7bd61853b7eeeb refs/pull/8/head",
+        "96a03559cfb83a949791357c39043fbaee7b3f98 refs/pull/1/merge",
+        "a14614b86e4f82e506711baf7a68266de81fb6bd refs/pull/7/merge",
+        "be90480d0c2a76310dc8eccab251a7038d5fbd37 refs/pull/9/merge",
+        "cc9c054eef71bfcdd8c42d65671073d983719eca refs/pull/11/head",
+        "e4257fda3cf2538497d61f17360303e6b469fe52 refs/pull/3/merge",
+        "e45f0ffc61197693ea7b663426e4cdb2752ebf3c refs/heads/main",
+        "eafcec1a55e21b4ab6f35eb7bb4b3791ba054a0e refs/pull/8/merge"
+      ],
+      "publication_review": "TECHNICAL_CONTENT_REVIEW_COMPLETE; OWNER_PUBLICATION_APPROVAL_PENDING",
+      "record_redactions": 0,
+      "redacted_paths": [],
+      "redaction_policy": [],
+      "repository": "organize-appai",
+      "review_limits": [
+        "Pattern review is not proof that all possible private information is absent.",
+        "Owner review of these prepared archives remains required before public publication."
+      ],
+      "schema": "mantle.archive-capture/1",
+      "snapshot": "Exact Git blob bytes; Git control filenames mapped in source-path-map.json"
+    }
+  ],
+  "status": "TECHNICALLY_REVIEWED_PUBLIC_CANDIDATES; OWNER_CUTOVER_APPROVAL_PENDING"
+}

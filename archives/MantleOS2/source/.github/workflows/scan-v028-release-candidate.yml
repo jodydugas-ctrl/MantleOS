@@ -1,0 +1,273 @@
+name: SCAN v0.28 release candidate qualification
+
+on:
+  push:
+    branches:
+      - anchor-v0.28-reconstruction-loop
+    paths:
+      - 'Anchor/engine/v0.28/**'
+      - '.github/workflows/scan-v028-release-candidate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      OPENAI_API_KEY: ''
+      ANTHROPIC_API_KEY: ''
+      GOOGLE_API_KEY: ''
+      GEMINI_API_KEY: ''
+      GROQ_API_KEY: ''
+      MISTRAL_API_KEY: ''
+      COHERE_API_KEY: ''
+      SOURCE_DATE_EPOCH: '315532800'
+
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Verify predecessor is unchanged
+        shell: bash
+        run: |
+          git fetch origin main --depth=1
+          git diff --exit-code origin/main -- Anchor/engine/v0.27
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verify committed package manifest before installation
+        shell: bash
+        run: |
+          test -f Anchor/engine/v0.28/PACKAGE_MANIFEST.json
+          PYTHONPATH="$GITHUB_WORKSPACE/Anchor/engine/v0.28" python - <<'PY'
+          import json
+          from pathlib import Path
+          from scan.release import verify_package
+
+          result = verify_package(Path("Anchor/engine/v0.28"))
+          Path("results").mkdir(exist_ok=True)
+          Path("results/V028_COMMITTED_PACKAGE_SELF_AUDIT.json").write_text(
+              json.dumps({"package": result, "state": result["state"]}, indent=2),
+              encoding="utf-8",
+          )
+          assert result["state"] == "PASS", result
+          assert result["manifest_file_count"] == 90, result
+          assert result["verified_file_count"] == 90, result
+          PY
+
+      - name: Install candidate tooling
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e Anchor/engine/v0.28 pytest build
+          mkdir -p .scan-tools
+          npm install --prefix .scan-tools --ignore-scripts --no-package-lock --no-save typescript@5.7.2
+          echo "SCAN_TYPESCRIPT_MODULE=$GITHUB_WORKSPACE/.scan-tools/node_modules/typescript" >> "$GITHUB_ENV"
+          python - <<'PY'
+          import scan
+          assert scan.__version__ == "0.28.0", scan.__version__
+          PY
+
+      - name: Run final source regression suite
+        shell: bash
+        run: |
+          mkdir -p results
+          pytest -q Anchor/engine/v0.28/tests | tee results/V028_REGRESSION.txt
+
+      - name: Create clean release tree
+        shell: bash
+        run: |
+          rm -rf results/release-tree
+          cp -a Anchor/engine/v0.28 results/release-tree
+          find results/release-tree -type d \( -name __pycache__ -o -name '*.egg-info' \) -prune -exec rm -rf {} +
+          find results/release-tree -type f \( -name '*.pyc' -o -name '*.pyo' \) -delete
+          rm -f results/release-tree/PACKAGE_MANIFEST.json
+
+      - name: Generate manifest and self-audit exact candidate bytes
+        shell: bash
+        run: |
+          scan-body package-manifest results/release-tree
+          scan-body self-audit results/release-tree --out results/V028_PACKAGE_SELF_AUDIT.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          manifest = json.loads(Path("results/release-tree/PACKAGE_MANIFEST.json").read_text())
+          audit = json.loads(Path("results/V028_PACKAGE_SELF_AUDIT.json").read_text())
+          assert manifest["engine_version"] == "0.28.0", manifest
+          assert audit["state"] == "PASS", audit
+          bad = [x["path"] for x in manifest["files"] if "__pycache__/" in x["path"] or ".egg-info/" in x["path"]]
+          assert not bad, bad
+          PY
+          cp results/release-tree/PACKAGE_MANIFEST.json results/V028_PACKAGE_MANIFEST.json
+          echo '---V028_PACKAGE_MANIFEST_BEGIN---'
+          cat results/V028_PACKAGE_MANIFEST.json
+          echo '---V028_PACKAGE_MANIFEST_END---'
+
+      - name: Run LLM-disabled mechanical release qualification
+        shell: bash
+        run: |
+          scan-body qualify results/release-tree --out results/V028_RELEASE_QUALIFICATION.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          q = json.loads(Path("results/V028_RELEASE_QUALIFICATION.json").read_text())
+          assert q["state"] == "PASS", q
+          assert q["package"]["state"] == "PASS", q
+          assert q["mechanical_independence"]["state"] == "PASS", q
+          assert q["projections"]["state"] == "PASS", q
+          assert q["queries"]["state"] == "PASS", q
+          assert q["queries"]["passed_query_count"] == q["queries"]["required_query_count"] == 12, q
+          PY
+
+      - name: Build source and reproducible wheel artifacts
+        shell: bash
+        run: |
+          mkdir -p results/dist results/dist-repeat
+          python -m build results/release-tree --outdir results/dist
+          python -m build results/release-tree --outdir results/dist-repeat
+          sha256sum results/dist/* | sort > results/V028_DIST_SHA256.txt
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+
+          first = next(Path("results/dist").glob("*.whl"))
+          second = next(Path("results/dist-repeat").glob("*.whl"))
+          a = first.read_bytes()
+          b = second.read_bytes()
+          result = {
+              "schema_version": "scan-v028-wheel-determinism/0.1",
+              "state": "PASS" if a == b else "FAIL",
+              "source_date_epoch": "315532800",
+              "first": {"file": first.name, "bytes": len(a), "sha256": hashlib.sha256(a).hexdigest()},
+              "second": {"file": second.name, "bytes": len(b), "sha256": hashlib.sha256(b).hexdigest()},
+          }
+          Path("results/V028_WHEEL_DETERMINISM.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+          assert result["state"] == "PASS", result
+          PY
+
+      - name: Create deterministic source ZIP
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, zipfile
+
+          root = Path("results/release-tree")
+          out = Path("results/scan-software-body-0.28.0.zip")
+          with zipfile.ZipFile(out, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
+              for path in sorted(p for p in root.rglob("*") if p.is_file()):
+                  rel = Path("scan-software-body-0.28.0") / path.relative_to(root)
+                  info = zipfile.ZipInfo(rel.as_posix(), date_time=(1980,1,1,0,0,0))
+                  info.compress_type = zipfile.ZIP_DEFLATED
+                  info.external_attr = 0o100644 << 16
+                  zf.writestr(info, path.read_bytes())
+          digest = hashlib.sha256(out.read_bytes()).hexdigest()
+          Path("results/V028_SOURCE_ZIP_SHA256.txt").write_text(f"{digest}  {out.name}\n", encoding="utf-8")
+          PY
+
+      - name: Fresh Python 3.13 wheel install
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Qualify installed wheel surface
+        shell: bash
+        run: |
+          python -m venv results/wheel-venv
+          results/wheel-venv/bin/python -m pip install --upgrade pip
+          WHEEL="$(ls results/dist/*.whl | head -n 1)"
+          results/wheel-venv/bin/python -m pip install --no-deps "$WHEEL"
+          results/wheel-venv/bin/scan-body --help >/dev/null
+          results/wheel-venv/bin/python - <<'PY'
+          import scan
+          assert scan.__version__ == "0.28.0", scan.__version__
+          PY
+          results/wheel-venv/bin/scan-body scan Anchor/engine/v0.28/tests/fixtures/qualification_sample --out results/wheel-scan --specimen-id "v028-wheel-qualification"
+          results/wheel-venv/bin/python - <<'PY'
+          import json
+          from pathlib import Path
+          from scan.release import verify_projection_manifest, run_query_acceptance
+
+          p = verify_projection_manifest(Path("results/wheel-scan"))
+          q = run_query_acceptance(Path("results/wheel-scan/scan_index.sqlite"))
+          assert p["state"] == "PASS", p
+          assert q["state"] == "PASS", q
+          assert q["passed_query_count"] == q["required_query_count"] == 12, q
+          receipt = {
+              "schema_version": "scan-v028-wheel-qualification/0.1",
+              "state": "PASS",
+              "python": "3.13",
+              "engine_version": "0.28.0",
+              "projection_verification": p,
+              "query_acceptance": q,
+          }
+          Path("results/V028_WHEEL_QUALIFICATION.json").write_text(json.dumps(receipt, indent=2), encoding="utf-8")
+          PY
+
+      - name: Seal release-candidate receipt
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+
+          def digest(path):
+              p=Path(path)
+              return {"file":p.name,"bytes":p.stat().st_size,"sha256":hashlib.sha256(p.read_bytes()).hexdigest()}
+
+          manifest=digest("results/V028_PACKAGE_MANIFEST.json")
+          qualify=json.loads(Path("results/V028_RELEASE_QUALIFICATION.json").read_text())
+          wheelq=json.loads(Path("results/V028_WHEEL_QUALIFICATION.json").read_text())
+          wheeldet=json.loads(Path("results/V028_WHEEL_DETERMINISM.json").read_text())
+          artifacts=[digest(p) for p in sorted(Path("results/dist").iterdir()) if p.is_file()]
+          artifacts.append(digest("results/scan-software-body-0.28.0.zip"))
+          receipt={
+              "schema_version":"scan-v028-release-candidate-receipt/0.1",
+              "engine_version":"0.28.0",
+              "git_commit":os.environ["GITHUB_SHA"],
+              "state":"PASS",
+              "feature_freeze":True,
+              "package_manifest":manifest,
+              "release_qualification":{
+                  "state":qualify["state"],
+                  "manifest_file_count":qualify["package"]["manifest_file_count"],
+                  "verified_file_count":qualify["package"]["verified_file_count"],
+                  "query_count":qualify["queries"]["required_query_count"],
+                  "queries_passed":qualify["queries"]["passed_query_count"],
+                  "integrity_error_count":qualify["mechanical_independence"]["integrity_error_count"],
+              },
+              "wheel_qualification":{"state":wheelq["state"],"python":"3.13","queries_passed":wheelq["query_acceptance"]["passed_query_count"]},
+              "wheel_determinism":{"state":wheeldet["state"],"source_date_epoch":wheeldet["source_date_epoch"],"sha256":wheeldet["first"]["sha256"]},
+              "artifacts":artifacts,
+          }
+          Path("results/V028_RELEASE_CANDIDATE_RECEIPT.json").write_text(json.dumps(receipt,indent=2)+"\n",encoding="utf-8")
+          print("---V028_RELEASE_RECEIPT_BEGIN---")
+          print(json.dumps(receipt,indent=2))
+          print("---V028_RELEASE_RECEIPT_END---")
+          PY
+
+      - name: Upload release-candidate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scan-v028-release-candidate
+          path: |
+            results/V028_*.json
+            results/V028_*.txt
+            results/dist/*
+            results/scan-software-body-0.28.0.zip
+          if-no-files-found: error
+          retention-days: 30

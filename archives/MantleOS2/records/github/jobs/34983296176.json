@@ -1,0 +1,198 @@
+[
+  {
+    "id": 104428852512,
+    "run_id": 34983296176,
+    "workflow_name": "SCAN v0.24 adaptive assimilation",
+    "head_branch": "scan/moji-electron-flex-test",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/34983296176",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAYUHHVIA",
+    "head_sha": "b68c989a1ce58fd0d8e78737ef2078d0a4938a3d",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/104428852512",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/34983296176/job/104428852512",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-15T14:41:02Z",
+    "started_at": "2026-09-15T14:41:05Z",
+    "completed_at": "2026-09-15T14:42:09Z",
+    "name": "adaptive-scan",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-15T14:41:06Z",
+        "completed_at": "2026-09-15T14:41:07Z"
+      },
+      {
+        "name": "Checkout SCAN development branch",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-15T14:41:07Z",
+        "completed_at": "2026-09-15T14:41:08Z"
+      },
+      {
+        "name": "Verify frozen v0.23 is unchanged",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-15T14:41:08Z",
+        "completed_at": "2026-09-15T14:41:09Z"
+      },
+      {
+        "name": "Set up Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-15T14:41:09Z",
+        "completed_at": "2026-09-15T14:41:09Z"
+      },
+      {
+        "name": "Set up Node",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-15T14:41:09Z",
+        "completed_at": "2026-09-15T14:41:09Z"
+      },
+      {
+        "name": "Install v0.24 scanner and scanner-owned TypeScript parser",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-15T14:41:09Z",
+        "completed_at": "2026-09-15T14:41:15Z"
+      },
+      {
+        "name": "Run SCAN v0.24 regression suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-15T14:41:15Z",
+        "completed_at": "2026-09-15T14:41:25Z"
+      },
+      {
+        "name": "Checkout frozen Moji specimen",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-15T14:41:25Z",
+        "completed_at": "2026-09-15T14:41:26Z"
+      },
+      {
+        "name": "Verify specimen identity",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-15T14:41:26Z",
+        "completed_at": "2026-09-15T14:41:26Z"
+      },
+      {
+        "name": "Cold structural baseline without TypeScript Electron adapters",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-09-15T14:41:26Z",
+        "completed_at": "2026-09-15T14:41:26Z"
+      },
+      {
+        "name": "Adaptive cold scan A",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-15T14:41:26Z",
+        "completed_at": "2026-09-15T14:41:45Z"
+      },
+      {
+        "name": "Adaptive cold scan B and determinism proof",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-15T14:41:45Z",
+        "completed_at": "2026-09-15T14:42:03Z"
+      },
+      {
+        "name": "Mechanical comparison and integrity gates",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-15T14:42:03Z",
+        "completed_at": "2026-09-15T14:42:04Z"
+      },
+      {
+        "name": "Regenerate and self-audit clean v0.24 package manifest",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-09-15T14:42:04Z",
+        "completed_at": "2026-09-15T14:42:04Z"
+      },
+      {
+        "name": "Add development receipt",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-09-15T14:42:04Z",
+        "completed_at": "2026-09-15T14:42:04Z"
+      },
+      {
+        "name": "Upload v0.24 calibration evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16,
+        "started_at": "2026-09-15T14:42:04Z",
+        "completed_at": "2026-09-15T14:42:07Z"
+      },
+      {
+        "name": "Post Checkout frozen Moji specimen",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 29,
+        "started_at": "2026-09-15T14:42:07Z",
+        "completed_at": "2026-09-15T14:42:07Z"
+      },
+      {
+        "name": "Post Set up Node",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 30,
+        "started_at": "2026-09-15T14:42:07Z",
+        "completed_at": "2026-09-15T14:42:07Z"
+      },
+      {
+        "name": "Post Set up Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 31,
+        "started_at": "2026-09-15T14:42:07Z",
+        "completed_at": "2026-09-15T14:42:07Z"
+      },
+      {
+        "name": "Post Checkout SCAN development branch",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 32,
+        "started_at": "2026-09-15T14:42:07Z",
+        "completed_at": "2026-09-15T14:42:07Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 33,
+        "started_at": "2026-09-15T14:42:07Z",
+        "completed_at": "2026-09-15T14:42:07Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/104428852512",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000002485,
+    "runner_name": "GitHub Actions 1000002485",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

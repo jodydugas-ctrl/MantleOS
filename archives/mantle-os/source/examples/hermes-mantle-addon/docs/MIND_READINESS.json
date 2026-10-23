@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.2",
+  "recorded_at": "2026-07-15T14:32:35-03:00",
+  "target": {
+    "plugin": "mantle-os",
+    "version": "0.4.0",
+    "resident_identity": "Hermes.Mantle.AppAI",
+    "framework_version": "1.3.0"
+  },
+  "verdict": "READY",
+  "mind_fusion_authorized": false,
+  "reproduction_activation_authorized": false,
+  "evidence": {
+    "addon_stage1": {
+      "passed_rows": 14,
+      "total_rows": 14,
+      "failed_rows": [],
+      "passed": true
+    },
+    "framework_stage1": {
+      "gate_rows": 20,
+      "security_invariants_passed": 90,
+      "security_invariants_total": 90,
+      "passed": true,
+      "failed_invariant": null,
+      "root_cause": "Security/runtime invariants remain in the certification gate. Repository-optimization ledgers and version snapshots are advisory release tooling rather than organism security invariants."
+    },
+    "addon_unit_tests": 127,
+    "containment_rows_passed": 11,
+    "real_plugin_hooks": 12,
+    "real_plugin_stage1_certified": false,
+    "owner_only_storage": true,
+    "raw_payload_exclusion": true,
+    "technical_fusion_acceptance": "authenticated offline attach -> heartbeat -> defusion -> 14/14 addon and 90/90 framework Stage-1 PASS",
+    "operator_fusion_decision": "DEFERRED",
+    "guardian_fusion_decision": "DEFERRED",
+    "verification_warnings": [
+      "MacroDroid YAML parses successfully; MacroDroid semantic import/runtime correctness remains unverified and is not a Python release gate.",
+      "READY is a software engineering verdict, not deployment fusion authority."
+    ]
+  },
+  "resolved_requirements": [
+    {
+      "id": "B-01",
+      "status": "RESOLVED",
+      "resolution": "The complete framework receipt is 20/20 Stage-1 rows and 90/90 executable security invariants."
+    },
+    {
+      "id": "B-02",
+      "status": "RESOLVED",
+      "resolution": "ResidentConfig.authorize_phase2 requires a complete fresh target-bound Stage-1 receipt, READY engineering verdict, explicit reproduction denial, and an authenticated authority provider. Caller-authored approval JSON alone remains powerless."
+    },
+    {
+      "id": "B-03",
+      "status": "RESOLVED",
+      "resolution": "ResidentRuntime owns transactional fusion, redacted durable receipts, replacement refusal, fail-closed rollback, authority-free idempotent defusion, startup recovery, and a verified offline attach-heartbeat-defuse-post-Stage-1 acceptance path."
+    },
+    {
+      "id": "B-04",
+      "status": "RESOLVED",
+      "resolution": "Exactly one lifecycle-owned CognitiveScheduler uses the fixed 600-second baseline. Observer hooks run Body-only pulses; queued significant/distress wakeups are additional and do not move the natural deadline."
+    },
+    {
+      "id": "B-05",
+      "status": "RESOLVED",
+      "resolution": "HermesModel calls PluginContext.llm without provider/model overrides, so Hermes owns active routing, fallback, authentication, and credentials."
+    },
+    {
+      "id": "B-06",
+      "status": "RESOLVED",
+      "resolution": "CognitionPolicy enforces bounded output, rolling token/cost budgets, serialized calls, one addon dispatch through Hermes-owned fallback/retries, timeout/outage behavior, conservative unknown-usage charging, and redacted usage receipts."
+    },
+    {
+      "id": "B-07",
+      "status": "RESOLVED",
+      "resolution": "Ed25519AuthorityProvider verifies distinct operator and guardian public keys and target-bound signatures without loading private signing material. No production approval or key is bundled; deployment activation remains separately deferred."
+    },
+    {
+      "id": "B-08",
+      "status": "RESOLVED",
+      "resolution": "Core, vendor, addon, tests, and doctrine state that technical evidence and release readiness never grant fusion authority."
+    }
+  ],
+  "blocking_requirements": [],
+  "operational_activation_requirements": [
+    {
+      "id": "A-01",
+      "status": "PENDING_DEPLOYMENT",
+      "requirement": "Generate a fresh Stage-1 PASS and READY report bound to the concrete resident identity and Body fingerprint."
+    },
+    {
+      "id": "A-02",
+      "status": "DEFERRED",
+      "requirement": "Obtain separate fresh operator and guardian APPROVED records signed with distinct configured authority credentials."
+    },
+    {
+      "id": "A-03",
+      "status": "PROHIBITED_BY_DEFAULT",
+      "requirement": "Keep reproduction false unless separately designed, reviewed, and authorized."
+    }
+  ],
+  "next_action": {
+    "roadmap_step": null,
+    "action": "Publish the software release after clean-checkout verification. Do not fuse a production MIND without the separate operational activation requirements."
+  },
+  "decision_rule": "READY authorizes software publication only. Runtime fusion still requires fresh target-bound evidence plus independently authenticated operator and guardian approvals."
+}

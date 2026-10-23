@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mantle-os.local/schemas/research-receipt.schema.json",
+  "title": "Mantle append-only research receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "experiment_id", "beat", "target_kind", "grimoire_profile", "protocol_id", "protocol_version", "protocol_hash", "evaluator_hash", "corpus_hash", "baseline_hash", "candidate_hash", "workspace_hash", "budget", "metrics", "safety_gates", "correctness_gates", "status", "evidence_class", "force_class", "semantic_projection_status", "adoption_status"],
+  "properties": {
+    "schema": {"const": "mantle.research.receipt.v1"},
+    "experiment_id": {"type": "string", "minLength": 1},
+    "parent_experiment_id": {"type": ["string", "null"]},
+    "beat": {"type": "integer", "minimum": 0},
+    "target_kind": {"type": "string"},
+    "target_ref": {"type": "string"},
+    "grimoire_profile": {"const": "grimoire-v0.10"},
+    "protocol_id": {"const": "mantle-research-loop"},
+    "protocol_version": {"const": "1"},
+    "protocol_hash": {"type": "string"}, "evaluator_hash": {"type": "string"}, "corpus_hash": {"type": "string"},
+    "baseline_hash": {"type": "string"}, "candidate_hash": {"type": "string"}, "workspace_hash": {"type": "string"},
+    "budget": {"type": "object"}, "metrics": {"type": "object"}, "safety_gates": {"type": "object"}, "correctness_gates": {"type": "object"},
+    "complexity_delta": {}, "previous_hash": {"type": ["string", "null"]}, "receipt_hash": {"type": "string"}, "author": {"const": "BODY"}, "event": {"type": "string"}, "ts": {"type": "number"}, "status": {"enum": ["PROPOSED", "MATERIALIZED", "RUNNING", "MEASURED", "ELIGIBLE", "DISCARDED", "CRASHED", "REFUSED", "INCONCLUSIVE", "AUTHORIZED", "ADOPTED"]},
+    "artifact_ref": {"type": ["string", "null"]}, "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "evidence_class": {"enum": ["ASSUMED", "INFERRED", "MEASURED", "CITED"]},
+    "force_class": {"enum": ["MAY", "GATE", "NEVER", "QUOTE"]},
+    "semantic_projection_status": {"enum": ["pending", "verified", "failed", "not-requested"]},
+    "adoption_status": {"enum": ["not-eligible", "eligible-not-adopted", "authorized", "adopted"]},
+    "error": {"type": ["string", "null"]}
+  }
+}

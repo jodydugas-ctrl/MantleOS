@@ -1,0 +1,169 @@
+{
+  "schema_version": "scan-release-qualification/0.1",
+  "engine_version": "0.26.0",
+  "state": "PASS",
+  "package": {
+    "schema_version": "scan-package-self-audit/0.1",
+    "state": "PASS",
+    "engine_version": "0.26.0",
+    "manifest_file_count": 83,
+    "verified_file_count": 83,
+    "issue_count": 0,
+    "issues": []
+  },
+  "mechanical_independence": {
+    "state": "PASS",
+    "llm_environment": "DISABLED",
+    "required_outputs": [
+      "scan_index.sqlite",
+      "machine_body_map.json",
+      "evidence_graph.json",
+      "evidence_catalog.json",
+      "completeness_vector.json",
+      "integrity_report.json",
+      "surface_closure.json",
+      "effect_closure.json",
+      "nest_capability_map.json",
+      "projection_manifest.json",
+      "stage1_summary.md"
+    ],
+    "missing_outputs": [],
+    "integrity_state": "MAPPED",
+    "integrity_error_count": 0,
+    "surface_closure_state": "PARTIAL",
+    "effect_closure_state": "PARTIAL",
+    "files": 3,
+    "nodes": 67,
+    "edges": 65,
+    "evidence": 70
+  },
+  "projections": {
+    "schema_version": "scan-projection-self-audit/0.1",
+    "state": "PASS",
+    "projection_count": 9,
+    "issue_count": 0,
+    "issues": []
+  },
+  "queries": {
+    "schema_version": "scan-query-acceptance/0.1",
+    "state": "PASS",
+    "required_query_count": 12,
+    "passed_query_count": 12,
+    "results": [
+      {
+        "query": "surface-without-handler",
+        "state": "PASS",
+        "row_count": 2,
+        "sample_ids": [
+          "node:1d5560526648d1ca3f33",
+          "node:3efbec8722e44c38395e"
+        ]
+      },
+      {
+        "query": "subprocess",
+        "state": "PASS",
+        "row_count": 1,
+        "sample_ids": [
+          "node:3a76daec0e7528198301"
+        ]
+      },
+      {
+        "query": "extensions",
+        "state": "PASS",
+        "row_count": 2,
+        "sample_ids": [
+          "node:f3135769fb5fc3db76bd",
+          "node:8f7e3c437f760e3f19aa"
+        ]
+      },
+      {
+        "query": "external-writes",
+        "state": "PASS",
+        "row_count": 5,
+        "sample_ids": [
+          "node:59b00e6f342c0dd04c22",
+          "node:b459afa12d31517ceeaa",
+          "node:9d0238f8fce1cc0d1b6e",
+          "node:8d1769b00730bcaaf2cf",
+          "node:0007b27bccd5da84abdb"
+        ]
+      },
+      {
+        "query": "unknown-routes",
+        "state": "PASS",
+        "row_count": 18,
+        "sample_ids": [
+          "node:65b397bfe09246d1495f",
+          "node:9e9edf0cea95b5f1a0de",
+          "node:870084a4bd683360d4cc",
+          "node:8e45ad66100224267be7",
+          "node:2aced11bc8bc92479f82"
+        ]
+      },
+      {
+        "query": "nest-dependent-actions",
+        "state": "PASS",
+        "row_count": 2,
+        "sample_ids": [
+          "node:82d09b5a13db1d602928",
+          "node:febc897553d60bcc1a4a"
+        ]
+      },
+      {
+        "query": "disconnected-handlers",
+        "state": "PASS",
+        "row_count": 0,
+        "sample_ids": []
+      },
+      {
+        "query": "high-connectivity-junctions",
+        "state": "PASS",
+        "row_count": 5,
+        "sample_ids": [
+          "node:7f983042706b2f4c276e",
+          "node:125a6166e28a355c3278",
+          "node:1db8c82e7fdf39e273de",
+          "node:be0a173f45ba8251c6a6",
+          "node:0d79a98fb59e02b17b42"
+        ]
+      },
+      {
+        "query": "dynamic-registrations",
+        "state": "PASS",
+        "row_count": 2,
+        "sample_ids": [
+          "node:1d5560526648d1ca3f33",
+          "node:767df5fa483d1c396bb5"
+        ]
+      },
+      {
+        "query": "hidden-surface-candidates",
+        "state": "PASS",
+        "row_count": 1,
+        "sample_ids": [
+          "node:1d5560526648d1ca3f33"
+        ]
+      },
+      {
+        "query": "capability-without-human-route",
+        "state": "PASS",
+        "row_count": 7,
+        "sample_ids": [
+          "node:59b00e6f342c0dd04c22",
+          "node:b459afa12d31517ceeaa",
+          "node:9d0238f8fce1cc0d1b6e",
+          "node:8d1769b00730bcaaf2cf",
+          "node:8f7e3c437f760e3f19aa"
+        ]
+      },
+      {
+        "query": "authentication-permissions",
+        "state": "PASS",
+        "row_count": 1,
+        "sample_ids": [
+          "node:2a7f966a02cd026b0ed1"
+        ]
+      }
+    ]
+  }
+}

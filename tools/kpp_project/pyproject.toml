@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kitchen-party-protocol"
+version = "1.1.0a4"
+description = "Build software from a Pantry and a pinned Recipe with scoped evidence and Baker acceptance"
+readme = "README.md"
+requires-python = ">=3.11,<3.15"
+license = "MIT AND LicenseRef-MantleOS-Reserved"
+license-files = ["LICENSE", "THIRD-PARTY-NOTICES.md", "shared/licenses/MantleOS/LICENSE", "shared/licenses/MantleOS/THIRD_PARTY_NOTICES.md", "shared/licenses/MantleOS/licenses/*"]
+authors = [{name = "Jody Dugas"}]
+dependencies = []
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+
+[project.urls]
+Repository = "https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol"
+Issues = "https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol/issues"
+
+[project.scripts]
+kpp = "mantleos.kpp.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+mantleos = ["**/*.json", "**/*.txt", "**/*.md", "**/*.anchor", "**/*.html", "**/*.js", "**/*.cjs", "**/*.css", "**/*.ui", "**/*.py", "**/LICENSE"]

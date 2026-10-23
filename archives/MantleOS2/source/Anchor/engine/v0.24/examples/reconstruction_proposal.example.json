@@ -1,0 +1,43 @@
+{
+  "schema_version": "scan-reconstruction-proposal/0.1",
+  "proposal_id": "RP-EXAMPLE-001",
+  "origin": "EXTERNAL_PROPOSAL",
+  "objects": [
+    {
+      "id": "BEH-EXAMPLE-001",
+      "object_type": "BEHAVIOR",
+      "subtype": "example-behavior",
+      "label": "Example evidence-backed behavior",
+      "coverage": "PARTIAL",
+      "attributes": {
+        "trigger": "Describe the observed trigger",
+        "observable_response": "Describe only the response supported by the scan",
+        "uncertainty": "State unresolved behavior explicitly"
+      }
+    },
+    {
+      "id": "RA-EXAMPLE-001",
+      "object_type": "RECONSTRUCTION_ANCHOR",
+      "subtype": "behavior",
+      "label": "Example reconstruction property",
+      "coverage": "PARTIAL",
+      "attributes": {
+        "property": "State what a faithful reconstruction must keep true",
+        "fidelity_test": "Describe an observable test for the property",
+        "uncertainty": "State the evidence boundary"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "src": "REPLACE_WITH_EXISTING_EVIDENCE_BACKED_OBJECT_ID",
+      "dst": "BEH-EXAMPLE-001",
+      "kind": "supports"
+    },
+    {
+      "src": "BEH-EXAMPLE-001",
+      "dst": "RA-EXAMPLE-001",
+      "kind": "supports_anchor"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": "scan-candidate-freeze/0.3",
+  "engine_version": "0.25.0",
+  "status": "FROZEN_FOR_CONTINUED_PR5_CALIBRATION",
+  "frozen_at": "2026-09-21T18:25:07Z",
+  "source_package": {
+    "directory": "../../engine/v0.25",
+    "package_manifest_sha256": "9eaa29ca54e651c65ce61774d98468d028dff959032024e2ccc5201abea3822e",
+    "manifest_file_count": 83,
+    "actual_file_count_including_manifest": 84,
+    "self_audit_state": "PASS",
+    "verified_file_count": 83
+  },
+  "artifacts": [
+    {
+      "path": "SCAN_ENGINE_v0.25.zip",
+      "bytes": 235099,
+      "sha256": "dbc929892b26bf3d2d61916d8a9e18e0a70a32d3d9a37cb1692ec6ba98dbf6c3",
+      "deterministic_second_build_sha256": "dbc929892b26bf3d2d61916d8a9e18e0a70a32d3d9a37cb1692ec6ba98dbf6c3"
+    },
+    {
+      "path": "scan_software_body-0.25.0-py3-none-any.whl",
+      "bytes": 156608,
+      "sha256": "627837b08d6d7d5268edd142baac33cf6b4a285e7225afc8099d2aae620a3dc6",
+      "deterministic_second_build_sha256": "627837b08d6d7d5268edd142baac33cf6b4a285e7225afc8099d2aae620a3dc6",
+      "fresh_python_3_13_install_state": "PASS",
+      "build_environment": {
+        "source_date_epoch": 315532800
+      }
+    }
+  ],
+  "qualification": {
+    "development_tests_run": 140,
+    "development_test_state": "PASS",
+    "clean_extracted_package_tests_run": 140,
+    "clean_extracted_package_test_state": "PASS",
+    "skipped": 3,
+    "skip_reason": "Windows symlink privilege-dependent cases",
+    "llm_environment": "DISABLED",
+    "required_queries": 12,
+    "passed_queries": 12,
+    "fresh_python": "3.13.13",
+    "qualification_state": "PASS",
+    "qualification_sha256": "41fa0f5bcd617182443c7e0ef16e8983c99a4ea571032658f0b60db150f21ae9"
+  },
+  "determinism": {
+    "cold_manifest_runs": 2,
+    "emitted_files_per_run": 21,
+    "byte_differences": 0,
+    "canonical_database_row_differences": 0,
+    "cache_hits": 4186,
+    "cache_misses": 0,
+    "cache_independent_projection_differences": 0,
+    "adaptive_workbench_file_differences": 0
+  },
+  "pr5_input": {
+    "repository": "dail8859/NotepadNext",
+    "specimen_id": "dail8859/NotepadNext@f57db52d6760a2ce4149a37190c3adaa586845f5",
+    "commit": "f57db52d6760a2ce4149a37190c3adaa586845f5",
+    "tree": "f0995b128bf6dbc73e5d0f3ef4e4f302f8a3081b",
+    "verified_blob_count": 1928,
+    "source_manifest_sha256": "8fca5eb6edcbf9ec2a23e38b1792ad6bc40e0a3adda7b52715ece8cde661152f",
+    "exact_acquisition_zip_sha256": "4a1343f4f56500ba850162039e7483e2f17f894be6493f5afbaacdf25c2c44a3",
+    "oracle_used": false
+  },
+  "certification": {
+    "state": "PASS",
+    "verification_state": "PASS",
+    "manifest_file_count": 12,
+    "verified_file_count": 12,
+    "receipt_sha256": "35da46a2ed7786ce00cb05406472fa535527015a2de50899869ca3f9450b0ec8",
+    "certification_manifest_sha256": "4ab1221d981df9adb85b72bbbca562a5c64cff5d86da521ca1b83c326bd1a249",
+    "bundle_bytes": 277741620,
+    "bundle_sha256": "0834f44051ce7cf012c391e113905cbccf28754fd6143bd9388c16f7007a7fee",
+    "bundle_published_in_git": false
+  },
+  "admission_rule": "Only generic scanner changes are admitted. The v0.20 cold certification remains the immutable pre-oracle baseline; Hermes remains an opt-in reference example; H-001 remains frozen and source-uninspected."
+}

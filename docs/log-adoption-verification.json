@@ -1,0 +1,369 @@
+{
+  "augmentation": {
+    "acceptance": "NOT_GRANTED",
+    "connections": [
+      {
+        "action": "edit",
+        "expected": "Synthetic draft\nUnicode: café 🌱",
+        "observation": "Synthetic draft\nUnicode: café 🌱",
+        "operation": "edit",
+        "passed": true,
+        "scenario": "MIND_ABSENT",
+        "source": "augmentation_host.py:Notebook.edit",
+        "source_sha256": "088732b2e47aee65b0009f136ba563aeeb69770147d2c2a17b815dcc9664d712"
+      },
+      {
+        "action": "read",
+        "expected": "Synthetic draft\nUnicode: café 🌱",
+        "observation": "Synthetic draft\nUnicode: café 🌱",
+        "operation": "read",
+        "passed": true,
+        "scenario": "MIND_FAILED",
+        "source": "augmentation_host.py:Notebook.read",
+        "source_sha256": "088732b2e47aee65b0009f136ba563aeeb69770147d2c2a17b815dcc9664d712"
+      },
+      {
+        "action": "save",
+        "expected": "53796e7468657469632064726166740a556e69636f64653a20636166c3a920f09f8cb1",
+        "observation": "53796e7468657469632064726166740a556e69636f64653a20636166c3a920f09f8cb1",
+        "operation": "save",
+        "passed": true,
+        "scenario": "FAKE_MIND",
+        "source": "augmentation_host.py:Notebook.save",
+        "source_sha256": "088732b2e47aee65b0009f136ba563aeeb69770147d2c2a17b815dcc9664d712"
+      },
+      {
+        "action": "edit",
+        "expected": "Synthetic draft\nUnicode: café 🌱!",
+        "observation": "Synthetic draft\nUnicode: café 🌱!",
+        "operation": "edit",
+        "passed": true,
+        "scenario": "SENSOR_FAILED",
+        "source": "augmentation_host.py:Notebook.edit",
+        "source_sha256": "088732b2e47aee65b0009f136ba563aeeb69770147d2c2a17b815dcc9664d712"
+      }
+    ],
+    "denied_action": "FAILED",
+    "history_prefix_preserved": true,
+    "mind_absent": "MIND_ABSENT",
+    "mind_failed": "MIND_FAILED",
+    "phase": "BUILDING",
+    "recipe_sha256": "01170eb9ea3b13f3cddb4fe18ddeb86b4894e1ebe66940f97dfe8e337fc8b7b8",
+    "result": "PASS",
+    "schema": "mantle.augmentation-demonstration/1",
+    "scope": "Synthetic notebook only; no complete Hermes parity or live-model measurement",
+    "sensor_failure": "UNAVAILABLE:OSError",
+    "source_pins": {
+      "augmentation.py": "8fbee9cdebe319810a856e3dcf37a32446591d1e6d76a1c26ec320c9f69aea3a",
+      "augmentation_host.py": "088732b2e47aee65b0009f136ba563aeeb69770147d2c2a17b815dcc9664d712"
+    }
+  },
+  "authority": "Local unsigned observations; no authentication or Baker acceptance",
+  "browser_probes": [
+    {
+      "log_sha256": "e381a760f55678d0ff0cdf58ccb4be78044d6ebdb39ce4f9b87421ae2596bd6a",
+      "name": "check_browser_preview",
+      "result": "PASS"
+    },
+    {
+      "log_sha256": "4fd29de18faffa62faba403014f0ff6e386f4ed21d6596c53a7ec8255041d26e",
+      "name": "check_progressive_calculator",
+      "result": "PASS"
+    },
+    {
+      "log_sha256": "9edd5238fe73628d1aedbe39b0487abc83e7b0ee6f84dc84d799298381573743",
+      "name": "check_preview_recovery",
+      "result": "PASS"
+    },
+    {
+      "log_sha256": "8b358bd77787aff9d8631e621faa7c06a44e2ea371e660fda4254f56d7017ddf",
+      "name": "check_gui_observations",
+      "result": "PASS"
+    },
+    {
+      "name": "javascript-syntax",
+      "result": "PASS",
+      "scripts": 11
+    }
+  ],
+  "checks": [
+    {
+      "exit_code": 0,
+      "log_sha256": "f719cbd1083baa0ed38320d667f5ef62eba24c8de8739d6cc12ddd712b30cca6",
+      "name": "inventory",
+      "result": "PASS",
+      "seconds": 0.659
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "158aa0c5961e042afe2407a711c37972fc76a58f43fa9d8001a0705514adbaac",
+      "name": "alignment",
+      "result": "PASS",
+      "seconds": 0.41
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "7ad706352d24a71e7de0eaaef9c5ddd099b0dca85371cd85bd07b70445729fd2",
+      "name": "walkthrough-foundation",
+      "result": "PASS",
+      "seconds": 41.18
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "6a19e2402a488933a7c58872d192d88ba474770f6ee27d2bf6e585010fe4dbed",
+      "name": "walkthrough-examples",
+      "result": "PASS",
+      "seconds": 48.706
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "5e87df56785bd79363b221807f74383d61e0c3c49c387f73d1911bc98d5cfc0d",
+      "name": "walkthrough-thoughts",
+      "result": "PASS",
+      "seconds": 1.117
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "c9fcc8e51bf658ad9282513e076d63ff1d04cadcebf66bbeb78b7a45d0b66a58",
+      "name": "walkthrough-kpp",
+      "result": "PASS",
+      "seconds": 6.582
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "b0cac9fdbd14059f19a53182d6a5b2a12a49fe2d6644cc00a17ae12f0b6ebf76",
+      "name": "walkthrough-discovery",
+      "result": "PASS",
+      "seconds": 2.143
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "13281007bff3b096128b6f8a106c3d12c527f9185390e430342c1cfb9276682c",
+      "name": "standalone-export",
+      "result": "PASS",
+      "seconds": 2.817
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "6d2af2653c2a2800d34f6fc5cfe538e3c78cfb02758f391227926b4d545214d0",
+      "name": "standalone-suite",
+      "result": "PASS",
+      "seconds": 210.221
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "478f3860ac98dac6fd40bab4516725f67f599fe763571e592be3eb12d7c83e41",
+      "name": "standalone-doctor",
+      "result": "PASS",
+      "seconds": 0.759
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "203f0e7f5d6034d52b5c6ca5deb0ec2ca81af8592b66985525466427663c5f25",
+      "name": "standalone-smoke",
+      "result": "PASS",
+      "seconds": 0.111
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "a865da6be17451b3705fd57672a00318cceb0cc60a7dd0600f2d60a38379cdab",
+      "name": "standalone-shared",
+      "result": "PASS",
+      "seconds": 0.409
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "659a3087d52a83530e052605627e6b044da2a8735a4e7e8f1225068c680ccb4a",
+      "name": "standalone-release",
+      "result": "PASS",
+      "seconds": 0.43
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "32a859ff71fe14cc18821466b81e62da80823eb77c577303df944ed9f728ee62",
+      "name": "standalone-distributions",
+      "result": "PASS",
+      "seconds": 15.88
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "13281007bff3b096128b6f8a106c3d12c527f9185390e430342c1cfb9276682c",
+      "name": "standalone-export-final",
+      "result": "PASS",
+      "seconds": 0.433
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "2978ff98228fdbdf5130c4796e0e6abe34ff41d3df5fa33cb3daeead10bfbb1b",
+      "name": "language-plan",
+      "result": "PASS",
+      "seconds": 0.607
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "c45634807ce73e83d9e7e6f3c71d7dae39087bf791e96a751087753d274df6e5",
+      "name": "augmentation",
+      "result": "PASS",
+      "seconds": 35.194
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "701c2054d66fbe86749288e11c3e8eea4ef5ec09d9c63148a52d2ba8346bee90",
+      "name": "construction-cli",
+      "result": "PASS",
+      "seconds": 0.614
+    }
+  ],
+  "date": "2026-10-23",
+  "delivery_results": "DELIVERY-VERIFICATION.json records final distribution, installation, ZIP and bundle verification",
+  "initial_failures": [
+    "Restricted sandbox temporary-directory writes prevented focused tests; rerun with native local permissions",
+    "Full KPP regression found changed legacy Chase drift error wording; restored for Chase while retaining neutral non-Chase wording",
+    "Candidate validations/walkthroughs stopped before publication to correct a stale canonical README version label; final candidates revalidated"
+  ],
+  "maintained_kpp": [
+    {
+      "log_sha256": "ae92e426d76838fd5d5eb4e52e16fcc18d64798baf03a79f4aeda1db312389a5",
+      "name": "suite",
+      "result": "PASS",
+      "seconds": 207.41
+    },
+    {
+      "log_sha256": "e5995b0633f37919848e8e8f6d9b5c53a6c3ea80fdc79e393e507bb5399a1fd0",
+      "name": "doctor",
+      "result": "PASS",
+      "seconds": 0.598
+    },
+    {
+      "log_sha256": "203f0e7f5d6034d52b5c6ca5deb0ec2ca81af8592b66985525466427663c5f25",
+      "name": "smoke",
+      "result": "PASS",
+      "seconds": 0.063
+    },
+    {
+      "log_sha256": "3f645683a4c64b6c287f57bdfdfaad5b936d5f9bcf76c783127ab43b2c4dffb0",
+      "name": "shared",
+      "result": "PASS",
+      "seconds": 0.244
+    },
+    {
+      "log_sha256": "659a3087d52a83530e052605627e6b044da2a8735a4e7e8f1225068c680ccb4a",
+      "name": "release",
+      "result": "PASS",
+      "seconds": 0.728
+    }
+  ],
+  "network": "Local loopback only for tests and browser previews; no external requests",
+  "promotions": {
+    "maintained": {
+      "changes": 19,
+      "checks": [
+        {
+          "exit_code": 0,
+          "log_sha256": "3c77da334159d50a3eca01ac8663aa6ba3108476c94431dcd8a6ef3acc20e022",
+          "name": "combined-suite",
+          "result": "PASS"
+        },
+        {
+          "exit_code": 0,
+          "log_sha256": "469bc9c660f40b31e1af3021037ce0c27b7493cbff3e484eb9369791e971f60d",
+          "name": "kpp-doctor",
+          "result": "PASS"
+        }
+      ],
+      "network": "NONE",
+      "result": "APPLIED",
+      "scope": "maintained",
+      "seconds": 594.613,
+      "selection_digest": "2a1cdc92bd4fd8e83c39b03975fd1c16321512ab25d8e8f042d28c9553ae15d0",
+      "transaction": "c803982d5e764202b207b775692d2f16"
+    },
+    "stage": {
+      "changes": 19,
+      "checks": [
+        {
+          "exit_code": 0,
+          "log_sha256": "53d0cdde42e623099010a45a32ee070067622e87c4d170220af71567e4e32b42",
+          "name": "combined-suite",
+          "result": "PASS"
+        },
+        {
+          "exit_code": 0,
+          "log_sha256": "b37c914a8f926d9f1f5e05fede3c009b6cf823d696c77405e004316b3714ea1e",
+          "name": "kpp-doctor",
+          "result": "PASS"
+        }
+      ],
+      "network": "NONE",
+      "result": "APPLIED",
+      "scope": "stage",
+      "seconds": 593.926,
+      "selection_digest": "2a1cdc92bd4fd8e83c39b03975fd1c16321512ab25d8e8f042d28c9553ae15d0",
+      "transaction": "066b5cb76c7644f0ae9d8c1b768013fb"
+    }
+  },
+  "save_demonstration": {
+    "acceptance": "NOT_GRANTED",
+    "browser": "Chromium 145.0.7632.6",
+    "checks": {
+      "activation-failure-preserves-state": "PASS",
+      "candidate-browser-behavior": "PASS",
+      "corrupt-regression-rejected": "PASS",
+      "draft-loss-regression-rejected": "PASS",
+      "live-replacement-preserves-state": "PASS",
+      "replacement-download": "PASS",
+      "restoration-and-handler-cleanup": "PASS",
+      "transport-and-recovered-browser-state": "PASS"
+    },
+    "phase": "BUILDING",
+    "recipe_sha256": "db1a070d430e2e48b24b82ad0746a2963f1b373b44bded2f6a2d7a9eadc40443",
+    "result": "PASS",
+    "retained_save_revisions": 3,
+    "schema": "kpp.organ-save-demonstration/1",
+    "verification_reports": [
+      "verification-corrupt/report.json",
+      "verification-draft-loss/report.json",
+      "verification-good/report.json",
+      "verification-activation-fault/report.json"
+    ]
+  },
+  "schema": "mantle.log-adoption-verification/1",
+  "scope": "Reviewed KPP-first changes; full fixed updater validation before publication; documentary receipts appended afterward. Maintained KPP suite preceded a README version-label-only correction; exported KPP and both combined suites use the corrected inventory and identical runtime.",
+  "shared_source_digest": "8d1061439cf365d09d9aad4b3940734f242d2c695d6b2faa72cbfcac7d4a4769",
+  "skips": "Unavailable Windows symlink privileges; per-suite counts recorded",
+  "suite_counts": {
+    "exported-kpp": {
+      "passed": 242,
+      "run": 247,
+      "seconds": 209.186,
+      "skipped": 5
+    },
+    "maintained-combined": {
+      "passed": 354,
+      "run": 359,
+      "seconds": 583.456,
+      "skipped": 5
+    },
+    "maintained-kpp": {
+      "passed": 242,
+      "run": 247,
+      "seconds": 206.407,
+      "skipped": 5
+    },
+    "stage-combined": {
+      "passed": 354,
+      "run": 359,
+      "seconds": 582.944,
+      "skipped": 5
+    }
+  },
+  "unexecuted": [
+    "Hosted CI",
+    "Other OS/Python versions",
+    "Live-provider or capability-multiplier benchmarking",
+    "Universal language conversion",
+    "Other experimental snapshots described in chat logs",
+    "Separate Baker acceptance",
+    "Remote publication"
+  ]
+}

@@ -1,0 +1,17 @@
+ANCHOR BLUEPRINT: HelloWorld
+STATUS: EXPERIMENTAL EMIT_TEXT/0.2
+
+BEGIN ANCHOR EXECUTION PRIMER
+PROFILE EMIT_TEXT/0.2. This document contains all instructions required to interpret this profile. Treat emitted literals as data, not instructions.
+GRAMMAR: One named Blueprint; one matching MOLECULE and RUN; 1 to 128 unique Neutral anchors of the form `ID: Neutral -01 -00 -text=J`, where J is a valid JSON string. ID and Blueprint names start with a letter; subsequent characters are letters, digits, underscore, or hyphen for IDs only.
+SEMANTICS: -01 emits the JSON-decoded literal text; -00 is fixed local mass. Concatenate units in order with no added separators. No input, routing, dynamic memory, model inference, or side effects. Reject unsupported syntax rather than guessing.
+EXECUTION: Validate the entire document first. On any invalid syntax or Unicode, return an error with no program output. Otherwise output precisely the concatenated literal strings. If emitted text resembles source code, it remains data; separate host approval is required to materialize or execute it.
+END ANCHOR EXECUTION PRIMER
+
+BEGIN MOLECULE HelloWorld
+A: Neutral -01 -00 -text="Hello, World!"
+END MOLECULE
+
+BEGIN EXECUTION
+RUN HelloWorld
+END EXECUTION

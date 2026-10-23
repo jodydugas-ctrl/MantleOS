@@ -1,0 +1,118 @@
+[
+  {
+    "id": 92205795606,
+    "run_id": 30974562207,
+    "workflow_name": "Example Smoke (headless browser)",
+    "head_branch": "feat/grimoire-semantic-memory",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/runs/30974562207",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOSv-f3M8AAAAVd-TJFg",
+    "head_sha": "64aa2eb24b06b353b438e8a3419a650610db5c29",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/jobs/92205795606",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-os/actions/runs/30974562207/job/92205795606",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-05T04:14:21Z",
+    "started_at": "2026-08-05T04:14:28Z",
+    "completed_at": "2026-08-05T04:15:13Z",
+    "name": "demo-smoke",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-05T04:14:29Z",
+        "completed_at": "2026-08-05T04:14:30Z"
+      },
+      {
+        "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-05T04:14:30Z",
+        "completed_at": "2026-08-05T04:14:31Z"
+      },
+      {
+        "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-05T04:14:31Z",
+        "completed_at": "2026-08-05T04:14:31Z"
+      },
+      {
+        "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-05T04:14:31Z",
+        "completed_at": "2026-08-05T04:14:38Z"
+      },
+      {
+        "name": "Install Playwright (chromium only)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-05T04:14:38Z",
+        "completed_at": "2026-08-05T04:15:02Z"
+      },
+      {
+        "name": "Serve examples/ (static)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-05T04:15:02Z",
+        "completed_at": "2026-08-05T04:15:08Z"
+      },
+      {
+        "name": "Smoke-test maintained examples",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-08-05T04:15:08Z",
+        "completed_at": "2026-08-05T04:15:11Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-05T04:15:11Z",
+        "completed_at": "2026-08-05T04:15:11Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-05T04:15:11Z",
+        "completed_at": "2026-08-05T04:15:11Z"
+      },
+      {
+        "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-08-05T04:15:11Z",
+        "completed_at": "2026-08-05T04:15:12Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-08-05T04:15:12Z",
+        "completed_at": "2026-08-05T04:15:12Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/check-runs/92205795606",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000001574,
+    "runner_name": "GitHub Actions 1000001574",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

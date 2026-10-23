@@ -1,0 +1,46 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "kernel-relative-cells",
+  "version": "0.3.0",
+  "function": "The shared mantle.cell/2 contract: one RGB pixel or one appended record segment, carried as canonical source.",
+  "status": "ready",
+  "preferred_for": [
+    "mantleos",
+    "bioagent",
+    "kernel"
+  ],
+  "compatible_tissues": [
+    "anchor",
+    "python",
+    "mixed"
+  ],
+  "tags": [
+    "mantleos",
+    "specimen"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "The shared mantle.cell/2 contract: one RGB pixel or one appended record segment, carried as canonical source."
+  ],
+  "adaptation": "The specimen emits Python reference code as literal data; compilation is a separate explicit host operation.",
+  "verified_with": "Automated bridge + subprocess reference behavior tests",
+  "provenance": "Generated from canonical mantleos.cells and mantleos.json_contract source; no alternate CELL definition.",
+  "specimen": {
+    "path": "specimens/mantleos/kernel-cells.anchor",
+    "profile": "EMIT_TEXT/0.2",
+    "emits": "python",
+    "sha256": "94596344092f5063361a51f92d32485103d2834346b0ebc535e137d716ce3994",
+    "scope": "Anchor emits a runnable Python reference; the Anchor emitter itself has no dynamic state or Python effects."
+  },
+  "usage": {
+    "use_when": "Select to demonstrate that CELL depends on its kernel.",
+    "inputs": [
+      "Kernel kind and value"
+    ],
+    "outputs": [
+      "Pixel cell or tape-segment cell"
+    ],
+    "limits": "Exact canonical CELL validation; this specimen is not a Chroma codec or whole Body."
+  }
+}

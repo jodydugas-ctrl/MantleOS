@@ -1,0 +1,190 @@
+[
+  {
+    "id": 106815450716,
+    "run_id": 35748289493,
+    "workflow_name": "SCAN v0.29 frozen coverage calibration",
+    "head_branch": "anchor-v0.29-coverage-gaps",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35748289493",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY3rJuXA",
+    "head_sha": "b5aeac40b6374362355f7a5cb5aeb0aea1e30430",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106815450716",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35748289493/job/106815450716",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T15:34:22Z",
+    "started_at": "2026-09-22T15:34:25Z",
+    "completed_at": "2026-09-22T16:03:48Z",
+    "name": "frozen-coverage",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T15:34:25Z",
+        "completed_at": "2026-09-22T15:34:26Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T15:34:26Z",
+        "completed_at": "2026-09-22T15:34:27Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T15:34:27Z",
+        "completed_at": "2026-09-22T15:34:27Z"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T15:34:27Z",
+        "completed_at": "2026-09-22T15:34:30Z"
+      },
+      {
+        "name": "Install isolated v0.28 and v0.29 scanners",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T15:34:30Z",
+        "completed_at": "2026-09-22T15:34:45Z"
+      },
+      {
+        "name": "Checkout frozen NotepadNext",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T15:34:45Z",
+        "completed_at": "2026-09-22T15:34:47Z"
+      },
+      {
+        "name": "Checkout frozen Moji",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T15:34:47Z",
+        "completed_at": "2026-09-22T15:34:47Z"
+      },
+      {
+        "name": "Verify specimen identities",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-22T15:34:47Z",
+        "completed_at": "2026-09-22T15:34:47Z"
+      },
+      {
+        "name": "Run released v0.28 baselines",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-22T15:34:47Z",
+        "completed_at": "2026-09-22T15:44:04Z"
+      },
+      {
+        "name": "Run duplicate v0.29 scans",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-09-22T15:44:04Z",
+        "completed_at": "2026-09-22T16:03:04Z"
+      },
+      {
+        "name": "Prove v0.29 coverage projection determinism",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-22T16:03:04Z",
+        "completed_at": "2026-09-22T16:03:22Z"
+      },
+      {
+        "name": "Prove v0.29 does not alter v0.28 canonical evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-22T16:03:22Z",
+        "completed_at": "2026-09-22T16:03:41Z"
+      },
+      {
+        "name": "Reconcile coverage reports and write calibration receipt",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T16:03:41Z",
+        "completed_at": "2026-09-22T16:03:43Z"
+      },
+      {
+        "name": "Upload compact calibration evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-09-22T16:03:43Z",
+        "completed_at": "2026-09-22T16:03:44Z"
+      },
+      {
+        "name": "Post Checkout frozen Moji",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 24,
+        "started_at": "2026-09-22T16:03:44Z",
+        "completed_at": "2026-09-22T16:03:45Z"
+      },
+      {
+        "name": "Post Checkout frozen NotepadNext",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 25,
+        "started_at": "2026-09-22T16:03:45Z",
+        "completed_at": "2026-09-22T16:03:45Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 26,
+        "started_at": "2026-09-22T16:03:45Z",
+        "completed_at": "2026-09-22T16:03:45Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 27,
+        "started_at": "2026-09-22T16:03:45Z",
+        "completed_at": "2026-09-22T16:03:45Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 28,
+        "started_at": "2026-09-22T16:03:45Z",
+        "completed_at": "2026-09-22T16:03:45Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 29,
+        "started_at": "2026-09-22T16:03:45Z",
+        "completed_at": "2026-09-22T16:03:45Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106815450716",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000002939,
+    "runner_name": "GitHub Actions 1000002939",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

@@ -1,0 +1,316 @@
+name: SCAN v0.28 frozen calibration
+
+on:
+  push:
+    branches:
+      - anchor-v0.28-reconstruction-loop
+    paths:
+      - 'Anchor/engine/v0.28/**'
+      - '.github/workflows/scan-v028-frozen-calibration.yml'
+  pull_request:
+    paths:
+      - 'Anchor/engine/v0.28/**'
+      - '.github/workflows/scan-v028-frozen-calibration.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  frozen-calibration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    env:
+      NOTEPAD_COMMIT: f57db52d6760a2ce4149a37190c3adaa586845f5
+      NOTEPAD_TREE: f0995b128bf6dbc73e5d0f3ef4e4f302f8a3081b
+      MOJI_COMMIT: 7793dbabc880a950b5003dcfd57c1222b279b807
+      MOJI_TREE: b4e0e6a4d2010a6d584f40b01ab5ffad7bf18fea
+      OPENAI_API_KEY: ''
+      ANTHROPIC_API_KEY: ''
+      GOOGLE_API_KEY: ''
+      GEMINI_API_KEY: ''
+      GROQ_API_KEY: ''
+      MISTRAL_API_KEY: ''
+      COHERE_API_KEY: ''
+
+    steps:
+      - name: Checkout SCAN integration branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Verify v0.27 base is unchanged
+        shell: bash
+        run: |
+          git fetch origin main --depth=1
+          git diff --exit-code origin/main -- Anchor/engine/v0.27
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install isolated v0.27 and v0.28 scanners
+        shell: bash
+        run: |
+          python -m venv .venv27
+          python -m venv .venv28
+          .venv27/bin/python -m pip install --upgrade pip
+          .venv28/bin/python -m pip install --upgrade pip
+          .venv27/bin/python -m pip install -e Anchor/engine/v0.27
+          .venv28/bin/python -m pip install -e Anchor/engine/v0.28
+          mkdir -p .scan-tools
+          npm install --prefix .scan-tools --ignore-scripts --no-package-lock --no-save typescript@5.7.2
+          echo "SCAN_TYPESCRIPT_MODULE=$GITHUB_WORKSPACE/.scan-tools/node_modules/typescript" >> "$GITHUB_ENV"
+          .venv27/bin/python - <<'PY'
+          import scan
+          assert scan.__version__ == "0.27.0", scan.__version__
+          PY
+          .venv28/bin/python - <<'PY'
+          import scan
+          assert scan.__version__ == "0.28.0", scan.__version__
+          PY
+
+      - name: Checkout frozen NotepadNext specimen
+        uses: actions/checkout@v4
+        with:
+          repository: dail8859/NotepadNext
+          ref: f57db52d6760a2ce4149a37190c3adaa586845f5
+          path: specimen-notepad
+          fetch-depth: 1
+
+      - name: Checkout frozen Moji specimen
+        uses: actions/checkout@v4
+        with:
+          repository: alexishida/Moji
+          ref: 7793dbabc880a950b5003dcfd57c1222b279b807
+          path: specimen-moji
+          fetch-depth: 1
+
+      - name: Verify frozen specimen identities
+        shell: bash
+        run: |
+          test "$(git -C specimen-notepad rev-parse HEAD)" = "$NOTEPAD_COMMIT"
+          test "$(git -C specimen-notepad rev-parse HEAD^{tree})" = "$NOTEPAD_TREE"
+          test "$(git -C specimen-moji rev-parse HEAD)" = "$MOJI_COMMIT"
+          test "$(git -C specimen-moji rev-parse HEAD^{tree})" = "$MOJI_TREE"
+
+      - name: Run v0.27 baselines
+        shell: bash
+        run: |
+          mkdir -p results
+          .venv27/bin/scan-body scan specimen-notepad --out results/v027-notepad --specimen-id "dail8859/NotepadNext@$NOTEPAD_COMMIT"
+          .venv27/bin/scan-body scan specimen-moji --out results/v027-moji --specimen-id "alexishida/Moji@$MOJI_COMMIT"
+
+      - name: Run duplicate v0.28 cold scans
+        shell: bash
+        run: |
+          .venv28/bin/scan-body scan specimen-notepad --out results/v028-notepad-a --specimen-id "dail8859/NotepadNext@$NOTEPAD_COMMIT"
+          .venv28/bin/scan-body scan specimen-notepad --out results/v028-notepad-b --specimen-id "dail8859/NotepadNext@$NOTEPAD_COMMIT"
+          .venv28/bin/scan-body scan specimen-moji --out results/v028-moji-a --specimen-id "alexishida/Moji@$MOJI_COMMIT"
+          .venv28/bin/scan-body scan specimen-moji --out results/v028-moji-b --specimen-id "alexishida/Moji@$MOJI_COMMIT"
+
+      - name: Generate duplicate reconstruction projections
+        shell: bash
+        run: |
+          for specimen in notepad moji; do
+            for run in a b; do
+              root="results/v028-$specimen-$run"
+              .venv28/bin/scan-body anchor-code "$root/scan_index.sqlite" --out-dir "$root"
+              .venv28/bin/scan-body anchor-blueprint "$root/scan_index.sqlite" --out "$root/anchor_blueprint.md"
+            done
+          done
+
+      - name: Prove v0.28 determinism
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import sqlite3
+
+          canonical = [
+              "machine_body_map.json", "evidence_graph.json", "evidence_catalog.json",
+              "completeness_vector.json", "integrity_report.json", "surface_closure.json",
+              "effect_closure.json", "nest_capability_map.json", "stage1_summary.md",
+              "projection_manifest.json", "assimilation_status.json", "anchor_code.txt",
+              "anchor_blueprint.json", "anchor_blueprint.md",
+          ]
+          tables = {"files", "nodes", "edges", "evidence", "findings", "semantic_objects", "semantic_relations"}
+
+          def rows(db_path, table):
+              db = sqlite3.connect(db_path)
+              try:
+                  return sorted(db.execute(f"SELECT * FROM {table}").fetchall(), key=repr)
+              finally:
+                  db.close()
+
+          for specimen in ("notepad", "moji"):
+              a = Path(f"results/v028-{specimen}-a")
+              b = Path(f"results/v028-{specimen}-b")
+              for name in canonical:
+                  assert (a / name).read_bytes() == (b / name).read_bytes(), (specimen, name)
+              if (a / "assimilation").exists() or (b / "assimilation").exists():
+                  assert (a / "assimilation").exists() and (b / "assimilation").exists()
+                  af = sorted(p.relative_to(a / "assimilation") for p in (a / "assimilation").rglob("*") if p.is_file())
+                  bf = sorted(p.relative_to(b / "assimilation") for p in (b / "assimilation").rglob("*") if p.is_file())
+                  assert af == bf, (specimen, "assimilation-file-set")
+                  for rel in af:
+                      assert (a / "assimilation" / rel).read_bytes() == (b / "assimilation" / rel).read_bytes(), (specimen, rel)
+              for table in tables:
+                  assert rows(a / "scan_index.sqlite", table) == rows(b / "scan_index.sqlite", table), (specimen, table)
+          PY
+
+      - name: Compare v0.28 against v0.27 and review new web routes
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          import sqlite3
+
+          report = {
+              "schema_version": "scan-v028-frozen-calibration/0.1",
+              "state": "PASS",
+              "baseline_engine": "0.27.0",
+              "candidate_engine": "0.28.0",
+              "determinism": "PASS",
+              "specimens": {},
+          }
+
+          def load(root, name):
+              return json.loads((Path(root) / name).read_text(encoding="utf-8"))
+
+          def node_map(db_path):
+              db = sqlite3.connect(db_path)
+              db.row_factory = sqlite3.Row
+              try:
+                  return {row["id"]: dict(row) for row in db.execute("SELECT id,kind,name,path,coverage,attributes_json FROM nodes")}
+              finally:
+                  db.close()
+
+          def outgoing(db_path, src):
+              db = sqlite3.connect(db_path)
+              db.row_factory = sqlite3.Row
+              try:
+                  return [dict(row) for row in db.execute(
+                      "SELECT src,dst,kind,coverage FROM edges WHERE src=? ORDER BY kind,dst", (src,)
+                  )]
+              finally:
+                  db.close()
+
+          for specimen in ("notepad", "moji"):
+              base_root = Path(f"results/v027-{specimen}")
+              cand_root = Path(f"results/v028-{specimen}-a")
+              base_surface = load(base_root, "surface_closure.json")
+              cand_surface = load(cand_root, "surface_closure.json")
+              base_effect = load(base_root, "effect_closure.json")
+              cand_effect = load(cand_root, "effect_closure.json")
+              integrity = load(cand_root, "integrity_report.json")
+
+              assert integrity.get("severity_counts", {}).get("ERROR", 0) == 0, (specimen, integrity)
+
+              base_s = {row["surface_id"]: row for row in base_surface["records"]}
+              cand_s = {row["surface_id"]: row for row in cand_surface["records"]}
+              assert set(base_s) <= set(cand_s), (specimen, "lost-surface-id")
+              for sid, before in base_s.items():
+                  after = cand_s[sid]
+                  assert before["closure"] == after["closure"], (specimen, sid, before["closure"], after["closure"])
+                  assert before["route_edge_count"] == after["route_edge_count"], (specimen, sid, "route-edge-count")
+
+              base_e = {row["surface_id"]: row for row in base_effect["records"]}
+              cand_e = {row["surface_id"]: row for row in cand_effect["records"]}
+              assert set(base_e) <= set(cand_e), (specimen, "lost-effect-surface-id")
+              for sid, before in base_e.items():
+                  after = cand_e[sid]
+                  for key in ("binding_closure", "effect_closure", "terminal_count", "feedback_count"):
+                      assert before[key] == after[key], (specimen, sid, key, before[key], after[key])
+
+              extra_ids = sorted(set(cand_s) - set(base_s))
+              nodes = node_map(cand_root / "scan_index.sqlite")
+              reviewed = []
+              for sid in extra_ids:
+                  row = cand_s[sid]
+                  node = nodes[sid]
+                  attrs = json.loads(node["attributes_json"] or "{}")
+                  assert str(row.get("surface_type") or "").startswith("html:"), (specimen, sid, row.get("surface_type"))
+                  assert Path(row.get("path") or "").suffix.lower() in {".html", ".htm"}, (specimen, sid, row.get("path"))
+                  edges = outgoing(cand_root / "scan_index.sqlite", sid)
+                  routing = [e for e in edges if e["kind"] == "dispatches_to"]
+                  for edge in routing:
+                      target = nodes[edge["dst"]]
+                      assert target["kind"] == "handler_reference", (specimen, sid, target["kind"])
+                      assert target["path"] == node["path"], (specimen, sid, node["path"], target["path"])
+                  if row.get("surface_type") == "html:canvas":
+                      assert row.get("surface_role") == "input", (specimen, sid, "non-actionable-canvas-entered-denominator")
+                      assert routing, (specimen, sid, "canvas-input-without-route")
+                  reviewed.append({
+                      "surface_id": sid,
+                      "path": row.get("path"),
+                      "surface_type": row.get("surface_type"),
+                      "closure": row.get("closure"),
+                      "route_edge_count": row.get("route_edge_count"),
+                  })
+
+              # Presented canvases must remain outside the actionable closure denominator.
+              closure_ids = set(cand_s)
+              for nid, node in nodes.items():
+                  if node["kind"] != "human_surface":
+                      continue
+                  attrs = json.loads(node["attributes_json"] or "{}")
+                  if attrs.get("tag") == "canvas" and attrs.get("surface_role") == "presented":
+                      assert nid not in closure_ids, (specimen, nid, "presented-canvas-in-action-denominator")
+
+              # Neither frozen calibration specimen exposes a runtime HTML application shell.
+              # Any newly actionable static-web denominator here is therefore a false promotion.
+              # Candidate/reference HTML nodes may exist, but they must remain outside A7 until a
+              # runtime/event coupling proves they are part of the application surface.
+              assert not reviewed, (specimen, "unexpected-actionable-web-surfaces", reviewed[:20])
+
+              assert (base_root / "nest_capability_map.json").read_bytes() == (cand_root / "nest_capability_map.json").read_bytes(), (specimen, "NEST-projection-drift")
+
+              report["specimens"][specimen] = {
+                  "baseline_surface_count": base_surface["surface_count"],
+                  "candidate_surface_count": cand_surface["surface_count"],
+                  "new_actionable_web_surfaces": reviewed,
+                  "new_actionable_web_surface_count": len(reviewed),
+                  "existing_surface_states_preserved": True,
+                  "existing_effect_states_preserved": True,
+                  "nest_projection_preserved": True,
+                  "integrity_error_count": integrity.get("severity_counts", {}).get("ERROR", 0),
+              }
+
+          Path("results/V028_FROZEN_CALIBRATION.json").write_text(
+              json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8"
+          )
+          print(json.dumps(report, indent=2, ensure_ascii=False))
+          PY
+
+      - name: Verify reconstruction export did not mutate sealed scan projection
+        shell: bash
+        run: |
+          for specimen in notepad moji; do
+            .venv28/bin/scan-body self-audit Anchor/engine/v0.28 --scan-output "results/v028-$specimen-a" --out "results/v028-$specimen-a/SELF_AUDIT.json" || true
+            python - <<PY
+          import json
+          from pathlib import Path
+          specimen = "$specimen"
+          result = json.loads(Path(f"results/v028-{specimen}-a/SELF_AUDIT.json").read_text())
+          # The package side is expected to fail until v0.28 gets its final manifest.
+          # The emitted scan projection itself must remain internally valid after Anchor exports.
+          assert result["scan_output"]["state"] == "PASS", result
+          PY
+          done
+
+      - name: Upload v0.28 frozen-calibration evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scan-v028-frozen-calibration
+          path: results
+          if-no-files-found: error
+          retention-days: 14

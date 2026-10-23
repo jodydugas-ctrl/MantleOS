@@ -1,0 +1,43 @@
+{
+  "anchors": [
+    {
+      "area": "view",
+      "depends": [],
+      "depth": 1,
+      "id": "gui-coverage",
+      "required": true,
+      "statement": "Every observed Qt declaration has a mandatory Anchor mapping or Baker scope attestation, with runtime unknowns disclosed",
+      "test": "Rescan both pinned UI files and compare the 20 discovered entries; inspect unknown runtime and visual contexts"
+    }
+  ],
+  "capabilities": {
+    "agent": false,
+    "mantleos_splice": false,
+    "mind": false
+  },
+  "delivery_mode": "artifact",
+  "fidelity": 1,
+  "goal": "Account for the static synthetic Qt editor declarations without claiming runtime or visual parity",
+  "id": "qt-gui-coverage-demo",
+  "ingredients": [
+    "interface-shell",
+    "chase-gate"
+  ],
+  "mode": "chase",
+  "product_kind": "biosoftware",
+  "reference_gui": {
+    "coverage_anchor": "gui-coverage",
+    "inventory": {
+      "path": "references/synthetic-qt-inventory.json",
+      "sha256": "da3c64379bfead5b9c6bd52b5f0fe2b2b1ed4e43f531fc39657e672356b8369a"
+    },
+    "source_root": "references/synthetic-qt"
+  },
+  "schema": "kpp.recipe/3",
+  "target": {
+    "description": "Synthetic Qt UI declaration coverage only",
+    "reference_version": "4630c8931b5fce10b5ace1728d1ff8bae6ae9f9857baea8198f69c395c129609",
+    "source": "synthetic-qt-editor"
+  },
+  "tissue": "python"
+}

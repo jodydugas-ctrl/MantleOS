@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kitchen Party · Progressive Notes</title>
+<link rel="stylesheet" href="/style.css"></head>
+<body><main id="app" class="wrapper">
+<div class="top"><h1>Kitchen Party · Live Bake</h1><span class="caption">Usable while building · not complete until the recipe is accepted</span></div>
+<section class="frame">
+  <header class="titlebar"><span>Untitled — Progressive Notes</span><span>✧ KPP</span></header>
+  <nav class="menus" aria-label="Notepad features">
+    <span>File</span>
+    <button id="open" data-requires="files" data-area="file" disabled title="Bakes at Fidelity 3">Open…</button>
+    <button id="save" data-requires="files" data-area="file" disabled title="Bakes at Fidelity 3">Save…</button>
+    <button id="selectall" data-requires="edit" data-area="edit" disabled title="Bakes at Fidelity 2">Select all</button>
+    <button id="clear" data-requires="edit" data-area="edit" disabled title="Bakes at Fidelity 2">Clear</button>
+    <input hidden id="filepicker" type="file" accept=".txt,text/plain">
+  </nav>
+  <textarea id="notes" placeholder="Start typing. Draft text is locally recovered as you work…" spellcheck="true" aria-label="Notes"></textarea>
+  <footer class="status"><span id="kpp-progress">Fidelity 1 surface ready</span><span id="counter">Editor preview</span><span id="save-status">Draft recovery active</span></footer>
+</section>
+<div id="chase">Initializing progressive kitchen…</div>
+<div class="meta"><label><input id="observe" type="checkbox"> Share coarse feature-area activity with this local KPP bake (off by default)</label><span id="kpp-anchors">Mandatory Anchors: loading…</span></div>
+</main><script defer src="/base.js"></script><script defer src="/runtime.js"></script></body></html>

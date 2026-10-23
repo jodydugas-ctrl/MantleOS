@@ -1,0 +1,47 @@
+name: Verify MantleOS
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        python: ['3.11', '3.14']
+    runs-on: ${{ matrix.os }}
+    env:
+      PYTHONPATH: src
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Verify reviewed source inventory and KPP alignment
+        run: |
+          python tools/project_container.py check
+          python tools/kpp_upstream.py check
+          python tools/archive_inventory.py --reviewed
+      - name: Read the reviewed KPP commit
+        id: kpp-pin
+        shell: bash
+        run: echo "commit=$(python tools/verify_kpp_pin.py --commit-only)" >> "$GITHUB_OUTPUT"
+      - name: Check out the pinned independent KPP project
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: jodydugas-ctrl/Kitchen-Party-Protocol
+          ref: ${{ steps.kpp-pin.outputs.commit }}
+          path: .work/pinned-kpp
+          persist-credentials: false
+      - name: Compare exact shared source against the pinned KPP commit
+        run: python tools/verify_kpp_pin.py --source .work/pinned-kpp
+      - name: Complete core verification
+        run: python -m unittest discover -s tests -v
+      - run: python -m mantleos demo --output .work/ci-demo
+      - run: python -m mantleos examples demo --output .work/ci-examples
+      - run: python examples/thoughts/walkthrough.py --output .work/ci-thoughts
+      - run: python examples/kpp/walkthrough.py --output .work/ci-kpp
+      - run: python examples/discovery/walkthrough.py --output .work/ci-discovery
+      - run: python -m build --no-isolation

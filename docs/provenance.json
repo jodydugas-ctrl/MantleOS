@@ -1,0 +1,1028 @@
+{
+  "schema": "mantle.provenance/1",
+  "sources": [
+    {
+      "id": "windows-rc3",
+      "sha256": "74fb3bf80facd3e46309fcb2d3164302cb13318adc02c5d73d49d1f85d806965"
+    },
+    {
+      "id": "raven-runtime",
+      "sha256": "cc21ce50c745ff7c7f958e5f9edb2a55253c41e6da26a9033e7df9bbedf0a4f7"
+    },
+    {
+      "id": "mantle-os",
+      "url": "https://github.com/jodydugas-ctrl/mantle-os",
+      "commit": "8e90a4f84998518d6abd8309dfa285a9ea7e8b24",
+      "branch": "main",
+      "license": "MIT"
+    },
+    {
+      "id": "MantleOS2",
+      "url": "https://github.com/jodydugas-ctrl/MantleOS2",
+      "commit": "a624546a57abf463c8e160a17d34f0ea12e8646b",
+      "branch": "main",
+      "license": "MIT"
+    },
+    {
+      "id": "archived-windows-rc3",
+      "sha256": "3b0b62647e0b497f9d747e742cd67567454dc1530dc7b5aa8558ffef1a38ad98",
+      "disposition": "inventory-only; same name as windows-rc3, different bytes"
+    },
+    {
+      "id": "MantleOS_Unification_Agent_Brief",
+      "sha256": "69306f0dfdb32d1e586ea2e605a9d30ed01fc4e0f3e8de5cf9654b42530a4b9d",
+      "disposition": "advisory input; original document not tracked"
+    },
+    {
+      "id": "MantleOS_Philosophy_Agent_Orientation",
+      "sha256": "80855a611c2e7c63a288c41fd747f5ef4b583ea8fec5b9d840e8f189e361e4f2",
+      "disposition": "advisory input; original document not tracked"
+    },
+    {
+      "id": "hermes",
+      "url": "https://github.com/nousresearch/hermes-agent",
+      "commit": "63279301bcbdc185c1b07b98a9312eb0c862f26d",
+      "license": "MIT",
+      "disposition": "ignored local installation; source not vendored"
+    },
+    {
+      "id": "raven-legacy-chroma",
+      "sha256": "d92cf77a1ad607a7c0050b14bc3aede26c5503b13c56d175c516795cb87fca71",
+      "disposition": "historical inspection; old envelope reader removed in a2"
+    },
+    {
+      "id": "supplied-notepad",
+      "sha256": "095db6c3915ca12481acab042264ca6025b07494b28a3d4cc9358551f69b8fcf",
+      "disposition": "verified semantics, current targets regenerated"
+    },
+    {
+      "id": "KPP-1.0.0",
+      "sha256": "989ca7d5a59d15bdb6df4f23103333b30a9e93cb59413561476791b19589d8a4",
+      "license": "MIT",
+      "disposition": "Preferred EMIT_TEXT profile and recipe/3 attributes; original archive external"
+    },
+    {
+      "id": "KPP-1.0.1-dev-parallel-discovery",
+      "sha256": "056320e9be91f9f960cdcd51fa8b7e330f48d19dcea49aea53a7534bddbdb0d9",
+      "disposition": "supplied experimental assistant-authored derivative, not an official upstream release; archive remains external",
+      "license": "MIT"
+    },
+    {
+      "id": "xp-paint-documentation",
+      "url": "https://users.sch.gr/edimitriad/images/Zografiki/A_Guide_to_Microsoft_Paint_XP.pdf",
+      "disposition": "Web-readable historical behavior reference only; direct byte download failed certificate validation; no native executable supplied, no invented hash. Not redistributed."
+    },
+    {
+      "id": "scan-optimizer-1.0.0",
+      "sha256": "4e0f6a54182dc492e5ede1fc7c94f405ac51b8b0c66c00aebf902d5d4e07e78a",
+      "disposition": "External local analysis/experiment tool only; manifest verified; no runtime source imported; filter-0 optimization measured in examples/optimization/measurement.json"
+    },
+    {
+      "id": "kpp-general-tooling-1.0.0",
+      "sha256": "989ca7d5a59d15bdb6df4f23103333b30a9e93cb59413561476791b19589d8a4",
+      "license": "MIT",
+      "disposition": "Full workflow/resources/tests promoted into canonical mantleos.kpp; independent interpreter/scanner replaced with shared-system ports; standalone project generated from the same source"
+    },
+    {
+      "id": "anchor-organ-kpp-scan-bridge-poc",
+      "sha256": "b0eb542833118aaccea160b8a4c31a06eb33590c14f42121d126c8adf3ef25f9",
+      "disposition": "Organ projection/mapping adapted in primary KPP; experimental SCAN v0.28 and imported instructions not activated; archive stays external."
+    }
+  ],
+  "adopted_files": [
+    {
+      "path": "src/mantleos/__init__.py",
+      "source_member": "runtime_lib/mantleos/__init__.py",
+      "source": "raven-runtime",
+      "sha256": "cd98ebf4c1617ef0766c4751a8936c6e2f5af9e61a0b841971903f027c4b5b35",
+      "integrated_sha256": "c68ffe3410586ff55c213728d79a89598a73e6ae709c62c5f0566c11cd746b2a",
+      "status": "adapted",
+      "adaptation": " a2: compatibility removal/resource deduplication; generated semantic payloads preserved. a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/__main__.py",
+      "source_member": "runtime_lib/mantleos/__main__.py",
+      "source": "shared",
+      "sha256": "cbe02841476525317189782adb3a38acb0f6b49617da3e4fe1f2afb7f38bd577",
+      "integrated_sha256": "8facf58fbb85b958dd1ae2fe54a1e6100755ded6b3eb54924d01f7bf303ea317",
+      "status": "adapted"
+    },
+    {
+      "path": "src/mantleos/agentic_continuity.py",
+      "source_member": "runtime_lib/mantleos/agentic_continuity.py",
+      "source": "shared",
+      "sha256": "650f23ded21430c2b460fa1717d9123277eb01904589a3101a2c1191b881900f",
+      "integrated_sha256": "650f23ded21430c2b460fa1717d9123277eb01904589a3101a2c1191b881900f",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/agentic_profiles/primer_agentic_v0_2.txt",
+      "source_member": "runtime_lib/mantleos/agentic_profiles/primer_agentic_v0_2.txt",
+      "source": "shared",
+      "sha256": "0ac9a89e47458f43de0581713f9c8588199cb4808828d90e52c03aba0681a4ec",
+      "integrated_sha256": "0ac9a89e47458f43de0581713f9c8588199cb4808828d90e52c03aba0681a4ec",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/agentic_validation.py",
+      "source_member": "runtime_lib/mantleos/agentic_validation.py",
+      "source": "shared",
+      "sha256": "2558f8f3ae6f77342fd916d4e63f0d3d21373f02b52ea4c8ee7665cb8e9309b6",
+      "integrated_sha256": "2558f8f3ae6f77342fd916d4e63f0d3d21373f02b52ea4c8ee7665cb8e9309b6",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/anchor_app_bridge.py",
+      "source_member": "runtime_lib/mantleos/anchor_app_bridge.py",
+      "source": "shared",
+      "sha256": "892f357774c22c20ff6a30a15caeae3e70fbac49ea8d73fdb9fe8a12916617b5",
+      "integrated_sha256": "a49eb21940bf2638de67b04139a2cc2c05f781138cba61b51ed269b6bf57050c",
+      "status": "adapted"
+    },
+    {
+      "path": "src/mantleos/anchor_app_document.py",
+      "source_member": "runtime_lib/mantleos/anchor_app_document.py",
+      "source": "shared",
+      "sha256": "78efcb8c3f9491b6ef3e96a3a4181a93d49a594bc6820e8adec120453ed85759",
+      "integrated_sha256": "186d990cf626f37295a3f768d6ae74407e5186da054b0146a6b622ace4213284",
+      "status": "adapted"
+    },
+    {
+      "path": "src/mantleos/anchor_apps.py",
+      "source_member": "runtime_lib/mantleos/anchor_apps.py",
+      "source": "shared",
+      "sha256": "3c6b51f734b282a434eca3906ddbd4d637781f0127a6d0c87b4e78fbe9e8c97e",
+      "integrated_sha256": "a78786d895e361131ca9232354523a97377308e5f4bcf5228f9a8ef3bda1a2ad",
+      "status": "adapted",
+      "adaptation": " a2: compatibility removal/resource deduplication; generated semantic payloads preserved."
+    },
+    {
+      "path": "src/mantleos/anchor_blueprint.py",
+      "source_member": "runtime_lib/mantleos/anchor_blueprint.py",
+      "source": "shared",
+      "sha256": "3246d508d3bfa72bbe27e1eee9fea3717047649344981079e18a224a2385981c",
+      "integrated_sha256": "2b270699d3a5d9bf0270fad6f521241622055f4ae0a4ad46a0572eb441eaa59c",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/anchor_canvas.py",
+      "source_member": "runtime_lib/mantleos/anchor_canvas.py",
+      "source": "shared",
+      "sha256": "b99f5262bf4532b32308b4459019f4ef24b4fea0241459c5986b0f5751c6c8be",
+      "integrated_sha256": "b99f5262bf4532b32308b4459019f4ef24b4fea0241459c5986b0f5751c6c8be",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/anchor_engine/SOURCE-PINS.json",
+      "source_member": "runtime_lib/mantleos/anchor_engine/SOURCE-PINS.json",
+      "source": "shared",
+      "sha256": "0633d41037d01d66d6d1e14c35b58bf9bb92a24159eafcd00bd67d41de9c6cf1",
+      "integrated_sha256": "b372862e3893bf8be584eba5f1b0bfdfe503dc73b561806ec2cb978634451a89",
+      "status": "adapted",
+      "adaptation": " a2: compatibility removal/resource deduplication; generated semantic payloads preserved. a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/anchor_engine/__init__.py",
+      "source_member": "runtime_lib/mantleos/anchor_engine/__init__.py",
+      "source": "shared",
+      "sha256": "07a9b5223bbd4669bca4f4d4cc0b4709daec2895c32bc288820889c8a5e0071a",
+      "integrated_sha256": "07a9b5223bbd4669bca4f4d4cc0b4709daec2895c32bc288820889c8a5e0071a",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/anchor_engine/profiles/hello_world_compact.anchor",
+      "source_member": "runtime_lib/mantleos/anchor_engine/profiles/hello_world_compact.anchor",
+      "source": "shared",
+      "sha256": "4687839518f29c4f098a7a7f375e4fb36042c3fb20ea8fd1aa4555334501b281",
+      "integrated_sha256": "2493c4d34f902539c2d030d84044a686829f154561290c74e12082b3b1651211",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/anchor_engine/reference_materials/unicode/LICENSE.txt",
+      "source_member": "runtime_lib/mantleos/anchor_engine/reference_materials/unicode/LICENSE.txt",
+      "source": "shared",
+      "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96",
+      "integrated_sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/anchor_engine/templates/notepad_llm_v1_molecules.txt",
+      "source_member": "runtime_lib/mantleos/anchor_engine/templates/notepad_llm_v1_molecules.txt",
+      "source": "shared",
+      "sha256": "0882c960df82ba087401aa683e49605f3278522ee8bf8a4a970214e07d032488",
+      "integrated_sha256": "0882c960df82ba087401aa683e49605f3278522ee8bf8a4a970214e07d032488",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/anchor_engine/templates/primer_emit_text_v0_2.txt",
+      "source_member": "runtime_lib/mantleos/anchor_engine/templates/primer_emit_text_v0_2.txt",
+      "source": "shared",
+      "sha256": "3b8ebaa85aee71f050d03dec9c2e43e6b7e93fddcc6e364cc4b27bd3bbfd94fa",
+      "integrated_sha256": "39f1742b92f733b0727a0518623841ae5d03eb00a0b8dbd2e0885abfd5837c42",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/anchor_engine/templates/primer_notepad_llm_v1.txt",
+      "source_member": "runtime_lib/mantleos/anchor_engine/templates/primer_notepad_llm_v1.txt",
+      "source": "shared",
+      "sha256": "f85e0beaa8023c80103741268f91fdcd3936a904dd63fa99f1df52e2a8008837",
+      "integrated_sha256": "f85e0beaa8023c80103741268f91fdcd3936a904dd63fa99f1df52e2a8008837",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/anchor_engine/tools/__init__.py",
+      "source_member": "runtime_lib/mantleos/anchor_engine/tools/__init__.py",
+      "source": "shared",
+      "sha256": "e1b90a91c496c5924a57b256c0dc9920a4d221554c82442121d844819ec4cbc7",
+      "integrated_sha256": "e1b90a91c496c5924a57b256c0dc9920a4d221554c82442121d844819ec4cbc7",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/anchor_engine/tools/anchor_compile.py",
+      "source_member": "runtime_lib/mantleos/anchor_engine/tools/anchor_compile.py",
+      "source": "shared",
+      "sha256": "24c25dbf3b239f2fdc55b7c51be4637896207ae14c8b6bcc6aafc005bdaa5f8c",
+      "integrated_sha256": "24c25dbf3b239f2fdc55b7c51be4637896207ae14c8b6bcc6aafc005bdaa5f8c",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/anchor_engine/tools/anchor_journal.py",
+      "source_member": "runtime_lib/mantleos/anchor_engine/tools/anchor_journal.py",
+      "source": "shared",
+      "sha256": "0c56d3dc358e1d603eb22ba6bedc866b99be73ee75683e4d8dc435a1b3127bc5",
+      "integrated_sha256": "42ce7b1e40207c5ec497d1b2bdb0ec870d70c645bd274a1e97e10f512ed25f26",
+      "status": "adapted"
+    },
+    {
+      "path": "src/mantleos/anchor_engine/tools/anchor_notepad.py",
+      "source_member": "runtime_lib/mantleos/anchor_engine/tools/anchor_notepad.py",
+      "source": "shared",
+      "sha256": "04e7745fdf5c67d954a0bbdfcf168fd090e6f99c6206b0cd5ac55a0b32bf1183",
+      "integrated_sha256": "d556a269f74d0b6b6e94051d470318fdcb8342bd1dbf15cfc8da03d3e6afa8a9",
+      "status": "adapted",
+      "adaptation": " a2: compatibility removal/resource deduplication; generated semantic payloads preserved."
+    },
+    {
+      "path": "src/mantleos/anchor_engine/tools/anchor_runtime.py",
+      "source_member": "runtime_lib/mantleos/anchor_engine/tools/anchor_runtime.py",
+      "source": "shared",
+      "sha256": "4f7635b2eb488949cde8b5a14a0b02b2442a1ec57cc4772aaa298cbf54ef2917",
+      "integrated_sha256": "fc23145450f5c5d12eab50a362b043ed4bb8c05aeb0c15b0293298a0f0b4323e",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/anchor_engine/tools/anchor_structure.py",
+      "source_member": "runtime_lib/mantleos/anchor_engine/tools/anchor_structure.py",
+      "source": "shared",
+      "sha256": "0e1546f59999a777be90621f88912f431e0a6768d1ea7ad639b6a66e3dd5f964",
+      "integrated_sha256": "45cea1549b6af80494e352b1e02815d7b8059b3d92597324a5003459a66b5eaf",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/anchor_engine/tools/notepad_blueprint.py",
+      "source_member": "runtime_lib/mantleos/anchor_engine/tools/notepad_blueprint.py",
+      "source": "shared",
+      "sha256": "838a4862b344bb9be3a62344fd653ef2a2aaee692be85eb6dc56590d64cddc4e",
+      "integrated_sha256": "838a4862b344bb9be3a62344fd653ef2a2aaee692be85eb6dc56590d64cddc4e",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/anchor_engine/tools/unicode_fold.py",
+      "source_member": "runtime_lib/mantleos/anchor_engine/tools/unicode_fold.py",
+      "source": "shared",
+      "sha256": "fab1726555701dcf629ab2fd64d14bb2f7c3c9f4f005a4e588546bfbbe0af748",
+      "integrated_sha256": "cd1efc3920315e240c5b131dd372046b989f97755770242a1adb7c0afdee0f8a",
+      "status": "adapted",
+      "adaptation": " a2: compatibility removal/resource deduplication; generated semantic payloads preserved."
+    },
+    {
+      "path": "src/mantleos/anchor_language.py",
+      "source_member": "runtime_lib/mantleos/anchor_language.py",
+      "source": "shared",
+      "sha256": "c203e5245fe03236222a60a4e10324ede822f5cafb34eadec31a7a22dab151f3",
+      "integrated_sha256": "075bfc2642183dfb36d01e77ef7377d5d3cf2acbaf9fc080fa5024b3d5f3b4d4",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/anchor_qualification.py",
+      "source_member": "runtime_lib/mantleos/anchor_qualification.py",
+      "source": "shared",
+      "sha256": "c8226b205cf7c6754775d209d4b1c2b2987f6e7bb0a89f24ebea841329e7ed09",
+      "integrated_sha256": "c8226b205cf7c6754775d209d4b1c2b2987f6e7bb0a89f24ebea841329e7ed09",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/anchor_qualification_cli.py",
+      "source_member": "runtime_lib/mantleos/anchor_qualification_cli.py",
+      "source": "shared",
+      "sha256": "cfb4a4731ff35d3671393938daf04185c1b5e9408917b487ee517dee26f7c9bb",
+      "integrated_sha256": "cfb4a4731ff35d3671393938daf04185c1b5e9408917b487ee517dee26f7c9bb",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/app_assets/notepad.html",
+      "source_member": "runtime_lib/mantleos/app_assets/notepad.html",
+      "source": "shared",
+      "sha256": "6fa641292659d44b53059184cb3dc7f4bc2be1322b33bfc2626e2f3c3bf8b3c3",
+      "integrated_sha256": "8fa1e19fb3683e2ee20bdc1803624959fc11d3c4525cdc642df37a685efbcec9",
+      "status": "adapted",
+      "adaptation": " a2: compatibility removal/resource deduplication; generated semantic payloads preserved."
+    },
+    {
+      "path": "src/mantleos/app_bridges.py",
+      "source_member": "runtime_lib/mantleos/app_bridges.py",
+      "source": "shared",
+      "sha256": "f0e8ba47ed581b2ca4bf87cc6a269ee341828fdc493e17f2ae3174811bfdda1e",
+      "integrated_sha256": "f0e8ba47ed581b2ca4bf87cc6a269ee341828fdc493e17f2ae3174811bfdda1e",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/app_builder.py",
+      "source_member": "runtime_lib/mantleos/app_builder.py",
+      "source": "shared",
+      "sha256": "ab354dc07e6c9cf95a7b752b12b392add5f4480d9577a0f816b304b01c535b00",
+      "integrated_sha256": "ab354dc07e6c9cf95a7b752b12b392add5f4480d9577a0f816b304b01c535b00",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/application.py",
+      "source_member": "runtime_lib/mantleos/application.py",
+      "source": "raven-runtime",
+      "sha256": "1b8ab5d842f39e2ddc7c3e5ea13999cc44f07dc95b4417e8b5056ddbec6dbaab",
+      "integrated_sha256": "1b8ab5d842f39e2ddc7c3e5ea13999cc44f07dc95b4417e8b5056ddbec6dbaab",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/birth.py",
+      "source_member": "runtime_lib/mantleos/birth.py",
+      "source": "shared",
+      "sha256": "c69059063a2065615e5af13b8f45104613f9f1ed9cfacec2ac75b90a7265699b",
+      "integrated_sha256": "7c83ce697bdfd2d18441f12f6ec2faef289f7c183d1852e8bbff05744be3d74b",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/body_entrypoint.py",
+      "source_member": "runtime_lib/mantleos/body_entrypoint.py",
+      "source": "shared",
+      "sha256": "872d57af281ff3bb51683efb438676b62d90f4cd8642e3d94f13d7e98f4230e2",
+      "integrated_sha256": "872d57af281ff3bb51683efb438676b62d90f4cd8642e3d94f13d7e98f4230e2",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/builder.py",
+      "source_member": "runtime_lib/mantleos/builder.py",
+      "source": "raven-runtime",
+      "sha256": "bd39a688311a8adc5c34eff1a614b909d2e327c8947709ffb0dc08ed7bc1be8e",
+      "integrated_sha256": "1b82688abb92bcf556a683b3ba1a94860da97307e6f7c42844ea16603bc94f23",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/cartridge.py",
+      "source_member": "runtime_lib/mantleos/cartridge.py",
+      "source": "shared",
+      "sha256": "3207af305f32732720f3d5feadef5d99914300e7d3c1d6fbfd524a9e1ae4d133",
+      "integrated_sha256": "56e22f0fc5e3339b8a87b9d29605846db8a68f4df4d3894b3604a21f2546a896",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/checkpoint.py",
+      "source_member": "runtime_lib/mantleos/checkpoint.py",
+      "source": "raven-runtime",
+      "sha256": "3deea4faed9525bce3e8749012378525188e9499d7dea35dc55974850a0c68fb",
+      "integrated_sha256": "3deea4faed9525bce3e8749012378525188e9499d7dea35dc55974850a0c68fb",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/chromamem.py",
+      "source_member": "runtime_lib/mantleos/chromamem.py",
+      "source": "shared",
+      "sha256": "974e9f82195a769ea4566218af98f70926dad9d887996c6f802f79471d595efd",
+      "integrated_sha256": "8e91b3c798e61c9191a0b2eb35da5612ee05c0d66097db42c2443bf2f31f6c2d",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/cli.py",
+      "source_member": "runtime_lib/mantleos/cli.py",
+      "source": "shared",
+      "sha256": "9089e231781d872ddee18ac1697d9f62fd3fa84dff9f547c6c0f730827908998",
+      "integrated_sha256": "5fbd16ca6d61a38fe5fb242b67703978bd490e84faeb11b52c68bf5d2e92ef53",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/compiled.py",
+      "source_member": "runtime_lib/mantleos/compiled.py",
+      "source": "shared",
+      "sha256": "a80a75e2af33f1a0878b64b99c15eb3fc08fbd71e8b119cc82efe7b0bb009cb5",
+      "integrated_sha256": "099f0031abe0d33504f36b9ce1830c52611f8a906e77954a4d27909a58afb6f3",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/effects.py",
+      "source_member": "runtime_lib/mantleos/effects.py",
+      "source": "shared",
+      "sha256": "50090d242c7e9aebab970a32d02c6a05fc0f4ae3f7e79fdfcb5214acd9936584",
+      "integrated_sha256": "50090d242c7e9aebab970a32d02c6a05fc0f4ae3f7e79fdfcb5214acd9936584",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/engram.py",
+      "source_member": "runtime_lib/mantleos/engram.py",
+      "source": "shared",
+      "sha256": "6f58f04f5dbab57915ba8743e93b84b481ab8ba5e428a9c41337aa7ff1bd5002",
+      "integrated_sha256": "6f44b80a01c28982bf70f477984b5478c20f21b8a544439becdd70aec164a2e7",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/harness_adapter.py",
+      "source_member": "runtime_lib/mantleos/harness_adapter.py",
+      "source": "shared",
+      "sha256": "62c4347d1a19578678f1daf58e13ba3c5782e03bbfd3ca5a52aca46177a36aa5",
+      "integrated_sha256": "62c4347d1a19578678f1daf58e13ba3c5782e03bbfd3ca5a52aca46177a36aa5",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/hosted.py",
+      "source_member": "runtime_lib/mantleos/hosted.py",
+      "source": "raven-runtime",
+      "sha256": "2962109072c98767637250615ffaf8dbe695244f5eec9cd6bd2798694acfbbb2",
+      "integrated_sha256": "277f195362aaae79d99fad5ccaefc6d443c86c8bf69259ae05b21523d5b32f06",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/json_contract.py",
+      "source_member": "runtime_lib/mantleos/json_contract.py",
+      "source": "shared",
+      "sha256": "f928ffc45808d3fc987fde510bfb511ef5e7a3aea96e21a580b4018b5540af2f",
+      "integrated_sha256": "f928ffc45808d3fc987fde510bfb511ef5e7a3aea96e21a580b4018b5540af2f",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/kernel.py",
+      "source_member": "runtime_lib/mantleos/kernel.py",
+      "source": "shared",
+      "sha256": "a2390fd46854cdec1bfb984a180dc735d78fc7275dea8786f16d23e8b5519357",
+      "integrated_sha256": "c9844c9120fb4c40b55b505dd9108a62d7aa6fbfd832c87e56ada741920ef612",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/lifecycle.py",
+      "source_member": "runtime_lib/mantleos/lifecycle.py",
+      "source": "shared",
+      "sha256": "73d513d7930b96e1c2a7c669b1059a8fdfefe2e617ea73016d814b8d287b79d1",
+      "integrated_sha256": "7ad19f1a3c26f5526b0b32b10a6df72c51d91be810d22550de4c11204750bba2",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/native_anchor.py",
+      "source_member": "runtime_lib/mantleos/native_anchor.py",
+      "source": "shared",
+      "sha256": "09c5a9e8571ffaa2d596ac7606e6fe4ec6ad385788a770e937689c1ee985f5f0",
+      "integrated_sha256": "c48625ef2e6d0457072ae3caca5695e0b27ee1e7c318323e898a62813ff62c6e",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/optical_bootstrap.py",
+      "source_member": "runtime_lib/mantleos/optical_bootstrap.py",
+      "source": "shared",
+      "sha256": "e42eee1521ed5926aa9524f3fbfb93e66f1f69bb1e49e7faf008621ddf4d2930",
+      "integrated_sha256": "e42eee1521ed5926aa9524f3fbfb93e66f1f69bb1e49e7faf008621ddf4d2930",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/organs.py",
+      "source_member": "runtime_lib/mantleos/organs.py",
+      "source": "shared",
+      "sha256": "740940231d3319f22eada5fafc78c31b0b042e7f9801a0df095e074b836ed685",
+      "integrated_sha256": "46fabb77e0653ff15ad09ca32af8ca321ac525f2ba61595e8cfa6ed8e80ff30d",
+      "status": "adapted"
+    },
+    {
+      "path": "src/mantleos/primer.py",
+      "source_member": "runtime_lib/mantleos/primer.py",
+      "source": "shared",
+      "sha256": "ba0b5607b7d87328b8b0e7678f926b852dd45b43ec4bcffea8d13f527e9dac48",
+      "integrated_sha256": "ba0b5607b7d87328b8b0e7678f926b852dd45b43ec4bcffea8d13f527e9dac48",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/progressive_app.py",
+      "source_member": "runtime_lib/mantleos/progressive_app.py",
+      "source": "shared",
+      "sha256": "a5c7ee0dbf48f6ab216433cb099ebb6cb89f960efd1c82a1c9e8ce99f34ab8d1",
+      "integrated_sha256": "a5c7ee0dbf48f6ab216433cb099ebb6cb89f960efd1c82a1c9e8ce99f34ab8d1",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/progressive_runtime.js",
+      "source_member": "runtime_lib/mantleos/progressive_runtime.js",
+      "source": "shared",
+      "sha256": "67a2d96d59983c8cace4e5b5b47878cee296ceb497f32ea3b10767eb05cc86a4",
+      "integrated_sha256": "67a2d96d59983c8cace4e5b5b47878cee296ceb497f32ea3b10767eb05cc86a4",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/projection.py",
+      "source_member": "runtime_lib/mantleos/projection.py",
+      "source": "shared",
+      "sha256": "90a09853a106e329e73bea7a925d065c19a062472a75b26565e63b4489b75121",
+      "integrated_sha256": "90a09853a106e329e73bea7a925d065c19a062472a75b26565e63b4489b75121",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/projects.py",
+      "source_member": "runtime_lib/mantleos/projects.py",
+      "source": "shared",
+      "sha256": "22a97efdd63ec80ef39c9de991221554ec64f0d5df62abd9f3d40cf0f9cfdfcf",
+      "integrated_sha256": "22a97efdd63ec80ef39c9de991221554ec64f0d5df62abd9f3d40cf0f9cfdfcf",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/__init__.py",
+      "source_member": "runtime_lib/mantleos/scan/__init__.py",
+      "source": "shared",
+      "sha256": "ff26fa702d023685480c808d613f3eadc10dbce25abd5b515c3f652c283a9444",
+      "integrated_sha256": "ff26fa702d023685480c808d613f3eadc10dbce25abd5b515c3f652c283a9444",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/adapters.py",
+      "source_member": "runtime_lib/mantleos/scan/adapters.py",
+      "source": "shared",
+      "sha256": "8d09dcbd5070f95187585eff6e023711add67745f0debca9c5ab3b525a57ae69",
+      "integrated_sha256": "8d09dcbd5070f95187585eff6e023711add67745f0debca9c5ab3b525a57ae69",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/anchor_adapter.py",
+      "source_member": "runtime_lib/mantleos/scan/anchor_adapter.py",
+      "source": "shared",
+      "sha256": "b59568e9b354490ff9293e1311815326641e68e70f65aaffb7113245dab0f856",
+      "integrated_sha256": "b59568e9b354490ff9293e1311815326641e68e70f65aaffb7113245dab0f856",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/chase.py",
+      "source_member": "runtime_lib/mantleos/scan/chase.py",
+      "source": "shared",
+      "sha256": "3cb5a6284eb85e52987b273899827b066ebad9ca6e52adfd766774c223a3aaf7",
+      "integrated_sha256": "3cb5a6284eb85e52987b273899827b066ebad9ca6e52adfd766774c223a3aaf7",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/chase_optional.py",
+      "source_member": "runtime_lib/mantleos/scan/chase_optional.py",
+      "source": "shared",
+      "sha256": "e98017f240ca011b913a8354c083e8cf01bb8d23628e269a777ad8530f4ea8d5",
+      "integrated_sha256": "e98017f240ca011b913a8354c083e8cf01bb8d23628e269a777ad8530f4ea8d5",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/chase_pipeline.py",
+      "source_member": "runtime_lib/mantleos/scan/chase_pipeline.py",
+      "source": "shared",
+      "sha256": "cfe472647af4921bc0ea5dcf123a6e2c887fbe2c17c577da49d1e41548cea3fb",
+      "integrated_sha256": "cfe472647af4921bc0ea5dcf123a6e2c887fbe2c17c577da49d1e41548cea3fb",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/chase_v2.py",
+      "source_member": "runtime_lib/mantleos/scan/chase_v2.py",
+      "source": "shared",
+      "sha256": "afc39c30c15f5523167480003d05f9c7a34840abf05bb5ef2cf0ec1f8dedaa11",
+      "integrated_sha256": "afc39c30c15f5523167480003d05f9c7a34840abf05bb5ef2cf0ec1f8dedaa11",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/cli.py",
+      "source_member": "runtime_lib/mantleos/scan/cli.py",
+      "source": "shared",
+      "sha256": "e5b2a440ff5dca011dd86f2baf04e1621474d85657aade7bc9cfb9f5a5923f96",
+      "integrated_sha256": "0dccd3a42f484dae263f24d8e6e6525b5ad05baa7e14f79004f2cfc19b85c547",
+      "status": "adapted",
+      "adaptation": "a4: expose concurrent discovery through the existing native SCAN checked-action interface; existing scan operations retained."
+    },
+    {
+      "path": "src/mantleos/scan/common.py",
+      "source_member": "runtime_lib/mantleos/scan/common.py",
+      "source": "shared",
+      "sha256": "e86b5ef297d94778580b878a1d8d56829a0901bab8c0a9d0d501ee5be1d9d3fe",
+      "integrated_sha256": "e86b5ef297d94778580b878a1d8d56829a0901bab8c0a9d0d501ee5be1d9d3fe",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/dossier.py",
+      "source_member": "runtime_lib/mantleos/scan/dossier.py",
+      "source": "shared",
+      "sha256": "553fcb7b947c08f2500f76bdea491e54a4061a81721c054fb92ec38e7a20b99d",
+      "integrated_sha256": "553fcb7b947c08f2500f76bdea491e54a4061a81721c054fb92ec38e7a20b99d",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/evidence.py",
+      "source_member": "runtime_lib/mantleos/scan/evidence.py",
+      "source": "shared",
+      "sha256": "a74be7bec73c088f073f9ced92e425ccf2769f301d47b09980434ef2c3bfd695",
+      "integrated_sha256": "a74be7bec73c088f073f9ced92e425ccf2769f301d47b09980434ef2c3bfd695",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/experiments.py",
+      "source_member": "runtime_lib/mantleos/scan/experiments.py",
+      "source": "shared",
+      "sha256": "c64331ee390af80ffa8dad86b414d7f03abe75a346633fa7120091f1b41e8d6a",
+      "integrated_sha256": "c64331ee390af80ffa8dad86b414d7f03abe75a346633fa7120091f1b41e8d6a",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/graph.py",
+      "source_member": "runtime_lib/mantleos/scan/graph.py",
+      "source": "shared",
+      "sha256": "02c733bfd6e864c730adec16117db921c3d225bec64408c89dfa38bbaaddc7b5",
+      "integrated_sha256": "02c733bfd6e864c730adec16117db921c3d225bec64408c89dfa38bbaaddc7b5",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/html_report.py",
+      "source_member": "runtime_lib/mantleos/scan/html_report.py",
+      "source": "shared",
+      "sha256": "109a9cc427726e28116357798b337e945610f0de372da2adb3f6b321c6af3e86",
+      "integrated_sha256": "109a9cc427726e28116357798b337e945610f0de372da2adb3f6b321c6af3e86",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/inspection.py",
+      "source_member": "runtime_lib/mantleos/scan/inspection.py",
+      "source": "shared",
+      "sha256": "a5b12054017d7452b28832439ca802e753f8cfc3498aaaf93dafc76559f886b2",
+      "integrated_sha256": "a5b12054017d7452b28832439ca802e753f8cfc3498aaaf93dafc76559f886b2",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/investigator.py",
+      "source_member": "runtime_lib/mantleos/scan/investigator.py",
+      "source": "shared",
+      "sha256": "60c36bbc1790fb3f896ea07503550bd4fa0654ce160594ef9ee190531d1adb72",
+      "integrated_sha256": "60c36bbc1790fb3f896ea07503550bd4fa0654ce160594ef9ee190531d1adb72",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/javascript.py",
+      "source_member": "runtime_lib/mantleos/scan/javascript.py",
+      "source": "shared",
+      "sha256": "84e11afb8a93e2a54508a9128e971f60e960ea24270c50482c038de9922c09e8",
+      "integrated_sha256": "84e11afb8a93e2a54508a9128e971f60e960ea24270c50482c038de9922c09e8",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/observations.py",
+      "source_member": "runtime_lib/mantleos/scan/observations.py",
+      "source": "shared",
+      "sha256": "053bdb7777b5f7c664ad07e2f6a5b7be15944d1ffcf654bcc2837b791e546fcf",
+      "integrated_sha256": "053bdb7777b5f7c664ad07e2f6a5b7be15944d1ffcf654bcc2837b791e546fcf",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/pe.py",
+      "source_member": "runtime_lib/mantleos/scan/pe.py",
+      "source": "shared",
+      "sha256": "c21bee7f7291c7c5743224b4fc2a516e87f44b992ebb80b43c81f9120ff2d966",
+      "integrated_sha256": "c21bee7f7291c7c5743224b4fc2a516e87f44b992ebb80b43c81f9120ff2d966",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/planner.py",
+      "source_member": "runtime_lib/mantleos/scan/planner.py",
+      "source": "shared",
+      "sha256": "6896ede8d750a047763da633c4e47fe4363a28a997396ecae88d294ee253854a",
+      "integrated_sha256": "6896ede8d750a047763da633c4e47fe4363a28a997396ecae88d294ee253854a",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/provider_process.py",
+      "source_member": "runtime_lib/mantleos/scan/provider_process.py",
+      "source": "shared",
+      "sha256": "cbe1b49e627ccde24202df70c6e527444e5617246af1860d7dc2ee18367e1d02",
+      "integrated_sha256": "cbe1b49e627ccde24202df70c6e527444e5617246af1860d7dc2ee18367e1d02",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/providers.py",
+      "source_member": "runtime_lib/mantleos/scan/providers.py",
+      "source": "shared",
+      "sha256": "c80bd977ca17e0803f20106d1c2b668b78457998e2100c3c2b3550de7662d50a",
+      "integrated_sha256": "c80bd977ca17e0803f20106d1c2b668b78457998e2100c3c2b3550de7662d50a",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/registry.py",
+      "source_member": "runtime_lib/mantleos/scan/registry.py",
+      "source": "shared",
+      "sha256": "5560d61c88dc3fb351cac1e795be195f66eb8d75b8730011a618197a3ac7ca37",
+      "integrated_sha256": "5560d61c88dc3fb351cac1e795be195f66eb8d75b8730011a618197a3ac7ca37",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/scanner.py",
+      "source_member": "runtime_lib/mantleos/scan/scanner.py",
+      "source": "shared",
+      "sha256": "92f1059f9b616ed3af052a80668842916a4f791c0bb73b238e2c9987614f614a",
+      "integrated_sha256": "92f1059f9b616ed3af052a80668842916a4f791c0bb73b238e2c9987614f614a",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/service.py",
+      "source_member": "runtime_lib/mantleos/scan/service.py",
+      "source": "shared",
+      "sha256": "cdd5c329fe75502c425ec03ec79c1b819294f08b7aee7bc27fbcefe15ee56d4b",
+      "integrated_sha256": "c064514e0c42c400452f8dcdf89b4d025e259464954734dc17e8b14cf25f309f",
+      "status": "adapted",
+      "adaptation": "a4: expose concurrent discovery through the existing native SCAN checked-action interface; existing scan operations retained."
+    },
+    {
+      "path": "src/mantleos/scan/symbols.py",
+      "source_member": "runtime_lib/mantleos/scan/symbols.py",
+      "source": "shared",
+      "sha256": "3ae49ce0a7bd8af3879d67a9dddc81da796fd0a090d331bfd0d5e838d445487b",
+      "integrated_sha256": "3ae49ce0a7bd8af3879d67a9dddc81da796fd0a090d331bfd0d5e838d445487b",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/typescript_bridge.cjs",
+      "source_member": "runtime_lib/mantleos/scan/typescript_bridge.cjs",
+      "source": "shared",
+      "sha256": "ab6111cf4f91ca0cd8e44bb03a165a5cfd60334ed790866451eeeac8bcf054eb",
+      "integrated_sha256": "ab6111cf4f91ca0cd8e44bb03a165a5cfd60334ed790866451eeeac8bcf054eb",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/scan/views.py",
+      "source_member": "runtime_lib/mantleos/scan/views.py",
+      "source": "shared",
+      "sha256": "d1ff4636d0c094ff82826e32bd79c652f3b683772034f498f4ce8ac595dbee3f",
+      "integrated_sha256": "d1ff4636d0c094ff82826e32bd79c652f3b683772034f498f4ce8ac595dbee3f",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/semantic_discovery.py",
+      "source_member": "runtime_lib/mantleos/semantic_discovery.py",
+      "source": "shared",
+      "sha256": "8c79e67e8f4eff8d031b384685f1bfb2ee50ad780e3985b193ddacea37de3cb6",
+      "integrated_sha256": "30260b8f242f0440853083f0878efff9e9252905b01ebbf87e729d9f9d158819",
+      "status": "adapted",
+      "adaptation": " a3: KPP-preferred Anchor profile, immutable definitions, kernel CELLs and tissue/anatomy naming."
+    },
+    {
+      "path": "src/mantleos/sessions.py",
+      "source_member": "runtime_lib/mantleos/sessions.py",
+      "source": "shared",
+      "sha256": "e7ee6341c46fdb429b944f68e0d9dc9dffaa7c733328ff84948a3a3dfa862712",
+      "integrated_sha256": "e7ee6341c46fdb429b944f68e0d9dc9dffaa7c733328ff84948a3a3dfa862712",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/single_media.py",
+      "source_member": "runtime_lib/mantleos/single_media.py",
+      "source": "raven-runtime",
+      "sha256": "983ef6da177b82d6b97d4c75ea6e894d288ebc73ff8d448de6d9963272bfd634",
+      "integrated_sha256": "f560d10ffb50bcd67f9f0f1a9cf61b84cf87a7cfcc972eaa8c74bf8674699f1e",
+      "status": "adapted"
+    },
+    {
+      "path": "src/mantleos/storage.py",
+      "source_member": "runtime_lib/mantleos/storage.py",
+      "source": "shared",
+      "sha256": "57ff2b4f7e3c7e7d3401f6b35cc07e1d8a224f8cb6c1fd64dbf3186f9d2703dd",
+      "integrated_sha256": "57ff2b4f7e3c7e7d3401f6b35cc07e1d8a224f8cb6c1fd64dbf3186f9d2703dd",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/synchronization.py",
+      "source_member": "runtime_lib/mantleos/synchronization.py",
+      "source": "shared",
+      "sha256": "c893bc9e6c65664b71f013768e91c53542a1d633964231ab2e975de63b9e3403",
+      "integrated_sha256": "c893bc9e6c65664b71f013768e91c53542a1d633964231ab2e975de63b9e3403",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/systems.py",
+      "source_member": "runtime_lib/mantleos/systems.py",
+      "source": "shared",
+      "sha256": "70c590ad63a95242936b2285e33ca6581a6201746f4fa9ac28038426afca653c",
+      "integrated_sha256": "1ed043c5bb733234de4958468f16d36e05f0e9174b431fff6322a086cf56d322",
+      "status": "adapted"
+    },
+    {
+      "path": "src/mantleos/transactions.py",
+      "source_member": "runtime_lib/mantleos/transactions.py",
+      "source": "raven-runtime",
+      "sha256": "84bc9150ed8ee7a6136ba1f3c202c65091a4ef3ab2acc55d9fa2070209b31d8b",
+      "integrated_sha256": "f4aeac0393c17f01d6faec9a8d7810a4e2eda1ba36b438239b2ce21ca2e72e9b",
+      "status": "adapted"
+    },
+    {
+      "path": "src/mantleos/unified_cli.py",
+      "source_member": "runtime_lib/mantleos/unified_cli.py",
+      "source": "shared",
+      "sha256": "c5fece77369cb7b8f7f0538141cfda32dd3b301c02019a0b7a69d4c15de09e22",
+      "integrated_sha256": "c5fece77369cb7b8f7f0538141cfda32dd3b301c02019a0b7a69d4c15de09e22",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/vault_auto.py",
+      "source_member": "runtime_lib/mantleos/vault_auto.py",
+      "source": "raven-runtime",
+      "sha256": "fed484e4c12d98712f3bb5fd1cae0d22b3db7c09879f690b5ecbea251df23bf4",
+      "integrated_sha256": "fed484e4c12d98712f3bb5fd1cae0d22b3db7c09879f690b5ecbea251df23bf4",
+      "status": "unchanged"
+    },
+    {
+      "path": "src/mantleos/vault_store.py",
+      "source_member": "runtime_lib/mantleos/vault_store.py",
+      "source": "raven-runtime",
+      "sha256": "fb794721b792cbb4999b092a164ae2c3ae74d42cceecd83147d6b3a1374b6614",
+      "integrated_sha256": "f5f36862c116a83a002cb9e752bd21b025c9b5ed2840aa687cf5448703073c94",
+      "status": "adapted"
+    },
+    {
+      "path": "src/mantleos/continuity.py",
+      "source_member": "Examples/CloudContinuity/raven_cloud.py",
+      "source": "raven-runtime",
+      "sha256": "af72b7e27db551bfaa5edb181967631e374ac262e6269a4933068081b7bfd8e7",
+      "integrated_sha256": "196ed9106026fa99af464bde2d3ae5ba6ed431b085f977e3e077bae011169dbe",
+      "status": "adapted"
+    },
+    {
+      "path": "tests/upstream/test_cloud.py",
+      "source_member": "Examples/CloudContinuity/test_cloud.py",
+      "source": "raven-runtime",
+      "sha256": "1144c62d9c9c52ebb11f6db4c30f413e38bd6ff9f49ab54209feb9e53c3d5f15",
+      "integrated_sha256": "054a1b5b69d93dc1818ff32ea8927cebc881a275c7fed16c0087a5fe3aa5cc9b",
+      "status": "adapted"
+    },
+    {
+      "path": "tests/upstream/test_vault.py",
+      "source_member": "Examples/CartridgeVault/test_vault.py",
+      "source": "raven-runtime",
+      "sha256": "49ad7dbbb6ef8a559b30577ed3e8b414fe9c194fe785f99908e257e75fa1a5bf",
+      "integrated_sha256": "f1bfdc7a9368b40975ab3af89ff6447750ee265f5e4e3062876eff8195dad682",
+      "status": "adapted"
+    },
+    {
+      "path": "src/mantleos/appai_assets/hermes.json",
+      "source": "MantleOS2",
+      "source_member": "examples/hermes/adapter.py",
+      "sha256": "9b9284e904825ee1fd6a4e7bdf3c03f51b4901a06c0d5ef63a7203f1e85a3d72",
+      "integrated_sha256": "869f4715ca629681127da057e2fd121bf2029891bc40551b2f7412f65b888039",
+      "status": "adapted",
+      "adaptation": "Eight insertion recipes extracted as inert data; mapped to unified runtime. Corrected two host symbol labels; unavailable addressed motor authority now fails closed."
+    },
+    {
+      "path": "src/mantleos/anchor_engine/templates/primer_emit_text_v0_2.txt",
+      "source": "KPP-1.0.0",
+      "source_member": "src/kpp/anchor.py",
+      "sha256": "9c9f2cb85dd098deb97e0f3b623898f3b67883da1f31861e5103897bdf3372f6",
+      "integrated_sha256": "39f1742b92f733b0727a0518623841ae5d03eb00a0b8dbd2e0885abfd5837c42",
+      "status": "adopted-current-profile",
+      "adaptation": "Extracted the exact PRIMER constant and added its source-file final LF; interpreter grammar and limits aligned."
+    },
+    {
+      "path": "examples/kpp/specimens/chase-stop.anchor",
+      "source": "KPP-1.0.0",
+      "source_member": "specimens/mantleos/chase-stop.anchor",
+      "sha256": "455ce6b45bad7956d7c3456049d21ffec4e9471f3b33e9deb3cc0a299e374896",
+      "integrated_sha256": "455ce6b45bad7956d7c3456049d21ffec4e9471f3b33e9deb3cc0a299e374896",
+      "status": "adopted-current-profile"
+    },
+    {
+      "path": "examples/kpp/specimens/intent-boundary.anchor",
+      "source": "KPP-1.0.0",
+      "source_member": "specimens/mantleos/intent-boundary.anchor",
+      "sha256": "17b3834021278df111d9315ba2d2863e8bbf5acd31a45a1dda1e9234781fa4de",
+      "integrated_sha256": "17b3834021278df111d9315ba2d2863e8bbf5acd31a45a1dda1e9234781fa4de",
+      "status": "adopted-current-profile"
+    },
+    {
+      "path": "examples/kpp/specimens/kernel-cells.anchor",
+      "source": "KPP-1.0.0",
+      "source_member": "specimens/mantleos/kernel-cells.anchor",
+      "sha256": "bd3e4cb0f5064e7af42380650dae9214c1693176ad3584c3f89a8809ebc240db",
+      "integrated_sha256": "bd3e4cb0f5064e7af42380650dae9214c1693176ad3584c3f89a8809ebc240db",
+      "status": "adopted-current-profile"
+    },
+    {
+      "path": "examples/kpp/specimens/memory-ledger.anchor",
+      "source": "KPP-1.0.0",
+      "source_member": "specimens/mantleos/memory-ledger.anchor",
+      "sha256": "ed9f040a3d8c74f781adf02638445c85ccbbee4cbccf99909287208f3c049924",
+      "integrated_sha256": "ed9f040a3d8c74f781adf02638445c85ccbbee4cbccf99909287208f3c049924",
+      "status": "adopted-current-profile"
+    },
+    {
+      "path": "examples/kpp/recipe.json",
+      "source": "KPP-1.0.0",
+      "source_member": "recipes/portable-memory-bake.json",
+      "sha256": "5df963683a081b92d49c3ce4d48eaf8a0fe58b367eb0ae795f06b604feb92300",
+      "integrated_sha256": "d44f5c1587a0178ff479db56e6963ee8c19f185313c6e39d494f3b9fd19e1cec",
+      "status": "data-example",
+      "adaptation": "JSON indentation and LF normalized; complete recipe values retained."
+    },
+    {
+      "path": "src/mantleos/scan/discovery.py",
+      "source": "KPP-1.0.1-dev-parallel-discovery",
+      "source_member": "src/kpp/discovery.py",
+      "sha256": "3471baf591b6556baaf3266634720652edcaedf7a3b9481ea1e77d2f10b6cc32",
+      "integrated_sha256": "5d2c6bd16a5635b68cf41bc938debf91d9d644c2523b303aa7efadf39bfca46d",
+      "status": "adapted-current",
+      "additional_source_members": [
+        {
+          "path": "src/kpp/gui.py",
+          "sha256": "9d7b4f46cf9952536a27667b0a3f3a770494862932608c9e1373436ac54d1934"
+        }
+      ],
+      "adaptation": "Two-thread scheduler and checked source join adapted to native SCAN. Qt declaration extraction retains inventory/2; stricter bounded traversal/reads, reparse refusal, staged directory publication. No duplicate KPP runtime."
+    },
+    {
+      "path": "tests/test_parallel_discovery.py",
+      "source": "KPP-1.0.1-dev-parallel-discovery",
+      "source_member": "tests/test_parallel_discovery.py",
+      "sha256": "989d826f99f557203b8151ac0eb44d62091c47ef0f3c43608cae248ffa8c9834",
+      "integrated_sha256": "bad105c680e725e147ac6b88171236e8fb507e92d1b3ae203686066fd5ebf2e6",
+      "status": "adapted-tests",
+      "adaptation": "Synthetic barrier, drift, failure and CLI checks adapted and expanded for native graph parity, checked authority, bounded reads/traversal, byte pins and staged publication."
+    }
+  ],
+  "notes": [
+    "Source hashes describe original bytes; integrated hashes describe this checkpoint.",
+    "Private source archives and original personal records are deliberately not tracked.",
+    "Anchor journal Windows publication changed with reviewed source-pin update; language semantics unchanged.",
+    "Raven and supplied Windows runtime share 86 identical files; six changed and three added files selected from Raven.",
+    "AppAI mission module implements a bounded local cycle; does not certify legacy asynchronous pseudopods.",
+    "Anchor launch wording is advisory; explicit example importer rebuilds qualified program targets.",
+    "Raw source archives, personal founding material, host installs, and generated identities remain ignored.",
+    "a2 retains current skills; old-format adapters and duplicate resources removed. See docs/verification.md for current evidence.",
+    "Creator clarification: CELL is the smallest kernel-produced organism unit. Anchor singularities are immutable; KPP/project obligations apply contextual attributes to the same three-type model.",
+    "a4 adapts the supplied experimental KPP parallel code/Qt discovery patch to the one native SCAN/checked-action interface; original and new test evidence remain distinct.",
+    "Mantle Paint is an original KPP-bound Bio-Software example. Actual source, raster, browser, local file and portable-receiver results are in examples/paint/verification.json. Native XP parity and Baker approval remain open. No Microsoft code or artwork is vendored."
+  ],
+  "removed_files": [
+    {
+      "path": "src/mantleos/anchor_engine/profiles/XPNotepad_LLM_v1.anchor",
+      "source": "shared",
+      "source_sha256": "f8b42bc6b6fb73f2a30ecb410eeeb426f6e5da1f2e4e73509a3157330e761d69",
+      "disposition": "removed legacy adapter or redundant generated resource in a2"
+    },
+    {
+      "path": "src/mantleos/anchor_engine/templates/unicode_fold_16.json",
+      "source": "shared",
+      "source_sha256": "dc9119bcf59e150eb4e7efe5a7f3f621b1493f5e993fbf1b8bf661162be32df9",
+      "disposition": "removed legacy adapter or redundant generated resource in a2"
+    },
+    {
+      "path": "tests/upstream/test_single_handoff.py",
+      "source": "raven-runtime",
+      "source_sha256": "625ae928a70ab0059ecebce6cbf5d6c2f636d9876022bcc1090d0e71c0ee82a1",
+      "disposition": "removed legacy adapter or redundant generated resource in a2"
+    },
+    {
+      "path": "src/mantleos/legacy/vcw_cube.py",
+      "source": "mantle-os",
+      "source_sha256": "762150c7ef36f3e886d3e4eb08afbdc0da18446fc781fa824563f2e624322b2e",
+      "disposition": "removed legacy adapter or redundant generated resource in a2"
+    },
+    {
+      "path": "src/mantleos/legacy/books.py",
+      "source": "MantleOS2",
+      "source_sha256": "8761377165cceff0cbe7ad2d58f46c8e0646d880305fdcc6d5d4beff24504802",
+      "disposition": "removed legacy adapter or redundant generated resource in a2"
+    }
+  ],
+  "consolidation": {
+    "baseline_zip_sha256": "af1349b8f6b58e7b2f71208d01867fa17c5242bb5971227856760a1be5eac527",
+    "historical_projects": [
+      "mantle-os",
+      "MantleOS2",
+      "organize-appai",
+      "mantle-daemon-laboratory"
+    ],
+    "history": "restorable archive data, not main-branch ancestry",
+    "publication": "PENDING_REVIEW",
+    "kpp_commit": "aa6aceac62796aa7dc07a9dd20fe040457c109d9"
+  }
+}

@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scan-software-body"
+version = "0.26.0"
+description = "Evidence-first mechanical software anatomy scanner"
+requires-python = ">=3.11,<3.14"
+dependencies = []
+
+[project.scripts]
+scan-body = "scan.adaptive_cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["scan*"]
+
+[tool.setuptools.package-data]
+"scan.adapters" = ["ts_probe.cjs"]

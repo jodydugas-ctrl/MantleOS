@@ -1,0 +1,142 @@
+[
+  {
+    "id": 106917897034,
+    "run_id": 35778565315,
+    "workflow_name": "SCAN v0.29 coverage gaps",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35778565315",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5M2jSg",
+    "head_sha": "6a6c435ab37908905f33353717694fcbf7644f58",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106917897034",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35778565315/job/106917897034",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T20:10:44Z",
+    "started_at": "2026-09-22T20:25:48Z",
+    "completed_at": "2026-09-22T20:26:35Z",
+    "name": "coverage-gaps",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T20:25:49Z",
+        "completed_at": "2026-09-22T20:25:50Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T20:25:50Z",
+        "completed_at": "2026-09-22T20:25:52Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T20:25:52Z",
+        "completed_at": "2026-09-22T20:25:52Z"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T20:25:52Z",
+        "completed_at": "2026-09-22T20:25:57Z"
+      },
+      {
+        "name": "Install v0.29 candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T20:25:57Z",
+        "completed_at": "2026-09-22T20:26:06Z"
+      },
+      {
+        "name": "Run full candidate regression suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T20:26:06Z",
+        "completed_at": "2026-09-22T20:26:29Z"
+      },
+      {
+        "name": "Prove ordinary scan emits deterministic coverage projections",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T20:26:29Z",
+        "completed_at": "2026-09-22T20:26:30Z"
+      },
+      {
+        "name": "Prove read-only regeneration is byte stable",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-22T20:26:30Z",
+        "completed_at": "2026-09-22T20:26:30Z"
+      },
+      {
+        "name": "Reconcile report counts to canonical database",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-22T20:26:30Z",
+        "completed_at": "2026-09-22T20:26:30Z"
+      },
+      {
+        "name": "Upload v0.29 coverage evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-09-22T20:26:30Z",
+        "completed_at": "2026-09-22T20:26:32Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18,
+        "started_at": "2026-09-22T20:26:32Z",
+        "completed_at": "2026-09-22T20:26:32Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19,
+        "started_at": "2026-09-22T20:26:32Z",
+        "completed_at": "2026-09-22T20:26:32Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 20,
+        "started_at": "2026-09-22T20:26:32Z",
+        "completed_at": "2026-09-22T20:26:32Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 21,
+        "started_at": "2026-09-22T20:26:32Z",
+        "completed_at": "2026-09-22T20:26:32Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106917897034",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000003663,
+    "runner_name": "GitHub Actions 1000003663",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

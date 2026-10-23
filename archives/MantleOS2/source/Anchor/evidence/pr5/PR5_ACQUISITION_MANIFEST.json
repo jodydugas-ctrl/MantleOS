@@ -1,0 +1,28 @@
+{
+  "schema": "scan.pr5.acquisition-manifest.v2",
+  "acquired_at_utc": "2026-09-13T18:21:51.2836955Z",
+  "repository": "https://github.com/dail8859/NotepadNext.git",
+  "commit": "f57db52d6760a2ce4149a37190c3adaa586845f5",
+  "tree": "f0995b128bf6dbc73e5d0f3ef4e4f302f8a3081b",
+  "expected_tree": "f0995b128bf6dbc73e5d0f3ef4e4f302f8a3081b",
+  "tree_matches_expected": true,
+  "tracked_files": 1928,
+  "working_tree_clean": true,
+  "git_object_check": "passed",
+  "submodules_present": false,
+  "accepted_archive": {
+    "filename": "NotepadNext_exact_acquisition.zip",
+    "format": "verified provider-blob acquisition zip",
+    "provider_blobs": 1928,
+    "verified_source_bytes": 20875384,
+    "bytes": 7336255,
+    "sha256": "4a1343f4f56500ba850162039e7483e2f17f894be6493f5afbaacdf25c2c44a3",
+    "verification": "size+git-object-sha1+available-sha256"
+  },
+  "rejected_historical_archive": {
+    "filename": "NotepadNext-f57db52d6760a2ce4149a37190c3adaa586845f5.zip",
+    "bytes": 7353730,
+    "sha256": "d808933bb774f7258750100ea5902ba0b06d1dc30ca8075b7d5c829f4290988e",
+    "reason": "Windows checkout filters transformed line endings; this archive was not accepted as the exact provider-byte source."
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "chroma-png-memory",
+  "version": "0.1.0",
+  "function": "Image-encoded memory carrier kernel (not bundled in KPP)",
+  "status": "reference",
+  "preferred_for": [
+    "png-transport",
+    "bioagent",
+    "constrained-environments"
+  ],
+  "compatible_tissues": [
+    "unspecified"
+  ],
+  "tags": [
+    "portability",
+    "memory"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "Image-encoded memory carrier kernel (not bundled in KPP)"
+  ],
+  "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
+  "verified_with": "Not bundled; acquisition and integration require operator review",
+  "provenance": "KPP design reference inspired by user-provided MantleOS material",
+  "usage": {
+    "use_when": "Consider when a carrier must be a PNG image.",
+    "inputs": [
+      "Image carrier and compatible encoder/decoder"
+    ],
+    "outputs": [
+      "Image-carried memory format"
+    ],
+    "limits": "Reference only; actual Chroma implementation is not included."
+  }
+}

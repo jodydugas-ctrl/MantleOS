@@ -1,0 +1,65 @@
+{
+  "schema": "kpp.recipe/3",
+  "id": "bio-hermes-design",
+  "goal": "Design a behaviorally comparable Hermes-like bioagent without copying its source, using a model-neutral iterative Chase bake. This is a DESIGN TEMPLATE, not a working clone.",
+  "mode": "chase",
+  "tissue": "mixed",
+  "fidelity": 6,
+  "target": {
+    "description": "Hermes-like tool-using agent with separately selected agent behaviors; pinned source and rights review are required before actual bake",
+    "source": "operator-selected upstream revision",
+    "reference_version": "PIN_BEFORE_BUILD"
+  },
+  "ingredients": [
+    "anchor-tissue",
+    "python-tissue",
+    "fidelity-trace",
+    "chase-gate",
+    "mind-body-boundary"
+  ],
+  "oven": {
+    "provider": "chosen by Baker",
+    "assumption": "Dependable coding",
+    "iterations": "as needed"
+  },
+  "anchors": [
+    {
+      "id": "capability-inventory",
+      "required": true,
+      "depth": 1,
+      "area": "other",
+      "statement": "Pin target revision and record the externally observable capabilities required",
+      "test": "Baker reviews reference revision and feature inventory",
+      "depends": []
+    },
+    {
+      "id": "behavior-contracts",
+      "required": true,
+      "depth": 2,
+      "area": "other",
+      "statement": "Define measurable acceptance tests for each selected capability",
+      "test": "Baker approves tests against pinned reference",
+      "depends": [
+        "capability-inventory"
+      ]
+    },
+    {
+      "id": "body-operations",
+      "required": true,
+      "depth": 6,
+      "area": "other",
+      "statement": "Verified body behavior remains useful in declared MIND-stasis conditions",
+      "test": "Run accepted scenario battery for MIND active and inactive states, compare target behaviors",
+      "depends": [
+        "behavior-contracts"
+      ]
+    }
+  ],
+  "product_kind": "bioagent",
+  "delivery_mode": "artifact",
+  "capabilities": {
+    "agent": true,
+    "mind": true,
+    "mantleos_splice": false
+  }
+}

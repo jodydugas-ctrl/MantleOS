@@ -1,0 +1,142 @@
+[
+  {
+    "id": 106871629648,
+    "run_id": 35764844674,
+    "workflow_name": "SCAN v0.33 parity distribution",
+    "head_branch": "scan-v0.33-parity-distribution",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35764844674",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY4gunUA",
+    "head_sha": "01f3748bdf76753f30548425bbb181a522137bd4",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106871629648",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35764844674/job/106871629648",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T18:05:02Z",
+    "started_at": "2026-09-22T18:05:05Z",
+    "completed_at": "2026-09-22T18:05:44Z",
+    "name": "parity-distribution",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T18:05:06Z",
+        "completed_at": "2026-09-22T18:05:07Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T18:05:07Z",
+        "completed_at": "2026-09-22T18:05:08Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T18:05:08Z",
+        "completed_at": "2026-09-22T18:05:08Z"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T18:05:08Z",
+        "completed_at": "2026-09-22T18:05:09Z"
+      },
+      {
+        "name": "Install v0.33 candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T18:05:09Z",
+        "completed_at": "2026-09-22T18:05:16Z"
+      },
+      {
+        "name": "Run full candidate regression suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T18:05:16Z",
+        "completed_at": "2026-09-22T18:05:40Z"
+      },
+      {
+        "name": "Generate two portable blueprint distributions",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T18:05:40Z",
+        "completed_at": "2026-09-22T18:05:41Z"
+      },
+      {
+        "name": "Audit one-to-one contract derivation and static-only boundary",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-22T18:05:41Z",
+        "completed_at": "2026-09-22T18:05:41Z"
+      },
+      {
+        "name": "Prove project AGENTS.md is never clobbered",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-22T18:05:41Z",
+        "completed_at": "2026-09-22T18:05:41Z"
+      },
+      {
+        "name": "Upload v0.33 parity evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-09-22T18:05:41Z",
+        "completed_at": "2026-09-22T18:05:42Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18,
+        "started_at": "2026-09-22T18:05:42Z",
+        "completed_at": "2026-09-22T18:05:42Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19,
+        "started_at": "2026-09-22T18:05:42Z",
+        "completed_at": "2026-09-22T18:05:42Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 20,
+        "started_at": "2026-09-22T18:05:42Z",
+        "completed_at": "2026-09-22T18:05:42Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 21,
+        "started_at": "2026-09-22T18:05:42Z",
+        "completed_at": "2026-09-22T18:05:43Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106871629648",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000003011,
+    "runner_name": "GitHub Actions 1000003011",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

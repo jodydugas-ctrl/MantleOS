@@ -1,0 +1,142 @@
+[
+  {
+    "id": 106917896584,
+    "run_id": 35778565255,
+    "workflow_name": "SCAN v0.30 uncertainty challenger",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35778565255",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5M2hiA",
+    "head_sha": "6a6c435ab37908905f33353717694fcbf7644f58",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106917896584",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35778565255/job/106917896584",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T20:10:44Z",
+    "started_at": "2026-09-22T20:28:00Z",
+    "completed_at": "2026-09-22T20:28:46Z",
+    "name": "uncertainty-challenger",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T20:28:01Z",
+        "completed_at": "2026-09-22T20:28:03Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T20:28:03Z",
+        "completed_at": "2026-09-22T20:28:04Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T20:28:04Z",
+        "completed_at": "2026-09-22T20:28:04Z"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T20:28:04Z",
+        "completed_at": "2026-09-22T20:28:09Z"
+      },
+      {
+        "name": "Install v0.30 candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T20:28:09Z",
+        "completed_at": "2026-09-22T20:28:17Z"
+      },
+      {
+        "name": "Run full candidate regression suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T20:28:17Z",
+        "completed_at": "2026-09-22T20:28:43Z"
+      },
+      {
+        "name": "Prove deterministic scan-time challenger output",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T20:28:43Z",
+        "completed_at": "2026-09-22T20:28:44Z"
+      },
+      {
+        "name": "Prove read-only challenger regeneration",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-22T20:28:44Z",
+        "completed_at": "2026-09-22T20:28:44Z"
+      },
+      {
+        "name": "Audit challenger authority boundary",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-22T20:28:44Z",
+        "completed_at": "2026-09-22T20:28:44Z"
+      },
+      {
+        "name": "Upload v0.30 challenger evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-09-22T20:28:44Z",
+        "completed_at": "2026-09-22T20:28:45Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18,
+        "started_at": "2026-09-22T20:28:45Z",
+        "completed_at": "2026-09-22T20:28:45Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19,
+        "started_at": "2026-09-22T20:28:45Z",
+        "completed_at": "2026-09-22T20:28:45Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 20,
+        "started_at": "2026-09-22T20:28:45Z",
+        "completed_at": "2026-09-22T20:28:45Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 21,
+        "started_at": "2026-09-22T20:28:45Z",
+        "completed_at": "2026-09-22T20:28:45Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106917896584",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000003690,
+    "runner_name": "GitHub Actions 1000003690",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

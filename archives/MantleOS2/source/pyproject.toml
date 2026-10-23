@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mantleos2"
+version = "2.0.0a3"
+description = "A deterministic autonomic nervous system for host applications and devices"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = "MIT"
+authors = [{ name = "Jody Dugas" }]
+keywords = ["appai", "agent", "autonomic", "llm", "memory"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+dependencies = ["cryptography>=44,<51"]
+
+[project.optional-dependencies]
+dev = ["build>=1.2", "PyYAML>=6", "pytest>=8", "ruff>=0.12"]
+
+[project.scripts]
+mantle = "mantleos.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/jodydugas-ctrl/MantleOS2"
+Issues = "https://github.com/jodydugas-ctrl/MantleOS2/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+exclude = [".assimilation-work", ".pytest-*", "Anchor", "examples/hermes"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

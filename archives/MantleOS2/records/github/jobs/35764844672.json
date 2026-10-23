@@ -1,0 +1,218 @@
+[
+  {
+    "id": 106871629662,
+    "run_id": 35764844672,
+    "workflow_name": "Native resident lifecycle",
+    "head_branch": "scan-v0.33-parity-distribution",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35764844672",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY4gunXg",
+    "head_sha": "01f3748bdf76753f30548425bbb181a522137bd4",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106871629662",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35764844672/job/106871629662",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T18:05:02Z",
+    "started_at": "2026-09-22T18:05:06Z",
+    "completed_at": "2026-09-22T18:05:26Z",
+    "name": "Native resident / ubuntu-latest",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T18:05:06Z",
+        "completed_at": "2026-09-22T18:05:07Z"
+      },
+      {
+        "name": "Run actions/checkout@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T18:05:07Z",
+        "completed_at": "2026-09-22T18:05:08Z"
+      },
+      {
+        "name": "Run actions/setup-python@v6",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T18:05:08Z",
+        "completed_at": "2026-09-22T18:05:10Z"
+      },
+      {
+        "name": "Run python -m pip install -e \".[dev]\"",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T18:05:10Z",
+        "completed_at": "2026-09-22T18:05:16Z"
+      },
+      {
+        "name": "Prepare disposable Linux user service manager",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T18:05:16Z",
+        "completed_at": "2026-09-22T18:05:16Z"
+      },
+      {
+        "name": "Real native registration and encrypted disposable Body",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T18:05:16Z",
+        "completed_at": "2026-09-22T18:05:23Z"
+      },
+      {
+        "name": "Retain test results only; never upload organism state",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T18:05:23Z",
+        "completed_at": "2026-09-22T18:05:24Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v6",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T18:05:24Z",
+        "completed_at": "2026-09-22T18:05:24Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-09-22T18:05:24Z",
+        "completed_at": "2026-09-22T18:05:25Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-09-22T18:05:25Z",
+        "completed_at": "2026-09-22T18:05:25Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106871629662",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000003015,
+    "runner_name": "GitHub Actions 1000003015",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 106871629916,
+    "run_id": 35764844672,
+    "workflow_name": "Native resident lifecycle",
+    "head_branch": "scan-v0.33-parity-distribution",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35764844672",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY4guoXA",
+    "head_sha": "01f3748bdf76753f30548425bbb181a522137bd4",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106871629916",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35764844672/job/106871629916",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T18:05:02Z",
+    "started_at": "2026-09-22T18:05:06Z",
+    "completed_at": "2026-09-22T18:05:46Z",
+    "name": "Native resident / windows-latest",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T18:05:07Z",
+        "completed_at": "2026-09-22T18:05:07Z"
+      },
+      {
+        "name": "Run actions/checkout@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T18:05:07Z",
+        "completed_at": "2026-09-22T18:05:13Z"
+      },
+      {
+        "name": "Run actions/setup-python@v6",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T18:05:13Z",
+        "completed_at": "2026-09-22T18:05:18Z"
+      },
+      {
+        "name": "Run python -m pip install -e \".[dev]\"",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T18:05:18Z",
+        "completed_at": "2026-09-22T18:05:35Z"
+      },
+      {
+        "name": "Prepare disposable Linux user service manager",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 5,
+        "started_at": "2026-09-22T18:05:35Z",
+        "completed_at": "2026-09-22T18:05:35Z"
+      },
+      {
+        "name": "Real native registration and encrypted disposable Body",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T18:05:35Z",
+        "completed_at": "2026-09-22T18:05:39Z"
+      },
+      {
+        "name": "Retain test results only; never upload organism state",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T18:05:39Z",
+        "completed_at": "2026-09-22T18:05:40Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v6",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T18:05:40Z",
+        "completed_at": "2026-09-22T18:05:42Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-09-22T18:05:42Z",
+        "completed_at": "2026-09-22T18:05:45Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-09-22T18:05:45Z",
+        "completed_at": "2026-09-22T18:05:45Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106871629916",
+    "labels": [
+      "windows-latest"
+    ],
+    "runner_id": 1000003019,
+    "runner_name": "GitHub Actions 1000003019",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

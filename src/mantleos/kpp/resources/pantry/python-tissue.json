@@ -1,0 +1,37 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "python-tissue",
+  "version": "0.1.0",
+  "function": "Python implementation tissue using host interpreter",
+  "status": "ready",
+  "preferred_for": [
+    "desktop",
+    "automation",
+    "server"
+  ],
+  "compatible_tissues": [
+    "python"
+  ],
+  "tags": [
+    "tissue",
+    "runtime"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "Python implementation tissue using host interpreter"
+  ],
+  "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
+  "verified_with": "Bundled reference/tests only",
+  "provenance": "Original KPP reference",
+  "usage": {
+    "use_when": "Select conventional Python execution for a recipe.",
+    "inputs": [
+      "Python source and interpreter"
+    ],
+    "outputs": [
+      "Runnable Python tissue"
+    ],
+    "limits": "Requires compatible Python host and explicit execution permission."
+  }
+}

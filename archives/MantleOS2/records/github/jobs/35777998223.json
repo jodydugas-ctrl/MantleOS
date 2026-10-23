@@ -1,0 +1,142 @@
+[
+  {
+    "id": 106915997950,
+    "run_id": 35777998223,
+    "workflow_name": "SCAN v0.31 triage ranking",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35777998223",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5LCo_g",
+    "head_sha": "0c14b902c5e35c142e090537d55c474181e0a238",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106915997950",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35777998223/job/106915997950",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T20:05:31Z",
+    "started_at": "2026-09-22T20:13:19Z",
+    "completed_at": "2026-09-22T20:13:54Z",
+    "name": "triage-ranking",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T20:13:20Z",
+        "completed_at": "2026-09-22T20:13:21Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T20:13:21Z",
+        "completed_at": "2026-09-22T20:13:22Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T20:13:22Z",
+        "completed_at": "2026-09-22T20:13:22Z"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T20:13:22Z",
+        "completed_at": "2026-09-22T20:13:23Z"
+      },
+      {
+        "name": "Install v0.31 candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T20:13:23Z",
+        "completed_at": "2026-09-22T20:13:29Z"
+      },
+      {
+        "name": "Run full candidate regression suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T20:13:29Z",
+        "completed_at": "2026-09-22T20:13:51Z"
+      },
+      {
+        "name": "Prove deterministic scan-time triage output",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T20:13:51Z",
+        "completed_at": "2026-09-22T20:13:51Z"
+      },
+      {
+        "name": "Prove read-only triage regeneration",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-22T20:13:51Z",
+        "completed_at": "2026-09-22T20:13:51Z"
+      },
+      {
+        "name": "Audit ranking transparency and authority boundary",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-22T20:13:51Z",
+        "completed_at": "2026-09-22T20:13:51Z"
+      },
+      {
+        "name": "Upload v0.31 triage evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-09-22T20:13:51Z",
+        "completed_at": "2026-09-22T20:13:52Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18,
+        "started_at": "2026-09-22T20:13:52Z",
+        "completed_at": "2026-09-22T20:13:53Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19,
+        "started_at": "2026-09-22T20:13:53Z",
+        "completed_at": "2026-09-22T20:13:53Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 20,
+        "started_at": "2026-09-22T20:13:53Z",
+        "completed_at": "2026-09-22T20:13:53Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 21,
+        "started_at": "2026-09-22T20:13:53Z",
+        "completed_at": "2026-09-22T20:13:53Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106915997950",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000003534,
+    "runner_name": "GitHub Actions 1000003534",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

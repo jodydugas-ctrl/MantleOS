@@ -1,0 +1,206 @@
+[
+  {
+    "id": 106774841231,
+    "run_id": 35736458081,
+    "workflow_name": "SCAN v0.28 release candidate qualification",
+    "head_branch": "anchor-v0.28-reconstruction-loop",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35736458081",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY3EbHjw",
+    "head_sha": "0db1c02f53cf651ee10c6225f0e85bc00c85bd4b",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106774841231",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35736458081/job/106774841231",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T13:53:03Z",
+    "started_at": "2026-09-22T13:53:07Z",
+    "completed_at": "2026-09-22T13:53:49Z",
+    "name": "release-candidate",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T13:53:08Z",
+        "completed_at": "2026-09-22T13:53:09Z"
+      },
+      {
+        "name": "Checkout candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T13:53:09Z",
+        "completed_at": "2026-09-22T13:53:10Z"
+      },
+      {
+        "name": "Verify predecessor is unchanged",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T13:53:10Z",
+        "completed_at": "2026-09-22T13:53:10Z"
+      },
+      {
+        "name": "Set up Python 3.12",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T13:53:10Z",
+        "completed_at": "2026-09-22T13:53:11Z"
+      },
+      {
+        "name": "Set up Node",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T13:53:11Z",
+        "completed_at": "2026-09-22T13:53:11Z"
+      },
+      {
+        "name": "Verify committed package manifest before installation",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T13:53:11Z",
+        "completed_at": "2026-09-22T13:53:12Z"
+      },
+      {
+        "name": "Install candidate tooling",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T13:53:12Z",
+        "completed_at": "2026-09-22T13:53:19Z"
+      },
+      {
+        "name": "Run final source regression suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-22T13:53:19Z",
+        "completed_at": "2026-09-22T13:53:34Z"
+      },
+      {
+        "name": "Create clean release tree",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-22T13:53:34Z",
+        "completed_at": "2026-09-22T13:53:34Z"
+      },
+      {
+        "name": "Generate manifest and self-audit exact candidate bytes",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-09-22T13:53:34Z",
+        "completed_at": "2026-09-22T13:53:34Z"
+      },
+      {
+        "name": "Run LLM-disabled mechanical release qualification",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-22T13:53:34Z",
+        "completed_at": "2026-09-22T13:53:34Z"
+      },
+      {
+        "name": "Build source and reproducible wheel artifacts",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-22T13:53:34Z",
+        "completed_at": "2026-09-22T13:53:41Z"
+      },
+      {
+        "name": "Create deterministic source ZIP",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T13:53:41Z",
+        "completed_at": "2026-09-22T13:53:41Z"
+      },
+      {
+        "name": "Fresh Python 3.13 wheel install",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-09-22T13:53:41Z",
+        "completed_at": "2026-09-22T13:53:41Z"
+      },
+      {
+        "name": "Qualify installed wheel surface",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-09-22T13:53:41Z",
+        "completed_at": "2026-09-22T13:53:45Z"
+      },
+      {
+        "name": "Seal release-candidate receipt",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16,
+        "started_at": "2026-09-22T13:53:45Z",
+        "completed_at": "2026-09-22T13:53:45Z"
+      },
+      {
+        "name": "Upload release-candidate evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-09-22T13:53:45Z",
+        "completed_at": "2026-09-22T13:53:46Z"
+      },
+      {
+        "name": "Post Fresh Python 3.13 wheel install",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 31,
+        "started_at": "2026-09-22T13:53:46Z",
+        "completed_at": "2026-09-22T13:53:46Z"
+      },
+      {
+        "name": "Post Set up Node",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 32,
+        "started_at": "2026-09-22T13:53:46Z",
+        "completed_at": "2026-09-22T13:53:47Z"
+      },
+      {
+        "name": "Post Set up Python 3.12",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 33,
+        "started_at": "2026-09-22T13:53:47Z",
+        "completed_at": "2026-09-22T13:53:47Z"
+      },
+      {
+        "name": "Post Checkout candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 34,
+        "started_at": "2026-09-22T13:53:47Z",
+        "completed_at": "2026-09-22T13:53:47Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 35,
+        "started_at": "2026-09-22T13:53:47Z",
+        "completed_at": "2026-09-22T13:53:47Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106774841231",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000002781,
+    "runner_name": "GitHub Actions 1000002781",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

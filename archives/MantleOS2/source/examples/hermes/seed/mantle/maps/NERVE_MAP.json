@@ -1,0 +1,154 @@
+[
+  {
+    "nerve_id": "hermes:body.session.started",
+    "direction": "afferent",
+    "semantic_event": "body.session.started",
+    "anchor": {
+      "path": "agent/conversation_loop.py",
+      "symbol": "initialize_conversation",
+      "anchor_sha256": "04da14f93572c421657285d0745f42d385ed5ea1c8e5e35bfb0904ef174047cd",
+      "insertion": "before-anchor"
+    },
+    "book_id": "book:layer-0:v2",
+    "capability_id": null,
+    "payload_schema": "mantle.semantic-event.v2",
+    "redaction_policy": "deny-secrets",
+    "failure_mode": "native-no-op",
+    "tissue_state": "staged",
+    "before_sha256": "dda70a8d459aa5a31418b55e43c0eeb27276e4f243a4974e9d201af777280ac1",
+    "after_sha256": "548c9289d86f65d39b848b46bde20489eeaff37418486d9c0e76fab4479e5ed1"
+  },
+  {
+    "nerve_id": "hermes:communication.user.message",
+    "direction": "bidirectional",
+    "semantic_event": "communication.user.message",
+    "anchor": {
+      "path": "agent/turn_context.py",
+      "symbol": "prepare_turn_context",
+      "anchor_sha256": "9435a83dad50a98a0e310f15d48b4f17039d0452240e5ac074dd96e1114ddab3",
+      "insertion": "before-anchor"
+    },
+    "book_id": "book:layer-0:v2",
+    "capability_id": null,
+    "payload_schema": "mantle.semantic-event.v2",
+    "redaction_policy": "deny-secrets",
+    "failure_mode": "native-no-op",
+    "tissue_state": "staged",
+    "before_sha256": "9a3caec7b67fc58b1635d933ae7c71a37387f981aafba0095ad28f020bee1fd8",
+    "after_sha256": "79c05bc4feb7b58794b6278bd0a8144003101afe69ba70544dc3fd878707f5cd"
+  },
+  {
+    "nerve_id": "hermes:appai.mind.turn",
+    "direction": "afferent",
+    "semantic_event": "appai.mind.turn",
+    "anchor": {
+      "path": "agent/turn_finalizer.py",
+      "symbol": "finalize_turn",
+      "anchor_sha256": "4160ed6b79dc674d98d4a78c6cc8d74685abb3956e52819386f3f0aff0e93bd1",
+      "insertion": "before-anchor"
+    },
+    "book_id": "book:layer-0:v2",
+    "capability_id": null,
+    "payload_schema": "mantle.semantic-event.v2",
+    "redaction_policy": "deny-secrets",
+    "failure_mode": "native-no-op",
+    "tissue_state": "staged",
+    "before_sha256": "463a0d3bd92b2f1fcb7674c0400bfd2451a2344011c35de906bbb61ca96cc7e3",
+    "after_sha256": "725f5ef78d0f0e1bd1b63bf04c3d8a66083169679e2d270cd3a1c4cfe54d1835"
+  },
+  {
+    "nerve_id": "hermes:appai.limb.proposed",
+    "direction": "efferent",
+    "semantic_event": "appai.limb.proposed",
+    "anchor": {
+      "path": "agent/tool_executor.py",
+      "symbol": "_authorized_dispatch",
+      "anchor_sha256": "7c2eb9f38b1e7afd30943c79d5b9714f1c66116815be229ee762e9cf1e3e0f9f",
+      "insertion": "before-anchor"
+    },
+    "book_id": "book:actions:v2",
+    "capability_id": "hermes.tool-dispatch",
+    "payload_schema": "mantle.semantic-event.v2",
+    "redaction_policy": "deny-secrets",
+    "failure_mode": "native-no-op",
+    "tissue_state": "staged",
+    "before_sha256": "08965a18d17fc7b92ac9264e8131ce91cce23b88b479fe7356154a8144bc35d2",
+    "after_sha256": "016ccf405676842ebad7e9190a07d7bba7ddfbbb241f8fe43418379cfe867808"
+  },
+  {
+    "nerve_id": "hermes:body.tool.completed",
+    "direction": "afferent",
+    "semantic_event": "body.tool.completed",
+    "anchor": {
+      "path": "agent/tool_executor.py",
+      "symbol": "_emit_terminal_post_tool_call",
+      "anchor_sha256": "252b5e6fdf4eaa340281f6ce35fb2419f043ed06e1cbdae60e2c4a1240834818",
+      "insertion": "before-anchor"
+    },
+    "book_id": "book:layer-0:v2",
+    "capability_id": null,
+    "payload_schema": "mantle.semantic-event.v2",
+    "redaction_policy": "deny-secrets",
+    "failure_mode": "native-no-op",
+    "tissue_state": "staged",
+    "before_sha256": "016ccf405676842ebad7e9190a07d7bba7ddfbbb241f8fe43418379cfe867808",
+    "after_sha256": "bd521ed6b99067e37df1eac9dd8706daca023070e480b7e07cc69a442a92c633"
+  },
+  {
+    "nerve_id": "hermes:body.turn.ended",
+    "direction": "afferent",
+    "semantic_event": "body.turn.ended",
+    "anchor": {
+      "path": "agent/turn_finalizer.py",
+      "symbol": "finalize_turn",
+      "anchor_sha256": "381eed49052c87c0c725cdc1e17a9edadb591e832906165a9ed86abab73c76d1",
+      "insertion": "before-anchor"
+    },
+    "book_id": "book:layer-0:v2",
+    "capability_id": null,
+    "payload_schema": "mantle.semantic-event.v2",
+    "redaction_policy": "deny-secrets",
+    "failure_mode": "native-no-op",
+    "tissue_state": "staged",
+    "before_sha256": "725f5ef78d0f0e1bd1b63bf04c3d8a66083169679e2d270cd3a1c4cfe54d1835",
+    "after_sha256": "08b46729655f03db7c1010edfd2d93f332673e881a4a87611f9f49da2880f6b5"
+  },
+  {
+    "nerve_id": "hermes:cli:body.session.ended",
+    "direction": "afferent",
+    "semantic_event": "body.session.ended",
+    "anchor": {
+      "path": "cli.py",
+      "symbol": "_notify_session_finalize",
+      "anchor_sha256": "5a66048df6913dedd425c64f5a67eab640f1e0e156944530d9da1fbcb3631b55",
+      "insertion": "before-anchor"
+    },
+    "book_id": "book:layer-0:v2",
+    "capability_id": null,
+    "payload_schema": "mantle.semantic-event.v2",
+    "redaction_policy": "deny-secrets",
+    "failure_mode": "native-no-op",
+    "tissue_state": "staged",
+    "before_sha256": "0eaab73ee696321e6c3084ac38fede21396b3c7f40d5df3d67bdd76f84310b0e",
+    "after_sha256": "f4856e80fb74ab78c198f91ccd305e87faa66d66638e8cb51684447e6084af05"
+  },
+  {
+    "nerve_id": "hermes:gateway:body.session.ended",
+    "direction": "afferent",
+    "semantic_event": "body.session.ended",
+    "anchor": {
+      "path": "tui_gateway/server.py",
+      "symbol": "_finalize_session",
+      "anchor_sha256": "db6ca85927df4e0b8bb738927d3363e806a8a43dea9a1b7527ba15118fd054b8",
+      "insertion": "before-anchor"
+    },
+    "book_id": "book:layer-0:v2",
+    "capability_id": null,
+    "payload_schema": "mantle.semantic-event.v2",
+    "redaction_policy": "deny-secrets",
+    "failure_mode": "native-no-op",
+    "tissue_state": "staged",
+    "before_sha256": "7e98a93354522498026619813329bf28ab76093b9abe89884eaa4c1e5605377d",
+    "after_sha256": "a6d7e0c547810ed4477959a592eeb337fcba78afd834a54e56c6199584afbc1f"
+  }
+]

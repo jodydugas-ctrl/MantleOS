@@ -1,0 +1,126 @@
+[
+  {
+    "id": 100479463139,
+    "run_id": 33700802290,
+    "workflow_name": "Hermes assimilation",
+    "head_branch": "reconcile/prebirth-integrity",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/33700802290",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAXZQru4w",
+    "head_sha": "8e423453f1f9fed412574b71545008b2dff4c6d0",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/100479463139",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/33700802290/job/100479463139",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-03T00:44:47Z",
+    "started_at": "2026-09-03T00:44:49Z",
+    "completed_at": "2026-09-03T00:45:53Z",
+    "name": "Pinned Hermes delta",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-03T00:44:50Z",
+        "completed_at": "2026-09-03T00:44:51Z"
+      },
+      {
+        "name": "Run actions/checkout@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-03T00:44:51Z",
+        "completed_at": "2026-09-03T00:44:51Z"
+      },
+      {
+        "name": "Run actions/setup-python@v6",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-03T00:44:51Z",
+        "completed_at": "2026-09-03T00:44:52Z"
+      },
+      {
+        "name": "Run python -m pip install -e \".[dev]\"",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-03T00:44:52Z",
+        "completed_at": "2026-09-03T00:44:57Z"
+      },
+      {
+        "name": "Resolve certified commit",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-03T00:44:57Z",
+        "completed_at": "2026-09-03T00:44:57Z"
+      },
+      {
+        "name": "Construct candidate NEST",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-03T00:44:57Z",
+        "completed_at": "2026-09-03T00:45:36Z"
+      },
+      {
+        "name": "Verify delta and host boundary",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-03T00:45:36Z",
+        "completed_at": "2026-09-03T00:45:37Z"
+      },
+      {
+        "name": "Prove host Python remains syntactically intact",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-03T00:45:37Z",
+        "completed_at": "2026-09-03T00:45:52Z"
+      },
+      {
+        "name": "Verify constructed Body remains un-born",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-03T00:45:52Z",
+        "completed_at": "2026-09-03T00:45:52Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v6",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-09-03T00:45:52Z",
+        "completed_at": "2026-09-03T00:45:52Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18,
+        "started_at": "2026-09-03T00:45:52Z",
+        "completed_at": "2026-09-03T00:45:52Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19,
+        "started_at": "2026-09-03T00:45:52Z",
+        "completed_at": "2026-09-03T00:45:52Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/100479463139",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000001949,
+    "runner_name": "GitHub Actions 1000001949",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

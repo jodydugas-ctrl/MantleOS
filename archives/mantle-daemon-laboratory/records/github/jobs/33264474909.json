@@ -1,0 +1,129 @@
+[
+  {
+    "id": 99131993268,
+    "run_id": 33264474909,
+    "workflow_name": "Mantle Daemon BODY heartbeat",
+    "head_branch": "main",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-daemon-laboratory/actions/runs/33264474909",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUILlxc8AAAAXFLostA",
+    "head_sha": "d24ef35faa1705aab396bfd80b52eae852026ac5",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-daemon-laboratory/actions/jobs/99131993268",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-daemon-laboratory/actions/runs/33264474909/job/99131993268",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-29T17:00:29Z",
+    "started_at": "2026-08-29T17:00:33Z",
+    "completed_at": "2026-08-29T17:00:40Z",
+    "name": "heartbeat_read_only",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-29T17:00:34Z",
+        "completed_at": "2026-08-29T17:00:36Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-29T17:00:36Z",
+        "completed_at": "2026-08-29T17:00:37Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-29T17:00:37Z",
+        "completed_at": "2026-08-29T17:00:37Z"
+      },
+      {
+        "name": "Verify durable specimen",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-29T17:00:37Z",
+        "completed_at": "2026-08-29T17:00:38Z"
+      },
+      {
+        "name": "Run BODY-only heartbeat",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-29T17:00:38Z",
+        "completed_at": "2026-08-29T17:00:38Z"
+      },
+      {
+        "name": "Report read-only mode",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-29T17:00:38Z",
+        "completed_at": "2026-08-29T17:00:38Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-08-29T17:00:38Z",
+        "completed_at": "2026-08-29T17:00:38Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-08-29T17:00:38Z",
+        "completed_at": "2026-08-29T17:00:38Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-29T17:00:38Z",
+        "completed_at": "2026-08-29T17:00:38Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-daemon-laboratory/check-runs/99131993268",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000001921,
+    "runner_name": "GitHub Actions 1000001921",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 99131993790,
+    "run_id": 33264474909,
+    "workflow_name": "Mantle Daemon BODY heartbeat",
+    "head_branch": "main",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-daemon-laboratory/actions/runs/33264474909",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUILlxc8AAAAXFLouvg",
+    "head_sha": "d24ef35faa1705aab396bfd80b52eae852026ac5",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-daemon-laboratory/actions/jobs/99131993790",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-daemon-laboratory/actions/runs/33264474909/job/99131993790",
+    "status": "completed",
+    "conclusion": "skipped",
+    "created_at": "2026-08-29T17:00:29Z",
+    "started_at": "2026-08-29T17:00:29Z",
+    "completed_at": "2026-08-29T17:00:29Z",
+    "name": "heartbeat_write",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-daemon-laboratory/check-runs/99131993790",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": null,
+    "runner_name": null,
+    "runner_group_id": null,
+    "runner_group_name": null
+  }
+]

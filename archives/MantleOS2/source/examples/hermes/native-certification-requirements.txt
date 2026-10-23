@@ -1,0 +1,11 @@
+# Minimal, upstream-pinned dependencies needed by the focused native Hermes
+# lifecycle suite. Keep these aligned with the certified Hermes pyproject.toml.
+pytest==9.1.1
+pytest-asyncio==1.3.0
+pyyaml==6.0.3
+rich==14.3.3
+requests==2.33.0
+prompt_toolkit==3.0.52
+python-dotenv==1.2.2
+httpx[socks]==0.28.1
+concurrent-log-handler==0.9.29; sys_platform == "win32"

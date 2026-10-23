@@ -1,0 +1,66 @@
+{
+  "default_branch": "main",
+  "git_bundle_restore": "PASS",
+  "github_counts": {
+    "artifacts": 0,
+    "branches": 1,
+    "commit-comments": 0,
+    "issue-comments": 0,
+    "issue-events": 0,
+    "issues": 0,
+    "labels": 10,
+    "milestones": 0,
+    "pulls": 0,
+    "releases": 0,
+    "review-comments": 0,
+    "runs": 6,
+    "tags": 0,
+    "workflows": 1
+  },
+  "github_records": "CAPTURED",
+  "limitations": [
+    "Historical source is inert reference data, not supported runtime.",
+    "Exact pre-redaction originals remain in the independent private backup."
+  ],
+  "omissions": [],
+  "original_backup": "A:\\GitHub-Backups\\2026-10-23\\mantle-daemon-laboratory",
+  "original_head": "2dc3a7f6a207128eb6eabeaf5a4f956b178e5696",
+  "original_url": "https://github.com/jodydugas-ctrl/mantle-daemon-laboratory",
+  "public_head": "8b79a1c93d653276d208005e955e2e9614f7d9d9",
+  "public_refs": [
+    "8b79a1c93d653276d208005e955e2e9614f7d9d9 refs/heads/main"
+  ],
+  "publication_review": "TECHNICAL_CONTENT_REVIEW_COMPLETE; OWNER_PUBLICATION_APPROVAL_PENDING",
+  "record_redactions": 0,
+  "redacted_paths": [
+    "genome/identity.json",
+    "receipts/beat-1787958403687387.json",
+    "receipts/beat-1787958405410779.json",
+    "receipts/beat-1787958407220865.json",
+    "receipts/beat-1787958408879053.json",
+    "receipts/beat-1787958410464868.json",
+    "receipts/beat-1787958412113562.json",
+    "receipts/beat-1787958413742088.json",
+    "receipts/beat-1787958415541715.json",
+    "receipts/beat-1787958417321962.json",
+    "receipts/beat-1787958419111145.json",
+    "receipts/beat-1788022649222029.json",
+    "reports/LOCAL_AUDIT_2026-08-28.json",
+    "vcw/100_identity.png",
+    "vcw/200_events.png",
+    "vcw/300_immune.png"
+  ],
+  "redaction_policy": [
+    "^genome/identity\\.json$",
+    "^vcw/",
+    "^receipts/",
+    "^reports/"
+  ],
+  "repository": "mantle-daemon-laboratory",
+  "review_limits": [
+    "Pattern review is not proof that all possible private information is absent.",
+    "Owner review of these prepared archives remains required before public publication."
+  ],
+  "schema": "mantle.archive-capture/1",
+  "snapshot": "Exact Git blob bytes; Git control filenames mapped in source-path-map.json"
+}

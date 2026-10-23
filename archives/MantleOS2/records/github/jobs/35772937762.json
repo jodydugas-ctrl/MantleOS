@@ -1,0 +1,742 @@
+[
+  {
+    "id": 106898849946,
+    "run_id": 35772937762,
+    "workflow_name": "SCAN v0.37 operational hardening",
+    "head_branch": "scan-v0.37-operational-hardening",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35772937762",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY46sAmg",
+    "head_sha": "8955c96a261af8d96555327de78451cddd3be601",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106898849946",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35772937762/job/106898849946",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T19:18:30Z",
+    "started_at": "2026-09-22T19:20:14Z",
+    "completed_at": "2026-09-22T19:20:24Z",
+    "name": "focused-hardening (ubuntu-latest, 3.11)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T19:20:14Z",
+        "completed_at": "2026-09-22T19:20:15Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T19:20:15Z",
+        "completed_at": "2026-09-22T19:20:17Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T19:20:17Z",
+        "completed_at": "2026-09-22T19:20:17Z"
+      },
+      {
+        "name": "Install v0.37 candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T19:20:17Z",
+        "completed_at": "2026-09-22T19:20:20Z"
+      },
+      {
+        "name": "Run focused operational hardening suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T19:20:20Z",
+        "completed_at": "2026-09-22T19:20:21Z"
+      },
+      {
+        "name": "Console entry point smoke test",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T19:20:21Z",
+        "completed_at": "2026-09-22T19:20:21Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-22T19:20:21Z",
+        "completed_at": "2026-09-22T19:20:21Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-22T19:20:21Z",
+        "completed_at": "2026-09-22T19:20:22Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T19:20:22Z",
+        "completed_at": "2026-09-22T19:20:22Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106898849946",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000003204,
+    "runner_name": "GitHub Actions 1000003204",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 106898850108,
+    "run_id": 35772937762,
+    "workflow_name": "SCAN v0.37 operational hardening",
+    "head_branch": "scan-v0.37-operational-hardening",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35772937762",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY46sBPA",
+    "head_sha": "8955c96a261af8d96555327de78451cddd3be601",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106898850108",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35772937762/job/106898850108",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T19:18:31Z",
+    "started_at": "2026-09-22T19:20:02Z",
+    "completed_at": "2026-09-22T19:20:35Z",
+    "name": "focused-hardening (windows-latest, 3.11)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T19:20:03Z",
+        "completed_at": "2026-09-22T19:20:04Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T19:20:04Z",
+        "completed_at": "2026-09-22T19:20:10Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T19:20:10Z",
+        "completed_at": "2026-09-22T19:20:10Z"
+      },
+      {
+        "name": "Install v0.37 candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T19:20:10Z",
+        "completed_at": "2026-09-22T19:20:25Z"
+      },
+      {
+        "name": "Run focused operational hardening suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T19:20:25Z",
+        "completed_at": "2026-09-22T19:20:31Z"
+      },
+      {
+        "name": "Console entry point smoke test",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T19:20:31Z",
+        "completed_at": "2026-09-22T19:20:31Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-22T19:20:31Z",
+        "completed_at": "2026-09-22T19:20:32Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-22T19:20:32Z",
+        "completed_at": "2026-09-22T19:20:34Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T19:20:34Z",
+        "completed_at": "2026-09-22T19:20:34Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106898850108",
+    "labels": [
+      "windows-latest"
+    ],
+    "runner_id": 1000003199,
+    "runner_name": "GitHub Actions 1000003199",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 106898850119,
+    "run_id": 35772937762,
+    "workflow_name": "SCAN v0.37 operational hardening",
+    "head_branch": "scan-v0.37-operational-hardening",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35772937762",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY46sBRw",
+    "head_sha": "8955c96a261af8d96555327de78451cddd3be601",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106898850119",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35772937762/job/106898850119",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T19:18:31Z",
+    "started_at": "2026-09-22T19:20:17Z",
+    "completed_at": "2026-09-22T19:21:10Z",
+    "name": "full-regression-and-envelope",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T19:20:18Z",
+        "completed_at": "2026-09-22T19:20:19Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T19:20:19Z",
+        "completed_at": "2026-09-22T19:20:20Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T19:20:20Z",
+        "completed_at": "2026-09-22T19:20:21Z"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T19:20:21Z",
+        "completed_at": "2026-09-22T19:20:21Z"
+      },
+      {
+        "name": "Install candidate and deterministic TypeScript parser dependency",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T19:20:21Z",
+        "completed_at": "2026-09-22T19:20:28Z"
+      },
+      {
+        "name": "Run full inherited plus v0.37 regression suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T19:20:28Z",
+        "completed_at": "2026-09-22T19:20:56Z"
+      },
+      {
+        "name": "Build and smoke-test clean wheel",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T19:20:56Z",
+        "completed_at": "2026-09-22T19:21:02Z"
+      },
+      {
+        "name": "Exercise bounded synthetic large-repository envelope",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-22T19:21:02Z",
+        "completed_at": "2026-09-22T19:21:05Z"
+      },
+      {
+        "name": "Prove live writer contention fails closed",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-22T19:21:05Z",
+        "completed_at": "2026-09-22T19:21:05Z"
+      },
+      {
+        "name": "Upload v0.37 operational evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-09-22T19:21:05Z",
+        "completed_at": "2026-09-22T19:21:06Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18,
+        "started_at": "2026-09-22T19:21:06Z",
+        "completed_at": "2026-09-22T19:21:07Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19,
+        "started_at": "2026-09-22T19:21:07Z",
+        "completed_at": "2026-09-22T19:21:07Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 20,
+        "started_at": "2026-09-22T19:21:07Z",
+        "completed_at": "2026-09-22T19:21:07Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 21,
+        "started_at": "2026-09-22T19:21:07Z",
+        "completed_at": "2026-09-22T19:21:07Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106898850119",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000003205,
+    "runner_name": "GitHub Actions 1000003205",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 106898850155,
+    "run_id": 35772937762,
+    "workflow_name": "SCAN v0.37 operational hardening",
+    "head_branch": "scan-v0.37-operational-hardening",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35772937762",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY46sBaw",
+    "head_sha": "8955c96a261af8d96555327de78451cddd3be601",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106898850155",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35772937762/job/106898850155",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T19:18:31Z",
+    "started_at": "2026-09-22T19:20:16Z",
+    "completed_at": "2026-09-22T19:20:39Z",
+    "name": "focused-hardening (macos-latest, 3.11)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T19:20:17Z",
+        "completed_at": "2026-09-22T19:20:18Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T19:20:18Z",
+        "completed_at": "2026-09-22T19:20:21Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T19:20:21Z",
+        "completed_at": "2026-09-22T19:20:21Z"
+      },
+      {
+        "name": "Install v0.37 candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T19:20:21Z",
+        "completed_at": "2026-09-22T19:20:29Z"
+      },
+      {
+        "name": "Run focused operational hardening suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T19:20:29Z",
+        "completed_at": "2026-09-22T19:20:34Z"
+      },
+      {
+        "name": "Console entry point smoke test",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T19:20:34Z",
+        "completed_at": "2026-09-22T19:20:34Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-22T19:20:34Z",
+        "completed_at": "2026-09-22T19:20:34Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-22T19:20:34Z",
+        "completed_at": "2026-09-22T19:20:35Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T19:20:35Z",
+        "completed_at": "2026-09-22T19:20:35Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106898850155",
+    "labels": [
+      "macos-latest"
+    ],
+    "runner_id": 1000003203,
+    "runner_name": "GitHub Actions 1000003203",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 106898850188,
+    "run_id": 35772937762,
+    "workflow_name": "SCAN v0.37 operational hardening",
+    "head_branch": "scan-v0.37-operational-hardening",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35772937762",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY46sBjA",
+    "head_sha": "8955c96a261af8d96555327de78451cddd3be601",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106898850188",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35772937762/job/106898850188",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T19:18:31Z",
+    "started_at": "2026-09-22T19:19:49Z",
+    "completed_at": "2026-09-22T19:20:21Z",
+    "name": "focused-hardening (windows-latest, 3.13)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T19:19:50Z",
+        "completed_at": "2026-09-22T19:19:51Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T19:19:51Z",
+        "completed_at": "2026-09-22T19:19:57Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T19:19:57Z",
+        "completed_at": "2026-09-22T19:19:57Z"
+      },
+      {
+        "name": "Install v0.37 candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T19:19:57Z",
+        "completed_at": "2026-09-22T19:20:11Z"
+      },
+      {
+        "name": "Run focused operational hardening suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T19:20:11Z",
+        "completed_at": "2026-09-22T19:20:17Z"
+      },
+      {
+        "name": "Console entry point smoke test",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T19:20:17Z",
+        "completed_at": "2026-09-22T19:20:18Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-22T19:20:18Z",
+        "completed_at": "2026-09-22T19:20:18Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-22T19:20:18Z",
+        "completed_at": "2026-09-22T19:20:20Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T19:20:20Z",
+        "completed_at": "2026-09-22T19:20:20Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106898850188",
+    "labels": [
+      "windows-latest"
+    ],
+    "runner_id": 1000003192,
+    "runner_name": "GitHub Actions 1000003192",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 106898850266,
+    "run_id": 35772937762,
+    "workflow_name": "SCAN v0.37 operational hardening",
+    "head_branch": "scan-v0.37-operational-hardening",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35772937762",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY46sB2g",
+    "head_sha": "8955c96a261af8d96555327de78451cddd3be601",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106898850266",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35772937762/job/106898850266",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T19:18:31Z",
+    "started_at": "2026-09-22T19:20:18Z",
+    "completed_at": "2026-09-22T19:20:33Z",
+    "name": "focused-hardening (ubuntu-latest, 3.13)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T19:20:19Z",
+        "completed_at": "2026-09-22T19:20:20Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T19:20:20Z",
+        "completed_at": "2026-09-22T19:20:21Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T19:20:21Z",
+        "completed_at": "2026-09-22T19:20:21Z"
+      },
+      {
+        "name": "Install v0.37 candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T19:20:21Z",
+        "completed_at": "2026-09-22T19:20:27Z"
+      },
+      {
+        "name": "Run focused operational hardening suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T19:20:27Z",
+        "completed_at": "2026-09-22T19:20:30Z"
+      },
+      {
+        "name": "Console entry point smoke test",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T19:20:30Z",
+        "completed_at": "2026-09-22T19:20:30Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-22T19:20:30Z",
+        "completed_at": "2026-09-22T19:20:30Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-22T19:20:30Z",
+        "completed_at": "2026-09-22T19:20:30Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T19:20:30Z",
+        "completed_at": "2026-09-22T19:20:30Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106898850266",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000003206,
+    "runner_name": "GitHub Actions 1000003206",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 106898850303,
+    "run_id": 35772937762,
+    "workflow_name": "SCAN v0.37 operational hardening",
+    "head_branch": "scan-v0.37-operational-hardening",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35772937762",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY46sB_w",
+    "head_sha": "8955c96a261af8d96555327de78451cddd3be601",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106898850303",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35772937762/job/106898850303",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T19:18:31Z",
+    "started_at": "2026-09-22T19:20:25Z",
+    "completed_at": "2026-09-22T19:20:41Z",
+    "name": "focused-hardening (macos-latest, 3.13)",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T19:20:26Z",
+        "completed_at": "2026-09-22T19:20:27Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T19:20:27Z",
+        "completed_at": "2026-09-22T19:20:30Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T19:20:30Z",
+        "completed_at": "2026-09-22T19:20:30Z"
+      },
+      {
+        "name": "Install v0.37 candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T19:20:30Z",
+        "completed_at": "2026-09-22T19:20:35Z"
+      },
+      {
+        "name": "Run focused operational hardening suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T19:20:35Z",
+        "completed_at": "2026-09-22T19:20:38Z"
+      },
+      {
+        "name": "Console entry point smoke test",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T19:20:38Z",
+        "completed_at": "2026-09-22T19:20:38Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-22T19:20:38Z",
+        "completed_at": "2026-09-22T19:20:39Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-22T19:20:39Z",
+        "completed_at": "2026-09-22T19:20:39Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T19:20:39Z",
+        "completed_at": "2026-09-22T19:20:40Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106898850303",
+    "labels": [
+      "macos-latest"
+    ],
+    "runner_id": 1000003207,
+    "runner_name": "GitHub Actions 1000003207",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

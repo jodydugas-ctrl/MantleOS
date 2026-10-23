@@ -1,0 +1,37 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "anchor-tissue",
+  "version": "0.1.0",
+  "function": "Model-neutral Anchor execution contract (external profile required)",
+  "status": "reference",
+  "preferred_for": [
+    "mantleos",
+    "portable-agents",
+    "semantic-tissue"
+  ],
+  "compatible_tissues": [
+    "anchor"
+  ],
+  "tags": [
+    "semantics",
+    "tissue"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "Model-neutral Anchor execution contract (external profile required)"
+  ],
+  "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
+  "verified_with": "Not bundled; acquisition and integration require operator review",
+  "provenance": "KPP design reference inspired by user-provided MantleOS material",
+  "usage": {
+    "use_when": "Select when a recipe requires portable Anchor semantics.",
+    "inputs": [
+      "Pinned Anchor profile and source"
+    ],
+    "outputs": [
+      "Profile-scoped Anchor operation"
+    ],
+    "limits": "Requires explicit supported profile and execution bridge; not a universal compiler."
+  }
+}

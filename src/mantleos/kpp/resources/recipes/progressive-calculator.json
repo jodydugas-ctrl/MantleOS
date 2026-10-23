@@ -1,0 +1,67 @@
+{
+  "schema": "kpp.recipe/3",
+  "id": "progressive-calculator",
+  "goal": "Deliver a usable BioSoftware calculator first, then admit optional capabilities while preserving current result and inputs.",
+  "product_kind": "biosoftware",
+  "delivery_mode": "progressive-web",
+  "capabilities": {
+    "agent": false,
+    "mind": false,
+    "mantleos_splice": false
+  },
+  "mode": "chase",
+  "tissue": "javascript",
+  "fidelity": 3,
+  "target": {
+    "description": "Immediate interactive calculator with independent basic arithmetic and an optional square extension"
+  },
+  "ingredients": [
+    "interface-shell",
+    "progressive-web-runtime",
+    "chase-gate"
+  ],
+  "preview": {
+    "kind": "progressive-web",
+    "assets": {
+      "index.html": {
+        "path": "previews/calculator/index.html",
+        "sha256": "38af2443b52203896e8f79a6e9c3db0dff026dcff3f1bbecd97067a3113f9c19"
+      },
+      "base.js": {
+        "path": "previews/calculator/base.js",
+        "sha256": "c9dba278d8e13afcd15d9f17d84e880ea6239f85834873bf4718898931591fc0"
+      },
+      "style.css": {
+        "path": "previews/calculator/style.css",
+        "sha256": "fbdc31dbdbf7a4e7e5a0d15d1874908d9bb6a0d22694e170e3cc62c084e7683f"
+      }
+    },
+    "state_profile": "json-body/1"
+  },
+  "anchors": [
+    {
+      "id": "usable-surface",
+      "statement": "A calculator with working addition and subtraction is interactively available while BUILDING",
+      "depth": 1,
+      "test": "Browser interaction: 2 + 3 = 5 and 9 - 4 = 5",
+      "required": true
+    },
+    {
+      "id": "preserve-working-state",
+      "statement": "Adding the optional square capability does not reset input, result, or core calculations",
+      "depth": 2,
+      "test": "After 2+3=5, install square and verify displayed 5 persists; clicking square yields 25; adding still works",
+      "required": true,
+      "depends": [
+        "usable-surface"
+      ]
+    },
+    {
+      "id": "optional-extension-absent",
+      "statement": "Core calculation operates when optional square module is absent",
+      "depth": 3,
+      "test": "Before module installation 2+3=5; square disabled",
+      "required": true
+    }
+  ]
+}

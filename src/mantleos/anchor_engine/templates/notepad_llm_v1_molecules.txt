@@ -1,0 +1,32 @@
+BEGIN MOLECULE Boundary
+BoundaryGuard: WhiteHole -10 -00 -policy="deny_unverified_external_effects"
+END MOLECULE
+
+BEGIN MOLECULE Dispatch
+CommandRouter: Neutral -30 -00 -function="explicit_function_map"
+END MOLECULE
+
+BEGIN MOLECULE Document
+DocumentIn: BlackHole -20 -00 -buffer="one_plain_text_document"
+DocumentCommit: Neutral -30 -00 -transaction="commit_or_rollback"
+END MOLECULE
+
+BEGIN MOLECULE Editing
+EditIn: BlackHole -20 -00 -input="text_or_selection_command"
+EditAction: Neutral -30 -00 -function="edit_one_document"
+END MOLECULE
+
+BEGIN MOLECULE Searching
+SearchIn: BlackHole -20 -00 -input="find_or_replace_command"
+SearchAction: Neutral -30 -00 -function="search_document"
+END MOLECULE
+
+BEGIN MOLECULE Files
+FileGuard: WhiteHole -10 -00 -policy="explicit_hosted_export_only"
+FileAction: Neutral -30 -00 -function="new_open_save_confirm"
+END MOLECULE
+
+BEGIN MOLECULE Display
+DisplayAction: Neutral -30 -00 -function="format_navigate_display"
+END MOLECULE
+

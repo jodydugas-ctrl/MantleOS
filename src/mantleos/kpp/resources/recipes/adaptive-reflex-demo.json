@@ -1,0 +1,78 @@
+{
+  "schema": "kpp.recipe/3",
+  "id": "adaptive-reflex-demo",
+  "goal": "Extend a conventional task agent with optional after-success session continuity without changing command semantics",
+  "mode": "transformation",
+  "tissue": "python",
+  "fidelity": 3,
+  "target": {
+    "description": "Preserve original task-agent commands while an optional adapter records only successful calls"
+  },
+  "ingredients": [
+    "python-tissue",
+    "engram-continuity"
+  ],
+  "transformation": {
+    "preserve": [
+      "Task agent returns fixed add, list and invalid-command responses"
+    ],
+    "may_change": [
+      "Optional continuity receives successful task command records"
+    ]
+  },
+  "anchors": [
+    {
+      "id": "original-commands",
+      "required": true,
+      "depth": 2,
+      "area": "other",
+      "statement": "Original command responses and task state remain unchanged",
+      "test": "Compare add/list/invalid commands to pinned expected outputs for both baseline and integrated paths",
+      "preserves": [
+        "Task agent returns fixed add, list and invalid-command responses"
+      ]
+    },
+    {
+      "id": "after-success-reflex",
+      "required": true,
+      "depth": 3,
+      "area": "memory",
+      "statement": "Only successful task commands produce continuity events",
+      "test": "Confirm exactly two events for add, invalid, list and unchanged result payloads",
+      "depends": [
+        "original-commands"
+      ]
+    },
+    {
+      "id": "optional-organ-absent",
+      "required": true,
+      "depth": 2,
+      "area": "memory",
+      "statement": "The original task agent works without continuity or a MIND",
+      "test": "Execute add and list through wrapper with no continuity instance and compare fixed outputs",
+      "depends": [
+        "original-commands"
+      ]
+    }
+  ],
+  "reflexes": [
+    {
+      "id": "task-success-continuity",
+      "source": "task_agent.py::run_command",
+      "ingredient": "engram-continuity",
+      "timing": "after-success",
+      "anchors": [
+        "original-commands",
+        "after-success-reflex",
+        "optional-organ-absent"
+      ]
+    }
+  ],
+  "product_kind": "conventional",
+  "delivery_mode": "artifact",
+  "capabilities": {
+    "agent": false,
+    "mind": false,
+    "mantleos_splice": false
+  }
+}

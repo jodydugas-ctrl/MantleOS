@@ -1,0 +1,150 @@
+[
+  {
+    "id": 100864008479,
+    "run_id": 33821189196,
+    "workflow_name": "Release",
+    "head_branch": "v2.0.0-alpha.2",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/33821189196",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAXe_ahHw",
+    "head_sha": "fc7c7b251fa14d3e9598032ac5580d8ffb5d7fa9",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/100864008479",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/33821189196/job/100864008479",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-04T00:17:30Z",
+    "started_at": "2026-09-04T00:17:33Z",
+    "completed_at": "2026-09-04T00:18:45Z",
+    "name": "release",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-04T00:17:34Z",
+        "completed_at": "2026-09-04T00:17:35Z"
+      },
+      {
+        "name": "Run actions/checkout@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-04T00:17:35Z",
+        "completed_at": "2026-09-04T00:17:35Z"
+      },
+      {
+        "name": "Run actions/setup-python@v6",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-04T00:17:35Z",
+        "completed_at": "2026-09-04T00:17:39Z"
+      },
+      {
+        "name": "Run python -m pip install -e \".[dev]\"",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-04T00:17:39Z",
+        "completed_at": "2026-09-04T00:17:46Z"
+      },
+      {
+        "name": "Run python -m pytest --junitxml=test-results.xml",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-04T00:17:46Z",
+        "completed_at": "2026-09-04T00:17:48Z"
+      },
+      {
+        "name": "Run python -m mantleos.public_audit .",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-04T00:17:48Z",
+        "completed_at": "2026-09-04T00:17:48Z"
+      },
+      {
+        "name": "Resolve certified Hermes commit",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-04T00:17:48Z",
+        "completed_at": "2026-09-04T00:17:48Z"
+      },
+      {
+        "name": "Run mantle assimilate github.com/nousresearch/hermes-agent --ref \"63279301bcbdc185c1b07b98a9312eb0c862f26d\" --destination .assimilation-work/hermes-agent",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-04T00:17:48Z",
+        "completed_at": "2026-09-04T00:18:32Z"
+      },
+      {
+        "name": "Run python scripts/verify_hermes_delta.py .assimilation-work/hermes-agent --expected-commit \"63279301bcbdc185c1b07b98a9312eb0c862f26d\"",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-04T00:18:32Z",
+        "completed_at": "2026-09-04T00:18:32Z"
+      },
+      {
+        "name": "Run python -m build",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-09-04T00:18:32Z",
+        "completed_at": "2026-09-04T00:18:36Z"
+      },
+      {
+        "name": "Run python scripts/build_release.py .assimilation-work/hermes-agent .artifacts --test-report test-results.xml",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-04T00:18:36Z",
+        "completed_at": "2026-09-04T00:18:37Z"
+      },
+      {
+        "name": "Publish immutable prerelease artifacts",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-04T00:18:37Z",
+        "completed_at": "2026-09-04T00:18:42Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v6",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 23,
+        "started_at": "2026-09-04T00:18:42Z",
+        "completed_at": "2026-09-04T00:18:42Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 24,
+        "started_at": "2026-09-04T00:18:42Z",
+        "completed_at": "2026-09-04T00:18:42Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 25,
+        "started_at": "2026-09-04T00:18:42Z",
+        "completed_at": "2026-09-04T00:18:42Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/100864008479",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000002062,
+    "runner_name": "GitHub Actions 1000002062",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

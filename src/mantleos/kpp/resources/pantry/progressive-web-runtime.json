@@ -1,0 +1,38 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "progressive-web-runtime",
+  "version": "0.1.0",
+  "function": "Append-only live module delivery to running browser UI",
+  "status": "ready",
+  "preferred_for": [
+    "browser",
+    "prototype",
+    "streaming"
+  ],
+  "compatible_tissues": [
+    "javascript",
+    "mixed"
+  ],
+  "tags": [
+    "runtime",
+    "streaming"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "Append-only live module delivery to running browser UI"
+  ],
+  "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
+  "verified_with": "Bundled reference/tests only",
+  "provenance": "Original KPP reference",
+  "usage": {
+    "use_when": "Select when a browser interface needs append-only feature admission.",
+    "inputs": [
+      "Existing shell and reviewed JS module"
+    ],
+    "outputs": [
+      "Newly available browser capability"
+    ],
+    "limits": "Not arbitrary hot replacement; maintain state and protect authorization boundaries."
+  }
+}

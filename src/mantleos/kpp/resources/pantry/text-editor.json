@@ -1,0 +1,38 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "text-editor",
+  "version": "0.1.0",
+  "function": "Editable text buffer and user interactions",
+  "status": "ready",
+  "preferred_for": [
+    "notes",
+    "editor",
+    "browser"
+  ],
+  "compatible_tissues": [
+    "javascript",
+    "anchor"
+  ],
+  "tags": [
+    "edit",
+    "ui"
+  ],
+  "minimum_fidelity": 2,
+  "dependencies": [],
+  "capabilities": [
+    "Editable text buffer and user interactions"
+  ],
+  "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
+  "verified_with": "Bundled reference/tests only",
+  "provenance": "Original KPP reference",
+  "usage": {
+    "use_when": "Select when the user needs text editing interactions.",
+    "inputs": [
+      "Editable document and user events"
+    ],
+    "outputs": [
+      "Editable text state"
+    ],
+    "limits": "Saving, persistence, and recovery are separate obligations."
+  }
+}

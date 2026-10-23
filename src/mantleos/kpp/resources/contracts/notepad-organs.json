@@ -1,0 +1,107 @@
+{
+  "schema": "organ.mapping/0.1",
+  "recipe_id": "notepad-organs",
+  "recipe_sha256": "db1a070d430e2e48b24b82ad0746a2963f1b373b44bded2f6a2d7a9eadc40443",
+  "organs": [
+    {
+      "id": "editor",
+      "role": "Deterministic editor state, UI, draft recovery and editing commands",
+      "anchor_ids": [
+        "ui-surface",
+        "draft-safety",
+        "editing-actions"
+      ],
+      "requires": [],
+      "interfaces": {
+        "inputs": {
+          "keystrokes": "text and editor events"
+        },
+        "outputs": {
+          "draft": "UTF-8 text; browser-owned state"
+        }
+      },
+      "capabilities": [
+        "browser-local-storage"
+      ],
+      "failure_policy": {
+        "condition": "local storage disabled or full",
+        "response": "retain current draft in memory and disclose lack of durable recovery"
+      }
+    },
+    {
+      "id": "save",
+      "role": "User-initiated UTF-8 plain-text download",
+      "anchor_ids": [
+        "save-file"
+      ],
+      "requires": [
+        "editor"
+      ],
+      "interfaces": {
+        "inputs": {
+          "text": "string: current editor text",
+          "filename": "string: browser download filename"
+        },
+        "outputs": {
+          "status": "DOWNLOAD_INITIATED or FAILED",
+          "error": "string on observable failure"
+        }
+      },
+      "capabilities": [
+        "browser-download-on-user-gesture"
+      ],
+      "failure_policy": {
+        "condition": "browser download refused or interrupted",
+        "response": "never discard editor draft; do not claim verified disk write"
+      }
+    },
+    {
+      "id": "open",
+      "role": "Local UTF-8 file intake with draft-preservation safeguards",
+      "anchor_ids": [
+        "open-file"
+      ],
+      "requires": [
+        "editor"
+      ],
+      "interfaces": {
+        "inputs": {
+          "local-file": "approved browser File object"
+        },
+        "outputs": {
+          "draft": "new editor draft only after safe user decision"
+        }
+      },
+      "capabilities": [
+        "browser-local-file-read"
+      ],
+      "failure_policy": {
+        "condition": "cancel, invalid UTF-8, or stale read",
+        "response": "preserve prior editor draft"
+      }
+    },
+    {
+      "id": "release-gate",
+      "role": "Keep incomplete functions gated and completion explicit",
+      "anchor_ids": [
+        "no-fake-completion"
+      ],
+      "requires": [
+        "editor"
+      ],
+      "interfaces": {
+        "inputs": {
+          "coverage": "KPP workspace evidence"
+        },
+        "outputs": {
+          "stage": "BUILDING or approved COMPLETE"
+        }
+      },
+      "capabilities": [],
+      "failure_policy": {
+        "condition": "required evidence missing or acceptance not granted",
+        "response": "remain BUILDING and expose unmet Anchors"
+      }
+    }
+  ]
+}

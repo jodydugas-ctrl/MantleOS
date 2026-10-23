@@ -1,0 +1,36 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "local-draft-recovery",
+  "version": "0.1.0",
+  "function": "Persistent browser-local draft recovery",
+  "status": "ready",
+  "preferred_for": [
+    "notes",
+    "browser",
+    "resilience"
+  ],
+  "compatible_tissues": [
+    "javascript"
+  ],
+  "tags": [
+    "storage"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "Persistent browser-local draft recovery"
+  ],
+  "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
+  "verified_with": "Bundled reference/tests only",
+  "provenance": "Original KPP reference",
+  "usage": {
+    "use_when": "Select to recover draft text in a browser.",
+    "inputs": [
+      "Browser local storage and draft text"
+    ],
+    "outputs": [
+      "Locally restored draft"
+    ],
+    "limits": "Storage is per-origin and subject to browser clearing and quotas."
+  }
+}

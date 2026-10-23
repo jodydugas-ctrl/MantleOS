@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <widget class="QMenuBar" name="menuBar">
+   <widget class="QMenu" name="menuFile">
+    <property name="title"><string>File</string></property>
+    <addaction name="actionSave"/>
+    <addaction name="actionGhost"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <action name="actionSave"><property name="text"><string>Save</string></property></action>
+  <action name="actionGhost"><property name="text"><string>Ghost</string></property></action>
+ </widget>
+</ui>

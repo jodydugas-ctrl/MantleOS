@@ -1,0 +1,42 @@
+# Soft-time heartbeat workflow for a GitHub NEST.
+# Copied to .github/workflows/ ONLY by an explicit operator command
+# (`mantle nest install-template heartbeat`). Scheduled workflows are SOFT-TIME
+# signals: delay or a dropped run must become visible in the next heartbeat
+# receipt and Immune record. Concurrency is load control, not atomicity.
+name: mantle-nest-heartbeat
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+  repository_dispatch:
+    types: [mantle-heartbeat]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mantle-nest-heartbeat
+  cancel-in-progress: false
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact SHA
+        # SHA-pinned action (no mutable tag/branch)
+        uses: actions/checkout@9c7f8e6a2b4d5f0e1a3c4d5e6f7a8b9c0d1e2f3a
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Record scheduler drift
+        run: |
+          echo "heartbeat_pulse=1"
+          echo "missed_pulse_repaired=1"
+          echo "at_most_one_natural_pulse_per_overdue_beat=1"
+
+      # Body-only by default: cognition requires current Stage-1 evidence,
+      # target-bound dual authorization, explicit metering, and an approved
+      # secret provider (never scaffolded as automatic).
+      - name: Body-only pulse
+        run: echo "NO_MIND_AUTOMATIC=1"

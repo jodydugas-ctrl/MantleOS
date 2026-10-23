@@ -1,0 +1,72 @@
+name: Hermes assimilation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pinned-delta:
+    name: Pinned Hermes delta
+    # Keep the historical check name available to protected PRs, but the
+    # Hermes reference executes only when a maintainer explicitly starts it.
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -e ".[dev]"
+      - name: Resolve certified commit
+        id: lock
+        shell: python
+        run: |
+          import json
+          import os
+          commit = json.load(open("examples/hermes/upstream.lock.json", encoding="utf-8"))["commit"]
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"commit={commit}\n")
+      - name: Clone pinned reference host
+        run: |
+          git clone https://github.com/nousresearch/hermes-agent.git .assimilation-work/hermes-agent
+          git -C .assimilation-work/hermes-agent checkout "${{ steps.lock.outputs.commit }}"
+      - name: Apply optional checked-in Hermes example seed
+        run: mantle delta apply examples/hermes/seed --destination .assimilation-work/hermes-agent
+      - name: Verify delta and host boundary
+        run: python examples/hermes/verify_delta.py .assimilation-work/hermes-agent --expected-commit "${{ steps.lock.outputs.commit }}"
+      - name: Build and verify public direct-innervation seed
+        run: |
+          mantle --nest .assimilation-work/hermes-agent delta build .assimilation-work/generated-seed
+          cmp examples/hermes/seed/host-edge.patch .assimilation-work/generated-seed/host-edge.patch
+          diff -qr examples/hermes/seed/mantle/maps .assimilation-work/generated-seed/mantle/maps
+          diff -qr examples/hermes/seed/mantle/runtime .assimilation-work/generated-seed/mantle/runtime
+      - name: Prove host Python remains syntactically intact
+        run: python -m compileall -q .assimilation-work/hermes-agent
+      - name: Verify constructed Body remains un-born
+        run: mantle --nest .assimilation-work/hermes-agent verify
+      - name: Install pinned native-certification dependencies
+        run: python -m pip install -r examples/hermes/native-certification-requirements.txt
+      - name: Create pristine comparison checkout
+        run: git clone .assimilation-work/hermes-agent .assimilation-work/hermes-pristine
+      - name: Compare native behavior before and after innervation
+        run: >-
+          python examples/hermes/certify_native.py
+          .assimilation-work/hermes-pristine
+          .assimilation-work/hermes-agent
+          --expected-commit "${{ steps.lock.outputs.commit }}"
+          --report .assimilation-work/hermes-native-certification.json
+      - name: Test example-only adapter and reference bundle
+        run: python -m pytest examples/hermes/test_adapter.py examples/hermes/test_build_release.py
+      - name: Retain native-behavior evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: hermes-native-certification
+          path: .assimilation-work/hermes-native-certification.json
+          if-no-files-found: warn

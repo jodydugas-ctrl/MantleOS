@@ -1,0 +1,93 @@
+# "Everything is provable" — so prove it on every commit, with the same single command a
+# contributor runs locally: `python -m mantle check --strict`. It executes the Stage-1 gate, the
+# three tamper proofs (which must FAIL to pass), the security invariant suite, the Stage-2
+# gate, both narrated demos, the assimilation dry-run, the standalone cube codec
+# conformance (selftest + interop), the SPORE purity gates, and the multi-language parity
+# test. Certification extras are installed so no required gate can pass by omission.
+name: Zombie Body Audit
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Every minor admitted by pyproject.toml is listed here.
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+    name: certify (Python ${{ matrix.python-version }})
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "${{ matrix.python-version }}"
+
+      - name: Install Mantle (editable, with all certification extras)
+        run: pip install -e ".[spore,multilang]" cryptography==46.0.7 pyyaml==6.0.3
+
+      - name: The whole certification, one command
+        run: |
+          mkdir -p .artifacts
+          python tools/environment_receipt.py ".artifacts/environment-${{ matrix.python-version }}.json"
+          set -o pipefail
+          python -m mantle check --strict | tee ".artifacts/certification-${{ matrix.python-version }}.txt"
+
+      - name: Upload certification evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: certification-python-${{ matrix.python-version }}
+          path: .artifacts/
+          include-hidden-files: true
+          if-no-files-found: error
+
+  hermes-integration:
+    name: Hermes integration (Python 3.12)
+    needs: certify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.12"
+      - name: Checkout tested Hermes plugin API
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          repository: NousResearch/hermes-agent
+          ref: 78e844d4465c4d9f6a2cb2f44e5076d31e1c68db
+          path: .ci/hermes-agent
+
+      - name: Install Mantle integration dependencies
+        run: pip install -e ".[spore]" cryptography==46.0.7 pyyaml==6.0.3
+
+      - name: Hermes addon behavior contracts
+        working-directory: examples/hermes-mantle-addon
+        env:
+          PYTHONPATH: ${{ github.workspace }}/.ci/hermes-agent
+        run: python -W error::ResourceWarning -m unittest discover -s tests
+
+      - name: Hermes addon adversarial containment
+        working-directory: examples/hermes-mantle-addon
+        run: python -W error::ResourceWarning tests/verify_containment.py
+
+  mutation-sweep:
+    name: Targeted mutation sweep (Python 3.12)
+    needs: certify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.12"
+      - name: Kill every doctrine-critical mutant
+        run: python tools/mutate.py --report .artifacts/mutation-report.json
+      - name: Upload mutation evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: mutation-report-python-3.12
+          path: .artifacts/mutation-report.json
+          include-hidden-files: true
+          if-no-files-found: error

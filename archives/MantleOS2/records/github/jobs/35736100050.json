@@ -1,0 +1,206 @@
+[
+  {
+    "id": 106773625641,
+    "run_id": 35736100050,
+    "workflow_name": "SCAN v0.28 frozen calibration",
+    "head_branch": "anchor-v0.28-reconstruction-loop",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35736100050",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY3DQ7KQ",
+    "head_sha": "ffa51dc513d79d050126164919a495371267c8cd",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106773625641",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35736100050/job/106773625641",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T13:49:54Z",
+    "started_at": "2026-09-22T13:50:31Z",
+    "completed_at": "2026-09-22T14:23:29Z",
+    "name": "frozen-calibration",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T13:50:33Z",
+        "completed_at": "2026-09-22T13:50:34Z"
+      },
+      {
+        "name": "Checkout SCAN integration branch",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T13:50:34Z",
+        "completed_at": "2026-09-22T13:50:35Z"
+      },
+      {
+        "name": "Verify v0.27 base is unchanged",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T13:50:35Z",
+        "completed_at": "2026-09-22T13:50:36Z"
+      },
+      {
+        "name": "Set up Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T13:50:36Z",
+        "completed_at": "2026-09-22T13:50:36Z"
+      },
+      {
+        "name": "Set up Node",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T13:50:36Z",
+        "completed_at": "2026-09-22T13:50:36Z"
+      },
+      {
+        "name": "Install isolated v0.27 and v0.28 scanners",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T13:50:36Z",
+        "completed_at": "2026-09-22T13:50:50Z"
+      },
+      {
+        "name": "Checkout frozen NotepadNext specimen",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T13:50:50Z",
+        "completed_at": "2026-09-22T13:50:52Z"
+      },
+      {
+        "name": "Checkout frozen Moji specimen",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-22T13:50:52Z",
+        "completed_at": "2026-09-22T13:50:53Z"
+      },
+      {
+        "name": "Verify frozen specimen identities",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-22T13:50:53Z",
+        "completed_at": "2026-09-22T13:50:53Z"
+      },
+      {
+        "name": "Run v0.27 baselines",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-09-22T13:50:53Z",
+        "completed_at": "2026-09-22T14:00:05Z"
+      },
+      {
+        "name": "Run duplicate v0.28 cold scans",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-22T14:00:05Z",
+        "completed_at": "2026-09-22T14:18:36Z"
+      },
+      {
+        "name": "Generate duplicate reconstruction projections",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-22T14:18:36Z",
+        "completed_at": "2026-09-22T14:21:24Z"
+      },
+      {
+        "name": "Prove v0.28 determinism",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T14:21:24Z",
+        "completed_at": "2026-09-22T14:21:41Z"
+      },
+      {
+        "name": "Compare v0.28 against v0.27 and review new web routes",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-09-22T14:21:41Z",
+        "completed_at": "2026-09-22T14:21:41Z"
+      },
+      {
+        "name": "Verify reconstruction export did not mutate sealed scan projection",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-09-22T14:21:41Z",
+        "completed_at": "2026-09-22T14:21:43Z"
+      },
+      {
+        "name": "Upload v0.28 frozen-calibration evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16,
+        "started_at": "2026-09-22T14:21:43Z",
+        "completed_at": "2026-09-22T14:23:25Z"
+      },
+      {
+        "name": "Post Checkout frozen Moji specimen",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 28,
+        "started_at": "2026-09-22T14:23:25Z",
+        "completed_at": "2026-09-22T14:23:25Z"
+      },
+      {
+        "name": "Post Checkout frozen NotepadNext specimen",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 29,
+        "started_at": "2026-09-22T14:23:25Z",
+        "completed_at": "2026-09-22T14:23:26Z"
+      },
+      {
+        "name": "Post Set up Node",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 30,
+        "started_at": "2026-09-22T14:23:26Z",
+        "completed_at": "2026-09-22T14:23:26Z"
+      },
+      {
+        "name": "Post Set up Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 31,
+        "started_at": "2026-09-22T14:23:26Z",
+        "completed_at": "2026-09-22T14:23:26Z"
+      },
+      {
+        "name": "Post Checkout SCAN integration branch",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 32,
+        "started_at": "2026-09-22T14:23:26Z",
+        "completed_at": "2026-09-22T14:23:26Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 33,
+        "started_at": "2026-09-22T14:23:26Z",
+        "completed_at": "2026-09-22T14:23:26Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106773625641",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000002771,
+    "runner_name": "GitHub Actions 1000002771",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

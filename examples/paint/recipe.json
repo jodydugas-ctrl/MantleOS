@@ -1,0 +1,175 @@
+{
+  "schema": "kpp.recipe/3",
+  "id": "xp-paint-biosoftware",
+  "goal": "Bake a useful local Bio-Software paint app in Canvas, using Windows XP Paint as the Chase target; retain exact native parity as an open gate.",
+  "mode": "chase",
+  "tissue": "mixed",
+  "fidelity": 4,
+  "target": {
+    "description": "Windows XP Paint: raster editing, classic toolbox, palette and menus. Native XP executable not supplied.",
+    "source": "https://users.sch.gr/edimitriad/images/Zografiki/A_Guide_to_Microsoft_Paint_XP.pdf",
+    "reference_version": "XP-era documented behavior, inspected 2026-10-14; binary and byte-exact PDF pin unavailable",
+    "reference_limits": "Web-readable guide inspected; direct PDF byte retrieval failed certificate validation, so no invented file hash or native version pin."
+  },
+  "ingredients": [
+    "interface-shell",
+    "browser-file-io",
+    "local-draft-recovery",
+    "engram-continuity",
+    "anchor-tissue",
+    "chase-gate"
+  ],
+  "product_kind": "biosoftware",
+  "delivery_mode": "artifact",
+  "capabilities": {
+    "agent": false,
+    "mind": false,
+    "mantleos_splice": false
+  },
+  "transformation": {
+    "preserve": [
+      "Visible pixel editor",
+      "Deterministic drawing without a MIND",
+      "Editable raster pixels",
+      "Operator-controlled local files",
+      "Identity and append-only experience",
+      "Portable complete application",
+      "Evidence is not operator approval"
+    ],
+    "may_change": [
+      "Browser implementation and delivery",
+      "Extended organism memory beyond XP Paint",
+      "Undo capacity, rasterizer and native platform integration"
+    ]
+  },
+  "oven": {
+    "provider": "authorized local development host",
+    "execution": "Explicit local tests and browser preview; no paid model or remote publication"
+  },
+  "acceptance": "Baker review remains separate from tests; native-xp-parity remains unmet without a native reference.",
+  "anchors": [
+    {
+      "id": "ui-shell",
+      "required": true,
+      "depth": 2,
+      "area": "drawing",
+      "statement": "Expose the classic six menus, sixteen tools and twenty-eight palette slots, with usable keyboard focus.",
+      "test": "Browser fixture: tool routes; manual menu and pointer checks.",
+      "depends": [],
+      "preserves": [
+        "Visible pixel editor"
+      ]
+    },
+    {
+      "id": "raster-tools",
+      "required": true,
+      "depth": 4,
+      "area": "drawing",
+      "statement": "Provide pencil, brush, spray, fill, color picker, eraser, line, two-bend curve and area shapes on a deterministic raster.",
+      "test": "node --test examples/paint/test_raster.cjs; browser shape and pointer checks.",
+      "depends": [
+        "ui-shell"
+      ],
+      "preserves": [
+        "Deterministic drawing without a MIND"
+      ]
+    },
+    {
+      "id": "selection-editing",
+      "required": true,
+      "depth": 4,
+      "area": "drawing",
+      "statement": "Rectangular and masked free-form selections support moving, copying, cutting, pasting, undo and redo.",
+      "test": "Raster selection/history tests and browser selection/clipboard fixtures.",
+      "depends": [
+        "raster-tools"
+      ],
+      "preserves": [
+        "Editable raster pixels"
+      ]
+    },
+    {
+      "id": "image-operations",
+      "required": true,
+      "depth": 3,
+      "area": "drawing",
+      "statement": "Provide bounded nearest-neighbor stretch, skew, flips, rotations, inversion, resize, magnification and grid.",
+      "test": "Raster transform inverses, dimension bounds, browser attributes and grid fixtures.",
+      "depends": [
+        "raster-tools"
+      ],
+      "preserves": [
+        "Editable raster pixels"
+      ]
+    },
+    {
+      "id": "local-file-io",
+      "required": true,
+      "depth": 3,
+      "area": "files",
+      "statement": "Import bounded PNG, JPEG, GIF and supported BMP; export PNG, JPEG and 24-bit BMP through explicit user actions.",
+      "test": "BMP round trips, PNG browser round trip, explicit local file-open and download checks.",
+      "depends": [
+        "raster-tools"
+      ],
+      "preserves": [
+        "Operator-controlled local files"
+      ]
+    },
+    {
+      "id": "bio-continuity",
+      "required": true,
+      "depth": 4,
+      "area": "memory",
+      "statement": "Keep a founding PRIMER, instance identity, append-only checked experience, stasis and explicit verified recovery; refuse invalid imports before changing the active Body.",
+      "test": "Raster organism rejection tests and browser stasis, restoration and corrupt-import fixtures.",
+      "depends": [
+        "raster-tools"
+      ],
+      "preserves": [
+        "Identity and append-only experience"
+      ]
+    },
+    {
+      "id": "portable-thought",
+      "required": true,
+      "depth": 3,
+      "area": "drawing",
+      "statement": "Emit a self-contained EMIT_TEXT/0.2 Anchor thought; an isolated receiving process materializes byte-identical HTML without MantleOS.",
+      "test": "python examples/paint/build.py --output NEW; isolated receiver equality and tamper refusal.",
+      "depends": [
+        "bio-continuity"
+      ],
+      "preserves": [
+        "Portable complete application"
+      ]
+    },
+    {
+      "id": "chase-boundaries",
+      "required": true,
+      "depth": 3,
+      "area": "drawing",
+      "statement": "Keep measured tests, described XP behavior, untested native parity and Baker acceptance separate.",
+      "test": "KPP recipe/workspace validation; graph, coverage and complete refusal without Baker attestations.",
+      "depends": [
+        "portable-thought"
+      ],
+      "preserves": [
+        "Evidence is not operator approval"
+      ]
+    },
+    {
+      "id": "native-xp-parity",
+      "required": true,
+      "depth": 5,
+      "area": "drawing",
+      "statement": "Perform paired native XP Paint and browser observations on a pinned executable, including visual and uncommon file/OS behavior.",
+      "test": "Requires an independently supplied trusted native target and matched observations; NOT RUN.",
+      "depends": [
+        "selection-editing",
+        "image-operations",
+        "local-file-io"
+      ]
+    }
+  ]
+}

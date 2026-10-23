@@ -1,0 +1,71 @@
+{
+  "schema": "kpp.recipe/4",
+  "id": "augmentation-v4",
+  "goal": "Augment a synthetic notebook while preserving native operations",
+  "mode": "composition",
+  "tissue": "python",
+  "fidelity": 3,
+  "target": {
+    "description": "Existing synthetic Python notebook with read, edit and UTF-8 save"
+  },
+  "ingredients": [],
+  "oven": {
+    "assumption": "Consistent execution of sufficiently explicit recipe",
+    "provider": "any capable host",
+    "iterations": "as needed",
+    "implementation": "incremental",
+    "verification": "Baker acceptance"
+  },
+  "acceptance": "Every required anchor must carry explicit evidence; no credit for untested capabilities.",
+  "anchors": [
+    {
+      "id": "native",
+      "statement": "Native host works without a MIND",
+      "test": "Exercise read/edit/save while MIND absent or failing",
+      "required": true,
+      "depth": 1,
+      "depends": []
+    },
+    {
+      "id": "connections",
+      "statement": "Individually verified pathways",
+      "test": "Compare exact native results through each adapter",
+      "required": true,
+      "depth": 1,
+      "depends": []
+    },
+    {
+      "id": "authority",
+      "statement": "Proposals do not grant effects",
+      "test": "Denied read/edit/save do not invoke host functions",
+      "required": true,
+      "depth": 1,
+      "depends": []
+    },
+    {
+      "id": "history",
+      "statement": "Preserve history and source",
+      "test": "Check ledger prefix and retained source hashes",
+      "required": true,
+      "depth": 1,
+      "depends": []
+    }
+  ],
+  "product_kind": "conventional",
+  "delivery_mode": "artifact",
+  "capabilities": {},
+  "implementation": {
+    "components": [
+      {
+        "id": "app",
+        "policy": "required",
+        "languages": [
+          "python"
+        ]
+      }
+    ]
+  },
+  "construction": {
+    "techniques": []
+  }
+}

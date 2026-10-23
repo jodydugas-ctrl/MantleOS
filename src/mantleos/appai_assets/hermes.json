@@ -1,0 +1,81 @@
+{
+  "schema": "mantle.hermes-graft/1",
+  "repository": "https://github.com/nousresearch/hermes-agent",
+  "commit": "63279301bcbdc185c1b07b98a9312eb0c862f26d",
+  "donor_commit": "a624546a57abf463c8e160a17d34f0ea12e8646b",
+  "donor_sha256": "9b9284e904825ee1fd6a4e7bdf3c03f51b4901a06c0d5ef63a7203f1e85a3d72",
+  "files": {
+    "agent/conversation_loop.py": "dda70a8d459aa5a31418b55e43c0eeb27276e4f243a4974e9d201af777280ac1",
+    "agent/tool_executor.py": "08965a18d17fc7b92ac9264e8131ce91cce23b88b479fe7356154a8144bc35d2",
+    "agent/turn_context.py": "9a3caec7b67fc58b1635d933ae7c71a37387f981aafba0095ad28f020bee1fd8",
+    "agent/turn_finalizer.py": "463a0d3bd92b2f1fcb7674c0400bfd2451a2344011c35de906bbb61ca96cc7e3",
+    "cli.py": "0eaab73ee696321e6c3084ac38fede21396b3c7f40d5df3d67bdd76f84310b0e",
+    "tui_gateway/server.py": "7e98a93354522498026619813329bf28ab76093b9abe89884eaa4c1e5605377d"
+  },
+  "insertions": [
+    {
+      "path": "agent/conversation_loop.py",
+      "symbol": "_restore_or_build_system_prompt",
+      "semantic_event": "body.session.started",
+      "direction": "AFFERENT",
+      "anchor": "    # Plugin hook: on_session_start",
+      "source": "    # MantleOS direct afferent nerve: session boundary.\n    try:\n        from mantle.nerves import session_started as _mantle_session_started\n        _mantle_session_started(\n            session_id=agent.session_id or \"\",\n            model=agent.model or \"\",\n            surface=getattr(agent, \"platform\", None) or \"\",\n        )\n    except Exception:\n        logger.debug(\"Mantle session nerve unavailable\", exc_info=True)\n\n"
+    },
+    {
+      "path": "agent/turn_context.py",
+      "symbol": "build_turn_context",
+      "semantic_event": "communication.user.message",
+      "direction": "BIDIRECTIONAL",
+      "anchor": "    # Gateway must-deliver notes (auto-reset note, first-contact intro,",
+      "source": "    # MantleOS direct nerve: committed user turn and Primer-first AppAI context.\n    agent._mantle_addressed = isinstance(original_user_message, str) and original_user_message.lstrip().lower().startswith(\"@appai\")\n    try:\n        from mantle.nerves import before_mind as _mantle_before_mind\n        _mantle_turn = _mantle_before_mind(\n            user_message=original_user_message,\n            session_id=agent.session_id or \"\",\n            turn_id=turn_id,\n            surface=getattr(agent, \"platform\", None) or \"\",\n        )\n        _mantle_context = _mantle_turn.get(\"context\", \"\")\n        if _mantle_context:\n            plugin_user_context = (\n                _mantle_context + \"\\n\\n\" + plugin_user_context\n                if plugin_user_context\n                else _mantle_context\n            )\n    except Exception:\n        logger.debug(\"Mantle committed-turn nerve unavailable\", exc_info=True)\n\n"
+    },
+    {
+      "path": "agent/turn_finalizer.py",
+      "symbol": "finalize_turn",
+      "semantic_event": "appai.mind.turn",
+      "direction": "AFFERENT",
+      "anchor": "    # Plugin hook: post_llm_call",
+      "source": "    # MantleOS direct afferent nerve: finalized semantic MIND turn.\n    if final_response and not interrupted:\n        try:\n            from mantle.nerves import after_mind as _mantle_after_mind\n            _mantle_after_mind(\n                user_message=original_user_message,\n                assistant_response=final_response,\n                session_id=agent.session_id or \"\",\n                turn_id=turn_id,\n                surface=getattr(agent, \"platform\", None) or \"\",\n            )\n        except Exception:\n            logger.debug(\"Mantle MIND-result nerve unavailable\", exc_info=True)\n\n"
+    },
+    {
+      "path": "agent/tool_executor.py",
+      "symbol": "_authorized_dispatch",
+      "semantic_event": "appai.limb.proposed",
+      "direction": "EFFERENT",
+      "anchor": "        if block_message is None:\n            block_error_type = \"plugin_block\"",
+      "source": "        # MantleOS direct efferent nerve: AppAI Limb proposal.\n        if block_message is None:\n            try:\n                from mantle.nerves import authorize_tool as _mantle_authorize_tool\n                _mantle_block = _mantle_authorize_tool(\n                    tool_name=function_name,\n                    arguments=final_args,\n                    session_id=getattr(agent, \"session_id\", \"\") or \"\",\n                    turn_id=getattr(agent, \"_current_turn_id\", \"\") or \"\",\n                )\n                if _mantle_block:\n                    block_message = _mantle_block\n                    block_error_type = \"mantle_authority_block\"\n            except Exception:\n                if getattr(agent, \"_mantle_addressed\", False) is True:\n                    block_message = \"AppAI authority unavailable; addressed motor activity denied\"\n                    block_error_type = \"mantle_authority_unavailable\"\n                logger.debug(\"Mantle Limb-authority nerve unavailable\", exc_info=True)\n\n"
+    },
+    {
+      "path": "agent/tool_executor.py",
+      "symbol": "_emit_terminal_post_tool_call",
+      "semantic_event": "body.tool.completed",
+      "direction": "AFFERENT",
+      "anchor": "def _cancelled_tool_result(reason: str = \"user interrupt\") -> str:",
+      "source": "\n    # MantleOS direct afferent nerve: one terminal semantic tool event.\n    try:\n        from mantle.nerves import tool_completed as _mantle_tool_completed\n        _mantle_tool_completed(\n            tool_name=function_name,\n            arguments=function_args,\n            status=status or (\"failed\" if error_type else \"completed\"),\n            duration_ms=duration_ms,\n            session_id=getattr(agent, \"session_id\", \"\") or \"\",\n            turn_id=getattr(agent, \"_current_turn_id\", \"\") or \"\",\n        )\n    except Exception:\n        logger.debug(\"Mantle tool nerve unavailable\", exc_info=True)\n"
+    },
+    {
+      "path": "agent/turn_finalizer.py",
+      "symbol": "finalize_turn",
+      "semantic_event": "body.turn.ended",
+      "direction": "AFFERENT",
+      "anchor": "    # Plugin hook: on_session_end",
+      "source": "    # MantleOS direct afferent nerve: completed turn boundary.\n    try:\n        from mantle.nerves import turn_ended as _mantle_turn_ended\n        _mantle_turn_ended(\n            session_id=agent.session_id or \"\",\n            turn_id=turn_id,\n            completed=completed,\n            failed=failed,\n            interrupted=interrupted,\n        )\n    except Exception:\n        logger.debug(\"Mantle turn-end nerve unavailable\", exc_info=True)\n\n"
+    },
+    {
+      "path": "cli.py",
+      "symbol": "_notify_session_finalize",
+      "semantic_event": "body.session.ended",
+      "direction": "AFFERENT",
+      "anchor": "    try:\n        from hermes_cli.lifecycle import finalize_session",
+      "source": "    # MantleOS direct afferent nerve: actual CLI session boundary.\n    try:\n        from mantle.nerves import session_ended as _mantle_session_ended\n        _mantle_session_ended(\n            session_id=session_id or \"\",\n            surface=platform or \"cli\",\n            reason=reason or \"shutdown\",\n        )\n    except Exception:\n        logger.debug(\"Mantle CLI session-end nerve unavailable\", exc_info=True)\n\n"
+    },
+    {
+      "path": "tui_gateway/server.py",
+      "symbol": "_finalize_session",
+      "semantic_event": "body.session.ended",
+      "direction": "AFFERENT",
+      "anchor": "    agent = session.get(\"agent\")\n    lock = session.get(\"history_lock\")",
+      "source": "    # MantleOS direct afferent nerve: actual gateway session boundary.\n    _mantle_agent = session.get(\"agent\")\n    if _mantle_agent is not None:\n        try:\n            from mantle.nerves import session_ended as _mantle_session_ended\n            _mantle_session_ended(\n                session_id=getattr(_mantle_agent, \"session_id\", None)\n                or session.get(\"session_key\", \"\"),\n                surface=_session_source(session) or \"tui\",\n                reason=end_reason or \"tui_close\",\n            )\n        except Exception:\n            logger.debug(\"Mantle gateway session-end nerve unavailable\", exc_info=True)\n\n"
+    }
+  ]
+}

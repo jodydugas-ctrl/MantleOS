@@ -1,0 +1,721 @@
+{
+  "controls": [
+    "plugin opt-in and disable/uninstall boundary",
+    "Hermes tool approval and dispatch pipeline remains authoritative",
+    "Hermes hook exceptions are isolated from the host loop",
+    "resident storage is scoped and redacted before persistence",
+    "MIND fusion requires Stage-1 evidence plus separate target-bound operator and guardian authorization"
+  ],
+  "files_modified": 0,
+  "gaps": [
+    "Host behavior before plugin loading is unobservable.",
+    "Effects outside Hermes registered tool dispatch are not guaranteed to cross resident Limbs.",
+    "Pre-existing host state predates residency and remains external tissue.",
+    "Provider-private internals and host activity outside the twelve registered hooks remain unobservable.",
+    "A fail-closed Phase-2 configuration transition exists but cannot be satisfied by the live NOT_READY/DEFERRED records; fusion/defusion lifecycle, Hermes-native provider routing, reproduction activation, and an addon ten-minute scheduler remain unimplemented."
+  ],
+  "generated_by": "Mantle OS 1.2.0 read-only scanner; current-state claims reconciled under Mantle OS 1.3.0 Step 10",
+  "host": {
+    "branch": "main",
+    "commit": "2ccfdb2db4eedf385f6c5b3fe722e183cee1b6de",
+    "name": "Hermes Agent",
+    "python_files_scanned": 2988,
+    "repository": "https://github.com/NousResearch/hermes-agent.git",
+    "root": "/home/aibox/.hermes/hermes-agent",
+    "tracked_files_censused": 6304
+  },
+  "observable_surfaces": [
+    "on_session_start",
+    "pre_llm_call",
+    "post_llm_call",
+    "pre_tool_call",
+    "pre_approval_request",
+    "post_approval_response",
+    "post_tool_call",
+    "on_session_end",
+    "on_session_finalize",
+    "subagent_start",
+    "subagent_stop",
+    "pre_gateway_dispatch"
+  ],
+  "organs": {
+    "brain": {
+      "host_symbol_count": 3128,
+      "representative_symbols": [
+        {
+          "kind": "function",
+          "line": 244,
+          "module": "batch_runner.py",
+          "role": "MIND_AFFORDANCE",
+          "symbol": "_process_single_prompt"
+        },
+        {
+          "kind": "function",
+          "line": 732,
+          "module": "batch_runner.py",
+          "role": "MIND_AFFORDANCE",
+          "symbol": "BatchRunner._scan_completed_prompts_by_content"
+        },
+        {
+          "kind": "function",
+          "line": 2698,
+          "module": "cli.py",
+          "role": "MIND_AFFORDANCE",
+          "symbol": "_prepend_note_to_message"
+        },
+        {
+          "kind": "function",
+          "line": 3174,
+          "module": "cli.py",
+          "role": "MIND_AFFORDANCE",
+          "symbol": "_bind_prompt_submit_keys"
+        },
+        {
+          "kind": "function",
+          "line": 3193,
+          "module": "cli.py",
+          "role": "MIND_AFFORDANCE",
+          "symbol": "_disable_prompt_toolkit_cpr_warning"
+        },
+        {
+          "kind": "function",
+          "line": 3576,
+          "module": "cli.py",
+          "role": "MIND_AFFORDANCE",
+          "symbol": "build_preloaded_skills_prompt"
+        },
+        {
+          "kind": "function",
+          "line": 4282,
+          "module": "cli.py",
+          "role": "MIND_AFFORDANCE",
+          "symbol": "HermesCLI._clear_prompt_toolkit_screen"
+        },
+        {
+          "kind": "function",
+          "line": 4499,
+          "module": "cli.py",
+          "role": "MIND_AFFORDANCE",
+          "symbol": "HermesCLI._format_prompt_elapsed"
+        },
+        {
+          "kind": "function",
+          "line": 7449,
+          "module": "cli.py",
+          "role": "MIND_AFFORDANCE",
+          "symbol": "HermesCLI._prompt_text_input"
+        },
+        {
+          "kind": "function",
+          "line": 7504,
+          "module": "cli.py",
+          "role": "MIND_AFFORDANCE",
+          "symbol": "HermesCLI._prompt_text_input_modal"
+        },
+        {
+          "kind": "function",
+          "line": 8360,
+          "module": "cli.py",
+          "role": "MIND_AFFORDANCE",
+          "symbol": "HermesCLI._resolve_personality_prompt"
+        },
+        {
+          "kind": "function",
+          "line": 12919,
+          "module": "cli.py",
+          "role": "MIND_AFFORDANCE",
+          "symbol": "HermesCLI._get_tui_prompt_symbols"
+        }
+      ],
+      "resident_boundary": [
+        "mind readiness report",
+        "optional post_llm_call adapter after Stage-1 and separate authorization"
+      ],
+      "status": "resident_present_dormant_unfused"
+    },
+    "genome": {
+      "host_symbol_count": 0,
+      "representative_symbols": [],
+      "resident_boundary": [
+        "primer",
+        "identity",
+        "authority",
+        "budgets",
+        "dnr",
+        "lineage"
+      ],
+      "status": "resident_active_primer_sealed"
+    },
+    "heart": {
+      "host_symbol_count": 934,
+      "representative_symbols": [
+        {
+          "kind": "function",
+          "line": 994,
+          "module": "cli.py",
+          "role": "HEARTBEAT",
+          "symbol": "_arm_exit_watchdog"
+        },
+        {
+          "kind": "function",
+          "line": 1028,
+          "module": "cli.py",
+          "role": "HEARTBEAT",
+          "symbol": "_arm_exit_watchdog._watchdog"
+        },
+        {
+          "kind": "function",
+          "line": 4975,
+          "module": "cli.py",
+          "role": "HEARTBEAT",
+          "symbol": "HermesCLI._pet_anim_loop"
+        },
+        {
+          "kind": "function",
+          "line": 5622,
+          "module": "cli.py",
+          "role": "HEARTBEAT",
+          "symbol": "HermesCLI._stream_delta"
+        },
+        {
+          "kind": "function",
+          "line": 11236,
+          "module": "cli.py",
+          "role": "HEARTBEAT",
+          "symbol": "HermesCLI._voice_start_recording._refresh_level"
+        },
+        {
+          "kind": "function",
+          "line": 15155,
+          "module": "cli.py",
+          "role": "HEARTBEAT",
+          "symbol": "HermesCLI.run.spinner_loop"
+        },
+        {
+          "kind": "function",
+          "line": 428,
+          "module": "mcp_serve.py",
+          "role": "HEARTBEAT",
+          "symbol": "EventBridge._poll_loop"
+        },
+        {
+          "kind": "function",
+          "line": 4863,
+          "module": "run_agent.py",
+          "role": "HEARTBEAT",
+          "symbol": "AIAgent._describe_image_for_anthropic_fallback"
+        },
+        {
+          "kind": "function",
+          "line": 414,
+          "module": "trajectory_compressor.py",
+          "role": "HEARTBEAT",
+          "symbol": "TrajectoryCompressor._get_async_client"
+        },
+        {
+          "kind": "function",
+          "line": 605,
+          "module": "trajectory_compressor.py",
+          "role": "HEARTBEAT",
+          "symbol": "TrajectoryCompressor._generate_summary"
+        },
+        {
+          "kind": "function",
+          "line": 1041,
+          "module": "trajectory_compressor.py",
+          "role": "HEARTBEAT",
+          "symbol": "TrajectoryCompressor.process_directory"
+        },
+        {
+          "kind": "function",
+          "line": 551,
+          "module": "cron/blueprint_catalog.py",
+          "role": "HEARTBEAT",
+          "symbol": "_humanize_schedule"
+        }
+      ],
+      "resident_boundary": [
+        "on_session_start",
+        "pre_llm_call",
+        "on_session_end",
+        "on_session_finalize"
+      ],
+      "status": "resident_active_observer"
+    },
+    "immune": {
+      "host_symbol_count": 4391,
+      "representative_symbols": [
+        {
+          "kind": "function",
+          "line": 120,
+          "module": "cli.py",
+          "role": "SECRET_BOUNDARY",
+          "symbol": "format_token_count_compact"
+        },
+        {
+          "kind": "function",
+          "line": 875,
+          "module": "cli.py",
+          "role": "ERROR_DEFENSE",
+          "symbol": "validate_toolset"
+        },
+        {
+          "kind": "function",
+          "line": 948,
+          "module": "cli.py",
+          "role": "SECRET_BOUNDARY",
+          "symbol": "_prepare_deferred_agent_startup"
+        },
+        {
+          "kind": "function",
+          "line": 2173,
+          "module": "cli.py",
+          "role": "SECRET_BOUNDARY",
+          "symbol": "_detect_light_mode"
+        },
+        {
+          "kind": "function",
+          "line": 3201,
+          "module": "cli.py",
+          "role": "SECRET_BOUNDARY",
+          "symbol": "_terminal_may_leak_cpr"
+        },
+        {
+          "kind": "function",
+          "line": 4189,
+          "module": "cli.py",
+          "role": "ERROR_DEFENSE",
+          "symbol": "HermesCLI._invalidate"
+        },
+        {
+          "kind": "function",
+          "line": 7239,
+          "module": "cli.py",
+          "role": "ERROR_DEFENSE",
+          "symbol": "HermesCLI.retry_last"
+        },
+        {
+          "kind": "function",
+          "line": 10490,
+          "module": "cli.py",
+          "role": "ERROR_DEFENSE",
+          "symbol": "HermesCLI._check_config_mcp_changes"
+        },
+        {
+          "kind": "function",
+          "line": 12066,
+          "module": "cli.py",
+          "role": "SECRET_BOUNDARY",
+          "symbol": "HermesCLI._submit_secret_response"
+        },
+        {
+          "kind": "function",
+          "line": 12076,
+          "module": "cli.py",
+          "role": "SECRET_BOUNDARY",
+          "symbol": "HermesCLI._cancel_secret_capture"
+        },
+        {
+          "kind": "function",
+          "line": 12079,
+          "module": "cli.py",
+          "role": "SECRET_BOUNDARY",
+          "symbol": "HermesCLI._clear_secret_input_buffer"
+        },
+        {
+          "kind": "function",
+          "line": 125,
+          "module": "hermes_bootstrap.py",
+          "role": "SECRET_BOUNDARY",
+          "symbol": "harden_import_path"
+        }
+      ],
+      "resident_boundary": [
+        "hook exception containment",
+        "integrity scan",
+        "redaction policy",
+        "policy refusal"
+      ],
+      "status": "resident_active_observed_failures"
+    },
+    "limbs": {
+      "host_symbol_count": 6745,
+      "representative_symbols": [
+        {
+          "kind": "function",
+          "line": 532,
+          "module": "batch_runner.py",
+          "role": "DISPLAY_RENDER",
+          "symbol": "BatchRunner.__init__"
+        },
+        {
+          "kind": "function",
+          "line": 1059,
+          "module": "cli.py",
+          "role": "ARM_ACTION",
+          "symbol": "_run_cleanup"
+        },
+        {
+          "kind": "function",
+          "line": 1291,
+          "module": "cli.py",
+          "role": "ARM_ACTION",
+          "symbol": "_normalize_git_bash_path"
+        },
+        {
+          "kind": "function",
+          "line": 1320,
+          "module": "cli.py",
+          "role": "ARM_ACTION",
+          "symbol": "_git_repo_root"
+        },
+        {
+          "kind": "function",
+          "line": 1350,
+          "module": "cli.py",
+          "role": "ARM_ACTION",
+          "symbol": "_resolve_worktree_base"
+        },
+        {
+          "kind": "function",
+          "line": 1376,
+          "module": "cli.py",
+          "role": "ARM_ACTION",
+          "symbol": "_resolve_worktree_base._git"
+        },
+        {
+          "kind": "function",
+          "line": 1425,
+          "module": "cli.py",
+          "role": "ARM_ACTION",
+          "symbol": "_setup_worktree"
+        },
+        {
+          "kind": "function",
+          "line": 1593,
+          "module": "cli.py",
+          "role": "ARM_ACTION",
+          "symbol": "_worktree_has_unpushed_commits"
+        },
+        {
+          "kind": "function",
+          "line": 1624,
+          "module": "cli.py",
+          "role": "ARM_ACTION",
+          "symbol": "_worktree_is_dirty"
+        },
+        {
+          "kind": "function",
+          "line": 1645,
+          "module": "cli.py",
+          "role": "ARM_ACTION",
+          "symbol": "_worktree_lock_is_live"
+        },
+        {
+          "kind": "function",
+          "line": 1707,
+          "module": "cli.py",
+          "role": "ARM_ACTION",
+          "symbol": "_cleanup_worktree"
+        },
+        {
+          "kind": "function",
+          "line": 1848,
+          "module": "cli.py",
+          "role": "ARM_ACTION",
+          "symbol": "_prune_stale_worktrees"
+        }
+      ],
+      "resident_boundary": [
+        "pre_tool_call",
+        "pre_approval_request",
+        "post_approval_response",
+        "post_tool_call"
+      ],
+      "status": "resident_active_observed_aep_only"
+    },
+    "memory": {
+      "host_symbol_count": 4961,
+      "representative_symbols": [
+        {
+          "kind": "function",
+          "line": 400,
+          "module": "batch_runner.py",
+          "role": "PERSISTENCE_WRITE",
+          "symbol": "_process_batch_worker"
+        },
+        {
+          "kind": "function",
+          "line": 642,
+          "module": "batch_runner.py",
+          "role": "PERSISTENCE_WRITE",
+          "symbol": "BatchRunner._load_dataset"
+        },
+        {
+          "kind": "function",
+          "line": 688,
+          "module": "batch_runner.py",
+          "role": "PERSISTENCE_WRITE",
+          "symbol": "BatchRunner._load_checkpoint"
+        },
+        {
+          "kind": "function",
+          "line": 715,
+          "module": "batch_runner.py",
+          "role": "PERSISTENCE_WRITE",
+          "symbol": "BatchRunner._save_checkpoint"
+        },
+        {
+          "kind": "function",
+          "line": 776,
+          "module": "batch_runner.py",
+          "role": "STATE_TRANSITION",
+          "symbol": "BatchRunner._filter_dataset_by_completed"
+        },
+        {
+          "kind": "function",
+          "line": 810,
+          "module": "batch_runner.py",
+          "role": "PERSISTENCE_WRITE",
+          "symbol": "BatchRunner.run"
+        },
+        {
+          "kind": "function",
+          "line": 1147,
+          "module": "batch_runner.py",
+          "role": "PERSISTENCE_WRITE",
+          "symbol": "main"
+        },
+        {
+          "kind": "function",
+          "line": 289,
+          "module": "cli.py",
+          "role": "PERSISTENCE_WRITE",
+          "symbol": "_load_prefill_messages"
+        },
+        {
+          "kind": "function",
+          "line": 360,
+          "module": "cli.py",
+          "role": "PERSISTENCE_WRITE",
+          "symbol": "load_cli_config"
+        },
+        {
+          "kind": "function",
+          "line": 853,
+          "module": "cli.py",
+          "role": "STATE_TRANSITION",
+          "symbol": "get_toolset_for_tool"
+        },
+        {
+          "kind": "function",
+          "line": 869,
+          "module": "cli.py",
+          "role": "STATE_TRANSITION",
+          "symbol": "get_toolset_info"
+        },
+        {
+          "kind": "function",
+          "line": 2100,
+          "module": "cli.py",
+          "role": "PERSISTENCE_WRITE",
+          "symbol": "_query_osc11_background"
+        }
+      ],
+      "resident_boundary": [
+        "VCW append",
+        "checkpoint",
+        "veil",
+        "metabolism"
+      ],
+      "status": "resident_active_vcw"
+    },
+    "nervous": {
+      "host_symbol_count": 0,
+      "representative_symbols": [],
+      "resident_boundary": [
+        "normalized hook event bus",
+        "typed routing",
+        "context assembly",
+        "correlation references"
+      ],
+      "status": "resident_present_calm_unassembled"
+    },
+    "reproduction": {
+      "host_symbol_count": 0,
+      "representative_symbols": [],
+      "resident_boundary": [
+        "sealed seed",
+        "ovipositio receipt",
+        "resurgere receipt",
+        "lineage",
+        "dnr enforcement"
+      ],
+      "status": "resident_present_activation_unauthorized"
+    },
+    "senses": {
+      "host_symbol_count": 9388,
+      "representative_symbols": [
+        {
+          "kind": "function",
+          "line": 105,
+          "module": "cli.py",
+          "role": "SENSOR_EVENT",
+          "symbol": "format_duration_compact"
+        },
+        {
+          "kind": "function",
+          "line": 881,
+          "module": "cli.py",
+          "role": "SENSOR_EVENT",
+          "symbol": "_sync_process_session_id"
+        },
+        {
+          "kind": "function",
+          "line": 903,
+          "module": "cli.py",
+          "role": "SENSOR_EVENT",
+          "symbol": "set_sudo_password_callback"
+        },
+        {
+          "kind": "function",
+          "line": 909,
+          "module": "cli.py",
+          "role": "SENSOR_EVENT",
+          "symbol": "set_approval_callback"
+        },
+        {
+          "kind": "function",
+          "line": 915,
+          "module": "cli.py",
+          "role": "SENSOR_EVENT",
+          "symbol": "set_secret_capture_callback"
+        },
+        {
+          "kind": "function",
+          "line": 1152,
+          "module": "cli.py",
+          "role": "SENSOR_EVENT",
+          "symbol": "_should_emit_cleanup_session_finalize"
+        },
+        {
+          "kind": "function",
+          "line": 1160,
+          "module": "cli.py",
+          "role": "SENSOR_EVENT",
+          "symbol": "_notify_session_finalize"
+        },
+        {
+          "kind": "function",
+          "line": 1178,
+          "module": "cli.py",
+          "role": "SENSOR_EVENT",
+          "symbol": "_emit_interrupted_session_end"
+        },
+        {
+          "kind": "function",
+          "line": 1214,
+          "module": "cli.py",
+          "role": "SENSOR_EVENT",
+          "symbol": "_notify_single_query_session_finalize"
+        },
+        {
+          "kind": "function",
+          "line": 1239,
+          "module": "cli.py",
+          "role": "SENSOR_EVENT",
+          "symbol": "_reset_terminal_input_modes_on_exit"
+        },
+        {
+          "kind": "function",
+          "line": 2992,
+          "module": "cli.py",
+          "role": "SENSOR_EVENT",
+          "symbol": "_should_auto_attach_clipboard_image_on_paste"
+        },
+        {
+          "kind": "function",
+          "line": 3570,
+          "module": "cli.py",
+          "role": "SENSOR_EVENT",
+          "symbol": "build_skill_invocation_message"
+        }
+      ],
+      "resident_boundary": [
+        "pre_llm_call",
+        "pre_tool_call",
+        "session hooks"
+      ],
+      "status": "resident_active_observer"
+    }
+  },
+  "phase1_runtime": {
+    "mind_fused": false,
+    "mutating_addon_tools": false,
+    "plugin_version": "0.2.0",
+    "registered_observer_hooks": [
+      "on_session_start",
+      "on_session_end",
+      "on_session_finalize",
+      "pre_llm_call",
+      "post_llm_call",
+      "pre_tool_call",
+      "post_tool_call"
+    ],
+    "reproduction_active": false,
+    "stage1_certified": false
+  },
+  "proposed_bands": [
+    "identity",
+    "facts",
+    "events",
+    "discoveries",
+    "senses",
+    "immune",
+    "brain",
+    "thoughts",
+    "host_state",
+    "host_actions"
+  ],
+  "read_only": true,
+  "scanner": {
+    "deprecated_or_parse_gap_count": 7,
+    "external_host_symbol_count": 46985,
+    "limitations": [
+      "Name/call-pattern classification is heuristic and may contain false positives.",
+      "The scanner maps six operational organ roles; Genome, Nervous, and Reproduction are resident-supplied contracts.",
+      "Static symbols do not prove runtime hook coverage."
+    ],
+    "raw_artifact": null,
+    "raw_artifact_note": "Full scanner output was generated under ignored .runtime/assimilation/raw during Phase 0; this reviewed map is the distributable artifact.",
+    "role_counts": {
+      "ARM_ACTION": 4925,
+      "DEPRECATED": 7,
+      "DISPLAY_RENDER": 1820,
+      "ERROR_DEFENSE": 1172,
+      "HEARTBEAT": 934,
+      "INTERNAL_UTILITY": 46985,
+      "MIND_AFFORDANCE": 3128,
+      "PERSISTENCE_WRITE": 3645,
+      "SECRET_BOUNDARY": 3219,
+      "SENSOR_EVENT": 9388,
+      "STATE_TRANSITION": 1316
+    }
+  },
+  "schema_version": 1,
+  "secret_boundaries": [
+    "environment and provider credentials",
+    "Hermes secret-capture flows",
+    "tool arguments and terminal output",
+    "approval request and response metadata",
+    "plugin configuration and identity material"
+  ],
+  "signoff": {
+    "approved_scope": "deterministic observer-only Body and documented Hermes hook registration; excludes MIND fusion, mutating tools, and reproduction activation",
+    "approved_to_instrument": true,
+    "date": "2026-07-13T23:06:55-03:00",
+    "host_files_modified": 0,
+    "inventory_complete": true,
+    "operator": "explicit chat authorization"
+  }
+}

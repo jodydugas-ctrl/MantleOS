@@ -1,0 +1,118 @@
+[
+  {
+    "id": 106782280355,
+    "run_id": 35738640444,
+    "workflow_name": "Publish SCAN v0.28.0",
+    "head_branch": "main",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35738640444",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY3LhKow",
+    "head_sha": "1f7388cd5291f5584cfc020820878a3ed73058c7",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106782280355",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35738640444/job/106782280355",
+    "status": "completed",
+    "conclusion": "failure",
+    "created_at": "2026-09-22T14:12:01Z",
+    "started_at": "2026-09-22T14:12:05Z",
+    "completed_at": "2026-09-22T14:12:29Z",
+    "name": "publish",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T14:12:06Z",
+        "completed_at": "2026-09-22T14:12:07Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T14:12:07Z",
+        "completed_at": "2026-09-22T14:12:08Z"
+      },
+      {
+        "name": "Skip if release already exists",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T14:12:08Z",
+        "completed_at": "2026-09-22T14:12:11Z"
+      },
+      {
+        "name": "Set up Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T14:12:11Z",
+        "completed_at": "2026-09-22T14:12:11Z"
+      },
+      {
+        "name": "Verify sealed package manifest",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T14:12:11Z",
+        "completed_at": "2026-09-22T14:12:15Z"
+      },
+      {
+        "name": "Build release artifacts",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T14:12:15Z",
+        "completed_at": "2026-09-22T14:12:27Z"
+      },
+      {
+        "name": "Verify artifact identities",
+        "status": "completed",
+        "conclusion": "failure",
+        "number": 7,
+        "started_at": "2026-09-22T14:12:27Z",
+        "completed_at": "2026-09-22T14:12:27Z"
+      },
+      {
+        "name": "Publish GitHub release and tag",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 8,
+        "started_at": "2026-09-22T14:12:27Z",
+        "completed_at": "2026-09-22T14:12:27Z"
+      },
+      {
+        "name": "Post Set up Python",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 15,
+        "started_at": "2026-09-22T14:12:27Z",
+        "completed_at": "2026-09-22T14:12:27Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16,
+        "started_at": "2026-09-22T14:12:27Z",
+        "completed_at": "2026-09-22T14:12:27Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-09-22T14:12:27Z",
+        "completed_at": "2026-09-22T14:12:27Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106782280355",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000002859,
+    "runner_name": "GitHub Actions 1000002859",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

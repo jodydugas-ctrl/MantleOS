@@ -1,0 +1,110 @@
+[
+  {
+    "id": 91411898381,
+    "run_id": 30716141927,
+    "workflow_name": "Windows Mantle 2",
+    "head_branch": "codex/mantle2-full-scope-completion",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/runs/30716141927",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOSv-f3M8AAAAVSJLgDQ",
+    "head_sha": "3bc32ab4873b5ed85f4ad7173b7aef6fa011faf0",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/jobs/91411898381",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-os/actions/runs/30716141927/job/91411898381",
+    "status": "completed",
+    "conclusion": "failure",
+    "created_at": "2026-08-01T20:03:37Z",
+    "started_at": "2026-08-01T20:03:40Z",
+    "completed_at": "2026-08-01T20:04:34Z",
+    "name": "windows-contracts",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-01T20:03:41Z",
+        "completed_at": "2026-08-01T20:03:42Z"
+      },
+      {
+        "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-01T20:03:42Z",
+        "completed_at": "2026-08-01T20:03:47Z"
+      },
+      {
+        "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-01T20:03:47Z",
+        "completed_at": "2026-08-01T20:03:48Z"
+      },
+      {
+        "name": "Install complete certification environment",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-01T20:03:48Z",
+        "completed_at": "2026-08-01T20:04:04Z"
+      },
+      {
+        "name": "Windows resident lifecycle scanner and terminal contracts",
+        "status": "completed",
+        "conclusion": "failure",
+        "number": 5,
+        "started_at": "2026-08-01T20:04:04Z",
+        "completed_at": "2026-08-01T20:04:31Z"
+      },
+      {
+        "name": "Strict repository certification",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 6,
+        "started_at": "2026-08-01T20:04:31Z",
+        "completed_at": "2026-08-01T20:04:31Z"
+      },
+      {
+        "name": "Release content scan",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 7,
+        "started_at": "2026-08-01T20:04:31Z",
+        "completed_at": "2026-08-01T20:04:31Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 13,
+        "started_at": "2026-08-01T20:04:31Z",
+        "completed_at": "2026-08-01T20:04:31Z"
+      },
+      {
+        "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-08-01T20:04:31Z",
+        "completed_at": "2026-08-01T20:04:33Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-08-01T20:04:33Z",
+        "completed_at": "2026-08-01T20:04:33Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/check-runs/91411898381",
+    "labels": [
+      "windows-latest"
+    ],
+    "runner_id": 1000000871,
+    "runner_name": "GitHub Actions 1000000871",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

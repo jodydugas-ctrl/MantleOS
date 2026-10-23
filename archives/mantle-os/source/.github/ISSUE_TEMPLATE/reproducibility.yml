@@ -1,0 +1,48 @@
+name: Reproducibility report
+description: Report a certification result that cannot be reproduced.
+title: "[repro] "
+labels: ["reproducibility"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Follow REPRODUCE.md. Do not attach keys, environment dumps, private bands, or provider request bodies.
+  - type: input
+    id: commit
+    attributes:
+      label: Mantle commit
+      placeholder: 40-hex Git commit
+    validations:
+      required: true
+  - type: dropdown
+    id: path
+    attributes:
+      label: Reproduction path
+      options:
+        - Dockerfile.reproduce
+        - Dev container
+        - Local clean virtual environment
+        - GitHub Actions
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Exact command and result
+      description: Include the failing command, exit code, and concise output.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Safe evidence
+      description: Paste environment receipt fields and mutation/check summaries, with secrets removed.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed keys, tokens, private memory, and provider request bodies.
+          required: true

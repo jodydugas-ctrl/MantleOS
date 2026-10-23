@@ -1,0 +1,406 @@
+{
+  "entries": [
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "QDialog",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "FindDialog.ui",
+      "id": "FindDialog.ui#1",
+      "kind": "widget",
+      "label": "Find",
+      "observation": "static",
+      "path": "/ui/FindDialog",
+      "properties": {
+        "windowTitle": "Find"
+      },
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "QLineEdit",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "FindDialog.ui",
+      "id": "FindDialog.ui#2",
+      "kind": "widget",
+      "label": "query",
+      "observation": "static",
+      "path": "/ui/FindDialog/query",
+      "properties": {},
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "QPushButton",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "FindDialog.ui",
+      "id": "FindDialog.ui#3",
+      "kind": "widget",
+      "label": "Find Next",
+      "observation": "static",
+      "path": "/ui/FindDialog/findButton",
+      "properties": {
+        "text": "Find Next"
+      },
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "",
+      "confidence": "declaration-only",
+      "declaration": {
+        "receiver": "FindDialog",
+        "sender": "findButton",
+        "signal": "clicked()",
+        "slot": "accept()"
+      },
+      "depth": 1,
+      "disposition": "required",
+      "file": "FindDialog.ui",
+      "id": "FindDialog.ui#4",
+      "kind": "connection",
+      "label": "connection",
+      "observation": "static",
+      "path": "/ui/connections/connection",
+      "properties": {},
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "QMainWindow",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "MainWindow.ui",
+      "id": "MainWindow.ui#1",
+      "kind": "widget",
+      "label": "Synthetic Editor",
+      "observation": "static",
+      "path": "/ui/MainWindow",
+      "properties": {
+        "windowTitle": "Synthetic Editor"
+      },
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "QMenuBar",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "MainWindow.ui",
+      "id": "MainWindow.ui#2",
+      "kind": "widget",
+      "label": "menubar",
+      "observation": "static",
+      "path": "/ui/MainWindow/menubar",
+      "properties": {},
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "QMenu",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "MainWindow.ui",
+      "id": "MainWindow.ui#3",
+      "kind": "widget",
+      "label": "&File",
+      "observation": "static",
+      "path": "/ui/MainWindow/menubar/menuFile",
+      "properties": {
+        "title": "&File"
+      },
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "MainWindow.ui",
+      "id": "MainWindow.ui#4",
+      "kind": "action-placement",
+      "label": "actionOpen",
+      "observation": "static",
+      "path": "/ui/MainWindow/menubar/menuFile/actionOpen",
+      "properties": {},
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "QMenu",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "MainWindow.ui",
+      "id": "MainWindow.ui#5",
+      "kind": "widget",
+      "label": "&Edit",
+      "observation": "static",
+      "path": "/ui/MainWindow/menubar/menuEdit",
+      "properties": {
+        "title": "&Edit"
+      },
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "MainWindow.ui",
+      "id": "MainWindow.ui#6",
+      "kind": "action-placement",
+      "label": "actionClear",
+      "observation": "static",
+      "path": "/ui/MainWindow/menubar/menuEdit/actionClear",
+      "properties": {},
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "MainWindow.ui",
+      "id": "MainWindow.ui#7",
+      "kind": "action-placement",
+      "label": "actionFind",
+      "observation": "static",
+      "path": "/ui/MainWindow/menubar/menuEdit/actionFind",
+      "properties": {},
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "MainWindow.ui",
+      "id": "MainWindow.ui#8",
+      "kind": "action-placement",
+      "label": "menuFile",
+      "observation": "static",
+      "path": "/ui/MainWindow/menubar/menuFile",
+      "properties": {},
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "MainWindow.ui",
+      "id": "MainWindow.ui#9",
+      "kind": "action-placement",
+      "label": "menuEdit",
+      "observation": "static",
+      "path": "/ui/MainWindow/menubar/menuEdit",
+      "properties": {},
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "QPlainTextEdit",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "MainWindow.ui",
+      "id": "MainWindow.ui#10",
+      "kind": "widget",
+      "label": "editor",
+      "observation": "static",
+      "path": "/ui/MainWindow/editor",
+      "properties": {},
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "QStatusBar",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "MainWindow.ui",
+      "id": "MainWindow.ui#11",
+      "kind": "widget",
+      "label": "statusbar",
+      "observation": "static",
+      "path": "/ui/MainWindow/statusbar",
+      "properties": {},
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "MainWindow.ui",
+      "id": "MainWindow.ui#12",
+      "kind": "action",
+      "label": "Open",
+      "observation": "static",
+      "path": "/ui/MainWindow/actionOpen",
+      "properties": {
+        "shortcut": "Ctrl+O",
+        "text": "Open"
+      },
+      "shortcut": "Ctrl+O"
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "MainWindow.ui",
+      "id": "MainWindow.ui#13",
+      "kind": "action",
+      "label": "Clear",
+      "observation": "static",
+      "path": "/ui/MainWindow/actionClear",
+      "properties": {
+        "text": "Clear"
+      },
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "MainWindow.ui",
+      "id": "MainWindow.ui#14",
+      "kind": "action",
+      "label": "Find",
+      "observation": "static",
+      "path": "/ui/MainWindow/actionFind",
+      "properties": {
+        "shortcut": "Ctrl+F",
+        "text": "Find"
+      },
+      "shortcut": "Ctrl+F"
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "",
+      "confidence": "declaration-only",
+      "declaration": {},
+      "depth": 1,
+      "disposition": "required",
+      "file": "MainWindow.ui",
+      "id": "MainWindow.ui#15",
+      "kind": "tab-order",
+      "label": "editor",
+      "observation": "static",
+      "path": "/ui/tabstops/tabstop",
+      "properties": {},
+      "shortcut": ""
+    },
+    {
+      "anchor_ids": [
+        "gui-coverage"
+      ],
+      "class": "",
+      "confidence": "declaration-only",
+      "declaration": {
+        "receiver": "editor",
+        "sender": "actionClear",
+        "signal": "triggered()",
+        "slot": "clear()"
+      },
+      "depth": 1,
+      "disposition": "required",
+      "file": "MainWindow.ui",
+      "id": "MainWindow.ui#16",
+      "kind": "connection",
+      "label": "connection",
+      "observation": "static",
+      "path": "/ui/connections/connection",
+      "properties": {},
+      "shortcut": ""
+    }
+  ],
+  "schema": "kpp.gui-inventory/2",
+  "source": {
+    "files": {
+      "FindDialog.ui": "e8821c4ae3968f8bd8485efa5533b4f151ac842a82538a15a7fd68b2992a84dd",
+      "MainWindow.ui": "814ec54f9040d9c99317d6a63781dd1017ec76dc34f7d2f065f2c02de7b26d65"
+    },
+    "identity": "synthetic-qt-editor",
+    "revision": "4630c8931b5fce10b5ace1728d1ff8bae6ae9f9857baea8198f69c395c129609"
+  },
+  "uninspected": [
+    "Reference runtime, conditional visibility, platform differences and dynamic menus",
+    "Action handlers, keyboard/pointer behavior, accessibility and drag/drop",
+    "Screenshot geometry/theme and visual conformance"
+  ]
+}

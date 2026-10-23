@@ -1,0 +1,205 @@
+diff --git a/.gitignore b/.gitignore
+index 7cf39fcfc9df8bd991c608a94153a77eb9c6d9a0..80ba51716fe5861c668397200887c02836cd217c 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -220,3 +220,8 @@ native/fts5_cjk/*.so
+ 
+ # Disposable profile created by scripts/probe_active_session_exclusivity.py
+ .probe-home/
++
++# MantleOS private organism state and local communication surfaces.
++/.mantle/
++/COMMUNICATION.TXT
++/Food.txt
+diff --git a/agent/conversation_loop.py b/agent/conversation_loop.py
+index 46cbc717a7e852471a915f04334e86a25ba4360c..e8337364d960304c52eb22a9a9eb92d3d9e7ace6 100644
+--- a/agent/conversation_loop.py
++++ b/agent/conversation_loop.py
+@@ -1181,6 +1181,17 @@ def _restore_or_build_system_prompt(agent, system_message, conversation_history)
+     # prompt) — build from scratch.
+     agent._cached_system_prompt = agent._build_system_prompt(system_message)
+ 
++    # MantleOS direct afferent nerve: session boundary.
++    try:
++        from mantle.nerves import session_started as _mantle_session_started
++        _mantle_session_started(
++            session_id=agent.session_id or "",
++            model=agent.model or "",
++            surface=getattr(agent, "platform", None) or "",
++        )
++    except Exception:
++        logger.debug("Mantle session nerve unavailable", exc_info=True)
++
+     # Plugin hook: on_session_start — fired once when a brand-new
+     # session is created (not on continuation).  Plugins can use this
+     # to initialise session-scoped state (e.g. warm a memory cache).
+diff --git a/agent/tool_executor.py b/agent/tool_executor.py
+index fb0265310c3859b8521d21964d1c9d1dcccf5b19..2cfeb780f9454cc61714310a4aa4d9cc8303ed9f 100644
+--- a/agent/tool_executor.py
++++ b/agent/tool_executor.py
+@@ -332,6 +332,20 @@ def _emit_terminal_post_tool_call(
+         pass
+ 
+ 
++
++    # MantleOS direct afferent nerve: one terminal semantic tool event.
++    try:
++        from mantle.nerves import tool_completed as _mantle_tool_completed
++        _mantle_tool_completed(
++            tool_name=function_name,
++            arguments=function_args,
++            status=status or ("failed" if error_type else "completed"),
++            duration_ms=duration_ms,
++            session_id=getattr(agent, "session_id", "") or "",
++            turn_id=getattr(agent, "_current_turn_id", "") or "",
++        )
++    except Exception:
++        logger.debug("Mantle tool nerve unavailable", exc_info=True)
+ def _cancelled_tool_result(reason: str = "user interrupt") -> str:
+     return json.dumps(
+         {
+@@ -638,6 +652,22 @@ def _run_agent_tool_execution_middleware(
+ 
+         block_message = scope_block
+         block_error_type = "tool_scope_block"
++        # MantleOS direct efferent nerve: AppAI Limb proposal.
++        if block_message is None:
++            try:
++                from mantle.nerves import authorize_tool as _mantle_authorize_tool
++                _mantle_block = _mantle_authorize_tool(
++                    tool_name=function_name,
++                    arguments=final_args,
++                    session_id=getattr(agent, "session_id", "") or "",
++                    turn_id=getattr(agent, "_current_turn_id", "") or "",
++                )
++                if _mantle_block:
++                    block_message = _mantle_block
++                    block_error_type = "mantle_authority_block"
++            except Exception:
++                logger.debug("Mantle Limb-authority nerve unavailable", exc_info=True)
++
+         if block_message is None:
+             block_error_type = "plugin_block"
+ 
+diff --git a/agent/turn_context.py b/agent/turn_context.py
+index e0f06338dc2f25f8f86e7b03bbecea10af75c3ca..a316099cf5f149198eaf3bd5ee4c915113ff68ca 100644
+--- a/agent/turn_context.py
++++ b/agent/turn_context.py
+@@ -1518,6 +1518,25 @@ def build_turn_context(
+     except Exception as exc:
+         logger.warning("pre_llm_call hook failed: %s", exc)
+ 
++    # MantleOS direct nerve: committed user turn and Primer-first AppAI context.
++    try:
++        from mantle.nerves import before_mind as _mantle_before_mind
++        _mantle_turn = _mantle_before_mind(
++            user_message=original_user_message,
++            session_id=agent.session_id or "",
++            turn_id=turn_id,
++            surface=getattr(agent, "platform", None) or "",
++        )
++        _mantle_context = _mantle_turn.get("context", "")
++        if _mantle_context:
++            plugin_user_context = (
++                _mantle_context + "\n\n" + plugin_user_context
++                if plugin_user_context
++                else _mantle_context
++            )
++    except Exception:
++        logger.debug("Mantle committed-turn nerve unavailable", exc_info=True)
++
+     # Gateway must-deliver notes (auto-reset note, first-contact intro,
+     # voice-channel change) ride the same user-message injection channel as
+     # plugin context so the ephemeral system prompt can stay byte-stable.
+diff --git a/agent/turn_finalizer.py b/agent/turn_finalizer.py
+index 93506f680cf970ac86b262cc69a385aab646da1c..52492f73847c496f92f67bb42110a8c869b52808 100644
+--- a/agent/turn_finalizer.py
++++ b/agent/turn_finalizer.py
+@@ -636,6 +636,20 @@ def finalize_turn(
+         except Exception as exc:
+             logger.warning("transform_llm_output hook failed: %s", exc)
+ 
++    # MantleOS direct afferent nerve: finalized semantic MIND turn.
++    if final_response and not interrupted:
++        try:
++            from mantle.nerves import after_mind as _mantle_after_mind
++            _mantle_after_mind(
++                user_message=original_user_message,
++                assistant_response=final_response,
++                session_id=agent.session_id or "",
++                turn_id=turn_id,
++                surface=getattr(agent, "platform", None) or "",
++            )
++        except Exception:
++            logger.debug("Mantle MIND-result nerve unavailable", exc_info=True)
++
+     # Plugin hook: post_llm_call
+     # Fired once per turn after the tool-calling loop completes.
+     # Plugins can use this to persist conversation data (e.g. sync
+@@ -836,6 +850,19 @@ def finalize_turn(
+     # handled by the CLI (atexit / /reset) and gateway (session expiry /
+     # _reset_session).
+ 
++    # MantleOS direct afferent nerve: completed turn boundary.
++    try:
++        from mantle.nerves import turn_ended as _mantle_turn_ended
++        _mantle_turn_ended(
++            session_id=agent.session_id or "",
++            turn_id=turn_id,
++            completed=completed,
++            failed=failed,
++            interrupted=interrupted,
++        )
++    except Exception:
++        logger.debug("Mantle turn-end nerve unavailable", exc_info=True)
++
+     # Plugin hook: on_session_end
+     # Fired at the very end of every run_conversation call.
+     # Plugins can use this for cleanup, flushing buffers, etc.
+diff --git a/cli.py b/cli.py
+index 19536ffe8d272a3e3339cc139a30bd2e0bc68f46..1e88f9944f2d8dc6c81a13c5007ebb2fe42e0850 100644
+--- a/cli.py
++++ b/cli.py
+@@ -1311,6 +1311,17 @@ def _notify_session_finalize(
+     platform: str = "cli",
+     reason: str = "shutdown",
+ ) -> None:
++    # MantleOS direct afferent nerve: actual CLI session boundary.
++    try:
++        from mantle.nerves import session_ended as _mantle_session_ended
++        _mantle_session_ended(
++            session_id=session_id or "",
++            surface=platform or "cli",
++            reason=reason or "shutdown",
++        )
++    except Exception:
++        logger.debug("Mantle CLI session-end nerve unavailable", exc_info=True)
++
+     try:
+         from hermes_cli.lifecycle import finalize_session
+         finalize_session(
+diff --git a/tui_gateway/server.py b/tui_gateway/server.py
+index 4455b91e5f33c0702f92dc47b3defa46c65f492f..0b0c02adfdbf52d7e8ff1c7b527c32b3ab8614a2 100644
+--- a/tui_gateway/server.py
++++ b/tui_gateway/server.py
+@@ -960,6 +960,20 @@ def _finalize_session(session: dict | None, end_reason: str = "tui_close") -> No
+     if stop_event is not None:
+         stop_event.set()
+ 
++    # MantleOS direct afferent nerve: actual gateway session boundary.
++    _mantle_agent = session.get("agent")
++    if _mantle_agent is not None:
++        try:
++            from mantle.nerves import session_ended as _mantle_session_ended
++            _mantle_session_ended(
++                session_id=getattr(_mantle_agent, "session_id", None)
++                or session.get("session_key", ""),
++                surface=_session_source(session) or "tui",
++                reason=end_reason or "tui_close",
++            )
++        except Exception:
++            logger.debug("Mantle gateway session-end nerve unavailable", exc_info=True)
++
+     agent = session.get("agent")
+     lock = session.get("history_lock")
+     if lock is not None:

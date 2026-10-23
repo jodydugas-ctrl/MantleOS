@@ -1,0 +1,118 @@
+[
+  {
+    "id": 89333622003,
+    "run_id": 30044914103,
+    "workflow_name": "Example Smoke (headless browser)",
+    "head_branch": "main",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/runs/30044914103",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOSv-f3M8AAAAUzLLk8w",
+    "head_sha": "7b8fe323ca188d256dc34240ab09a1d63c8c1b86",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/jobs/89333622003",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-os/actions/runs/30044914103/job/89333622003",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-07-23T21:07:18Z",
+    "started_at": "2026-07-23T21:07:20Z",
+    "completed_at": "2026-07-23T21:07:59Z",
+    "name": "demo-smoke",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-07-23T21:07:21Z",
+        "completed_at": "2026-07-23T21:07:21Z"
+      },
+      {
+        "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-07-23T21:07:21Z",
+        "completed_at": "2026-07-23T21:07:22Z"
+      },
+      {
+        "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-07-23T21:07:22Z",
+        "completed_at": "2026-07-23T21:07:22Z"
+      },
+      {
+        "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-07-23T21:07:22Z",
+        "completed_at": "2026-07-23T21:07:26Z"
+      },
+      {
+        "name": "Install Playwright (chromium only)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-07-23T21:07:26Z",
+        "completed_at": "2026-07-23T21:07:49Z"
+      },
+      {
+        "name": "Serve examples/ (static)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-07-23T21:07:49Z",
+        "completed_at": "2026-07-23T21:07:54Z"
+      },
+      {
+        "name": "Smoke-test maintained examples",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-07-23T21:07:54Z",
+        "completed_at": "2026-07-23T21:07:57Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-07-23T21:07:57Z",
+        "completed_at": "2026-07-23T21:07:57Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-07-23T21:07:57Z",
+        "completed_at": "2026-07-23T21:07:58Z"
+      },
+      {
+        "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-07-23T21:07:58Z",
+        "completed_at": "2026-07-23T21:07:58Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-07-23T21:07:58Z",
+        "completed_at": "2026-07-23T21:07:58Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/check-runs/89333622003",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000000495,
+    "runner_name": "GitHub Actions 1000000495",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

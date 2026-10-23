@@ -1,0 +1,120 @@
+name: SCAN v0.28 reconstruction loop
+# Release-path touch: keep this required context present for v0.28.0 publication PRs.
+
+on:
+  push:
+    branches:
+      - anchor-v0.28-reconstruction-loop
+    paths:
+      - 'Anchor/engine/v0.28/**'
+      - '.github/workflows/scan-v028-reconstruction-loop.yml'
+  pull_request:
+    paths:
+      - 'Anchor/engine/v0.28/**'
+      - '.github/workflows/scan-v028-reconstruction-loop.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reconstruction-loop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      OPENAI_API_KEY: ''
+      ANTHROPIC_API_KEY: ''
+      GOOGLE_API_KEY: ''
+      GEMINI_API_KEY: ''
+      GROQ_API_KEY: ''
+      MISTRAL_API_KEY: ''
+      COHERE_API_KEY: ''
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Verify sealed v0.28 package manifest before installation
+        shell: bash
+        run: |
+          test -f Anchor/engine/v0.28/PACKAGE_MANIFEST.json
+          PYTHONPATH="$GITHUB_WORKSPACE/Anchor/engine/v0.28" python - <<'PY'
+          from pathlib import Path
+          from scan.release import verify_package
+
+          audit = verify_package(Path("Anchor/engine/v0.28"))
+          assert audit["state"] == "PASS", audit
+          assert audit["manifest_file_count"] == 90, audit
+          assert audit["verified_file_count"] == 90, audit
+          PY
+
+      - name: Install v0.28 scanner and scanner-owned TypeScript parser
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e Anchor/engine/v0.28 pytest
+          mkdir -p .scan-tools
+          npm install --prefix .scan-tools --ignore-scripts --no-package-lock --no-save typescript@5.7.2
+          echo "SCAN_TYPESCRIPT_MODULE=$GITHUB_WORKSPACE/.scan-tools/node_modules/typescript" >> "$GITHUB_ENV"
+          python - <<'PY'
+          import scan
+          assert scan.__version__ == "0.28.0", scan.__version__
+          PY
+
+      - name: Run full v0.28 regression suite
+        shell: bash
+        run: pytest -q Anchor/engine/v0.28/tests
+
+      - name: Exercise Anchor Code, Blueprint, and fresh-scan conformance
+        shell: bash
+        run: |
+          mkdir -p fixture results
+          cat > fixture/index.html <<'EOF'
+          <!doctype html>
+          <html><body>
+            <button id="save" onclick="save()">Save</button>
+            <canvas id="preview"></canvas>
+          </body></html>
+          EOF
+          cat > fixture/style.css <<'EOF'
+          #preview { width: 320px; height: 200px; }
+          EOF
+
+          scan-body scan fixture --out results/source --specimen-id "v028-smoke"
+          scan-body anchor-code results/source/scan_index.sqlite --out-dir results/source
+          scan-body anchor-blueprint results/source/scan_index.sqlite --out "results/v028 Anchor Blueprint.md"
+
+          test -s results/source/anchor_code.txt
+          test -s results/source/anchor_blueprint.json
+          test -s "results/v028 Anchor Blueprint.md"
+
+          scan-body conform "results/v028 Anchor Blueprint.md" fixture --out results/conformance
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path("results/conformance/anchor_conformance.json").read_text())
+          assert report["state"] == "PASS", report
+          assert not report["regressions"], report
+          body = json.loads(Path("results/source/machine_body_map.json").read_text())
+          assert body["engine_version"] == "0.28.0", body["engine_version"]
+          PY
+
+      - name: Upload v0.28 integration evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scan-v028-reconstruction-loop
+          path: results
+          if-no-files-found: warn
+          retention-days: 14

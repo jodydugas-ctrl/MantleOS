@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "self_component": "SPECIAL",
+  "vcw_format": "vcw-cube-png-v2",
+  "dimensions": [800, 800],
+  "bands": {
+    "identity": {"layer": 100, "path": "vcw/100_identity.png", "purpose": "experiential identity state", "driver": "log-json", "private": false},
+    "events": {"layer": 200, "path": "vcw/200_events.png", "purpose": "heartbeat and sensed events", "driver": "log-json", "private": false},
+    "immune": {"layer": 300, "path": "vcw/300_immune.png", "purpose": "integrity and policy evidence", "driver": "log-json", "private": false}
+  }
+}

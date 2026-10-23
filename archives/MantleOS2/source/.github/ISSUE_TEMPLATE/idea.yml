@@ -1,0 +1,28 @@
+name: Idea or design question
+description: Suggest a bounded improvement or ask about the architecture
+title: "[Idea]: "
+labels: ["idea", "needs-contract-review"]
+body:
+  - type: markdown
+    attributes:
+      value: Ideas are welcome. This repository does not accept outside code contributions during the alpha.
+  - type: textarea
+    id: need
+    attributes:
+      label: Need or question
+      description: Describe the user or organism need, not only a proposed mechanism.
+    validations:
+      required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Architectural boundary
+      description: Which distinction, authority boundary, or lifecycle transition is involved?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence or examples
+      description: Link public evidence only; do not disclose private organism data.
+

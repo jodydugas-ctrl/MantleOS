@@ -1,0 +1,216 @@
+{
+  "schema": "mantle.consolidation-verification/1",
+  "baseline_zip_sha256": "af1349b8f6b58e7b2f71208d01867fa17c5242bb5971227856760a1be5eac527",
+  "environment": "Windows; Python 3.14.2",
+  "combined_suite": {
+    "run": 366,
+    "passed": 361,
+    "skipped": 5,
+    "result": "PASS"
+  },
+  "kpp_suite": {
+    "run": 247,
+    "passed": 242,
+    "skipped": 5,
+    "result": "PASS"
+  },
+  "skips": "Unavailable Windows symlink privileges",
+  "walkthroughs": [
+    {
+      "command": [
+        "-m",
+        "mantleos",
+        "demo",
+        "--output",
+        ".work/consolidation-foundation"
+      ],
+      "exit_code": 0,
+      "seconds": 32.97,
+      "log": "walkthrough-0.log"
+    },
+    {
+      "command": [
+        "-m",
+        "mantleos",
+        "examples",
+        "demo",
+        "--output",
+        ".work/consolidation-examples"
+      ],
+      "exit_code": 0,
+      "seconds": 37.11,
+      "log": "walkthrough-1.log"
+    },
+    {
+      "command": [
+        "examples/thoughts/walkthrough.py",
+        "--output",
+        ".work/consolidation-thoughts"
+      ],
+      "exit_code": 0,
+      "seconds": 0.94,
+      "log": "walkthrough-2.log"
+    },
+    {
+      "command": [
+        "examples/kpp/walkthrough.py",
+        "--output",
+        ".work/consolidation-kpp"
+      ],
+      "exit_code": 0,
+      "seconds": 4.99,
+      "log": "walkthrough-3.log"
+    },
+    {
+      "command": [
+        "examples/discovery/walkthrough.py",
+        "--output",
+        ".work/consolidation-discovery"
+      ],
+      "exit_code": 0,
+      "seconds": 2.05,
+      "log": "walkthrough-4.log"
+    },
+    {
+      "command": [
+        "-m",
+        "mantleos.augmentation",
+        "--output",
+        ".work/consolidation-augmentation"
+      ],
+      "exit_code": 1,
+      "seconds": 26.39,
+      "log": "walkthrough-5.log"
+    },
+    {
+      "command": [
+        "-m",
+        "mantleos",
+        "kpp",
+        "doctor"
+      ],
+      "exit_code": 0,
+      "seconds": 0.49,
+      "log": "walkthrough-6.log"
+    },
+    {
+      "command": [
+        "tools/verify_kpp_pin.py",
+        "--source",
+        "../KPP-review"
+      ],
+      "exit_code": 0,
+      "seconds": 0.66,
+      "log": "walkthrough-7.log"
+    },
+    {
+      "command": [
+        "tools/export_kpp.py",
+        "--check",
+        "../KPP-candidate"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3,
+      "log": "walkthrough-8.log"
+    }
+  ],
+  "augmentation_rerun": {
+    "result": "PASS",
+    "reason": "First run completed work but printing the Unicode fixture failed under cp1252; rerun with PYTHONUTF8=1."
+  },
+  "save_browser": {
+    "acceptance": "NOT_GRANTED",
+    "browser": "Chromium 156.0.8078.47",
+    "checks": {
+      "activation-failure-preserves-state": "PASS",
+      "candidate-browser-behavior": "PASS",
+      "corrupt-regression-rejected": "PASS",
+      "draft-loss-regression-rejected": "PASS",
+      "live-replacement-preserves-state": "PASS",
+      "replacement-download": "PASS",
+      "restoration-and-handler-cleanup": "PASS",
+      "transport-and-recovered-browser-state": "PASS"
+    },
+    "phase": "BUILDING",
+    "recipe_sha256": "db1a070d430e2e48b24b82ad0746a2963f1b373b44bded2f6a2d7a9eadc40443",
+    "result": "PASS",
+    "retained_save_revisions": 3,
+    "schema": "kpp.organ-save-demonstration/1",
+    "verification_reports": [
+      "verification-corrupt/report.json",
+      "verification-draft-loss/report.json",
+      "verification-good/report.json",
+      "verification-activation-fault/report.json"
+    ]
+  },
+  "distributions": [
+    {
+      "project": "kpp",
+      "wheel": "kitchen_party_protocol-1.1.0a4-py3-none-any.whl",
+      "sdist": "kitchen_party_protocol-1.1.0a4.tar.gz",
+      "historical_payloads_in_distribution": false,
+      "fresh_install_and_cli": "PASS"
+    },
+    {
+      "project": "mantle",
+      "wheel": "mantleos_unified-0.1.0a8-py3-none-any.whl",
+      "sdist": "mantleos_unified-0.1.0a8.tar.gz",
+      "historical_payloads_in_distribution": false,
+      "fresh_install_and_cli": "PASS"
+    }
+  ],
+  "source_snapshots": [
+    {
+      "repository": "mantle-daemon-laboratory",
+      "snapshot_files": 51,
+      "exact_git_blob_bytes": true,
+      "renamed_control_files": {
+        ".gitattributes": ".gitattributes.archived",
+        ".gitignore": ".gitignore.archived"
+      },
+      "submodule_entries": 0
+    },
+    {
+      "repository": "mantle-os",
+      "snapshot_files": 370,
+      "exact_git_blob_bytes": true,
+      "renamed_control_files": {
+        ".gitignore": ".gitignore.archived",
+        "examples/hermes-mantle-addon/.gitignore": "examples/hermes-mantle-addon/.gitignore.archived"
+      },
+      "submodule_entries": 0
+    },
+    {
+      "repository": "MantleOS2",
+      "snapshot_files": 677,
+      "exact_git_blob_bytes": true,
+      "renamed_control_files": {
+        ".gitattributes": ".gitattributes.archived",
+        ".gitignore": ".gitignore.archived",
+        "Anchor/.gitattributes": "Anchor/.gitattributes.archived"
+      },
+      "submodule_entries": 0
+    },
+    {
+      "repository": "organize-appai",
+      "snapshot_files": 188,
+      "exact_git_blob_bytes": true,
+      "renamed_control_files": {
+        ".gitignore": ".gitignore.archived"
+      },
+      "submodule_entries": 0
+    }
+  ],
+  "kpp_review_commit": {
+    "commit": "aa6aceac62796aa7dc07a9dd20fe040457c109d9",
+    "base": "6f4919cafb96e8f415434036a04762de69a6f5b8",
+    "published": false
+  },
+  "publication": "NOT_PERFORMED",
+  "deletions": [],
+  "hosted_ci": "UNEXECUTED",
+  "limits": [
+    "Checks do not establish authentication, Baker acceptance, or general historical runtime compatibility.",
+    "Hosted CI and fresh remote clones are cutover gates after review approval."
+  ]
+}

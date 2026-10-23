@@ -1,0 +1,49 @@
+{
+  "schema": "kpp.recipe/4",
+  "id": "anchor-literal-v4",
+  "goal": "Illustrate explicit construction choices; no execution or acceptance implied",
+  "mode": "chase",
+  "tissue": "anchor",
+  "fidelity": 3,
+  "target": {
+    "description": "An offline-style plain text notepad with visible controls, text editing, file open/save and draft recovery",
+    "source": "functional description, not a copied implementation",
+    "reference_version": "notepad-demo/v1",
+    "fidelity_semantics": "depth 1 surface; depth 2 direct events; depth 3 files and persistent consequences"
+  },
+  "ingredients": [],
+  "oven": {
+    "assumption": "Consistent execution of sufficiently explicit recipe",
+    "provider": "any capable host",
+    "iterations": "as needed",
+    "implementation": "incremental",
+    "verification": "Baker acceptance"
+  },
+  "acceptance": "Every required anchor must carry explicit evidence; no credit for untested capabilities.",
+  "anchors": [
+    {
+      "id": "exact-output",
+      "statement": "Produce the recipe-defined output",
+      "test": "Compare exact observed output with the declared expected bytes",
+      "required": true,
+      "depth": 1,
+      "depends": []
+    }
+  ],
+  "product_kind": "conventional",
+  "delivery_mode": "artifact",
+  "capabilities": {},
+  "implementation": {
+    "components": [
+      {
+        "id": "app",
+        "policy": "required",
+        "languages": [
+          "anchor"
+        ],
+        "profile": "EMIT_TEXT/0.2"
+      }
+    ]
+  },
+  "anchor_binding": "shared-neutral"
+}

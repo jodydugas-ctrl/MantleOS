@@ -1,0 +1,182 @@
+[
+  {
+    "id": 106764573771,
+    "run_id": 35733456047,
+    "workflow_name": "SCAN v0.28 calibration and determinism",
+    "head_branch": "anchor-v0.28-reconstruction-loop",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35733456047",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY26ocSw",
+    "head_sha": "af0e8a06a468d1e81d93d61db6dc05d74eac06cd",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106764573771",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35733456047/job/106764573771",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T13:26:19Z",
+    "started_at": "2026-09-22T13:27:40Z",
+    "completed_at": "2026-09-22T13:29:28Z",
+    "name": "calibration",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T13:27:41Z",
+        "completed_at": "2026-09-22T13:27:42Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T13:27:42Z",
+        "completed_at": "2026-09-22T13:27:43Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T13:27:43Z",
+        "completed_at": "2026-09-22T13:27:43Z"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T13:27:43Z",
+        "completed_at": "2026-09-22T13:27:44Z"
+      },
+      {
+        "name": "Install scanner-owned TypeScript parser",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T13:27:44Z",
+        "completed_at": "2026-09-22T13:27:45Z"
+      },
+      {
+        "name": "Checkout frozen Moji specimen",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T13:27:45Z",
+        "completed_at": "2026-09-22T13:27:46Z"
+      },
+      {
+        "name": "Verify specimen identity",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T13:27:46Z",
+        "completed_at": "2026-09-22T13:27:46Z"
+      },
+      {
+        "name": "Cold scan with v0.27",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-22T13:27:46Z",
+        "completed_at": "2026-09-22T13:28:18Z"
+      },
+      {
+        "name": "Cold scans A and B with v0.28",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-22T13:28:18Z",
+        "completed_at": "2026-09-22T13:29:15Z"
+      },
+      {
+        "name": "Require byte-stable v0.28 canonical projections",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-09-22T13:29:15Z",
+        "completed_at": "2026-09-22T13:29:15Z"
+      },
+      {
+        "name": "Compare canonical database rows",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-22T13:29:15Z",
+        "completed_at": "2026-09-22T13:29:16Z"
+      },
+      {
+        "name": "Audit v0.27 to v0.28 delta and new web evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-22T13:29:16Z",
+        "completed_at": "2026-09-22T13:29:16Z"
+      },
+      {
+        "name": "Generate v0.28 portable artifacts from frozen specimen",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T13:29:16Z",
+        "completed_at": "2026-09-22T13:29:20Z"
+      },
+      {
+        "name": "Upload calibration evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-09-22T13:29:20Z",
+        "completed_at": "2026-09-22T13:29:26Z"
+      },
+      {
+        "name": "Post Checkout frozen Moji specimen",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 25,
+        "started_at": "2026-09-22T13:29:26Z",
+        "completed_at": "2026-09-22T13:29:26Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 26,
+        "started_at": "2026-09-22T13:29:26Z",
+        "completed_at": "2026-09-22T13:29:26Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 27,
+        "started_at": "2026-09-22T13:29:26Z",
+        "completed_at": "2026-09-22T13:29:26Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 28,
+        "started_at": "2026-09-22T13:29:26Z",
+        "completed_at": "2026-09-22T13:29:26Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 29,
+        "started_at": "2026-09-22T13:29:26Z",
+        "completed_at": "2026-09-22T13:29:26Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106764573771",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000002698,
+    "runner_name": "GitHub Actions 1000002698",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

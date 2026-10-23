@@ -1,0 +1,30 @@
+[
+  {
+    "capability_id": "host.conversation",
+    "host_symbol": "agent.conversation_loop.run_conversation",
+    "description": "Run a native host conversation turn",
+    "effect": "communicate",
+    "input_schema": "mantle.host-conversation-input.v2",
+    "verifier": "native-turn-receipt",
+    "default_authority": "denied",
+    "implementation_status": "observed",
+    "availability_status": "not-exercised",
+    "evidence_status": "static",
+    "transition_owner": "BODY",
+    "limitations": []
+  },
+  {
+    "capability_id": "host.tool-dispatch",
+    "host_symbol": "agent.tool_executor",
+    "description": "Dispatch a registered host tool through native authority",
+    "effect": "external-effect",
+    "input_schema": "mantle.host-tool-input.v2",
+    "verifier": "native-tool-result",
+    "default_authority": "denied",
+    "implementation_status": "observed",
+    "availability_status": "not-exercised",
+    "evidence_status": "static",
+    "transition_owner": "BODY",
+    "limitations": []
+  }
+]

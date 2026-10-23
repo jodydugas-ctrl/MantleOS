@@ -1,0 +1,172 @@
+{
+  "schema": "mantle.canvas-build-qualification/1",
+  "date": "2026-10-15",
+  "versions": {
+    "mantleos": "0.1.0a6",
+    "kpp": "1.1.0a2"
+  },
+  "runtime": {
+    "platform": "Windows x64",
+    "python": "3.14.2"
+  },
+  "code_files": {
+    "anchor_apps.py": "e288101997e4c620e25c81f1ac1152821b6acb4743223df2b07bead8ed5fab8e",
+    "anchor_app_document.py": "8980ea63946f645581393746b59ad8b1e176b9d9727c63d3f32dd81e058c7d28",
+    "anchor_language.py": "e46a60e4080dc12f6ee7fc594f941f7e70ad9588523b5820bd7a017278562774",
+    "anchor_app_bridge.py": "a49eb21940bf2638de67b04139a2cc2c05f781138cba61b51ed269b6bf57050c",
+    "app_builder.py": "ab354dc07e6c9cf95a7b752b12b392add5f4480d9577a0f816b304b01c535b00",
+    "app_bridges.py": "f0e8ba47ed581b2ca4bf87cc6a269ee341828fdc493e17f2ae3174811bfdda1e",
+    "progressive_app.py": "a5c7ee0dbf48f6ab216433cb099ebb6cb89f960efd1c82a1c9e8ce99f34ab8d1",
+    "progressive_runtime.js": "67a2d96d59983c8cace4e5b5b47878cee296ceb497f32ea3b10767eb05cc86a4",
+    "application.py": "75c97f5bcc93e12ffd9b595c11b300fd9c7c0aacd9fcf62db34f6d5cfd8bce26",
+    "builder.py": "dba106a0bcd60aa451a0d24cc6f4836b1ded84cbb6073b7fb982fa346943f495",
+    "checkpoint.py": "d9568402aeab178367acd3abc8db4e0cba8baa1366386d6f50ac07a523c50e7d",
+    "kpp/build.py": "06aed3eb4c6cc16733eb5a506e60789fb549e78f5d778e27cdc50b6801e4a9cf",
+    "kpp/cli.py": "600651891458d42d16aaf502f801fd39251f66e3f98469d85dda2c45865cb436",
+    "kpp/workshop.py": "6411af905632e4ceb22278c60191e04f67406310da909b11d48f96a051799950"
+  },
+  "combined_suite": {
+    "run": 298,
+    "passed": 294,
+    "skipped": 4,
+    "seconds": 358.126,
+    "skips": "Windows symlink creation unavailable"
+  },
+  "standalone_suite": {
+    "run": 191,
+    "passed": 187,
+    "skipped": 4,
+    "doctor": "PASS",
+    "smoke": "PASS",
+    "inventory": "PASS",
+    "javascript_syntax": 6
+  },
+  "new_regressions": 12,
+  "walkthroughs": [
+    "foundation:17 checks",
+    "organisms",
+    "portable-thoughts",
+    "kpp",
+    "discovery",
+    "paint"
+  ],
+  "browser": {
+    "schema": "mantle.canvas-staged-browser-check/1",
+    "result": "PASS",
+    "surface": "real Codex in-app Chromium, loopback KPP calculator, synthetic inputs",
+    "checks": [
+      "Interactive BUILDING surface before optional extension installation",
+      "2 + 3 = 5 while extension disabled",
+      "9 - 4 = 5 before extension installation",
+      "Installed extension arrives without browser reload",
+      "Inputs 9 and 4, subtraction selection and result 5 survive installation",
+      "New extension produces 25",
+      "Original subtraction still produces 5 afterward",
+      "0/3 unaccepted recipe obligations remain BUILDING after installation",
+      "No captured warning/error console messages"
+    ],
+    "live_llm_generation": "NOT_RUN",
+    "chatgpt_canvas_mount_latency": "NOT_MEASURED",
+    "baker_acceptance": "NOT_GRANTED"
+  },
+  "synthetic_hosted_contract": {
+    "result": "PASS",
+    "scope": "Real synthetic Engram ORIENT/RESPOND frames and projection; no model or mount invoked",
+    "app_contract_bytes": {
+      "ORIENT": 3245,
+      "RESPOND": 3245
+    },
+    "committed_reply": false,
+    "private_identity_used": false
+  },
+  "measurement": {
+    "summary": {
+      "notepad": {
+        "author": {
+          "baseline": 0.09931130000040866,
+          "candidate": 0.05204779999985476,
+          "reduction_percent": 47.59126101496951
+        },
+        "request_context": {
+          "baseline": 0.08751960000154213,
+          "candidate": 0.0004281999972590711,
+          "reduction_percent": 99.51073816921978
+        },
+        "browser_prepare": {
+          "baseline": 0.07335489999968559,
+          "candidate": 0.020369199999549892,
+          "reduction_percent": 72.231984503234
+        },
+        "native_launch": {
+          "baseline": 0.09834509999927832,
+          "candidate": 0.020173199998680502,
+          "reduction_percent": 79.48733592336727
+        },
+        "portable_materialize": {
+          "baseline": 0.0022761000000173226,
+          "candidate": 0.0021157000010134652,
+          "reduction_percent": 7.047141997391881
+        },
+        "file_delivery": {
+          "baseline": 0.27836670000033337,
+          "candidate": 0.2159577000020363,
+          "reduction_percent": 22.419707529033584
+        }
+      },
+      "large-html": {
+        "author": {
+          "baseline": 0.15618090000134544,
+          "candidate": 0.06723990000318736,
+          "reduction_percent": 56.947424427309535
+        },
+        "browser_prepare": {
+          "baseline": 0.17406119999941438,
+          "candidate": 0.05545739999797661,
+          "reduction_percent": 68.13913727001584
+        },
+        "native_launch": {
+          "baseline": 0.22890790000019479,
+          "candidate": 0.05516110000098706,
+          "reduction_percent": 75.90249178777135
+        },
+        "portable_materialize": {
+          "baseline": 0.0031584999996994156,
+          "candidate": 0.003183199998602504,
+          "reduction_percent": -0.782016745462677
+        },
+        "file_delivery": {
+          "baseline": 0.36195699999734643,
+          "candidate": 0.23652130000118632,
+          "reduction_percent": 34.65486231709283
+        }
+      }
+    },
+    "request_context_bytes": {
+      "baseline": 215779,
+      "candidate": 3245
+    },
+    "matched_pairs": 7,
+    "discarded_warmup_pairs": 1,
+    "exact_app_html_preview_parity": true,
+    "scope": "Fresh local Python processes; preparation and file delivery, not host Canvas/model latency",
+    "raw_measurement_sha256": "33c76935df7af740dc47c313e2a03f5364c347e0c25f9c48da47cb67c4814c3a",
+    "harness_sha256": "492c0ac6b0d57be50fe8aac9ff3db68f6c20c3bdbc329c85c09aa8a136240d1b"
+  },
+  "receipts": {
+    "full-tests.log": "063c7985ac8cfc7fefcd8c006b3d371c414d90ac1972c3fe05fdcea4d0df0c68",
+    "standalone-validation.json": "d4b45911c80bafa234bcc772363c79160ed3e95c36492c4c7e25a01b64b699fe",
+    "hosted-contract-check.json": "37df91592df75b21693008e7911b38a47b774e356ebd3c58c152bc7b1b65e306",
+    "measurement.json": "33c76935df7af740dc47c313e2a03f5364c347e0c25f9c48da47cb67c4814c3a"
+  },
+  "not_run": [
+    "live model generation",
+    "ChatGPT Canvas mount latency",
+    "full optional Playwright probes",
+    "Python 3.11-3.13",
+    "Linux/macOS",
+    "real Hermes host requalification",
+    "live providers/cloud"
+  ],
+  "approval": "No product Baker acceptance, private carrier update, deployment or publication",
+  "scope": "Source-bound local observations; hashes are integrity, not authentication or operator approval"
+}

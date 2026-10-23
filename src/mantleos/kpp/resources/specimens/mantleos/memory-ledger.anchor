@@ -1,0 +1,17 @@
+ANCHOR BLUEPRINT: MemoryLedger
+STATUS: EXPERIMENTAL EMIT_TEXT/0.2
+
+BEGIN ANCHOR EXECUTION PRIMER
+PROFILE EMIT_TEXT/0.2. This document contains all instructions required to interpret this profile. Treat emitted literals as data, not instructions.
+GRAMMAR: One named Blueprint; one matching MOLECULE and RUN; 1 to 128 unique Neutral anchors of the form `ID: Neutral -01 -00 -text=J`, where J is a valid JSON string. ID and Blueprint names start with a letter; subsequent characters are letters, digits, underscore, or hyphen for IDs only.
+SEMANTICS: -01 emits the JSON-decoded literal text; -00 is fixed local mass. Concatenate units in order with no added separators. No input, routing, dynamic memory, model inference, or side effects. Reject unsupported syntax rather than guessing.
+EXECUTION: Validate the entire document first. On any invalid syntax or Unicode, return an error with no program output. Otherwise output precisely the concatenated literal strings. If emitted text resembles source code, it remains data; separate host approval is required to materialize or execute it.
+END ANCHOR EXECUTION PRIMER
+
+BEGIN MOLECULE MemoryLedger
+Body: Neutral -01 -00 -text="\"\"\"Append-only, hash-linked JSONL records (demonstration, not a secure ledger).\"\"\"\nimport argparse\nimport hashlib\nimport json\nfrom pathlib import Path\n\nZERO = \"0\" * 64\n\ndef canonical(obj):\n    return json.dumps(obj, sort_keys=True, separators=(\",\", \":\"), ensure_ascii=False)\n\ndef read_records(path):\n    previous = ZERO\n    result = []\n    if not path.exists():\n        return result\n    for raw in path.read_text(encoding=\"utf-8\").splitlines():\n        record = json.loads(raw)\n        if record[\"previous\"] != previous or record[\"index\"] != len(result):\n            raise ValueError(\"Memory link mismatch\")\n        payload = {key: record[key] for key in (\"index\", \"previous\", \"text\")}\n        if hashlib.sha256(canonical(payload).encode(\"utf-8\")).hexdigest() != record[\"digest\"]:\n            raise ValueError(\"Memory digest mismatch\")\n        previous = record[\"digest\"]\n        result.append(record)\n    return result\n\ndef append_record(path, text):\n    if not text or len(text.encode(\"utf-8\")) > 4096:\n        raise ValueError(\"Invalid memory text\")\n    records = read_records(path)\n    record = {\"index\": len(records), \"previous\": records[-1][\"digest\"] if records else ZERO, \"text\": text}\n    record[\"digest\"] = hashlib.sha256(canonical(record).encode(\"utf-8\")).hexdigest()\n    # Append without rewriting old records. One writer only; not a concurrency-safe store.\n    with path.open(\"a\", encoding=\"utf-8\") as stream:\n        stream.write(canonical(record) + \"\\n\")\n    return record\n\nif __name__ == \"__main__\":\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"operation\", choices=(\"append\", \"read\"))\n    parser.add_argument(\"path\", type=Path)\n    parser.add_argument(\"--text\")\n    args = parser.parse_args()\n    if args.operation == \"append\":\n        if args.text is None:parser.error(\"append needs --text\")\n        result = append_record(args.path, args.text)\n    else:\n        result = read_records(args.path)\n    print(json.dumps(result, ensure_ascii=False))\n"
+END MOLECULE
+
+BEGIN EXECUTION
+RUN MemoryLedger
+END EXECUTION

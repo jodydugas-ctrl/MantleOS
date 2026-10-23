@@ -1,0 +1,209 @@
+[
+  {
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/pulls/comments/3936566815",
+    "pull_request_review_id": 5116205512,
+    "id": 3936566815,
+    "node_id": "PRRC_kwDOUMjVl87qoz4f",
+    "diff_hunk": "@@ -0,0 +1,531 @@\n+\"\"\"Read-first, substrate-neutral NEST assimilation for MantleOS 2.\n+\n+The constructor clones and inventories a host, then writes only Mantle-owned\n+construction tissue.  It never executes code from the cloned repository and\n+never performs birth.\n+\"\"\"\n+\n+from __future__ import annotations\n+\n+import gzip\n+import hashlib\n+import json\n+import os\n+import re\n+import subprocess\n+import tempfile\n+from collections.abc import Iterable\n+from dataclasses import asdict, dataclass\n+from datetime import UTC, datetime\n+from pathlib import Path\n+from typing import Any\n+from urllib.parse import urlparse\n+\n+from .constitution import COMMANDMENTS_VERSION, species_kernel_markdown, species_kernel_sha256\n+from .construction import create_execution_plan\n+from .mapping import map_body\n+from .targets.hermes import HermesInnervationError, innervate, is_hermes\n+\n+SCHEMA = \"mantle.assimilation.v2\"\n+GITHUB_REPOSITORY = re.compile(r\"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$\")\n+PRIVATE_NAMES = {\".git\", \".mantle\", \"__pycache__\", \".pytest_cache\", \".venv\", \"venv\"}\n+GITIGNORE_BLOCK = \"\"\"# MantleOS private organism state and local communication surfaces.\n+/.mantle/\n+/COMMUNICATION.TXT\n+/Food.txt\n+\"\"\"\n+\n+\n+class AssimilationError(RuntimeError):\n+    \"\"\"A construction or evidence gate could not be satisfied.\"\"\"\n+\n+\n+def utc_now() -> str:\n+    return datetime.now(UTC).isoformat().replace(\"+00:00\", \"Z\")\n+\n+\n+def canonical_json(value: Any) -> bytes:\n+    return json.dumps(value, sort_keys=True, separators=(\",\", \":\"), ensure_ascii=False).encode(\"utf-8\")\n+\n+\n+def sha256_file(path: Path) -> str:\n+    digest = hashlib.sha256()\n+    with path.open(\"rb\") as handle:\n+        for chunk in iter(lambda: handle.read(1024 * 1024), b\"\"):\n+            digest.update(chunk)\n+    return digest.hexdigest()\n+\n+\n+def normalize_github_source(source: str) -> tuple[str, str]:\n+    \"\"\"Return canonical HTTPS URL and repository name for a GitHub source.\"\"\"\n+    raw = source.strip().rstrip(\"/\")\n+    if raw.startswith(\"git@github.com:\"):\n+        raw = raw.removeprefix(\"git@github.com:\")\n+    elif raw.startswith(\"github.com/\"):",
+    "path": "examples/hermes/seed/mantle/runtime/mantleos/assimilate.py",
+    "commit_id": "5bd23fac0a5463b8cf7e4dc226dd7cd8689fb8b5",
+    "original_commit_id": "5bd23fac0a5463b8cf7e4dc226dd7cd8689fb8b5",
+    "user": {
+      "login": "github-advanced-security[bot]",
+      "id": 62310815,
+      "node_id": "MDM6Qm90NjIzMTA4MTU=",
+      "avatar_url": "https://avatars.githubusercontent.com/in/57789?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/github-advanced-security%5Bbot%5D",
+      "html_url": "https://github.com/apps/github-advanced-security",
+      "followers_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "## CodeQL / Incomplete URL substring sanitization\n\nThe string [github.com/](1) may be at an arbitrary position in the sanitized URL.\n\n[Show more details](https://github.com/jodydugas-ctrl/MantleOS2/security/code-scanning/2)",
+    "created_at": "2026-09-04T17:47:42Z",
+    "updated_at": "2026-09-04T17:47:42Z",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/pull/28#discussion_r3936566815",
+    "pull_request_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/pulls/28",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/pulls/comments/3936566815"
+      },
+      "html": {
+        "href": "https://github.com/jodydugas-ctrl/MantleOS2/pull/28#discussion_r3936566815"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/pulls/28"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/pulls/comments/3936566815/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": null,
+    "original_start_line": null,
+    "start_side": null,
+    "line": null,
+    "original_line": 64,
+    "side": "RIGHT",
+    "author_association": "NONE",
+    "original_position": 64,
+    "position": 1,
+    "subject_type": "line"
+  },
+  {
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/pulls/comments/3936613237",
+    "pull_request_review_id": 5116272445,
+    "id": 3936613237,
+    "node_id": "PRRC_kwDOUMjVl87qo_N1",
+    "diff_hunk": "@@ -0,0 +1,539 @@\n+\"\"\"Read-first, substrate-neutral NEST assimilation for MantleOS 2.\n+\n+The constructor clones and inventories a host, then writes only Mantle-owned\n+construction tissue.  It never executes code from the cloned repository and\n+never performs birth.\n+\"\"\"\n+\n+from __future__ import annotations\n+\n+import gzip\n+import hashlib\n+import json\n+import os\n+import re\n+import subprocess\n+import tempfile\n+from collections.abc import Iterable\n+from dataclasses import asdict, dataclass\n+from datetime import UTC, datetime\n+from pathlib import Path\n+from typing import Any\n+from urllib.parse import urlparse\n+\n+from .constitution import COMMANDMENTS_VERSION, species_kernel_markdown, species_kernel_sha256\n+from .construction import create_execution_plan\n+from .mapping import map_body\n+from .targets.hermes import HermesInnervationError, innervate, is_hermes\n+\n+SCHEMA = \"mantle.assimilation.v2\"\n+GITHUB_REPOSITORY = re.compile(r\"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$\")\n+PRIVATE_NAMES = {\".git\", \".mantle\", \"__pycache__\", \".pytest_cache\", \".venv\", \"venv\"}\n+GITIGNORE_BLOCK = \"\"\"# MantleOS private organism state and local communication surfaces.\n+/.mantle/\n+/COMMUNICATION.TXT\n+/Food.txt\n+\"\"\"\n+\n+\n+class AssimilationError(RuntimeError):\n+    \"\"\"A construction or evidence gate could not be satisfied.\"\"\"\n+\n+\n+def utc_now() -> str:\n+    return datetime.now(UTC).isoformat().replace(\"+00:00\", \"Z\")\n+\n+\n+def canonical_json(value: Any) -> bytes:\n+    return json.dumps(value, sort_keys=True, separators=(\",\", \":\"), ensure_ascii=False).encode(\"utf-8\")\n+\n+\n+def sha256_file(path: Path) -> str:\n+    digest = hashlib.sha256()\n+    with path.open(\"rb\") as handle:\n+        for chunk in iter(lambda: handle.read(1024 * 1024), b\"\"):\n+            digest.update(chunk)\n+    return digest.hexdigest()\n+\n+\n+def normalize_github_source(source: str) -> tuple[str, str]:\n+    \"\"\"Return canonical HTTPS URL and repository name for a GitHub source.\"\"\"\n+    candidate = source.strip().rstrip(\"/\")\n+    if candidate.startswith(\"git@github.com:\"):\n+        raw = candidate.split(\":\", 1)[1]\n+    else:\n+        if candidate.startswith(\"github.com/\"):",
+    "path": "examples/hermes/seed/mantle/runtime/mantleos/assimilate.py",
+    "commit_id": "648b18d0557318c47571e414e459f0eb4bf319db",
+    "original_commit_id": "648b18d0557318c47571e414e459f0eb4bf319db",
+    "user": {
+      "login": "github-advanced-security[bot]",
+      "id": 62310815,
+      "node_id": "MDM6Qm90NjIzMTA4MTU=",
+      "avatar_url": "https://avatars.githubusercontent.com/in/57789?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/github-advanced-security%5Bbot%5D",
+      "html_url": "https://github.com/apps/github-advanced-security",
+      "followers_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "## CodeQL / Incomplete URL substring sanitization\n\nThe string [github.com/](1) may be at an arbitrary position in the sanitized URL.\n\n[Show more details](https://github.com/jodydugas-ctrl/MantleOS2/security/code-scanning/4)",
+    "created_at": "2026-09-04T17:54:21Z",
+    "updated_at": "2026-09-04T17:54:21Z",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/pull/28#discussion_r3936613237",
+    "pull_request_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/pulls/28",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/pulls/comments/3936613237"
+      },
+      "html": {
+        "href": "https://github.com/jodydugas-ctrl/MantleOS2/pull/28#discussion_r3936613237"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/pulls/28"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/pulls/comments/3936613237/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": null,
+    "original_start_line": null,
+    "start_side": null,
+    "line": null,
+    "original_line": 65,
+    "side": "RIGHT",
+    "author_association": "NONE",
+    "original_position": 65,
+    "position": 1,
+    "subject_type": "line"
+  },
+  {
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/pulls/comments/3936613249",
+    "pull_request_review_id": 5116272445,
+    "id": 3936613249,
+    "node_id": "PRRC_kwDOUMjVl87qo_OB",
+    "diff_hunk": "@@ -56,16 +58,24 @@\n \n def normalize_github_source(source: str) -> tuple[str, str]:\n     \"\"\"Return canonical HTTPS URL and repository name for a GitHub source.\"\"\"\n-    raw = source.strip().rstrip(\"/\")\n-    if raw.startswith(\"git@github.com:\"):\n-        raw = raw.removeprefix(\"git@github.com:\")\n-    elif raw.startswith(\"github.com/\"):\n-        raw = raw.removeprefix(\"github.com/\")\n-    elif raw.startswith(\"https://github.com/\") or raw.startswith(\"http://github.com/\"):\n-        parsed = urlparse(raw)\n-        raw = parsed.path.strip(\"/\")\n+    candidate = source.strip().rstrip(\"/\")\n+    if candidate.startswith(\"git@github.com:\"):\n+        raw = candidate.split(\":\", 1)[1]\n     else:\n-        raise AssimilationError(\"The alpha constructor accepts only github.com repositories\")\n+        if candidate.startswith(\"github.com/\"):",
+    "path": "src/mantleos/assimilate.py",
+    "commit_id": "648b18d0557318c47571e414e459f0eb4bf319db",
+    "original_commit_id": "648b18d0557318c47571e414e459f0eb4bf319db",
+    "user": {
+      "login": "github-advanced-security[bot]",
+      "id": 62310815,
+      "node_id": "MDM6Qm90NjIzMTA4MTU=",
+      "avatar_url": "https://avatars.githubusercontent.com/in/57789?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/github-advanced-security%5Bbot%5D",
+      "html_url": "https://github.com/apps/github-advanced-security",
+      "followers_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/subscriptions",
+      "organizations_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/orgs",
+      "repos_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/repos",
+      "events_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/github-advanced-security%5Bbot%5D/received_events",
+      "type": "Bot",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "body": "## CodeQL / Incomplete URL substring sanitization\n\nThe string [github.com/](1) may be at an arbitrary position in the sanitized URL.\n\n[Show more details](https://github.com/jodydugas-ctrl/MantleOS2/security/code-scanning/3)",
+    "created_at": "2026-09-04T17:54:21Z",
+    "updated_at": "2026-09-04T17:54:21Z",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/pull/28#discussion_r3936613249",
+    "pull_request_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/pulls/28",
+    "_links": {
+      "self": {
+        "href": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/pulls/comments/3936613249"
+      },
+      "html": {
+        "href": "https://github.com/jodydugas-ctrl/MantleOS2/pull/28#discussion_r3936613249"
+      },
+      "pull_request": {
+        "href": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/pulls/28"
+      }
+    },
+    "reactions": {
+      "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/pulls/comments/3936613249/reactions",
+      "total_count": 0,
+      "+1": 0,
+      "-1": 0,
+      "laugh": 0,
+      "hooray": 0,
+      "confused": 0,
+      "heart": 0,
+      "rocket": 0,
+      "eyes": 0
+    },
+    "start_line": null,
+    "original_start_line": null,
+    "start_side": null,
+    "line": null,
+    "original_line": 65,
+    "side": "RIGHT",
+    "author_association": "NONE",
+    "original_position": 33,
+    "position": 1,
+    "subject_type": "line"
+  }
+]

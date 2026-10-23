@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Observation Counter</title>
+<style>
+body{font:18px system-ui;max-width:36rem;margin:8vh auto;padding:1.5rem;background:#f5f5f2;color:#203028}
+button{font:inherit;padding:.7rem 1rem;margin:.25rem;border:1px solid #587363;border-radius:.4rem;cursor:pointer}
+output{display:block;font-size:4rem;margin:1rem 0}
+</style>
+<h1>Observation Counter</h1>
+<p>A small executable thought. Count observations, then reset for a new session.</p>
+<output id="count" aria-live="polite">0</output>
+<button id="add">Record an observation</button><button id="reset">Reset</button>
+<p>This example keeps state in this page only. It makes no network requests.</p>
+<script>
+let observations=0;
+const display=document.getElementById('count');
+document.getElementById('add').onclick=()=>{display.textContent=String(++observations)};
+document.getElementById('reset').onclick=()=>{observations=0;display.textContent='0'};
+</script>
+</html>

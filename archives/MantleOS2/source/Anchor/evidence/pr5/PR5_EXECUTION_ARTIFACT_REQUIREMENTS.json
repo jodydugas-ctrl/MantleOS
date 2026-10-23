@@ -1,0 +1,81 @@
+{
+  "schema": "scan.pr5.execution-artifact-requirements.v1",
+  "source_thread": {
+    "id": "6aa5dd4a-f49c-83e9-a15e-68e8a022fae5",
+    "title": "Continue SCAN Development",
+    "release_turn_id": "49a4d3d8-d4d2-4f10-a643-e4480895c3e4"
+  },
+  "release": {
+    "engine_version": "0.20",
+    "project_version": "0.27",
+    "reported_validation": {
+      "development_tests": "111/111 PASS",
+      "clean_release_tests": "111/111 PASS",
+      "handoff_manifest": "25/25 PASS",
+      "engine_self_audit": "67/67 PASS",
+      "llm_disabled_queries": "12/12 PASS",
+      "sealed_trial_verification": "16/16 PASS"
+    }
+  },
+  "required_artifacts": [
+    {
+      "role": "project_handoff",
+      "sha256": "f9590271c0c8cca16993e548667dcf9536c4a04c2be33590e83d302bac7cddb0",
+      "status": "recovered_and_sha256_verified"
+    },
+    {
+      "role": "engine_zip",
+      "sha256": "6dce99a4ed924d9e370a29367e7a59845f2eefac5414cb3403e873b8577f9af1",
+      "status": "recovered_and_sha256_verified"
+    },
+    {
+      "role": "wheel",
+      "sha256": "573ce1c0a0ea7e5bc0039ce954209e983ba3d373e73b9301baf282fd559076fa",
+      "status": "recovered_and_sha256_verified"
+    },
+    {
+      "role": "public_challenge",
+      "sha256": "ccd806213189e2b0bf0f7ec47bf3f608c41132ce6f16af7b04147ec9afdb5eee",
+      "status": "recovered_and_sha256_verified"
+    },
+    {
+      "role": "sealed_m6a_trial",
+      "sha256": "d1052f9a46e666f1f538fda9f6ac8cdd5aa00d39bfaa688c6c2553516e27f737",
+      "status": "recovered_and_sha256_verified"
+    },
+    {
+      "role": "cold_runner",
+      "expected_name": "RUN_PR5_NOTEPADNEXT_COLD_v020.ps1",
+      "verification": "must be contained by and verified through the authentic project handoff manifest",
+      "sha256": "138d36ff1abd6831587f3178e844ae42bfaec87220a79cc932b3710c5ca46def",
+      "status": "recovered_and_handoff_manifest_verified"
+    }
+  ],
+  "recovery_request": {
+    "sent_at_utc": "2026-09-13T18:47:04.0000000Z",
+    "destination_thread_id": "6aa5dd4a-f49c-83e9-a15e-68e8a022fae5",
+    "destination_thread_title": "Continue SCAN Development",
+    "message_turn_id": "3783bf35-02f3-4eb7-83b8-38fb97891dac",
+    "delivery_state": "written_as_user_message",
+    "assistant_generation_state": "completed",
+    "artifacts_recovered": true,
+    "drive_recovery_folder_id": "12tCMasfbftGUQB9_gGXTqbXoa2ZUv3xx"
+  },
+  "cold_execution": {
+    "state": "PASS",
+    "oracle_used_during_scan": false,
+    "commit": "f57db52d6760a2ce4149a37190c3adaa586845f5",
+    "tree": "f0995b128bf6dbc73e5d0f3ef4e4f302f8a3081b",
+    "verified_blob_count": 1928,
+    "content_unavailable_file_count": 0,
+    "certification_sha256": "6c0d476e2dd7a63481cf388e6d654798ffa26f8c72ce9760a8bd60667b075ce3",
+    "acquisition_sha256": "4a1343f4f56500ba850162039e7483e2f17f894be6493f5afbaacdf25c2c44a3",
+    "independent_verification": "12/12 PASS, 0 issues",
+    "calibration_verdict": "PARTIAL"
+  },
+  "execution_policy": {
+    "substitute_engine_allowed": false,
+    "oracle_allowed_before_scan_seal": false,
+    "h001_source_inspection_allowed": false
+  }
+}

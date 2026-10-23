@@ -1,0 +1,94 @@
+[
+  {
+    "id": 106712334819,
+    "run_id": 35717498664,
+    "workflow_name": "CodeQL",
+    "head_branch": "scan-v026-surface-denominator",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35717498664",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY2I0B4w",
+    "head_sha": "0ec392c645928e72361f06e99c4b5ad747a07301",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106712334819",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35717498664/job/106712334819",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T10:42:55Z",
+    "started_at": "2026-09-22T10:42:58Z",
+    "completed_at": "2026-09-22T10:43:52Z",
+    "name": "analyze",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T10:42:59Z",
+        "completed_at": "2026-09-22T10:43:00Z"
+      },
+      {
+        "name": "Run actions/checkout@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T10:43:00Z",
+        "completed_at": "2026-09-22T10:43:01Z"
+      },
+      {
+        "name": "Run github/codeql-action/init@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T10:43:01Z",
+        "completed_at": "2026-09-22T10:43:20Z"
+      },
+      {
+        "name": "Run github/codeql-action/analyze@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T10:43:20Z",
+        "completed_at": "2026-09-22T10:43:50Z"
+      },
+      {
+        "name": "Post Run github/codeql-action/analyze@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T10:43:50Z",
+        "completed_at": "2026-09-22T10:43:50Z"
+      },
+      {
+        "name": "Post Run github/codeql-action/init@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T10:43:50Z",
+        "completed_at": "2026-09-22T10:43:51Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-22T10:43:51Z",
+        "completed_at": "2026-09-22T10:43:51Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-22T10:43:51Z",
+        "completed_at": "2026-09-22T10:43:51Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106712334819",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000002528,
+    "runner_name": "GitHub Actions 1000002528",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

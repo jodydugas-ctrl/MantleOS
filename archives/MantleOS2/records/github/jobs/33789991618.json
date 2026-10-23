@@ -1,0 +1,134 @@
+[
+  {
+    "id": 100763995761,
+    "run_id": 33789991618,
+    "workflow_name": "Hermes assimilation",
+    "head_branch": "codex/generic-assimilation",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/33789991618",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAXdgCOcQ",
+    "head_sha": "d4486703e737a0f90ca47d76c67a258ad53c511b",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/100763995761",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/33789991618/job/100763995761",
+    "status": "completed",
+    "conclusion": "failure",
+    "created_at": "2026-09-03T18:21:19Z",
+    "started_at": "2026-09-03T18:21:22Z",
+    "completed_at": "2026-09-03T18:22:15Z",
+    "name": "Pinned Hermes delta",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-03T18:21:23Z",
+        "completed_at": "2026-09-03T18:21:24Z"
+      },
+      {
+        "name": "Run actions/checkout@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-03T18:21:24Z",
+        "completed_at": "2026-09-03T18:21:24Z"
+      },
+      {
+        "name": "Run actions/setup-python@v6",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-03T18:21:24Z",
+        "completed_at": "2026-09-03T18:21:25Z"
+      },
+      {
+        "name": "Run python -m pip install -e \".[dev]\"",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-03T18:21:25Z",
+        "completed_at": "2026-09-03T18:21:31Z"
+      },
+      {
+        "name": "Resolve certified commit",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-03T18:21:31Z",
+        "completed_at": "2026-09-03T18:21:31Z"
+      },
+      {
+        "name": "Construct candidate NEST",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-03T18:21:31Z",
+        "completed_at": "2026-09-03T18:22:14Z"
+      },
+      {
+        "name": "Verify delta and host boundary",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-03T18:22:14Z",
+        "completed_at": "2026-09-03T18:22:14Z"
+      },
+      {
+        "name": "Build and verify public direct-innervation seed",
+        "status": "completed",
+        "conclusion": "failure",
+        "number": 8,
+        "started_at": "2026-09-03T18:22:14Z",
+        "completed_at": "2026-09-03T18:22:14Z"
+      },
+      {
+        "name": "Prove host Python remains syntactically intact",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 9,
+        "started_at": "2026-09-03T18:22:14Z",
+        "completed_at": "2026-09-03T18:22:14Z"
+      },
+      {
+        "name": "Verify constructed Body remains un-born",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 10,
+        "started_at": "2026-09-03T18:22:14Z",
+        "completed_at": "2026-09-03T18:22:14Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v6",
+        "status": "completed",
+        "conclusion": "skipped",
+        "number": 19,
+        "started_at": "2026-09-03T18:22:14Z",
+        "completed_at": "2026-09-03T18:22:14Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 20,
+        "started_at": "2026-09-03T18:22:14Z",
+        "completed_at": "2026-09-03T18:22:14Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 21,
+        "started_at": "2026-09-03T18:22:14Z",
+        "completed_at": "2026-09-03T18:22:14Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/100763995761",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000001996,
+    "runner_name": "GitHub Actions 1000001996",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

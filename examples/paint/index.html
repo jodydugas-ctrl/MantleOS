@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A local, memory-bearing pixel editor baked with KPP. Windows XP Paint is its Chase target.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src blob: data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>untitled - Mantle Paint</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<main class="window" id="app-window" aria-label="Mantle Paint Bio-Software">
+  <header class="titlebar"><span class="app-icon" aria-hidden="true">▧</span><span id="document-title">untitled - Paint</span><span class="bio-tag" title="Local Bio-Software. No MIND required.">◉</span><div class="window-controls"><button id="minimize" aria-label="Minimize">_</button><button id="maximize" aria-label="Maximize">□</button><button id="close-window" aria-label="Stasis" class="close">×</button></div></header>
+  <nav id="menus" role="menubar" aria-label="Paint menus"></nav>
+  <aside id="recovery" hidden>There is a saved organism in this browser. <button id="recover-session">Recover session</button><button id="dismiss-recovery">Start fresh</button></aside>
+  <div class="work-area"><aside id="toolbox" aria-label="Tool Box"><div id="tools" role="toolbar" aria-label="Drawing tools"></div><div id="tool-options"></div></aside>
+    <section id="workspace" aria-label="Image workspace"><div id="paper"><canvas id="drawing" width="640" height="400" tabindex="0" aria-label="Drawing canvas">Use a modern browser with HTML canvas support.</canvas><canvas id="overlay" aria-hidden="true"></canvas><textarea id="text-editor" aria-label="Text to paint" spellcheck="false" hidden></textarea><button class="resize-handle" id="resize-canvas" aria-label="Resize canvas" title="Drag to change canvas size"></button></div></section>
+  </div>
+  <footer id="color-box"><div class="current-colors"><button id="background-color" title="Background color" aria-label="Background color"></button><button id="foreground-color" title="Foreground color" aria-label="Foreground color"></button><button id="swap-colors" title="Swap colors (X)" aria-label="Swap foreground and background">↔</button></div><div id="palette" role="toolbar" aria-label="Color palette"></div><span class="palette-hint">Left: foreground<br>Right: background</span></footer>
+  <div class="statusbar" id="statusbar" role="status"><span id="status-message">For Help, click Help Topics on the Help Menu.</span><span id="coordinates">0, 0 px</span><span id="dimensions">640 × 400 px</span><button id="memory-status" title="Open organism memory">◉ Awake · local memory</button></div>
+  <div id="sleep-screen" hidden><div><strong>Paint is resting.</strong><p>Your drawing stays here. Resume when you are ready.</p><button id="resume">Resume Body</button></div></div>
+</main>
+<button id="restore-window" hidden>▧ untitled - Paint</button>
+<input id="open-image" type="file" accept="image/png,image/jpeg,image/gif,image/bmp,.bmp" hidden>
+<input id="open-organism" type="file" accept="application/json,.json" hidden>
+<dialog id="dialog"><form id="dialog-form"><header class="titlebar"><span id="dialog-title">Paint</span><button type="button" id="dialog-close" class="close" aria-label="Close dialog">×</button></header><div id="dialog-body"></div><p id="dialog-error" role="alert"></p><footer class="dialog-buttons"><button type="submit" id="dialog-ok">OK</button><button type="button" id="dialog-cancel">Cancel</button></footer></form></dialog>
+<script src="raster.js"></script><script src="paint.js"></script>
+</body></html>

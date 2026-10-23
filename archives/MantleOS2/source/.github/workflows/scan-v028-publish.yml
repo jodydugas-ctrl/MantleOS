@@ -1,0 +1,123 @@
+name: Publish SCAN v0.28.0
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Anchor/engine/v0.28/**'
+      - 'Anchor/releases/v0.28/**'
+      - '.github/workflows/scan-v028-publish.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      SOURCE_DATE_EPOCH: '315532800'
+      EXPECTED_WHEEL_SHA256: '87fe51d3241d3b21627261bdb7db3ab5ad4bd69ac0b6a9de5d4fa9ccbb78aa79'
+      EXPECTED_MANIFEST_SHA256: 'a03048a4bc54e346313f5bd32e9fb5281ee5686a18e98bd55fcc0009ebfd861e'
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Skip if release already exists
+        id: existing
+        shell: bash
+        run: |
+          if gh release view v0.28.0 >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set up Python
+        if: steps.existing.outputs.exists != 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Verify sealed package manifest
+        if: steps.existing.outputs.exists != 'true'
+        shell: bash
+        run: |
+          test -f Anchor/engine/v0.28/PACKAGE_MANIFEST.json
+          printf '%s  %s\n' "$EXPECTED_MANIFEST_SHA256" "Anchor/engine/v0.28/PACKAGE_MANIFEST.json" | sha256sum -c -
+          PYTHONPATH="$GITHUB_WORKSPACE/Anchor/engine/v0.28" python - <<'PY'
+          from pathlib import Path
+          from scan.release import verify_package
+          result = verify_package(Path("Anchor/engine/v0.28"))
+          assert result["state"] == "PASS", result
+          assert result["manifest_file_count"] == 90, result
+          assert result["verified_file_count"] == 90, result
+          PY
+
+      - name: Build reproducible release artifacts
+        if: steps.existing.outputs.exists != 'true'
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip build
+          rm -rf release-tree-a release-tree-b release-build release-repeat
+          cp -a Anchor/engine/v0.28 release-tree-a
+          cp -a Anchor/engine/v0.28 release-tree-b
+          mkdir -p release-build release-repeat
+
+          python - <<'PY'
+          from pathlib import Path
+          import zipfile
+
+          def make_zip(root_name: str, out_name: str):
+              root = Path(root_name)
+              out = Path(out_name)
+              with zipfile.ZipFile(out, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as zf:
+                  for path in sorted(p for p in root.rglob("*") if p.is_file()):
+                      rel = Path("scan-software-body-0.28.0") / path.relative_to(root)
+                      info = zipfile.ZipInfo(rel.as_posix(), date_time=(1980, 1, 1, 0, 0, 0))
+                      info.compress_type = zipfile.ZIP_DEFLATED
+                      info.external_attr = 0o100644 << 16
+                      zf.writestr(info, path.read_bytes())
+
+          make_zip("release-tree-a", "release-build/scan-software-body-0.28.0.zip")
+          make_zip("release-tree-b", "release-repeat/scan-software-body-0.28.0.zip")
+          PY
+
+          cmp release-build/scan-software-body-0.28.0.zip release-repeat/scan-software-body-0.28.0.zip
+
+          python -m build --wheel release-tree-a --outdir release-build
+          python -m build --wheel release-tree-b --outdir release-repeat
+          cmp release-build/*.whl release-repeat/*.whl
+
+          cp Anchor/engine/v0.28/PACKAGE_MANIFEST.json release-build/PACKAGE_MANIFEST.json
+          (
+            cd release-build
+            sha256sum PACKAGE_MANIFEST.json *.whl *.zip > SHA256SUMS.txt
+            cat SHA256SUMS.txt
+          )
+
+      - name: Verify sealed artifact identities
+        if: steps.existing.outputs.exists != 'true'
+        shell: bash
+        run: |
+          WHEEL="$(ls release-build/*.whl | head -n 1)"
+          printf '%s  %s\n' "$EXPECTED_WHEEL_SHA256" "$WHEEL" | sha256sum -c -
+          printf '%s  %s\n' "$EXPECTED_MANIFEST_SHA256" "release-build/PACKAGE_MANIFEST.json" | sha256sum -c -
+
+      - name: Publish GitHub release and tag
+        if: steps.existing.outputs.exists != 'true'
+        shell: bash
+        run: |
+          gh release create v0.28.0 \
+            --target "$GITHUB_SHA" \
+            --title "SCAN v0.28.0" \
+            --notes-file Anchor/releases/v0.28/RELEASE_NOTES.md \
+            release-build/*.whl \
+            release-build/scan-software-body-0.28.0.zip \
+            release-build/PACKAGE_MANIFEST.json \
+            release-build/SHA256SUMS.txt

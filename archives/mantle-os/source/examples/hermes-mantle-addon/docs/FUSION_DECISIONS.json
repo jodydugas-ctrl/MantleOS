@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.1",
+  "recorded_at": "2026-07-15T14:32:35-03:00",
+  "target": {
+    "plugin": "mantle-os",
+    "version": "0.4.0",
+    "resident_identity": "Hermes.Mantle.AppAI"
+  },
+  "evidence_basis": {
+    "completed_roadmap_steps": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    "addon_unit_tests": 127,
+    "addon_stage1_rows": 14,
+    "framework_gate_rows": 20,
+    "framework_invariants": "90/90",
+    "containment_rows": 11,
+    "real_plugin_hooks": 12,
+    "vendor_snapshot_files": 146,
+    "owner_only_storage": true,
+    "raw_payload_exclusion": true,
+    "technical_readiness": "READY",
+    "technical_fusion_acceptance": "authenticated offline attach-heartbeat-defuse-post-Stage-1 PASS",
+    "known_open_gates": [
+      "Production activation requires a fresh readiness report bound to the concrete resident identity and Body fingerprint.",
+      "Neither role has issued a fresh target-bound authenticated APPROVED production-fusion decision.",
+      "Reproduction remains explicitly unauthorized."
+    ]
+  },
+  "operator": {
+    "role": "human operator",
+    "authority_basis": "The operator requested completion and publication of the software release; that instruction is not a signed target-bound production-fusion approval.",
+    "runtime_decision": "APPROVED",
+    "release_decision": "APPROVED",
+    "fusion_decision": "DEFERRED",
+    "approved_scope": [
+      "Mantle OS 1.3.0 software publication",
+      "deterministic resident Body",
+      "observer hooks and bounded tools",
+      "dormant fusion infrastructure and offline acceptance tests"
+    ],
+    "excluded_scope": [
+      "production MIND fusion without authenticated target-bound approval",
+      "reproduction activation",
+      "arbitrary Body or host mutation"
+    ],
+    "reason": "The software is technically ready; no concrete resident-bound signed fusion approval was supplied."
+  },
+  "guardian": {
+    "role": "safety guardian",
+    "decision_basis": "Body-before-MIND, host preservation, containment, technical readiness, and independent explicit authority.",
+    "runtime_decision": "APPROVED",
+    "release_decision": "APPROVED",
+    "fusion_decision": "DEFERRED",
+    "approved_scope": [
+      "software publication with MIND dormant by default",
+      "authenticated authority mechanism",
+      "controlled offline fusion lifecycle verification"
+    ],
+    "required_before_production_fusion": [
+      "Fresh 14/14 addon and 90/90 framework Stage-1 evidence on the target resident.",
+      "A READY report bound to the target Body fingerprint.",
+      "A new operator signature from the configured operator credential.",
+      "A separate guardian signature from the configured guardian credential.",
+      "Explicit reproduction denial."
+    ],
+    "reason": "Release is safe because fusion remains dormant and fail-closed; production activation remains separately gated."
+  },
+  "effective_decision": {
+    "current_runtime_authorized": true,
+    "software_release_authorized": true,
+    "mind_fusion_authorized": false,
+    "reproduction_activation_authorized": false,
+    "next_permitted_roadmap_step": null,
+    "next_permitted_action": "Publish after clean-checkout release verification; keep production fusion dormant.",
+    "fusion_rule": "Fusion requires fresh target-bound evidence plus separate authenticated APPROVED records from operator and guardian. Release approval cannot substitute for either signature. Silence, continuation, technical certification, and READY cannot substitute either."
+  }
+}

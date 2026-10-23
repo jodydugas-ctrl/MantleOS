@@ -1,0 +1,37 @@
+name: Organize.AppAI certification
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  appai:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.10", "3.12"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install pinned Mantle 2 and Organize.AppAI
+        run: |
+          python -m pip install "mantle-os @ git+https://github.com/jodydugas-ctrl/mantle-os.git@main"
+          python -m pip install -e . pytest pyfakefs
+      - name: Birth a disposable CI resident
+        run: python -m mantle anchor . --name=Organize.AppAI
+      - name: Full host and AppAI suite
+        run: python -m pytest -q
+      - name: Contained offline demo
+        shell: bash
+        run: scripts/demo.sh
+      - name: Application certification
+        run: |
+          python -c "from pathlib import Path; Path('artifacts').mkdir(exist_ok=True)"
+          python scripts/certify_app.py .mantle --out=artifacts/ci-certification.json
+      - name: Secret and private-path scan
+        run: python scripts/release_scan.py

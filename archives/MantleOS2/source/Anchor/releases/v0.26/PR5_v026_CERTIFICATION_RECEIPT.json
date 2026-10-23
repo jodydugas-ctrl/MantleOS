@@ -1,0 +1,73 @@
+{
+  "schema_version": "scan-specimen-certification/0.1",
+  "engine_version": "0.26.0",
+  "state": "PASS",
+  "meaning": "PASS means the evidence handoff passed SCAN mechanical integrity gates; it is not a claim of complete understanding.",
+  "llm_environment": "DISABLED",
+  "specimen": {
+    "specimen_id": "dail8859/NotepadNext@f57db52d6760a2ce4149a37190c3adaa586845f5",
+    "fingerprint": {
+      "kind": "provider-tree",
+      "value": "f0995b128bf6dbc73e5d0f3ef4e4f302f8a3081b",
+      "provider": "github"
+    },
+    "acquisition_mode": "manifest",
+    "provider": "github",
+    "repository": "dail8859/NotepadNext",
+    "commit_sha": "f57db52d6760a2ce4149a37190c3adaa586845f5",
+    "tree_sha": "f0995b128bf6dbc73e5d0f3ef4e4f302f8a3081b"
+  },
+  "policy": {
+    "max_file_bytes": 67108864,
+    "max_total_bytes": 0,
+    "max_materialized_files": 0,
+    "max_extraction_seconds": 0.0,
+    "max_nodes": 0,
+    "max_edges": 0,
+    "max_evidence": 0
+  },
+  "environment": {
+    "python_version": "3.13.13",
+    "python_implementation": "CPython",
+    "system": "Windows",
+    "machine": "AMD64"
+  },
+  "mechanical_health": {
+    "package_state": "PASS",
+    "projection_state": "PASS",
+    "query_state": "PASS",
+    "queries_passed": 12,
+    "queries_required": 12,
+    "integrity_state": "PARTIAL",
+    "integrity_error_count": 0,
+    "surface_closure_state": "PARTIAL",
+    "effect_closure_state": "PARTIAL"
+  },
+  "coverage": {
+    "execution_state": "COMPLETE_WITH_EXPLICIT_COVERAGE_VECTOR",
+    "completeness_dimension_state_counts": {
+      "MAPPED": 19,
+      "PARTIAL": 35,
+      "UNKNOWN": 3
+    },
+    "content_unavailable_file_count": 0,
+    "budget_triggered": false,
+    "budget_reason": null,
+    "parser_failure_count": 0,
+    "parser_gap_count": 331,
+    "rule": "PASS certifies mechanical integrity of this evidence package, not universal semantic completeness; consult the coverage vector."
+  },
+  "counts": {
+    "files": 1928,
+    "materialized_files": 1928,
+    "nodes": 124959,
+    "edges": 139431,
+    "evidence": 137559,
+    "semantic_objects": 408862,
+    "semantic_relations": 1015328
+  },
+  "sealed_handoff": {
+    "manifest_file_count": 12,
+    "verification_state": "PASS"
+  }
+}

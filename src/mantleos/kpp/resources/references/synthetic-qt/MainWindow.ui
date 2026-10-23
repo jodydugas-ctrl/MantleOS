@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="windowTitle"><string>Synthetic Editor</string></property>
+  <widget class="QMenuBar" name="menubar">
+   <widget class="QMenu" name="menuFile">
+    <property name="title"><string>&amp;File</string></property>
+    <addaction name="actionOpen"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title"><string>&amp;Edit</string></property>
+    <addaction name="actionClear"/><addaction name="actionFind"/>
+   </widget>
+   <addaction name="menuFile"/><addaction name="menuEdit"/>
+  </widget>
+  <widget class="QPlainTextEdit" name="editor"/>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen"><property name="text"><string>Open</string></property><property name="shortcut"><string>Ctrl+O</string></property></action>
+  <action name="actionClear"><property name="text"><string>Clear</string></property></action>
+  <action name="actionFind"><property name="text"><string>Find</string></property><property name="shortcut"><string>Ctrl+F</string></property></action>
+ </widget>
+ <tabstops><tabstop>editor</tabstop></tabstops>
+ <connections><connection><sender>actionClear</sender><signal>triggered()</signal><receiver>editor</receiver><slot>clear()</slot></connection></connections>
+</ui>

@@ -1,0 +1,252 @@
+name: SCAN v0.28 calibration and determinism
+
+on:
+  push:
+    branches:
+      - anchor-v0.28-reconstruction-loop
+    paths:
+      - 'Anchor/engine/v0.28/**'
+      - '.github/workflows/scan-v028-calibration.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  calibration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      MOJI_COMMIT: 7793dbabc880a950b5003dcfd57c1222b279b807
+      MOJI_TREE: b4e0e6a4d2010a6d584f40b01ab5ffad7bf18fea
+      OPENAI_API_KEY: ''
+      ANTHROPIC_API_KEY: ''
+      GOOGLE_API_KEY: ''
+      GEMINI_API_KEY: ''
+      GROQ_API_KEY: ''
+      MISTRAL_API_KEY: ''
+      COHERE_API_KEY: ''
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install scanner-owned TypeScript parser
+        shell: bash
+        run: |
+          mkdir -p .scan-tools
+          npm install --prefix .scan-tools --ignore-scripts --no-package-lock --no-save typescript@5.7.2
+          echo "SCAN_TYPESCRIPT_MODULE=$GITHUB_WORKSPACE/.scan-tools/node_modules/typescript" >> "$GITHUB_ENV"
+
+      - name: Checkout frozen Moji specimen
+        uses: actions/checkout@v4
+        with:
+          repository: alexishida/Moji
+          ref: 7793dbabc880a950b5003dcfd57c1222b279b807
+          path: specimen
+          fetch-depth: 1
+
+      - name: Verify specimen identity
+        shell: bash
+        run: |
+          test "$(git -C specimen rev-parse HEAD)" = "$MOJI_COMMIT"
+          test "$(git -C specimen rev-parse HEAD^{tree})" = "$MOJI_TREE"
+
+      - name: Cold scan with v0.27
+        shell: bash
+        run: |
+          python -m pip install -e Anchor/engine/v0.27
+          python - <<'PY'
+          import scan
+          assert scan.__version__ == "0.27.0"
+          PY
+          scan-body scan specimen --out results/v027 --specimen-id "alexishida/Moji@$MOJI_COMMIT"
+
+      - name: Cold scans A and B with v0.28
+        shell: bash
+        run: |
+          python -m pip uninstall -y scan-software-body
+          python -m pip install -e Anchor/engine/v0.28
+          python - <<'PY'
+          import scan
+          assert scan.__version__ == "0.28.0"
+          PY
+          scan-body scan specimen --out results/v028-a --specimen-id "alexishida/Moji@$MOJI_COMMIT"
+          scan-body scan specimen --out results/v028-b --specimen-id "alexishida/Moji@$MOJI_COMMIT"
+
+      - name: Require byte-stable v0.28 canonical projections
+        shell: bash
+        run: |
+          for f in machine_body_map.json evidence_graph.json evidence_catalog.json completeness_vector.json integrity_report.json surface_closure.json effect_closure.json nest_capability_map.json stage1_summary.md projection_manifest.json assimilation_status.json; do
+            cmp "results/v028-a/$f" "results/v028-b/$f"
+          done
+          diff -qr results/v028-a/assimilation results/v028-b/assimilation
+
+      - name: Compare canonical database rows
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, sqlite3
+          from pathlib import Path
+
+          def rows(path, table):
+              db = sqlite3.connect(path)
+              db.row_factory = sqlite3.Row
+              try:
+                  return [dict(r) for r in db.execute(f"SELECT * FROM {table} ORDER BY 1")]
+              finally:
+                  db.close()
+
+          tables = [
+              "files", "nodes", "edges", "findings", "evidence",
+              "semantic_objects", "semantic_relations", "completeness_dimensions",
+          ]
+          mismatches = {}
+          for table in tables:
+              a = rows("results/v028-a/scan_index.sqlite", table)
+              b = rows("results/v028-b/scan_index.sqlite", table)
+              if a != b:
+                  mismatches[table] = {"a": len(a), "b": len(b)}
+          assert not mismatches, mismatches
+          Path("results/V028_DB_DETERMINISM.json").write_text(
+              json.dumps({"state":"PASS","tables":tables}, indent=2), encoding="utf-8"
+          )
+          PY
+
+      - name: Audit v0.27 to v0.28 delta and new web evidence
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, sqlite3
+          from collections import Counter
+          from pathlib import Path
+
+          def load(root, name):
+              return json.loads((Path(root) / name).read_text(encoding="utf-8"))
+
+          def dbrows(root, sql):
+              db = sqlite3.connect(Path(root) / "scan_index.sqlite")
+              db.row_factory = sqlite3.Row
+              try:
+                  return [dict(r) for r in db.execute(sql)]
+              finally:
+                  db.close()
+
+          old = load("results/v027", "machine_body_map.json")
+          new = load("results/v028-a", "machine_body_map.json")
+          old_surface = load("results/v027", "surface_closure.json")
+          new_surface = load("results/v028-a", "surface_closure.json")
+          old_effect = load("results/v027", "effect_closure.json")
+          new_effect = load("results/v028-a", "effect_closure.json")
+          new_integrity = load("results/v028-a", "integrity_report.json")
+
+          web_nodes = dbrows("results/v028-a",
+              "SELECT id,kind,name,path,coverage,attributes_json FROM nodes "
+              "WHERE id NOT IN (SELECT id FROM main.nodes WHERE 0)")
+          # Re-query by extractor evidence, because node IDs are canonical and do not encode adapter name.
+          db = sqlite3.connect(Path("results/v028-a") / "scan_index.sqlite")
+          db.row_factory = sqlite3.Row
+          try:
+              web_evidence = [dict(r) for r in db.execute(
+                  "SELECT id,path,start_line,end_line,evidence_class,extractor,excerpt FROM evidence "
+                  "WHERE extractor LIKE 'web-frontend/%' ORDER BY path,start_line,id"
+              )]
+              web_eids = {r["id"] for r in web_evidence}
+              nodes = [dict(r) for r in db.execute(
+                  "SELECT id,kind,name,path,coverage,evidence_ids_json,attributes_json FROM nodes ORDER BY path,kind,name,id"
+              )]
+              web_node_rows = []
+              for row in nodes:
+                  try:
+                      eids = set(json.loads(row["evidence_ids_json"] or "[]"))
+                  except Exception:
+                      eids = set()
+                  if eids & web_eids:
+                      web_node_rows.append(row)
+          finally:
+              db.close()
+
+          web_kind_counts = Counter(r["kind"] for r in web_node_rows)
+          web_surface_count = sum(1 for r in web_node_rows if r["kind"] == "human_surface")
+          web_handler_count = sum(1 for r in web_node_rows if r["kind"] == "handler_reference")
+          web_visual_count = sum(1 for r in web_node_rows if r["kind"] == "visual_contract")
+
+          delta = {
+              "schema_version": "scan-v028-calibration-delta/0.1",
+              "specimen": {"repository":"alexishida/Moji","commit":"7793dbabc880a950b5003dcfd57c1222b279b807","tree":"b4e0e6a4d2010a6d584f40b01ab5ffad7bf18fea"},
+              "v027": {
+                  "nodes": old["extraction"]["node_count"], "edges": old["extraction"]["edge_count"],
+                  "evidence": old["extraction"]["evidence_count"],
+                  "surface": {k: old_surface.get(k) for k in ("state","surface_count","bound_count","partial_count","unresolved_count")},
+                  "effect": {k: old_effect.get(k) for k in ("state","surface_count","closed_count","partial_count","unresolved_count")},
+              },
+              "v028": {
+                  "nodes": new["extraction"]["node_count"], "edges": new["extraction"]["edge_count"],
+                  "evidence": new["extraction"]["evidence_count"],
+                  "surface": {k: new_surface.get(k) for k in ("state","surface_count","bound_count","partial_count","unresolved_count")},
+                  "effect": {k: new_effect.get(k) for k in ("state","surface_count","closed_count","partial_count","unresolved_count")},
+                  "integrity": {k:new_integrity.get(k) for k in ("state","issue_count","severity_counts")},
+              },
+              "delta": {
+                  "nodes": new["extraction"]["node_count"] - old["extraction"]["node_count"],
+                  "edges": new["extraction"]["edge_count"] - old["extraction"]["edge_count"],
+                  "evidence": new["extraction"]["evidence_count"] - old["extraction"]["evidence_count"],
+                  "surface_count": new_surface.get("surface_count",0) - old_surface.get("surface_count",0),
+                  "bound_count": new_surface.get("bound_count",0) - old_surface.get("bound_count",0),
+                  "partial_count": new_surface.get("partial_count",0) - old_surface.get("partial_count",0),
+                  "unresolved_count": new_surface.get("unresolved_count",0) - old_surface.get("unresolved_count",0),
+              },
+              "new_web": {
+                  "evidence_count": len(web_evidence),
+                  "node_count": len(web_node_rows),
+                  "kind_counts": dict(sorted(web_kind_counts.items())),
+                  "surface_count": web_surface_count,
+                  "handler_count": web_handler_count,
+                  "visual_contract_count": web_visual_count,
+                  "records": web_node_rows[:200],
+              },
+          }
+
+          assert new_integrity.get("severity_counts",{}).get("ERROR",0) == 0, new_integrity
+          # v0.28 must not regress previously known closure. Additional web surfaces may legitimately
+          # increase the denominator, but existing aggregate bound/effect counts may not decrease.
+          assert new_surface.get("bound_count",0) >= old_surface.get("bound_count",0), delta
+          assert new_effect.get("closed_count",0) >= old_effect.get("closed_count",0), delta
+
+          # Every new web human surface must retain direct web-frontend evidence.
+          for row in web_node_rows:
+              if row["kind"] == "human_surface":
+                  assert row["coverage"] in {"MAPPED","PARTIAL"}, row
+                  assert row["path"].endswith((".html",".htm")), row
+
+          Path("results/V028_CALIBRATION_DELTA.json").write_text(
+              json.dumps(delta, indent=2, ensure_ascii=False), encoding="utf-8"
+          )
+          print(json.dumps(delta, indent=2, ensure_ascii=False))
+          PY
+
+      - name: Generate v0.28 portable artifacts from frozen specimen
+        shell: bash
+        run: |
+          scan-body anchor-code results/v028-a/scan_index.sqlite --out-dir results/v028-a
+          scan-body anchor-blueprint results/v028-a/scan_index.sqlite --out "results/Moji Anchor Blueprint.md"
+          test -s results/v028-a/anchor_code.txt
+          test -s "results/Moji Anchor Blueprint.md"
+
+      - name: Upload calibration evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scan-v028-calibration
+          path: results
+          if-no-files-found: error
+          retention-days: 14

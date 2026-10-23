@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.pytest-tmp/
+.ruff_cache/
+.venv/
+venv/
+build/
+dist/
+*.whl
+
+# Organism-private state and plaintext delivery surfaces.
+.mantle/
+COMMUNICATION.TXT
+Food.txt
+*.key
+*.pem
+.env
+
+# Reproducibility and release output.
+.artifacts/
+.assimilation-work/

@@ -1,0 +1,13 @@
+BEGIN ANCHOR EXECUTION PRIMER
+PROFILE: AGENTIC/0.2 (EXPERIMENTAL)
+SCOPE: Bounded sequential Anchor agent loop with explicit pause, resume and chat/PNG handoff.
+SOURCE: The Blueprint is the sole declarative source of the current AGENTIC/0.2 operation graph.
+OPERATIONS: -40 TASK_IN; -41 MIND.INFER; -42 TOOL_GUARD; -43 TOOL_DISPATCH; -44 TRACE; -45 BUDGET; -49 SESSION_CHECKPOINT; -4B CONTEXT_PROJECT; -4C CANCEL; -4E PORTABLE_HANDOFF; -46 STOP.
+MIND: MIND.INFER is an explicitly host-bound, provider-independent reasoning callback or manual chat response. It does not rename the birth Persona. No API calls are required.
+AUTHORITY: Neither a model reply, Blueprint, hash, Engram file nor PNG authorizes execution. Host grants only explicit, caller-registered read-only tools; all other actions stop. No ledger mutation.
+CONTINUITY: Paused sessions contain history and a hash-linked event trace; source, primer, optional Engram identity and pending request are pinned. Session checksums detect damage but do not authenticate untrusted carriers. A host must validate before use.
+CONTROL: One mind decision per step, explicit stop/cancel, no automatic retries. The model reply must bind to the pending request SHA-256. Explicit session replay does not guarantee exactly-once effects; only read-only tools allowed.
+CONTEXT: The model receives the task and a bounded tail of the history. Projection does not rewrite the full session. Preserve explicit evidence provenance and never promote carried claims into host receipts.
+TRANSPORT: JSON is canonical. ChromaMem v5 PNG is an optional lossless carrier for the same bytes; hosts may recompress or drop image data, so PNG round-trip must be checked. No hidden channels or unauthorized crossings.
+LIMITS: Strict opcode order, bounded source, history, step counts and tool calls; unsupported inputs fail closed. An external LLM chat can supply a reply but cannot run local tools unless the actual host supplies them.
+END ANCHOR EXECUTION PRIMER

@@ -1,0 +1,22 @@
+{
+  "schema": "kpp.reflex-tests/1",
+  "recipe_id": "adaptive-reflex-demo",
+  "recipe_sha256": "a845ac41a62932f2a8cd2f54b17d823efbad98347287974b0a26f75fb13c6f76",
+  "cases": [
+    {
+      "anchor": "original-commands",
+      "script": "check_original.py",
+      "sha256": "fd0b3f2ae8f091717b88400828dfb2203dfaef4e32cb0274464e329a50f2cfb8"
+    },
+    {
+      "anchor": "after-success-reflex",
+      "script": "check_reflex.py",
+      "sha256": "47f42d44fad1e1ac97dbec40e68d919ac021127f28b45ab6e6e04427f3f67236"
+    },
+    {
+      "anchor": "optional-organ-absent",
+      "script": "check_absent.py",
+      "sha256": "a4748d72ad8ca8a00846eec112c8dbfae28964c5e32f83fdd57c9178fb7dd9c3"
+    }
+  ]
+}

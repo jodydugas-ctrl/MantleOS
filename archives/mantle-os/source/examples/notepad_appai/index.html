@@ -1,0 +1,1613 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mantle Notepad AppAI</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root {
+      color-scheme: light;
+      --chrome: #c0c0c0;
+      --chrome-hi: #ffffff;
+      --chrome-lo: #808080;
+      --chrome-dark: #404040;
+      --ink: #000000;
+      --paper: #ffffff;
+      --select: #0a246a;
+      --status-ok: #0f6b2b;
+      --status-warn: #7b4e00;
+      --status-bad: #8b1f1f;
+      --font-ui: Tahoma, "MS Sans Serif", Arial, sans-serif;
+      --font-editor: Consolas, "Courier New", monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body,
+    #app {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      background: var(--chrome);
+      color: var(--ink);
+      font: 12px/1.25 var(--font-ui);
+      letter-spacing: 0;
+      overflow: hidden;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+      letter-spacing: 0;
+    }
+
+    button,
+    select,
+    input {
+      border: 2px solid;
+      border-color: var(--chrome-hi) var(--chrome-lo) var(--chrome-lo) var(--chrome-hi);
+      background: var(--chrome);
+      color: var(--ink);
+      min-height: 23px;
+    }
+
+    button {
+      padding: 2px 8px;
+      text-align: left;
+      cursor: default;
+    }
+
+    button:active,
+    button[aria-pressed="true"] {
+      border-color: var(--chrome-lo) var(--chrome-hi) var(--chrome-hi) var(--chrome-lo);
+      padding: 3px 7px 1px 9px;
+    }
+
+    button:focus-visible,
+    textarea:focus,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 1px dotted var(--ink);
+      outline-offset: -3px;
+    }
+
+    .window {
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      border: 2px solid;
+      border-color: var(--chrome-hi) var(--chrome-dark) var(--chrome-dark) var(--chrome-hi);
+      background: var(--chrome);
+    }
+
+    .titlebar {
+      height: 24px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 4px;
+      background: linear-gradient(90deg, #000080, #1084d0);
+      color: white;
+      font-weight: 700;
+      user-select: none;
+    }
+
+    .title-icon {
+      width: 16px;
+      height: 16px;
+      display: grid;
+      place-items: center;
+      border: 1px solid white;
+      background: #e8e8e8;
+      color: #000080;
+      font: 700 11px/1 var(--font-editor);
+    }
+
+    .title-text {
+      min-width: 0;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 2px;
+    }
+
+    .window-controls button {
+      width: 18px;
+      height: 18px;
+      min-height: 18px;
+      padding: 0;
+      text-align: center;
+      font-weight: 700;
+      line-height: 14px;
+    }
+
+    .menubar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 1px;
+      padding: 2px;
+      border-bottom: 1px solid var(--chrome-lo);
+      background: var(--chrome);
+      user-select: none;
+    }
+
+    .menu-button {
+      border: 1px solid transparent;
+      min-height: 20px;
+      padding: 2px 7px;
+      background: transparent;
+    }
+
+    .menu-button:hover,
+    .menu-button[aria-expanded="true"] {
+      border-color: var(--chrome-hi) var(--chrome-lo) var(--chrome-lo) var(--chrome-hi);
+    }
+
+    .menu {
+      position: absolute;
+      top: 24px;
+      z-index: 20;
+      min-width: 176px;
+      display: none;
+      padding: 2px;
+      border: 2px solid;
+      border-color: var(--chrome-hi) var(--chrome-dark) var(--chrome-dark) var(--chrome-hi);
+      background: var(--chrome);
+      box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.28);
+    }
+
+    .menu[aria-hidden="false"] { display: block; }
+
+    .menu button {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      border: 0;
+      min-height: 22px;
+      padding: 3px 18px 3px 18px;
+      background: transparent;
+    }
+
+    .menu button:hover,
+    .menu button:focus-visible {
+      background: var(--select);
+      color: white;
+      outline: 0;
+    }
+
+    .menu hr {
+      height: 1px;
+      margin: 3px 2px;
+      border: 0;
+      background: var(--chrome-lo);
+      border-bottom: 1px solid var(--chrome-hi);
+    }
+
+    .main {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(280px, 1fr) 310px;
+      border-top: 1px solid var(--chrome-hi);
+    }
+
+    .main.panel-hidden {
+      grid-template-columns: 1fr 0;
+    }
+
+    .editor-shell {
+      min-width: 0;
+      min-height: 0;
+      padding: 3px;
+      border-right: 1px solid var(--chrome-lo);
+    }
+
+    #editor {
+      width: 100%;
+      height: 100%;
+      display: block;
+      resize: none;
+      overflow: auto;
+      border: 2px solid;
+      border-color: var(--chrome-lo) var(--chrome-hi) var(--chrome-hi) var(--chrome-lo);
+      background: var(--paper);
+      color: var(--ink);
+      padding: 4px;
+      font-family: var(--font-editor);
+      font-size: 14px;
+      line-height: 1.35;
+      white-space: pre;
+      tab-size: 4;
+    }
+
+    #editor.word-wrap {
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+      overflow-x: hidden;
+    }
+
+    .appai-panel {
+      min-width: 0;
+      min-height: 0;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      padding: 6px;
+      gap: 6px;
+      overflow: hidden;
+    }
+
+    .main.panel-hidden .appai-panel {
+      display: none;
+    }
+
+    .group {
+      border: 2px solid;
+      border-color: var(--chrome-lo) var(--chrome-hi) var(--chrome-hi) var(--chrome-lo);
+      padding: 8px 6px 6px;
+      position: relative;
+      background: var(--chrome);
+    }
+
+    .group-title {
+      position: absolute;
+      top: -8px;
+      left: 6px;
+      padding: 0 4px;
+      background: var(--chrome);
+      font-weight: 700;
+    }
+
+    .kv {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 4px 6px;
+      align-items: center;
+    }
+
+    .mono {
+      font-family: var(--font-editor);
+      font-size: 11px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 1px 4px;
+      border: 1px solid var(--chrome-lo);
+      background: #e8e8e8;
+      font-weight: 700;
+    }
+
+    .pill.ok { color: var(--status-ok); }
+    .pill.warn { color: var(--status-warn); }
+
+    .ledger {
+      min-height: 0;
+      overflow: auto;
+      margin: 0;
+      padding: 5px;
+      border: 2px solid;
+      border-color: var(--chrome-lo) var(--chrome-hi) var(--chrome-hi) var(--chrome-lo);
+      background: #f7f7f7;
+      font: 11px/1.35 var(--font-editor);
+    }
+
+    .statusbar {
+      min-height: 23px;
+      display: grid;
+      grid-template-columns: minmax(90px, 1fr) auto auto auto auto auto;
+      gap: 2px;
+      padding: 2px;
+      border-top: 1px solid var(--chrome-hi);
+    }
+
+    .status-cell {
+      min-width: 66px;
+      padding: 2px 6px;
+      border: 1px solid;
+      border-color: var(--chrome-lo) var(--chrome-hi) var(--chrome-hi) var(--chrome-lo);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .status-message { min-width: 150px; }
+
+    dialog {
+      padding: 0;
+      border: 2px solid;
+      border-color: var(--chrome-hi) var(--chrome-dark) var(--chrome-dark) var(--chrome-hi);
+      background: var(--chrome);
+      color: var(--ink);
+      box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+      max-width: calc(100vw - 24px);
+    }
+
+    dialog::backdrop { background: rgba(0, 0, 0, 0.2); }
+
+    .dialog-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-width: 280px;
+      height: 22px;
+      padding: 2px 4px;
+      background: #000080;
+      color: white;
+      font-weight: 700;
+    }
+
+    .dialog-title button {
+      width: 18px;
+      height: 18px;
+      min-height: 18px;
+      padding: 0;
+      text-align: center;
+    }
+
+    .dialog-body {
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      min-width: 320px;
+    }
+
+    .dialog-row {
+      display: grid;
+      grid-template-columns: 72px minmax(180px, 1fr);
+      gap: 8px;
+      align-items: center;
+    }
+
+    .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .dialog-body input,
+    .dialog-body select {
+      width: 100%;
+      background: white;
+    }
+
+    .help-text {
+      max-width: 470px;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 820px) {
+      .main {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(280px, 1fr) 220px;
+      }
+
+      .editor-shell {
+        border-right: 0;
+        border-bottom: 1px solid var(--chrome-lo);
+      }
+
+      .statusbar {
+        grid-template-columns: 1fr 76px 62px;
+      }
+
+      .status-cell.optional {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="app" class="window" role="application" aria-label="Mantle Notepad AppAI">
+  <div class="titlebar">
+    <div class="title-icon" aria-hidden="true">N</div>
+    <div id="titleText" class="title-text">Untitled - Mantle Notepad AppAI</div>
+    <div class="window-controls" aria-hidden="true">
+      <button type="button" tabindex="-1">_</button>
+      <button type="button" tabindex="-1">□</button>
+      <button type="button" tabindex="-1">×</button>
+    </div>
+  </div>
+
+  <nav id="menubar" class="menubar" aria-label="Menu bar">
+    <button class="menu-button" type="button" data-menu="fileMenu" aria-expanded="false">File</button>
+    <button class="menu-button" type="button" data-menu="editMenu" aria-expanded="false">Edit</button>
+    <button class="menu-button" type="button" data-menu="searchMenu" aria-expanded="false">Search</button>
+    <button class="menu-button" type="button" data-menu="formatMenu" aria-expanded="false">Format</button>
+    <button class="menu-button" type="button" data-menu="viewMenu" aria-expanded="false">View</button>
+    <button class="menu-button" type="button" data-menu="helpMenu" aria-expanded="false">Help</button>
+
+    <div id="fileMenu" class="menu" role="menu" aria-hidden="true">
+      <button type="button" data-action="newFile"><span>New</span><span>Ctrl+N</span></button>
+      <button type="button" data-action="openFile"><span>Open...</span><span>Ctrl+O</span></button>
+      <button type="button" data-action="saveFile"><span>Save</span><span>Ctrl+S</span></button>
+      <button type="button" data-action="saveAsFile"><span>Save As...</span><span>Ctrl+Shift+S</span></button>
+      <hr>
+      <button type="button" data-action="closeDocument"><span>Close</span><span>Alt+F4</span></button>
+    </div>
+
+    <div id="editMenu" class="menu" role="menu" aria-hidden="true">
+      <button type="button" data-action="undo"><span>Undo</span><span>Ctrl+Z</span></button>
+      <hr>
+      <button type="button" data-action="cut"><span>Cut</span><span>Ctrl+X</span></button>
+      <button type="button" data-action="copy"><span>Copy</span><span>Ctrl+C</span></button>
+      <button type="button" data-action="paste"><span>Paste</span><span>Ctrl+V</span></button>
+      <button type="button" data-action="deleteSelection"><span>Delete</span><span>Del</span></button>
+      <hr>
+      <button type="button" data-action="selectAll"><span>Select All</span><span>Ctrl+A</span></button>
+      <button type="button" data-action="insertTimeDate"><span>Time/Date</span><span>F5</span></button>
+    </div>
+
+    <div id="searchMenu" class="menu" role="menu" aria-hidden="true">
+      <button type="button" data-action="showFind"><span>Find...</span><span>Ctrl+F</span></button>
+      <button type="button" data-action="findNext"><span>Find Next</span><span>F3</span></button>
+      <button type="button" data-action="showReplace"><span>Replace...</span><span>Ctrl+H</span></button>
+      <button type="button" data-action="showGoto"><span>Go To...</span><span>Ctrl+G</span></button>
+    </div>
+
+    <div id="formatMenu" class="menu" role="menu" aria-hidden="true">
+      <button type="button" data-action="toggleWordWrap"><span>Word Wrap</span><span id="wrapMark">Off</span></button>
+      <button type="button" data-action="showFont"><span>Font...</span><span></span></button>
+    </div>
+
+    <div id="viewMenu" class="menu" role="menu" aria-hidden="true">
+      <button type="button" data-action="toggleStatusBar"><span>Status Bar</span><span id="statusMark">On</span></button>
+      <button type="button" data-action="toggleAppAIPanel"><span>AppAI Body Panel</span><span id="panelMark">On</span></button>
+    </div>
+
+    <div id="helpMenu" class="menu" role="menu" aria-hidden="true">
+      <button type="button" data-action="showAbout"><span>About Mantle Notepad</span><span>F1</span></button>
+      <button type="button" data-action="showCertification"><span>Stage-1 Certification</span><span></span></button>
+    </div>
+  </nav>
+
+  <main id="main" class="main">
+    <section class="editor-shell" aria-label="Plain text editor">
+      <textarea id="editor" spellcheck="false" wrap="off" aria-label="Document text"></textarea>
+    </section>
+
+    <aside id="appaiPanel" class="appai-panel" aria-label="AppAI Body status">
+      <section class="group">
+        <div class="group-title">Body</div>
+        <div class="kv">
+          <span>Phase</span><span class="pill ok">Phase 1 Body</span>
+          <span>Brain</span><span class="pill warn">MIND dormant</span>
+          <span>Budget</span><span>No model calls</span>
+          <span>DNR</span><span>Operator-defined reconstruction only</span>
+          <span>Writes</span><span>Body/Limbs only</span>
+        </div>
+      </section>
+
+      <section class="group">
+        <div class="group-title">Document</div>
+        <div class="kv">
+          <span>Name</span><span id="panelName" class="mono">Untitled</span>
+          <span>Dirty</span><span id="panelDirty">No</span>
+          <span>Encoding</span><span>UTF-8</span>
+          <span>Line end</span>
+          <select id="lineEnding" aria-label="Line ending">
+            <option value="LF">LF</option>
+            <option value="CRLF">CRLF</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="group" style="min-height:0; display:grid; grid-template-rows:auto 1fr;">
+        <div class="group-title">Append-Only Ledger</div>
+        <pre id="ledgerView" class="ledger" aria-label="Important event ledger"></pre>
+      </section>
+    </aside>
+  </main>
+
+  <footer id="statusbar" class="statusbar" role="status" aria-live="polite">
+    <div id="statusMessage" class="status-cell status-message">Ready</div>
+    <div id="statusPosition" class="status-cell">Ln 1, Col 1</div>
+    <div id="statusEncoding" class="status-cell optional">UTF-8</div>
+    <div id="statusLineEnding" class="status-cell optional">LF</div>
+    <div id="statusWrap" class="status-cell optional">Wrap Off</div>
+    <div id="statusMind" class="status-cell">MIND dormant</div>
+  </footer>
+</div>
+
+<input id="fileInput" type="file" accept="text/plain,.txt,.log,.md,.csv" hidden>
+
+<dialog id="findDialog">
+  <form method="dialog">
+    <div class="dialog-title"><span>Find</span><button type="submit" value="close">×</button></div>
+    <div class="dialog-body">
+      <label class="dialog-row"><span>Find what:</span><input id="findText" type="text"></label>
+      <label><input id="matchCase" type="checkbox"> Match case</label>
+      <div class="dialog-actions">
+        <button type="button" id="findNextButton">Find Next</button>
+        <button type="submit" value="close">Cancel</button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="replaceDialog">
+  <form method="dialog">
+    <div class="dialog-title"><span>Replace</span><button type="submit" value="close">×</button></div>
+    <div class="dialog-body">
+      <label class="dialog-row"><span>Find what:</span><input id="replaceFindText" type="text"></label>
+      <label class="dialog-row"><span>Replace with:</span><input id="replaceWithText" type="text"></label>
+      <label><input id="replaceMatchCase" type="checkbox"> Match case</label>
+      <div class="dialog-actions">
+        <button type="button" id="replaceOneButton">Replace</button>
+        <button type="button" id="replaceAllButton">Replace All</button>
+        <button type="submit" value="close">Cancel</button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="gotoDialog">
+  <form method="dialog">
+    <div class="dialog-title"><span>Go To Line</span><button type="submit" value="close">×</button></div>
+    <div class="dialog-body">
+      <label class="dialog-row"><span>Line:</span><input id="gotoLine" type="number" min="1" value="1"></label>
+      <div class="dialog-actions">
+        <button type="button" id="gotoButton">Go To</button>
+        <button type="submit" value="close">Cancel</button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="fontDialog">
+  <form method="dialog">
+    <div class="dialog-title"><span>Font</span><button type="submit" value="close">×</button></div>
+    <div class="dialog-body">
+      <label class="dialog-row">
+        <span>Family:</span>
+        <select id="fontFamily">
+          <option value='Consolas, "Courier New", monospace'>Consolas</option>
+          <option value='"Courier New", monospace'>Courier New</option>
+          <option value='Tahoma, Arial, sans-serif'>Tahoma</option>
+          <option value='Arial, sans-serif'>Arial</option>
+        </select>
+      </label>
+      <label class="dialog-row"><span>Size:</span><input id="fontSize" type="number" min="10" max="32" value="14"></label>
+      <div class="dialog-actions">
+        <button type="button" id="applyFontButton">OK</button>
+        <button type="submit" value="close">Cancel</button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="aboutDialog">
+  <form method="dialog">
+    <div class="dialog-title"><span>About</span><button type="submit" value="close">×</button></div>
+    <div class="dialog-body help-text">
+      <strong>Mantle Notepad AppAI</strong>
+      <div>A clean-room, plain-text editor Body inspired by classic desktop notepads. It uses no proprietary assets and performs no model calls in Phase 1.</div>
+      <div>Brain/MIND support is readiness-only until fresh evidence and separate target-bound operator and guardian approvals authorize Vocare.</div>
+      <div class="dialog-actions"><button type="submit" value="close">OK</button></div>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="certDialog">
+  <form method="dialog">
+    <div class="dialog-title"><span>Stage-1 Body Certification</span><button type="submit" value="close">×</button></div>
+    <div class="dialog-body help-text">
+      <strong id="certVerdict">PASS: Phase-1 Body deterministic</strong>
+      <div>Launch, edit, file actions, ledger proofs, AppAI declaration, organ map, and no-network/no-model policy are covered by <span class="mono">examples/tests/notepad_appai_smoke.mjs</span>.</div>
+      <div>MIND is dormant. Stage-1 evidence permits readiness review only; it does not authorize Vocare.</div>
+      <div class="dialog-actions"><button type="submit" value="close">OK</button></div>
+    </div>
+  </form>
+</dialog>
+
+<script id="appai-declaration" type="application/json">
+{
+  "kind": "APPAI DECLARATION",
+  "name": "Mantle Notepad AppAI",
+  "target_language": "browser-javascript",
+  "target_runtime": "static HTML/CSS/JavaScript in a modern browser",
+  "host_path": "examples/notepad_appai/index.html",
+  "target_storage": "browser memory, localStorage ledger, user-selected files via File APIs",
+  "body_mode": "standard Phase-1 Body",
+  "vcw_format": "append-only ledger records; no binary VCW cube required for this browser demo",
+  "keyfile_path": "Phase 2 only; absent in Phase 1",
+  "default_model": "none in Phase 1",
+  "budget_policy": "sleep: no model calls, no hidden network, no API key requirement",
+  "dnr_policy": "operator_defined: no reconstruction or MIND fusion without fresh target-bound operator and guardian approvals",
+  "authority_source": "operator request in Codex thread",
+  "intentionally_omitted": ["active MIND", "cloud sync", "rich text", "agentic file mutation"],
+  "syntax_constraints": ["no eval", "no model calls", "plain text only", "file writes through Body/Limb actions only"]
+}
+</script>
+
+<script id="organ-map" type="application/json">
+{
+  "kind": "APP INVENTORY & ORGAN MAP",
+  "host_identity": {
+    "name": "Mantle Notepad AppAI",
+    "purpose": "Plain-text editor Body with dormant Brain affordance",
+    "language_runtime": "browser-javascript",
+    "entry_points": ["examples/notepad_appai/index.html"],
+    "boot_path": "DOMContentLoaded -> NotepadBody.init()"
+  },
+  "organs": {
+    "Heart": ["boot", "beforeunload guard", "UI refresh pulse"],
+    "Genome": ["AppAI declaration", "settings", "budget policy", "DNR policy"],
+    "Senses": ["keyboard input", "menu actions", "file-open events"],
+    "Memory": ["current document state", "recent file name", "settings", "append-only audit ledger"],
+    "Immune": ["file error handling", "large-file guard", "secret redaction boundary", "network/model call policy"],
+    "Limbs": ["open", "save", "save as", "download fallback", "clipboard commands", "window close guard"],
+    "Brain": ["dormant MIND readiness surface only"]
+  },
+  "secret_boundaries": [
+    {"boundary": "file paths", "location": "ledger proof ref", "redaction_note": "paths are reduced to basename-like labels"},
+    {"boundary": "document text", "location": "ledger", "redaction_note": "ledger records byte counts and hashes, not body text"}
+  ],
+  "human_surface_map": [
+    {"control": "File/Open/Save/Save As", "organ": "Limbs", "proof_plan": "Action Execution Proof record"},
+    {"control": "Editor textarea", "organ": "Senses + Memory", "proof_plan": "HOST_TEXT_COMMIT on blur/submit/readback, not per keypress"},
+    {"control": "Find/Replace/Go To", "organ": "Senses", "proof_plan": "deterministic buffer selection/update"},
+    {"control": "MIND dormant panel", "organ": "Brain", "proof_plan": "disabled readiness only"}
+  ]
+}
+</script>
+
+<script id="host-evidence-index" type="application/json">
+{
+  "kind": "HOST_EVIDENCE_INDEX",
+  "schema_version": "mantle-host-evidence-v2",
+  "local_first_consultation": true,
+  "host_identity": {
+    "name": "Mantle Notepad AppAI",
+    "host_path": "examples/notepad_appai/index.html",
+    "substrate_languages": ["browser-javascript", "html", "css"],
+    "purpose": "Plain-text editor Body with dormant Brain affordance"
+  },
+  "evidence_sources": ["appai-declaration", "organ-map", "parity-matrix", "stage1-certification"],
+  "consultation_contract": {
+    "answer_host_questions_from": ["host_identity", "organ_summary", "control_surfaces", "surface_coverage_summary", "gaps", "limitations"],
+    "provider_mind_role": "Phase 2 only; may interpret resident evidence after authorization",
+    "missing_evidence_policy": "name the gap instead of guessing",
+    "effectful_action_policy": "plain-English host-surface requests are interpreted by the resident MIND against mapped SELF/body evidence; effectful operations require Body-owned Action Execution Proof",
+    "text_commit_policy": "text inputs use commit_policy=submit_or_blur: keypresses are transient Senses activity; blur/focus-loss, submit, declared host commit boundaries, or explicit Body readback create durable HOST_TEXT_COMMIT entries",
+    "working_surface_policy": "working surfaces are app-specific anatomy discovered from GUI coverage or live Body evidence and mirrored into VCW state; tabs are not universal slash commands and are not assumed for every app",
+    "creative_work_policy": "creative/generative content must be authored by the resident MIND, never by Body reflexes; Body may only place or verify MIND-authored or user-literal content",
+    "reset_policy": "resident VCW resets must be explicit maintenance commands that recreate Prime from current evidence and clear transient runtime residue"
+  },
+  "organ_summary": {
+    "Heart": {"count": 3, "samples": ["boot", "beforeunload guard", "UI refresh pulse"]},
+    "Genome": {"count": 4, "samples": ["AppAI declaration", "settings", "budget policy", "DNR policy"]},
+    "Senses": {"count": 3, "samples": ["keyboard input", "menu actions", "file-open events"]},
+    "Memory": {"count": 4, "samples": ["current document state", "recent file name", "settings", "append-only audit ledger"]},
+    "Immune": {"count": 4, "samples": ["file error handling", "large-file guard", "secret redaction boundary", "network/model call policy"]},
+    "Limbs": {"count": 6, "samples": ["open", "save", "save as", "download fallback", "clipboard commands", "window close guard"]},
+    "Brain": {"count": 1, "samples": ["dormant MIND readiness surface only"]}
+  },
+  "control_surfaces": [
+    {"control": "newFile", "organ": "Limbs", "proof_requirement": "dirty-state guard and buffer verification"},
+    {"control": "loadTextFile", "organ": "Limbs", "proof_requirement": "File.text receipt or failed proof"},
+    {"control": "saveFile", "organ": "Limbs", "proof_requirement": "write adapter receipt with byte/hash evidence"},
+    {"control": "saveAsFile", "organ": "Limbs", "proof_requirement": "destination receipt with byte/hash evidence"},
+    {"control": "findNext/replace/goToLine", "organ": "Senses", "proof_requirement": "deterministic selection or buffer update"},
+    {"control": "editor", "organ": "Senses + Memory", "proof_requirement": "HOST_TEXT_COMMIT with commit_policy=submit_or_blur and text hash/length"}
+  ],
+  "surface_coverage_summary": {
+    "kind": "GUI_NERVE_COVERAGE",
+    "schema_version": "mantle-gui-nerve-coverage-v2",
+    "policy": "runtime readGuiNerveCoverage() enumerates DOM controls and checks data-action handlers",
+    "text_commit_policy": "textarea/input controls use commit_policy=submit_or_blur and emit HOST_TEXT_COMMIT only at durable commit boundaries"
+  },
+  "gaps": [],
+  "limitations": [
+    "Phase 1 only: Brain is dormant and no model calls are authorized.",
+    "Browser file and clipboard behavior depends on platform permission surfaces.",
+    "This is a browser AppAI demo, not the native NotepadNext hybrid."
+  ]
+}
+</script>
+
+<script id="parity-matrix" type="application/json">
+[
+  {"feature": "New", "expected": "Clears current document after unsaved prompt", "implemented": "newFile guards dirty state then clears buffer", "evidence": "notepad_appai_smoke.mjs", "status": "PASS"},
+  {"feature": "Open", "expected": "Loads plain text file", "implemented": "File picker/File object loads UTF-8 text with errors caught", "evidence": "notepad_appai_smoke.mjs", "status": "PASS"},
+  {"feature": "Save", "expected": "Writes current text to current file", "implemented": "File System Access API if available, otherwise download fallback", "evidence": "notepad_appai_smoke.mjs", "status": "PASS"},
+  {"feature": "Save As", "expected": "Prompts for destination and writes text", "implemented": "showSaveFilePicker with deterministic test adapter fallback", "evidence": "notepad_appai_smoke.mjs", "status": "PASS"},
+  {"feature": "Plain text only", "expected": "No rich text formatting in document", "implemented": "textarea buffer and text/plain saves", "evidence": "manual inspection + test", "status": "PASS"},
+  {"feature": "Unsaved detection", "expected": "Dirty marker and prompt before destructive close/open/new", "implemented": "savedText comparison, beforeunload and confirm guard", "evidence": "notepad_appai_smoke.mjs", "status": "PASS"},
+  {"feature": "Find/replace", "expected": "Find next and replace text deterministically", "implemented": "case-sensitive optional string search", "evidence": "notepad_appai_smoke.mjs", "status": "PASS"},
+  {"feature": "Go To line", "expected": "Moves caret to requested line", "implemented": "line offset calculation", "evidence": "notepad_appai_smoke.mjs", "status": "PASS"},
+  {"feature": "Word Wrap", "expected": "Toggle wrapping", "implemented": "textarea CSS and wrap status toggle", "evidence": "notepad_appai_smoke.mjs", "status": "PASS"},
+  {"feature": "Resident host consultation", "expected": "Answers software/body questions from embedded evidence before any MIND", "implemented": "host-evidence-index plus consultHostEvidence API", "evidence": "notepad_appai_smoke.mjs", "status": "PASS"},
+  {"feature": "Phase-1 no MIND", "expected": "No model/API call required", "implemented": "budget policy none; no fetch/XHR/WebSocket use", "evidence": "notepad_appai_smoke.mjs", "status": "PASS"}
+]
+</script>
+
+<script>
+(() => {
+  "use strict";
+
+  const MAX_FILE_BYTES = 5 * 1024 * 1024;
+  const LEDGER_KEY = "mantle.notepad.ledger.v1";
+  const SETTINGS_KEY = "mantle.notepad.settings.v1";
+
+  const $ = (id) => document.getElementById(id);
+  const editor = $("editor");
+
+  const els = {
+    titleText: $("titleText"),
+    main: $("main"),
+    statusbar: $("statusbar"),
+    statusMessage: $("statusMessage"),
+    statusPosition: $("statusPosition"),
+    statusEncoding: $("statusEncoding"),
+    statusLineEnding: $("statusLineEnding"),
+    statusWrap: $("statusWrap"),
+    panelName: $("panelName"),
+    panelDirty: $("panelDirty"),
+    ledgerView: $("ledgerView"),
+    lineEnding: $("lineEnding"),
+    fileInput: $("fileInput"),
+    wrapMark: $("wrapMark"),
+    statusMark: $("statusMark"),
+    panelMark: $("panelMark")
+  };
+
+  const dialogs = {
+    find: $("findDialog"),
+    replace: $("replaceDialog"),
+    goto: $("gotoDialog"),
+    font: $("fontDialog"),
+    about: $("aboutDialog"),
+    cert: $("certDialog")
+  };
+
+  const state = {
+    fileName: "Untitled",
+    fileHandle: null,
+    savedText: "",
+    wordWrap: false,
+    statusBar: true,
+    appaiPanel: true,
+    lastFind: "",
+    matchCase: false,
+    saveAdapter: null,
+    confirmAdapter: null,
+    lastCommittedText: "",
+    ledger: []
+  };
+
+  function safeJsonParse(value, fallback) {
+    if (value == null || value === "") return fallback;
+    try {
+      const parsed = JSON.parse(value);
+      return parsed == null ? fallback : parsed;
+    } catch (_) {
+      return fallback;
+    }
+  }
+
+  function readDeclaration() {
+    return safeJsonParse($("appai-declaration").textContent, {});
+  }
+
+  function readOrganMap() {
+    return safeJsonParse($("organ-map").textContent, {});
+  }
+
+  function readHostEvidenceIndex() {
+    return safeJsonParse($("host-evidence-index").textContent, {});
+  }
+
+  function readParityMatrix() {
+    return safeJsonParse($("parity-matrix").textContent, []);
+  }
+
+  function readGuiNerveCoverage() {
+    const surfaces = [];
+    document.querySelectorAll("[data-action]").forEach((button) => {
+      const id = button.dataset.action;
+      const handler = actions[id];
+      surfaces.push({
+        id,
+        surface_type: "action",
+        label: button.textContent.trim().replace(/\s+/g, " "),
+        vcw_status: typeof handler === "function" ? "verified_body_operation" : "maintenance_gap",
+        proof_requirement: "DOM data-action handler plus Action Execution Proof where effectful",
+        connection_evidence: typeof handler === "function" ? ["actions table"] : []
+      });
+    });
+    document.querySelectorAll("[data-menu]").forEach((button) => {
+      surfaces.push({
+        id: button.dataset.menu,
+        surface_type: "menu",
+        label: button.textContent.trim(),
+        vcw_status: "sense_only",
+        proof_requirement: "menu can be observed/opened; child actions carry effect proofs",
+        connection_evidence: ["data-menu handler"]
+      });
+    });
+    document.querySelectorAll("textarea, input, select, dialog button[id]").forEach((control) => {
+      const id = control.id || control.getAttribute("aria-label") || control.tagName.toLowerCase();
+      surfaces.push({
+        id,
+        surface_type: control.tagName.toLowerCase(),
+        label: control.getAttribute("aria-label") || control.textContent.trim() || id,
+        vcw_status: "sense_only",
+        commit_policy: /^(textarea|input)$/i.test(control.tagName) ? "submit_or_blur" : "",
+        proof_requirement: "input state is observable; effectful actions are routed through named controls",
+        commit_requirement: /^(textarea|input)$/i.test(control.tagName)
+          ? "write one HOST_TEXT_COMMIT event on blur/focus-loss, submit, declared host commit boundary, or explicit Body readback"
+          : "",
+        connection_evidence: [control.tagName.toLowerCase()]
+      });
+    });
+    const status_counts = surfaces.reduce((acc, surface) => {
+      acc[surface.vcw_status] = (acc[surface.vcw_status] || 0) + 1;
+      return acc;
+    }, {});
+    const type_counts = surfaces.reduce((acc, surface) => {
+      acc[surface.surface_type] = (acc[surface.surface_type] || 0) + 1;
+      return acc;
+    }, {});
+    return {
+      kind: "GUI_NERVE_COVERAGE",
+      schema_version: "mantle-gui-nerve-coverage-v2",
+      total_surfaces: surfaces.length,
+      status_counts,
+      type_counts,
+      surfaces,
+      maintenance_findings: surfaces
+        .filter((surface) => surface.vcw_status === "maintenance_gap")
+        .map((surface) => ({ surface: surface.id, status: surface.vcw_status })),
+      contract: {
+        no_silent_gui_omission: true,
+        effectful_claim_policy: "ok=true requires Body-owned Action Execution Proof",
+        text_commit_policy: "text inputs use commit_policy=submit_or_blur; keypresses are transient and durable text enters VCW as HOST_TEXT_COMMIT"
+      }
+    };
+  }
+
+  function consultHostEvidence(question) {
+    const index = readHostEvidenceIndex();
+    const organMap = readOrganMap();
+    const coverage = readGuiNerveCoverage();
+    const prompt = String(question || "").toLowerCase();
+    const lines = [];
+    if (!index.local_first_consultation) {
+      return "Resident host evidence is not marked local-first.";
+    }
+    if (/\b(limit|cannot|gap|unknown|phase)\b/.test(prompt)) {
+      lines.push("Known resident limits:");
+      (index.limitations || []).forEach((item) => lines.push(`- ${item}`));
+      if (Array.isArray(index.gaps) && index.gaps.length) {
+        index.gaps.slice(0, 6).forEach((gap) => lines.push(`- ${gap.source || "gap"}: ${gap.why || "unknown"}`));
+      }
+    } else if (/\b(control|body|limb|action|do|function|functions|gui|nerve|surface)\b/.test(prompt)) {
+      lines.push("Observed Body controls:");
+      (index.control_surfaces || []).forEach((control) => {
+        lines.push(`- ${control.control} [${control.organ}]: ${control.proof_requirement}`);
+      });
+      lines.push(`GUI surfaces: ${coverage.total_surfaces}; statuses: ${JSON.stringify(coverage.status_counts)}`);
+      lines.push(index.consultation_contract.effectful_action_policy);
+      lines.push(index.consultation_contract.text_commit_policy);
+      lines.push(index.consultation_contract.working_surface_policy);
+      lines.push(index.consultation_contract.creative_work_policy);
+      lines.push(index.consultation_contract.reset_policy);
+    } else {
+      lines.push(`${index.host_identity.name}: ${index.host_identity.purpose}`);
+      lines.push(`Substrate: ${(index.host_identity.substrate_languages || []).join(", ")}`);
+      Object.entries(organMap.organs || {}).forEach(([organ, samples]) => {
+        lines.push(`- ${organ}: ${samples.join(", ")}`);
+      });
+    }
+    appendLedger("resident_consultation", {
+      source: "host-evidence-index",
+      question_chars: String(question || "").length,
+      answer_lines: lines.length
+    });
+    return lines.join("\n");
+  }
+
+  async function sha256Hex(text) {
+    if (!crypto.subtle) return "unavailable";
+    const encoded = new TextEncoder().encode(text);
+    const digest = await crypto.subtle.digest("SHA-256", encoded);
+    return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, "0")).join("");
+  }
+
+  function redactRef(ref) {
+    if (!ref) return "";
+    const text = String(ref).replace(/\\/g, "/");
+    const parts = text.split("/");
+    return parts[parts.length - 1].slice(-80);
+  }
+
+  function loadLedger() {
+    state.ledger = safeJsonParse(localStorage.getItem(LEDGER_KEY), []);
+    if (!Array.isArray(state.ledger)) state.ledger = [];
+      const legacyNoise = state.ledger.filter((entry) => entry && entry.type === "buffer_changed").length;
+      if (legacyNoise > 0) {
+        state.ledger = state.ledger.filter((entry) => !entry || entry.type !== "buffer_changed");
+        state.ledger.push({
+        id: `evt-${Date.now()}-migrate`,
+        timestamp: new Date().toISOString(),
+        type: "ledger_migration",
+          detail: { removed: "legacy per-keystroke buffer_changed rows", count: legacyNoise }
+        });
+        persistLedger();
+      }
+      let renamed = 0;
+      state.ledger.forEach((entry) => {
+        if (entry && entry.type === "buffer_committed") {
+          entry.type = "HOST_TEXT_COMMIT";
+          entry.detail = Object.assign({
+            commit_policy: "submit_or_blur",
+            legacy_type: "buffer_committed"
+          }, entry.detail || {});
+          renamed += 1;
+        }
+      });
+      if (renamed > 0) {
+        state.ledger.push({
+          id: `evt-${Date.now()}-text-commit-migrate`,
+          timestamp: new Date().toISOString(),
+          type: "ledger_migration",
+          detail: { renamed: "buffer_committed -> HOST_TEXT_COMMIT", count: renamed }
+        });
+        persistLedger();
+      }
+  }
+
+  function persistLedger() {
+    localStorage.setItem(LEDGER_KEY, JSON.stringify(state.ledger.slice(-200)));
+  }
+
+  function appendLedger(type, detail) {
+    const record = {
+      id: `evt-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      timestamp: new Date().toISOString(),
+      type,
+      detail: detail || {}
+    };
+    state.ledger.push(record);
+    persistLedger();
+    renderLedger();
+    return record;
+  }
+
+  async function proof(action, ok, method, ref, reason, evidence) {
+    const record = {
+      action_id: `aep-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      attempted: true,
+      ok: Boolean(ok),
+      method,
+      ref: redactRef(ref),
+      reason,
+      actor: "Body",
+      authorship: "Body/Limb",
+      timestamp: new Date().toISOString(),
+      evidence: evidence || []
+    };
+    appendLedger("action_execution_proof", record);
+    return record;
+  }
+
+  function renderLedger() {
+    const rows = state.ledger.slice(-18).map((entry) => {
+      if (entry.type === "action_execution_proof") {
+        const p = entry.detail;
+        return `${p.timestamp} ${p.ok ? "OK" : "FAIL"} ${p.method} ${p.ref || ""}`;
+      }
+      if (entry.type === "HOST_TEXT_COMMIT") {
+        const d = entry.detail || {};
+        return `${entry.timestamp} HOST_TEXT_COMMIT chars=${d.chars} ${d.commit_boundary || d.reason || ""}`;
+      }
+      return `${entry.timestamp} ${entry.type}`;
+    });
+    els.ledgerView.textContent = rows.join("\n") || "No events yet.";
+  }
+
+  function readSettings() {
+    const settings = safeJsonParse(localStorage.getItem(SETTINGS_KEY), {});
+    state.wordWrap = Boolean(settings.wordWrap);
+    state.statusBar = settings.statusBar !== false;
+    state.appaiPanel = settings.appaiPanel !== false;
+    els.lineEnding.value = settings.lineEnding === "CRLF" ? "CRLF" : "LF";
+    if (settings.fontFamily) editor.style.fontFamily = settings.fontFamily;
+    if (settings.fontSize) editor.style.fontSize = `${Math.max(10, Math.min(32, Number(settings.fontSize) || 14))}px`;
+  }
+
+  function saveSettings() {
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify({
+      wordWrap: state.wordWrap,
+      statusBar: state.statusBar,
+      appaiPanel: state.appaiPanel,
+      lineEnding: els.lineEnding.value,
+      fontFamily: editor.style.fontFamily || "",
+      fontSize: parseInt(editor.style.fontSize, 10) || 14
+    }));
+  }
+
+  function isDirty() {
+    return editor.value !== state.savedText;
+  }
+
+  function normalizeLineEndings(text) {
+    const lf = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+    return els.lineEnding.value === "CRLF" ? lf.replace(/\n/g, "\r\n") : lf;
+  }
+
+  function setMessage(text, kind) {
+    els.statusMessage.textContent = text;
+    els.statusMessage.style.color = kind === "bad" ? "var(--status-bad)" : kind === "warn" ? "var(--status-warn)" : "var(--ink)";
+  }
+
+  function updatePosition() {
+    const pos = editor.selectionStart;
+    const before = editor.value.slice(0, pos);
+    const lines = before.split("\n");
+    const line = lines.length;
+    const col = lines[lines.length - 1].length + 1;
+    els.statusPosition.textContent = `Ln ${line}, Col ${col}`;
+  }
+
+  function updateChrome() {
+    const dirty = isDirty();
+    els.titleText.textContent = `${dirty ? "*" : ""}${state.fileName} - Mantle Notepad AppAI`;
+    els.panelName.textContent = state.fileName;
+    els.panelDirty.textContent = dirty ? "Yes" : "No";
+    editor.classList.toggle("word-wrap", state.wordWrap);
+    editor.wrap = state.wordWrap ? "soft" : "off";
+    els.wrapMark.textContent = state.wordWrap ? "On" : "Off";
+    els.statusWrap.textContent = state.wordWrap ? "Wrap On" : "Wrap Off";
+    els.statusLineEnding.textContent = els.lineEnding.value;
+    els.statusbar.hidden = !state.statusBar;
+    els.statusMark.textContent = state.statusBar ? "On" : "Off";
+    els.main.classList.toggle("panel-hidden", !state.appaiPanel);
+    els.panelMark.textContent = state.appaiPanel ? "On" : "Off";
+    updatePosition();
+  }
+
+  function closeMenus() {
+    document.querySelectorAll(".menu").forEach((menu) => menu.setAttribute("aria-hidden", "true"));
+    document.querySelectorAll(".menu-button").forEach((button) => button.setAttribute("aria-expanded", "false"));
+  }
+
+  function showMenu(button) {
+    const menu = $(button.dataset.menu);
+    const wasOpen = menu.getAttribute("aria-hidden") === "false";
+    closeMenus();
+    if (wasOpen) return;
+    const rect = button.getBoundingClientRect();
+    const barRect = $("menubar").getBoundingClientRect();
+    menu.style.left = `${Math.max(2, rect.left - barRect.left)}px`;
+    menu.setAttribute("aria-hidden", "false");
+    button.setAttribute("aria-expanded", "true");
+  }
+
+  async function confirmDiscard(reason) {
+    if (!isDirty()) return true;
+    const ask = state.confirmAdapter || ((message) => window.confirm(message));
+    const ok = await Promise.resolve(ask(`${state.fileName} has unsaved changes. Discard changes and ${reason}?`));
+    appendLedger("unsaved_guard", { reason, ok: Boolean(ok), file: redactRef(state.fileName) });
+    return Boolean(ok);
+  }
+
+  function setText(text, fileName, markSaved) {
+    editor.value = text;
+    if (fileName) state.fileName = fileName;
+    if (markSaved) {
+      state.savedText = text;
+      state.lastCommittedText = text;
+    }
+    updateChrome();
+  }
+
+  async function commitBufferChange(reason) {
+    if (editor.value === state.lastCommittedText) return false;
+    state.lastCommittedText = editor.value;
+    const hash = await sha256Hex(editor.value);
+    appendLedger("HOST_TEXT_COMMIT", {
+      reason,
+      commit_boundary: reason,
+      commit_policy: "submit_or_blur",
+      file: redactRef(state.fileName),
+      chars: editor.value.length,
+      dirty: isDirty(),
+      sha256: hash
+    });
+    return true;
+  }
+
+  async function newFile() {
+    if (!(await confirmDiscard("start a new file"))) return false;
+    state.fileName = "Untitled";
+    state.fileHandle = null;
+    setText("", "Untitled", true);
+    appendLedger("document_new", { file: "Untitled" });
+    setMessage("New document", "ok");
+    editor.focus();
+    return true;
+  }
+
+  async function openFile() {
+    if (!(await confirmDiscard("open another file"))) return false;
+    if (window.showOpenFilePicker) {
+      try {
+        const [handle] = await window.showOpenFilePicker({
+          multiple: false,
+          types: [{ description: "Text files", accept: { "text/plain": [".txt", ".log", ".md", ".csv"] } }]
+        });
+        const file = await handle.getFile();
+        await loadTextFile(file, handle);
+        return true;
+      } catch (err) {
+        if (err && err.name === "AbortError") return false;
+        await proof("open", false, "showOpenFilePicker", "picker", err.message || "open failed", []);
+        setMessage("Open failed", "bad");
+        return false;
+      }
+    }
+    els.fileInput.click();
+    return true;
+  }
+
+  async function loadTextFile(file, handle) {
+    try {
+      if (!file) throw new Error("No file selected");
+      if (typeof file.size === "number" && file.size > MAX_FILE_BYTES) throw new Error("File exceeds 5 MB Phase-1 limit");
+      const text = await file.text();
+      state.fileHandle = handle || null;
+      setText(text, file.name || "Untitled", true);
+      await proof("open", true, "File.text", file.name || "Untitled", "operator file-open event", [`chars=${text.length}`]);
+      setMessage(`Opened ${state.fileName}`, "ok");
+      editor.focus();
+      return true;
+    } catch (err) {
+      appendLedger("immune_event", { surface: "open", message: err.message || String(err) });
+      await proof("open", false, "File.text", file && file.name, err.message || "bad file", []);
+      setMessage(err.message || "Open failed", "bad");
+      return false;
+    }
+  }
+
+  function downloadText(text, fileName) {
+    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = fileName || "Untitled.txt";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 0);
+  }
+
+  async function saveViaHandle(handle, text) {
+    const writable = await handle.createWritable();
+    await writable.write(text);
+    await writable.close();
+  }
+
+  async function saveFile() {
+    const text = normalizeLineEndings(editor.value);
+    try {
+      if (state.saveAdapter) {
+        const result = await state.saveAdapter({ mode: "save", text, fileName: state.fileName });
+        state.fileName = result && result.fileName ? result.fileName : state.fileName;
+      } else if (state.fileHandle) {
+        await saveViaHandle(state.fileHandle, text);
+      } else {
+        return saveAsFile();
+      }
+      state.savedText = editor.value;
+      state.lastCommittedText = editor.value;
+      const hash = await sha256Hex(text);
+      await proof("save", true, "Body/Limb save", state.fileName, "operator requested save", [`bytes=${new TextEncoder().encode(text).length}`, `sha256=${hash}`]);
+      setMessage(`Saved ${state.fileName}`, "ok");
+      updateChrome();
+      return true;
+    } catch (err) {
+      appendLedger("immune_event", { surface: "save", message: err.message || String(err) });
+      await proof("save", false, "Body/Limb save", state.fileName, err.message || "save failed", []);
+      setMessage(err.message || "Save failed", "bad");
+      return false;
+    }
+  }
+
+  async function saveAsFile() {
+    const text = normalizeLineEndings(editor.value);
+    try {
+      if (state.saveAdapter) {
+        const result = await state.saveAdapter({ mode: "saveAs", text, fileName: state.fileName });
+        state.fileName = result && result.fileName ? result.fileName : state.fileName;
+      } else if (window.showSaveFilePicker) {
+        const handle = await window.showSaveFilePicker({
+          suggestedName: state.fileName === "Untitled" ? "Untitled.txt" : state.fileName,
+          types: [{ description: "Text Document", accept: { "text/plain": [".txt"] } }]
+        });
+        await saveViaHandle(handle, text);
+        state.fileHandle = handle;
+        state.fileName = handle.name || state.fileName;
+      } else {
+        const fileName = state.fileName === "Untitled" ? "Untitled.txt" : state.fileName;
+        downloadText(text, fileName);
+        state.fileName = fileName;
+      }
+      state.savedText = editor.value;
+      state.lastCommittedText = editor.value;
+      const hash = await sha256Hex(text);
+      await proof("save-as", true, "Body/Limb save-as", state.fileName, "operator requested save-as", [`bytes=${new TextEncoder().encode(text).length}`, `sha256=${hash}`]);
+      setMessage(`Saved as ${state.fileName}`, "ok");
+      updateChrome();
+      return true;
+    } catch (err) {
+      if (err && err.name === "AbortError") return false;
+      appendLedger("immune_event", { surface: "save-as", message: err.message || String(err) });
+      await proof("save-as", false, "Body/Limb save-as", state.fileName, err.message || "save-as failed", []);
+      setMessage(err.message || "Save As failed", "bad");
+      return false;
+    }
+  }
+
+  async function closeDocument() {
+    const ok = await confirmDiscard("close");
+    if (ok) setMessage("Close permitted; browser window remains under operator control.", "ok");
+    return ok;
+  }
+
+  function replaceSelection(text) {
+    const start = editor.selectionStart;
+    const end = editor.selectionEnd;
+    editor.setRangeText(text, start, end, "end");
+    editor.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+
+  async function clipboardWrite(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+    return document.execCommand("copy");
+  }
+
+  async function clipboardRead() {
+    if (navigator.clipboard && navigator.clipboard.readText) return navigator.clipboard.readText();
+    return "";
+  }
+
+  function undo() {
+    editor.focus();
+    document.execCommand("undo");
+    updateChrome();
+  }
+
+  async function cut() {
+    const text = editor.value.slice(editor.selectionStart, editor.selectionEnd);
+    await clipboardWrite(text);
+    replaceSelection("");
+    setMessage("Cut", "ok");
+  }
+
+  async function copy() {
+    const text = editor.value.slice(editor.selectionStart, editor.selectionEnd);
+    await clipboardWrite(text);
+    setMessage("Copied", "ok");
+  }
+
+  async function paste() {
+    const text = await clipboardRead();
+    replaceSelection(text);
+    setMessage("Pasted", "ok");
+  }
+
+  function deleteSelection() {
+    replaceSelection("");
+    setMessage("Deleted", "ok");
+  }
+
+  function selectAll() {
+    editor.focus();
+    editor.select();
+    setMessage("Selected all", "ok");
+  }
+
+  function insertTimeDate(date) {
+    const d = date || new Date();
+    const text = d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) + " " + d.toLocaleDateString();
+    replaceSelection(text);
+    setMessage("Inserted time/date", "ok");
+  }
+
+  function findNext(term, options) {
+    const needle = term != null ? String(term) : state.lastFind;
+    if (!needle) {
+      showFind();
+      return false;
+    }
+    state.lastFind = needle;
+    const matchCase = options && "matchCase" in options ? options.matchCase : state.matchCase;
+    state.matchCase = Boolean(matchCase);
+    const haystack = matchCase ? editor.value : editor.value.toLowerCase();
+    const query = matchCase ? needle : needle.toLowerCase();
+    let start = editor.selectionEnd;
+    let index = haystack.indexOf(query, start);
+    if (index === -1 && start > 0) index = haystack.indexOf(query, 0);
+    if (index === -1) {
+      setMessage(`Cannot find "${needle}"`, "warn");
+      return false;
+    }
+    editor.focus();
+    editor.setSelectionRange(index, index + needle.length);
+    updatePosition();
+    setMessage(`Found "${needle}"`, "ok");
+    return true;
+  }
+
+  function replaceCurrent(findText, replaceText, options) {
+    const selected = editor.value.slice(editor.selectionStart, editor.selectionEnd);
+    const matchCase = options && "matchCase" in options ? options.matchCase : false;
+    const same = matchCase ? selected === findText : selected.toLowerCase() === String(findText).toLowerCase();
+    if (!same && !findNext(findText, { matchCase })) return false;
+    replaceSelection(replaceText);
+    setMessage("Replaced", "ok");
+    return true;
+  }
+
+  function replaceAll(findText, replaceText, options) {
+    if (!findText) return 0;
+    const flags = options && options.matchCase ? "g" : "gi";
+    const escaped = String(findText).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    let count = 0;
+    editor.value = editor.value.replace(new RegExp(escaped, flags), () => {
+      count += 1;
+      return replaceText;
+    });
+    editor.dispatchEvent(new Event("input", { bubbles: true }));
+    setMessage(`Replaced ${count} occurrence${count === 1 ? "" : "s"}`, "ok");
+    return count;
+  }
+
+  function goToLine(lineNumber) {
+    const target = Math.max(1, Number(lineNumber) || 1);
+    const lines = editor.value.split("\n");
+    let pos = 0;
+    for (let i = 0; i < Math.min(target - 1, lines.length); i += 1) pos += lines[i].length + 1;
+    editor.focus();
+    editor.setSelectionRange(pos, pos);
+    updatePosition();
+    setMessage(`Line ${Math.min(target, lines.length)}`, "ok");
+    return pos;
+  }
+
+  function toggleWordWrap(force) {
+    state.wordWrap = typeof force === "boolean" ? force : !state.wordWrap;
+    saveSettings();
+    updateChrome();
+    appendLedger("setting_changed", { wordWrap: state.wordWrap });
+    return state.wordWrap;
+  }
+
+  function toggleStatusBar(force) {
+    state.statusBar = typeof force === "boolean" ? force : !state.statusBar;
+    saveSettings();
+    updateChrome();
+    return state.statusBar;
+  }
+
+  function toggleAppAIPanel(force) {
+    state.appaiPanel = typeof force === "boolean" ? force : !state.appaiPanel;
+    saveSettings();
+    updateChrome();
+    return state.appaiPanel;
+  }
+
+  function showFind() {
+    $("findText").value = state.lastFind;
+    $("matchCase").checked = state.matchCase;
+    dialogs.find.showModal();
+    $("findText").focus();
+  }
+
+  function showReplace() {
+    $("replaceFindText").value = state.lastFind;
+    $("replaceMatchCase").checked = state.matchCase;
+    dialogs.replace.showModal();
+    $("replaceFindText").focus();
+  }
+
+  function showGoto() {
+    $("gotoLine").value = els.statusPosition.textContent.match(/Ln (\d+)/)?.[1] || "1";
+    dialogs.goto.showModal();
+    $("gotoLine").focus();
+  }
+
+  function showFont() {
+    $("fontSize").value = parseInt(editor.style.fontSize, 10) || 14;
+    dialogs.font.showModal();
+    $("fontFamily").focus();
+  }
+
+  function applyFont() {
+    editor.style.fontFamily = $("fontFamily").value;
+    editor.style.fontSize = `${Math.max(10, Math.min(32, Number($("fontSize").value) || 14))}px`;
+    saveSettings();
+    dialogs.font.close();
+    editor.focus();
+  }
+
+  const actions = {
+    newFile,
+    openFile,
+    saveFile,
+    saveAsFile,
+    closeDocument,
+    undo,
+    cut,
+    copy,
+    paste,
+    deleteSelection,
+    selectAll,
+    insertTimeDate,
+    showFind,
+    findNext: () => findNext(),
+    showReplace,
+    showGoto,
+    toggleWordWrap,
+    showFont,
+    toggleStatusBar,
+    toggleAppAIPanel,
+    showAbout: () => dialogs.about.showModal(),
+    showCertification: () => dialogs.cert.showModal()
+  };
+
+  function bindMenus() {
+    document.querySelectorAll(".menu-button").forEach((button) => {
+      button.addEventListener("click", () => showMenu(button));
+    });
+    document.querySelectorAll("[data-action]").forEach((button) => {
+      button.addEventListener("click", async () => {
+        closeMenus();
+        const action = actions[button.dataset.action];
+        if (action) await action();
+      });
+    });
+    document.addEventListener("pointerdown", (event) => {
+      if (!$("menubar").contains(event.target)) closeMenus();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMenus();
+    });
+  }
+
+  function bindDialogs() {
+    $("findNextButton").addEventListener("click", () => {
+      findNext($("findText").value, { matchCase: $("matchCase").checked });
+    });
+    $("replaceOneButton").addEventListener("click", () => {
+      replaceCurrent($("replaceFindText").value, $("replaceWithText").value, { matchCase: $("replaceMatchCase").checked });
+    });
+    $("replaceAllButton").addEventListener("click", () => {
+      replaceAll($("replaceFindText").value, $("replaceWithText").value, { matchCase: $("replaceMatchCase").checked });
+    });
+    $("gotoButton").addEventListener("click", () => {
+      goToLine($("gotoLine").value);
+      dialogs.goto.close();
+    });
+    $("applyFontButton").addEventListener("click", applyFont);
+  }
+
+  function bindKeyboard() {
+    document.addEventListener("keydown", async (event) => {
+      const key = event.key.toLowerCase();
+      if (event.ctrlKey && !event.shiftKey && key === "n") { event.preventDefault(); await newFile(); }
+      if (event.ctrlKey && !event.shiftKey && key === "o") { event.preventDefault(); await openFile(); }
+      if (event.ctrlKey && !event.shiftKey && key === "s") { event.preventDefault(); await saveFile(); }
+      if (event.ctrlKey && event.shiftKey && key === "s") { event.preventDefault(); await saveAsFile(); }
+      if (event.ctrlKey && !event.shiftKey && key === "f") { event.preventDefault(); showFind(); }
+      if (event.ctrlKey && !event.shiftKey && key === "h") { event.preventDefault(); showReplace(); }
+      if (event.ctrlKey && !event.shiftKey && key === "g") { event.preventDefault(); showGoto(); }
+      if (event.key === "F3") { event.preventDefault(); findNext(); }
+      if (event.key === "F5") { event.preventDefault(); insertTimeDate(); }
+      if (event.key === "F1") { event.preventDefault(); dialogs.about.showModal(); }
+    });
+  }
+
+  function bindEditor() {
+    editor.addEventListener("input", () => {
+      updateChrome();
+    });
+    editor.addEventListener("blur", () => {
+      commitBufferChange("editor_blur");
+    });
+    editor.addEventListener("keyup", updatePosition);
+    editor.addEventListener("click", updatePosition);
+    editor.addEventListener("select", updatePosition);
+    els.lineEnding.addEventListener("change", () => {
+      saveSettings();
+      updateChrome();
+      appendLedger("setting_changed", { lineEnding: els.lineEnding.value });
+    });
+    els.fileInput.addEventListener("change", async () => {
+      const file = els.fileInput.files && els.fileInput.files[0];
+      await loadTextFile(file, null);
+      els.fileInput.value = "";
+    });
+    window.addEventListener("beforeunload", (event) => {
+      if (!isDirty()) return;
+      event.preventDefault();
+      event.returnValue = "";
+    });
+  }
+
+  function init() {
+    readSettings();
+    loadLedger();
+    bindMenus();
+    bindDialogs();
+    bindKeyboard();
+    bindEditor();
+    setText("", "Untitled", true);
+    appendLedger("heart_boot", { body: "Mantle Notepad AppAI", phase: "Phase 1", modelCalls: 0 });
+    updateChrome();
+    setMessage("Ready", "ok");
+  }
+
+  window.NotepadAppAI = {
+    init,
+    state,
+    readDeclaration,
+    readOrganMap,
+    readHostEvidenceIndex,
+    readGuiNerveCoverage,
+    readParityMatrix,
+    consultHostEvidence,
+    newFile,
+    openFile,
+    loadTextFile,
+    saveFile,
+    saveAsFile,
+    closeDocument,
+    setText,
+    isDirty,
+    findNext,
+    replaceCurrent,
+    replaceAll,
+    goToLine,
+    toggleWordWrap,
+    toggleStatusBar,
+    toggleAppAIPanel,
+    insertTimeDate,
+    getLedger: () => state.ledger.slice(),
+    getProofs: () => state.ledger.filter((entry) => entry.type === "action_execution_proof").map((entry) => entry.detail),
+    setSaveAdapter: (adapter) => { state.saveAdapter = adapter; },
+    setConfirmAdapter: (adapter) => { state.confirmAdapter = adapter; },
+    phase1NoModelCalls: () => true,
+    brainStatus: () => ({ phase: "Phase 1", mind: "dormant", mayMutate: false, modelCalls: 0 })
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>

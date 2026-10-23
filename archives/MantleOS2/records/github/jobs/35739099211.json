@@ -1,0 +1,134 @@
+[
+  {
+    "id": 106783850864,
+    "run_id": 35739099211,
+    "workflow_name": "SCAN v0.28 reconstruction loop",
+    "head_branch": "release-v0.28-publish-fix",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35739099211",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY3NBBcA",
+    "head_sha": "e75b0950a2d93f2b22edee2d8b3ab8ce341542d1",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106783850864",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35739099211/job/106783850864",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T14:15:56Z",
+    "started_at": "2026-09-22T14:16:31Z",
+    "completed_at": "2026-09-22T14:17:02Z",
+    "name": "reconstruction-loop",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T14:16:32Z",
+        "completed_at": "2026-09-22T14:16:32Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T14:16:32Z",
+        "completed_at": "2026-09-22T14:16:33Z"
+      },
+      {
+        "name": "Set up Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T14:16:33Z",
+        "completed_at": "2026-09-22T14:16:34Z"
+      },
+      {
+        "name": "Set up Node",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T14:16:34Z",
+        "completed_at": "2026-09-22T14:16:34Z"
+      },
+      {
+        "name": "Verify sealed v0.28 package manifest before installation",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T14:16:34Z",
+        "completed_at": "2026-09-22T14:16:36Z"
+      },
+      {
+        "name": "Install v0.28 scanner and scanner-owned TypeScript parser",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T14:16:36Z",
+        "completed_at": "2026-09-22T14:16:43Z"
+      },
+      {
+        "name": "Run full v0.28 regression suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T14:16:43Z",
+        "completed_at": "2026-09-22T14:16:59Z"
+      },
+      {
+        "name": "Exercise Anchor Code, Blueprint, and fresh-scan conformance",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-22T14:16:59Z",
+        "completed_at": "2026-09-22T14:16:59Z"
+      },
+      {
+        "name": "Upload v0.28 integration evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-22T14:16:59Z",
+        "completed_at": "2026-09-22T14:17:00Z"
+      },
+      {
+        "name": "Post Set up Node",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16,
+        "started_at": "2026-09-22T14:17:00Z",
+        "completed_at": "2026-09-22T14:17:01Z"
+      },
+      {
+        "name": "Post Set up Python",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-09-22T14:17:01Z",
+        "completed_at": "2026-09-22T14:17:01Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18,
+        "started_at": "2026-09-22T14:17:01Z",
+        "completed_at": "2026-09-22T14:17:01Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 19,
+        "started_at": "2026-09-22T14:17:01Z",
+        "completed_at": "2026-09-22T14:17:01Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106783850864",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000002886,
+    "runner_name": "GitHub Actions 1000002886",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

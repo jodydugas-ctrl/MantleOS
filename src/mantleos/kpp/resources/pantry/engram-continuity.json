@@ -1,0 +1,45 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "engram-continuity",
+  "version": "0.1.0",
+  "function": "A small append-only hash-linked memory ledger demonstration. (minimal executable example; full organ not included)",
+  "status": "reference",
+  "preferred_for": [
+    "bioagent",
+    "passover",
+    "mantleos"
+  ],
+  "compatible_tissues": [
+    "anchor",
+    "python",
+    "mixed"
+  ],
+  "tags": [
+    "continuity"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "A small append-only hash-linked memory ledger demonstration. (minimal executable example; full organ not included)"
+  ],
+  "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
+  "verified_with": "Bundled Anchor emission and Python specimen tests; NOT complete MantleOS organ runtime",
+  "provenance": "Original KPP example inspired by privately provided MantleOS files; no MantleOS runtime source copied.",
+  "specimen": {
+    "path": "specimens/mantleos/memory-ledger.anchor",
+    "profile": "EMIT_TEXT/0.2",
+    "emits": "python",
+    "sha256": "ed9f040a3d8c74f781adf02638445c85ccbbee4cbccf99909287208f3c049924",
+    "scope": "Anchor emits a runnable Python reference; the Anchor emitter itself has no dynamic state or Python effects."
+  },
+  "usage": {
+    "use_when": "Select for an example of append-only memory continuity.",
+    "inputs": [
+      "Ledger path and text records"
+    ],
+    "outputs": [
+      "Hash-linked record log and readback"
+    ],
+    "limits": "Example only; not a complete Engram continuity organ."
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "interface-shell",
+  "version": "0.1.0",
+  "function": "Visible application surface: layout, controls, menus",
+  "status": "ready",
+  "preferred_for": [
+    "browser",
+    "prototype",
+    "desktop-style"
+  ],
+  "compatible_tissues": [
+    "javascript",
+    "html"
+  ],
+  "tags": [
+    "kpp",
+    "ui"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "Visible application surface: layout, controls, menus"
+  ],
+  "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
+  "verified_with": "Bundled reference/tests only",
+  "provenance": "Original KPP reference",
+  "usage": {
+    "use_when": "Select for a quickly usable visible browser prototype.",
+    "inputs": [
+      "UI description and markup"
+    ],
+    "outputs": [
+      "Visible page and controls"
+    ],
+    "limits": "GUI existence does not prove interaction behavior."
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "fidelity-trace",
+  "version": "0.1.0",
+  "function": "Bounded progressive static source relationship tracing",
+  "status": "ready",
+  "preferred_for": [
+    "codebase",
+    "scanner",
+    "migration"
+  ],
+  "compatible_tissues": [
+    "python"
+  ],
+  "tags": [
+    "scan",
+    "fidelity"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "Bounded progressive static source relationship tracing"
+  ],
+  "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
+  "verified_with": "Bundled reference/tests only",
+  "provenance": "Original KPP reference",
+  "usage": {
+    "use_when": "Select to examine progressive static source relationships.",
+    "inputs": [
+      "Supported source tree and depth"
+    ],
+    "outputs": [
+      "Bounded source inventory and relationship graph"
+    ],
+    "limits": "Static scan only; cannot prove runtime behavior."
+  }
+}

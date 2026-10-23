@@ -1,0 +1,37 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "external-project",
+  "version": "0.1.0",
+  "function": "Pinned external GitHub or local codebase as compositional ingredient",
+  "status": "reference",
+  "preferred_for": [
+    "legacy-code",
+    "github",
+    "composition"
+  ],
+  "compatible_tissues": [
+    "mixed"
+  ],
+  "tags": [
+    "repository",
+    "integration"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "Pinned external GitHub or local codebase as compositional ingredient"
+  ],
+  "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
+  "verified_with": "Not bundled; acquisition and integration require operator review",
+  "provenance": "KPP design reference inspired by user-provided MantleOS material",
+  "usage": {
+    "use_when": "Consider an existing authorized repository as a source-code ingredient.",
+    "inputs": [
+      "Pinned checkout and integration contract"
+    ],
+    "outputs": [
+      "Repository-based candidate component"
+    ],
+    "limits": "Code, rights, and behavior require independent inspection and qualification."
+  }
+}

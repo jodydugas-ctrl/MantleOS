@@ -1,0 +1,27 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -e ".[dev]"
+      - run: python -m pytest --junitxml=test-results.xml
+      - run: python -m mantleos.public_audit .
+      - run: python -m build
+      - run: python scripts/build_release.py dist .artifacts --test-report test-results.xml
+      - name: Publish immutable prerelease artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --prerelease --generate-notes dist/* .artifacts/*

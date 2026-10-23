@@ -1,0 +1,110 @@
+[
+  {
+    "id": 92338447752,
+    "run_id": 31015520818,
+    "workflow_name": "Package and release evidence",
+    "head_branch": "chore/deidentify-attribution",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/runs/31015520818",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOSv-f3M8AAAAVf8zliA",
+    "head_sha": "7ac3a58f09a4887f10e99118ec19fe969e04df19",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/jobs/92338447752",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-os/actions/runs/31015520818/job/92338447752",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-08-05T14:30:14Z",
+    "started_at": "2026-08-05T14:30:17Z",
+    "completed_at": "2026-08-05T14:30:39Z",
+    "name": "package",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-08-05T14:30:18Z",
+        "completed_at": "2026-08-05T14:30:18Z"
+      },
+      {
+        "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-08-05T14:30:18Z",
+        "completed_at": "2026-08-05T14:30:20Z"
+      },
+      {
+        "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-08-05T14:30:20Z",
+        "completed_at": "2026-08-05T14:30:20Z"
+      },
+      {
+        "name": "Build and validate distributions",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-08-05T14:30:20Z",
+        "completed_at": "2026-08-05T14:30:32Z"
+      },
+      {
+        "name": "Clean-environment wheel smoke",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-08-05T14:30:32Z",
+        "completed_at": "2026-08-05T14:30:35Z"
+      },
+      {
+        "name": "Hash artifacts and scan release surface",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-08-05T14:30:35Z",
+        "completed_at": "2026-08-05T14:30:36Z"
+      },
+      {
+        "name": "Run actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-08-05T14:30:36Z",
+        "completed_at": "2026-08-05T14:30:36Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-08-05T14:30:36Z",
+        "completed_at": "2026-08-05T14:30:36Z"
+      },
+      {
+        "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-08-05T14:30:36Z",
+        "completed_at": "2026-08-05T14:30:37Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-08-05T14:30:37Z",
+        "completed_at": "2026-08-05T14:30:37Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/check-runs/92338447752",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000001733,
+    "runner_name": "GitHub Actions 1000001733",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

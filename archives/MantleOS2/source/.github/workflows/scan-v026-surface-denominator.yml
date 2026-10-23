@@ -1,0 +1,229 @@
+name: SCAN v0.26 surface denominator
+
+on:
+  push:
+    branches:
+      - scan-v026-surface-denominator
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  adaptive-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      MOJI_COMMIT: 7793dbabc880a950b5003dcfd57c1222b279b807
+      MOJI_TREE: b4e0e6a4d2010a6d584f40b01ab5ffad7bf18fea
+      OPENAI_API_KEY: ''
+      ANTHROPIC_API_KEY: ''
+      GOOGLE_API_KEY: ''
+      GEMINI_API_KEY: ''
+      GROQ_API_KEY: ''
+      MISTRAL_API_KEY: ''
+      COHERE_API_KEY: ''
+
+    steps:
+      - name: Checkout SCAN development branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Verify frozen v0.23 through v0.25 are unchanged
+        shell: bash
+        run: |
+          git fetch origin main --depth=1
+          git diff --exit-code origin/main -- Anchor/engine/v0.23 Anchor/engine/v0.24 Anchor/engine/v0.25
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install v0.26 scanner and scanner-owned TypeScript parser
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e Anchor/engine/v0.26 pytest
+          mkdir -p .scan-tools
+          npm install --prefix .scan-tools --ignore-scripts --no-package-lock --no-save typescript@5.7.2
+          echo "SCAN_TYPESCRIPT_MODULE=$GITHUB_WORKSPACE/.scan-tools/node_modules/typescript" >> "$GITHUB_ENV"
+          scan-body --help >/dev/null
+          python - <<'PY'
+          import scan
+          assert scan.__version__ == "0.26.0", scan.__version__
+          PY
+
+      - name: Run SCAN v0.26 regression suite
+        shell: bash
+        run: pytest -q Anchor/engine/v0.26/tests
+
+      - name: Checkout frozen Moji specimen
+        uses: actions/checkout@v4
+        with:
+          repository: alexishida/Moji
+          ref: 7793dbabc880a950b5003dcfd57c1222b279b807
+          path: specimen
+          fetch-depth: 1
+
+      - name: Verify specimen identity
+        shell: bash
+        run: |
+          test "$(git -C specimen rev-parse HEAD)" = "$MOJI_COMMIT"
+          test "$(git -C specimen rev-parse HEAD^{tree})" = "$MOJI_TREE"
+          printf '{"repository":"alexishida/Moji","commit":"%s","tree":"%s"}\n' "$MOJI_COMMIT" "$MOJI_TREE" > specimen_identity.json
+
+      - name: Cold structural baseline without TypeScript Electron adapters
+        shell: bash
+        run: |
+          mkdir -p results
+          python - <<'PY'
+          from pathlib import Path
+          from scan.engine import ScanEngine
+          from scan.adapters import DEFAULT_ADAPTERS
+
+          excluded = {"typescript-electron", "electron-metadata"}
+          adapters = [a for a in DEFAULT_ADAPTERS if a.name not in excluded]
+          ScanEngine(adapters=adapters).scan(
+              Path("specimen"), Path("results/baseline"),
+              specimen_id="alexishida/Moji@7793dbabc880a950b5003dcfd57c1222b279b807",
+          )
+          PY
+
+      - name: Adaptive cold scan A
+        shell: bash
+        run: |
+          scan-body scan specimen --out results/adapted-a --specimen-id "alexishida/Moji@$MOJI_COMMIT"
+          test -f results/adapted-a/assimilation_status.json
+          test -f results/adapted-a/assimilation/assimilation_request.json
+          test -f results/adapted-a/assimilation/LLM_ASSIMILATION_TASK.md
+          test -f results/adapted-a/assimilation/promotion_gate.json
+
+      - name: Adaptive cold scan B and determinism proof
+        shell: bash
+        run: |
+          scan-body scan specimen --out results/adapted-b --specimen-id "alexishida/Moji@$MOJI_COMMIT"
+          for f in machine_body_map.json evidence_graph.json evidence_catalog.json completeness_vector.json integrity_report.json surface_closure.json effect_closure.json nest_capability_map.json stage1_summary.md projection_manifest.json assimilation_status.json; do
+            cmp "results/adapted-a/$f" "results/adapted-b/$f"
+          done
+          diff -qr results/adapted-a/assimilation results/adapted-b/assimilation
+
+      - name: Mechanical comparison and integrity gates
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          def load(root, name):
+              return json.loads((Path(root) / name).read_text(encoding="utf-8"))
+
+          roots = {"baseline": "results/baseline", "adapted": "results/adapted-a"}
+          out = {
+              "schema_version": "scan-v026-surface-denominator-calibration/0.1",
+              "specimen": {"repository": "alexishida/Moji", "commit": "7793dbabc880a950b5003dcfd57c1222b279b807", "tree": "b4e0e6a4d2010a6d584f40b01ab5ffad7bf18fea"},
+              "runs": {},
+              "determinism": "PASS",
+          }
+          for key, root in roots.items():
+              body = load(root, "machine_body_map.json")
+              surface = load(root, "surface_closure.json")
+              effect = load(root, "effect_closure.json")
+              nest = load(root, "nest_capability_map.json")
+              integrity = load(root, "integrity_report.json")
+              out["runs"][key] = {
+                  "files": body["inventory"]["file_count"],
+                  "nodes": body["extraction"]["node_count"],
+                  "edges": body["extraction"]["edge_count"],
+                  "evidence": body["extraction"]["evidence_count"],
+                  "surface_closure": {k: surface.get(k) for k in ("state", "surface_count", "bound_count", "partial_count", "unresolved_count", "closure_ratio")},
+                  "effect_closure": {k: effect.get(k) for k in ("state", "surface_count", "closed_count", "partial_count", "unresolved_count", "feedback_observed_count", "closure_ratio")},
+                  "nest": {k: nest.get(k) for k in ("state", "capability_count", "effect_count", "boundary_count", "persistence_object_count")},
+                  "integrity": {k: integrity.get(k) for k in ("state", "issue_count", "severity_counts")},
+              }
+          b = out["runs"]["baseline"]
+          a = out["runs"]["adapted"]
+          out["delta"] = {
+              "nodes": a["nodes"] - b["nodes"],
+              "edges": a["edges"] - b["edges"],
+              "evidence": a["evidence"] - b["evidence"],
+              "human_surfaces": a["surface_closure"]["surface_count"] - b["surface_closure"]["surface_count"],
+              "bound_surfaces": a["surface_closure"]["bound_count"] - b["surface_closure"]["bound_count"],
+              "closed_effect_routes": a["effect_closure"]["closed_count"] - b["effect_closure"]["closed_count"],
+          }
+          assert a["integrity"]["severity_counts"].get("ERROR", 0) == 0
+          assimilation = load("results/adapted-a", "assimilation_status.json")
+          assert assimilation["required"] is True
+          assert assimilation["state"] == "OPEN"
+          assert assimilation["unknown_runtime_languages"] == []
+          out["assimilation"] = assimilation
+          Path("results/V026_CALIBRATION_COMPARISON.json").write_text(json.dumps(out, indent=2), encoding="utf-8")
+          print(json.dumps(out, indent=2))
+          PY
+
+          scan-body query results/adapted-a/scan_index.sqlite surface-without-handler --limit 200 > results/query_surface_without_handler.json
+          scan-body query results/adapted-a/scan_index.sqlite external-writes --limit 200 > results/query_external_writes.json
+          scan-body query results/adapted-a/scan_index.sqlite nest-dependent-actions --limit 200 > results/query_nest_dependent_actions.json
+          scan-body query results/adapted-a/scan_index.sqlite unknown-routes --limit 200 > results/query_unknown_routes.json
+
+      - name: Regenerate and self-audit clean v0.26 package manifest
+        shell: bash
+        run: |
+          rm -rf Anchor/engine/v0.26/*.egg-info Anchor/engine/v0.26/*/*.egg-info
+          find Anchor/engine/v0.26 -type d -name __pycache__ -prune -exec rm -rf {} +
+          scan-body package-manifest Anchor/engine/v0.26
+          scan-body self-audit Anchor/engine/v0.26 --out results/V026_PACKAGE_SELF_AUDIT.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          manifest = json.loads(Path("Anchor/engine/v0.26/PACKAGE_MANIFEST.json").read_text(encoding="utf-8"))
+          assert manifest["engine_version"] == "0.26.0"
+          bad = [x["path"] for x in manifest["files"] if ".egg-info/" in x["path"] or "__pycache__/" in x["path"]]
+          assert not bad, bad
+          audit = json.loads(Path("results/V026_PACKAGE_SELF_AUDIT.json").read_text(encoding="utf-8"))
+          assert audit["state"] == "PASS", audit
+          PY
+          cp Anchor/engine/v0.26/PACKAGE_MANIFEST.json results/V026_PACKAGE_MANIFEST.json
+
+      - name: Add development receipt
+        if: always()
+        shell: bash
+        run: |
+          cp specimen_identity.json results/ 2>/dev/null || true
+          mkdir -p results/scanner-source
+          cp Anchor/engine/v0.26/scan/assimilation.py results/scanner-source/ 2>/dev/null || true
+          cp Anchor/engine/v0.26/scan/adaptive_cli.py results/scanner-source/ 2>/dev/null || true
+          cp Anchor/engine/v0.26/scan/assimilation_candidate.py results/scanner-source/ 2>/dev/null || true
+          cp Anchor/engine/v0.26/scan/assimilation_context.py results/scanner-source/ 2>/dev/null || true
+          cp Anchor/engine/v0.26/scan/adapters/clang_cpp.py results/scanner-source/ 2>/dev/null || true
+          cp Anchor/engine/v0.26/scan/adapters/cpp_qt.py results/scanner-source/ 2>/dev/null || true
+          cp Anchor/engine/v0.26/scan/resolution.py results/scanner-source/ 2>/dev/null || true
+          cp Anchor/engine/v0.26/scan/adapters/typescript_electron.py results/scanner-source/ 2>/dev/null || true
+          cp Anchor/engine/v0.26/scan/adapters/typescript_electron_precise.py results/scanner-source/ 2>/dev/null || true
+          cp Anchor/engine/v0.26/scan/adapters/typescript_electron_final.py results/scanner-source/ 2>/dev/null || true
+          cat > results/V026_DEVELOPMENT_RECEIPT.md <<'EOF'
+          # SCAN v0.26 surface-denominator development receipt
+
+          - v0.23 through v0.25 are verified unchanged from `main` before testing.
+          - Moji is frozen at commit `7793dbabc880a950b5003dcfd57c1222b279b807`, tree `b4e0e6a4d2010a6d584f40b01ab5ffad7bf18fea`.
+          - The TypeScript parser is scanner-owned and parse-only; specimen packages are not installed and specimen code is not executed.
+          - LLM credentials are blank during the mechanical scan.
+          - `adapted-a` and `adapted-b` are fresh unchanged runs used for byte-level determinism checks.
+          - The assimilation workbench is secondary scanner engineering output. It does not mutate canonical evidence and generated candidate code is not auto-executed.
+          - The committed/source package manifest excludes editable-install metadata and other transient Python caches.
+          EOF
+
+      - name: Upload v0.26 calibration evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scan-v026-surface-denominator
+          path: results
+          if-no-files-found: error
+          retention-days: 14

@@ -1,0 +1,54 @@
+{
+  "organs": {
+    "heart": {
+      "path": "daemon/heart.py",
+      "sha256": "308b1f889cb56a424a685fe1b3c8291ca7b78e4edc18f90411c9863af5b34630",
+      "tests": [
+        "tests/test_daemon.py"
+      ],
+      "version": "0.1.0"
+    },
+    "immune": {
+      "path": "daemon/body.py",
+      "sha256": "06128124965b8b1a72b8794f7c905a68f7f83f3ddaed836ffe30b643a646a126",
+      "tests": [
+        "tests/test_failures.py"
+      ],
+      "version": "0.1.0"
+    },
+    "limbs": {
+      "path": "daemon/body.py",
+      "sha256": "06128124965b8b1a72b8794f7c905a68f7f83f3ddaed836ffe30b643a646a126",
+      "tests": [
+        "tests/test_daemon.py"
+      ],
+      "version": "0.1.0"
+    },
+    "memory": {
+      "path": "daemon/body.py",
+      "sha256": "06128124965b8b1a72b8794f7c905a68f7f83f3ddaed836ffe30b643a646a126",
+      "tests": [
+        "tests/test_daemon.py"
+      ],
+      "version": "0.1.0"
+    },
+    "nervous": {
+      "path": "daemon/body.py",
+      "sha256": "06128124965b8b1a72b8794f7c905a68f7f83f3ddaed836ffe30b643a646a126",
+      "tests": [
+        "tests/test_daemon.py"
+      ],
+      "version": "0.1.0"
+    },
+    "senses": {
+      "path": "daemon/body.py",
+      "sha256": "06128124965b8b1a72b8794f7c905a68f7f83f3ddaed836ffe30b643a646a126",
+      "tests": [
+        "tests/test_daemon.py"
+      ],
+      "version": "0.1.0"
+    }
+  },
+  "runtime": "python >=3.9",
+  "schema_version": 1
+}

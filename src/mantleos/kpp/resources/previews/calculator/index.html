@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KPP Progressive Calculator</title><link rel="stylesheet" href="/style.css"></head>
+<body><main id="app">
+ <header><h1>Calculator</h1><span id="kpp-progress" aria-live="polite">BUILDING · first interactive surface</span></header>
+ <p>Calculate now. Additional capabilities can be added without replacing this workspace.</p>
+ <form id="calculator" autocomplete="off">
+  <label>First number <input id="left" type="number" step="any" value="2"></label>
+  <label>Operation <select id="operation"><option value="add">Add +</option><option value="subtract">Subtract −</option></select></label>
+  <label>Second number <input id="right" type="number" step="any" value="3"></label>
+  <div class="actions"><button type="submit" id="calculate">Calculate</button>
+  <button type="button" id="square" data-requires="square" disabled title="Not installed">Square result (future extension)</button></div>
+ </form>
+ <output id="result" role="status" aria-live="polite">Ready</output>
+ <p id="kpp-anchors">Anchors not yet accepted</p>
+</main><script defer src="/base.js"></script><script defer src="/runtime.js"></script></body></html>

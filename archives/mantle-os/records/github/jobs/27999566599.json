@@ -1,0 +1,218 @@
+[
+  {
+    "id": 82868808285,
+    "run_id": 27999566599,
+    "workflow_name": "Zombie Body Audit",
+    "head_branch": "docs/grimoire",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/runs/27999566599",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOSv-f3M8AAAATS12qXQ",
+    "head_sha": "8b2ceff702f9c27305ed94e68f9580378c9ddf5f",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/jobs/82868808285",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-os/actions/runs/27999566599/job/82868808285",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-06-23T03:12:52Z",
+    "started_at": "2026-06-23T03:12:55Z",
+    "completed_at": "2026-06-23T03:13:07Z",
+    "name": "certify-v3",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-06-23T03:12:56Z",
+        "completed_at": "2026-06-23T03:12:57Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-06-23T03:12:57Z",
+        "completed_at": "2026-06-23T03:12:58Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-06-23T03:12:58Z",
+        "completed_at": "2026-06-23T03:12:59Z"
+      },
+      {
+        "name": "Stage-1 Zombie Body gate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-06-23T03:12:59Z",
+        "completed_at": "2026-06-23T03:13:01Z"
+      },
+      {
+        "name": "The gate must CATCH tampering (all three MUST fail)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-06-23T03:13:01Z",
+        "completed_at": "2026-06-23T03:13:01Z"
+      },
+      {
+        "name": "Security invariants (68 red/green)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-06-23T03:13:01Z",
+        "completed_at": "2026-06-23T03:13:02Z"
+      },
+      {
+        "name": "Stage-2 MIND gate (containment + full Stage-1 regression, offline stub)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-06-23T03:13:02Z",
+        "completed_at": "2026-06-23T03:13:03Z"
+      },
+      {
+        "name": "Narrated demos (Phase 1 + Phase 2) and the assimilation dry-run",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-06-23T03:13:03Z",
+        "completed_at": "2026-06-23T03:13:04Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-06-23T03:13:04Z",
+        "completed_at": "2026-06-23T03:13:04Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16,
+        "started_at": "2026-06-23T03:13:04Z",
+        "completed_at": "2026-06-23T03:13:04Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-06-23T03:13:04Z",
+        "completed_at": "2026-06-23T03:13:04Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/check-runs/82868808285",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000000133,
+    "runner_name": "GitHub Actions 1000000133",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  },
+  {
+    "id": 82868808292,
+    "run_id": 27999566599,
+    "workflow_name": "Zombie Body Audit",
+    "head_branch": "docs/grimoire",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/runs/27999566599",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOSv-f3M8AAAATS12qZA",
+    "head_sha": "8b2ceff702f9c27305ed94e68f9580378c9ddf5f",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/jobs/82868808292",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-os/actions/runs/27999566599/job/82868808292",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-06-23T03:12:52Z",
+    "started_at": "2026-06-23T03:12:55Z",
+    "completed_at": "2026-06-23T03:13:04Z",
+    "name": "certify-standalone-cube",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-06-23T03:12:56Z",
+        "completed_at": "2026-06-23T03:12:57Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-06-23T03:12:57Z",
+        "completed_at": "2026-06-23T03:12:58Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-06-23T03:12:58Z",
+        "completed_at": "2026-06-23T03:12:59Z"
+      },
+      {
+        "name": "The standalone cube codec proves every format rule",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-06-23T03:12:59Z",
+        "completed_at": "2026-06-23T03:13:00Z"
+      },
+      {
+        "name": "One format, two faithful implementations (standalone <-> engine)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-06-23T03:13:00Z",
+        "completed_at": "2026-06-23T03:13:00Z"
+      },
+      {
+        "name": "Back-compat shims still drive the gates (v2.3 commands keep working)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-06-23T03:13:00Z",
+        "completed_at": "2026-06-23T03:13:02Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-06-23T03:13:02Z",
+        "completed_at": "2026-06-23T03:13:02Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-06-23T03:13:02Z",
+        "completed_at": "2026-06-23T03:13:02Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-06-23T03:13:02Z",
+        "completed_at": "2026-06-23T03:13:02Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/check-runs/82868808292",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000000132,
+    "runner_name": "GitHub Actions 1000000132",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

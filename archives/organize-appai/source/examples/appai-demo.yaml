@@ -1,0 +1,27 @@
+rules:
+  - name: Archive invoices
+    locations:
+      - fixtures/inbox
+    subfolders: false
+    tags:
+      - demo
+    filters:
+      - extension:
+          - txt
+          - pdf
+      - name:
+          contains: invoice
+          case_sensitive: false
+    actions:
+      - move:
+          dest: artifacts/demo-output/
+          on_conflict: rename_new
+
+  - name: Disabled cleanup example
+    enabled: false
+    locations:
+      - fixtures/inbox
+    filters:
+      - extension: txt
+    actions:
+      - delete

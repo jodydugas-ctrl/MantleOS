@@ -1,0 +1,118 @@
+{
+  "schema": "mantle.optimization-measurement/1",
+  "date": "2026-10-15",
+  "tool": {
+    "name": "SCAN/Optimizer",
+    "version": "1.0.0",
+    "archive_sha256": "4e0f6a54182dc492e5ede1fc7c94f405ac51b8b0c66c00aebf902d5d4e07e78a",
+    "manifest_files_verified": 52
+  },
+  "baseline_git_commit": "ad6362140004bc7218221ce194f117e8f898210f",
+  "graph_digest": "e23f0434eee50a9b77d367fd4a15d5256ce004578a93bd891f2d2564363ce833",
+  "scan": {
+    "tracked_files": 182,
+    "nodes": 22790,
+    "edges": 28522,
+    "unsupported_syntax_files": 50
+  },
+  "evidence_nodes": [
+    "node:6e125f8fd4ae80c8ec5f7d77",
+    "node:286160138d5257bab43880b7"
+  ],
+  "mechanism": "Skip per-byte prediction for PNG filter-0 rows in both Chroma readers; retain previous-row state",
+  "host": {
+    "system": "Windows",
+    "machine": "AMD64",
+    "python": "3.14.2"
+  },
+  "status": "VERIFIED_WITHIN_DECLARED_CHECK_SCOPE",
+  "identities_before": {
+    "baseline": "d103c241a16f7d2db0b14ff533706ea0bc28ee8c5206e9a8d28e1f176c5b110f",
+    "candidate": "4eb9d618ad1666813cf590a847c56ff433ddddef9bea89e13f15bca73ae0cb3b"
+  },
+  "identities_after": {
+    "baseline": "d103c241a16f7d2db0b14ff533706ea0bc28ee8c5206e9a8d28e1f176c5b110f",
+    "candidate": "4eb9d618ad1666813cf590a847c56ff433ddddef9bea89e13f15bca73ae0cb3b"
+  },
+  "measurement": {
+    "baseline_median_seconds": 3.2421677999991516,
+    "candidate_median_seconds": 0.3487219999988156,
+    "improvement_percent": 89.24417175449997,
+    "every_pair_improved": true
+  },
+  "trials": [
+    {
+      "trial": -1,
+      "warmup": true,
+      "baseline_seconds": 3.2827690999984043,
+      "candidate_seconds": 0.40006720000019413,
+      "stdout_match": true
+    },
+    {
+      "trial": 0,
+      "warmup": false,
+      "baseline_seconds": 3.875748400001612,
+      "candidate_seconds": 0.32679339999958756,
+      "stdout_match": true
+    },
+    {
+      "trial": 1,
+      "warmup": false,
+      "baseline_seconds": 3.2421677999991516,
+      "candidate_seconds": 0.34539179999774205,
+      "stdout_match": true
+    },
+    {
+      "trial": 2,
+      "warmup": false,
+      "baseline_seconds": 3.4519387999971514,
+      "candidate_seconds": 0.4129681999984314,
+      "stdout_match": true
+    },
+    {
+      "trial": 3,
+      "warmup": false,
+      "baseline_seconds": 3.132180699998571,
+      "candidate_seconds": 0.35869800000000396,
+      "stdout_match": true
+    },
+    {
+      "trial": 4,
+      "warmup": false,
+      "baseline_seconds": 3.130856900002982,
+      "candidate_seconds": 0.3487219999988156,
+      "stdout_match": true
+    }
+  ],
+  "acceptance": {
+    "independent_tests": 7,
+    "baseline_check_exit": 0,
+    "candidate_check_exit": 0,
+    "minimum_improvement_percent": 10,
+    "repeats": 5,
+    "timeout_seconds": 30,
+    "total_seconds": 180
+  },
+  "source_sha256": {
+    "src/mantleos/chromamem.py": {
+      "before": "8e91b3c798e61c9191a0b2eb35da5612ee05c0d66097db42c2443bf2f31f6c2d",
+      "after": "9a12cae4b17feb5f3e1f0c3ccab0dd4b0acf5a90f459035d8685f8c39d3add3f"
+    },
+    "src/mantleos/optical_bootstrap.py": {
+      "before": "e42eee1521ed5926aa9524f3fbfb93e66f1f69bb1e49e7faf008621ddf4d2930",
+      "after": "ba8af23748df6be1f1789c7ae673399c7d597ede6a8a9394f2107b47b23c24e1"
+    }
+  },
+  "harness_sha256": {
+    "tests/test_chroma_filters.py": "93eaafc867b2a2d990e26263226bdde13e490724cb9a2156e40304933c69edee",
+    "examples/optimization/benchmark.py": "4a187a9d3a735faec292c0a5d60367402fb4e42dc48ffb60b5881ea62e6d3a0b"
+  },
+  "raw_receipt": ".work/optimizer/experiment.json",
+  "raw_receipt_sha256": "0f7c2e756357629ae732381950e9643d56dbf5e50833a15d57fa1ff07000d021",
+  "scope": "User-provided checks and measured commands only. Fresh-copy construction excluded; process startup included. No deployment performed.",
+  "limits": [
+    "Synthetic local Chroma workload only; no whole-application or other-platform speed claim",
+    "Static syntax gaps remain explicit; no live host, provider or cloud qualification",
+    "External harness files are hashed separately; optimizer source-tree identities exclude those external files"
+  ]
+}

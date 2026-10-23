@@ -1,0 +1,126 @@
+[
+  {
+    "id": 85404411519,
+    "run_id": 28801111364,
+    "workflow_name": "Demo Smoke (headless browser)",
+    "head_branch": "codex/add-live-agent-demo",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/runs/28801111364",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOSv-f3M8AAAAT4n_mfw",
+    "head_sha": "869d1203a5cd5ebde69f7525e306ce593523c30c",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/jobs/85404411519",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-os/actions/runs/28801111364/job/85404411519",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-07-06T14:59:21Z",
+    "started_at": "2026-07-06T14:59:25Z",
+    "completed_at": "2026-07-06T15:00:22Z",
+    "name": "demo-smoke",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-07-06T14:59:26Z",
+        "completed_at": "2026-07-06T14:59:32Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-07-06T14:59:32Z",
+        "completed_at": "2026-07-06T14:59:34Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-07-06T14:59:34Z",
+        "completed_at": "2026-07-06T14:59:34Z"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-07-06T14:59:34Z",
+        "completed_at": "2026-07-06T14:59:39Z"
+      },
+      {
+        "name": "Install Playwright (chromium only)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-07-06T14:59:39Z",
+        "completed_at": "2026-07-06T15:00:07Z"
+      },
+      {
+        "name": "Serve examples/ (static)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-07-06T15:00:07Z",
+        "completed_at": "2026-07-06T15:00:14Z"
+      },
+      {
+        "name": "Smoke-test both demos (mount + self-audit)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-07-06T15:00:14Z",
+        "completed_at": "2026-07-06T15:00:16Z"
+      },
+      {
+        "name": "Smoke-test the live agent (jsdom mount + runnable Stage-1 gate)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-07-06T15:00:16Z",
+        "completed_at": "2026-07-06T15:00:18Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-07-06T15:00:18Z",
+        "completed_at": "2026-07-06T15:00:18Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-07-06T15:00:18Z",
+        "completed_at": "2026-07-06T15:00:18Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16,
+        "started_at": "2026-07-06T15:00:18Z",
+        "completed_at": "2026-07-06T15:00:18Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-07-06T15:00:18Z",
+        "completed_at": "2026-07-06T15:00:18Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/check-runs/85404411519",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000000321,
+    "runner_name": "GitHub Actions 1000000321",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

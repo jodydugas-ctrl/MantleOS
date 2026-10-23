@@ -1,0 +1,1500 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Files.AppAI</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --canvas: #eef1f4;
+      --surface: #ffffff;
+      --surface-alt: #f7f8fa;
+      --ink: #17202a;
+      --muted: #5d6875;
+      --line: #cfd5dc;
+      --line-strong: #aeb7c2;
+      --accent: #087e8b;
+      --accent-strong: #075c65;
+      --accent-soft: #e1f4f5;
+      --success: #1d6b42;
+      --success-soft: #e5f4eb;
+      --warning: #8a5a00;
+      --warning-soft: #fff2cf;
+      --danger: #a1282f;
+      --danger-soft: #fbe8e9;
+      --shadow: 0 8px 22px rgba(23, 32, 42, 0.10);
+      font-family: "Segoe UI Variable", "Segoe UI", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      min-height: 100vh;
+      background: var(--canvas);
+      color: var(--ink);
+      font-size: 14px;
+      letter-spacing: 0;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+      letter-spacing: 0;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 3px solid rgba(8, 126, 139, 0.28);
+      outline-offset: 1px;
+    }
+
+    .app-shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 224px minmax(0, 1fr);
+      grid-template-rows: 58px minmax(0, 1fr);
+      grid-template-areas:
+        "brand topbar"
+        "sidebar main";
+    }
+
+    .brand {
+      grid-area: brand;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 9px 16px;
+      background: #17202a;
+      color: #ffffff;
+      border-right: 1px solid #2d3844;
+    }
+
+    .brand img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
+
+    .brand-name {
+      min-width: 0;
+      font-size: 16px;
+      font-weight: 650;
+      line-height: 1.1;
+    }
+
+    .brand-subtitle {
+      margin-top: 3px;
+      color: #b9c3ce;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .topbar {
+      grid-area: topbar;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 0 22px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .snapshot {
+      min-width: 0;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .snapshot strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .status {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 3px var(--success-soft);
+    }
+
+    .sidebar {
+      grid-area: sidebar;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      padding: 14px 10px;
+      background: #17202a;
+      color: #dce3ea;
+      border-right: 1px solid #2d3844;
+    }
+
+    .nav {
+      display: grid;
+      gap: 4px;
+    }
+
+    .nav-button {
+      width: 100%;
+      min-height: 40px;
+      padding: 9px 11px;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      background: transparent;
+      color: inherit;
+      text-align: left;
+    }
+
+    .nav-button:hover {
+      background: #24303c;
+    }
+
+    .nav-button[aria-selected="true"] {
+      border-color: #3e5961;
+      background: #1f4449;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .sidebar-note {
+      margin-top: auto;
+      padding: 13px 10px 2px;
+      border-top: 1px solid #34404c;
+      color: #aeb9c4;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .main {
+      grid-area: main;
+      min-width: 0;
+      min-height: 0;
+      overflow: auto;
+      padding: 22px;
+    }
+
+    .view {
+      display: none;
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    .view-header {
+      margin-bottom: 16px;
+    }
+
+    .view-header h1 {
+      margin: 0;
+      font-size: 23px;
+      line-height: 1.25;
+    }
+
+    .view-header p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .assistant-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .assistant-panel,
+    .tool-panel,
+    .evidence-row,
+    .body-band {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface);
+    }
+
+    .assistant-panel {
+      min-height: 610px;
+      display: grid;
+      grid-template-rows: minmax(340px, 1fr) auto;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .transcript {
+      max-height: 560px;
+      min-height: 340px;
+      overflow: auto;
+      padding: 20px;
+    }
+
+    .message {
+      max-width: 82%;
+      margin-bottom: 16px;
+    }
+
+    .message.user {
+      margin-left: auto;
+    }
+
+    .message-label {
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 650;
+      text-transform: uppercase;
+    }
+
+    .message.user .message-label {
+      text-align: right;
+    }
+
+    .message-body {
+      padding: 11px 13px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface-alt);
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+    .message.user .message-body {
+      border-color: #abd9dd;
+      background: var(--accent-soft);
+    }
+
+    .evidence-stamp {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 7px;
+    }
+
+    .stamp {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 7px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .stamp.direct,
+    .stamp.measured {
+      border-color: #acd5bd;
+      background: var(--success-soft);
+      color: var(--success);
+    }
+
+    .stamp.unknown {
+      border-color: #e4c581;
+      background: var(--warning-soft);
+      color: var(--warning);
+    }
+
+    .prompt-area {
+      padding: 14px;
+      border-top: 1px solid var(--line);
+      background: var(--surface-alt);
+    }
+
+    .prompt-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 9px;
+    }
+
+    .text-input,
+    .select-input {
+      width: 100%;
+      min-height: 40px;
+      border: 1px solid var(--line-strong);
+      border-radius: 5px;
+      background: var(--surface);
+      color: var(--ink);
+    }
+
+    .text-input {
+      padding: 9px 11px;
+    }
+
+    .select-input {
+      padding: 7px 9px;
+    }
+
+    .primary-button,
+    .secondary-button,
+    .danger-button {
+      min-height: 40px;
+      padding: 8px 14px;
+      border-radius: 5px;
+      font-weight: 600;
+    }
+
+    .primary-button {
+      border: 1px solid var(--accent-strong);
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .primary-button:hover {
+      background: var(--accent-strong);
+    }
+
+    .secondary-button {
+      border: 1px solid var(--line-strong);
+      background: var(--surface);
+      color: var(--ink);
+    }
+
+    .secondary-button:hover {
+      background: #edf0f3;
+    }
+
+    .danger-button {
+      border: 1px solid #dca6aa;
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .prompt-hint {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .quick-panel {
+      display: grid;
+      gap: 8px;
+    }
+
+    .quick-title {
+      margin: 0 0 2px;
+      font-size: 13px;
+    }
+
+    .quick-button {
+      min-height: 42px;
+      padding: 9px 11px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--surface);
+      color: var(--ink);
+      text-align: left;
+      line-height: 1.35;
+    }
+
+    .quick-button:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .notice {
+      margin-top: 12px;
+      padding: 12px;
+      border-left: 4px solid var(--warning);
+      background: var(--warning-soft);
+      color: #5b410d;
+      line-height: 1.45;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .tool-panel {
+      padding: 18px;
+    }
+
+    .tool-panel h2 {
+      margin: 0 0 4px;
+      font-size: 16px;
+    }
+
+    .tool-panel > p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .field {
+      min-width: 0;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .command-output,
+    .path-output {
+      margin-top: 14px;
+      padding: 13px;
+      border: 1px solid #35414d;
+      border-radius: 5px;
+      background: #17202a;
+      color: #edf4f6;
+      font-family: Consolas, "Courier New", monospace;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .output-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .mutation-gate {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 16px;
+      padding: 12px;
+      border: 1px solid #dca6aa;
+      border-radius: 5px;
+      background: var(--danger-soft);
+      color: #692025;
+    }
+
+    .mutation-gate input {
+      width: 18px;
+      height: 18px;
+      margin: 1px 0 0;
+    }
+
+    .mutation-gate strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .mutation-state {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .evidence-list,
+    .body-stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .evidence-row {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr) 110px;
+      gap: 14px;
+      align-items: start;
+      padding: 14px;
+    }
+
+    .evidence-key {
+      font-weight: 650;
+    }
+
+    .evidence-value {
+      min-width: 0;
+      overflow-wrap: anywhere;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .evidence-source {
+      color: var(--muted);
+      font-size: 11px;
+      text-align: right;
+    }
+
+    .body-band {
+      display: grid;
+      grid-template-columns: 120px minmax(0, 1fr) 100px;
+      gap: 14px;
+      align-items: center;
+      padding: 14px;
+    }
+
+    .body-band strong {
+      font-size: 14px;
+    }
+
+    .body-band span {
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .gate-pass {
+      color: var(--success);
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .receipt {
+      margin-top: 16px;
+      padding: 14px;
+      border: 1px solid #acd5bd;
+      border-radius: 6px;
+      background: var(--success-soft);
+      color: #174f34;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+      .app-shell {
+        grid-template-columns: 76px minmax(0, 1fr);
+      }
+
+      .brand {
+        justify-content: center;
+        padding: 9px;
+      }
+
+      .brand img {
+        width: 36px;
+        height: 36px;
+      }
+
+      .brand-copy,
+      .sidebar-note {
+        display: none;
+      }
+
+      .nav-button {
+        padding: 9px 5px;
+        text-align: center;
+        font-size: 11px;
+      }
+
+      .assistant-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-panel {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .quick-title,
+      .notice {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 660px) {
+      .app-shell {
+        min-height: 100vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: 54px auto minmax(0, 1fr);
+        grid-template-areas:
+          "brand"
+          "sidebar"
+          "main";
+      }
+
+      .brand {
+        justify-content: flex-start;
+        border-right: 0;
+      }
+
+      .brand-copy {
+        display: block;
+      }
+
+      .brand-subtitle {
+        display: none;
+      }
+
+      .topbar {
+        display: none;
+      }
+
+      .sidebar {
+        display: block;
+        min-height: auto;
+        padding: 8px;
+        overflow-x: auto;
+        border-right: 0;
+        border-bottom: 1px solid #2d3844;
+      }
+
+      .nav {
+        display: flex;
+        width: max-content;
+      }
+
+      .nav-button {
+        width: auto;
+        min-width: 78px;
+        min-height: 36px;
+        padding: 7px 10px;
+      }
+
+      .main {
+        padding: 15px;
+      }
+
+      .assistant-panel {
+        min-height: 560px;
+      }
+
+      .message {
+        max-width: 94%;
+      }
+
+      .quick-panel,
+      .tool-grid,
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-title,
+      .notice {
+        grid-column: auto;
+      }
+
+      .evidence-row,
+      .body-band {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+
+      .evidence-source,
+      .gate-pass {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --canvas: #11171d;
+        --surface: #1b232b;
+        --surface-alt: #222c35;
+        --ink: #eef2f5;
+        --muted: #b2bec9;
+        --line: #3b4651;
+        --line-strong: #596570;
+        --accent: #33aeb9;
+        --accent-strong: #208b95;
+        --accent-soft: #16383c;
+        --success: #72d19b;
+        --success-soft: #183829;
+        --warning: #f0c15d;
+        --warning-soft: #3d3218;
+        --danger: #ff9298;
+        --danger-soft: #432328;
+        --shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+      }
+
+      .topbar {
+        background: var(--surface);
+      }
+
+      .secondary-button:hover {
+        background: #2b3640;
+      }
+
+      .notice {
+        color: #f2d58f;
+      }
+
+      .mutation-gate {
+        color: #ffc2c5;
+      }
+
+      .receipt {
+        color: #a7e6c0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="brand">
+      <img src="files-logo.png" alt="">
+      <div class="brand-copy">
+        <div class="brand-name">Files.AppAI</div>
+        <div class="brand-subtitle">Resident project aide</div>
+      </div>
+    </header>
+
+    <header class="topbar">
+      <div class="snapshot">
+        <strong>Evidence snapshot</strong>
+        <span>7aa516aca1a9 / main / 2026-07-26</span>
+      </div>
+      <div class="status"><span class="status-dot"></span>Stage 1 certified</div>
+    </header>
+
+    <aside class="sidebar">
+      <nav class="nav" aria-label="AppAI views">
+        <button class="nav-button" type="button" data-view="assistant" aria-selected="true">Assistant</button>
+        <button class="nav-button" type="button" data-view="workbench" aria-selected="false">Workbench</button>
+        <button class="nav-button" type="button" data-view="evidence" aria-selected="false">Evidence</button>
+        <button class="nav-button" type="button" data-view="body" aria-selected="false">Body</button>
+      </nav>
+      <div class="sidebar-note">
+        Offline Phase 1 Body.<br>
+        No model, key, network, or host mutation.
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="view active" id="view-assistant" aria-labelledby="assistant-title">
+        <div class="view-header">
+          <h1 id="assistant-title">Ask about the Files project</h1>
+          <p>Deterministic answers from the germ's commit-bound evidence and calcified project rules.</p>
+        </div>
+
+        <div class="assistant-layout">
+          <div class="assistant-panel">
+            <div class="transcript" id="transcript" aria-live="polite"></div>
+            <form class="prompt-area" id="assistantForm">
+              <div class="prompt-row">
+                <input class="text-input" id="assistantPrompt" name="prompt" type="text"
+                  autocomplete="off" placeholder="Ask how to build, verify, or locate a subsystem">
+                <button class="primary-button" type="submit">Ask</button>
+              </div>
+              <div class="prompt-hint">The prompt is recorded only when submitted or blurred, never per keystroke.</div>
+            </form>
+          </div>
+
+          <aside class="quick-panel" aria-label="Suggested questions">
+            <h2 class="quick-title">Suggested questions</h2>
+            <button class="quick-button" type="button" data-question="How do I build the Files solution?">Build the solution</button>
+            <button class="quick-button" type="button" data-question="Where should I start for a WinUI interface change?">Find UI code</button>
+            <button class="quick-button" type="button" data-question="How should I handle native Windows interop?">Native interop</button>
+            <button class="quick-button" type="button" data-question="Which changes are high risk?">Review risk</button>
+            <button class="quick-button" type="button" data-question="What SDK and target framework does this snapshot use?">SDK baseline</button>
+            <button class="quick-button" type="button" data-question="Can you edit the Files source for me?">Mutation boundary</button>
+            <div class="notice">
+              Answers describe the recorded source snapshot. Refresh through Senses before treating changing repository facts as current.
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-workbench" aria-labelledby="workbench-title">
+        <div class="view-header">
+          <h1 id="workbench-title">Files workbench</h1>
+          <p>Generate exact verification commands and classify source paths without a model call.</p>
+        </div>
+
+        <div class="tool-grid">
+          <section class="tool-panel">
+            <h2>Build command</h2>
+            <p>Uses the `files_verify_command` instinct carried and proven by the spore.</p>
+            <div class="field-grid">
+              <div class="field">
+                <label for="buildTarget">Target</label>
+                <select class="select-input" id="buildTarget">
+                  <option value="solution">Solution</option>
+                  <option value="app">Main app</option>
+                  <option value="shared">Shared</option>
+                  <option value="sourcegenerator">Source generator</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="configuration">Configuration</label>
+                <select class="select-input" id="configuration">
+                  <option>Debug</option>
+                  <option>Release</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="platform">Platform</label>
+                <select class="select-input" id="platform">
+                  <option>x64</option>
+                  <option>arm64</option>
+                  <option>x86</option>
+                </select>
+              </div>
+            </div>
+            <div class="command-output" id="commandOutput"></div>
+            <div class="output-actions">
+              <button class="secondary-button" id="copyCommand" type="button">Copy command</button>
+            </div>
+          </section>
+
+          <section class="tool-panel">
+            <h2>Project area</h2>
+            <p>Classifies a Files path with the `files_area` instinct proven at hatch.</p>
+            <div class="field">
+              <label for="sourcePath">Relative source path</label>
+              <input class="text-input" id="sourcePath" type="text"
+                value="src/Files.App/App.xaml.cs" spellcheck="false">
+            </div>
+            <div class="path-output" id="pathOutput"></div>
+            <div class="output-actions">
+              <button class="secondary-button" id="classifyPath" type="button">Classify path</button>
+            </div>
+          </section>
+
+          <section class="tool-panel">
+            <h2>Host mutation gate</h2>
+            <p>This face can advise and prepare evidence. It has no Files checkout and no write limb connected to one.</p>
+            <label class="mutation-gate">
+              <input id="mutationGate" type="checkbox">
+              <span>
+                <strong>Operator intent acknowledged</strong>
+                This records intent only. It does not grant a write capability or change any source file.
+              </span>
+            </label>
+            <div class="mutation-state" id="mutationState">Closed. Read-only guidance remains active.</div>
+          </section>
+
+          <section class="tool-panel">
+            <h2>Session ledger</h2>
+            <p>Inputs, answers, proofs, and immune events append locally. A new session creates a boundary record.</p>
+            <div class="command-output" id="ledgerSummary">0 entries in this browser profile</div>
+            <div class="output-actions">
+              <button class="secondary-button" id="newSession" type="button">Start new session</button>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-evidence" aria-labelledby="evidence-title">
+        <div class="view-header">
+          <h1 id="evidence-title">Source evidence</h1>
+          <p>Presentation does not grant authority. Every answer retains its evidence label and source.</p>
+        </div>
+        <div class="evidence-list" id="evidenceList"></div>
+      </section>
+
+      <section class="view" id="view-body" aria-labelledby="body-title">
+        <div class="view-header">
+          <h1 id="body-title">Certified Body</h1>
+          <p>The deterministic organs are active; the Brain socket is dormant and cannot mutate the host.</p>
+        </div>
+        <div class="body-stack" id="bodyStack"></div>
+        <div class="receipt" id="certificationReceipt"></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="application/json" id="appai-declaration">
+  {
+    "schema_version": "mantle-appai-declaration-v1",
+    "name": "Files.AppAI",
+    "phase": 1,
+    "default_model": "none in Phase 1",
+    "network": "disabled",
+    "source_mutation": "no connected limb",
+    "source_repository": "files-community/Files",
+    "source_commit": "7aa516aca1a97e08ffd74a5cc79a91d00e828a2c",
+    "spore_sha256": "9cd03996c00fa3964db07b67a4f104f3419103c6327815cbcff118c481fbd4d6",
+    "prompt_commit_policy": "submit_or_blur"
+  }
+  </script>
+
+  <script type="application/json" id="organ-map">
+  {
+    "schema_version": "mantle-organ-map-v1",
+    "organs": {
+      "Heart": "boots the face, refreshes deterministic views, and emits session beats",
+      "Genome": "holds Files.AppAI identity, commit-bound truths, commandments, and source bands",
+      "Senses": "accepts submitted questions, committed fields, path requests, and operator toggles",
+      "Memory": "keeps an append-only browser ledger and exposes the spore evidence index",
+      "Nervous": "routes questions to evidence topics and controls to deterministic instincts",
+      "Immune": "contains unsupported claims, clipboard failures, and unavailable write requests",
+      "Limbs": "copies a generated command and records an action proof; no source write limb exists",
+      "Brain": "dormant Phase 2 socket; no model, network, or mutation authority",
+      "Reproduction": "retains the sealed origin spore and certified germ in the hatched Body"
+    }
+  }
+  </script>
+
+  <script type="application/json" id="evidence-index">
+  {
+    "schema_version": "mantle-host-evidence-v2",
+    "kind": "HOST_EVIDENCE_INDEX",
+    "local_first_consultation": true,
+    "snapshot": {
+      "repository": "files-community/Files",
+      "branch": "main",
+      "commit": "7aa516aca1a97e08ffd74a5cc79a91d00e828a2c",
+      "commit_date": "2026-07-26T23:45:31-04:00",
+      "commit_subject": "Code Quality: Enable WinUI XAML optional performance changes"
+    },
+    "facts": [
+      {
+        "key": "Product",
+        "value": "C#/.NET WinUI 3 desktop application and an alternative to Windows File Explorer.",
+        "evidence": "DIRECT",
+        "source": "AGENTS.md"
+      },
+      {
+        "key": "Solution",
+        "value": "Files.slnx; main application project src/Files.App/Files.App.csproj.",
+        "evidence": "DIRECT",
+        "source": "AGENTS.md / Files.slnx"
+      },
+      {
+        "key": "Build baseline",
+        "value": "msbuild -restore Files.slnx -p:Configuration=Debug -p:Platform=x64 -v:quiet -clp:ErrorsOnly",
+        "evidence": "DIRECT",
+        "source": "AGENTS.md"
+      },
+      {
+        "key": "SDK",
+        "value": ".NET SDK 10.0.102 with latestMajor roll-forward; target framework net10.0 and C# preview.",
+        "evidence": "DIRECT",
+        "source": "global.json / Directory.Build.props"
+      },
+      {
+        "key": "Windows baseline",
+        "value": "Target Windows 10.0.26100.0; minimum Windows 10.0.19041.0.",
+        "evidence": "DIRECT",
+        "source": "Directory.Build.props"
+      },
+      {
+        "key": "Native interop",
+        "value": "Prefer Files.App.CsWin32, NativeMethods.txt, and existing wrappers over ad hoc P/Invoke.",
+        "evidence": "STIPULATED",
+        "source": "spore commandment from AGENTS.md"
+      },
+      {
+        "key": "High-risk surfaces",
+        "value": "File operations, shell integration, drag and drop, preview handlers, archive actions, settings persistence, and localization.",
+        "evidence": "DIRECT",
+        "source": "AGENTS.md"
+      },
+      {
+        "key": "Carrier integrity",
+        "value": "Files.AppAI spore verifies every statement parity control and its full-lane package fingerprint.",
+        "evidence": "MEASURED",
+        "source": "mantle spore verify"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/json" id="stage1-matrix">
+  [
+    {"gate": "Spore carrier integrity", "evidence": "28 structural checks; parity and full-lane fingerprint verified", "status": "PASS"},
+    {"gate": "Germ hatch", "evidence": "19 bands; 3 reflexes; 2 routines; 6 controls", "status": "PASS"},
+    {"gate": "Instinct trials", "evidence": "files_area 4/4; files_verify_command 3/3", "status": "PASS"},
+    {"gate": "Stage-1 Body audit", "evidence": "21/21 rows; no failures", "status": "PASS"},
+    {"gate": "MIND containment", "evidence": "Brain dormant; no model or key", "status": "PASS"},
+    {"gate": "Network containment", "evidence": "static face; browser smoke observes zero external requests", "status": "PASS"},
+    {"gate": "Host mutation boundary", "evidence": "no Files checkout or write limb connected", "status": "PASS"},
+    {"gate": "Prompt write discipline", "evidence": "one HOST_TEXT_COMMIT at submit or blur", "status": "PASS"}
+  ]
+  </script>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const COMMIT = "7aa516aca1a97e08ffd74a5cc79a91d00e828a2c";
+      const STORAGE_KEY = "mantle.files-appai.ledger.v1";
+      const declaration = readJson("appai-declaration");
+      const organMap = readJson("organ-map");
+      const evidenceIndex = readJson("evidence-index");
+      const stage1Matrix = readJson("stage1-matrix");
+      const transcript = document.getElementById("transcript");
+      const prompt = document.getElementById("assistantPrompt");
+      let visibleTranscript = [];
+      let promptCommittedValue = "";
+
+      const topics = [
+        {
+          id: "build",
+          keywords: ["build", "compile", "msbuild", "solution", "verify"],
+          evidence: "DIRECT",
+          source: "AGENTS.md",
+          answer: () => [
+            "Run the solution baseline from a Visual Studio Developer PowerShell:",
+            "",
+            buildCommand("solution", "Debug", "x64"),
+            "",
+            "For a narrower change, select the smallest relevant project in the Workbench. This snapshot requires .NET SDK 10.0.102 and uses net10.0 with C# preview."
+          ].join("\n")
+        },
+        {
+          id: "ui",
+          keywords: ["ui", "interface", "xaml", "view", "page", "winui", "control"],
+          evidence: "STIPULATED",
+          source: "spore commandments / Files.App.csproj",
+          answer: () => [
+            "Start in src/Files.App and locate the existing page, control, command, converter, or XAML resource nearest the behavior.",
+            "",
+            "Follow the project's existing WinUI resources and localization patterns. Build src/Files.App/Files.App.csproj first when the change is isolated, then expand verification if shared contracts move."
+          ].join("\n")
+        },
+        {
+          id: "interop",
+          keywords: ["interop", "pinvoke", "p/invoke", "native", "win32", "cswin32"],
+          evidence: "STIPULATED",
+          source: "spore commandment from AGENTS.md",
+          answer: () => [
+            "Use the existing Files.App.CsWin32 project, NativeMethods.txt, and established wrappers before adding a direct P/Invoke.",
+            "",
+            "Native and shell-facing changes are high risk. Keep the patch narrow and verify the owning project plus the affected interaction path."
+          ].join("\n")
+        },
+        {
+          id: "risk",
+          keywords: ["risk", "danger", "review", "careful", "sensitive"],
+          evidence: "DIRECT",
+          source: "AGENTS.md",
+          answer: () => [
+            "Treat these as high-risk surfaces:",
+            "",
+            "File operations; shell integration; drag and drop; preview handlers; archive actions; settings persistence; localization.",
+            "",
+            "For any of them, identify the owning project, add focused evidence, and avoid broad refactors during the behavioral change."
+          ].join("\n")
+        },
+        {
+          id: "sdk",
+          keywords: ["sdk", "framework", "dotnet", ".net", "windows version", "baseline"],
+          evidence: "DIRECT",
+          source: "global.json / Directory.Build.props",
+          answer: () => [
+            "Recorded toolchain baseline:",
+            "",
+            ".NET SDK 10.0.102 (latestMajor roll-forward), target framework net10.0, C# preview, Windows target 10.0.26100.0, and minimum Windows 10.0.19041.0."
+          ].join("\n")
+        },
+        {
+          id: "tests",
+          keywords: ["test", "uitest", "interaction", "quality"],
+          evidence: "DIRECT",
+          source: "Files.slnx project map",
+          answer: () => [
+            "The recorded solution includes UI and interaction test projects. Start with the project that owns the changed behavior, then run the solution baseline before calling a cross-project change verified.",
+            "",
+            "Use the Workbench to generate the build command. This AppAI does not claim a test result it has not observed."
+          ].join("\n")
+        },
+        {
+          id: "structure",
+          keywords: ["structure", "project", "map", "where", "architecture", "source"],
+          evidence: "DIRECT",
+          source: "Files.slnx / Files.App.csproj",
+          answer: () => [
+            "The main WinUI application is src/Files.App. The solution also records Shared, Controls, Storage, Core.Storage, CsWin32, BackgroundTasks, Server, SourceGenerator, native launcher/dialog projects, and test projects.",
+            "",
+            "Paste a relative path into the Workbench for deterministic area classification."
+          ].join("\n")
+        },
+        {
+          id: "mutation",
+          keywords: ["edit", "change", "modify", "write", "mutation", "checkout"],
+          evidence: "STIPULATED",
+          source: "Mantle boundary / germ commandment",
+          answer: () => [
+            "This face cannot edit the Files source: no checkout or write limb is connected.",
+            "",
+            "It can help locate the owning area, generate a verification command, and record operator intent. A real source change requires an explicitly scoped local checkout and a separate authorized action."
+          ].join("\n")
+        },
+        {
+          id: "identity",
+          keywords: ["what is files", "about files", "what software", "purpose"],
+          evidence: "DIRECT",
+          source: "AGENTS.md",
+          answer: () => "Files is a C#/.NET WinUI 3 desktop application presented by its source as an alternative to Windows File Explorer."
+        }
+      ];
+
+      function readJson(id) {
+        return JSON.parse(document.getElementById(id).textContent);
+      }
+
+      function loadLedger() {
+        try {
+          const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+          return Array.isArray(parsed) ? parsed : [];
+        } catch {
+          return [];
+        }
+      }
+
+      function appendLedger(type, detail) {
+        const ledger = loadLedger();
+        const entry = {
+          id: ledger.length ? ledger[ledger.length - 1].id + 1 : 1,
+          timestamp: new Date().toISOString(),
+          type,
+          detail
+        };
+        ledger.push(entry);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(ledger));
+        updateLedgerSummary();
+        return entry;
+      }
+
+      function sense(kind, detail) {
+        return appendLedger(kind, { ...detail, organ: "Senses" });
+      }
+
+      function immune(kind, detail) {
+        return appendLedger("immune_event", { kind, ...detail, organ: "Immune" });
+      }
+
+      function limb(action, detail) {
+        return appendLedger("action_proof", {
+          action,
+          attempted: true,
+          ...detail,
+          actor: "BODY",
+          organ: "Limbs"
+        });
+      }
+
+      function commitPrompt(reason) {
+        const value = prompt.value.trim();
+        if (!value || value === promptCommittedValue) return null;
+        promptCommittedValue = value;
+        return sense("HOST_TEXT_COMMIT", {
+          control: "assistantPrompt",
+          commit_policy: "submit_or_blur",
+          commit_boundary: reason,
+          chars: value.length
+        });
+      }
+
+      function consult(query) {
+        const normalized = String(query || "").trim().toLowerCase();
+        if (!normalized) {
+          return {
+            topic: "empty",
+            answer: "Enter a Files project question. I can help with builds, project areas, native interop, risk, SDK requirements, and the local mutation boundary.",
+            evidence: "STIPULATED",
+            source: "Files.AppAI capability map"
+          };
+        }
+
+        let best = null;
+        let score = 0;
+        for (const topic of topics) {
+          const topicScore = topic.keywords.reduce((sum, keyword) => (
+            sum + (normalized.includes(keyword) ? Math.max(1, keyword.split(" ").length) : 0)
+          ), 0);
+          if (topicScore > score) {
+            best = topic;
+            score = topicScore;
+          }
+        }
+
+        if (!best) {
+          immune("unsupported_claim_contained", {
+            query_chars: normalized.length,
+            reason: "no matching commit-bound evidence topic"
+          });
+          return {
+            topic: "unknown",
+            answer: [
+              "I cannot support that answer from the recorded snapshot.",
+              "",
+              "Try asking about the build, project structure, UI code, native interop, tests, high-risk surfaces, SDK baseline, or mutation boundary. Refresh evidence through Senses before relying on changing repository facts."
+            ].join("\n"),
+            evidence: "UNKNOWN",
+            source: "No matching evidence"
+          };
+        }
+
+        return {
+          topic: best.id,
+          answer: best.answer(),
+          evidence: best.evidence,
+          source: best.source
+        };
+      }
+
+      function ask(query) {
+        const text = String(query || "").trim();
+        if (!text) return consult("");
+        sense("resident_question", { chars: text.length });
+        const result = consult(text);
+        appendLedger("resident_answer", {
+          topic: result.topic,
+          evidence: result.evidence,
+          source: result.source,
+          commit: COMMIT
+        });
+        return result;
+      }
+
+      function addMessage(role, text, meta = {}) {
+        visibleTranscript.push({ role, text, meta });
+        const article = document.createElement("article");
+        article.className = `message ${role}`;
+        const label = document.createElement("div");
+        label.className = "message-label";
+        label.textContent = role === "user" ? "Operator" : "Files.AppAI";
+        const body = document.createElement("div");
+        body.className = "message-body";
+        body.textContent = text;
+        article.append(label, body);
+        if (meta.evidence) {
+          const stamps = document.createElement("div");
+          stamps.className = "evidence-stamp";
+          const evidence = document.createElement("span");
+          evidence.className = `stamp ${meta.evidence.toLowerCase()}`;
+          evidence.textContent = meta.evidence;
+          const source = document.createElement("span");
+          source.className = "stamp";
+          source.textContent = meta.source;
+          stamps.append(evidence, source);
+          article.appendChild(stamps);
+        }
+        transcript.appendChild(article);
+        transcript.scrollTop = transcript.scrollHeight;
+      }
+
+      function submitQuestion(text) {
+        const query = String(text || "").trim();
+        if (!query) return consult("");
+        prompt.value = query;
+        commitPrompt("assistant_submit");
+        addMessage("user", query);
+        const result = ask(query);
+        addMessage("assistant", result.answer, result);
+        prompt.value = "";
+        promptCommittedValue = "";
+        return result;
+      }
+
+      function buildCommand(target = "solution", configuration = "Debug", platform = "x64") {
+        const projects = {
+          solution: "Files.slnx",
+          app: "src/Files.App/Files.App.csproj",
+          shared: "src/Files.Shared/Files.Shared.csproj",
+          sourcegenerator: "src/Files.Core.SourceGenerator/Files.Core.SourceGenerator.csproj"
+        };
+        const project = projects[target] || projects.solution;
+        const safeConfiguration = configuration === "Release" ? "Release" : "Debug";
+        const safePlatform = ["x64", "arm64", "x86"].includes(platform) ? platform : "x64";
+        return `msbuild -restore ${project} -p:Configuration=${safeConfiguration} -p:Platform=${safePlatform} -v:quiet -clp:ErrorsOnly`;
+      }
+
+      function classifyPath(path) {
+        const value = String(path || "").replaceAll("\\", "/").toLowerCase();
+        if (!value) return "unknown: enter a repository-relative path";
+        if (value.includes("files.app.cswin32") || value.includes("nativemethods")) return "native-interop";
+        if (value.startsWith("tests/") || value.includes(".tests/") || value.includes("uitests")) return "tests";
+        if (value.startsWith("docs/") || value.endsWith(".md")) return "docs";
+        if (value.includes("files.core.sourcegenerator")) return "source-generator";
+        if (value.includes("files.core.storage")) return "core-storage";
+        if (value.includes("files.storage")) return "storage";
+        if (value.includes("files.shared")) return "shared";
+        if (value.includes("files.app.controls")) return "controls";
+        if (value.includes("files.app")) return "main-winui-app";
+        if (value.includes("backgroundtasks")) return "background-tasks";
+        if (value.includes("files.server")) return "server";
+        return "solution-support";
+      }
+
+      function updateCommand() {
+        const command = buildCommand(
+          document.getElementById("buildTarget").value,
+          document.getElementById("configuration").value,
+          document.getElementById("platform").value
+        );
+        document.getElementById("commandOutput").textContent = command;
+        return command;
+      }
+
+      function runPathClassifier() {
+        const path = document.getElementById("sourcePath").value.trim();
+        const area = classifyPath(path);
+        document.getElementById("pathOutput").textContent = `${area}\nEvidence: calcified files_area rule`;
+        sense("path_classification_request", { chars: path.length, area });
+        return area;
+      }
+
+      function updateLedgerSummary() {
+        const ledger = loadLedger();
+        const proofs = ledger.filter((entry) => entry.type === "action_proof").length;
+        const immuneEvents = ledger.filter((entry) => entry.type === "immune_event").length;
+        const target = document.getElementById("ledgerSummary");
+        if (target) {
+          target.textContent = `${ledger.length} entries\n${proofs} action proofs\n${immuneEvents} immune events`;
+        }
+      }
+
+      function renderEvidence() {
+        const list = document.getElementById("evidenceList");
+        for (const fact of evidenceIndex.facts) {
+          const row = document.createElement("article");
+          row.className = "evidence-row";
+          const key = document.createElement("div");
+          key.className = "evidence-key";
+          key.textContent = fact.key;
+          const value = document.createElement("div");
+          value.className = "evidence-value";
+          value.textContent = `${fact.value} [${fact.evidence}]`;
+          const source = document.createElement("div");
+          source.className = "evidence-source";
+          source.textContent = fact.source;
+          row.append(key, value, source);
+          list.appendChild(row);
+        }
+      }
+
+      function renderBody() {
+        const stack = document.getElementById("bodyStack");
+        for (const [organ, duty] of Object.entries(organMap.organs)) {
+          const row = document.createElement("article");
+          row.className = "body-band";
+          const name = document.createElement("strong");
+          name.textContent = organ;
+          const detail = document.createElement("span");
+          detail.textContent = duty;
+          const status = document.createElement("div");
+          status.className = "gate-pass";
+          status.textContent = organ === "Brain" ? "DORMANT" : "ACTIVE";
+          row.append(name, detail, status);
+          stack.appendChild(row);
+        }
+        const passed = stage1Matrix.filter((row) => row.status === "PASS").length;
+        document.getElementById("certificationReceipt").textContent =
+          `${passed}/${stage1Matrix.length} Files phenotype gates passed. ` +
+          "The originating hatch also passed all 21 Stage-1 Body rows and both instinct trial sets.";
+      }
+
+      for (const button of document.querySelectorAll(".nav-button")) {
+        button.addEventListener("click", () => {
+          for (const nav of document.querySelectorAll(".nav-button")) {
+            nav.setAttribute("aria-selected", String(nav === button));
+          }
+          for (const view of document.querySelectorAll(".view")) {
+            view.classList.toggle("active", view.id === `view-${button.dataset.view}`);
+          }
+          sense("view_selected", { view: button.dataset.view });
+        });
+      }
+
+      document.getElementById("assistantForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        submitQuestion(prompt.value);
+      });
+
+      prompt.addEventListener("blur", () => commitPrompt("assistant_blur"));
+
+      for (const button of document.querySelectorAll("[data-question]")) {
+        button.addEventListener("click", () => submitQuestion(button.dataset.question));
+      }
+
+      for (const id of ["buildTarget", "configuration", "platform"]) {
+        document.getElementById(id).addEventListener("change", () => {
+          const command = updateCommand();
+          sense("build_command_generated", { command, commit: COMMIT });
+        });
+      }
+
+      document.getElementById("copyCommand").addEventListener("click", async () => {
+        const command = updateCommand();
+        try {
+          await navigator.clipboard.writeText(command);
+          limb("copy_build_command", { ok: true, method: "Clipboard.writeText", chars: command.length });
+        } catch (error) {
+          immune("clipboard_write_failed", { reason: String(error && error.message || error) });
+          limb("copy_build_command", { ok: false, method: "Clipboard.writeText", chars: command.length });
+        }
+      });
+
+      document.getElementById("classifyPath").addEventListener("click", runPathClassifier);
+      document.getElementById("sourcePath").addEventListener("blur", () => {
+        const value = document.getElementById("sourcePath").value.trim();
+        if (value) {
+          sense("HOST_TEXT_COMMIT", {
+            control: "sourcePath",
+            commit_policy: "submit_or_blur",
+            commit_boundary: "source_path_blur",
+            chars: value.length
+          });
+        }
+      });
+
+      document.getElementById("mutationGate").addEventListener("change", (event) => {
+        const acknowledged = event.target.checked;
+        sense("operator_mutation_intent", { acknowledged, capability_granted: false });
+        document.getElementById("mutationState").textContent = acknowledged
+          ? "Intent recorded. Gate remains capability-closed because no source write limb is connected."
+          : "Closed. Read-only guidance remains active.";
+      });
+
+      document.getElementById("newSession").addEventListener("click", () => {
+        appendLedger("session_boundary", { reason: "operator_requested", transcript_cleared: true });
+        visibleTranscript = [];
+        transcript.replaceChildren();
+        addMessage("assistant",
+          "New visible session started. The append-only ledger retains the prior boundary and history.",
+          { evidence: "STIPULATED", source: "Memory policy" });
+      });
+
+      renderEvidence();
+      renderBody();
+      updateCommand();
+      runPathClassifier();
+      updateLedgerSummary();
+      appendLedger("body_boot", { phase: 1, commit: COMMIT, mind: "dormant" });
+      addMessage("assistant", [
+        "I am the deterministic Files project aide born from the Files.AppAI spore.",
+        "",
+        "Ask about builds, project structure, UI work, native interop, tests, risk, or the recorded SDK baseline. I retain evidence labels and refuse claims outside the snapshot."
+      ].join("\n"), { evidence: "STIPULATED", source: "Files.AppAI germ" });
+
+      window.FilesAppAI = Object.freeze({
+        readDeclaration: () => structuredClone(declaration),
+        readOrganMap: () => structuredClone(organMap),
+        readEvidenceIndex: () => structuredClone(evidenceIndex),
+        readStage1Matrix: () => structuredClone(stage1Matrix),
+        ask,
+        submitQuestion,
+        buildCommand,
+        classifyPath,
+        getLedger: () => structuredClone(loadLedger()),
+        getVisibleTranscript: () => structuredClone(visibleTranscript),
+        brainStatus: () => ({ mind: "dormant", mayMutate: false, model: null }),
+        phase1NoModelCalls: () => true
+      });
+    })();
+  </script>
+</body>
+</html>

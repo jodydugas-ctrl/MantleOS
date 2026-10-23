@@ -1,0 +1,15 @@
+include LICENSE THIRD_PARTY_NOTICES.md README.md MANTLE.md CONTRIBUTING.md SECURITY.md AGENTS.md requirements-dev.txt
+include PROJECT-FILES.json .gitattributes .gitignore MANIFEST.in
+include archives/README.md archives/index.json
+recursive-include upstream *.md *.json LICENSE
+recursive-include .github *.yml *.yaml
+recursive-include licenses *
+recursive-include docs *.md *.json
+recursive-include examples *.py *.json *.txt *.md *.html *.anchor *.js *.css *.cjs *.png
+recursive-include tests *.py
+recursive-include tools *.py
+recursive-include tools/kpp_project *.md *.toml *.in *.yml *.yaml .gitattributes .gitignore
+recursive-include src/mantleos *.json *.txt *.md *.anchor *.html *.js *.cjs *.css *.ui *.py LICENSE
+global-exclude *.pyc
+prune .work
+prune .heritage

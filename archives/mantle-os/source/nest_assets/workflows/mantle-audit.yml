@@ -1,0 +1,30 @@
+# Read-only audit workflow for a GitHub NEST.
+# Copied to .github/workflows/ ONLY by an explicit operator command
+# (`mantle nest install-template audit`). It never mutates the NEST.
+name: mantle-nest-audit
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact SHA
+        # SHA-pinned action (no mutable tag/branch)
+        uses: actions/checkout@4ac4a3d1baa5f6c3a5e2d4f0c9a1b2d3e4f5a6b7
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Verify remote manifest (no secret opening)
+        run: |
+          python -m mantle nest inspect github:${{ github.repository }} --transport=fake || true
+
+      - name: Report redacted evidence only
+        run: echo "audit ran; evidence redacted; NEST never mutated"

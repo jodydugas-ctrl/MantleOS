@@ -1,0 +1,46 @@
+# Mantle OS — project metadata.
+#
+# The framework is PURE STANDARD LIBRARY: there are no runtime dependencies (the optional
+# `multilang` extra only adds tree-sitter for multi-language dissection). The package lives
+# under src/ (src-layout); install it editable to run in place:
+#
+#     pip install -e .          # then: python -m mantle teach
+#
+# (or set PYTHONPATH=src). The on-disk VCW format and every gate are unchanged.
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mantle-os"
+version = "2.0.0rc1"
+description = "Mantle OS: the Homeostatic AppAI Framework — grow software like a living organism, then give it a mind. Reproduction, symbiosis, and self-evolution on the certified Body."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+# CI runs every admitted minor. Raise the ceiling only together with the certification
+# matrix after the new minor is available and green.
+requires-python = ">=3.10,<3.15"
+keywords = ["ai", "framework", "llm", "agents", "organic-coding", "vcw", "mantle"]
+authors = [{ name = "Mantle OS contributors" }]
+dependencies = []
+
+[project.optional-dependencies]
+# Multi-language assimilator dissection (NECROMANCY language_agnostic path): without this,
+# `mantle.assimilator.scan_project` dissects Python only -- no behavior change for existing users.
+multilang = ["tree-sitter-language-pack==1.3.1"]
+# The SPORE-PNG seed (mantle.spore / spore_min): the one facet that needs a PNG rasterizer.
+# Without it the module imports fine and every other gate runs; spore PNG operations raise
+# an honest error naming this extra.
+spore = ["pillow>=12.2.0,<13"]
+
+[project.urls]
+Homepage = "https://github.com/jodydugas-ctrl/mantle-os"
+Repository = "https://github.com/jodydugas-ctrl/mantle-os"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["examples/tests"]

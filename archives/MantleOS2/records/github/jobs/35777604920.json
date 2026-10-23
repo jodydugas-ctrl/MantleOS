@@ -1,0 +1,230 @@
+[
+  {
+    "id": 106914666440,
+    "run_id": 35777604920,
+    "workflow_name": "SCAN v0.34 broader calibration",
+    "head_branch": "scan-v1.0-certification",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/runs/35777604920",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOUMjVl88AAAAY5JxXyA",
+    "head_sha": "f4ced3760158d2bf319bde26fa1f416a924b1467",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/actions/jobs/106914666440",
+    "html_url": "https://github.com/jodydugas-ctrl/MantleOS2/actions/runs/35777604920/job/106914666440",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-09-22T20:01:57Z",
+    "started_at": "2026-09-22T20:03:34Z",
+    "completed_at": "2026-09-22T20:28:15Z",
+    "name": "broader-calibration",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-09-22T20:03:35Z",
+        "completed_at": "2026-09-22T20:03:36Z"
+      },
+      {
+        "name": "Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-09-22T20:03:36Z",
+        "completed_at": "2026-09-22T20:03:37Z"
+      },
+      {
+        "name": "Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-09-22T20:03:37Z",
+        "completed_at": "2026-09-22T20:03:37Z"
+      },
+      {
+        "name": "Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-09-22T20:03:37Z",
+        "completed_at": "2026-09-22T20:03:40Z"
+      },
+      {
+        "name": "Install v0.34 calibration candidate",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-09-22T20:03:40Z",
+        "completed_at": "2026-09-22T20:03:48Z"
+      },
+      {
+        "name": "Prove calibration has no specimen-name branches in scanner runtime",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-09-22T20:03:48Z",
+        "completed_at": "2026-09-22T20:03:48Z"
+      },
+      {
+        "name": "Run full inherited regression suite",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-09-22T20:03:48Z",
+        "completed_at": "2026-09-22T20:04:12Z"
+      },
+      {
+        "name": "Checkout frozen NotepadNext",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 8,
+        "started_at": "2026-09-22T20:04:12Z",
+        "completed_at": "2026-09-22T20:04:13Z"
+      },
+      {
+        "name": "Checkout frozen Moji",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 9,
+        "started_at": "2026-09-22T20:04:13Z",
+        "completed_at": "2026-09-22T20:04:14Z"
+      },
+      {
+        "name": "Checkout frozen pell",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 10,
+        "started_at": "2026-09-22T20:04:14Z",
+        "completed_at": "2026-09-22T20:04:15Z"
+      },
+      {
+        "name": "Verify frozen specimen identities",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 11,
+        "started_at": "2026-09-22T20:04:15Z",
+        "completed_at": "2026-09-22T20:04:15Z"
+      },
+      {
+        "name": "Create deterministic adversarial fixtures",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-09-22T20:04:15Z",
+        "completed_at": "2026-09-22T20:04:15Z"
+      },
+      {
+        "name": "Run duplicate cold scans across calibration matrix",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-09-22T20:04:15Z",
+        "completed_at": "2026-09-22T20:26:02Z"
+      },
+      {
+        "name": "Generate portable blueprint and parity companions for every scan",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-09-22T20:26:02Z",
+        "completed_at": "2026-09-22T20:26:24Z"
+      },
+      {
+        "name": "Prove duplicate determinism across all substrates",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-09-22T20:26:24Z",
+        "completed_at": "2026-09-22T20:26:41Z"
+      },
+      {
+        "name": "Audit broad calibration invariants and failure semantics",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 16,
+        "started_at": "2026-09-22T20:26:41Z",
+        "completed_at": "2026-09-22T20:26:53Z"
+      },
+      {
+        "name": "Verify portable parity regeneration on real specimens",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 17,
+        "started_at": "2026-09-22T20:26:53Z",
+        "completed_at": "2026-09-22T20:26:55Z"
+      },
+      {
+        "name": "Upload v0.34 broader-calibration evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 18,
+        "started_at": "2026-09-22T20:26:55Z",
+        "completed_at": "2026-09-22T20:28:11Z"
+      },
+      {
+        "name": "Post Checkout frozen pell",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 31,
+        "started_at": "2026-09-22T20:28:11Z",
+        "completed_at": "2026-09-22T20:28:11Z"
+      },
+      {
+        "name": "Post Checkout frozen Moji",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 32,
+        "started_at": "2026-09-22T20:28:11Z",
+        "completed_at": "2026-09-22T20:28:11Z"
+      },
+      {
+        "name": "Post Checkout frozen NotepadNext",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 33,
+        "started_at": "2026-09-22T20:28:11Z",
+        "completed_at": "2026-09-22T20:28:11Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 34,
+        "started_at": "2026-09-22T20:28:11Z",
+        "completed_at": "2026-09-22T20:28:11Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v5",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 35,
+        "started_at": "2026-09-22T20:28:11Z",
+        "completed_at": "2026-09-22T20:28:11Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v4",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 36,
+        "started_at": "2026-09-22T20:28:11Z",
+        "completed_at": "2026-09-22T20:28:12Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 37,
+        "started_at": "2026-09-22T20:28:12Z",
+        "completed_at": "2026-09-22T20:28:12Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/MantleOS2/check-runs/106914666440",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000003346,
+    "runner_name": "GitHub Actions 1000003346",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

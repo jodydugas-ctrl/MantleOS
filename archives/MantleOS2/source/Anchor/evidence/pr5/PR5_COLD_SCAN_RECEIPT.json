@@ -1,0 +1,66 @@
+{
+  "schema_version": "scan-pr5-cold-receipt/0.3",
+  "engine_version": "0.20.0",
+  "project_version": "0.27",
+  "repository": "dail8859/NotepadNext",
+  "commit": "f57db52d6760a2ce4149a37190c3adaa586845f5",
+  "tree": "f0995b128bf6dbc73e5d0f3ef4e4f302f8a3081b",
+  "oracle_used_during_scan": false,
+  "llm_environment": "DISABLED",
+  "source_manifest_sha256": "8fca5eb6edcbf9ec2a23e38b1792ad6bc40e0a3adda7b52715ece8cde661152f",
+  "source_materialization": "github-git-data-api-tree+verified-local-git-cat-file-export",
+  "verified_blob_count": 1928,
+  "verified_source_bytes": 20875384,
+  "acquisition_zip": "NotepadNext_exact_acquisition.zip",
+  "acquisition_bytes": 7336255,
+  "acquisition_sha256": "4a1343f4f56500ba850162039e7483e2f17f894be6493f5afbaacdf25c2c44a3",
+  "certification_zip": "NotepadNext_cold_SCAN_v0.20.cert.zip",
+  "certification_bytes": 213474077,
+  "certification_sha256": "6c0d476e2dd7a63481cf388e6d654798ffa26f8c72ce9760a8bd60667b075ce3",
+  "certification_state": "PASS",
+  "certification_specimen_fingerprint": {
+    "kind": "provider-tree",
+    "value": "f0995b128bf6dbc73e5d0f3ef4e4f302f8a3081b",
+    "provider": "github"
+  },
+  "coverage": {
+    "execution_state": "COMPLETE_WITH_EXPLICIT_COVERAGE_VECTOR",
+    "content_unavailable_file_count": 0,
+    "budget_triggered": false,
+    "parser_failure_count": 0,
+    "parser_gap_count": 394,
+    "completeness_dimension_state_counts": {
+      "BLOCKED": 1,
+      "MAPPED": 19,
+      "PARTIAL": 33,
+      "UNKNOWN": 4
+    }
+  },
+  "mechanical_counts": {
+    "files": 1928,
+    "materialized_files": 1928,
+    "nodes": 101138,
+    "edges": 109282,
+    "evidence": 109072,
+    "semantic_objects": 326026,
+    "semantic_relations": 808588
+  },
+  "certification_verification": {
+    "state": "PASS",
+    "manifest_file_count": 12,
+    "verified_file_count": 12,
+    "issue_count": 0
+  },
+  "release_artifacts": {
+    "project_handoff_sha256": "f9590271c0c8cca16993e548667dcf9536c4a04c2be33590e83d302bac7cddb0",
+    "engine_zip_sha256": "6dce99a4ed924d9e370a29367e7a59845f2eefac5414cb3403e873b8577f9af1",
+    "wheel_sha256": "573ce1c0a0ea7e5bc0039ce954209e983ba3d373e73b9301baf282fd559076fa",
+    "runner_sha256": "138d36ff1abd6831587f3178e844ae42bfaec87220a79cc932b3710c5ca46def"
+  },
+  "environment": {
+    "system": "Linux (WSL2)",
+    "python_version": "3.12.3",
+    "reason": "Unmodified SCAN v0.20 requires POSIX-consistent lstat/fstat ctime semantics for local manifest materialization."
+  },
+  "sealed_at": "2026-09-14T10:59:03.0575899Z"
+}

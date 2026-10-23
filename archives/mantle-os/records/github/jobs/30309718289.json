@@ -1,0 +1,118 @@
+[
+  {
+    "id": 90122269370,
+    "run_id": 30309718289,
+    "workflow_name": "Example Smoke (headless browser)",
+    "head_branch": "agent/add-pirate-spore",
+    "run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/runs/30309718289",
+    "run_attempt": 1,
+    "node_id": "CR_kwDOSv-f3M8AAAAU-7Syug",
+    "head_sha": "e7db577f5e3af76991993103ce657c10c32e9565",
+    "url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/actions/jobs/90122269370",
+    "html_url": "https://github.com/jodydugas-ctrl/mantle-os/actions/runs/30309718289/job/90122269370",
+    "status": "completed",
+    "conclusion": "success",
+    "created_at": "2026-07-27T22:10:00Z",
+    "started_at": "2026-07-27T22:11:35Z",
+    "completed_at": "2026-07-27T22:12:27Z",
+    "name": "demo-smoke",
+    "steps": [
+      {
+        "name": "Set up job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 1,
+        "started_at": "2026-07-27T22:11:36Z",
+        "completed_at": "2026-07-27T22:11:37Z"
+      },
+      {
+        "name": "Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 2,
+        "started_at": "2026-07-27T22:11:37Z",
+        "completed_at": "2026-07-27T22:11:38Z"
+      },
+      {
+        "name": "Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 3,
+        "started_at": "2026-07-27T22:11:38Z",
+        "completed_at": "2026-07-27T22:11:39Z"
+      },
+      {
+        "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 4,
+        "started_at": "2026-07-27T22:11:39Z",
+        "completed_at": "2026-07-27T22:11:45Z"
+      },
+      {
+        "name": "Install Playwright (chromium only)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 5,
+        "started_at": "2026-07-27T22:11:45Z",
+        "completed_at": "2026-07-27T22:12:12Z"
+      },
+      {
+        "name": "Serve examples/ (static)",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 6,
+        "started_at": "2026-07-27T22:12:12Z",
+        "completed_at": "2026-07-27T22:12:17Z"
+      },
+      {
+        "name": "Smoke-test maintained examples",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 7,
+        "started_at": "2026-07-27T22:12:17Z",
+        "completed_at": "2026-07-27T22:12:23Z"
+      },
+      {
+        "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 12,
+        "started_at": "2026-07-27T22:12:23Z",
+        "completed_at": "2026-07-27T22:12:23Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 13,
+        "started_at": "2026-07-27T22:12:23Z",
+        "completed_at": "2026-07-27T22:12:23Z"
+      },
+      {
+        "name": "Post Run actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 14,
+        "started_at": "2026-07-27T22:12:23Z",
+        "completed_at": "2026-07-27T22:12:23Z"
+      },
+      {
+        "name": "Complete job",
+        "status": "completed",
+        "conclusion": "success",
+        "number": 15,
+        "started_at": "2026-07-27T22:12:23Z",
+        "completed_at": "2026-07-27T22:12:23Z"
+      }
+    ],
+    "check_run_url": "https://api.github.com/repos/jodydugas-ctrl/mantle-os/check-runs/90122269370",
+    "labels": [
+      "ubuntu-latest"
+    ],
+    "runner_id": 1000000614,
+    "runner_name": "GitHub Actions 1000000614",
+    "runner_group_id": 0,
+    "runner_group_name": "GitHub Actions"
+  }
+]

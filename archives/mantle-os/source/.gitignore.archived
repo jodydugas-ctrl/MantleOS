@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+.venv/
+.venv-mantle2/
+venv/
+env/
+
+# VCW cubes / generated organism state
+*.vcw
+cubes/
+*.cube
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# Local secrets / environment overrides
+.env
+.env.*
+
+# Logs and temp
+*.log
+.cache/
+.codex-remote-attachments/
+tmp/
+work/
+
+# Node (the headless demo smoke tests under examples/tests/ — Python stays dependency-free)
+node_modules/
+/package-lock.json
+playwright-report/
+test-results/
+
+
+# Python build / editable-install artifacts
+*.egg-info/
+build/
+dist/
+
+# local CI dependency checkout (mirrors .github/workflows/audit.yml)
+.ci/
+.artifacts/

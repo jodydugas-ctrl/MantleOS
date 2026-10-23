@@ -1,0 +1,29 @@
+name: Manual Hermes reference compatibility
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  latest-hermes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -e ".[dev]"
+      - run: mantle assimilate github.com/nousresearch/hermes-agent --destination .assimilation-work/hermes-agent
+      - name: Assert generic construction did not innervate the reference host
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+          manifest = json.loads(Path(".assimilation-work/hermes-agent/mantle/ASSIMILATION.json").read_text(encoding="utf-8"))
+          assert manifest["target"]["kind"] == "generic"
+          assert manifest["nerve_map"] == []
+          assert manifest["activation"]["direct_nerves"] is False
+      - run: python -m compileall -q .assimilation-work/hermes-agent

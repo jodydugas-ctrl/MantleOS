@@ -1,0 +1,984 @@
+{
+  "schema": "mantle.canvas-preparation-benchmark/1",
+  "python": "3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]",
+  "scope": "Fresh local Python processes; preparation and file delivery, not host Canvas/model latency",
+  "pairs": [
+    {
+      "candidate": {
+        "process_seconds": 1.2293384000004153,
+        "apps": {
+          "notepad": {
+            "seconds": {
+              "author": 0.05158139999912237,
+              "request_context": 0.00041169999894918874,
+              "browser_prepare": 0.020034100001794286,
+              "native_launch": 0.020465199999307515,
+              "portable_materialize": 0.002260600002045976,
+              "file_delivery": 0.21437829999922542
+            },
+            "app_sha256": "3106a271485a47b15a810d402ebbe42d8bbc315fd1202b26a12d7b030aeb1a14",
+            "html_sha256": "fd8482f86dccfb9889a44a14fd0e1fe11cb13ca3c74aee918f72134eed9f18f2",
+            "delivery_sha256": "9bb683c6cd8259a77262a2438d59bc48d175eb5547d9d87d31b0cc04086ef7c5",
+            "request_context_bytes": 3245
+          },
+          "large-html": {
+            "seconds": {
+              "author": 0.0670590000008815,
+              "browser_prepare": 0.05503070000122534,
+              "native_launch": 0.05516110000098706,
+              "portable_materialize": 0.0031631999991077464,
+              "file_delivery": 0.23662850000255276
+            },
+            "app_sha256": "0c4452075d925e75e5c851a23a771c545ddb33022c8a16e50c54da8aa9702721",
+            "html_sha256": "3de0ba8f152fbb3d5bcac8b7f4b7d891ff66b08f93ed8607ad35b277b6f22aca",
+            "delivery_sha256": "2f3817016087b88be852f5c8be2bab06b6593aea3af5133ac0188b5ea72d1d8c"
+          }
+        }
+      },
+      "baseline": {
+        "process_seconds": 2.0143244999999297,
+        "apps": {
+          "notepad": {
+            "seconds": {
+              "author": 0.09797079999771086,
+              "request_context": 0.08752280000044266,
+              "browser_prepare": 0.07215199999700417,
+              "native_launch": 0.09704389999751584,
+              "portable_materialize": 0.002130000000761356,
+              "file_delivery": 0.2738160000008065
+            },
+            "app_sha256": "3106a271485a47b15a810d402ebbe42d8bbc315fd1202b26a12d7b030aeb1a14",
+            "html_sha256": "fd8482f86dccfb9889a44a14fd0e1fe11cb13ca3c74aee918f72134eed9f18f2",
+            "delivery_sha256": "9bb683c6cd8259a77262a2438d59bc48d175eb5547d9d87d31b0cc04086ef7c5",
+            "request_context_bytes": 215779
+          },
+          "large-html": {
+            "seconds": {
+              "author": 0.15509019999808515,
+              "browser_prepare": 0.1720647000001918,
+              "native_launch": 0.22803030000068247,
+              "portable_materialize": 0.0031254000023182016,
+              "file_delivery": 0.35745829999723355
+            },
+            "app_sha256": "0c4452075d925e75e5c851a23a771c545ddb33022c8a16e50c54da8aa9702721",
+            "html_sha256": "3de0ba8f152fbb3d5bcac8b7f4b7d891ff66b08f93ed8607ad35b277b6f22aca",
+            "delivery_sha256": "2f3817016087b88be852f5c8be2bab06b6593aea3af5133ac0188b5ea72d1d8c"
+          }
+        }
+      }
+    },
+    {
+      "baseline": {
+        "process_seconds": 2.034002899999905,
+        "apps": {
+          "notepad": {
+            "seconds": {
+              "author": 0.09851049999997485,
+              "request_context": 0.08728730000075302,
+              "browser_prepare": 0.07557400000223424,
+              "native_launch": 0.10032119999959832,
+              "portable_materialize": 0.0022190999989106786,
+              "file_delivery": 0.284177900000941
+            },
+            "app_sha256": "3106a271485a47b15a810d402ebbe42d8bbc315fd1202b26a12d7b030aeb1a14",
+            "html_sha256": "fd8482f86dccfb9889a44a14fd0e1fe11cb13ca3c74aee918f72134eed9f18f2",
+            "delivery_sha256": "9bb683c6cd8259a77262a2438d59bc48d175eb5547d9d87d31b0cc04086ef7c5",
+            "request_context_bytes": 215779
+          },
+          "large-html": {
+            "seconds": {
+              "author": 0.156085599999642,
+              "browser_prepare": 0.17340930000136723,
+              "native_launch": 0.22810989999925368,
+              "portable_materialize": 0.0031543000004603527,
+              "file_delivery": 0.3587954000031459
+            },
+            "app_sha256": "0c4452075d925e75e5c851a23a771c545ddb33022c8a16e50c54da8aa9702721",
+            "html_sha256": "3de0ba8f152fbb3d5bcac8b7f4b7d891ff66b08f93ed8607ad35b277b6f22aca",
+            "delivery_sha256": "2f3817016087b88be852f5c8be2bab06b6593aea3af5133ac0188b5ea72d1d8c"
+          }
+        }
+      },
+      "candidate": {
+        "process_seconds": 1.2383396000004723,
+        "apps": {
+          "notepad": {
+            "seconds": {
+              "author": 0.052513899998302804,
+              "request_context": 0.00043820000064442866,
+              "browser_prepare": 0.019727599999896483,
+              "native_launch": 0.020363799998449394,
+              "portable_materialize": 0.0021157000010134652,
+              "file_delivery": 0.2159577000020363
+            },
+            "app_sha256": "3106a271485a47b15a810d402ebbe42d8bbc315fd1202b26a12d7b030aeb1a14",
+            "html_sha256": "fd8482f86dccfb9889a44a14fd0e1fe11cb13ca3c74aee918f72134eed9f18f2",
+            "delivery_sha256": "9bb683c6cd8259a77262a2438d59bc48d175eb5547d9d87d31b0cc04086ef7c5",
+            "request_context_bytes": 3245
+          },
+          "large-html": {
+            "seconds": {
+              "author": 0.06842699999833712,
+              "browser_prepare": 0.055129200001829304,
+              "native_launch": 0.05545279999932973,
+              "portable_materialize": 0.002972100002807565,
+              "file_delivery": 0.23366819999864674
+            },
+            "app_sha256": "0c4452075d925e75e5c851a23a771c545ddb33022c8a16e50c54da8aa9702721",
+            "html_sha256": "3de0ba8f152fbb3d5bcac8b7f4b7d891ff66b08f93ed8607ad35b277b6f22aca",
+            "delivery_sha256": "2f3817016087b88be852f5c8be2bab06b6593aea3af5133ac0188b5ea72d1d8c"
+          }
+        }
+      }
+    },
+    {
+      "candidate": {
+        "process_seconds": 1.2407443999982206,
+        "apps": {
+          "notepad": {
+            "seconds": {
+              "author": 0.05180990000008023,
+              "request_context": 0.0004281999972590711,
+              "browser_prepare": 0.020169800001895055,
+              "native_launch": 0.019647200002509635,
+              "portable_materialize": 0.0020863999998255167,
+              "file_delivery": 0.21608689999993658
+            },
+            "app_sha256": "3106a271485a47b15a810d402ebbe42d8bbc315fd1202b26a12d7b030aeb1a14",
+            "html_sha256": "fd8482f86dccfb9889a44a14fd0e1fe11cb13ca3c74aee918f72134eed9f18f2",
+            "delivery_sha256": "9bb683c6cd8259a77262a2438d59bc48d175eb5547d9d87d31b0cc04086ef7c5",
+            "request_context_bytes": 3245
+          },
+          "large-html": {
+            "seconds": {
+              "author": 0.07128279999960796,
+              "browser_prepare": 0.056740100000752136,
+              "native_launch": 0.05489230000239331,
+              "portable_materialize": 0.0033550999978615437,
+              "file_delivery": 0.2386547000023711
+            },
+            "app_sha256": "0c4452075d925e75e5c851a23a771c545ddb33022c8a16e50c54da8aa9702721",
+            "html_sha256": "3de0ba8f152fbb3d5bcac8b7f4b7d891ff66b08f93ed8607ad35b277b6f22aca",
+            "delivery_sha256": "2f3817016087b88be852f5c8be2bab06b6593aea3af5133ac0188b5ea72d1d8c"
+          }
+        }
+      },
+      "baseline": {
+        "process_seconds": 2.0460272999989684,
+        "apps": {
+          "notepad": {
+            "seconds": {
+              "author": 0.10085150000304566,
+              "request_context": 0.08751960000154213,
+              "browser_prepare": 0.07374830000117072,
+              "native_launch": 0.0986166000002413,
+              "portable_materialize": 0.00221629999941797,
+              "file_delivery": 0.2770911999978125
+            },
+            "app_sha256": "3106a271485a47b15a810d402ebbe42d8bbc315fd1202b26a12d7b030aeb1a14",
+            "html_sha256": "fd8482f86dccfb9889a44a14fd0e1fe11cb13ca3c74aee918f72134eed9f18f2",
+            "delivery_sha256": "9bb683c6cd8259a77262a2438d59bc48d175eb5547d9d87d31b0cc04086ef7c5",
+            "request_context_bytes": 215779
+          },
+          "large-html": {
+            "seconds": {
+              "author": 0.1561848999990616,
+              "browser_prepare": 0.17406119999941438,
+              "native_launch": 0.22739960000035353,
+              "portable_materialize": 0.0032011000002967194,
+              "file_delivery": 0.36265650000132155
+            },
+            "app_sha256": "0c4452075d925e75e5c851a23a771c545ddb33022c8a16e50c54da8aa9702721",
+            "html_sha256": "3de0ba8f152fbb3d5bcac8b7f4b7d891ff66b08f93ed8607ad35b277b6f22aca",
+            "delivery_sha256": "2f3817016087b88be852f5c8be2bab06b6593aea3af5133ac0188b5ea72d1d8c"
+          }
+        }
+      }
+    },
+    {
+      "baseline": {
+        "process_seconds": 2.065032799997425,
+        "apps": {
+          "notepad": {
+            "seconds": {
+              "author": 0.09931130000040866,
+              "request_context": 0.08761719999893103,
+              "browser_prepare": 0.07335489999968559,
+              "native_launch": 0.09850630000073579,
+              "portable_materialize": 0.0022761000000173226,
+              "file_delivery": 0.2868820000003325
+            },
+            "app_sha256": "3106a271485a47b15a810d402ebbe42d8bbc315fd1202b26a12d7b030aeb1a14",
+            "html_sha256": "fd8482f86dccfb9889a44a14fd0e1fe11cb13ca3c74aee918f72134eed9f18f2",
+            "delivery_sha256": "9bb683c6cd8259a77262a2438d59bc48d175eb5547d9d87d31b0cc04086ef7c5",
+            "request_context_bytes": 215779
+          },
+          "large-html": {
+            "seconds": {
+              "author": 0.15772809999907622,
+              "browser_prepare": 0.1759085999983654,
+              "native_launch": 0.2308365999997477,
+              "portable_materialize": 0.003226400000130525,
+              "file_delivery": 0.36195699999734643
+            },
+            "app_sha256": "0c4452075d925e75e5c851a23a771c545ddb33022c8a16e50c54da8aa9702721",
+            "html_sha256": "3de0ba8f152fbb3d5bcac8b7f4b7d891ff66b08f93ed8607ad35b277b6f22aca",
+            "delivery_sha256": "2f3817016087b88be852f5c8be2bab06b6593aea3af5133ac0188b5ea72d1d8c"
+          }
+        }
+      },
+      "candidate": {
+        "process_seconds": 1.2371215999992273,
+        "apps": {
+          "notepad": {
+            "seconds": {
+              "author": 0.05175800000142772,
+              "request_context": 0.0005060000003140885,
+              "browser_prepare": 0.020881700002064463,
+              "native_launch": 0.020143600002484163,
+              "portable_materialize": 0.0019798000030277763,
+              "file_delivery": 0.2190362000001187
+            },
+            "app_sha256": "3106a271485a47b15a810d402ebbe42d8bbc315fd1202b26a12d7b030aeb1a14",
+            "html_sha256": "fd8482f86dccfb9889a44a14fd0e1fe11cb13ca3c74aee918f72134eed9f18f2",
+            "delivery_sha256": "9bb683c6cd8259a77262a2438d59bc48d175eb5547d9d87d31b0cc04086ef7c5",
+            "request_context_bytes": 3245
+          },
+          "large-html": {
+            "seconds": {
+              "author": 0.06723990000318736,
+              "browser_prepare": 0.05571839999902295,
+              "native_launch": 0.05522179999752552,
+              "portable_materialize": 0.0030254000012064353,
+              "file_delivery": 0.2329838000005111
+            },
+            "app_sha256": "0c4452075d925e75e5c851a23a771c545ddb33022c8a16e50c54da8aa9702721",
+            "html_sha256": "3de0ba8f152fbb3d5bcac8b7f4b7d891ff66b08f93ed8607ad35b277b6f22aca",
+            "delivery_sha256": "2f3817016087b88be852f5c8be2bab06b6593aea3af5133ac0188b5ea72d1d8c"
+          }
+        }
+      }
+    },
+    {
+      "candidate": {
+        "process_seconds": 1.242554200001905,
+        "apps": {
+          "notepad": {
+            "seconds": {
+              "author": 0.05204779999985476,
+              "request_context": 0.0004594999991240911,
+              "browser_prepare": 0.02038209999955143,
+              "native_launch": 0.020801800001208903,
+              "portable_materialize": 0.0022090999991633,
+              "file_delivery": 0.21473150000019814
+            },
+            "app_sha256": "3106a271485a47b15a810d402ebbe42d8bbc315fd1202b26a12d7b030aeb1a14",
+            "html_sha256": "fd8482f86dccfb9889a44a14fd0e1fe11cb13ca3c74aee918f72134eed9f18f2",
+            "delivery_sha256": "9bb683c6cd8259a77262a2438d59bc48d175eb5547d9d87d31b0cc04086ef7c5",
+            "request_context_bytes": 3245
+          },
+          "large-html": {
+            "seconds": {
+              "author": 0.06672610000168788,
+              "browser_prepare": 0.05551709999781451,
+              "native_launch": 0.05503350000071805,
+              "portable_materialize": 0.003246900003432529,
+              "file_delivery": 0.23652130000118632
+            },
+            "app_sha256": "0c4452075d925e75e5c851a23a771c545ddb33022c8a16e50c54da8aa9702721",
+            "html_sha256": "3de0ba8f152fbb3d5bcac8b7f4b7d891ff66b08f93ed8607ad35b277b6f22aca",
+            "delivery_sha256": "2f3817016087b88be852f5c8be2bab06b6593aea3af5133ac0188b5ea72d1d8c"
+          }
+        }
+      },
+      "baseline": {
+        "process_seconds": 2.0233720999967773,
+        "apps": {
+          "notepad": {
+            "seconds": {
+              "author": 0.09917069999937667,
+              "request_context": 0.09013109999796143,
+              "browser_prepare": 0.07396930000322754,
+              "native_launch": 0.09781870000006165,
+              "portable_materialize": 0.002343000000109896,
+              "file_delivery": 0.27560540000195033
+            },
+            "app_sha256": "3106a271485a47b15a810d402ebbe42d8bbc315fd1202b26a12d7b030aeb1a14",
+            "html_sha256": "fd8482f86dccfb9889a44a14fd0e1fe11cb13ca3c74aee918f72134eed9f18f2",
+            "delivery_sha256": "9bb683c6cd8259a77262a2438d59bc48d175eb5547d9d87d31b0cc04086ef7c5",
+            "request_context_bytes": 215779
+          },
+          "large-html": {
+            "seconds": {
+              "author": 0.15618090000134544,
+              "browser_prepare": 0.17309670000031474,
+              "native_launch": 0.22890790000019479,
+              "portable_materialize": 0.0031584999996994156,
+              "file_delivery": 0.357726600002934
+            },
+            "app_sha256": "0c4452075d925e75e5c851a23a771c545ddb33022c8a16e50c54da8aa9702721",
+            "html_sha256": "3de0ba8f152fbb3d5bcac8b7f4b7d891ff66b08f93ed8607ad35b277b6f22aca",
+            "delivery_sha256": "2f3817016087b88be852f5c8be2bab06b6593aea3af5133ac0188b5ea72d1d8c"
+          }
+        }
+      }
+    },
+    {
+      "baseline": {
+        "process_seconds": 2.043049700001575,
+        "apps": {
+          "notepad": {
+            "seconds": {
+              "author": 0.10091409999949974,
+              "request_context": 0.08648639999955776,
+              "browser_prepare": 0.07184770000094431,
+              "native_launch": 0.09764880000147969,
+              "portable_materialize": 0.002373700001044199,
+              "file_delivery": 0.27836670000033337
+            },
+            "app_sha256": "3106a271485a47b15a810d402ebbe42d8bbc315fd1202b26a12d7b030aeb1a14",
+            "html_sha256": "fd8482f86dccfb9889a44a14fd0e1fe11cb13ca3c74aee918f72134eed9f18f2",
+            "delivery_sha256": "9bb683c6cd8259a77262a2438d59bc48d175eb5547d9d87d31b0cc04086ef7c5",
+            "request_context_bytes": 215779
+          },
+          "large-html": {
+            "seconds": {
+              "author": 0.15853430000061053,
+              "browser_prepare": 0.17719810000198777,
+              "native_launch": 0.23004950000176905,
+              "portable_materialize": 0.0034125999991374556,
+              "file_delivery": 0.3670787000010023
+            },
+            "app_sha256": "0c4452075d925e75e5c851a23a771c545ddb33022c8a16e50c54da8aa9702721",
+            "html_sha256": "3de0ba8f152fbb3d5bcac8b7f4b7d891ff66b08f93ed8607ad35b277b6f22aca",
+            "delivery_sha256": "2f3817016087b88be852f5c8be2bab06b6593aea3af5133ac0188b5ea72d1d8c"
+          }
+        }
+      },
+      "candidate": {
+        "process_seconds": 1.2560737999992853,
+        "apps": {
+          "notepad": {
+            "seconds": {
+              "author": 0.05251770000177203,
+              "request_context": 0.0003954999992856756,
+              "browser_prepare": 0.020549400000163587,
+              "native_launch": 0.020173199998680502,
+              "portable_materialize": 0.002150799999071751,
+              "file_delivery": 0.21549850000155857
+            },
+            "app_sha256": "3106a271485a47b15a810d402ebbe42d8bbc315fd1202b26a12d7b030aeb1a14",
+            "html_sha256": "fd8482f86dccfb9889a44a14fd0e1fe11cb13ca3c74aee918f72134eed9f18f2",
+            "delivery_sha256": "9bb683c6cd8259a77262a2438d59bc48d175eb5547d9d87d31b0cc04086ef7c5",
+            "request_context_bytes": 3245
+          },
+          "large-html": {
+            "seconds": {
+              "author": 0.0678726000005554,
+              "browser_prepare": 0.05545739999797661,
+              "native_launch": 0.056253999999171356,
+              "portable_materialize": 0.003201999999873806,
+              "file_delivery": 0.24675189999834402
+            },
+            "app_sha256": "0c4452075d925e75e5c851a23a771c545ddb33022c8a16e50c54da8aa9702721",
+            "html_sha256": "3de0ba8f152fbb3d5bcac8b7f4b7d891ff66b08f93ed8607ad35b277b6f22aca",
+            "delivery_sha256": "2f3817016087b88be852f5c8be2bab06b6593aea3af5133ac0188b5ea72d1d8c"
+          }
+        }
+      }
+    },
+    {
+      "candidate": {
+        "process_seconds": 1.2333330999972532,
+        "apps": {
+          "notepad": {
+            "seconds": {
+              "author": 0.05241960000057588,
+              "request_context": 0.0004186000005574897,
+              "browser_prepare": 0.020369199999549892,
+              "native_launch": 0.019871600001351908,
+              "portable_materialize": 0.0020296000002417713,
+              "file_delivery": 0.216326100002334
+            },
+            "app_sha256": "3106a271485a47b15a810d402ebbe42d8bbc315fd1202b26a12d7b030aeb1a14",
+            "html_sha256": "fd8482f86dccfb9889a44a14fd0e1fe11cb13ca3c74aee918f72134eed9f18f2",
+            "delivery_sha256": "9bb683c6cd8259a77262a2438d59bc48d175eb5547d9d87d31b0cc04086ef7c5",
+            "request_context_bytes": 3245
+          },
+          "large-html": {
+            "seconds": {
+              "author": 0.06677889999991748,
+              "browser_prepare": 0.05503580000004149,
+              "native_launch": 0.054962199999863515,
+              "portable_materialize": 0.003183199998602504,
+              "file_delivery": 0.23550689999683527
+            },
+            "app_sha256": "0c4452075d925e75e5c851a23a771c545ddb33022c8a16e50c54da8aa9702721",
+            "html_sha256": "3de0ba8f152fbb3d5bcac8b7f4b7d891ff66b08f93ed8607ad35b277b6f22aca",
+            "delivery_sha256": "2f3817016087b88be852f5c8be2bab06b6593aea3af5133ac0188b5ea72d1d8c"
+          }
+        }
+      },
+      "baseline": {
+        "process_seconds": 2.0314581000020553,
+        "apps": {
+          "notepad": {
+            "seconds": {
+              "author": 0.09950649999882444,
+              "request_context": 0.08714599999802886,
+              "browser_prepare": 0.07257929999832413,
+              "native_launch": 0.09834509999927832,
+              "portable_materialize": 0.0023369999980786815,
+              "file_delivery": 0.27956859999903827
+            },
+            "app_sha256": "3106a271485a47b15a810d402ebbe42d8bbc315fd1202b26a12d7b030aeb1a14",
+            "html_sha256": "fd8482f86dccfb9889a44a14fd0e1fe11cb13ca3c74aee918f72134eed9f18f2",
+            "delivery_sha256": "9bb683c6cd8259a77262a2438d59bc48d175eb5547d9d87d31b0cc04086ef7c5",
+            "request_context_bytes": 215779
+          },
+          "large-html": {
+            "seconds": {
+              "author": 0.1561329000032856,
+              "browser_prepare": 0.1746808999996574,
+              "native_launch": 0.22948550000000978,
+              "portable_materialize": 0.0030394999994314276,
+              "file_delivery": 0.36295030000110273
+            },
+            "app_sha256": "0c4452075d925e75e5c851a23a771c545ddb33022c8a16e50c54da8aa9702721",
+            "html_sha256": "3de0ba8f152fbb3d5bcac8b7f4b7d891ff66b08f93ed8607ad35b277b6f22aca",
+            "delivery_sha256": "2f3817016087b88be852f5c8be2bab06b6593aea3af5133ac0188b5ea72d1d8c"
+          }
+        }
+      }
+    }
+  ],
+  "summary": {
+    "notepad": {
+      "author": {
+        "baseline": 0.09931130000040866,
+        "candidate": 0.05204779999985476,
+        "reduction_percent": 47.59126101496951
+      },
+      "request_context": {
+        "baseline": 0.08751960000154213,
+        "candidate": 0.0004281999972590711,
+        "reduction_percent": 99.51073816921978
+      },
+      "browser_prepare": {
+        "baseline": 0.07335489999968559,
+        "candidate": 0.020369199999549892,
+        "reduction_percent": 72.231984503234
+      },
+      "native_launch": {
+        "baseline": 0.09834509999927832,
+        "candidate": 0.020173199998680502,
+        "reduction_percent": 79.48733592336727
+      },
+      "portable_materialize": {
+        "baseline": 0.0022761000000173226,
+        "candidate": 0.0021157000010134652,
+        "reduction_percent": 7.047141997391881
+      },
+      "file_delivery": {
+        "baseline": 0.27836670000033337,
+        "candidate": 0.2159577000020363,
+        "reduction_percent": 22.419707529033584
+      }
+    },
+    "large-html": {
+      "author": {
+        "baseline": 0.15618090000134544,
+        "candidate": 0.06723990000318736,
+        "reduction_percent": 56.947424427309535
+      },
+      "browser_prepare": {
+        "baseline": 0.17406119999941438,
+        "candidate": 0.05545739999797661,
+        "reduction_percent": 68.13913727001584
+      },
+      "native_launch": {
+        "baseline": 0.22890790000019479,
+        "candidate": 0.05516110000098706,
+        "reduction_percent": 75.90249178777135
+      },
+      "portable_materialize": {
+        "baseline": 0.0031584999996994156,
+        "candidate": 0.003183199998602504,
+        "reduction_percent": -0.782016745462677
+      },
+      "file_delivery": {
+        "baseline": 0.36195699999734643,
+        "candidate": 0.23652130000118632,
+        "reduction_percent": 34.65486231709283
+      }
+    }
+  },
+  "exact_output_parity": true,
+  "request_context_bytes": {
+    "baseline": 215779,
+    "candidate": 3245
+  },
+  "source_files": {
+    "baseline": {
+      "mantleos\\__init__.py": "ce13779865179b552e3c3b15e9fdbb4894d4c67242efc2c8808ee8709998ec18",
+      "mantleos\\__main__.py": "8facf58fbb85b958dd1ae2fe54a1e6100755ded6b3eb54924d01f7bf303ea317",
+      "mantleos\\agentic_continuity.py": "650f23ded21430c2b460fa1717d9123277eb01904589a3101a2c1191b881900f",
+      "mantleos\\agentic_profiles\\primer_agentic_v0_2.txt": "0ac9a89e47458f43de0581713f9c8588199cb4808828d90e52c03aba0681a4ec",
+      "mantleos\\agentic_validation.py": "2558f8f3ae6f77342fd916d4e63f0d3d21373f02b52ea4c8ee7665cb8e9309b6",
+      "mantleos\\anchor_app_bridge.py": "a49eb21940bf2638de67b04139a2cc2c05f781138cba61b51ed269b6bf57050c",
+      "mantleos\\anchor_app_document.py": "186d990cf626f37295a3f768d6ae74407e5186da054b0146a6b622ace4213284",
+      "mantleos\\anchor_apps.py": "a78786d895e361131ca9232354523a97377308e5f4bcf5228f9a8ef3bda1a2ad",
+      "mantleos\\anchor_blueprint.py": "2b270699d3a5d9bf0270fad6f521241622055f4ae0a4ad46a0572eb441eaa59c",
+      "mantleos\\anchor_canvas.py": "b99f5262bf4532b32308b4459019f4ef24b4fea0241459c5986b0f5751c6c8be",
+      "mantleos\\anchor_engine\\__init__.py": "07a9b5223bbd4669bca4f4d4cc0b4709daec2895c32bc288820889c8a5e0071a",
+      "mantleos\\anchor_engine\\profiles\\hello_world_compact.anchor": "2493c4d34f902539c2d030d84044a686829f154561290c74e12082b3b1651211",
+      "mantleos\\anchor_engine\\reference_materials\\unicode\\LICENSE.txt": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96",
+      "mantleos\\anchor_engine\\SOURCE-PINS.json": "b372862e3893bf8be584eba5f1b0bfdfe503dc73b561806ec2cb978634451a89",
+      "mantleos\\anchor_engine\\templates\\notepad_llm_v1_molecules.txt": "0882c960df82ba087401aa683e49605f3278522ee8bf8a4a970214e07d032488",
+      "mantleos\\anchor_engine\\templates\\primer_emit_text_v0_2.txt": "39f1742b92f733b0727a0518623841ae5d03eb00a0b8dbd2e0885abfd5837c42",
+      "mantleos\\anchor_engine\\templates\\primer_notepad_llm_v1.txt": "f85e0beaa8023c80103741268f91fdcd3936a904dd63fa99f1df52e2a8008837",
+      "mantleos\\anchor_engine\\tools\\__init__.py": "e1b90a91c496c5924a57b256c0dc9920a4d221554c82442121d844819ec4cbc7",
+      "mantleos\\anchor_engine\\tools\\anchor_compile.py": "24c25dbf3b239f2fdc55b7c51be4637896207ae14c8b6bcc6aafc005bdaa5f8c",
+      "mantleos\\anchor_engine\\tools\\anchor_journal.py": "42ce7b1e40207c5ec497d1b2bdb0ec870d70c645bd274a1e97e10f512ed25f26",
+      "mantleos\\anchor_engine\\tools\\anchor_notepad.py": "d556a269f74d0b6b6e94051d470318fdcb8342bd1dbf15cfc8da03d3e6afa8a9",
+      "mantleos\\anchor_engine\\tools\\anchor_runtime.py": "fc23145450f5c5d12eab50a362b043ed4bb8c05aeb0c15b0293298a0f0b4323e",
+      "mantleos\\anchor_engine\\tools\\anchor_structure.py": "45cea1549b6af80494e352b1e02815d7b8059b3d92597324a5003459a66b5eaf",
+      "mantleos\\anchor_engine\\tools\\notepad_blueprint.py": "838a4862b344bb9be3a62344fd653ef2a2aaee692be85eb6dc56590d64cddc4e",
+      "mantleos\\anchor_engine\\tools\\unicode_fold.py": "cd1efc3920315e240c5b131dd372046b989f97755770242a1adb7c0afdee0f8a",
+      "mantleos\\anchor_language.py": "075bfc2642183dfb36d01e77ef7377d5d3cf2acbaf9fc080fa5024b3d5f3b4d4",
+      "mantleos\\anchor_qualification.py": "c8226b205cf7c6754775d209d4b1c2b2987f6e7bb0a89f24ebea841329e7ed09",
+      "mantleos\\anchor_qualification_cli.py": "cfb4a4731ff35d3671393938daf04185c1b5e9408917b487ee517dee26f7c9bb",
+      "mantleos\\anchors.py": "891f2c3e02eaaba9cd16ec155dbee3f0ec65ca76774fa22d8ca5df8f727ae429",
+      "mantleos\\app_assets\\notepad.html": "8fa1e19fb3683e2ee20bdc1803624959fc11d3c4525cdc642df37a685efbcec9",
+      "mantleos\\app_bridges.py": "f0e8ba47ed581b2ca4bf87cc6a269ee341828fdc493e17f2ae3174811bfdda1e",
+      "mantleos\\app_builder.py": "ab354dc07e6c9cf95a7b752b12b392add5f4480d9577a0f816b304b01c535b00",
+      "mantleos\\appai.py": "202fcdf4b531a97f380ea1d4aaaa1d541b70138f95ce3ae328025ec179507533",
+      "mantleos\\appai_assets\\hermes.json": "869f4715ca629681127da057e2fd121bf2029891bc40551b2f7412f65b888039",
+      "mantleos\\application.py": "1b8ab5d842f39e2ddc7c3e5ea13999cc44f07dc95b4417e8b5056ddbec6dbaab",
+      "mantleos\\birth.py": "7c83ce697bdfd2d18441f12f6ec2faef289f7c183d1852e8bbff05744be3d74b",
+      "mantleos\\body_entrypoint.py": "872d57af281ff3bb51683efb438676b62d90f4cd8642e3d94f13d7e98f4230e2",
+      "mantleos\\builder.py": "1b82688abb92bcf556a683b3ba1a94860da97307e6f7c42844ea16603bc94f23",
+      "mantleos\\cartridge.py": "56e22f0fc5e3339b8a87b9d29605846db8a68f4df4d3894b3604a21f2546a896",
+      "mantleos\\cells.py": "736e14c3e7e04d81a44135228e1f4b4b508ea4cfd43d7efb0366d0cda000a71c",
+      "mantleos\\checkpoint.py": "3deea4faed9525bce3e8749012378525188e9499d7dea35dc55974850a0c68fb",
+      "mantleos\\chromamem.py": "9a12cae4b17feb5f3e1f0c3ccab0dd4b0acf5a90f459035d8685f8c39d3add3f",
+      "mantleos\\cli.py": "5fbd16ca6d61a38fe5fb242b67703978bd490e84faeb11b52c68bf5d2e92ef53",
+      "mantleos\\compiled.py": "099f0031abe0d33504f36b9ce1830c52611f8a906e77954a4d27909a58afb6f3",
+      "mantleos\\console.py": "d28143419af1c18333ec2408ee8870ca6d2307566046e54863f9205dafc2780a",
+      "mantleos\\continuity.py": "196ed9106026fa99af464bde2d3ae5ba6ed431b085f977e3e077bae011169dbe",
+      "mantleos\\demo.py": "fdf4c2deff806817f99c9aa943af44b9d4bd27aebbe06ccc8b29237a6018e612",
+      "mantleos\\effects.py": "50090d242c7e9aebab970a32d02c6a05fc0f4ae3f7e79fdfcb5214acd9936584",
+      "mantleos\\engram.py": "6f44b80a01c28982bf70f477984b5478c20f21b8a544439becdd70aec164a2e7",
+      "mantleos\\evolution.py": "d849abcc3a0b06eb0dcc37df4a212645106e2266d7bd0f8636e7ada447a605e7",
+      "mantleos\\example_cli.py": "8d56d71a011ba980747e6736c3887e600f3b91bbcd135267484f61bdbe8a8454",
+      "mantleos\\examples.py": "a261263f1a29b1c6b7c984e81b788f45c4fa987ddfe1bc680e692af5e757a543",
+      "mantleos\\harness_adapter.py": "62c4347d1a19578678f1daf58e13ba3c5782e03bbfd3ca5a52aca46177a36aa5",
+      "mantleos\\hosted.py": "277f195362aaae79d99fad5ccaefc6d443c86c8bf69259ae05b21523d5b32f06",
+      "mantleos\\json_contract.py": "f928ffc45808d3fc987fde510bfb511ef5e7a3aea96e21a580b4018b5540af2f",
+      "mantleos\\kernel.py": "c9844c9120fb4c40b55b505dd9108a62d7aa6fbfd832c87e56ada741920ef612",
+      "mantleos\\kitchen.py": "6226d9c915e21cc93f788d470964780d90fc32f0a010d276ead8498d2be019ff",
+      "mantleos\\kpp\\__init__.py": "69589f8019aef310027d318fda2dafe8f9045933c47a9b5e0342f0055cf19c95",
+      "mantleos\\kpp\\__main__.py": "79ee6f134c5c5193377cf9b189cbdcc3e2095e49ba9cec310114441c15a917c4",
+      "mantleos\\kpp\\adaptation.py": "fdaa7a3f1e26096a4cb8ae457d6a5b1b652f1b80eeedc9ba85f0c65668b27a7a",
+      "mantleos\\kpp\\anchor.py": "ba92e01ad4262cce47622ff9e963b6b2ef6e538a05fc2d72dea1f99a1e3f54d4",
+      "mantleos\\kpp\\assets\\progressive.js": "024a814137bc31eda0ed51345dedc0e40550b981aef00e4fad4b7fd5ffe04f5f",
+      "mantleos\\kpp\\cells.py": "3832310c5860effa080d7f476ab583bbfa0487c2ebd677ce1f484a87af1d23dc",
+      "mantleos\\kpp\\cli.py": "af23208c701643404c6b6f2424c79102d11a216361dac0a9b14f5489c4ed6a46",
+      "mantleos\\kpp\\conformance.py": "fffcf832e79a89c3a1b26fd1eefaae5442cc0bf5ecdbc3641d0573248f715a38",
+      "mantleos\\kpp\\core.py": "5bb5dd7f5b93cb30016fd76660578dacca9cd88c6b0dd92dac31e42a742a70ae",
+      "mantleos\\kpp\\economy.py": "cbf8b33ee3b09fa796fc88c1ba0a5e46d1bfb9159eb0635401e3c21461df5f74",
+      "mantleos\\kpp\\graph.py": "57eda03141ec009324d851a1e863b01c2c91d069110e4d5076ed56873ccc58b1",
+      "mantleos\\kpp\\gui.py": "53a73a129c778310232be4bcc0c36a54a74cf7e1fcdb10f0311531f23405f42e",
+      "mantleos\\kpp\\ingest.py": "6bdb6385f2fedef0cabfa7f53319061c363ccc09de6e379959f6d66c95a4357f",
+      "mantleos\\kpp\\pantry.py": "d0e59accc8cfdec13641960690fb8aeb36776173509582f880a79905e6d7d692",
+      "mantleos\\kpp\\png.py": "6849482a8f8b6cb1c1650d59467a7b86c2836e0ed37965d2856f6e5b453de9f0",
+      "mantleos\\kpp\\portability.py": "5476e4ee1fc2f9712283060cc3a211cb4001338bac75002de3238e199d571e87",
+      "mantleos\\kpp\\reflex.py": "15909f79161a587156cb257395a7534c1f8e1802becbc4103e2b12c7e554a5a9",
+      "mantleos\\kpp\\resources\\AGENTS.md": "2c6f34be85c8743b7f557de947087e8e863fad673fc2b8ffa8cfc60ba4a9f4df",
+      "mantleos\\kpp\\resources\\BUILD-STATUS.md": "1af1f9d9285a701991624132d3d28d2ba7dda6b36c34dd0f5142b2661347dd52",
+      "mantleos\\kpp\\resources\\CONTRIBUTING.md": "23d1a1f6655a639da9e6ef3b9fead495decbda91767ea11269c0048785aa6b75",
+      "mantleos\\kpp\\resources\\docs\\ADAPTIVE-INTEGRATION.md": "beb65178ea04a7860397b8832c6597c179214efc06c9d7817739787152025a87",
+      "mantleos\\kpp\\resources\\docs\\ARCHITECTURE.md": "7c73a19260068532363f82491e2a2e304c76ef4e072cf0496dced9b0787e9882",
+      "mantleos\\kpp\\resources\\docs\\COMPLETION-AUDIT.md": "b94650a1237e5ae72fc96b3048fe6377c045a21d6a93ccf4962820b09d7426e1",
+      "mantleos\\kpp\\resources\\docs\\EXECUTED-REFLEX-ANCHORS.md": "1dd5c7f8c79feb8a703ec7339a6951ca3dc97b014f0eb976e142633f16118a17",
+      "mantleos\\kpp\\resources\\docs\\FUNCTIONAL-ECONOMY.md": "8dcfee85b5e38a4080ea1ccf937ac2bab13875e7f9dd12faa72234ede40c4d67",
+      "mantleos\\kpp\\resources\\docs\\GUI-REFERENCE.md": "78c06226fd4eb8015730b8c89b76cba7d5c9cd97a42c64e820d6b95d31e442b9",
+      "mantleos\\kpp\\resources\\docs\\INGREDIENT-LABELS.md": "82fb9dbdb1af491b7f0b519e849682b5ce894fa5fd53c086065fe7aa983f3cc3",
+      "mantleos\\kpp\\resources\\docs\\PANTRY.md": "29fe65bc317f0c77a5082ac9af912ba4e754651806170b71979ff872851c4c8e",
+      "mantleos\\kpp\\resources\\docs\\PORTABLE-REFLEX-BUNDLES.md": "43c207dd1834b722dcb2cbe1c58c42ffedef8a67f2364da722c1dafb7db7b64d",
+      "mantleos\\kpp\\resources\\docs\\PREVIEW-RECOVERY.md": "b77b68844aed2d9f9b35241cef84e2ba385d6dd3dbffaf7f95bac7e5af8cef4a",
+      "mantleos\\kpp\\resources\\docs\\PROGRESSIVE-BIOSOFTWARE.md": "fd2f6191c7d07b2e099737a2c6b286963fdb01ec3d1e8d7112e26a35550cea45",
+      "mantleos\\kpp\\resources\\docs\\PROTOCOL.md": "a0a4e8cad1c25157cf20c97438028aae899a25ed2c29bd8427a038ec52d1215e",
+      "mantleos\\kpp\\resources\\docs\\RELEASE-VALIDATION.md": "1d17175eb9e9ffc588813223fb10d0d9deace42169f0d2c2ce6df7c56d626cdc",
+      "mantleos\\kpp\\resources\\docs\\SECURITY.md": "eb1a87cbc81a7b8882b2c5f8cc724089f3bb0caf2f5d7a03b2bb7aa518e79e4e",
+      "mantleos\\kpp\\resources\\docs\\TRANSFORMATION.md": "11cc8cd2859cadff90dac907f644aa36d96c9392fc989ca4df4577ffc84d0985",
+      "mantleos\\kpp\\resources\\examples\\adaptive-reflex\\baseline-pins.json": "580a5e4665ba8d1cbc24dfa1f126ef2ee34d6c459098bbb079c8116fc66df598",
+      "mantleos\\kpp\\resources\\examples\\adaptive-reflex\\continuity.py": "a7c95ab4333f08116081fdb96ed9f06f80f2da1e61c5d6609b874d6596be3858",
+      "mantleos\\kpp\\resources\\examples\\adaptive-reflex\\integration.py": "ad004da4105609e7b5710a2bd1e1075f425b21a48b809c18d804c94ef42f0b6f",
+      "mantleos\\kpp\\resources\\examples\\adaptive-reflex\\README.md": "2d23b01695d71ca6a1849f2db3de98f2d1bbf3dd8650554526b900d73d49149b",
+      "mantleos\\kpp\\resources\\examples\\adaptive-reflex\\request.json": "57d70643fc346e964ded88b6f831e544302cdfec21cd6f4edd26dde40743974f",
+      "mantleos\\kpp\\resources\\examples\\adaptive-reflex\\smoke.py": "40f4d23b4f5531081036265da7c597dbf563334b5877ffccdb05d19e476571be",
+      "mantleos\\kpp\\resources\\examples\\adaptive-reflex\\task_agent.py": "e130a11d81e4af1bd21ee5d5ed10685b4d5fc0b5d5a1bab0cef2a6761fb34eff",
+      "mantleos\\kpp\\resources\\examples\\economy\\notepad-file-actions.json": "5a769bc999ea4d25231cfca100c4b292a82eed583c5e0b34418b2dafc7ef732e",
+      "mantleos\\kpp\\resources\\examples\\README.md": "ae0f0dddc3a762ea7487e664a69527b9c066d869204b591d3363dbc12cfc9dde",
+      "mantleos\\kpp\\resources\\examples\\reflex-anchors\\check_absent.py": "a4748d72ad8ca8a00846eec112c8dbfae28964c5e32f83fdd57c9178fb7dd9c3",
+      "mantleos\\kpp\\resources\\examples\\reflex-anchors\\check_original.py": "fd0b3f2ae8f091717b88400828dfb2203dfaef4e32cb0274464e329a50f2cfb8",
+      "mantleos\\kpp\\resources\\examples\\reflex-anchors\\check_reflex.py": "47f42d44fad1e1ac97dbec40e68d919ac021127f28b45ab6e6e04427f3f67236",
+      "mantleos\\kpp\\resources\\examples\\reflex-anchors\\suite.json": "b5fd8058f1a8b780db935bf0ea9429d47145773e9c87166cc5975c7f79ec62df",
+      "mantleos\\kpp\\resources\\KPP-BOOT.md": "6a1c0b46d5ad55fd705c67fbff2ac9ddb8d09c4c6044ab9a9477eca92c5c50e0",
+      "mantleos\\kpp\\resources\\KPP-MANIFEST.json": "c80307630f965251ac2b7ecc88edfcdaef794cb4ffde4d93dfc6659db73e9685",
+      "mantleos\\kpp\\resources\\KPP.md": "df712a801373a50c449383f27fda3f6bc2cc837ffb8c14bcd43c772a7a880956",
+      "mantleos\\kpp\\resources\\LICENSE": "5f82ec0daa51896b13158a5978d0aaaa2db17d2a502fcc4a7498b714e6d20a07",
+      "mantleos\\kpp\\resources\\NEXT-LLM-HANDOFF.md": "6a1c0b46d5ad55fd705c67fbff2ac9ddb8d09c4c6044ab9a9477eca92c5c50e0",
+      "mantleos\\kpp\\resources\\pantry\\anchor-tissue.json": "5f26d1319ba0cfa140c2389d9cad07d51435b78d8c8ae0ccaac2a6ad44df7742",
+      "mantleos\\kpp\\resources\\pantry\\browser-file-io.json": "8f3b19c724fcd790ba08b1a2b450b1dbd6bb5f2c3d274037a685e237fe99cc31",
+      "mantleos\\kpp\\resources\\pantry\\chase-gate.json": "eeb2f04eb887e4dc88cf6ac865dd4ca8396345b809bfc8d9084d0aa7f94f60a3",
+      "mantleos\\kpp\\resources\\pantry\\chroma-png-memory.json": "82b48d51305e5e720431ef1de7a3ab43fca9a4ed9a9599e7478a1ebe1a2d2bef",
+      "mantleos\\kpp\\resources\\pantry\\engram-continuity.json": "109462ab7a57aa80dde84b8e896dc0cc400b99017671a0cc4b095215ae6b599e",
+      "mantleos\\kpp\\resources\\pantry\\external-project.json": "83ad7fd041a409430a8833456d41d7ceed7c6b57c151848d6e76f953d55397a1",
+      "mantleos\\kpp\\resources\\pantry\\fidelity-trace.json": "4d8169fea9ab604e4144ab44e0ede13b385d11a50c0d832590fdfd5abe7f0309",
+      "mantleos\\kpp\\resources\\pantry\\interface-shell.json": "bcae33f100022050ffecfd1894a1137958d86a617ca5db722060a4877f158187",
+      "mantleos\\kpp\\resources\\pantry\\kernel-relative-cells.json": "1987159b0af18f7280af044d286351f500399d04d6abb47ebf2d124e4ffe349f",
+      "mantleos\\kpp\\resources\\pantry\\local-draft-recovery.json": "38d26f0d50e91cb3f62ed4ea5996b4a09ea55f87f0264a17ddbe3d7cddc3c93e",
+      "mantleos\\kpp\\resources\\pantry\\mind-body-boundary.json": "789ffe6560a52751ea5b5e06aed132330ddadb40d340a174a1068717a077845e",
+      "mantleos\\kpp\\resources\\pantry\\progressive-web-runtime.json": "8579b3b9d0f0af06c4517c83df11080e04072893cb2f6aaf33c2508b5a2ee860",
+      "mantleos\\kpp\\resources\\pantry\\python-tissue.json": "4167f3f9bfd32bc2216c7a133c99fa8a5b20b5bb27c84514089d8ea3ef4046d3",
+      "mantleos\\kpp\\resources\\pantry\\text-editor.json": "5b8b19ee58130310c41b4905995795585fe45934a0d342063eeb376186dd15d9",
+      "mantleos\\kpp\\resources\\previews\\calculator\\base.js": "c9dba278d8e13afcd15d9f17d84e880ea6239f85834873bf4718898931591fc0",
+      "mantleos\\kpp\\resources\\previews\\calculator\\index.html": "38af2443b52203896e8f79a6e9c3db0dff026dcff3f1bbecd97067a3113f9c19",
+      "mantleos\\kpp\\resources\\previews\\calculator\\square.js": "ccbecb29c3a4846ee64d31e15914ef02ebd0bafb5163d4b4c457a8a744c1f3ba",
+      "mantleos\\kpp\\resources\\previews\\calculator\\style.css": "fbdc31dbdbf7a4e7e5a0d15d1874908d9bb6a0d22694e170e3cc62c084e7683f",
+      "mantleos\\kpp\\resources\\previews\\notepad\\base.js": "13f8a33c5a1405b8be7c76521590e14f8320db1a14349ad6d0f032262d6d67ce",
+      "mantleos\\kpp\\resources\\previews\\notepad\\edit.js": "73320f750d4564e6e4ae0d8895af956f66fd8dd3d9f40c3e33c8a057785e3ed6",
+      "mantleos\\kpp\\resources\\previews\\notepad\\files.js": "20fb7e645c06bd1a2be9e1eb59a148340624ad6b508eb260236df62dfa52017e",
+      "mantleos\\kpp\\resources\\previews\\notepad\\index.html": "b2e14ede2772a8888a45d32e938ba4e6de0389d2a5d4f073282aebd02e0de6d8",
+      "mantleos\\kpp\\resources\\previews\\notepad\\style.css": "0bfe4ee72ff63eaf3bc781ad4444246caa6f8dbc647d1ec89852f60fa9e0c24c",
+      "mantleos\\kpp\\resources\\README.md": "f8ad9b69de45de7d1508e58adbf874219b4f9b86a0cbbc7c26a0c5f8a64086dd",
+      "mantleos\\kpp\\resources\\recipes\\adaptive-reflex-demo.json": "35971bc49e5f4dad408b61ba149874e4d61b1108e80e6bd5de0e261e98717ee7",
+      "mantleos\\kpp\\resources\\recipes\\bio-hermes-design.json": "4cbccc77f24e759dd9400558060701894134f7434daea5bc429ea250950d38a1",
+      "mantleos\\kpp\\resources\\recipes\\notepad-demo.json": "faf0130157cb814b6cf4092dba0bfd7713333c420c25e372a8cfdc344cf25434",
+      "mantleos\\kpp\\resources\\recipes\\portable-memory-bake.json": "5df963683a081b92d49c3ce4d48eaf8a0fe58b367eb0ae795f06b604feb92300",
+      "mantleos\\kpp\\resources\\recipes\\progressive-calculator.json": "ff71e52370ed4c08c28e679cbfcbce3e102140e8bf45fd0618dd250da6891569",
+      "mantleos\\kpp\\resources\\recipes\\qt-gui-coverage-demo.json": "55a12857897751e66474dfc7369d47e1e4d0e35788834be3e8d52b62dc4b7122",
+      "mantleos\\kpp\\resources\\references\\synthetic-qt\\FindDialog.ui": "e8821c4ae3968f8bd8485efa5533b4f151ac842a82538a15a7fd68b2992a84dd",
+      "mantleos\\kpp\\resources\\references\\synthetic-qt\\MainWindow.ui": "814ec54f9040d9c99317d6a63781dd1017ec76dc34f7d2f065f2c02de7b26d65",
+      "mantleos\\kpp\\resources\\references\\synthetic-qt-inventory.json": "3299594cce34c88e56bee39f812d92c435edf616b6bae9ba1252f720368d36ef",
+      "mantleos\\kpp\\resources\\release-evidence\\UNIFICATION.json": "b08ffcc62acaff5ec65a90f8c5c971d08e130b38e4345148cbaabf68c83930be",
+      "mantleos\\kpp\\resources\\specimens\\mantleos\\chase-stop.anchor": "455ce6b45bad7956d7c3456049d21ffec4e9471f3b33e9deb3cc0a299e374896",
+      "mantleos\\kpp\\resources\\specimens\\mantleos\\intent-boundary.anchor": "17b3834021278df111d9315ba2d2863e8bbf5acd31a45a1dda1e9234781fa4de",
+      "mantleos\\kpp\\resources\\specimens\\mantleos\\kernel-cells.anchor": "94596344092f5063361a51f92d32485103d2834346b0ebc535e137d716ce3994",
+      "mantleos\\kpp\\resources\\specimens\\mantleos\\memory-ledger.anchor": "ed9f040a3d8c74f781adf02638445c85ccbbee4cbccf99909287208f3c049924",
+      "mantleos\\kpp\\resources\\specimens\\README.md": "aeec0b93d83d56ff70d00d38d1369997c7b0a828d8597d93a42d3cec427fd912",
+      "mantleos\\kpp\\resources\\START-HERE.md": "6a1c0b46d5ad55fd705c67fbff2ac9ddb8d09c4c6044ab9a9477eca92c5c50e0",
+      "mantleos\\kpp\\resources\\SYSTEMS.md": "80185743aa3ae0b259950646118c37f3f1e770fd74d67f94be5b8d5c996ab67d",
+      "mantleos\\kpp\\resources\\THIRD-PARTY-NOTICES.md": "843885e30b8197409fd4b177ba9cb9b4ff620900dec6285876219bcbe989b630",
+      "mantleos\\kpp\\resources\\tools\\check_browser_preview.py": "e428f579bf912b1bfc9ccd6282a730e6a1477c830386d0e8dab0e2764d6c2a25",
+      "mantleos\\kpp\\resources\\tools\\check_gui_observations.py": "9a07f75d2d4b79fe378156e3df1b6392a431d9b4c85748d0c1ee08c7218af97f",
+      "mantleos\\kpp\\resources\\tools\\check_preview_recovery.py": "3af5ceb8ba32a543ef404d9adb7e2f89b6d92224aa1bb4e66df2b5833ad9978c",
+      "mantleos\\kpp\\resources\\tools\\check_progressive_calculator.py": "dc9134ebff4c6aa53c377bce0aae44d42c2710e87366abb39649d0cbde4552fd",
+      "mantleos\\kpp\\resources\\tools\\validate_release.py": "59fcb221c4fb36cda07841f558ec7077dac99a09617b79330e56e7fea3b180f4",
+      "mantleos\\kpp\\resources\\tools\\verify_release.py": "24050ee8b643ccc131cefdf0b504e1ca4fdd74c876977d13ff83c1f8d1d3621b",
+      "mantleos\\kpp\\resources\\tools\\verify_shared.py": "4f438c9362c386130efde49f89d4771328320ff1a420cf888a031ee0fd6c3cf3",
+      "mantleos\\kpp\\scanner.py": "e0722f06a31415d2e28f759729a43c495c7a4bb5e52a6db6f7a10348f13c97a6",
+      "mantleos\\kpp\\server.py": "b76d25b588578eea44a7badf4d4cdfc6e538d939efec4d21de22b2265c122153",
+      "mantleos\\kpp\\specimens.py": "8700be709a6dac95ea17289e917b18367d266cc7818e9b852845bcd780716c48",
+      "mantleos\\kpp\\systems.py": "fa29c7db13a07a7c7737b7cd35e2dd8037dc47b51cbb43c3acbf89c2896f36e0",
+      "mantleos\\kpp\\testing.py": "6dcfce1056eb1a81e657598125862099104d14e4db327b6038c7eedd89f4b96b",
+      "mantleos\\kpp\\tissue.py": "5d333bb1c9647da848c45421c52883c97153a0d90639941c8b1bbb941ae61a08",
+      "mantleos\\kpp\\workshop.py": "335751e426dc291a3ccc6e59a574e93c4980121779386fa9db77ac12c91c1fd7",
+      "mantleos\\lifecycle.py": "7ad19f1a3c26f5526b0b32b10a6df72c51d91be810d22550de4c11204750bba2",
+      "mantleos\\missions.py": "be9bf7ed644a465689b3c9deed2661e2074b59e2c56d29f3b815be8eca52c916",
+      "mantleos\\native_anchor.py": "c48625ef2e6d0457072ae3caca5695e0b27ee1e7c318323e898a62813ff62c6e",
+      "mantleos\\notices\\distribution-notice.md": "a1407096bb3f042afe30f2ca2d0a35cbaacbbb1eb652a3ee3e94c90c1a0fae09",
+      "mantleos\\notices\\hermes-MIT.txt": "e29dfaf6905a8d396a58ea4bd84ad27057756bbd9599b5bec0971ae34d2a2118",
+      "mantleos\\notices\\KPP-MIT.txt": "5f82ec0daa51896b13158a5978d0aaaa2db17d2a502fcc4a7498b714e6d20a07",
+      "mantleos\\notices\\LICENSE.txt": "6f6579ddd074586224c4792d759b7ba58aeb7feb3b511e7486f61cc50fb96bcb",
+      "mantleos\\notices\\mantle-os-MIT.txt": "966b1ef500d2cb945869c29d7982ee3436549771cf9208891171ca22fe080c23",
+      "mantleos\\notices\\MantleOS2-MIT.txt": "4061461f78dc7d47a956a7519ae8505dd08fb25ce5191215de47d5ff47184a5e",
+      "mantleos\\notices\\THIRD_PARTY_NOTICES.md": "fbaa64d2dad190e956a3d902b5a77e4044d00c52bf36630258b24503df7f94f0",
+      "mantleos\\observer.py": "b5bccf77b849c121ae9ebf463a2f3b8741227b669fa62f34c2cd3c8d151ddfe0",
+      "mantleos\\optical_bootstrap.py": "ba8af23748df6be1f1789c7ae673399c7d597ede6a8a9394f2107b47b23c24e1",
+      "mantleos\\organism.py": "eab2b58be27a6975e58253251f757ba43ffd556a3dcbba46cc669bea12dd5312",
+      "mantleos\\organs.py": "46fabb77e0653ff15ad09ca32af8ca321ac525f2ba61595e8cfa6ed8e80ff30d",
+      "mantleos\\primer.py": "ba0b5607b7d87328b8b0e7678f926b852dd45b43ec4bcffea8d13f527e9dac48",
+      "mantleos\\progressive_app.py": "a5c7ee0dbf48f6ab216433cb099ebb6cb89f960efd1c82a1c9e8ce99f34ab8d1",
+      "mantleos\\progressive_runtime.js": "67a2d96d59983c8cace4e5b5b47878cee296ceb497f32ea3b10767eb05cc86a4",
+      "mantleos\\projection.py": "90a09853a106e329e73bea7a925d065c19a062472a75b26565e63b4489b75121",
+      "mantleos\\projects.py": "22a97efdd63ec80ef39c9de991221554ec64f0d5df62abd9f3d40cf0f9cfdfcf",
+      "mantleos\\replication.py": "931294ff07cce61f3f6eb8cf0809cb3712d144073c155c74151242b1fa9660bb",
+      "mantleos\\scan\\__init__.py": "ff26fa702d023685480c808d613f3eadc10dbce25abd5b515c3f652c283a9444",
+      "mantleos\\scan\\adapters.py": "8d09dcbd5070f95187585eff6e023711add67745f0debca9c5ab3b525a57ae69",
+      "mantleos\\scan\\anchor_adapter.py": "b59568e9b354490ff9293e1311815326641e68e70f65aaffb7113245dab0f856",
+      "mantleos\\scan\\chase.py": "3cb5a6284eb85e52987b273899827b066ebad9ca6e52adfd766774c223a3aaf7",
+      "mantleos\\scan\\chase_optional.py": "e98017f240ca011b913a8354c083e8cf01bb8d23628e269a777ad8530f4ea8d5",
+      "mantleos\\scan\\chase_pipeline.py": "cfe472647af4921bc0ea5dcf123a6e2c887fbe2c17c577da49d1e41548cea3fb",
+      "mantleos\\scan\\chase_v2.py": "afc39c30c15f5523167480003d05f9c7a34840abf05bb5ef2cf0ec1f8dedaa11",
+      "mantleos\\scan\\cli.py": "0dccd3a42f484dae263f24d8e6e6525b5ad05baa7e14f79004f2cfc19b85c547",
+      "mantleos\\scan\\common.py": "e86b5ef297d94778580b878a1d8d56829a0901bab8c0a9d0d501ee5be1d9d3fe",
+      "mantleos\\scan\\discovery.py": "5d2c6bd16a5635b68cf41bc938debf91d9d644c2523b303aa7efadf39bfca46d",
+      "mantleos\\scan\\dossier.py": "553fcb7b947c08f2500f76bdea491e54a4061a81721c054fb92ec38e7a20b99d",
+      "mantleos\\scan\\evidence.py": "a74be7bec73c088f073f9ced92e425ccf2769f301d47b09980434ef2c3bfd695",
+      "mantleos\\scan\\experiments.py": "c64331ee390af80ffa8dad86b414d7f03abe75a346633fa7120091f1b41e8d6a",
+      "mantleos\\scan\\graph.py": "02c733bfd6e864c730adec16117db921c3d225bec64408c89dfa38bbaaddc7b5",
+      "mantleos\\scan\\html_report.py": "109a9cc427726e28116357798b337e945610f0de372da2adb3f6b321c6af3e86",
+      "mantleos\\scan\\inspection.py": "a5b12054017d7452b28832439ca802e753f8cfc3498aaaf93dafc76559f886b2",
+      "mantleos\\scan\\investigator.py": "60c36bbc1790fb3f896ea07503550bd4fa0654ce160594ef9ee190531d1adb72",
+      "mantleos\\scan\\javascript.py": "84e11afb8a93e2a54508a9128e971f60e960ea24270c50482c038de9922c09e8",
+      "mantleos\\scan\\observations.py": "053bdb7777b5f7c664ad07e2f6a5b7be15944d1ffcf654bcc2837b791e546fcf",
+      "mantleos\\scan\\pe.py": "c21bee7f7291c7c5743224b4fc2a516e87f44b992ebb80b43c81f9120ff2d966",
+      "mantleos\\scan\\planner.py": "6896ede8d750a047763da633c4e47fe4363a28a997396ecae88d294ee253854a",
+      "mantleos\\scan\\provider_process.py": "cbe1b49e627ccde24202df70c6e527444e5617246af1860d7dc2ee18367e1d02",
+      "mantleos\\scan\\providers.py": "c80bd977ca17e0803f20106d1c2b668b78457998e2100c3c2b3550de7662d50a",
+      "mantleos\\scan\\registry.py": "5560d61c88dc3fb351cac1e795be195f66eb8d75b8730011a618197a3ac7ca37",
+      "mantleos\\scan\\scanner.py": "92f1059f9b616ed3af052a80668842916a4f791c0bb73b238e2c9987614f614a",
+      "mantleos\\scan\\service.py": "c064514e0c42c400452f8dcdf89b4d025e259464954734dc17e8b14cf25f309f",
+      "mantleos\\scan\\symbols.py": "3ae49ce0a7bd8af3879d67a9dddc81da796fd0a090d331bfd0d5e838d445487b",
+      "mantleos\\scan\\typescript_bridge.cjs": "ab6111cf4f91ca0cd8e44bb03a165a5cfd60334ed790866451eeeac8bcf054eb",
+      "mantleos\\scan\\views.py": "d1ff4636d0c094ff82826e32bd79c652f3b683772034f498f4ce8ac595dbee3f",
+      "mantleos\\semantic_discovery.py": "30260b8f242f0440853083f0878efff9e9252905b01ebbf87e729d9f9d158819",
+      "mantleos\\sessions.py": "e7ee6341c46fdb429b944f68e0d9dc9dffaa7c733328ff84948a3a3dfa862712",
+      "mantleos\\single_media.py": "f560d10ffb50bcd67f9f0f1a9cf61b84cf87a7cfcc972eaa8c74bf8674699f1e",
+      "mantleos\\specimens.py": "60a7b1c771b9f3f5dd474b77f02fb5f17f44e144fa8f76b23220309a0dbfa564",
+      "mantleos\\storage.py": "57ff2b4f7e3c7e7d3401f6b35cc07e1d8a224f8cb6c1fd64dbf3186f9d2703dd",
+      "mantleos\\synchronization.py": "c893bc9e6c65664b71f013768e91c53542a1d633964231ab2e975de63b9e3403",
+      "mantleos\\systems.py": "1ed043c5bb733234de4958468f16d36e05f0e9174b431fff6322a086cf56d322",
+      "mantleos\\tissue.py": "e414a41bfd64287993c34a3a237877ec15f9d2f0024a1ad259fd04a956fbb6d3",
+      "mantleos\\transactions.py": "f4aeac0393c17f01d6faec9a8d7810a4e2eda1ba36b438239b2ce21ca2e72e9b",
+      "mantleos\\unified_cli.py": "c5fece77369cb7b8f7f0538141cfda32dd3b301c02019a0b7a69d4c15de09e22",
+      "mantleos\\vault_auto.py": "fed484e4c12d98712f3bb5fd1cae0d22b3db7c09879f690b5ecbea251df23bf4",
+      "mantleos\\vault_store.py": "f5f36862c116a83a002cb9e752bd21b025c9b5ed2840aa687cf5448703073c94"
+    },
+    "candidate": {
+      "mantleos\\__init__.py": "f1c20262a12ed10dc3fa231862a1fff264e15e2db92dea642c58d6cf3d91e3e2",
+      "mantleos\\__main__.py": "8facf58fbb85b958dd1ae2fe54a1e6100755ded6b3eb54924d01f7bf303ea317",
+      "mantleos\\agentic_continuity.py": "650f23ded21430c2b460fa1717d9123277eb01904589a3101a2c1191b881900f",
+      "mantleos\\agentic_profiles\\primer_agentic_v0_2.txt": "0ac9a89e47458f43de0581713f9c8588199cb4808828d90e52c03aba0681a4ec",
+      "mantleos\\agentic_validation.py": "2558f8f3ae6f77342fd916d4e63f0d3d21373f02b52ea4c8ee7665cb8e9309b6",
+      "mantleos\\anchor_app_bridge.py": "a49eb21940bf2638de67b04139a2cc2c05f781138cba61b51ed269b6bf57050c",
+      "mantleos\\anchor_app_document.py": "8980ea63946f645581393746b59ad8b1e176b9d9727c63d3f32dd81e058c7d28",
+      "mantleos\\anchor_apps.py": "e288101997e4c620e25c81f1ac1152821b6acb4743223df2b07bead8ed5fab8e",
+      "mantleos\\anchor_blueprint.py": "2b270699d3a5d9bf0270fad6f521241622055f4ae0a4ad46a0572eb441eaa59c",
+      "mantleos\\anchor_canvas.py": "b99f5262bf4532b32308b4459019f4ef24b4fea0241459c5986b0f5751c6c8be",
+      "mantleos\\anchor_engine\\__init__.py": "07a9b5223bbd4669bca4f4d4cc0b4709daec2895c32bc288820889c8a5e0071a",
+      "mantleos\\anchor_engine\\profiles\\hello_world_compact.anchor": "2493c4d34f902539c2d030d84044a686829f154561290c74e12082b3b1651211",
+      "mantleos\\anchor_engine\\reference_materials\\unicode\\LICENSE.txt": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96",
+      "mantleos\\anchor_engine\\SOURCE-PINS.json": "b372862e3893bf8be584eba5f1b0bfdfe503dc73b561806ec2cb978634451a89",
+      "mantleos\\anchor_engine\\templates\\notepad_llm_v1_molecules.txt": "0882c960df82ba087401aa683e49605f3278522ee8bf8a4a970214e07d032488",
+      "mantleos\\anchor_engine\\templates\\primer_emit_text_v0_2.txt": "39f1742b92f733b0727a0518623841ae5d03eb00a0b8dbd2e0885abfd5837c42",
+      "mantleos\\anchor_engine\\templates\\primer_notepad_llm_v1.txt": "f85e0beaa8023c80103741268f91fdcd3936a904dd63fa99f1df52e2a8008837",
+      "mantleos\\anchor_engine\\tools\\__init__.py": "e1b90a91c496c5924a57b256c0dc9920a4d221554c82442121d844819ec4cbc7",
+      "mantleos\\anchor_engine\\tools\\anchor_compile.py": "24c25dbf3b239f2fdc55b7c51be4637896207ae14c8b6bcc6aafc005bdaa5f8c",
+      "mantleos\\anchor_engine\\tools\\anchor_journal.py": "42ce7b1e40207c5ec497d1b2bdb0ec870d70c645bd274a1e97e10f512ed25f26",
+      "mantleos\\anchor_engine\\tools\\anchor_notepad.py": "d556a269f74d0b6b6e94051d470318fdcb8342bd1dbf15cfc8da03d3e6afa8a9",
+      "mantleos\\anchor_engine\\tools\\anchor_runtime.py": "fc23145450f5c5d12eab50a362b043ed4bb8c05aeb0c15b0293298a0f0b4323e",
+      "mantleos\\anchor_engine\\tools\\anchor_structure.py": "45cea1549b6af80494e352b1e02815d7b8059b3d92597324a5003459a66b5eaf",
+      "mantleos\\anchor_engine\\tools\\notepad_blueprint.py": "838a4862b344bb9be3a62344fd653ef2a2aaee692be85eb6dc56590d64cddc4e",
+      "mantleos\\anchor_engine\\tools\\unicode_fold.py": "cd1efc3920315e240c5b131dd372046b989f97755770242a1adb7c0afdee0f8a",
+      "mantleos\\anchor_language.py": "e46a60e4080dc12f6ee7fc594f941f7e70ad9588523b5820bd7a017278562774",
+      "mantleos\\anchor_qualification.py": "c8226b205cf7c6754775d209d4b1c2b2987f6e7bb0a89f24ebea841329e7ed09",
+      "mantleos\\anchor_qualification_cli.py": "cfb4a4731ff35d3671393938daf04185c1b5e9408917b487ee517dee26f7c9bb",
+      "mantleos\\anchors.py": "891f2c3e02eaaba9cd16ec155dbee3f0ec65ca76774fa22d8ca5df8f727ae429",
+      "mantleos\\app_assets\\notepad.html": "8fa1e19fb3683e2ee20bdc1803624959fc11d3c4525cdc642df37a685efbcec9",
+      "mantleos\\app_bridges.py": "f0e8ba47ed581b2ca4bf87cc6a269ee341828fdc493e17f2ae3174811bfdda1e",
+      "mantleos\\app_builder.py": "ab354dc07e6c9cf95a7b752b12b392add5f4480d9577a0f816b304b01c535b00",
+      "mantleos\\appai.py": "202fcdf4b531a97f380ea1d4aaaa1d541b70138f95ce3ae328025ec179507533",
+      "mantleos\\appai_assets\\hermes.json": "869f4715ca629681127da057e2fd121bf2029891bc40551b2f7412f65b888039",
+      "mantleos\\application.py": "75c97f5bcc93e12ffd9b595c11b300fd9c7c0aacd9fcf62db34f6d5cfd8bce26",
+      "mantleos\\birth.py": "7c83ce697bdfd2d18441f12f6ec2faef289f7c183d1852e8bbff05744be3d74b",
+      "mantleos\\body_entrypoint.py": "872d57af281ff3bb51683efb438676b62d90f4cd8642e3d94f13d7e98f4230e2",
+      "mantleos\\builder.py": "dba106a0bcd60aa451a0d24cc6f4836b1ded84cbb6073b7fb982fa346943f495",
+      "mantleos\\cartridge.py": "56e22f0fc5e3339b8a87b9d29605846db8a68f4df4d3894b3604a21f2546a896",
+      "mantleos\\cells.py": "736e14c3e7e04d81a44135228e1f4b4b508ea4cfd43d7efb0366d0cda000a71c",
+      "mantleos\\checkpoint.py": "d9568402aeab178367acd3abc8db4e0cba8baa1366386d6f50ac07a523c50e7d",
+      "mantleos\\chromamem.py": "9a12cae4b17feb5f3e1f0c3ccab0dd4b0acf5a90f459035d8685f8c39d3add3f",
+      "mantleos\\cli.py": "5fbd16ca6d61a38fe5fb242b67703978bd490e84faeb11b52c68bf5d2e92ef53",
+      "mantleos\\compiled.py": "099f0031abe0d33504f36b9ce1830c52611f8a906e77954a4d27909a58afb6f3",
+      "mantleos\\console.py": "d28143419af1c18333ec2408ee8870ca6d2307566046e54863f9205dafc2780a",
+      "mantleos\\continuity.py": "196ed9106026fa99af464bde2d3ae5ba6ed431b085f977e3e077bae011169dbe",
+      "mantleos\\demo.py": "fdf4c2deff806817f99c9aa943af44b9d4bd27aebbe06ccc8b29237a6018e612",
+      "mantleos\\effects.py": "50090d242c7e9aebab970a32d02c6a05fc0f4ae3f7e79fdfcb5214acd9936584",
+      "mantleos\\engram.py": "6f44b80a01c28982bf70f477984b5478c20f21b8a544439becdd70aec164a2e7",
+      "mantleos\\evolution.py": "d849abcc3a0b06eb0dcc37df4a212645106e2266d7bd0f8636e7ada447a605e7",
+      "mantleos\\example_cli.py": "8d56d71a011ba980747e6736c3887e600f3b91bbcd135267484f61bdbe8a8454",
+      "mantleos\\examples.py": "a261263f1a29b1c6b7c984e81b788f45c4fa987ddfe1bc680e692af5e757a543",
+      "mantleos\\harness_adapter.py": "62c4347d1a19578678f1daf58e13ba3c5782e03bbfd3ca5a52aca46177a36aa5",
+      "mantleos\\hosted.py": "277f195362aaae79d99fad5ccaefc6d443c86c8bf69259ae05b21523d5b32f06",
+      "mantleos\\json_contract.py": "f928ffc45808d3fc987fde510bfb511ef5e7a3aea96e21a580b4018b5540af2f",
+      "mantleos\\kernel.py": "c9844c9120fb4c40b55b505dd9108a62d7aa6fbfd832c87e56ada741920ef612",
+      "mantleos\\kitchen.py": "6226d9c915e21cc93f788d470964780d90fc32f0a010d276ead8498d2be019ff",
+      "mantleos\\kpp\\__init__.py": "20343457bf1be6fe5dab21441781da5bc7720ab6601f243e4f3566761d7e4490",
+      "mantleos\\kpp\\__main__.py": "79ee6f134c5c5193377cf9b189cbdcc3e2095e49ba9cec310114441c15a917c4",
+      "mantleos\\kpp\\adaptation.py": "fdaa7a3f1e26096a4cb8ae457d6a5b1b652f1b80eeedc9ba85f0c65668b27a7a",
+      "mantleos\\kpp\\anchor.py": "ba92e01ad4262cce47622ff9e963b6b2ef6e538a05fc2d72dea1f99a1e3f54d4",
+      "mantleos\\kpp\\assets\\progressive.js": "024a814137bc31eda0ed51345dedc0e40550b981aef00e4fad4b7fd5ffe04f5f",
+      "mantleos\\kpp\\build.py": "06aed3eb4c6cc16733eb5a506e60789fb549e78f5d778e27cdc50b6801e4a9cf",
+      "mantleos\\kpp\\cells.py": "3832310c5860effa080d7f476ab583bbfa0487c2ebd677ce1f484a87af1d23dc",
+      "mantleos\\kpp\\cli.py": "600651891458d42d16aaf502f801fd39251f66e3f98469d85dda2c45865cb436",
+      "mantleos\\kpp\\conformance.py": "fffcf832e79a89c3a1b26fd1eefaae5442cc0bf5ecdbc3641d0573248f715a38",
+      "mantleos\\kpp\\core.py": "5bb5dd7f5b93cb30016fd76660578dacca9cd88c6b0dd92dac31e42a742a70ae",
+      "mantleos\\kpp\\economy.py": "cbf8b33ee3b09fa796fc88c1ba0a5e46d1bfb9159eb0635401e3c21461df5f74",
+      "mantleos\\kpp\\graph.py": "57eda03141ec009324d851a1e863b01c2c91d069110e4d5076ed56873ccc58b1",
+      "mantleos\\kpp\\gui.py": "53a73a129c778310232be4bcc0c36a54a74cf7e1fcdb10f0311531f23405f42e",
+      "mantleos\\kpp\\ingest.py": "6bdb6385f2fedef0cabfa7f53319061c363ccc09de6e379959f6d66c95a4357f",
+      "mantleos\\kpp\\pantry.py": "d0e59accc8cfdec13641960690fb8aeb36776173509582f880a79905e6d7d692",
+      "mantleos\\kpp\\png.py": "6849482a8f8b6cb1c1650d59467a7b86c2836e0ed37965d2856f6e5b453de9f0",
+      "mantleos\\kpp\\portability.py": "5476e4ee1fc2f9712283060cc3a211cb4001338bac75002de3238e199d571e87",
+      "mantleos\\kpp\\reflex.py": "15909f79161a587156cb257395a7534c1f8e1802becbc4103e2b12c7e554a5a9",
+      "mantleos\\kpp\\resources\\AGENTS.md": "2c6f34be85c8743b7f557de947087e8e863fad673fc2b8ffa8cfc60ba4a9f4df",
+      "mantleos\\kpp\\resources\\BUILD-STATUS.md": "176507c2960274fd4b1a45bbb306e3ae03ef96e13fdb44d12f0f01dc464f21a4",
+      "mantleos\\kpp\\resources\\CONTRIBUTING.md": "23d1a1f6655a639da9e6ef3b9fead495decbda91767ea11269c0048785aa6b75",
+      "mantleos\\kpp\\resources\\docs\\ADAPTIVE-INTEGRATION.md": "beb65178ea04a7860397b8832c6597c179214efc06c9d7817739787152025a87",
+      "mantleos\\kpp\\resources\\docs\\ARCHITECTURE.md": "7c73a19260068532363f82491e2a2e304c76ef4e072cf0496dced9b0787e9882",
+      "mantleos\\kpp\\resources\\docs\\CANVAS-BUILDS.md": "a58971caaa01bae7fae3d03c292eaf05495fdbe145c0d174eb812d8891129604",
+      "mantleos\\kpp\\resources\\docs\\COMPLETION-AUDIT.md": "b94650a1237e5ae72fc96b3048fe6377c045a21d6a93ccf4962820b09d7426e1",
+      "mantleos\\kpp\\resources\\docs\\EXECUTED-REFLEX-ANCHORS.md": "1dd5c7f8c79feb8a703ec7339a6951ca3dc97b014f0eb976e142633f16118a17",
+      "mantleos\\kpp\\resources\\docs\\FUNCTIONAL-ECONOMY.md": "8dcfee85b5e38a4080ea1ccf937ac2bab13875e7f9dd12faa72234ede40c4d67",
+      "mantleos\\kpp\\resources\\docs\\GUI-REFERENCE.md": "78c06226fd4eb8015730b8c89b76cba7d5c9cd97a42c64e820d6b95d31e442b9",
+      "mantleos\\kpp\\resources\\docs\\INGREDIENT-LABELS.md": "82fb9dbdb1af491b7f0b519e849682b5ce894fa5fd53c086065fe7aa983f3cc3",
+      "mantleos\\kpp\\resources\\docs\\PANTRY.md": "29fe65bc317f0c77a5082ac9af912ba4e754651806170b71979ff872851c4c8e",
+      "mantleos\\kpp\\resources\\docs\\PORTABLE-REFLEX-BUNDLES.md": "43c207dd1834b722dcb2cbe1c58c42ffedef8a67f2364da722c1dafb7db7b64d",
+      "mantleos\\kpp\\resources\\docs\\PREVIEW-RECOVERY.md": "b77b68844aed2d9f9b35241cef84e2ba385d6dd3dbffaf7f95bac7e5af8cef4a",
+      "mantleos\\kpp\\resources\\docs\\PROGRESSIVE-BIOSOFTWARE.md": "6ddc6d03953334eeb4191f887095c78e7681c90bd50ce4cf9b2c86660e334d2e",
+      "mantleos\\kpp\\resources\\docs\\PROTOCOL.md": "e13236f42f0be6f7e1b32c26eafabbbe42eb71add085c399643e97baa448ec10",
+      "mantleos\\kpp\\resources\\docs\\RELEASE-VALIDATION.md": "1d17175eb9e9ffc588813223fb10d0d9deace42169f0d2c2ce6df7c56d626cdc",
+      "mantleos\\kpp\\resources\\docs\\SECURITY.md": "eb1a87cbc81a7b8882b2c5f8cc724089f3bb0caf2f5d7a03b2bb7aa518e79e4e",
+      "mantleos\\kpp\\resources\\docs\\TRANSFORMATION.md": "11cc8cd2859cadff90dac907f644aa36d96c9392fc989ca4df4577ffc84d0985",
+      "mantleos\\kpp\\resources\\examples\\adaptive-reflex\\baseline-pins.json": "580a5e4665ba8d1cbc24dfa1f126ef2ee34d6c459098bbb079c8116fc66df598",
+      "mantleos\\kpp\\resources\\examples\\adaptive-reflex\\continuity.py": "a7c95ab4333f08116081fdb96ed9f06f80f2da1e61c5d6609b874d6596be3858",
+      "mantleos\\kpp\\resources\\examples\\adaptive-reflex\\integration.py": "ad004da4105609e7b5710a2bd1e1075f425b21a48b809c18d804c94ef42f0b6f",
+      "mantleos\\kpp\\resources\\examples\\adaptive-reflex\\README.md": "2d23b01695d71ca6a1849f2db3de98f2d1bbf3dd8650554526b900d73d49149b",
+      "mantleos\\kpp\\resources\\examples\\adaptive-reflex\\request.json": "57d70643fc346e964ded88b6f831e544302cdfec21cd6f4edd26dde40743974f",
+      "mantleos\\kpp\\resources\\examples\\adaptive-reflex\\smoke.py": "40f4d23b4f5531081036265da7c597dbf563334b5877ffccdb05d19e476571be",
+      "mantleos\\kpp\\resources\\examples\\adaptive-reflex\\task_agent.py": "e130a11d81e4af1bd21ee5d5ed10685b4d5fc0b5d5a1bab0cef2a6761fb34eff",
+      "mantleos\\kpp\\resources\\examples\\economy\\notepad-file-actions.json": "5a769bc999ea4d25231cfca100c4b292a82eed583c5e0b34418b2dafc7ef732e",
+      "mantleos\\kpp\\resources\\examples\\README.md": "ae0f0dddc3a762ea7487e664a69527b9c066d869204b591d3363dbc12cfc9dde",
+      "mantleos\\kpp\\resources\\examples\\reflex-anchors\\check_absent.py": "a4748d72ad8ca8a00846eec112c8dbfae28964c5e32f83fdd57c9178fb7dd9c3",
+      "mantleos\\kpp\\resources\\examples\\reflex-anchors\\check_original.py": "fd0b3f2ae8f091717b88400828dfb2203dfaef4e32cb0274464e329a50f2cfb8",
+      "mantleos\\kpp\\resources\\examples\\reflex-anchors\\check_reflex.py": "47f42d44fad1e1ac97dbec40e68d919ac021127f28b45ab6e6e04427f3f67236",
+      "mantleos\\kpp\\resources\\examples\\reflex-anchors\\suite.json": "b5fd8058f1a8b780db935bf0ea9429d47145773e9c87166cc5975c7f79ec62df",
+      "mantleos\\kpp\\resources\\KPP-BOOT.md": "6a1c0b46d5ad55fd705c67fbff2ac9ddb8d09c4c6044ab9a9477eca92c5c50e0",
+      "mantleos\\kpp\\resources\\KPP-MANIFEST.json": "fc9190072a0989fcd6f9c3df686babdd9419c4209e36bf67aeb1b8ad2d35680d",
+      "mantleos\\kpp\\resources\\KPP.md": "0af5c8a490ae955fb6b9e41f9ee76012b8ffeb9a56788beea3506991e1408da6",
+      "mantleos\\kpp\\resources\\LICENSE": "5f82ec0daa51896b13158a5978d0aaaa2db17d2a502fcc4a7498b714e6d20a07",
+      "mantleos\\kpp\\resources\\NEXT-LLM-HANDOFF.md": "6a1c0b46d5ad55fd705c67fbff2ac9ddb8d09c4c6044ab9a9477eca92c5c50e0",
+      "mantleos\\kpp\\resources\\pantry\\anchor-tissue.json": "5f26d1319ba0cfa140c2389d9cad07d51435b78d8c8ae0ccaac2a6ad44df7742",
+      "mantleos\\kpp\\resources\\pantry\\browser-file-io.json": "8f3b19c724fcd790ba08b1a2b450b1dbd6bb5f2c3d274037a685e237fe99cc31",
+      "mantleos\\kpp\\resources\\pantry\\chase-gate.json": "eeb2f04eb887e4dc88cf6ac865dd4ca8396345b809bfc8d9084d0aa7f94f60a3",
+      "mantleos\\kpp\\resources\\pantry\\chroma-png-memory.json": "82b48d51305e5e720431ef1de7a3ab43fca9a4ed9a9599e7478a1ebe1a2d2bef",
+      "mantleos\\kpp\\resources\\pantry\\engram-continuity.json": "109462ab7a57aa80dde84b8e896dc0cc400b99017671a0cc4b095215ae6b599e",
+      "mantleos\\kpp\\resources\\pantry\\external-project.json": "83ad7fd041a409430a8833456d41d7ceed7c6b57c151848d6e76f953d55397a1",
+      "mantleos\\kpp\\resources\\pantry\\fidelity-trace.json": "4d8169fea9ab604e4144ab44e0ede13b385d11a50c0d832590fdfd5abe7f0309",
+      "mantleos\\kpp\\resources\\pantry\\interface-shell.json": "bcae33f100022050ffecfd1894a1137958d86a617ca5db722060a4877f158187",
+      "mantleos\\kpp\\resources\\pantry\\kernel-relative-cells.json": "1987159b0af18f7280af044d286351f500399d04d6abb47ebf2d124e4ffe349f",
+      "mantleos\\kpp\\resources\\pantry\\local-draft-recovery.json": "38d26f0d50e91cb3f62ed4ea5996b4a09ea55f87f0264a17ddbe3d7cddc3c93e",
+      "mantleos\\kpp\\resources\\pantry\\mind-body-boundary.json": "789ffe6560a52751ea5b5e06aed132330ddadb40d340a174a1068717a077845e",
+      "mantleos\\kpp\\resources\\pantry\\progressive-web-runtime.json": "8579b3b9d0f0af06c4517c83df11080e04072893cb2f6aaf33c2508b5a2ee860",
+      "mantleos\\kpp\\resources\\pantry\\python-tissue.json": "4167f3f9bfd32bc2216c7a133c99fa8a5b20b5bb27c84514089d8ea3ef4046d3",
+      "mantleos\\kpp\\resources\\pantry\\text-editor.json": "5b8b19ee58130310c41b4905995795585fe45934a0d342063eeb376186dd15d9",
+      "mantleos\\kpp\\resources\\previews\\calculator\\base.js": "c9dba278d8e13afcd15d9f17d84e880ea6239f85834873bf4718898931591fc0",
+      "mantleos\\kpp\\resources\\previews\\calculator\\index.html": "38af2443b52203896e8f79a6e9c3db0dff026dcff3f1bbecd97067a3113f9c19",
+      "mantleos\\kpp\\resources\\previews\\calculator\\square.js": "ccbecb29c3a4846ee64d31e15914ef02ebd0bafb5163d4b4c457a8a744c1f3ba",
+      "mantleos\\kpp\\resources\\previews\\calculator\\style.css": "fbdc31dbdbf7a4e7e5a0d15d1874908d9bb6a0d22694e170e3cc62c084e7683f",
+      "mantleos\\kpp\\resources\\previews\\notepad\\base.js": "13f8a33c5a1405b8be7c76521590e14f8320db1a14349ad6d0f032262d6d67ce",
+      "mantleos\\kpp\\resources\\previews\\notepad\\edit.js": "73320f750d4564e6e4ae0d8895af956f66fd8dd3d9f40c3e33c8a057785e3ed6",
+      "mantleos\\kpp\\resources\\previews\\notepad\\files.js": "20fb7e645c06bd1a2be9e1eb59a148340624ad6b508eb260236df62dfa52017e",
+      "mantleos\\kpp\\resources\\previews\\notepad\\index.html": "b2e14ede2772a8888a45d32e938ba4e6de0389d2a5d4f073282aebd02e0de6d8",
+      "mantleos\\kpp\\resources\\previews\\notepad\\style.css": "0bfe4ee72ff63eaf3bc781ad4444246caa6f8dbc647d1ec89852f60fa9e0c24c",
+      "mantleos\\kpp\\resources\\README.md": "36c00abc9a15a4730a65040d2cb21344c2f2f9b16b2b11d39b64244552dc672b",
+      "mantleos\\kpp\\resources\\recipes\\adaptive-reflex-demo.json": "35971bc49e5f4dad408b61ba149874e4d61b1108e80e6bd5de0e261e98717ee7",
+      "mantleos\\kpp\\resources\\recipes\\bio-hermes-design.json": "4cbccc77f24e759dd9400558060701894134f7434daea5bc429ea250950d38a1",
+      "mantleos\\kpp\\resources\\recipes\\notepad-demo.json": "faf0130157cb814b6cf4092dba0bfd7713333c420c25e372a8cfdc344cf25434",
+      "mantleos\\kpp\\resources\\recipes\\portable-memory-bake.json": "5df963683a081b92d49c3ce4d48eaf8a0fe58b367eb0ae795f06b604feb92300",
+      "mantleos\\kpp\\resources\\recipes\\progressive-calculator.json": "ff71e52370ed4c08c28e679cbfcbce3e102140e8bf45fd0618dd250da6891569",
+      "mantleos\\kpp\\resources\\recipes\\qt-gui-coverage-demo.json": "55a12857897751e66474dfc7369d47e1e4d0e35788834be3e8d52b62dc4b7122",
+      "mantleos\\kpp\\resources\\references\\synthetic-qt\\FindDialog.ui": "e8821c4ae3968f8bd8485efa5533b4f151ac842a82538a15a7fd68b2992a84dd",
+      "mantleos\\kpp\\resources\\references\\synthetic-qt\\MainWindow.ui": "814ec54f9040d9c99317d6a63781dd1017ec76dc34f7d2f065f2c02de7b26d65",
+      "mantleos\\kpp\\resources\\references\\synthetic-qt-inventory.json": "3299594cce34c88e56bee39f812d92c435edf616b6bae9ba1252f720368d36ef",
+      "mantleos\\kpp\\resources\\release-evidence\\UNIFICATION.json": "b08ffcc62acaff5ec65a90f8c5c971d08e130b38e4345148cbaabf68c83930be",
+      "mantleos\\kpp\\resources\\specimens\\mantleos\\chase-stop.anchor": "455ce6b45bad7956d7c3456049d21ffec4e9471f3b33e9deb3cc0a299e374896",
+      "mantleos\\kpp\\resources\\specimens\\mantleos\\intent-boundary.anchor": "17b3834021278df111d9315ba2d2863e8bbf5acd31a45a1dda1e9234781fa4de",
+      "mantleos\\kpp\\resources\\specimens\\mantleos\\kernel-cells.anchor": "94596344092f5063361a51f92d32485103d2834346b0ebc535e137d716ce3994",
+      "mantleos\\kpp\\resources\\specimens\\mantleos\\memory-ledger.anchor": "ed9f040a3d8c74f781adf02638445c85ccbbee4cbccf99909287208f3c049924",
+      "mantleos\\kpp\\resources\\specimens\\README.md": "aeec0b93d83d56ff70d00d38d1369997c7b0a828d8597d93a42d3cec427fd912",
+      "mantleos\\kpp\\resources\\START-HERE.md": "6a1c0b46d5ad55fd705c67fbff2ac9ddb8d09c4c6044ab9a9477eca92c5c50e0",
+      "mantleos\\kpp\\resources\\SYSTEMS.md": "f240b64b7fe566c659528739a1cee7e46509d86794ed7618701ecdb04a73b733",
+      "mantleos\\kpp\\resources\\THIRD-PARTY-NOTICES.md": "843885e30b8197409fd4b177ba9cb9b4ff620900dec6285876219bcbe989b630",
+      "mantleos\\kpp\\resources\\tools\\check_browser_preview.py": "e428f579bf912b1bfc9ccd6282a730e6a1477c830386d0e8dab0e2764d6c2a25",
+      "mantleos\\kpp\\resources\\tools\\check_gui_observations.py": "9a07f75d2d4b79fe378156e3df1b6392a431d9b4c85748d0c1ee08c7218af97f",
+      "mantleos\\kpp\\resources\\tools\\check_preview_recovery.py": "3af5ceb8ba32a543ef404d9adb7e2f89b6d92224aa1bb4e66df2b5833ad9978c",
+      "mantleos\\kpp\\resources\\tools\\check_progressive_calculator.py": "dc9134ebff4c6aa53c377bce0aae44d42c2710e87366abb39649d0cbde4552fd",
+      "mantleos\\kpp\\resources\\tools\\validate_release.py": "59fcb221c4fb36cda07841f558ec7077dac99a09617b79330e56e7fea3b180f4",
+      "mantleos\\kpp\\resources\\tools\\verify_release.py": "24050ee8b643ccc131cefdf0b504e1ca4fdd74c876977d13ff83c1f8d1d3621b",
+      "mantleos\\kpp\\resources\\tools\\verify_shared.py": "4f438c9362c386130efde49f89d4771328320ff1a420cf888a031ee0fd6c3cf3",
+      "mantleos\\kpp\\scanner.py": "e0722f06a31415d2e28f759729a43c495c7a4bb5e52a6db6f7a10348f13c97a6",
+      "mantleos\\kpp\\server.py": "b76d25b588578eea44a7badf4d4cdfc6e538d939efec4d21de22b2265c122153",
+      "mantleos\\kpp\\specimens.py": "8700be709a6dac95ea17289e917b18367d266cc7818e9b852845bcd780716c48",
+      "mantleos\\kpp\\systems.py": "1fb4742328cabf3031cb4051a5ee2bf95d0baf650fc397eedd10c8dfecc290ed",
+      "mantleos\\kpp\\testing.py": "6dcfce1056eb1a81e657598125862099104d14e4db327b6038c7eedd89f4b96b",
+      "mantleos\\kpp\\tissue.py": "5d333bb1c9647da848c45421c52883c97153a0d90639941c8b1bbb941ae61a08",
+      "mantleos\\kpp\\workshop.py": "6411af905632e4ceb22278c60191e04f67406310da909b11d48f96a051799950",
+      "mantleos\\lifecycle.py": "7ad19f1a3c26f5526b0b32b10a6df72c51d91be810d22550de4c11204750bba2",
+      "mantleos\\missions.py": "be9bf7ed644a465689b3c9deed2661e2074b59e2c56d29f3b815be8eca52c916",
+      "mantleos\\native_anchor.py": "c48625ef2e6d0457072ae3caca5695e0b27ee1e7c318323e898a62813ff62c6e",
+      "mantleos\\notices\\distribution-notice.md": "a1407096bb3f042afe30f2ca2d0a35cbaacbbb1eb652a3ee3e94c90c1a0fae09",
+      "mantleos\\notices\\hermes-MIT.txt": "e29dfaf6905a8d396a58ea4bd84ad27057756bbd9599b5bec0971ae34d2a2118",
+      "mantleos\\notices\\KPP-MIT.txt": "5f82ec0daa51896b13158a5978d0aaaa2db17d2a502fcc4a7498b714e6d20a07",
+      "mantleos\\notices\\LICENSE.txt": "6f6579ddd074586224c4792d759b7ba58aeb7feb3b511e7486f61cc50fb96bcb",
+      "mantleos\\notices\\mantle-os-MIT.txt": "966b1ef500d2cb945869c29d7982ee3436549771cf9208891171ca22fe080c23",
+      "mantleos\\notices\\MantleOS2-MIT.txt": "4061461f78dc7d47a956a7519ae8505dd08fb25ce5191215de47d5ff47184a5e",
+      "mantleos\\notices\\THIRD_PARTY_NOTICES.md": "fbaa64d2dad190e956a3d902b5a77e4044d00c52bf36630258b24503df7f94f0",
+      "mantleos\\observer.py": "b5bccf77b849c121ae9ebf463a2f3b8741227b669fa62f34c2cd3c8d151ddfe0",
+      "mantleos\\optical_bootstrap.py": "ba8af23748df6be1f1789c7ae673399c7d597ede6a8a9394f2107b47b23c24e1",
+      "mantleos\\organism.py": "eab2b58be27a6975e58253251f757ba43ffd556a3dcbba46cc669bea12dd5312",
+      "mantleos\\organs.py": "46fabb77e0653ff15ad09ca32af8ca321ac525f2ba61595e8cfa6ed8e80ff30d",
+      "mantleos\\primer.py": "ba0b5607b7d87328b8b0e7678f926b852dd45b43ec4bcffea8d13f527e9dac48",
+      "mantleos\\progressive_app.py": "a5c7ee0dbf48f6ab216433cb099ebb6cb89f960efd1c82a1c9e8ce99f34ab8d1",
+      "mantleos\\progressive_runtime.js": "67a2d96d59983c8cace4e5b5b47878cee296ceb497f32ea3b10767eb05cc86a4",
+      "mantleos\\projection.py": "90a09853a106e329e73bea7a925d065c19a062472a75b26565e63b4489b75121",
+      "mantleos\\projects.py": "22a97efdd63ec80ef39c9de991221554ec64f0d5df62abd9f3d40cf0f9cfdfcf",
+      "mantleos\\replication.py": "931294ff07cce61f3f6eb8cf0809cb3712d144073c155c74151242b1fa9660bb",
+      "mantleos\\scan\\__init__.py": "ff26fa702d023685480c808d613f3eadc10dbce25abd5b515c3f652c283a9444",
+      "mantleos\\scan\\adapters.py": "8d09dcbd5070f95187585eff6e023711add67745f0debca9c5ab3b525a57ae69",
+      "mantleos\\scan\\anchor_adapter.py": "b59568e9b354490ff9293e1311815326641e68e70f65aaffb7113245dab0f856",
+      "mantleos\\scan\\chase.py": "3cb5a6284eb85e52987b273899827b066ebad9ca6e52adfd766774c223a3aaf7",
+      "mantleos\\scan\\chase_optional.py": "e98017f240ca011b913a8354c083e8cf01bb8d23628e269a777ad8530f4ea8d5",
+      "mantleos\\scan\\chase_pipeline.py": "cfe472647af4921bc0ea5dcf123a6e2c887fbe2c17c577da49d1e41548cea3fb",
+      "mantleos\\scan\\chase_v2.py": "afc39c30c15f5523167480003d05f9c7a34840abf05bb5ef2cf0ec1f8dedaa11",
+      "mantleos\\scan\\cli.py": "0dccd3a42f484dae263f24d8e6e6525b5ad05baa7e14f79004f2cfc19b85c547",
+      "mantleos\\scan\\common.py": "e86b5ef297d94778580b878a1d8d56829a0901bab8c0a9d0d501ee5be1d9d3fe",
+      "mantleos\\scan\\discovery.py": "5d2c6bd16a5635b68cf41bc938debf91d9d644c2523b303aa7efadf39bfca46d",
+      "mantleos\\scan\\dossier.py": "553fcb7b947c08f2500f76bdea491e54a4061a81721c054fb92ec38e7a20b99d",
+      "mantleos\\scan\\evidence.py": "a74be7bec73c088f073f9ced92e425ccf2769f301d47b09980434ef2c3bfd695",
+      "mantleos\\scan\\experiments.py": "c64331ee390af80ffa8dad86b414d7f03abe75a346633fa7120091f1b41e8d6a",
+      "mantleos\\scan\\graph.py": "02c733bfd6e864c730adec16117db921c3d225bec64408c89dfa38bbaaddc7b5",
+      "mantleos\\scan\\html_report.py": "109a9cc427726e28116357798b337e945610f0de372da2adb3f6b321c6af3e86",
+      "mantleos\\scan\\inspection.py": "a5b12054017d7452b28832439ca802e753f8cfc3498aaaf93dafc76559f886b2",
+      "mantleos\\scan\\investigator.py": "60c36bbc1790fb3f896ea07503550bd4fa0654ce160594ef9ee190531d1adb72",
+      "mantleos\\scan\\javascript.py": "84e11afb8a93e2a54508a9128e971f60e960ea24270c50482c038de9922c09e8",
+      "mantleos\\scan\\observations.py": "053bdb7777b5f7c664ad07e2f6a5b7be15944d1ffcf654bcc2837b791e546fcf",
+      "mantleos\\scan\\pe.py": "c21bee7f7291c7c5743224b4fc2a516e87f44b992ebb80b43c81f9120ff2d966",
+      "mantleos\\scan\\planner.py": "6896ede8d750a047763da633c4e47fe4363a28a997396ecae88d294ee253854a",
+      "mantleos\\scan\\provider_process.py": "cbe1b49e627ccde24202df70c6e527444e5617246af1860d7dc2ee18367e1d02",
+      "mantleos\\scan\\providers.py": "c80bd977ca17e0803f20106d1c2b668b78457998e2100c3c2b3550de7662d50a",
+      "mantleos\\scan\\registry.py": "5560d61c88dc3fb351cac1e795be195f66eb8d75b8730011a618197a3ac7ca37",
+      "mantleos\\scan\\scanner.py": "92f1059f9b616ed3af052a80668842916a4f791c0bb73b238e2c9987614f614a",
+      "mantleos\\scan\\service.py": "c064514e0c42c400452f8dcdf89b4d025e259464954734dc17e8b14cf25f309f",
+      "mantleos\\scan\\symbols.py": "3ae49ce0a7bd8af3879d67a9dddc81da796fd0a090d331bfd0d5e838d445487b",
+      "mantleos\\scan\\typescript_bridge.cjs": "ab6111cf4f91ca0cd8e44bb03a165a5cfd60334ed790866451eeeac8bcf054eb",
+      "mantleos\\scan\\views.py": "d1ff4636d0c094ff82826e32bd79c652f3b683772034f498f4ce8ac595dbee3f",
+      "mantleos\\semantic_discovery.py": "30260b8f242f0440853083f0878efff9e9252905b01ebbf87e729d9f9d158819",
+      "mantleos\\sessions.py": "e7ee6341c46fdb429b944f68e0d9dc9dffaa7c733328ff84948a3a3dfa862712",
+      "mantleos\\single_media.py": "f560d10ffb50bcd67f9f0f1a9cf61b84cf87a7cfcc972eaa8c74bf8674699f1e",
+      "mantleos\\specimens.py": "60a7b1c771b9f3f5dd474b77f02fb5f17f44e144fa8f76b23220309a0dbfa564",
+      "mantleos\\storage.py": "57ff2b4f7e3c7e7d3401f6b35cc07e1d8a224f8cb6c1fd64dbf3186f9d2703dd",
+      "mantleos\\synchronization.py": "c893bc9e6c65664b71f013768e91c53542a1d633964231ab2e975de63b9e3403",
+      "mantleos\\systems.py": "1ed043c5bb733234de4958468f16d36e05f0e9174b431fff6322a086cf56d322",
+      "mantleos\\tissue.py": "e414a41bfd64287993c34a3a237877ec15f9d2f0024a1ad259fd04a956fbb6d3",
+      "mantleos\\transactions.py": "f4aeac0393c17f01d6faec9a8d7810a4e2eda1ba36b438239b2ce21ca2e72e9b",
+      "mantleos\\unified_cli.py": "c5fece77369cb7b8f7f0538141cfda32dd3b301c02019a0b7a69d4c15de09e22",
+      "mantleos\\vault_auto.py": "fed484e4c12d98712f3bb5fd1cae0d22b3db7c09879f690b5ecbea251df23bf4",
+      "mantleos\\vault_store.py": "f5f36862c116a83a002cb9e752bd21b025c9b5ed2840aa687cf5448703073c94"
+    }
+  },
+  "harness_sha256": "492c0ac6b0d57be50fe8aac9ff3db68f6c20c3bdbc329c85c09aa8a136240d1b"
+}

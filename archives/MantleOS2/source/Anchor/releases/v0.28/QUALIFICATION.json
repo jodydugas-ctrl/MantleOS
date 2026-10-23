@@ -1,0 +1,169 @@
+{
+  "schema_version": "scan-release-qualification/0.1",
+  "engine_version": "0.28.0",
+  "state": "PASS",
+  "package": {
+    "schema_version": "scan-package-self-audit/0.1",
+    "state": "PASS",
+    "engine_version": "0.28.0",
+    "manifest_file_count": 90,
+    "verified_file_count": 90,
+    "issue_count": 0,
+    "issues": []
+  },
+  "mechanical_independence": {
+    "state": "PASS",
+    "llm_environment": "DISABLED",
+    "required_outputs": [
+      "scan_index.sqlite",
+      "machine_body_map.json",
+      "evidence_graph.json",
+      "evidence_catalog.json",
+      "completeness_vector.json",
+      "integrity_report.json",
+      "surface_closure.json",
+      "effect_closure.json",
+      "nest_capability_map.json",
+      "projection_manifest.json",
+      "stage1_summary.md"
+    ],
+    "missing_outputs": [],
+    "integrity_state": "MAPPED",
+    "integrity_error_count": 0,
+    "surface_closure_state": "PARTIAL",
+    "effect_closure_state": "PARTIAL",
+    "files": 3,
+    "nodes": 67,
+    "edges": 65,
+    "evidence": 70
+  },
+  "projections": {
+    "schema_version": "scan-projection-self-audit/0.1",
+    "state": "PASS",
+    "projection_count": 9,
+    "issue_count": 0,
+    "issues": []
+  },
+  "queries": {
+    "schema_version": "scan-query-acceptance/0.1",
+    "state": "PASS",
+    "required_query_count": 12,
+    "passed_query_count": 12,
+    "results": [
+      {
+        "query": "surface-without-handler",
+        "state": "PASS",
+        "row_count": 2,
+        "sample_ids": [
+          "node:49f41b158dbefbe57a0c",
+          "node:3efbec8722e44c38395e"
+        ]
+      },
+      {
+        "query": "subprocess",
+        "state": "PASS",
+        "row_count": 1,
+        "sample_ids": [
+          "node:091544c14185552d55ae"
+        ]
+      },
+      {
+        "query": "extensions",
+        "state": "PASS",
+        "row_count": 2,
+        "sample_ids": [
+          "node:c5efeead28b8982e11c5",
+          "node:e574511f04e3d2f3a74d"
+        ]
+      },
+      {
+        "query": "external-writes",
+        "state": "PASS",
+        "row_count": 5,
+        "sample_ids": [
+          "node:484540d5ede84c95659a",
+          "node:3fcaae11e7cd9375afce",
+          "node:5f2eac2df539deb04fa0",
+          "node:0f1dba1265fe0ca24534",
+          "node:ab8e67b7ae44eeca3bfe"
+        ]
+      },
+      {
+        "query": "unknown-routes",
+        "state": "PASS",
+        "row_count": 18,
+        "sample_ids": [
+          "node:e302870e3f8df6d68309",
+          "node:3d65e654f7048f0491ad",
+          "node:ec8e1b943cd81e3391bb",
+          "node:3f9adc734d53d1683449",
+          "node:afb7f3971d09f2f006cd"
+        ]
+      },
+      {
+        "query": "nest-dependent-actions",
+        "state": "PASS",
+        "row_count": 2,
+        "sample_ids": [
+          "node:36fd0bb4f9725adfda37",
+          "node:febc897553d60bcc1a4a"
+        ]
+      },
+      {
+        "query": "disconnected-handlers",
+        "state": "PASS",
+        "row_count": 0,
+        "sample_ids": []
+      },
+      {
+        "query": "high-connectivity-junctions",
+        "state": "PASS",
+        "row_count": 5,
+        "sample_ids": [
+          "node:8512445a9a653b9fb1a5",
+          "node:53f995b12efb361feaa3",
+          "node:c7c99eb74f5414884bb3",
+          "node:915baa3be19446856b94",
+          "node:23e0d0684d5b01a8c5d4"
+        ]
+      },
+      {
+        "query": "dynamic-registrations",
+        "state": "PASS",
+        "row_count": 2,
+        "sample_ids": [
+          "node:49f41b158dbefbe57a0c",
+          "node:ff2560afe3a0d3a1dcee"
+        ]
+      },
+      {
+        "query": "hidden-surface-candidates",
+        "state": "PASS",
+        "row_count": 1,
+        "sample_ids": [
+          "node:49f41b158dbefbe57a0c"
+        ]
+      },
+      {
+        "query": "capability-without-human-route",
+        "state": "PASS",
+        "row_count": 7,
+        "sample_ids": [
+          "node:484540d5ede84c95659a",
+          "node:3fcaae11e7cd9375afce",
+          "node:5f2eac2df539deb04fa0",
+          "node:0f1dba1265fe0ca24534",
+          "node:c5efeead28b8982e11c5"
+        ]
+      },
+      {
+        "query": "authentication-permissions",
+        "state": "PASS",
+        "row_count": 1,
+        "sample_ids": [
+          "node:5215b51a2cdd663ba4c5"
+        ]
+      }
+    ]
+  }
+}

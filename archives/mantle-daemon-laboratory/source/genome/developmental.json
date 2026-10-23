@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "required_organs": ["heart", "memory", "immune", "senses", "nervous", "limbs"],
+  "runtime": "python>=3.9",
+  "implementation": "daemon.body.Body",
+  "tests": ["tests/test_daemon.py", "tests/test_failures.py"]
+}

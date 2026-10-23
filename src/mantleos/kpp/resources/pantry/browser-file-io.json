@@ -1,0 +1,38 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "browser-file-io",
+  "version": "0.1.0",
+  "function": "User-triggered local text open/download",
+  "status": "ready",
+  "preferred_for": [
+    "notes",
+    "browser",
+    "desktop-style"
+  ],
+  "compatible_tissues": [
+    "javascript"
+  ],
+  "tags": [
+    "file",
+    "storage"
+  ],
+  "minimum_fidelity": 3,
+  "dependencies": [],
+  "capabilities": [
+    "User-triggered local text open/download"
+  ],
+  "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
+  "verified_with": "Bundled reference/tests only",
+  "provenance": "Original KPP reference",
+  "usage": {
+    "use_when": "Select for user-controlled local text input/output in a browser.",
+    "inputs": [
+      "Browser user interaction",
+      "Document text"
+    ],
+    "outputs": [
+      "Open or download interaction"
+    ],
+    "limits": "Browser permission and user gestures apply; no silent disk writes."
+  }
+}

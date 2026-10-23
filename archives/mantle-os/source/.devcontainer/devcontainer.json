@@ -1,0 +1,9 @@
+{
+  "name": "Mantle OS reproducible certification",
+  "build": {
+    "dockerfile": "../Dockerfile.reproduce",
+    "context": ".."
+  },
+  "remoteUser": "root",
+  "postCreateCommand": "python tools/environment_receipt.py .artifacts/environment.json"
+}

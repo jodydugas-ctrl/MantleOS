@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FindDialog</class>
+ <widget class="QDialog" name="FindDialog">
+  <property name="windowTitle"><string>Find</string></property>
+  <widget class="QLineEdit" name="query"/>
+  <widget class="QPushButton" name="findButton"><property name="text"><string>Find Next</string></property></widget>
+ </widget>
+ <connections><connection><sender>findButton</sender><signal>clicked()</signal><receiver>FindDialog</receiver><slot>accept()</slot></connection></connections>
+</ui>

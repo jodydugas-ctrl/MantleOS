@@ -1,0 +1,41 @@
+name: Bug report
+description: Report a reproducible MantleOS 2 failure
+title: "[Bug]: "
+labels: ["bug", "needs-evidence"]
+body:
+  - type: markdown
+    attributes:
+      value: Do not include credentials, private SELF, or decrypted VCW content.
+  - type: input
+    id: version
+    attributes:
+      label: MantleOS version or commit
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+      description: What happened, including safe error output.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true
+  - type: dropdown
+    id: boundary
+    attributes:
+      label: Affected boundary
+      options: [Body, Heart, VCW, MIND seam, NEST, Hermes integration, Communication, Food, Unknown]
+    validations:
+      required: true
+
