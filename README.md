@@ -9,6 +9,9 @@ under `archives/`; their histories are data, not ancestors or supported runtime.
 remains independently maintained, with the exact shared source selected by a
 reviewed Git-commit pin. Public viewing does not relicense bundled components.
 
+Explore the [working Engram examples](#working-engram-examples): fresh Raven
+memory in two KPP-selectable carrier formats.
+
 For an AI host, start with [MANTLE.md](MANTLE.md). Instructions and runnable
 capabilities ship together: scanning, Anchor coding, app creation, portable
 executable thoughts, memory, AppAI missions, and cartridge/PNG continuity.
@@ -215,5 +218,43 @@ Selective augmentation and role-neutral Baker responsibility are described in
 `python -m mantleos.augmentation --output UNUSED_DIRECTORY`. Recipe/4 can select
 `construction.techniques: []` to refine requirements without Chase.
 
-Fresh Raven Engrams support recipe-selected VCW and Chroma carriers. See
-[Engram carrier instructions](docs/ENGRAM-CARRIERS.md).
+## Working Engram examples
+
+Try a fresh synthetic Engram in either native VCW cartridge or Chroma PNG form.
+Both checked files encode the same Body, Raven persona and empty initial memory;
+they contain no inherited conversation, archive or previous identity. These are
+working examples of the shared memory and carrier capabilities available as KPP
+ingredients. `--persona FILE --persona-name NAME` replaces the default Raven persona.
+
+| KPP carrier ingredient | Download original carrier |
+| --- | --- |
+| `vcw-cartridge-memory` | [raven-fresh.vcw](https://raw.githubusercontent.com/jodydugas-ctrl/MantleOS/main/examples/engrams/artifacts/raven-fresh.vcw) |
+| `chroma-png-memory` | [raven-fresh.vcw.png](https://raw.githubusercontent.com/jodydugas-ctrl/MantleOS/main/examples/engrams/artifacts/raven-fresh.vcw.png) |
+
+Both use `engram-continuity`. Download the original PNG bytes; a resized image or
+screenshot does not preserve the encoded carrier. The [generator](examples/engrams/generate.py)
+constructs one fresh Body and writes both encodings. Recipes and the generator are
+included in normal distributions; the reviewed sample binaries are in repository handoffs.
+
+With MantleOS installed, or `PYTHONPATH=src`, restore into new disposable directories:
+
+```python
+from mantleos import cartridge, chromamem, engram
+
+cartridge.unpack("examples/engrams/artifacts/raven-fresh.vcw", ".work/showcase-vcw")
+chromamem.extract_body("examples/engrams/artifacts/raven-fresh.vcw.png", ".work/showcase-chroma")
+for body in (".work/showcase-vcw", ".work/showcase-chroma"):
+    print(cartridge.verify(body))
+    assert engram.read(body + "/ENGRAM.jsonl") == []
+```
+
+See the [Engram guide](docs/ENGRAM-CARRIERS.md) for generation, custom personas and
+an explicit append/save/reload example. Restoration, verification and memory persistence
+work offline. Model interaction requires a separately configured host and its permissions.
+
+Evidence: [carrier tests](tests/kpp/test_engram_carriers.py),
+[artifact-export tests](tests/test_reviewed_engram_exports.py),
+[passing Engram implementation CI](https://github.com/jodydugas-ctrl/MantleOS/actions/runs/40038486205)
+and [current main CI](https://github.com/jodydugas-ctrl/MantleOS/actions/workflows/ci.yml?query=branch%3Amain).
+Tests and checksums provide evidence; they do not grant Baker or host acceptance.
+

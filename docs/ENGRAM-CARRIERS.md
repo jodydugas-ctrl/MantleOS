@@ -1,8 +1,10 @@
 # Fresh Engram carriers
 
-Shared development is in KPP PR #2. This promotion pins its exact reviewed
-commit 70c363648faeb212a0a2992bf04cd8af44651dd3. Merge KPP first with an ordinary
-merge preserving that commit; this MantleOS PR remains dependent on that review.
+Shared development is maintained in [Kitchen Party Protocol](https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol).
+The published Engram ingredients were introduced by [KPP PR #2](https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol/pull/2).
+MantleOS pins reviewed commit `70c363648faeb212a0a2992bf04cd8af44651dd3`, retained
+by KPP's ordinary merge. The carrier implementation, tests, notices, system documents
+and checked sample bytes match that selection. Future changes require reviewed promotion.
 
 ```console
 python -m mantleos kpp engram create --recipe src/mantleos/kpp/resources/recipes/raven-engram-vcw.json --output fresh.vcw
@@ -21,3 +23,32 @@ and current-source provenance. The provided personal carriers remain external.
 Reviewed example binaries are explicitly inventoried outside runtime resources;
 ordinary distributions contain the generator and recipes, not these binary samples.
 All existing licensing and component notices continue to apply.
+
+## Offline memory persistence demonstration
+
+After restoring the README's disposable `.work/showcase-vcw` copy, deliberately
+append a synthetic observation and save new carriers. The checked originals remain
+unchanged; no model or remote service is involved.
+
+```python
+from pathlib import Path
+from mantleos import cartridge, chromamem, engram, lifecycle
+
+body = Path(".work/showcase-vcw")
+prior = (body / "ENGRAM.jsonl").read_bytes()
+lifecycle.admit(body, "synthetic-memory", {"observation": "offline showcase"},
+                expected_head=engram.head(body / "ENGRAM.jsonl"))
+assert (body / "ENGRAM.jsonl").read_bytes().startswith(prior)
+cartridge.pack(body, ".work/showcase-saved.vcw")
+chromamem.export_body(body, ".work/showcase-saved.png")
+cartridge.unpack(".work/showcase-saved.vcw", ".work/showcase-reloaded-vcw")
+chromamem.extract_body(".work/showcase-saved.png", ".work/showcase-reloaded-chroma")
+for restored in (".work/showcase-reloaded-vcw", ".work/showcase-reloaded-chroma"):
+    cartridge.verify(restored)
+    assert engram.read(Path(restored) / "ENGRAM.jsonl") == engram.read(body / "ENGRAM.jsonl")
+```
+
+All destinations must be new. Run the trusted maintained implementation; carrier
+decoding does not execute embedded programs or authorize a host. Raven/custom-persona,
+fresh-state, corruption, overwrite-refusal and save/reload tests are linked from
+the README showcase. Passing these tests is separate from Baker acceptance.
