@@ -1,0 +1,50 @@
+{
+  "schema": "kpp.recipe/4",
+  "id": "raven-engram-vcw",
+  "goal": "Create a fresh Raven Engram with vcw transport",
+  "mode": "chase",
+  "tissue": "python",
+  "fidelity": 3,
+  "target": {
+    "description": "Fresh portable Engram, default Raven persona, no inherited history",
+    "source": "functional description, not a copied implementation",
+    "reference_version": "notepad-demo/v1",
+    "fidelity_semantics": "depth 1 surface; depth 2 direct events; depth 3 files and persistent consequences"
+  },
+  "ingredients": [
+    "engram-continuity",
+    "vcw-cartridge-memory"
+  ],
+  "oven": {
+    "assumption": "Consistent execution of sufficiently explicit recipe",
+    "provider": "any capable host",
+    "iterations": "as needed",
+    "implementation": "incremental",
+    "verification": "Baker acceptance"
+  },
+  "acceptance": "Every required anchor must carry explicit evidence; no credit for untested capabilities.",
+  "anchors": [
+    {
+      "id": "exact-output",
+      "statement": "Carrier restores a verified fresh Engram with the selected persona and no inherited history",
+      "test": "Run examples/engrams/generate.py and carrier round-trip tests",
+      "required": true,
+      "depth": 1,
+      "depends": []
+    }
+  ],
+  "product_kind": "conventional",
+  "delivery_mode": "artifact",
+  "capabilities": {},
+  "implementation": {
+    "components": [
+      {
+        "id": "app",
+        "policy": "required",
+        "languages": [
+          "python"
+        ]
+      }
+    ]
+  }
+}

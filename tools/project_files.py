@@ -103,9 +103,18 @@ def safe_path(root, name):
     return path
 
 
+def reviewed_examples(root):
+    root=Path(root)
+    if not (root/'examples/engrams/artifacts').exists(): return {}
+    import importlib.util
+    spec=importlib.util.spec_from_file_location('reviewed_engram_examples',root/'src/mantleos/kpp/artifacts.py')
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    return module.inventory(root)
+
+
 def collect(root):
     root = Path(root).resolve()
-    result = {}
+    result = reviewed_examples(root)
     explicit_archives = (root/'archives/ARCHIVE-FILES.json').is_file()
     archive_root = root/'archives'
     if (not explicit_archives and archive_root.is_dir()
@@ -132,6 +141,8 @@ def collect(root):
                 safe_path(root, (Path(parent) / directory).relative_to(root).as_posix())
             for filename in sorted(files):
                 name = (Path(parent) / filename).relative_to(root).as_posix()
+                if name.startswith('examples/engrams/artifacts/'):
+                    continue
                 if allowed(name):
                     result[name] = sha(safe_path(root, name).read_bytes())
     return dict(sorted(result.items()))
@@ -154,7 +165,7 @@ def verify(root):
     if (Path(root)/'archives/ARCHIVE-FILES.json').is_file():
         from archive_inventory import inventory
         archive_files = inventory(root)
-    if any(not allowed(name) and name not in archive_files for name in value['files']):
+    if any(not allowed(name) and name not in archive_files and name not in reviewed_examples(root) for name in value['files']):
         raise ProjectError('Undistributable path in project inventory')
     if value.get('source_digest') != digest(value['files']) or collect(root) != value['files']:
         raise ProjectError('Project source drift; review changes and refresh the inventory')

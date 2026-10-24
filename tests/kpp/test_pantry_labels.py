@@ -39,10 +39,10 @@ class PantryLabels(unittest.TestCase):
             self.assertEqual(result['source']['integrity'],'STALE_PIN_MISMATCH')
             with self.assertRaises(KPPError):ingredient_catalog(dest)
 
-    def test_unbundled_reference_has_no_fake_evidence(self):
+    def test_bundled_chroma_requires_recipe_specific_evidence(self):
         result=view(ROOT,'chroma-png-memory')
-        self.assertEqual(result['source']['integrity'],'NO_SOURCE_PIN')
-        self.assertEqual(result['status'],'reference')
+        self.assertEqual(result['source']['integrity'],'NOT_RECHECKED')
+        self.assertEqual(result['status'],'ready')
         self.assertEqual(result['integration'],'REQUIRES_RECIPE_SPECIFIC_TESTS')
 
     def test_external_bounded_recheck_is_explicit(self):

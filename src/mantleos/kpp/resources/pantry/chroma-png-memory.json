@@ -1,37 +1,47 @@
 {
   "schema": "kpp.ingredient/1",
   "id": "chroma-png-memory",
-  "version": "0.1.0",
-  "function": "Image-encoded memory carrier kernel (not bundled in KPP)",
-  "status": "reference",
+  "version": "0.2.0",
+  "function": "Chroma PNG encoding of the same portable Engram",
+  "status": "ready",
   "preferred_for": [
     "png-transport",
     "bioagent",
     "constrained-environments"
   ],
   "compatible_tissues": [
-    "unspecified"
+    "python",
+    "mixed"
   ],
   "tags": [
     "portability",
     "memory"
   ],
   "minimum_fidelity": 1,
-  "dependencies": [],
+  "dependencies": [
+    "engram-continuity"
+  ],
   "capabilities": [
-    "Image-encoded memory carrier kernel (not bundled in KPP)"
+    "Fresh Engram construction",
+    "Verified portable memory transport"
   ],
   "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
-  "verified_with": "Not bundled; acquisition and integration require operator review",
-  "provenance": "KPP design reference inspired by user-provided MantleOS material",
+  "verified_with": "Carrier-specific round-trip and fresh-birth tests; recipe acceptance remains separate",
+  "provenance": "Current shared MantleOS implementation; supplied private carriers were reference data only",
   "usage": {
-    "use_when": "Consider when a carrier must be a PNG image.",
+    "use_when": "Select an Engram capability or its explicit carrier encoding.",
     "inputs": [
-      "Image carrier and compatible encoder/decoder"
+      "Fresh verified Body and explicit output path"
     ],
     "outputs": [
-      "Image-carried memory format"
+      "Verified Engram memory or selected carrier"
     ],
-    "limits": "Reference only; actual Chroma implementation is not included."
+    "limits": "No imported histories, automatic activation, remote synchronization or transferred approval."
+  },
+  "source": {
+    "kind": "bundled-files",
+    "files": {
+      "src/mantleos/chromamem.py": "9a12cae4b17feb5f3e1f0c3ccab0dd4b0acf5a90f459035d8685f8c39d3add3f"
+    }
   }
 }

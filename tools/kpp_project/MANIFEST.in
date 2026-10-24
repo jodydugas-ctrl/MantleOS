@@ -18,3 +18,5 @@ prune workspaces
 prune .venv
 
 recursive-include tools/kpp_project *.py *.md *.toml *.in *.yml *.yaml .gitattributes .gitignore
+
+prune examples/engrams/artifacts

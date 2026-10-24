@@ -38,6 +38,19 @@ def source_identity(repo, item, check_external=False):
     """No source inspection for ordinary labels. Specimen check is byte-hash only.
     External scan is opt-in and its inventory remains explicitly bounded.
     """
+    declaration=item.get('source',{})
+    if isinstance(declaration,dict) and declaration.get('kind')=='bundled-files':
+        pins=declaration.get('files',{})
+        base=Path(repo).resolve()
+        bundled=base==Path(__file__).resolve().with_name('resources')
+        if not pins: raise KPPError('Empty bundled source inventory')
+        for name,pin in pins.items():
+            path=(Path(__file__).resolve().parents[2]/name[4:]) if bundled and name.startswith('src/') else base/name
+            if not name.startswith('src/mantleos/') or '..' in Path(name).parts or path.is_symlink() or (not bundled and not path.resolve().is_relative_to(base)):
+                raise KPPError('Unsafe bundled source path')
+            if check_external and (not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest()!=pin):
+                raise KPPError('Bundled source pin mismatch: '+name)
+        return {'kind':'bundled-files','integrity':'PIN_MATCH' if check_external else 'NOT_RECHECKED','files':pins,'source_access':'EXPLICIT_ONLY'}
     specimen = item.get("specimen")
     if specimen:
         path = specimen["path"]
@@ -107,7 +120,7 @@ def view(repo, ingredient_id, level="label", check_external=False, catalog=None)
     if ingredient_id not in catalog:
         raise KPPError("Unknown ingredient: "+ingredient_id)
     item=catalog[ingredient_id]
-    lbl=label(repo,item,check_external)
+    lbl=label(repo,item,check_external or level=="source")
     if level=="label":return lbl
     if level=="contract":return _contract(item,lbl)
     return {"schema":"kpp.ingredient-source-locator/1", "id":item["id"],
