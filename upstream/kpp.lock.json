@@ -8,7 +8,7 @@
     },
     "src/mantleos/__init__.py": {
       "group": "implementation",
-      "sha256": "9c729410daed4abbf86f99885ba98814ef8e6b1546125906ba450b6df3ff6429",
+      "sha256": "28e7f6abe09c0075aa3cc234ff926931badedf274ba0fa23ec9cec4613377fed",
       "source": "src/mantleos/__init__.py"
     },
     "src/mantleos/__main__.py": {
@@ -308,7 +308,7 @@
     },
     "src/mantleos/kpp/__init__.py": {
       "group": "implementation",
-      "sha256": "828af01543c89513738b858c8c23acfd7b322372310d8908f1b020489e4a16d1",
+      "sha256": "c24aa9a0582bf5189e6526c8564f03ac53a80458df10ec69b947a21056355856",
       "source": "src/mantleos/kpp/__init__.py"
     },
     "src/mantleos/kpp/__main__.py": {
@@ -463,7 +463,7 @@
     },
     "src/mantleos/kpp/resources/KPP.md": {
       "group": "implementation",
-      "sha256": "99ffc2751eeccaa931c2b7096dd967f66d0157b9097366579662df80e940b448",
+      "sha256": "7c600982216ed34ec57e7c8fa51a32296f2b266aa8642af0496cff3204877ef0",
       "source": "src/mantleos/kpp/resources/KPP.md"
     },
     "src/mantleos/kpp/resources/LICENSE": {
@@ -478,7 +478,7 @@
     },
     "src/mantleos/kpp/resources/README.md": {
       "group": "implementation",
-      "sha256": "fea4f62acc5bfd77ca289220e6fc31007fea9122398dbd1a6f3c799330835ef2",
+      "sha256": "44930b379484a7073ea114868cf4cfab56e3e290693f8115a0df8522a9dd54e7",
       "source": "src/mantleos/kpp/resources/README.md"
     },
     "src/mantleos/kpp/resources/START-HERE.md": {
@@ -588,7 +588,7 @@
     },
     "src/mantleos/kpp/resources/docs/REFLEX-BOOK.md": {
       "group": "implementation",
-      "sha256": "70f4a32cec6b1b3605132f84ccd30650a35b53225bd86b035ac530a0a532f570",
+      "sha256": "b8e1dcc2c940053147da4018418c4abd1b82ffbed5989bc8c835986e02a52f21",
       "source": "src/mantleos/kpp/resources/docs/REFLEX-BOOK.md"
     },
     "src/mantleos/kpp/resources/docs/REFLEX-PROVENANCE.json": {
@@ -605,6 +605,11 @@
       "group": "implementation",
       "sha256": "bee6eca12a233d5b53e3563c1d53e905f08159f6b208eec4e1ca379544437521",
       "source": "src/mantleos/kpp/resources/docs/REFLEX-REUSE.md"
+    },
+    "src/mantleos/kpp/resources/docs/RELEASE-HANDOFF.md": {
+      "group": "implementation",
+      "sha256": "14682e120ef0c3f188a0df5c4ca95b10921c23b45b91993e62a2326d4eb0429c",
+      "source": "src/mantleos/kpp/resources/docs/RELEASE-HANDOFF.md"
     },
     "src/mantleos/kpp/resources/docs/RELEASE-VALIDATION.md": {
       "group": "implementation",
@@ -1305,6 +1310,11 @@
       "group": "implementation",
       "sha256": "dc9134ebff4c6aa53c377bce0aae44d42c2710e87366abb39649d0cbde4552fd",
       "source": "src/mantleos/kpp/resources/tools/check_progressive_calculator.py"
+    },
+    "src/mantleos/kpp/resources/tools/check_reflex_install.py": {
+      "group": "implementation",
+      "sha256": "62b827ad4156859223e7df982ee3a854ddf80992a9d5e3a9cc22606e87aed862",
+      "source": "src/mantleos/kpp/resources/tools/check_reflex_install.py"
     },
     "src/mantleos/kpp/resources/tools/validate_release.py": {
       "group": "implementation",
@@ -2326,6 +2336,11 @@
       "sha256": "c81038352ea13abde99458cc098f658672ae2739541c3ea7155c2bf69b2d1bd9",
       "source": "tests/test_reflex_execution.py"
     },
+    "tests/kpp/test_reflex_install_check.py": {
+      "group": "tests",
+      "sha256": "e38c2b590e9c7bbaf1c5072ba3e7f2d948fe0f577e91690d643b048820cb65d4",
+      "source": "tests/test_reflex_install_check.py"
+    },
     "tests/kpp/test_reflex_stage.py": {
       "group": "tests",
       "sha256": "acc7546cc960892512181bfbb09796f54bb21b4b4b1f6f2045f8e5186bcccae9",
@@ -2362,14 +2377,14 @@
     "upstream/kpp-notices/THIRD-PARTY-NOTICES.md"
   ],
   "schema": "mantle.kpp-upstream/1",
-  "selection_digest": "7dd235e5871a8e17fb2cbc42203b5c0e00f008031366a13d02da7c1e4beb1fce",
-  "shared_source_digest": "946640570268e2a493c48a9012d1433a594743e5dd8e9437dc482aca05674ed6",
+  "selection_digest": "a19897dbc09e7060baecd2e7b69951f5d0cd215bba5d6da29f4ebde6e2aa2c92",
+  "shared_source_digest": "4549d8578dd25ca8f19ffac29ba84cdb3fb64bddabc17d07da2dd482e001dac6",
   "upstream": {
-    "base_commit": "5a48c0686c7aefbf077329e09d9e95fd4699d760",
+    "base_commit": "ac4e7b52aa360eda8b500a6b1336883364b494ea",
     "dirty": false,
     "official_url": "https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol",
     "published_revision_verified": false,
     "snapshot_kind": "local-committed-snapshot",
-    "version": "1.1.0a4"
+    "version": "1.1.0a5"
   }
 }

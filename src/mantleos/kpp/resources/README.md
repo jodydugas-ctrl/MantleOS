@@ -8,7 +8,7 @@ requires evidence and explicit Baker acceptance.
 KPP is the primary project we maintain going forward. MantleOS was built using
 KPP and remains an associated project. Both share one implementation of Anchors,
 CELLs, programs, SCAN, Body, memory and carriers. Read [SYSTEMS.md](SYSTEMS.md)
-and [the project guide](docs/PROJECT.md). Current version: **1.1.0a4**, alpha.
+and [the project guide](docs/PROJECT.md). Current version: **1.1.0a5**, alpha.
 
 `python -m kpp` and `python -m mantleos kpp` reach the same modules. `python -m kpp systems` describes their shared contracts. `python tools/verify_shared.py --source MANTLEOS_ROOT` checks the shared source against a selected checkout.
 
@@ -104,3 +104,6 @@ Run `python -m mantleos reflex-book demo --output .work/new-reflex-demo` for the
 synthetic NORMAL-to-UNKNOWN freshness example. [REFLEX-BOOK.md](docs/REFLEX-BOOK.md)
 explains read-only inspection and explicit reproduction. Native Body execution
 remains deferred; qualification and Baker acceptance remain separate.
+
+For the current release scope, installation, commit-bound evidence and continuation,
+read [the release handoff](docs/RELEASE-HANDOFF.md).

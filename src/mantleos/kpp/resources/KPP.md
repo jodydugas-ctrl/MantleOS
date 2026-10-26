@@ -1,4 +1,4 @@
-# Kitchen Party Protocol (KPP) · 1.1.0a4
+# Kitchen Party Protocol (KPP) · 1.1.0a5
 
 KPP is the independently maintained development protocol. MantleOS is the experimental AI-embodiment testbed built using it. They share implementation and retain one authoritative Anchor model wherever Anchor is selected. Read [SYSTEMS.md](SYSTEMS.md).
 

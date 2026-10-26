@@ -1,5 +1,9 @@
 # Contributing
 
+Current release scope, installed-wheel verification and commit-bound evidence:
+[docs/RELEASE-HANDOFF.md](docs/RELEASE-HANDOFF.md). Earlier dated verification
+records retain their original scope.
+
 Work locally on a focused branch. Keep the deterministic Body useful without a
 MIND. Reuse an existing capability or codec before adding a new mechanism.
 
@@ -53,4 +57,6 @@ trip and keep tested browser behavior separate from native XP parity.
 Recipe/4 implementation choices and optional Anchor binding are documented in
 `docs/LANGUAGE-CHOICES.md`. Run `python tools/kpp_upstream.py check` and
 `python tools/project_container.py check` before release. Current revision
-results belong in `docs/log-adoption-verification.json`; hosted CI is unexecuted.
+results for that earlier revision remain in `docs/log-adoption-verification.json`.
+Use the release handoff and the workflow run for the exact current commit for
+subsequent results; hosted CI has now been exercised.

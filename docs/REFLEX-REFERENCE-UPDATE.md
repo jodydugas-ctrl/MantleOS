@@ -1,5 +1,10 @@
 # REFLEX reference toolkit repository update
 
+This records the earlier reference-inspector integration snapshot. For the
+current release, read [RELEASE-HANDOFF.md](RELEASE-HANDOFF.md); the current KPP
+selection is recorded in `upstream/kpp.lock.json`. The commit below retains its
+historical scope.
+
 The bundled toolkit and evaluation inspector are integrated with the current
 published KPP source. The clean reviewed KPP commit is `5a48c0686c7aefbf077329e09d9e95fd4699d760`.
 MantleOS carries the same source through the documented offline promotion workflow.

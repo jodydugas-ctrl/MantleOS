@@ -89,3 +89,5 @@ ports remain supported. The new attachment API additionally preserves an existin
 Body by producing a verified copy. Both ports carry inert data; neither admits or
 executes it. Existing Engram construction, Pantry repository locators and the
 explicit approval-receipt field validation are preserved.
+
+Current release and installed-wheel verification: [RELEASE-HANDOFF.md](RELEASE-HANDOFF.md).

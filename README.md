@@ -24,7 +24,7 @@ functional Bodies, optional cognition, memory, continuity and reviewed adaptatio
 The experiments test concrete behavior and preservation; their results do not
 establish broader claims about AI identity or consciousness.
 
-This is **0.1.0a8, preview-first construction in one MantleOS/KPP system**. It brings together selected
+This is **0.1.0a9, preview-first construction in one MantleOS/KPP system**. It brings together selected
 Mantle OS, MantleOS2, MantleOS 4, and Raven mechanisms. It does not inherit their
 historical certification claims. [Capability status](docs/heritage.md) and
 [verification results](docs/verification.md) describe the actual delivery.
@@ -275,3 +275,5 @@ Run `python -m mantleos reflex-book demo --output .work/new-reflex-demo` for a
 synthetic freshness example, then inspect or reproduce its records.
 See [the toolkit guide](docs/REFLEX-BOOK.md) and [repository update notes](docs/REFLEX-REFERENCE-UPDATE.md).
 Native Body execution remains deferred; evidence does not grant Baker acceptance.
+
+Current release, installed-wheel checks and beginner workflow: [release handoff](docs/RELEASE-HANDOFF.md).

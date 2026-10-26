@@ -1,5 +1,9 @@
 # Verification record
 
+Current release workflow and commit-bound evidence indexing:
+[RELEASE-HANDOFF.md](RELEASE-HANDOFF.md). The dated observations below retain
+their original scope; they are not receipts for subsequent commits.
+
 Current r3 results: [log-adoption-verification.json](log-adoption-verification.json). These cover optional techniques and synthetic augmentation. Prior receipts below remain historical.
 
 Current recipe/4 revision results are in [recipe-v4-verification.json](recipe-v4-verification.json). Earlier records below, including the original handoff receipt, remain historical.

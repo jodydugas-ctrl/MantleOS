@@ -1,3 +1,6 @@
+Current release workflow and evidence indexing: [RELEASE-HANDOFF.md](RELEASE-HANDOFF.md).
+The dated observations below retain their original scope.
+
 # Project preparation verification
 
 New local execution on 15 October 2026, Windows x64, CPython 3.14.2:

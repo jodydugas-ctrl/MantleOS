@@ -1,5 +1,9 @@
 # Official KPP alignment
 
+For the current clean selection, read `upstream/kpp.lock.json` and verify it with
+`tools/verify_kpp_pin.py`. [RELEASE-HANDOFF.md](RELEASE-HANDOFF.md) indexes current
+release evidence. The dated local selections below are retained history.
+
 MantleOS is the primary product repository. The official Kitchen Party Protocol
 project remains independently maintained at the URL recorded in
 `upstream/kpp.lock.json`. This repository embeds one pinned selection from it.

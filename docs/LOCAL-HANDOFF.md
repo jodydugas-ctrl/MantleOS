@@ -1,8 +1,18 @@
-## Use this local project
+## Current repository and release
 
-`MantleOS/` is a complete local repository with one initial commit on `main` and
-no remote. `MantleOS.bundle` holds the same commit and all reachable Git objects.
-There is no Docker environment. Keep the existing license terms and notices.
+The maintained repository is https://github.com/jodydugas-ctrl/MantleOS. It has
+ordinary Git history and an explicitly pinned KPP selection, checked by hosted
+CI. For the current release, exact-commit evidence, installed-wheel verification
+and beginner workflow, read [RELEASE-HANDOFF.md](RELEASE-HANDOFF.md). Preserve
+existing local edits and use a clean checkout for new work.
+
+## Optional offline container
+
+The remaining instructions describe the disposable snapshot produced by
+`tools/project_container.py package`, not the maintained GitHub repository.
+In that container, `MantleOS/` has one initial commit on `main` and no remote;
+`MantleOS.bundle` holds that same snapshot. There is no Docker environment.
+Keep the existing license terms and notices.
 
 Use the included repository directly, or recreate it offline in a new directory:
 

@@ -46,3 +46,17 @@ jobs:
       - run: python examples/discovery/walkthrough.py --output .work/ci-discovery
       - run: python examples/reflex_book/qualify.py --output .work/ci-reflex --examples-only
       - run: python -m build --no-isolation
+      - name: Verify the wheel in a fresh environment outside the checkout
+        shell: bash
+        run: python tools/check_reflex_install.py --wheel dist/*.whl --output "${{ runner.temp }}/reflex-installed-${{ matrix.python }}"
+      - name: Retain installed-wheel evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reflex-installed-${{ matrix.os }}-${{ matrix.python }}
+          path: |
+            ${{ runner.temp }}/reflex-installed-${{ matrix.python }}/report.json
+            ${{ runner.temp }}/reflex-installed-${{ matrix.python }}/*.stdout
+            ${{ runner.temp }}/reflex-installed-${{ matrix.python }}/*.stderr
+            ${{ runner.temp }}/reflex-installed-${{ matrix.python }}/work/demo/*
+          if-no-files-found: ignore
