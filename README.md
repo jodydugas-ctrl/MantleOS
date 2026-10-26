@@ -258,3 +258,11 @@ Evidence: [carrier tests](tests/kpp/test_engram_carriers.py),
 and [current main CI](https://github.com/jodydugas-ctrl/MantleOS/actions/workflows/ci.yml?query=branch%3Amain).
 Tests and checksums provide evidence; they do not grant Baker or host acceptance.
 
+
+## Experimental REFLEX qualification
+
+The [qualification guide](docs/REFLEX-QUALIFICATION.md) covers the bounded REFLEX/0.1
+compiler/VM, original conformance corpus and native data-only VCW/Chroma examples.
+Run `python -m mantleos kpp pantry --id reflex-book` to discover the experimental
+ingredient. The [reuse report](docs/REFLEX-REUSE.md) pins current and archived source.
+This is not an executable Body profile, production adoption or Baker acceptance.

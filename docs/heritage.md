@@ -239,3 +239,14 @@ concerns. Their reported Bio-Hermes defects and model comparisons are unverified
 leads for other snapshots. No private history, source archive or identity was
 imported. The current source adds a bounded synthetic augmentation example;
 executed results and limitations are in log-adoption-verification.json.
+
+## Experimental REFLEX qualification
+
+The supplied handoff bundle and roadmap were located and source-pinned before adaptation.
+The original 64-test compiler/VM corpus is preserved; the reproduced dummy-reviewer
+collision is corrected. Current lifecycle, Cartridge and Chroma APIs carry canonical
+REFLEX as inert data in fresh synthetic Bodies. No new executable profile or production
+admission path is installed. The simulator is not canonical Engram memory or host authority.
+See [reuse review](REFLEX-REUSE.md), [guide](REFLEX-QUALIFICATION.md) and original
+receipts under reflex-history, which retain their historical scope. Archived calcification,
+Book editions, layered wake frontiers and SCAN branches remain inert references.

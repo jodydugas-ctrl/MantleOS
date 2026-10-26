@@ -1,0 +1,128 @@
+{
+  "all_local_checks_passed": true,
+  "approval": {
+    "admitted": false,
+    "authorized": false,
+    "installed": false,
+    "reviewer": null
+  },
+  "checks": [
+    {
+      "actual_exit": 0,
+      "command": "python -m unittest discover -s tests -v",
+      "expected_exit": 0,
+      "name": "unit_tests",
+      "result": "PASS",
+      "stderr_excerpt": "st_conformance.ReflexTests.test_binary_header_tamper) ... ok\ntest_bool3_truth_table (reflex_book.test_conformance.ReflexTests.test_bool3_truth_table) ... ok\ntest_canonical_order_and_digest (reflex_book.test_conformance.ReflexTests.test_canonical_order_and_digest) ... ok\ntest_compile_decode_roundtrip (reflex_book.test_conformance.ReflexTests.test_compile_decode_roundtrip) ... ok\ntest_golden_vectors_oracle_and_vm (reflex_book.test_conformance.ReflexTests.test_golden_vectors_oracle_and_vm) ... ok\ntest_input_malformed_refusal (reflex_book.test_conformance.ReflexTests.test_input_malformed_refusal) ... ok\ntest_instruction_disassembly (reflex_book.test_conformance.ReflexTests.test_instruction_disassembly) ... ok\ntest_json_parser_negative (reflex_book.test_conformance.ReflexTests.test_json_parser_negative) ... ok\ntest_negative_programs_stable_codes (reflex_book.test_conformance.ReflexTests.test_negative_programs_stable_codes) ... ok\ntest_no_self_granted_authority (reflex_book.test_conformance.ReflexTests.test_no_self_granted_authority) ... ok\ntest_not_a_host_effect (reflex_book.test_conformance.ReflexTests.test_not_a_host_effect) ... ok\ntest_recomputed_integrity_cannot_change_opcode (reflex_book.test_conformance.ReflexTests.test_recomputed_integrity_cannot_change_opcode) ... ok\ntest_unsupported_book_refused (reflex_book.test_conformance.ReflexTests.test_unsupported_book_refused) ... ok\n\n----------------------------------------------------------------------\nRan 31 tests in 3.009s\n\nOK",
+      "stdout_excerpt": ""
+    },
+    {
+      "actual_exit": 0,
+      "command": "python -m experiments.reflex_book.cli validate examples/reflex_book/location_rule.json",
+      "expected_exit": 0,
+      "name": "validate",
+      "result": "PASS",
+      "stderr_excerpt": "",
+      "stdout_excerpt": "{\"authorized\":false,\"instructions\":8,\"program_sha256\":\"fd1edf144fed8b097f5a63b17415e33361bd8a3b0023f57295cf44165e13f207\",\"status\":\"VALID\"}"
+    },
+    {
+      "actual_exit": 0,
+      "command": "python -m experiments.reflex_book.cli compile examples/reflex_book/location_rule.json --output .work/location.rfx",
+      "expected_exit": 0,
+      "name": "compile",
+      "result": "PASS",
+      "stderr_excerpt": "",
+      "stdout_excerpt": "{\"authorized\":false,\"byte_size\":1059,\"path\":\".work/location.rfx\",\"program_sha256\":\"fd1edf144fed8b097f5a63b17415e33361bd8a3b0023f57295cf44165e13f207\",\"status\":\"COMPILED\"}"
+    },
+    {
+      "actual_exit": 0,
+      "command": "python -m experiments.reflex_book.cli verify .work/location.rfx",
+      "expected_exit": 0,
+      "name": "verify",
+      "result": "PASS",
+      "stderr_excerpt": "",
+      "stdout_excerpt": "{\"abi\":\"reflex-vm/0.1\",\"authorized\":false,\"program_sha256\":\"fd1edf144fed8b097f5a63b17415e33361bd8a3b0023f57295cf44165e13f207\",\"status\":\"VERIFIED_INTEGRITY_ONLY\"}"
+    },
+    {
+      "actual_exit": 0,
+      "command": "python -m experiments.reflex_book.cli disassemble .work/location.rfx",
+      "expected_exit": 0,
+      "name": "disassemble",
+      "result": "PASS",
+      "stderr_excerpt": "",
+      "stdout_excerpt": "{\"abi\":\"reflex-vm/0.1\",\"instructions\":[{\"args\":[\"position\"],\"op\":\"LOAD_INPUT\",\"pc\":0},{\"args\":[\"routine_region\"],\"op\":\"LOAD_INPUT\",\"pc\":1},{\"args\":[],\"op\":\"GEO_OUTSIDE\",\"pc\":2},{\"args\":[\"position\",180],\"op\":\"CHECK_FRESH\",\"pc\":3},{\"args\":[\"position\",150],\"op\":\"CHECK_QUALITY\",\"pc\":4},{\"args\":[3],\"op\":\"GUARD3\",\"pc\":5},{\"args\":[],\"op\":\"BRANCH3\",\"pc\":6},{\"args\":[],\"op\":\"HALT\",\"pc\":7}],\"program_sha256\":\"fd1edf144fed8b097f5a63b17415e33361bd8a3b0023f57295cf44165e13f207\"}"
+    },
+    {
+      "actual_exit": 0,
+      "command": "python -m experiments.reflex_book.cli run .work/location.rfx --input examples/reflex_book/location_normal.json",
+      "expected_exit": 0,
+      "name": "run_normal",
+      "result": "PASS",
+      "stderr_excerpt": "",
+      "stdout_excerpt": "{\"authorized\":false,\"executed_pcs\":[0,1,2,3,4,5,6,7],\"input_sha256\":\"9cf5562bcfd8f90b3fb336f887405441246c3dc8ca27461e44d29a4da4c92866\",\"program_sha256\":\"fd1edf144fed8b097f5a63b17415e33361bd8a3b0023f57295cf44165e13f207\",\"refusal_code\":null,\"result\":{\"review_requested\":false,\"status\":\"NORMAL\"},\"schema\":\"mantle.reflex-trace/0.1\",\"vm_version\":\"reflex-python-vm/0.1\"}"
+    },
+    {
+      "actual_exit": 0,
+      "command": "python -m experiments.reflex_book.cli run .work/location.rfx --input examples/reflex_book/location_anomaly.json",
+      "expected_exit": 0,
+      "name": "run_anomaly",
+      "result": "PASS",
+      "stderr_excerpt": "",
+      "stdout_excerpt": "{\"authorized\":false,\"executed_pcs\":[0,1,2,3,4,5,6,7],\"input_sha256\":\"d0a4ff8d176fb361f0c0ce7edb7e45e0902f4fd9de4869c6e5c620e33a240bb3\",\"program_sha256\":\"fd1edf144fed8b097f5a63b17415e33361bd8a3b0023f57295cf44165e13f207\",\"refusal_code\":null,\"result\":{\"review_requested\":true,\"status\":\"ANOMALY\"},\"schema\":\"mantle.reflex-trace/0.1\",\"vm_version\":\"reflex-python-vm/0.1\"}"
+    },
+    {
+      "actual_exit": 0,
+      "command": "python -m experiments.reflex_book.cli run .work/location.rfx --input examples/reflex_book/location_stale.json",
+      "expected_exit": 0,
+      "name": "run_unknown",
+      "result": "PASS",
+      "stderr_excerpt": "",
+      "stdout_excerpt": "{\"authorized\":false,\"executed_pcs\":[0,1,2,3,4,5,6,7],\"input_sha256\":\"72b765c018e08db304d9ba654ef2ae36fb7f4e9c41be635b41644beb1b412ac0\",\"program_sha256\":\"fd1edf144fed8b097f5a63b17415e33361bd8a3b0023f57295cf44165e13f207\",\"refusal_code\":null,\"result\":{\"review_requested\":false,\"status\":\"UNKNOWN\"},\"schema\":\"mantle.reflex-trace/0.1\",\"vm_version\":\"reflex-python-vm/0.1\"}"
+    },
+    {
+      "actual_exit": 2,
+      "command": "python -m experiments.reflex_book.cli validate examples/reflex_book/invalid_capability.json",
+      "expected_exit": 2,
+      "name": "refuse_unauthorized_capability",
+      "result": "PASS",
+      "stderr_excerpt": "{\"code\": \"E_CAPABILITY\", \"detail\": \"capabilities must exactly match referenced read-only inputs\", \"status\": \"REFUSED\"}",
+      "stdout_excerpt": ""
+    },
+    {
+      "actual_exit": 2,
+      "command": "python -m experiments.reflex_book.cli verify examples/reflex_book/location_corrupt.rfx",
+      "expected_exit": 2,
+      "name": "refuse_binary_corrupt",
+      "result": "PASS",
+      "stderr_excerpt": "{\"code\": \"E_INTEGRITY\", \"detail\": \"binary digest mismatch\", \"status\": \"REFUSED\"}",
+      "stdout_excerpt": ""
+    }
+  ],
+  "environment": {
+    "network_required": false,
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "python": "3.13.5",
+    "third_party_dependencies": []
+  },
+  "generated_utc": "2026-10-23T23:22:27Z",
+  "golden_hashes_sha256": "5c9dc4186905cc8c0bfdf89ad888ff57656c6de6b5f197a1110204db3ebee27d",
+  "golden_vectors": 20,
+  "invalid_fixtures": 12,
+  "limits": [
+    "NOT certification/Baker acceptance",
+    "NO real geodesic guarantees",
+    "NOT an installed Body program",
+    "NO approval or external effects",
+    "MantleOS/KPP existing suites NOT run: repository not available in local runtime",
+    "No host wall-time or memory sandboxing",
+    "No binary carrier adapter beyond raw frame",
+    "No external benchmark comparison",
+    "No deployment or patient data"
+  ],
+  "repeat_determinism_runs": 10000,
+  "roadmap_scope": "M0 review candidate + M1 hardening + M2 differential expansion",
+  "schema": "mantle.reflex-test-receipt/0.1",
+  "seeded_differential_cases": 250,
+  "status": "EXPERIMENTAL_LOCAL_TEST_ONLY",
+  "unittest_methods": 31
+}

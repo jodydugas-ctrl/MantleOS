@@ -153,3 +153,13 @@ and Chroma PNG encodings. Select exactly one carrier ingredient with Engram
 continuity. Raven is the Engram construction default; explicit personas replace
 it. KPP workflow roles remain model-neutral. New carriers begin without inherited
 history or approval; see examples/engrams/README.md.
+
+## Experimental REFLEX language
+
+`mantleos.reflex` implements the opt-in REFLEX/0.1 prototype; `kpp reflex-book`
+exposes its offline compiler/VM and data-only transport. It is separate from KPP's
+existing Python reflex-adapter workflow. It adds no Anchor definition, executable
+Body profile, governing tissue, automatic calcification or approval registry. Its
+SQLite registry is only a disposable simulation. Native adapters reuse verified
+Cartridge/Chroma Body transport; decoding never authorizes or executes a program.
+See docs/REFLEX-QUALIFICATION.md for exact supported scope and remaining gates.

@@ -14,7 +14,8 @@
   ],
   "tags": [
     "tissue",
-    "runtime"
+    "runtime",
+    "department:languages"
   ],
   "minimum_fidelity": 1,
   "dependencies": [],
@@ -22,7 +23,7 @@
     "Python implementation tissue using host interpreter"
   ],
   "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
-  "verified_with": "Bundled reference/tests only",
+  "verified_with": "Current Python tissue contract and implementation-language tests; host execution permission remains explicit.",
   "provenance": "Original KPP reference",
   "usage": {
     "use_when": "Select conventional Python execution for a recipe.",
@@ -33,5 +34,14 @@
       "Runnable Python tissue"
     ],
     "limits": "Requires compatible Python host and explicit execution permission."
+  },
+  "source": {
+    "kind": "repository-files",
+    "repository": "jodydugas-ctrl/Kitchen-Party-Protocol",
+    "paths": [
+      "src/mantleos/kpp/language.py",
+      "src/mantleos/kpp/construction.py",
+      "tests/test_language.py"
+    ]
   }
 }

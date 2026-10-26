@@ -16,7 +16,8 @@
   ],
   "tags": [
     "mantleos",
-    "specimen"
+    "specimen",
+    "department:body"
   ],
   "minimum_fidelity": 1,
   "dependencies": [],
@@ -24,7 +25,7 @@
     "The shared mantle.cell/2 contract: one RGB pixel or one appended record segment, carried as canonical source."
   ],
   "adaptation": "The specimen emits Python reference code as literal data; compilation is a separate explicit host operation.",
-  "verified_with": "Automated bridge + subprocess reference behavior tests",
+  "verified_with": "Current shared CELL implementation and automated bridge/reference behavior tests; contract is one cell, not a Chroma codec or complete Body.",
   "provenance": "Generated from canonical mantleos.cells and mantleos.json_contract source; no alternate CELL definition.",
   "specimen": {
     "path": "specimens/mantleos/kernel-cells.anchor",
@@ -42,5 +43,14 @@
       "Pixel cell or tape-segment cell"
     ],
     "limits": "Exact canonical CELL validation; this specimen is not a Chroma codec or whole Body."
+  },
+  "source": {
+    "kind": "repository-files",
+    "repository": "jodydugas-ctrl/Kitchen-Party-Protocol",
+    "paths": [
+      "src/mantleos/cells.py",
+      "src/mantleos/json_contract.py",
+      "tests/test_anchor.py"
+    ]
   }
 }

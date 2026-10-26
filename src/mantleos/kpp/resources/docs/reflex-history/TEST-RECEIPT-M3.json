@@ -1,0 +1,73 @@
+{
+  "all_checks_passed": true,
+  "authority": {
+    "baker_accepted": false,
+    "mantleos_installed": false,
+    "production_body_authorized": false,
+    "reviewer_accepted": false
+  },
+  "checks": [
+    {
+      "command": "python -W error::ResourceWarning -m unittest discover -s tests -v",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "name": "unit_suite",
+      "observed_tests": 48,
+      "passed": true
+    },
+    {
+      "audit_event_count": 4,
+      "command": "python -m experiments.reflex_book.tools.demo_m3",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "name": "m3_demo",
+      "passed": true,
+      "reported_status": "ANOMALY",
+      "reported_steps": [
+        "INSTALLED_IN_SIMULATION",
+        "ACTIVE_IN_SIMULATION",
+        "EXECUTED_IN_SIMULATION",
+        "DISABLED"
+      ]
+    },
+    {
+      "command": "python -m experiments.reflex_book.cli verify examples/reflex_book/m3_location_candidate.rfx",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "name": "binary_integrity_only",
+      "passed": true
+    },
+    {
+      "command": "python -m experiments.reflex_book.cli verify examples/reflex_book/location_corrupt.rfx",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "name": "invalid_binary_refused",
+      "passed": true
+    }
+  ],
+  "date_utc": "2026-10-24",
+  "environment": {
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "python": "3.13.5"
+  },
+  "evidence_hashes": {
+    "candidate_binary_sha256": "43a9f0d38d617d95a22e5ce8fead9381a5b414480a44c0f89bf8b1a2e2525d08",
+    "candidate_manifest_sha256": "98b73f2a92f25e14cce25a077f4b3243198a06547d1f537119e458cb1fb906a3",
+    "m0_receipt_sha256": "8887a8c18951d576b9b67869c6fae51e99f46cd6b88c34ea6f6ca91fff82e30b"
+  },
+  "implementation_scope": "isolated-offline-synthetic",
+  "limitations": [
+    "HMAC local-host trust is not a production signature PKI",
+    "audit hash head is not externally anchored",
+    "spatial examples are synthetic approximations",
+    "tests do not establish approval or clinical safety"
+  ],
+  "schema": "mantle.reflex-m3-test-receipt/0.1-experimental",
+  "unrun": [
+    "MantleOS whole-repository regressions",
+    "KPP pinned-source regressions",
+    "cross-platform test matrix",
+    "real operator credential key management",
+    "crash power-failure durability test"
+  ]
+}

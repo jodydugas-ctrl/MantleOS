@@ -1,0 +1,70 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "reflex-book",
+  "version": "0.1.0-experimental",
+  "function": "Bounded typed REFLEX language and data-only candidate transport",
+  "status": "experimental",
+  "preferred_for": [
+    "offline-rule-evaluation",
+    "synthetic-qualification"
+  ],
+  "compatible_tissues": [
+    "python",
+    "mixed"
+  ],
+  "tags": [
+    "department:languages",
+    "department:cognition",
+    "department:carriers",
+    "experimental",
+    "reflex"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "Strict canonical JSON IR",
+    "Compiler and deterministic VM",
+    "Data-only raw/ZIP and verified native Body transport"
+  ],
+  "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
+  "verified_with": "Original 64-test corpus plus regressions; run the pinned qualification recipe. Evidence is not acceptance.",
+  "provenance": "Maintainer-supplied REFLEX handoff bundle with per-file source pins; see docs/REFLEX-PROVENANCE.json. No license document supplied; no open-source relicensing asserted.",
+  "usage": {
+    "use_when": "Evaluate prototype-supported synthetic rules or review transport compatibility; not production adoption.",
+    "inputs": [
+      "Strict REFLEX/0.1 JSON IR and explicit synthetic observations",
+      "Independent expected program digest for carrier verification"
+    ],
+    "outputs": [
+      "Bounded structured results/traces",
+      "Untrusted canonical IR recovered from checked transport"
+    ],
+    "limits": "Experimental only. No host effects, production installation, automatic calcification, OS sandbox, clinical semantics or transferred approval."
+  },
+  "source": {
+    "kind": "bundled-files",
+    "files": {
+      "src/mantleos/reflex/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/mantleos/reflex/admission.py": "f2998c5ff728e5665b1036fb25fbe75be79f8c1032d4751c09d5b4819c90260e",
+      "src/mantleos/reflex/bytecode.py": "a7b7269c681322ac3b9c1c1338847cc8dfa3f4da9bc99035e72c35efa6994bcd",
+      "src/mantleos/reflex/canonical.py": "4cc9c4401ef7b240bec6f63e375626939259db825bd1d1c56d75611021998930",
+      "src/mantleos/reflex/carriers/__init__.py": "96e139a07fba714ee8faa0fb0e2deb7f0bf6959bf7854d6487560d5ccda7a10f",
+      "src/mantleos/reflex/carriers/contract.py": "d8fcddd5914bcb1e0c510b49e3c9b55e4ad181ea8fa98a4741c2b4ea2905fe05",
+      "src/mantleos/reflex/carriers/raw.py": "5493391b35497b30de723d567e382d4b1d14b6c127486aa995bc6b45a29fa8a8",
+      "src/mantleos/reflex/carriers/zip_reflex.py": "71059031dadaaf3b8d9b38d5927ac08759a9367967e42ef28f18f5472858350e",
+      "src/mantleos/reflex/checker.py": "bec3c7d817dc4c55abb7e451d9a6226fcb82b07784da7342151ba25068592ade",
+      "src/mantleos/reflex/cli.py": "a75fa81722c93bae4bfcb0726b2772b54dc050d8cbb7fdfb3f47cbfb9f7a5fff",
+      "src/mantleos/reflex/compiler.py": "b02d33d0289df56f87ba10cb9d9ba17e51997050b4f0cf6fe0d15dcabdbc1196",
+      "src/mantleos/reflex/errors.py": "8118afce3c6df00738bc838adce9960ff3c2727029134650b0847de662d83928",
+      "src/mantleos/reflex/evidence.py": "d6537c6b7d3292734b49ff27e95bc4b717a710bbd822f2cba891d42de6cc2c85",
+      "src/mantleos/reflex/native.py": "3d9c6d1472e3eb6ffabe7f4a6a13db7971a739051919a15c28a92fa716ac4e02",
+      "src/mantleos/reflex/parser.py": "d164a8f81420a9ee40036f8641ea29d2ca10267469dd3c53969af2a050a4cc90",
+      "src/mantleos/reflex/PROVENANCE.md": "ed0a90ca04a74909fc0374a02210ee5e64bdd7c1d8dba42ed44173b970a8a679",
+      "src/mantleos/reflex/reference.py": "a4deec11653a053d581c5c678c6588a1a92805d864a41a9c9011bc0e7ee4ee37",
+      "src/mantleos/reflex/registry.py": "b1f51a5c7568afaa6828f4ebd040a21e6bbdc5da235f7fb92871ea80ffdd54b1",
+      "src/mantleos/reflex/SPEC.md": "965c5e5a39af4fa7a30c01218b095fe255139e914dbd5d8be328ff1abc8d88d9",
+      "src/mantleos/reflex/types.py": "f33794356a8a03d8178c49e40876d4ce3374b466f57158903ddceeb0a4955687",
+      "src/mantleos/reflex/vm.py": "8ad0b70a24c1307dcadc4f8e732f4c0847e84b1756c33a69d07772fc15311c94"
+    }
+  }
+}

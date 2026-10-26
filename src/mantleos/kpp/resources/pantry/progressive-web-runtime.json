@@ -15,7 +15,9 @@
   ],
   "tags": [
     "runtime",
-    "streaming"
+    "streaming",
+    "department:body",
+    "department:construction"
   ],
   "minimum_fidelity": 1,
   "dependencies": [],
@@ -23,7 +25,7 @@
     "Append-only live module delivery to running browser UI"
   ],
   "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
-  "verified_with": "Bundled reference/tests only",
+  "verified_with": "Current progressive preview delivery and transport implementation with tests/test_progressive_web.py; recipe-specific acceptance remains separate.",
   "provenance": "Original KPP reference",
   "usage": {
     "use_when": "Select when a browser interface needs append-only feature admission.",
@@ -34,5 +36,14 @@
       "Newly available browser capability"
     ],
     "limits": "Not arbitrary hot replacement; maintain state and protect authorization boundaries."
+  },
+  "source": {
+    "kind": "repository-files",
+    "repository": "jodydugas-ctrl/Kitchen-Party-Protocol",
+    "paths": [
+      "src/mantleos/kpp/workshop.py",
+      "src/mantleos/kpp/portability.py",
+      "tests/test_progressive_web.py"
+    ]
   }
 }

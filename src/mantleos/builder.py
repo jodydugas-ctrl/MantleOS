@@ -65,6 +65,13 @@ def _install_runtime_library(root: Path, *, minimal_metadata=False):
     notices = source / 'notices'
     if notices.is_dir():
         shutil.copytree(notices, target / 'notices', dirs_exist_ok=True)
+    # The experimental ingredient explicitly pins its normative prototype text
+    # and provenance as source. Keep those available in portable source views.
+    for name in ('SPEC.md', 'PROVENANCE.md'):
+        resource = source / 'reflex' / name
+        if resource.is_file():
+            (target / 'reflex').mkdir(parents=True, exist_ok=True)
+            shutil.copy2(resource, target / 'reflex' / name)
     shutil.copy2(source / "body_entrypoint.py", root / "runtime.py")
     (root / "runtime.py").chmod(0o755)
 

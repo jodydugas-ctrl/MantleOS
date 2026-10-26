@@ -8,6 +8,7 @@ SLUG = re.compile(r"^[a-z][a-z0-9_-]{0,63}$")
 SUPPORTED_RECIPE = "kpp.recipe/3"
 SUPPORTED_RECIPES = (SUPPORTED_RECIPE, "kpp.recipe/4")
 SUPPORTED_INGREDIENT = "kpp.ingredient/1"
+REPOSITORY_SOURCE_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*$")
 
 class KPPError(ValueError):
     pass
@@ -19,6 +20,38 @@ def canonical(obj):
 
 def digest(obj):
     return hashlib.sha256(canonical(obj).encode("utf-8")).hexdigest()
+
+
+def validate_repository_source(source):
+    """Validate an advisory, repo-relative source locator without opening files."""
+    if not isinstance(source, dict) or set(source) != {"kind", "repository", "paths"}:
+        raise KPPError("Invalid repository-files source declaration")
+    if source.get("kind") != "repository-files":
+        raise KPPError("Unsupported repository source kind")
+    repository = source.get("repository")
+    if not isinstance(repository, str) or not REPOSITORY_SOURCE_RE.fullmatch(repository):
+        raise KPPError("Invalid repository source identity")
+    paths = source.get("paths")
+    if not isinstance(paths, list) or not 1 <= len(paths) <= 16:
+        raise KPPError("Repository source needs 1..16 paths")
+    normalized = []
+    windows_reserved = {"con", "prn", "aux", "nul", *(f"com{i}" for i in range(1, 10)),
+                        *(f"lpt{i}" for i in range(1, 10))}
+    for path in paths:
+        if (not isinstance(path, str) or not path or len(path) > 240 or
+                "\\" in path or path.startswith("/") or
+                any(ord(character) < 32 for character in path)):
+            raise KPPError("Invalid repository source path")
+        parts = path.split("/")
+        if any(part in ("", ".", "..") or len(part) > 100 or
+               not re.fullmatch(r"[A-Za-z0-9_.-]+", part) or part.endswith(".") or
+               part.split(".", 1)[0].lower() in windows_reserved
+               for part in parts):
+            raise KPPError("Unsafe repository source path: " + path)
+        normalized.append(path)
+    if len(normalized) != len(set(normalized)):
+        raise KPPError("Duplicate repository source path")
+    return {"kind": "repository-files", "repository": repository, "paths": normalized}
 
 
 def parse_json(content):
@@ -220,6 +253,9 @@ def ingredient_catalog(repo, check_sources=True):
         obj=read_json(path)
         if obj.get("schema") != SUPPORTED_INGREDIENT or not SLUG.fullmatch(obj.get("id", "")):
             raise KPPError(f"Invalid ingredient manifest: {path}")
+        source = obj.get("source")
+        if isinstance(source, dict) and source.get("kind") == "repository-files":
+            validate_repository_source(source)
         if obj["id"] in entries: raise KPPError("Duplicate ingredient: "+obj["id"])
         entries[obj["id"]]=obj
     # Portable Anchor specimens are packaged relative to the pantry repository,

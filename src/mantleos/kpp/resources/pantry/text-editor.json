@@ -3,7 +3,7 @@
   "id": "text-editor",
   "version": "0.1.0",
   "function": "Editable text buffer and user interactions",
-  "status": "ready",
+  "status": "experimental",
   "preferred_for": [
     "notes",
     "editor",
@@ -15,7 +15,8 @@
   ],
   "tags": [
     "edit",
-    "ui"
+    "ui",
+    "department:body"
   ],
   "minimum_fidelity": 2,
   "dependencies": [],
@@ -23,7 +24,7 @@
     "Editable text buffer and user interactions"
   ],
   "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
-  "verified_with": "Bundled reference/tests only",
+  "verified_with": "Experimental: current editor module exists; tests/test_organs.py cover organ contracts, not this browser module behavior.",
   "provenance": "Original KPP reference",
   "usage": {
     "use_when": "Select when the user needs text editing interactions.",
@@ -34,5 +35,13 @@
       "Editable text state"
     ],
     "limits": "Saving, persistence, and recovery are separate obligations."
+  },
+  "source": {
+    "kind": "repository-files",
+    "repository": "jodydugas-ctrl/Kitchen-Party-Protocol",
+    "paths": [
+      "src/mantleos/kpp/resources/previews/notepad/edit.js",
+      "tests/test_organs.py"
+    ]
   }
 }

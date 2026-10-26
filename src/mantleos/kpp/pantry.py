@@ -7,7 +7,7 @@ manifest statement proves recipe compatibility or the runtime behavior of a bake
 import hashlib
 from pathlib import Path
 
-from .core import KPPError, digest, ingredient_catalog
+from .core import KPPError, digest, ingredient_catalog, validate_repository_source
 
 
 def _text(value, name):
@@ -67,6 +67,11 @@ def source_identity(repo, item, check_external=False):
                 "pin_sha256":specimen["sha256"], "profile":specimen["profile"],
                 "relative_path":path, "source_access":"EXPLICIT_ONLY"}
     source = item.get("source", {})
+    if isinstance(source, dict) and source.get("kind") == "repository-files":
+        declaration = validate_repository_source(source)
+        return {"kind": "repository-files", "repository": declaration["repository"],
+                "paths": declaration["paths"], "integrity": "DECLARED_LOCATION_ONLY",
+                "source_access": "EXPLICIT_ONLY"}
     if isinstance(source, dict) and source.get("kind") == "local-directory":
         result={"kind":"local-directory", "integrity":"NOT_RECHECKED",
                 "scope":source.get("scope", "bounded source inventory"),

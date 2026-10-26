@@ -2,9 +2,9 @@
 
 Shared development is maintained in [Kitchen Party Protocol](https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol).
 The published Engram ingredients were introduced by [KPP PR #2](https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol/pull/2).
-MantleOS pins reviewed commit `70c363648faeb212a0a2992bf04cd8af44651dd3`, retained
-by KPP's ordinary merge. The carrier implementation, tests, notices, system documents
-and checked sample bytes match that selection. Future changes require reviewed promotion.
+The original Engram examples were reviewed at KPP commit `70c363648faeb212a0a2992bf04cd8af44651dd3`, retained by its ordinary merge. Their checked sample bytes remain unchanged.
+The currently promoted shared source, including subsequent experimental additions,
+is pinned in `upstream/kpp.lock.json`. Future changes require reviewed promotion.
 
 ```console
 python -m mantleos kpp engram create --recipe src/mantleos/kpp/resources/recipes/raven-engram-vcw.json --output fresh.vcw

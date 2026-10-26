@@ -1,0 +1,48 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "recipe-organ-contracts",
+  "version": "0.1.0",
+  "function": "Recipe-pinned projection of anchor ownership onto declared organs, with separately bounded static evidence.",
+  "status": "ready",
+  "preferred_for": [
+    "mantleos",
+    "bioagent"
+  ],
+  "compatible_tissues": [
+    "python",
+    "mixed"
+  ],
+  "tags": [
+    "department:body",
+    "department:construction"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "Project existing recipe obligations to organ ownership",
+    "Bind static observations to recipe, mapping, and scanned source"
+  ],
+  "adaptation": "Compatibility is determined by interface and recipe acceptance tests; this label is advisory.",
+  "verified_with": "Current organ projection/evidence implementation and tests/test_organs.py cover pinning, ownership, graph mapping, stale inventory, and explicit non-acceptance.",
+  "provenance": "Current KPP MantleOS source; repository paths are explicit pointers and are never fetched or executed during Pantry discovery.",
+  "source": {
+    "kind": "repository-files",
+    "repository": "jodydugas-ctrl/Kitchen-Party-Protocol",
+    "paths": [
+      "src/mantleos/kpp/organs.py",
+      "tests/test_organs.py"
+    ]
+  },
+  "usage": {
+    "use_when": "Select when a recipe needs explicit organ ownership for its existing acceptance anchors.",
+    "inputs": [
+      "Recipe",
+      "Pinned organ mapping",
+      "Optional bounded source scan and bindings"
+    ],
+    "outputs": [
+      "Recipe-bound ownership projection or source-bound observations with gaps"
+    ],
+    "limits": "Projection and static evidence do not grant authority, execute candidate code, establish runtime behavior, or grant KPP acceptance."
+  }
+}

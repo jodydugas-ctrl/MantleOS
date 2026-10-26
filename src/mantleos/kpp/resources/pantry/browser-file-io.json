@@ -3,7 +3,7 @@
   "id": "browser-file-io",
   "version": "0.1.0",
   "function": "User-triggered local text open/download",
-  "status": "ready",
+  "status": "experimental",
   "preferred_for": [
     "notes",
     "browser",
@@ -14,7 +14,8 @@
   ],
   "tags": [
     "file",
-    "storage"
+    "storage",
+    "department:construction"
   ],
   "minimum_fidelity": 3,
   "dependencies": [],
@@ -22,7 +23,7 @@
     "User-triggered local text open/download"
   ],
   "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
-  "verified_with": "Bundled reference/tests only",
+  "verified_with": "Experimental: current user-triggered browser file module exists, but KPP lacks a component-specific behavior test. Host permission and recipe fitness remain separate.",
   "provenance": "Original KPP reference",
   "usage": {
     "use_when": "Select for user-controlled local text input/output in a browser.",
@@ -34,5 +35,13 @@
       "Open or download interaction"
     ],
     "limits": "Browser permission and user gestures apply; no silent disk writes."
+  },
+  "source": {
+    "kind": "repository-files",
+    "repository": "jodydugas-ctrl/Kitchen-Party-Protocol",
+    "paths": [
+      "src/mantleos/kpp/resources/previews/notepad/files.js",
+      "tests/test_current_cli.py"
+    ]
   }
 }
