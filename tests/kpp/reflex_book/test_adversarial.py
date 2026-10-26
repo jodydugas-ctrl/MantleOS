@@ -1,3 +1,4 @@
+from mantleos.reflex_book.fixtures import root as fixture_root
 """M0/M1 adversarial conformance and seeded differential sampling."""
 import copy
 import hashlib
@@ -6,17 +7,16 @@ import random
 from pathlib import Path
 import unittest
 
-from mantleos.reflex.bytecode import decode, encode
-from mantleos.reflex.canonical import dumps, loads, sha256
-from mantleos.reflex.checker import validate
-from mantleos.reflex.compiler import compile_ir
-from mantleos.reflex.errors import ReflexError
-from mantleos.reflex.parser import parse_inputs, parse_program
-from mantleos.reflex.reference import run as oracle
-from mantleos.reflex.vm import run as interpreter
+from mantleos.reflex_book.bytecode import decode, encode
+from mantleos.reflex_book.canonical import dumps, loads, sha256
+from mantleos.reflex_book.checker import validate
+from mantleos.reflex_book.compiler import compile_ir
+from mantleos.reflex_book.errors import ReflexError
+from mantleos.reflex_book.parser import parse_inputs, parse_program
+from mantleos.reflex_book.reference import run as oracle
+from mantleos.reflex_book.vm import run as interpreter
 
-from .fixtures import workspace
-BASE = workspace() / 'examples' / 'reflex_book'
+BASE = fixture_root() / 'examples' / 'reflex_book'
 
 
 def read(name):

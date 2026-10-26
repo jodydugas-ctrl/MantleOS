@@ -89,6 +89,11 @@ def source_identity(repo, item, check_external=False):
                 result["scan_limitations"]=current["limitations"]
                 result["skipped_files"]=len(current["skipped"])
         return result
+    if isinstance(source, dict) and source.get("kind") == "bundled-module":
+        # Declaration only: label/source discovery must not import candidate code.
+        return {"kind":"bundled-module", "module":source.get("module"),
+                "contract":source.get("contract"), "integrity":"DECLARED_NOT_RECHECKED",
+                "source_access":"EXPLICIT_ONLY"}
     return {"kind":"unbundled-reference-or-contract", "integrity":"NO_SOURCE_PIN",
             "source_access":"NOT_AVAILABLE_FROM_PANTRY"}
 

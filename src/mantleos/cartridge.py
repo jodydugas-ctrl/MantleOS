@@ -204,6 +204,8 @@ def verify(root: str | Path) -> dict:
             raise ValueError("Anchor Blueprint interface missing from Body systems")
     elif birth.get("blueprint") is not None:
         raise ValueError("BIRTH.json declares a Blueprint binding but Cartridge does not carry it")
+    from .attachments import validate as validate_attachments
+    validate_attachments(root)
     verify_lock(root)
     manifest = verify_manifest(root)
     return {

@@ -266,3 +266,12 @@ compiler/VM, original conformance corpus and native data-only VCW/Chroma example
 Run `python -m mantleos kpp pantry --id reflex-book` to discover the experimental
 ingredient. The [reuse report](docs/REFLEX-REUSE.md) pins current and archived source.
 This is not an executable Body profile, production adoption or Baker acceptance.
+
+
+## REFLEX reference inspector
+
+The bundled experimental toolkit now supports `python -m mantleos reflex-book`.
+Run `python -m mantleos reflex-book demo --output .work/new-reflex-demo` for a
+synthetic freshness example, then inspect or reproduce its records.
+See [the toolkit guide](docs/REFLEX-BOOK.md) and [repository update notes](docs/REFLEX-REFERENCE-UPDATE.md).
+Native Body execution remains deferred; evidence does not grant Baker acceptance.

@@ -1,0 +1,97 @@
+[
+  {
+    "id": "ordering",
+    "source": "{ \"z\": 0, \"a\": -12 }",
+    "expected": "{\"a\":-12,\"z\":0}"
+  },
+  {
+    "id": "min-int",
+    "source": "[-9223372036854775808,9223372036854775807]",
+    "expected": "[-9223372036854775808,9223372036854775807]"
+  },
+  {
+    "id": "negative-zero",
+    "source": "[-0,0]",
+    "expected": "[0,0]"
+  },
+  {
+    "id": "unicode-scalars",
+    "source": "{\"\ud800\udc00\":1,\"\ue000\":2}",
+    "expected": "{\"\ue000\":2,\"\ud800\udc00\":1}"
+  },
+  {
+    "id": "unicode-text",
+    "source": "{\"text\":\"\u00e9/\u2028\u2029\"}",
+    "expected": "{\"text\":\"\u00e9/\u2028\u2029\"}"
+  },
+  {
+    "id": "controls",
+    "source": "{\"text\":\"\\b\\t\\n\\f\\r\\u0000\"}",
+    "expected": "{\"text\":\"\\b\\t\\n\\f\\r\\u0000\"}"
+  },
+  {
+    "id": "booleans",
+    "source": "[true, false, null]",
+    "expected": "[true,false,null]"
+  },
+  {
+    "id": "escaped-input",
+    "source": "{\"\\u0061\":\"\\/\"}",
+    "expected": "{\"a\":\"/\"}"
+  },
+  {
+    "id": "duplicate",
+    "source": "{\"a\":1,\"a\":2}",
+    "refuse": true
+  },
+  {
+    "id": "escaped-duplicate",
+    "source": "{\"a\":1,\"\\u0061\":2}",
+    "refuse": true
+  },
+  {
+    "id": "float",
+    "source": "[1.5]",
+    "refuse": true
+  },
+  {
+    "id": "exponent",
+    "source": "[1e0]",
+    "refuse": true
+  },
+  {
+    "id": "large",
+    "source": "[9223372036854775808]",
+    "refuse": true
+  },
+  {
+    "id": "surrogate",
+    "source": "[\"\\ud800\"]",
+    "refuse": true
+  },
+  {
+    "id": "NFC",
+    "source": "[\"e\u0301\"]",
+    "refuse": true
+  },
+  {
+    "id": "leading-zero",
+    "source": "[01]",
+    "refuse": true
+  },
+  {
+    "id": "trailing-comma",
+    "source": "[1,]",
+    "refuse": true
+  },
+  {
+    "id": "whitespace",
+    "source": "\u00a0[]",
+    "refuse": true
+  },
+  {
+    "id": "trailing",
+    "source": "[]x",
+    "refuse": true
+  }
+]

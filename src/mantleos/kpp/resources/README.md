@@ -96,3 +96,11 @@ The [REFLEX guide](docs/REFLEX-QUALIFICATION.md) describes the bounded offline l
 original test corpus, source-pinned reuse review and synthetic native VCW/Chroma
 examples. Discover `reflex-book` in the Pantry. This experimental capability is
 separate from the existing Python reflex-adapter workflow and grants no Body authority.
+
+
+## REFLEX reference inspector
+
+Run `python -m mantleos reflex-book demo --output .work/new-reflex-demo` for the
+synthetic NORMAL-to-UNKNOWN freshness example. [REFLEX-BOOK.md](docs/REFLEX-BOOK.md)
+explains read-only inspection and explicit reproduction. Native Body execution
+remains deferred; qualification and Baker acceptance remain separate.

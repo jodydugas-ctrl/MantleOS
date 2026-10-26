@@ -22,6 +22,9 @@ def _write_new(path, value):
 
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] == 'reflex-book':
+        from .reflex_book.cli import main as reflex_main
+        return reflex_main(argv[1:])
     if argv and argv[0] == 'kpp':
         from .kpp.cli import main as kitchen_main
         return kitchen_main(argv[1:])
@@ -32,6 +35,9 @@ def main(argv=None):
     command = remaining[0] if remaining else None
     own = {"demo", "new", "cell", "program", "tissue", "evolve", "continuity"}
     try:
+        if command == 'attachment':
+            from .attachments import main as attachment_main
+            return attachment_main(remaining[1:], body=shared.body)
         if command in {'examples', 'appai', 'mission'}:
             from .example_cli import main as example_main
             return example_main(remaining)
@@ -46,7 +52,7 @@ def main(argv=None):
         parser = argparse.ArgumentParser(prog="mantleos", description="Build living software. Body first, optional MIND.",
             epilog="Body operations: --body PATH status | verify | run | query | save | restore | recover. "
                    "Examples: examples --help, appai --help, mission --help. "
-                   "Tools: kpp --help, scan --help, anchor-code --help. Use --body before or after a command.")
+                   "Tools: reflex-book --help, attachment --help, kpp --help, scan --help, anchor-code --help. Use --body before or after a command.")
         parser.add_argument("--version", action="version", version=__version__)
         sub = parser.add_subparsers(dest="command", required=True)
         p = sub.add_parser("demo", help="Run the complete synthetic offline organism loop")

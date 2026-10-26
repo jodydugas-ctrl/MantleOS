@@ -1,3 +1,6 @@
+import os
+import mantleos
+from mantleos.reflex_book.fixtures import root as fixture_root
 """Synthetic, isolated, host-driven M3 conformance and tamper tests."""
 import copy
 import hashlib
@@ -6,16 +9,15 @@ import sqlite3
 import tempfile
 import unittest
 
-from mantleos.reflex.admission import operator_issue_receipt,verify_approval,install
-from mantleos.reflex.bytecode import encode
-from mantleos.reflex.compiler import compile_ir
-from mantleos.reflex.evidence import make_candidate,validate_candidate
-from mantleos.reflex.errors import ReflexError
-from mantleos.reflex.parser import parse_program
-from mantleos.reflex.registry import ExperimentalRegistry
+from mantleos.reflex_book.admission import operator_issue_receipt,verify_approval,install
+from mantleos.reflex_book.bytecode import encode
+from mantleos.reflex_book.compiler import compile_ir
+from mantleos.reflex_book.evidence import make_candidate,validate_candidate
+from mantleos.reflex_book.errors import ReflexError
+from mantleos.reflex_book.parser import parse_program
+from mantleos.reflex_book.registry import ExperimentalRegistry
 
-from .fixtures import workspace
-ROOT=workspace()
+ROOT=fixture_root()
 FIX=ROOT/'examples'/'reflex_book'
 NOW='2026-10-24T12:00:00Z'
 END='2026-11-24T12:00:00Z'
@@ -244,12 +246,12 @@ class PackagingAndConcurrencyTests(unittest.TestCase):
         import sys
         with tempfile.TemporaryDirectory() as d:
             output=Path(d)/'candidate.json'
-            cmd=[sys.executable,'-m','mantleos.reflex.cli','candidate',
+            cmd=[sys.executable,'-m','mantleos.reflex_book.cli','candidate',
                  str(FIX/'m3_location_candidate.rfx'),'--evidence',
                  str(ROOT/'docs/reflex/TEST-RECEIPT.json'),'--baselines',
                  str(FIX/'m3_baseline_versions.json'),'--proposed-by','synthetic_model',
                  '--evidence-ref','synthetic:m0-test-receipt','--output',str(output)]
-            completed=subprocess.run(cmd,cwd=ROOT,capture_output=True,text=True,check=True)
+            completed=subprocess.run(cmd,cwd=ROOT, env={**os.environ, "PYTHONPATH":str(Path(mantleos.__file__).resolve().parent.parent)},capture_output=True,text=True,check=True)
             self.assertIn('CANDIDATE_ONLY',completed.stdout)
             self.assertIn('"authorized":false',completed.stdout)
             self.assertEqual(output.read_bytes().rstrip(b'\n'),

@@ -1,12 +1,4 @@
-"""Stable, machine-readable prototype refusal codes."""
-
-
-class ReflexError(ValueError):
-    def __init__(self, code: str, detail: str):
-        super().__init__(f"{code}: {detail}")
-        self.code = code
-        self.detail = detail
-
-
-def refuse(code: str, detail: str):
-    raise ReflexError(code, detail)
+"""Compatibility alias; implementation is maintained in reflex_book."""
+import importlib as _importlib
+import sys as _sys
+_sys.modules[__name__] = _importlib.import_module('mantleos.reflex_book.errors')

@@ -23,7 +23,7 @@ def print_json(obj):
 def main(argv=None):
     argv=list(sys.argv[1:] if argv is None else argv)
     if argv and argv[0]=='reflex-book':
-        from ..reflex.cli import main as reflex_book_main
+        from ..reflex_book.cli import main as reflex_book_main
         return reflex_book_main(argv[1:])
     if hasattr(sys.stdout,"reconfigure"):sys.stdout.reconfigure(encoding="utf-8")
     if hasattr(sys.stderr,"reconfigure"):sys.stderr.reconfigure(encoding="utf-8")

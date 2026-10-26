@@ -95,5 +95,6 @@ def unpack(path, output, carrier, expected_digest):
         refuse('E_IO','output already exists')
     payload,result=extract(path,carrier,expected_digest)
     output.parent.mkdir(parents=True,exist_ok=True)
-    with output.open('xb') as stream:stream.write(payload)
+    from ..reflex_book.cli import _write_new
+    _write_new(output,payload)
     return {**result,'path':str(output)}

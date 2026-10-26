@@ -13,7 +13,7 @@ The maintainer-supplied 104-file ZIP exists; 103 listed checksums matched and th
 original 64 tests were independently reproduced. Earlier narrative-only handoffs
 could not establish this. Original receipts in `docs/reflex-history` are immutable
 historical claims, not current tests. The language's prototype SPEC lives at
-`src/mantleos/reflex/SPEC.md`. Its Int/GeoFix/Region dialect remains restricted;
+`src/mantleos/reflex_book/SPEC.md`. Its Int/GeoFix/Region dialect remains restricted;
 roadmap Decimal/Quantity and other proposed operators are unsupported.
 
 Approval verification now validates an explicit receipt field set, eliminating
@@ -99,3 +99,7 @@ AppAI layered wake continuity, separate MIND sleep, scheduling, experiential age
 rebirth, automatic calcification and immune policies are later work. Existing
 Body stasis, permissions, born identities, Engram examples and supported Anchor
 profiles are unchanged. Source visibility does not relicense shared components.
+
+The bundled prepared evaluator and evidence inspector are documented in
+[REFLEX-BOOK.md](REFLEX-BOOK.md). Older imports alias the same implementation;
+local delivery still does not grant qualification or Baker acceptance.

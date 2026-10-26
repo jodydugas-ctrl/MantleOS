@@ -1,3 +1,4 @@
+from mantleos.reflex_book.fixtures import root as fixture_root
 import copy
 import hashlib
 import json
@@ -6,18 +7,17 @@ import struct
 import unittest
 from unittest.mock import patch
 
-from mantleos.reflex.bytecode import encode,decode,disassemble
-from mantleos.reflex.canonical import loads,dumps,sha256
-from mantleos.reflex.checker import validate
-from mantleos.reflex.compiler import compile_ir
-from mantleos.reflex.errors import ReflexError
-from mantleos.reflex.parser import parse_program
-from mantleos.reflex.reference import run as ast_run
-from mantleos.reflex.types import TRUE,FALSE,UNKNOWN,and3,or3,not3
-from mantleos.reflex.vm import run as vm_run
+from mantleos.reflex_book.bytecode import encode,decode,disassemble
+from mantleos.reflex_book.canonical import loads,dumps,sha256
+from mantleos.reflex_book.checker import validate
+from mantleos.reflex_book.compiler import compile_ir
+from mantleos.reflex_book.errors import ReflexError
+from mantleos.reflex_book.parser import parse_program
+from mantleos.reflex_book.reference import run as ast_run
+from mantleos.reflex_book.types import TRUE,FALSE,UNKNOWN,and3,or3,not3
+from mantleos.reflex_book.vm import run as vm_run
 
-from .fixtures import workspace
-EXAMPLES=workspace()/'examples'/'reflex_book'
+EXAMPLES=fixture_root()/'examples'/'reflex_book'
 
 
 def fixture(name):
@@ -159,7 +159,7 @@ class HostileShapeTests(unittest.TestCase):
                 validate(candidate)
 
     def test_unapproved_candidate_has_no_install_path(self):
-        from mantleos.reflex.admission import install
+        from mantleos.reflex_book.admission import install
         with self.assertRaises(ReflexError) as exc:
             install(loads(fixture('candidate_unapproved.json')))
         self.assertEqual(exc.exception.code,'E_AUTHORITY')

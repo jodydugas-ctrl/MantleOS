@@ -1,3 +1,6 @@
+import os
+import mantleos
+from mantleos.reflex_book.fixtures import root as fixture_root
 """M4 transport conformance. A successful decode is never admission."""
 import copy
 import hashlib
@@ -13,20 +16,19 @@ from unittest.mock import patch
 import warnings
 import zipfile
 
-from mantleos.reflex.bytecode import encode as encode_bytecode
-from mantleos.reflex.compiler import compile_ir
-from mantleos.reflex.canonical import dumps, loads
-from mantleos.reflex.carriers import carrier, make_manifest
-from mantleos.reflex.carriers.contract import (MAX_CARRIER_BYTES, MAX_MANIFEST_BYTES,
+from mantleos.reflex_book.bytecode import encode as encode_bytecode
+from mantleos.reflex_book.compiler import compile_ir
+from mantleos.reflex_book.canonical import dumps, loads
+from mantleos.reflex_book.carriers import carrier, make_manifest
+from mantleos.reflex_book.carriers.contract import (MAX_CARRIER_BYTES, MAX_MANIFEST_BYTES,
                                                       MAX_SOURCE_BYTES)
-from mantleos.reflex.carriers.raw import HEADER, MAGIC, DOMAIN
-from mantleos.reflex.carriers.zip_reflex import EPOCH, FILE_MODE
-from mantleos.reflex.errors import ReflexError
-from mantleos.reflex.parser import parse_program
-from mantleos.reflex.vm import run
+from mantleos.reflex_book.carriers.raw import HEADER, MAGIC, DOMAIN
+from mantleos.reflex_book.carriers.zip_reflex import EPOCH, FILE_MODE
+from mantleos.reflex_book.errors import ReflexError
+from mantleos.reflex_book.parser import parse_program
+from mantleos.reflex_book.vm import run
 
-from .fixtures import workspace
-ROOT=workspace()
+ROOT = fixture_root()
 EXAMPLES = ROOT / 'examples/reflex_book'
 
 
@@ -197,7 +199,7 @@ class CarrierConformanceTests(unittest.TestCase):
         self.refuses(lambda: c.decode(bytes(mutated)))
 
     def test_transport_roundtrip_never_invokes_runtime_or_operator(self):
-        from mantleos.reflex import vm, admission
+        from mantleos.reflex_book import vm, admission
         for kind in ('raw', 'zip'):
             c, m, blob = pair(kind)
             with patch.object(vm, 'run', side_effect=AssertionError('VM EXECUTED')), \
@@ -212,9 +214,9 @@ class CarrierConformanceTests(unittest.TestCase):
                 packed = temp / 'transport.bin'
                 unpacked = temp / 'program.json'
                 digest = hashlib.sha256(program()).hexdigest()
-                cmd = [sys.executable, '-m', 'mantleos.reflex.cli']
+                cmd = [sys.executable, '-m', 'mantleos.reflex_book.cli']
                 def invoke(*args):
-                    return subprocess.run(cmd+list(args), cwd=ROOT, capture_output=True, text=True, timeout=12)
+                    return subprocess.run(cmd+list(args), cwd=ROOT, env={**os.environ, "PYTHONPATH":str(Path(mantleos.__file__).resolve().parent.parent)}, capture_output=True, text=True, timeout=12)
                 result = invoke('carrier-pack', str(EXAMPLES/'location_rule.json'), '--carrier', kind,
                                 '--output', str(packed))
                 self.assertEqual(result.returncode, 0, result.stderr)

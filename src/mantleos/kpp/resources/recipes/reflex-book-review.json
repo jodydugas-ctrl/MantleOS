@@ -1,0 +1,125 @@
+{
+  "schema": "kpp.recipe/4",
+  "id": "reflex-book-review",
+  "goal": "Review a bounded REFLEX compiler/interpreter candidate and its transport and authority boundaries",
+  "mode": "composition",
+  "tissue": "python",
+  "fidelity": 3,
+  "target": {
+    "description": "Offline REFLEX 0.1 anomaly-basic reference candidate with prepared execution and optional explanations",
+    "source": "Owner-supplied REFLEX handoff; reviewed source and evidence must be pinned separately",
+    "reference_version": "reflex-0.1-hardening-candidate"
+  },
+  "ingredients": [
+    "reflex-book",
+    "python-tissue"
+  ],
+  "oven": {
+    "assumption": "Consistent execution of sufficiently explicit recipe",
+    "provider": "any capable host",
+    "iterations": "as needed",
+    "implementation": "incremental",
+    "verification": "Baker acceptance"
+  },
+  "acceptance": "Scoped Baker review is required for each obligation. Passing local tests, prototype receipts and label metadata do not grant acceptance.",
+  "anchors": [
+    {
+      "id": "parser-fidelity",
+      "statement": "Exact Book, typed IR, canonical bytes and stable refusals",
+      "test": "Run golden canonical and malformed-source vectors; require exact executable JSON encoding",
+      "required": true,
+      "depth": 3,
+      "depends": []
+    },
+    {
+      "id": "unknown-semantics",
+      "statement": "Preserve Bool3, global guard priority, presence semantics and bounded uncertainty reasons",
+      "test": "Run independent truth tables, missing/stale/future/quality/boundary cases and legacy trace comparisons",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "parser-fidelity"
+      ]
+    },
+    {
+      "id": "prepared-determinism",
+      "statement": "Prepare once and execute repeatably without further program decoding, compilation, model calls or network",
+      "test": "Execute 10000 runs with compiler/decoder/network forbidden; compare identical result and trace",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "parser-fidelity"
+      ]
+    },
+    {
+      "id": "provenance-and-evidence",
+      "statement": "Bind exact candidate, source, executable, evidence and dependency revisions",
+      "test": "Tamper each bound artifact independently and require refusal; pin the reviewed source handoff",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "parser-fidelity"
+      ]
+    },
+    {
+      "id": "authority-separation",
+      "statement": "Keep transport, evidence, approval, installation and activation distinct",
+      "test": "Refuse absent/forged/expired approval, stale baselines and authority smuggling; retain runtime reports as data",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "provenance-and-evidence"
+      ]
+    },
+    {
+      "id": "rollback-preservation",
+      "statement": "Retain prior executable candidates and append audit history without replacing Body identity or memory",
+      "test": "Test disable, revoke, stale quarantine, eligible rollback and failed publication preservation",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "authority-separation"
+      ]
+    },
+    {
+      "id": "native-transport",
+      "statement": "Recover exact canonical REFLEX candidate bytes through raw, ZIP, Cartridge and Chroma without execution or adoption",
+      "test": "Test corrupt containers, independent expected digests, both digest layers and unchanged host functionality",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "parser-fidelity",
+        "authority-separation"
+      ]
+    },
+    {
+      "id": "measured-limits",
+      "statement": "Publish measured preparation, execution and full simulated admission costs with explicit platform limits",
+      "test": "Run fixed-corpus benchmark with latency, CPU, allocations and artifact size; leave model baseline and break-even unmeasured until independent data exists",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "prepared-determinism",
+        "native-transport"
+      ]
+    }
+  ],
+  "product_kind": "conventional",
+  "delivery_mode": "artifact",
+  "capabilities": {},
+  "implementation": {
+    "components": [
+      {
+        "id": "app",
+        "policy": "required",
+        "languages": [
+          "python"
+        ]
+      }
+    ]
+  },
+  "anchor_binding": "none",
+  "construction": {
+    "techniques": []
+  }
+}
