@@ -1,0 +1,22 @@
+{
+  "clock_utc": "2026-10-23T12:00:00Z",
+  "schema": "mantle.reflex-input/0.1",
+  "values": {
+    "position": {
+      "accuracy_m": 30,
+      "lat_e6": 46700000,
+      "lon_e6": -64500000,
+      "observed_at": "2026-10-23T11:00:00Z",
+      "source": "synthetic:example",
+      "type": "GeoFix"
+    },
+    "routine_region": {
+      "crs": "WGS84-E6-RECT/0.1",
+      "lat_max_e6": 46000000,
+      "lat_min_e6": 45000000,
+      "lon_max_e6": -64000000,
+      "lon_min_e6": -65000000,
+      "type": "Region"
+    }
+  }
+}

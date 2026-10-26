@@ -21,10 +21,15 @@ def print_json(obj):
     print(json.dumps(obj,indent=2,ensure_ascii=False))
 
 def main(argv=None):
+    argv=list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0]=='reflex-book':
+        from ..reflex.cli import main as reflex_book_main
+        return reflex_book_main(argv[1:])
     if hasattr(sys.stdout,"reconfigure"):sys.stdout.reconfigure(encoding="utf-8")
     if hasattr(sys.stderr,"reconfigure"):sys.stderr.reconfigure(encoding="utf-8")
     p=argparse.ArgumentParser(prog="kpp",description="Kitchen Party Protocol / local developer tools")
     sub=p.add_subparsers(dest="cmd",required=True)
+    sub.add_parser('reflex-book',help='Experimental REFLEX language/VM and data-only carriers; no Body adoption')
     a=sub.add_parser('engram', help='Construct a fresh Engram with a recipe-selected carrier')
     commands=a.add_subparsers(dest='engram_cmd',required=True)
     c=commands.add_parser('create')

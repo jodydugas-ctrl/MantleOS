@@ -44,4 +44,5 @@ jobs:
       - run: python examples/thoughts/walkthrough.py --output .work/ci-thoughts
       - run: python examples/kpp/walkthrough.py --output .work/ci-kpp
       - run: python examples/discovery/walkthrough.py --output .work/ci-discovery
+      - run: python examples/reflex_book/qualify.py --output .work/ci-reflex --examples-only
       - run: python -m build --no-isolation

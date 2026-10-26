@@ -89,3 +89,10 @@ organs, fresh source observations, real browser checks and reviewed source
 replacement/restoration. Run `python tools/check_organ_save.py --output NEW_DIR
 --execute --reviewed` with locally available Playwright/Chromium. It preserves
 drafts and retained source and leaves acceptance open.
+
+## Experimental REFLEX qualification
+
+The [REFLEX guide](docs/REFLEX-QUALIFICATION.md) describes the bounded offline language,
+original test corpus, source-pinned reuse review and synthetic native VCW/Chroma
+examples. Discover `reflex-book` in the Pantry. This experimental capability is
+separate from the existing Python reflex-adapter workflow and grants no Body authority.

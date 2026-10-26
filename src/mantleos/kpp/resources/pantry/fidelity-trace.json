@@ -14,7 +14,8 @@
   ],
   "tags": [
     "scan",
-    "fidelity"
+    "fidelity",
+    "department:cognition"
   ],
   "minimum_fidelity": 1,
   "dependencies": [],
@@ -22,7 +23,7 @@
     "Bounded progressive static source relationship tracing"
   ],
   "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
-  "verified_with": "Bundled reference/tests only",
+  "verified_with": "Current bounded static scanner and tests/test_scan_integration.py; static observations do not prove runtime behavior.",
   "provenance": "Original KPP reference",
   "usage": {
     "use_when": "Select to examine progressive static source relationships.",
@@ -33,5 +34,13 @@
       "Bounded source inventory and relationship graph"
     ],
     "limits": "Static scan only; cannot prove runtime behavior."
+  },
+  "source": {
+    "kind": "repository-files",
+    "repository": "jodydugas-ctrl/Kitchen-Party-Protocol",
+    "paths": [
+      "src/mantleos/kpp/scanner.py",
+      "tests/test_scan_integration.py"
+    ]
   }
 }

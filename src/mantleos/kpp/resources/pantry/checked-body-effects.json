@@ -1,0 +1,52 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "checked-body-effects",
+  "version": "0.1.0",
+  "function": "Explicit allowlisted host actions with result stages and Engram observations around an existing host adapter.",
+  "status": "ready",
+  "preferred_for": [
+    "mantleos",
+    "bioagent"
+  ],
+  "compatible_tissues": [
+    "python",
+    "mixed"
+  ],
+  "tags": [
+    "department:body",
+    "department:cognition",
+    "department:memory"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "Allowlisted host operations with structured results",
+    "Engram-backed action and observation continuity",
+    "Failure stages preserve draft state"
+  ],
+  "adaptation": "Compatibility is determined by interface and recipe acceptance tests; this label is advisory.",
+  "verified_with": "Current augmentation and host-adapter source with tests/test_augmentation.py for denied unapproved actions, retained history, concurrent edits, and failure handling.",
+  "provenance": "Current KPP MantleOS source; repository paths are explicit pointers and are never fetched or executed during Pantry discovery.",
+  "source": {
+    "kind": "repository-files",
+    "repository": "jodydugas-ctrl/Kitchen-Party-Protocol",
+    "paths": [
+      "src/mantleos/augmentation.py",
+      "src/mantleos/augmentation_host.py",
+      "src/mantleos/engram.py",
+      "tests/test_augmentation.py"
+    ]
+  },
+  "usage": {
+    "use_when": "Select when an existing host adapter needs explicit operation allowlisting and recorded outcomes.",
+    "inputs": [
+      "Host adapter",
+      "Allowed operation names",
+      "Structured operation request"
+    ],
+    "outputs": [
+      "Verified, failed, or unknown action result and continuity observation when available"
+    ],
+    "limits": "This does not grant approval or authority, and does not provide arbitrary tool execution; host-specific permissions and recipe acceptance remain separate."
+  }
+}

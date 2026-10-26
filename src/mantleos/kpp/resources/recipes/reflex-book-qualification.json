@@ -1,0 +1,84 @@
+{
+  "schema": "kpp.recipe/4",
+  "id": "reflex-book-qualification",
+  "goal": "Qualify the experimental REFLEX language and native data transport without production adoption",
+  "mode": "composition",
+  "tissue": "python",
+  "fidelity": 3,
+  "target": {
+    "description": "Offline synthetic REFLEX compiler/VM and data-only native VCW/Chroma compatibility",
+    "source": "Pinned prototype and current shared MantleOS APIs",
+    "reference_version": "REFLEX/0.1 experimental"
+  },
+  "ingredients": [
+    "reflex-book"
+  ],
+  "oven": {
+    "assumption": "Consistent execution of sufficiently explicit recipe",
+    "provider": "any capable host",
+    "iterations": "as needed",
+    "implementation": "incremental",
+    "verification": "Baker acceptance"
+  },
+  "acceptance": "Every required anchor must carry explicit evidence; no credit for untested capabilities.",
+  "anchors": [
+    {
+      "id": "language-conformance",
+      "statement": "Typed canonical IR, golden vectors and AST/VM agreement",
+      "test": "Original conformance/adversarial tests and report reference_vm_agreement",
+      "required": true,
+      "depth": 2,
+      "depends": []
+    },
+    {
+      "id": "authority-separation",
+      "statement": "No self-approval, automatic adoption or execution during transport",
+      "test": "Admission and NativeTests authority/refusal cases",
+      "required": true,
+      "depth": 2,
+      "depends": []
+    },
+    {
+      "id": "native-data-transport",
+      "statement": "Both native carriers preserve exact data, founding identity and empty initial memory",
+      "test": "NativeTests plus qualify.py generated example checks",
+      "required": true,
+      "depth": 2,
+      "depends": []
+    },
+    {
+      "id": "failure-and-recovery",
+      "statement": "Malformed carriers, receipt drift, expiry, revocation, dependency drift and restart fail safely",
+      "test": "Carrier/admission/recovery and regression tests",
+      "required": true,
+      "depth": 2,
+      "depends": []
+    },
+    {
+      "id": "shared-preservation",
+      "statement": "Existing KPP/Body behavior, licensing and pinned source are preserved",
+      "test": "Complete suites, doctor/smoke, source inventories and standalone export parity",
+      "required": true,
+      "depth": 2,
+      "depends": []
+    }
+  ],
+  "product_kind": "conventional",
+  "delivery_mode": "artifact",
+  "capabilities": {},
+  "implementation": {
+    "components": [
+      {
+        "id": "app",
+        "policy": "required",
+        "languages": [
+          "python"
+        ]
+      }
+    ]
+  },
+  "anchor_binding": "none",
+  "construction": {
+    "techniques": []
+  }
+}

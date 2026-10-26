@@ -1,0 +1,105 @@
+{
+  "schema": "mantle.reflex-vectors/0.1",
+  "vectors": [
+    {
+      "expected": "NORMAL",
+      "input": "location_normal.json",
+      "rule": "location_rule.json"
+    },
+    {
+      "expected": "ANOMALY",
+      "input": "location_anomaly.json",
+      "rule": "location_rule.json"
+    },
+    {
+      "expected": "UNKNOWN",
+      "input": "location_unknown.json",
+      "rule": "location_rule.json"
+    },
+    {
+      "expected": "UNKNOWN",
+      "input": "location_stale.json",
+      "rule": "location_rule.json"
+    },
+    {
+      "expected": "UNKNOWN",
+      "input": "location_poor_quality.json",
+      "rule": "location_rule.json"
+    },
+    {
+      "expected": "UNKNOWN",
+      "input": "location_missing_region.json",
+      "rule": "location_rule.json"
+    },
+    {
+      "expected": "UNKNOWN",
+      "input": "location_boundary.json",
+      "rule": "location_rule.json"
+    },
+    {
+      "expected": "UNKNOWN",
+      "input": "location_future.json",
+      "rule": "location_rule.json"
+    },
+    {
+      "expected": "UNKNOWN",
+      "input": "location_high_latitude.json",
+      "rule": "location_rule.json"
+    },
+    {
+      "expected": "ANOMALY",
+      "input": "location_anomaly_lon.json",
+      "rule": "location_rule.json"
+    },
+    {
+      "expected": "UNKNOWN",
+      "input": "location_edge_inside.json",
+      "rule": "location_rule.json"
+    },
+    {
+      "expected": "NORMAL",
+      "input": "location_fresh_at_limit.json",
+      "rule": "location_rule.json"
+    },
+    {
+      "expected": "NORMAL",
+      "input": "location_quality_at_limit.json",
+      "rule": "location_rule.json"
+    },
+    {
+      "expected": "UNKNOWN",
+      "input": "location_stale_anomaly.json",
+      "rule": "location_rule.json"
+    },
+    {
+      "expected": "UNKNOWN",
+      "input": "location_stale_normal.json",
+      "rule": "location_rule.json"
+    },
+    {
+      "expected": "NORMAL",
+      "input": "counter_normal.json",
+      "rule": "counter_rule.json"
+    },
+    {
+      "expected": "ANOMALY",
+      "input": "counter_anomaly.json",
+      "rule": "counter_rule.json"
+    },
+    {
+      "expected": "NORMAL",
+      "input": "counter_equal.json",
+      "rule": "counter_rule.json"
+    },
+    {
+      "expected": "ANOMALY",
+      "input": "counter_upper.json",
+      "rule": "counter_rule.json"
+    },
+    {
+      "expected": "ANOMALY",
+      "input": "counter_lower.json",
+      "rule": "counter_rule.json"
+    }
+  ]
+}

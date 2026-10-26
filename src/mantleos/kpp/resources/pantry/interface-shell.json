@@ -3,7 +3,7 @@
   "id": "interface-shell",
   "version": "0.1.0",
   "function": "Visible application surface: layout, controls, menus",
-  "status": "ready",
+  "status": "experimental",
   "preferred_for": [
     "browser",
     "prototype",
@@ -15,7 +15,8 @@
   ],
   "tags": [
     "kpp",
-    "ui"
+    "ui",
+    "department:construction"
   ],
   "minimum_fidelity": 1,
   "dependencies": [],
@@ -23,7 +24,7 @@
     "Visible application surface: layout, controls, menus"
   ],
   "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
-  "verified_with": "Bundled reference/tests only",
+  "verified_with": "Experimental: current shell assets exist, but this catalog entry has no component-specific runtime test establishing the described visible surface.",
   "provenance": "Original KPP reference",
   "usage": {
     "use_when": "Select for a quickly usable visible browser prototype.",
@@ -34,5 +35,14 @@
       "Visible page and controls"
     ],
     "limits": "GUI existence does not prove interaction behavior."
+  },
+  "source": {
+    "kind": "repository-files",
+    "repository": "jodydugas-ctrl/Kitchen-Party-Protocol",
+    "paths": [
+      "src/mantleos/kpp/resources/previews/notepad/index.html",
+      "src/mantleos/kpp/resources/previews/notepad/base.js",
+      "tests/test_gui.py"
+    ]
   }
 }

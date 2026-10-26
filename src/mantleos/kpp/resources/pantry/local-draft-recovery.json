@@ -3,7 +3,7 @@
   "id": "local-draft-recovery",
   "version": "0.1.0",
   "function": "Persistent browser-local draft recovery",
-  "status": "ready",
+  "status": "experimental",
   "preferred_for": [
     "notes",
     "browser",
@@ -13,7 +13,9 @@
     "javascript"
   ],
   "tags": [
-    "storage"
+    "storage",
+    "department:body",
+    "department:memory"
   ],
   "minimum_fidelity": 1,
   "dependencies": [],
@@ -21,7 +23,7 @@
     "Persistent browser-local draft recovery"
   ],
   "adaptation": "Compatible use is determined by interface and acceptance tests; labels are advisory.",
-  "verified_with": "Bundled reference/tests only",
+  "verified_with": "Experimental: current localStorage draft code exists; KPP preview recovery tests do not directly exercise this browser storage implementation.",
   "provenance": "Original KPP reference",
   "usage": {
     "use_when": "Select to recover draft text in a browser.",
@@ -32,5 +34,13 @@
       "Locally restored draft"
     ],
     "limits": "Storage is per-origin and subject to browser clearing and quotas."
+  },
+  "source": {
+    "kind": "repository-files",
+    "repository": "jodydugas-ctrl/Kitchen-Party-Protocol",
+    "paths": [
+      "src/mantleos/kpp/resources/previews/notepad/base.js",
+      "tests/test_preview_recovery.py"
+    ]
   }
 }

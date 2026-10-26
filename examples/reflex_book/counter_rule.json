@@ -1,0 +1,67 @@
+{
+  "book": {
+    "dialect": "anomaly-basic",
+    "edition": "0.1",
+    "id": "reflex"
+  },
+  "capabilities": [
+    "read:count"
+  ],
+  "id": "example.counter",
+  "inputs": {
+    "count": "Int"
+  },
+  "limits": {
+    "max_input_bytes": 8192,
+    "max_instructions": 256,
+    "max_nodes": 128,
+    "max_result_bytes": 512
+  },
+  "on_anomaly": "NONE",
+  "outcomes": {
+    "false": "NORMAL",
+    "true": "ANOMALY",
+    "unknown": "UNKNOWN"
+  },
+  "preconditions": [],
+  "predicate": {
+    "args": [
+      {
+        "input": "count",
+        "max": 20,
+        "min": 10,
+        "op": "compare_range"
+      },
+      {
+        "arg": {
+          "left": {
+            "input": "count"
+          },
+          "op": "compare_eq",
+          "right": {
+            "const": {
+              "type": "Int",
+              "value": 13
+            }
+          }
+        },
+        "op": "not"
+      },
+      {
+        "args": [
+          {
+            "op": "literal",
+            "value": "FALSE"
+          },
+          {
+            "input": "count",
+            "op": "known"
+          }
+        ],
+        "op": "or"
+      }
+    ],
+    "op": "and"
+  },
+  "schema": "mantle.reflex-ir/0.1"
+}

@@ -39,11 +39,89 @@ class PantryLabels(unittest.TestCase):
             self.assertEqual(result['source']['integrity'],'STALE_PIN_MISMATCH')
             with self.assertRaises(KPPError):ingredient_catalog(dest)
 
-    def test_bundled_chroma_requires_recipe_specific_evidence(self):
-        result=view(ROOT,'chroma-png-memory')
-        self.assertEqual(result['source']['integrity'],'NOT_RECHECKED')
-        self.assertEqual(result['status'],'ready')
+    def test_unbundled_reference_has_no_fake_evidence(self):
+        result=view(ROOT,'anchor-tissue')
+        self.assertEqual(result['source']['integrity'],'NO_SOURCE_PIN')
+        self.assertEqual(result['status'],'reference')
         self.assertEqual(result['integration'],'REQUIRES_RECIPE_SPECIFIC_TESTS')
+
+    def test_repository_locator_is_metadata_only_and_discoverable_by_department(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);(root/'pantry').mkdir()
+            manifest={'schema':'kpp.ingredient/1','id':'sample-capability','version':'1.0.0',
+                      'function':'A bounded locator test','status':'experimental',
+                      'tags':['department:memory','hash-chain'],
+                      'usage':{'use_when':'Select for a memory locator test','inputs':['text'],
+                               'outputs':['declared source path'],'limits':'Metadata only.'},
+                      'source':{'kind':'repository-files','repository':'owner/repo',
+                                'paths':['src/mantleos/engram.py']}}
+            write_json(root/'pantry/sample-capability.json',manifest)
+            # The pantry manifest may be read; the declared repo source must not be opened.
+            import builtins
+            opened=[]; original_open=builtins.open
+            def tracked_open(file,*args,**kwargs):
+                opened.append(Path(file))
+                return original_open(file,*args,**kwargs)
+            with patch('builtins.open',side_effect=tracked_open), patch('pathlib.Path.read_bytes',side_effect=AssertionError('must not read source')):
+                found=discover(root,'department:memory')
+                self.assertEqual([x['id'] for x in found['matches']],['sample-capability'])
+                label_value=view(root,'sample-capability')
+                self.assertEqual(label_value['source']['integrity'],'DECLARED_LOCATION_ONLY')
+                source=view(root,'sample-capability','source')
+                self.assertEqual(source['source']['paths'],['src/mantleos/engram.py'])
+                self.assertEqual(source['source']['source_access'],'EXPLICIT_ONLY')
+                self.assertEqual(source['source']['integrity'],'DECLARED_LOCATION_ONLY')
+            self.assertTrue(all(path.name=='sample-capability.json' for path in opened))
+
+    def test_repository_locator_rejects_unsafe_and_duplicate_paths(self):
+        unsafe=['../outside.py','src/../../outside.py','/absolute.py','C:/outside.py',
+                'src\\outside.py','src//outside.py','src/./inside.py',
+                'src/file.py:stream','src/bad|name.py','src/CON.txt']
+        for paths in [[path] for path in unsafe] + [['src/a.py','src/a.py']]:
+            with self.subTest(paths=paths), tempfile.TemporaryDirectory() as d:
+                root=Path(d);(root/'pantry').mkdir()
+                write_json(root/'pantry/bad.json',{
+                    'schema':'kpp.ingredient/1','id':'bad-source','version':'1.0.0',
+                    'function':'Invalid locator','status':'reference',
+                    'source':{'kind':'repository-files','repository':'owner/repo','paths':paths}})
+                with self.assertRaises(KPPError): ingredient_catalog(root)
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);(root/'pantry').mkdir()
+            write_json(root/'pantry/bad.json',{
+                'schema':'kpp.ingredient/1','id':'bad-source','version':'1.0.0',
+                'function':'Invalid locator','status':'reference',
+                'source':{'kind':'repository-files','repository':'../repo','paths':['src/file.py']}})
+            with self.assertRaises(KPPError): ingredient_catalog(root)
+
+    def test_stable_ids_and_department_tags_are_catalog_metadata(self):
+        expected={'anchor-tissue','browser-file-io','chase-gate','chroma-png-memory',
+                  'engram-continuity','external-project','fidelity-trace','interface-shell',
+                  'kernel-relative-cells','local-draft-recovery','mind-body-boundary',
+                  'progressive-web-runtime','python-tissue','text-editor',
+                  'vcw-cartridge-memory','recipe-organ-contracts','checked-body-effects','reflex-book'}
+        catalog=ingredient_catalog(ROOT)
+        self.assertEqual(set(catalog),expected)
+        departments={'memory','carriers','languages','body','cognition','construction'}
+        for item in catalog.values():
+            self.assertTrue(all(tag.split(':',1)[1] in departments for tag in item['tags']
+                                if tag.startswith('department:')))
+            self.assertTrue(any(tag.startswith('department:') for tag in item['tags']))
+            if item['status']=='ready':
+                self.assertIn(item['source']['kind'],('repository-files','bundled-files'),item['id'])
+                if item['source']['kind']=='repository-files':
+                    self.assertTrue(any(path.startswith('tests/') for path in item['source']['paths']),item['id'])
+                self.assertIn('test',item['verified_with'].lower(),item['id'])
+        result=discover(ROOT,'department:memory')
+        ids={x['id'] for x in result['matches']}
+        self.assertTrue({'chroma-png-memory','engram-continuity'} <= ids)
+        self.assertNotIn('vcw-cube',catalog);self.assertNotIn('vcw-stack',catalog)
+
+    def test_current_carrier_evidence_is_preserved(self):
+        for ident in ('chroma-png-memory','vcw-cartridge-memory'):
+            result=view(ROOT,ident)
+            self.assertEqual(result['status'],'ready')
+            self.assertEqual(result['source']['integrity'],'NOT_RECHECKED')
+            self.assertEqual(view(ROOT,ident,'source')['source']['integrity'],'PIN_MATCH')
 
     def test_external_bounded_recheck_is_explicit(self):
         with tempfile.TemporaryDirectory() as d:
