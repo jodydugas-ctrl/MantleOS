@@ -19,6 +19,8 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - run: python -m pip install -r requirements-dev.txt
+      - name: Provision optional private Skin test dependency
+        run: python -m pip install "cryptography>=46,<47"
       - name: Verify reviewed source inventory and KPP alignment
         run: |
           python tools/project_container.py check
