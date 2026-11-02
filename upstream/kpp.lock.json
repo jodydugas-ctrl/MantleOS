@@ -173,7 +173,7 @@
     },
     "src/mantleos/appai.py": {
       "group": "implementation",
-      "sha256": "202fcdf4b531a97f380ea1d4aaaa1d541b70138f95ce3ae328025ec179507533",
+      "sha256": "26841c8ff310a84cb33d60981f6b6e2221fcee2d911a15fa776ef6f83a96d350",
       "source": "src/mantleos/appai.py"
     },
     "src/mantleos/appai_assets/hermes.json": {
@@ -248,7 +248,7 @@
     },
     "src/mantleos/console.py": {
       "group": "implementation",
-      "sha256": "439d14c5480dbf0f9e476848dc2f93ea4896ef8db42f7c781b9ddbffe2e066d1",
+      "sha256": "bb0cfb7ee7efd2c6cb9f8d7b0c9a1803c0a840ff89e102e637efa3794b2fecda",
       "source": "src/mantleos/console.py"
     },
     "src/mantleos/continuity.py": {
@@ -295,6 +295,11 @@
       "group": "implementation",
       "sha256": "277f195362aaae79d99fad5ccaefc6d443c86c8bf69259ae05b21523d5b32f06",
       "source": "src/mantleos/hosted.py"
+    },
+    "src/mantleos/immune.py": {
+      "group": "implementation",
+      "sha256": "b167fe233dfaf112ac9c1cdb642e6c447775de886f04bf83393228a8e89b4ce1",
+      "source": "src/mantleos/immune.py"
     },
     "src/mantleos/journal.py": {
       "group": "implementation",
@@ -493,7 +498,7 @@
     },
     "src/mantleos/kpp/resources/README.md": {
       "group": "implementation",
-      "sha256": "f67f886bab8836e91dbaf62bcb1f8ac0a6ee6d5d6adf10afe217a9d3ce58789a",
+      "sha256": "f5afef1b0f3dc874edffc8b17b334c67981a7e7c05e23b31ffb8548fc29154f9",
       "source": "src/mantleos/kpp/resources/README.md"
     },
     "src/mantleos/kpp/resources/START-HERE.md": {
@@ -611,6 +616,21 @@
       "sha256": "b77b68844aed2d9f9b35241cef84e2ba385d6dd3dbffaf7f95bac7e5af8cef4a",
       "source": "src/mantleos/kpp/resources/docs/PREVIEW-RECOVERY.md"
     },
+    "src/mantleos/kpp/resources/docs/PRIVATE-SKIN-VERIFICATION.md": {
+      "group": "implementation",
+      "sha256": "3f9e1a25ab123b44731407dc95e410d3b89fd4045c598b58a65d88d96bb51d63",
+      "source": "src/mantleos/kpp/resources/docs/PRIVATE-SKIN-VERIFICATION.md"
+    },
+    "src/mantleos/kpp/resources/docs/PRIVATE-SKIN.anchor.txt": {
+      "group": "implementation",
+      "sha256": "e6fd0173a3524f00bdbe6a47aa1ff6255eca7cec33e4755e4eeac04bf5e382f8",
+      "source": "src/mantleos/kpp/resources/docs/PRIVATE-SKIN.anchor.txt"
+    },
+    "src/mantleos/kpp/resources/docs/PRIVATE-SKIN.md": {
+      "group": "implementation",
+      "sha256": "1ce4ae9d76a12ab3aa7a56d6bcc90ffba703450dbe2fcb81490babbe0032051b",
+      "source": "src/mantleos/kpp/resources/docs/PRIVATE-SKIN.md"
+    },
     "src/mantleos/kpp/resources/docs/PROGRESSIVE-BIOSOFTWARE.md": {
       "group": "implementation",
       "sha256": "6ddc6d03953334eeb4191f887095c78e7681c90bd50ce4cf9b2c86660e334d2e",
@@ -660,6 +680,11 @@
       "group": "implementation",
       "sha256": "11cc8cd2859cadff90dac907f644aa36d96c9392fc989ca4df4577ffc84d0985",
       "source": "src/mantleos/kpp/resources/docs/TRANSFORMATION.md"
+    },
+    "src/mantleos/kpp/resources/docs/private-skin-benchmark.json": {
+      "group": "implementation",
+      "sha256": "f5a698e404e43b46ca4bce0bb5719a145971f52591c491b0a61a562c4372da9a",
+      "source": "src/mantleos/kpp/resources/docs/private-skin-benchmark.json"
     },
     "src/mantleos/kpp/resources/docs/reflex-history/INTEGRATION-STAGING.md": {
       "group": "implementation",
@@ -1091,6 +1116,11 @@
       "sha256": "bf20ca4adca34de6e57ca89549a9333040b46a4cdaa9bd30baf5e985c85dcfe3",
       "source": "src/mantleos/kpp/resources/pantry/fidelity-trace.json"
     },
+    "src/mantleos/kpp/resources/pantry/immune-boundary.json": {
+      "group": "implementation",
+      "sha256": "176bd920133e7285bfa79b5e6001656f8eaad36f05a900d844fc679debd34201",
+      "source": "src/mantleos/kpp/resources/pantry/immune-boundary.json"
+    },
     "src/mantleos/kpp/resources/pantry/interface-shell.json": {
       "group": "implementation",
       "sha256": "ad2242976260bd59df497528f48e8abc91b2a210c02ef0810c8e5cd689df19bc",
@@ -1115,6 +1145,21 @@
       "group": "implementation",
       "sha256": "1e5f4cc543806c177a504a16e56d2d85830f838d47632895041ab9b4a9349829",
       "source": "src/mantleos/kpp/resources/pantry/mind-body-boundary.json"
+    },
+    "src/mantleos/kpp/resources/pantry/openrouter-mind.json": {
+      "group": "implementation",
+      "sha256": "e8b6c99172f42c909992b7b44d7970456020a5c5c36e5c24470a7b3cc328dae7",
+      "source": "src/mantleos/kpp/resources/pantry/openrouter-mind.json"
+    },
+    "src/mantleos/kpp/resources/pantry/private-mind-bridge.json": {
+      "group": "implementation",
+      "sha256": "c0ac767dad4dca060b6ea13a49b448a5524250fbced58b96221bb20e8b1b5bf7",
+      "source": "src/mantleos/kpp/resources/pantry/private-mind-bridge.json"
+    },
+    "src/mantleos/kpp/resources/pantry/private-skin.json": {
+      "group": "implementation",
+      "sha256": "5abbe56303c278d5a6dbe8bbbda9aaf9d235f397ca7f3beb57c33287349fd3de",
+      "source": "src/mantleos/kpp/resources/pantry/private-skin.json"
     },
     "src/mantleos/kpp/resources/pantry/progressive-web-runtime.json": {
       "group": "implementation",
@@ -1145,6 +1190,11 @@
       "group": "implementation",
       "sha256": "8047305d2ced31d1d84cfd3cd6a149022471db49752627b003f6180396de8601",
       "source": "src/mantleos/kpp/resources/pantry/vcw-cartridge-memory.json"
+    },
+    "src/mantleos/kpp/resources/pantry/verified-reply-release.json": {
+      "group": "implementation",
+      "sha256": "7e09de3cceae505ffccbe4debaa22a98e75a30b7a2c715f6a1648a8e69a6b227",
+      "source": "src/mantleos/kpp/resources/pantry/verified-reply-release.json"
     },
     "src/mantleos/kpp/resources/personas/raven.md": {
       "group": "implementation",
@@ -1281,6 +1331,11 @@
       "sha256": "5df963683a081b92d49c3ce4d48eaf8a0fe58b367eb0ae795f06b604feb92300",
       "source": "src/mantleos/kpp/resources/recipes/portable-memory-bake.json"
     },
+    "src/mantleos/kpp/resources/recipes/private-appai-skin.json": {
+      "group": "implementation",
+      "sha256": "3263a07199c5a594a3235eff2a1f37d6beee75ffe5441f2469c08ba0d044a530",
+      "source": "src/mantleos/kpp/resources/recipes/private-appai-skin.json"
+    },
     "src/mantleos/kpp/resources/recipes/progressive-calculator.json": {
       "group": "implementation",
       "sha256": "ff71e52370ed4c08c28e679cbfcbce3e102140e8bf45fd0618dd250da6891569",
@@ -1411,10 +1466,20 @@
       "sha256": "20cc2a1a84d6e3e837d64de05aed7a8cacacee60e7d75ea0ca6c045b132ecb12",
       "source": "src/mantleos/kpp/resources/tools/journal_specimen.py"
     },
+    "src/mantleos/kpp/resources/tools/private_skin_specimen.py": {
+      "group": "implementation",
+      "sha256": "6f9f4ef99b4fc6a88b8ff7b905872e7bb16cbdff78c9ce7be56a1f75b75e66b0",
+      "source": "src/mantleos/kpp/resources/tools/private_skin_specimen.py"
+    },
     "src/mantleos/kpp/resources/tools/qualify_journal.py": {
       "group": "implementation",
       "sha256": "157bb2f755d9a3f97886f4f7066ae3f00b7542ab6da604d45b52c84865455e8b",
       "source": "src/mantleos/kpp/resources/tools/qualify_journal.py"
+    },
+    "src/mantleos/kpp/resources/tools/qualify_private_skin.py": {
+      "group": "implementation",
+      "sha256": "f50e6fc78ead457acd911533228e13fcc617c99a706220fe6d17975d1aa7ef70",
+      "source": "src/mantleos/kpp/resources/tools/qualify_private_skin.py"
     },
     "src/mantleos/kpp/resources/tools/validate_release.py": {
       "group": "implementation",
@@ -1546,6 +1611,16 @@
       "sha256": "ba0b5607b7d87328b8b0e7678f926b852dd45b43ec4bcffea8d13f527e9dac48",
       "source": "src/mantleos/primer.py"
     },
+    "src/mantleos/private_appai.py": {
+      "group": "implementation",
+      "sha256": "e6f599fad018ff13e3ba44772a1a77732462df2b11cc70dd752d87417fb1dab2",
+      "source": "src/mantleos/private_appai.py"
+    },
+    "src/mantleos/private_mind.py": {
+      "group": "implementation",
+      "sha256": "61f1deefb3c9231b57b16aeb66f64df49da3eee2ca1140da6c927f81dfbd56af",
+      "source": "src/mantleos/private_mind.py"
+    },
     "src/mantleos/progressive_app.py": {
       "group": "implementation",
       "sha256": "a5c7ee0dbf48f6ab216433cb099ebb6cb89f960efd1c82a1c9e8ce99f34ab8d1",
@@ -1565,6 +1640,11 @@
       "group": "implementation",
       "sha256": "22a97efdd63ec80ef39c9de991221554ec64f0d5df62abd9f3d40cf0f9cfdfcf",
       "source": "src/mantleos/projects.py"
+    },
+    "src/mantleos/prototype_import.py": {
+      "group": "implementation",
+      "sha256": "f9c0f4322a7d6b25f25b37eea8356522f4ae9d936dcd3eaf90b536835f9055ee",
+      "source": "src/mantleos/prototype_import.py"
     },
     "src/mantleos/reflex/PROVENANCE.md": {
       "group": "implementation",
@@ -2191,6 +2271,16 @@
       "sha256": "f560d10ffb50bcd67f9f0f1a9cf61b84cf87a7cfcc972eaa8c74bf8674699f1e",
       "source": "src/mantleos/single_media.py"
     },
+    "src/mantleos/skin.py": {
+      "group": "implementation",
+      "sha256": "2158beb2ac1db4c1f5caf245709ab667935c3b22817e5f0051783d094f68713b",
+      "source": "src/mantleos/skin.py"
+    },
+    "src/mantleos/skin_cli.py": {
+      "group": "implementation",
+      "sha256": "82290542d4a22108485659226d2c2f3bd627750fe32139d9368b72d5ac0a5359",
+      "source": "src/mantleos/skin_cli.py"
+    },
     "src/mantleos/specimens.py": {
       "group": "implementation",
       "sha256": "d3d75a6db6b2cdf2ecff12977234e185034078e736301c42906e66cd45ba0091",
@@ -2413,7 +2503,7 @@
     },
     "tests/kpp/test_pantry_labels.py": {
       "group": "tests",
-      "sha256": "83be4f21876a15155c99ffe5369ad69985b53820ad022e86ddff584bf9f1a76f",
+      "sha256": "fa2d076d18267d52479ea8160ad42fef2bebfa57b8e3490090f1cebb465e13e3",
       "source": "tests/test_pantry_labels.py"
     },
     "tests/kpp/test_portability.py": {
@@ -2425,6 +2515,11 @@
       "group": "tests",
       "sha256": "f4b7f72bab8e6c5f8fde1e16e0c4c5f44de1382a6f91f27a0da1ea84cdf25898",
       "source": "tests/test_preview_recovery.py"
+    },
+    "tests/kpp/test_private_skin.py": {
+      "group": "tests",
+      "sha256": "fd043fcfa883e71e925f837598bb1bfd8e0507a1f602ab182742fa1537dc9197",
+      "source": "tests/test_private_skin.py"
     },
     "tests/kpp/test_progressive_web.py": {
       "group": "tests",
@@ -2492,10 +2587,10 @@
     "upstream/kpp-notices/THIRD-PARTY-NOTICES.md"
   ],
   "schema": "mantle.kpp-upstream/1",
-  "selection_digest": "4d1a3c823487228379730c5de360aa219dde0715a82508ea9706df7a52f8fff6",
-  "shared_source_digest": "adf06535e9c0cabc672fce3aaf07de1c0431364ddb15ab322fa98c04380bc838",
+  "selection_digest": "13252c220e248a098885e93247eed5c4aab5754875cf36dad9b4a06e392a134f",
+  "shared_source_digest": "86b8834292651fd0c437cd8e5d9d6b82a4b82f89c5c4977c4287ab6e8b2966dc",
   "upstream": {
-    "base_commit": "f5a050404f1414e92fd88c50e929d10894079458",
+    "base_commit": "29b13e0742bfb75f8ed19bd62c299e5d9ab80a8e",
     "dirty": false,
     "official_url": "https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol",
     "published_revision_verified": false,

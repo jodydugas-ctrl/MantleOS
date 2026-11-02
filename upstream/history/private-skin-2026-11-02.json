@@ -1,0 +1,23 @@
+{
+  "acceptance": "OPEN; platform isolation and live provider qualification untested",
+  "authority": "Explicit local implementation request; no remote publication",
+  "checks": {
+    "final_private_focused": "21 PASS; late hardening separately verified",
+    "kpp_full": "422 PASS, 5 skipped",
+    "mantle_full": "544 PASS, 5 skipped"
+  },
+  "event": "REVIEWED_SHARED_PROMOTION",
+  "network": "NONE",
+  "previous_selection": "4d1a3c823487228379730c5de360aa219dde0715a82508ea9706df7a52f8fff6",
+  "schema": "mantle.kpp-update-event/1",
+  "selected_snapshot": {
+    "base_commit": "29b13e0742bfb75f8ed19bd62c299e5d9ab80a8e",
+    "dirty": false,
+    "official_url": "https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol",
+    "published_revision_verified": false,
+    "snapshot_kind": "local-committed-snapshot",
+    "version": "1.1.0a5"
+  },
+  "selection_digest": "13252c220e248a098885e93247eed5c4aab5754875cf36dad9b4a06e392a134f",
+  "shared_source": "BYTE_IDENTICAL"
+}

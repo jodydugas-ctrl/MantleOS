@@ -1,0 +1,85 @@
+{
+  "implementation_sha256": "0b15fc50e487f867291bef23794e4e18ce78589d44e2f3c18af22f8764ed9c0e",
+  "evidence": "SYNTHETIC_NO_LIVE_LLM",
+  "os_isolation": "UNTESTED",
+  "cases": [
+    {
+      "history": 0,
+      "cold_bytes": 0,
+      "samples": 20,
+      "startup_ms": 4.833799990592524,
+      "median_ms": 16.234650000114925,
+      "p95_ms": 19.61930000106804,
+      "export_ms": 10.454599978402257,
+      "frame_bytes_max": 5370,
+      "model_calls": 0,
+      "fixture_generations": 20,
+      "export_bytes": 159744
+    },
+    {
+      "history": 0,
+      "cold_bytes": 20971520,
+      "samples": 20,
+      "startup_ms": 52.965100010624155,
+      "median_ms": 16.490950001752935,
+      "p95_ms": 24.509599985321984,
+      "export_ms": 166.99190001236275,
+      "frame_bytes_max": 5370,
+      "model_calls": 0,
+      "fixture_generations": 20,
+      "export_bytes": 21151744
+    },
+    {
+      "history": 100,
+      "cold_bytes": 0,
+      "samples": 20,
+      "startup_ms": 5.85970000247471,
+      "median_ms": 17.85544998710975,
+      "p95_ms": 18.830299988621846,
+      "export_ms": 14.341100002638996,
+      "frame_bytes_max": 5377,
+      "model_calls": 0,
+      "fixture_generations": 20,
+      "export_bytes": 274432
+    },
+    {
+      "history": 100,
+      "cold_bytes": 20971520,
+      "samples": 20,
+      "startup_ms": 54.789100016932935,
+      "median_ms": 17.860549996839836,
+      "p95_ms": 24.466300004860386,
+      "export_ms": 139.98300000093877,
+      "frame_bytes_max": 5377,
+      "model_calls": 0,
+      "fixture_generations": 20,
+      "export_bytes": 21266432
+    },
+    {
+      "history": 1000,
+      "cold_bytes": 0,
+      "samples": 20,
+      "startup_ms": 21.377400000346825,
+      "median_ms": 17.423049997887574,
+      "p95_ms": 21.90689998678863,
+      "export_ms": 31.507300009252504,
+      "frame_bytes_max": 5384,
+      "model_calls": 0,
+      "fixture_generations": 20,
+      "export_bytes": 1273856
+    },
+    {
+      "history": 1000,
+      "cold_bytes": 20971520,
+      "samples": 20,
+      "startup_ms": 69.4589999911841,
+      "median_ms": 17.7986500057159,
+      "p95_ms": 18.451000010827556,
+      "export_ms": 156.4133999927435,
+      "frame_bytes_max": 5384,
+      "model_calls": 0,
+      "fixture_generations": 20,
+      "export_bytes": 22257664
+    }
+  ]
+}

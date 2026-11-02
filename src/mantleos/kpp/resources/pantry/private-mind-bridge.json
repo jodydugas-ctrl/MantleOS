@@ -1,0 +1,44 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "private-mind-bridge",
+  "version": "0.1.0",
+  "function": "Controller-owned isolated cognition adapter",
+  "status": "experimental",
+  "preferred_for": [
+    "appai",
+    "engram"
+  ],
+  "compatible_tissues": [
+    "mixed",
+    "python",
+    "anchor"
+  ],
+  "tags": [
+    "privacy",
+    "appai",
+    "department:cognition"
+  ],
+  "minimum_fidelity": 3,
+  "dependencies": [],
+  "capabilities": [
+    "Controller-owned isolated cognition adapter"
+  ],
+  "adaptation": "Opt-in trusted controller API. See docs/PRIVATE-SKIN.md. No service or provider starts on import.",
+  "verified_with": "tests/test_private_skin.py; synthetic evidence only unless qualification report explicitly says otherwise.",
+  "provenance": "New shared implementation informed by prototype ZIP SHA256 61d69805b354aeb3a1e5a7046cb33d8723ba5ee0a558e52de09de700b778d8ad and preserved MantleOS lineage; original private content excluded.",
+  "source": {
+    "kind": "bundled-module",
+    "module": "mantleos.private_mind",
+    "contract": "mantle.private-skin/1"
+  },
+  "usage": {
+    "use_when": "Controller-owned isolated cognition adapter",
+    "inputs": [
+      "Owner provisioned private Body and policy"
+    ],
+    "outputs": [
+      "Bounded verified operations"
+    ],
+    "limits": "Experimental controller pilot. Optional cryptography required. OS isolation and live model/provider qualification remain deployment-specific. Runnable synthetic specimen: python tools/private_skin_specimen.py --output NEW_DIRECTORY."
+  }
+}

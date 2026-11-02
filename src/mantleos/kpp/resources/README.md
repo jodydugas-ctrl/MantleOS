@@ -109,3 +109,5 @@ For the current release scope, installation, commit-bound evidence and continuat
 read [the release handoff](docs/RELEASE-HANDOFF.md).
 
 See docs/ANCHOR-DESIGN.md for compact responsibility contracts, recipe coverage and Journal integration.
+
+[Private Skin AppAI pilot](docs/PRIVATE-SKIN.md) adds encrypted continuity, private MIND ports and verified release.

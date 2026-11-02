@@ -21,6 +21,9 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
 ]
 
+[project.optional-dependencies]
+private-skin = ["cryptography>=46,<47"]
+
 [project.urls]
 Repository = "https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol"
 Issues = "https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol/issues"

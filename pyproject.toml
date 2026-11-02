@@ -14,6 +14,7 @@ authors = [{name = "Jody Dugas"}]
 dependencies = []
 
 [project.optional-dependencies]
+private-skin = ["cryptography>=46,<47"]
 dev = ["build==1.3.0", "setuptools==80.9.0"]
 
 [project.scripts]

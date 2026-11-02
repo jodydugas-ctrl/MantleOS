@@ -16,6 +16,16 @@ from . import compiled, engram, lifecycle, primer, specimens
 from .transactions import atomic_bytes, body_lock, write_json
 
 
+def private_session(skin, signer, mind, *, policy, broker=None, checkpoint=None):
+    """Explicit controller-owned pilot; does not graft secrets into host model context.
+
+    The existing Hermes graft is not a qualified private controller or display.
+    Its ordinary before_mind behavior remains a distinct public-PRIMER mode.
+    """
+    from .private_appai import PrivateAppAI
+    return PrivateAppAI(skin, signer, mind, policy=policy, broker=broker, checkpoint=checkpoint)
+
+
 def _sha(data):
     return hashlib.sha256(data).hexdigest()
 
