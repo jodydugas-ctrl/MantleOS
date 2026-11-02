@@ -163,3 +163,16 @@ Body profile, governing tissue, automatic calcification or approval registry. It
 SQLite registry is only a disposable simulation. Native adapters reuse verified
 Cartridge/Chroma Body transport; decoding never authorizes or executes a program.
 See docs/REFLEX-QUALIFICATION.md for exact supported scope and remaining gates.
+
+## Anchor Journal Engram (experimental)
+
+The shared `mantleos.journal` carrier stores a verified Body snapshot, founding
+PRIMER, Anchor register and canonical append-only records in a SQLite `.engram`
+file. Ordinary encounters use one host-supplied language packet; a checked read
+action adds a second. Both use existing Anchor conversational semantics and host
+authority. Durable turn commits are separate from explicit portable exports.
+Cartridge and Chroma remain supported; no new Anchor or CELL semantics apply.
+See docs/JOURNAL-ENGRAM.md for the protocol, limitations and qualification commands.
+
+
+See docs/ANCHOR-DESIGN.md for compact responsibility contracts, recipe coverage and Journal integration.

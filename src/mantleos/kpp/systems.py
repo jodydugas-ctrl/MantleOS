@@ -17,7 +17,7 @@ def describe():
             'scan_schema': 'scan.report/1', 'discovery_schema': 'mantle.parallel-discovery/1',
             'body_api': 'mantleos.organism / mantleos.lifecycle',
             'memory_api': 'mantleos.engram / mantleos.continuity',
-            'carrier_api': 'mantleos.cartridge / mantleos.chromamem',
+            'carrier_api': 'mantleos.cartridge / mantleos.chromamem / mantleos.journal',
             'app_construction': 'mantleos.kpp.build; preview first, then bounded Chase over the same recipe',
             'approval': 'Evidence and Anchor applications never grant Baker or host approval',
             'runtime_dependencies': []}

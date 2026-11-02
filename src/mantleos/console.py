@@ -22,6 +22,9 @@ def _write_new(path, value):
 
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] == 'journal':
+        from .journal import main as journal_main
+        return journal_main(argv[1:])
     if argv and argv[0] == 'reflex-book':
         from .reflex_book.cli import main as reflex_main
         return reflex_main(argv[1:])

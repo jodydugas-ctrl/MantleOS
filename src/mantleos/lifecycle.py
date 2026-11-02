@@ -71,7 +71,7 @@ def create(birth, output, *, blueprint=None, cartridge_id=None, programs=None,
         raise ValueError('Memory inheritance requires an explicit boolean and parent')
     selected=kernel.format_name(format or ('chroma' if str(output).lower().endswith('.png') else 'cartridge'))
     cloud=str(output).startswith('gdrive://')
-    if format is not None or cloud or Path(output).suffix.lower() in {'.vcw','.zip','.png'}:
+    if format is not None or cloud or Path(output).suffix.lower() in {'.vcw','.zip','.png','.engram'}:
         if not cloud:_destination(output,parent)
         if parent is not None and nest is not None and Path(nest).resolve().is_relative_to(Path(parent).resolve()):
             raise ValueError('NEST must be outside the parent Body')
@@ -277,7 +277,8 @@ def restore(source, output, *, nest=None, expected_sha256=None, store=None):
     with body_lock(output), tempfile.TemporaryDirectory(prefix='mantle-restore-') as td:
         archive = Path(td)/'snapshot'
         receipt = fetch(source,archive,nest=nest,expected_sha256=expected_sha256,store=store)
-        format = 'chroma' if archive.read_bytes()[:8]==b'\x89PNG\r\n\x1a\n' else 'cartridge'
+        magic = archive.read_bytes()[:16]
+        format = 'journal' if magic == b'SQLite format 3\x00' else 'chroma' if magic[:8]==b'\x89PNG\r\n\x1a\n' else 'cartridge'
         stage = output.parent/('.'+output.name+'.stage-'+uuid.uuid4().hex)
         try:
             kernel.verify_restored_output(archive,stage,format=format)

@@ -40,7 +40,7 @@ def main(argv=None, *, body=None):
     ci=cs.add_parser('import');ci.add_argument('checkpoint',type=Path)
     ce=cs.add_parser('export');ce.add_argument('--output',type=Path)
     call=sub.add_parser('call');call.add_argument('capability');call.add_argument('--arguments',default='{}');call.add_argument('--arguments-file',type=Path);call.add_argument('--permit-effect',action='store_true')
-    save=sub.add_parser('save');save.add_argument('--output',required=True);save.add_argument('--format',choices=('cartridge','chroma'),default='cartridge');save.add_argument('--permit-effect',action='store_true')
+    save=sub.add_parser('save');save.add_argument('--output',required=True);save.add_argument('--format',choices=('cartridge','chroma','journal'),default='cartridge');save.add_argument('--permit-effect',action='store_true')
     package=sub.add_parser('package');package.add_argument('--output',required=True)
     for name in ('mount','bridge-open'):
         op=sub.add_parser(name);op.add_argument('--model-id',required=True);op.add_argument('--request-id',required=True);op.add_argument('--user',required=True)

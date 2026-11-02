@@ -73,3 +73,5 @@ old workspaces. Replacement requires a current-runtime workspace. See
 [the runnable Save demonstration](ORGAN-SAVE.md) for commands, tests and limits.
 
 See ARTISANAL-CONSTRUCTION.md for optional recipe/4 construction.techniques and unchanged explicit acceptance.
+
+See docs/ANCHOR-DESIGN.md for compact responsibility contracts, recipe coverage and Journal integration.

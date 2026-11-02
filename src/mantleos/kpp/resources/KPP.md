@@ -100,3 +100,5 @@ This is a small pantry improvement, not a new organ or universal source-to-code 
 Python standard library runs the kitchen; browser products share one runtime. Qt XML discovery requires no Qt. Only explicitly reviewed local scripts may use executed tests; no sandbox is supplied. Unsupported profiles/schemas fail. See docs/PROTOCOL.md and docs/GUI-REFERENCE.md.
 
 See [artisanal construction](docs/ARTISANAL-CONSTRUCTION.md) for role-neutral Baker responsibility, optional Chase and augmentation evidence.
+
+See docs/ANCHOR-DESIGN.md for compact responsibility contracts, recipe coverage and Journal integration.

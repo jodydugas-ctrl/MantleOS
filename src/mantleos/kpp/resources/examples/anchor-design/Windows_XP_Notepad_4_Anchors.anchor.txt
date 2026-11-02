@@ -1,0 +1,58 @@
+ANCHOR DESIGN: WindowsXPNotepad
+STATUS: DESIGN SPECIFICATION ONLY — NOT AN EXECUTABLE ANCHOR PROFILE
+
+RECEIVING LLM:
+Build a faithful, single-document Windows XP Notepad clone. The four entries below
+are applications of the existing MantleOS Anchor types, not new types or opcodes.
+Preserve their responsibilities; implement with the tools actually available.
+Do not treat an interface mockup as a completed application.
+
+ANCHORS (ID | canonical type | canonical singularity | responsibility)
+
+BH-INPUT | BlackHole | Receive the declared input.
+  Receive keyboard, mouse, menu/shortcut, dialog, clipboard, and file-operation
+  results. Convert them into explicit user commands; do not change document state.
+
+N-DOCUMENT | Neutral | Apply the declared relationship.
+  Own exactly one plain-text document: characters, caret, selection, clipboard,
+  one-level undo, find/replace, filename, encoding, line endings, and dirty state.
+  Apply editing commands consistently and report the resulting state.
+
+N-WINDOWS | Neutral | Apply the declared relationship.
+  Present the Windows XP Notepad window, editor, five menus, dialogs and status.
+  Route commands to the document; request actual open/save/print/clipboard actions
+  from the authorized host; show the resulting state and errors.
+
+WH-INTEGRITY | WhiteHole | Enforce the declared boundary.
+  Prevent data loss and invalid state. Prompt Save/Don't Save/Cancel before losing
+  unsaved changes; honor Cancel; validate paths/encodings and failed I/O; only
+  mark a document saved after confirmed success. Host effects need host permission.
+
+FLOW:
+  BH-INPUT -> WH-INTEGRITY -> N-DOCUMENT <-> N-WINDOWS
+  External results -> BH-INPUT; WH-INTEGRITY guards destructive actions/effects.
+  Follow N-RULE-ECONOMY: fewest rules that still cover all required variables.
+
+XP NOTEPAD CONTRACT (all must actually work):
+  File: New, Open, Save, Save As, Page Setup, Print, Exit.
+  Edit: Undo, Cut, Copy, Paste, Delete, Find, Find Next, Replace, Go To,
+        Select All, Time/Date (F5).
+  Format: Word Wrap, Font.  View: Status Bar.
+  Help: Help Topics, About Notepad.
+  UI: XP-era title, menu layout, keyboard accelerators, dialogs, plain-text
+      editor, scrollbars, caret, selection, and line/column indicator.
+  Behavior: edits update dirty state; New/Open/Exit protect unsaved text; Open
+      and Save really exchange files with the host. Save As offers ANSI, Unicode
+      (UTF-16 LE), Unicode big-endian, and UTF-8; preserve text and report
+      unsupported/unrepresentable encodings instead of silently losing data.
+      Word Wrap changes display only, not file text; when enabled, disable
+      Go To and Status Bar as in XP. Font changes display, not document bytes.
+      Opening a text file starting with .LOG inserts a timestamp at the end.
+      Print and Page Setup operate through real host capabilities, or are
+      explicitly unavailable—never fake a successful effect.
+
+ACCEPTANCE:
+  Complete only when every menu command, shortcut, state transition, file
+  round-trip, cancellation path, and relevant error path is tested. Match XP
+  behavior and appearance within the chosen host's stated limits. No visual
+  resemblance alone, generated code alone, or self-approval counts as evidence.

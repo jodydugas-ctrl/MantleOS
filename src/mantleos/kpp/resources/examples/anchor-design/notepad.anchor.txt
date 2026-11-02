@@ -1,0 +1,34 @@
+ANCHOR DESIGN: WindowsXPNotepad
+STATUS: DESIGN CONTRACT ONLY — NOT AN EXECUTABLE ANCHOR PROFILE
+
+Build the single-document XP Notepad contract; the full supplied behavior checklist remains an acceptance obligation.
+
+ANCHORS (ID | canonical type | canonical singularity | responsibility)
+BH-INPUT | BlackHole | Receive the declared input.
+  Receive keyboard, mouse, menu, clipboard and file results as explicit commands; never mutate document state.
+N-DOCUMENT | Neutral | Apply the declared relationship.
+  Own one plain-text document, caret, selection, undo, filename, encoding, line endings and dirty state.
+N-WINDOWS | Neutral | Apply the declared relationship.
+  Present the XP window, menus and dialogs; route commands and request authorized host effects.
+WH-INTEGRITY | WhiteHole | Enforce the declared boundary.
+  Prevent data loss, honor cancellation, validate encoding and I/O, require confirmed success before marking saved.
+
+FLOW:
+BH-INPUT -> WH-INTEGRITY: Check commands
+WH-INTEGRITY -> N-DOCUMENT: Apply safe changes
+N-DOCUMENT -> N-WINDOWS: Present state
+N-WINDOWS -> BH-INPUT: Receive host results
+
+STATE OWNERSHIP:
+document -> N-DOCUMENT
+window-presentation -> N-WINDOWS
+
+GUARDED EFFECTS:
+open: N-WINDOWS -> WH-INTEGRITY; Require host permission and actual success; preserve draft on error or cancellation.
+save: N-WINDOWS -> WH-INTEGRITY; Require host permission and actual success; preserve draft on error or cancellation.
+print: N-WINDOWS -> WH-INTEGRITY; Require host permission and actual success; preserve draft on error or cancellation.
+clipboard: N-WINDOWS -> WH-INTEGRITY; Require host permission and actual success; preserve draft on error or cancellation.
+discard: N-WINDOWS -> WH-INTEGRITY; Require host permission and actual success; preserve draft on error or cancellation.
+
+N-RULE-ECONOMY: Use as few rules as possible while still covering all needed variables.
+Acceptance requires current behavioral evidence and explicit Baker review.

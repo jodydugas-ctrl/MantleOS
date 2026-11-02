@@ -107,3 +107,5 @@ remains deferred; qualification and Baker acceptance remain separate.
 
 For the current release scope, installation, commit-bound evidence and continuation,
 read [the release handoff](docs/RELEASE-HANDOFF.md).
+
+See docs/ANCHOR-DESIGN.md for compact responsibility contracts, recipe coverage and Journal integration.

@@ -61,7 +61,9 @@ class CheckedActionExecutor:
     def _record(self, stage, body, *, expected_head=None):
         payload = {"schema": "mantle.effect-stage/1", "stage": stage, **body}
         if self.ledger:
-            rec = engram.append(self.ledger, "effect", "checked-action", payload, expected_head=expected_head)
+            rec = (self.ledger.append_record("effect", "checked-action", payload, expected_head=expected_head)
+                   if hasattr(self.ledger, "append_record") else
+                   engram.append(self.ledger, "effect", "checked-action", payload, expected_head=expected_head))
             return payload, rec["sha256"]
         return payload, expected_head
 

@@ -37,6 +37,9 @@ def main(argv=None):
     c.add_argument('--output',type=Path,required=True)
     c.add_argument('--persona',type=Path)
     c.add_argument('--persona-name')
+    for name in ('design-check','design-view'):
+        a=sub.add_parser(name, help='Inspect a compact Anchor design; no execution or acceptance')
+        a.add_argument('--recipe',type=Path,required=True)
     sub.add_parser('systems', help='Describe the one shared MantleOS/KPP system')
     a=sub.add_parser('language-plan', help='Report recipe implementation choices without execution')
     a.add_argument('--recipe', type=Path, required=True)
@@ -255,6 +258,12 @@ def main(argv=None):
         elif args.cmd=='systems':
             from .systems import describe
             print_json(describe())
+        elif args.cmd in ('design-check','design-view'):
+            from ..anchor_design import recipe_design, projection, render, review
+            design=recipe_design(validate_recipe(read_json(args.recipe)))
+            if design is None:raise KPPError('Recipe has no Anchor design')
+            if args.cmd=='design-view':print(render(design),end='')
+            else:print_json({'design':projection(design),'review':review(design),'status':'STRUCTURALLY_VALID'})
         elif args.cmd=='language-plan':
             from .language import implementation_plan
             print_json(implementation_plan(read_json(args.recipe)))

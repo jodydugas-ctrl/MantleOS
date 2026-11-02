@@ -13,7 +13,8 @@ from .transactions import body_lock, write_json
 def founding_material(source):
     source = Path(source)
     from . import kernel
-    format = 'chroma' if source.read_bytes()[:8] == b'\x89PNG\r\n\x1a\n' else 'cartridge'
+    with source.open('rb') as stream: magic = stream.read(16)
+    format = 'journal' if magic == b'SQLite format 3\x00' else 'chroma' if magic[:8] == b'\x89PNG\r\n\x1a\n' else 'cartridge'
     with tempfile.TemporaryDirectory(prefix='mantle-founding-') as td:
         root = Path(td) / 'source'
         kernel.verify_restored_output(source, root, format=format)

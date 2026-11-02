@@ -1,0 +1,138 @@
+{
+  "schema": "kpp.recipe/4",
+  "id": "journal-engram",
+  "goal": "Bake a portable Anchor Journal Engram with lower warm-turn overhead and verified LLM bridge use.",
+  "mode": "transformation",
+  "tissue": "mixed",
+  "fidelity": 3,
+  "target": {
+    "description": "PRIMER-bearing portable Engram with incremental durable turns and Anchor internal communication"
+  },
+  "ingredients": [
+    "journal-engram"
+  ],
+  "oven": {
+    "assumption": "Consistent execution of sufficiently explicit recipe",
+    "provider": "any capable host",
+    "iterations": "as needed",
+    "implementation": "incremental",
+    "verification": "Baker acceptance"
+  },
+  "acceptance": "Every required anchor must carry explicit evidence; no credit for untested capabilities.",
+  "anchors": [
+    {
+      "id": "founding",
+      "statement": "Full PRIMER enters each encounter; Raven default is privately configured",
+      "test": "Execute and retain scoped evidence for Full PRIMER enters each encounter; Raven default is privately configured",
+      "required": true,
+      "depth": 3,
+      "depends": [],
+      "preserves": [
+        "Founding PRIMER and explicit persona override"
+      ]
+    },
+    {
+      "id": "continuity",
+      "statement": "Crash-safe commit, replay and source-retaining export",
+      "test": "Execute and retain scoped evidence for Crash-safe commit, replay and source-retaining export",
+      "required": true,
+      "depth": 3,
+      "depends": [],
+      "preserves": [
+        "Append-only history and source provenance"
+      ]
+    },
+    {
+      "id": "authority",
+      "statement": "Denied actions and forged evidence are rejected",
+      "test": "Execute and retain scoped evidence for Denied actions and forged evidence are rejected",
+      "required": true,
+      "depth": 3,
+      "depends": [],
+      "preserves": [
+        "Checked effects and exact committed replies"
+      ]
+    },
+    {
+      "id": "body",
+      "statement": "Native deterministic programs function without a MIND",
+      "test": "Execute and retain scoped evidence for Native deterministic programs function without a MIND",
+      "required": true,
+      "depth": 3,
+      "depends": [],
+      "preserves": [
+        "Deterministic Body without MIND"
+      ]
+    },
+    {
+      "id": "bridge",
+      "statement": "Current host LLM supplies real packets; replies commit and replay",
+      "test": "Execute and retain scoped evidence for Current host LLM supplies real packets; replies commit and replay",
+      "required": true,
+      "depth": 3,
+      "depends": [],
+      "preserves": []
+    },
+    {
+      "id": "latency",
+      "statement": "At least 50 percent lower median warm local overhead at 1000 records; report live timing separately",
+      "test": "Execute and retain scoped evidence for At least 50 percent lower median warm local overhead at 1000 records; report live timing separately",
+      "required": true,
+      "depth": 3,
+      "depends": [],
+      "preserves": []
+    },
+    {
+      "id": "transport",
+      "statement": "Journal/cartridge/PNG roundtrip retains complete history and executable source",
+      "test": "Execute and retain scoped evidence for Journal/cartridge/PNG roundtrip retains complete history and executable source",
+      "required": true,
+      "depth": 3,
+      "depends": [],
+      "preserves": []
+    }
+  ],
+  "product_kind": "bioagent",
+  "delivery_mode": "artifact",
+  "capabilities": {
+    "agent": true,
+    "mind": true,
+    "mantleos_splice": false
+  },
+  "implementation": {
+    "components": [
+      {
+        "id": "carrier",
+        "policy": "required",
+        "languages": [
+          "python"
+        ]
+      },
+      {
+        "id": "anchor-tissue",
+        "policy": "required",
+        "languages": [
+          "anchor"
+        ],
+        "profile": "EMIT_TEXT/0.2"
+      }
+    ]
+  },
+  "construction": {
+    "techniques": []
+  },
+  "anchor_binding": "none",
+  "transformation": {
+    "preserve": [
+      "Founding PRIMER and explicit persona override",
+      "Append-only history and source provenance",
+      "Checked effects and exact committed replies",
+      "Deterministic Body without MIND"
+    ],
+    "may_change": [
+      "Carrier representation",
+      "Encounter stage count",
+      "Derived retrieval structure"
+    ]
+  }
+}

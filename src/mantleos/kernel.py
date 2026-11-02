@@ -6,6 +6,8 @@ Kernel-produced CELLs may be pixels or append segments. They supply no authority
 """
 
 FORMATS = {
+    'journal': {'carrier':'mantle.journal-engram/1', 'suffixes':['.engram'], 'default':False,
+                'read_policy':'VERIFY_BEFORE_USE;NO_AUTOMATIC_EXECUTION'},
     'cartridge': {'carrier':'vcw/1', 'suffixes':['.vcw','.zip'], 'default':True,
                   'read_policy':'VERIFY_BEFORE_USE'},
     'chroma': {'carrier':'ChromaMem/5', 'suffixes':['.png'], 'default':False,
@@ -61,13 +63,16 @@ def scan(operation, arguments, *, body=None, permit=False):
 
 def format_name(name):
     if name not in FORMATS:
-        raise ValueError('Unsupported kernel output format (cartridge or chroma)')
+        raise ValueError('Unsupported kernel output format (cartridge, chroma or journal)')
     return name
 
 
 def pack_verified_body(body, output, *, format='cartridge'):
     """Expression organ's sole final serializer. Caller stages immutable snapshot."""
     format_name(format)
+    if format=='journal':
+        from .journal import from_body
+        return from_body(body, output)
     if format=='cartridge':
         from . import cartridge
         return cartridge.pack(body,output)
@@ -78,6 +83,10 @@ def pack_verified_body(body, output, *, format='cartridge'):
 def verify_restored_output(output, destination, *, format='cartridge'):
     """Immune organ's same final verification regardless of optical/digital carrier."""
     format_name(format)
+    if format=='journal':
+        from .journal import Journal
+        with Journal(output) as journal:
+            return journal.materialize(destination)
     if format=='cartridge':
         from . import cartridge
         return cartridge.unpack(output,destination)

@@ -1,0 +1,107 @@
+{
+  "schema": "anchor.design/1",
+  "id": "Anchor-Journal",
+  "purpose": "Portable continuity with compact responsibilities and durable exact replies.",
+  "applications": [
+    {
+      "schema": "anchor.application/1",
+      "id": "BH-ENCOUNTER",
+      "definition": "BlackHole",
+      "type": "BlackHole",
+      "singularity": "Receive the declared input.",
+      "attributes": {
+        "responsibility": "Receive user input, semantic proposals and checked observations; normalize without changing canonical experience."
+      },
+      "sha256": "5e6f1d22829a114694b26931a6fdd22af3a7773f5ae68a3b49a1e6a4629dcf91"
+    },
+    {
+      "schema": "anchor.application/1",
+      "id": "N-CONTINUITY",
+      "definition": "Neutral",
+      "type": "Neutral",
+      "singularity": "Apply the declared relationship.",
+      "attributes": {
+        "responsibility": "Own identity bindings, append-only experience, recall and committed request/reply continuity."
+      },
+      "sha256": "8f82af172ce4e4f036afed10c5dbfc2b4de6258780fa2ac6c682d270e93380d8"
+    },
+    {
+      "schema": "anchor.application/1",
+      "id": "N-HOST",
+      "definition": "Neutral",
+      "type": "Neutral",
+      "singularity": "Apply the declared relationship.",
+      "attributes": {
+        "responsibility": "Coordinate PRIMER-first model frames, authorized host operations and verified portable handoff."
+      },
+      "sha256": "55638bacffe75dc0466cb46527712ca738f0dd09169d7f1aee3349a712987fcf"
+    },
+    {
+      "schema": "anchor.application/1",
+      "id": "WH-INTEGRITY",
+      "definition": "WhiteHole",
+      "type": "WhiteHole",
+      "singularity": "Enforce the declared boundary.",
+      "attributes": {
+        "responsibility": "Enforce source, PRIMER, state, authority, observation, commit and release boundaries."
+      },
+      "sha256": "85a586fd9910f0e18969c405c9e5583c37e4e2576e433a37ba92da327a4cd857"
+    }
+  ],
+  "flows": [
+    {
+      "from": "BH-ENCOUNTER",
+      "to": "WH-INTEGRITY",
+      "relationship": "Validate input and bindings"
+    },
+    {
+      "from": "WH-INTEGRITY",
+      "to": "N-CONTINUITY",
+      "relationship": "Admit checked records atomically"
+    },
+    {
+      "from": "N-CONTINUITY",
+      "to": "N-HOST",
+      "relationship": "Project relevant committed memory"
+    },
+    {
+      "from": "N-HOST",
+      "to": "BH-ENCOUNTER",
+      "relationship": "Receive semantic proposals and verified observations"
+    }
+  ],
+  "state": [
+    {
+      "id": "identity-bindings",
+      "owner": "N-CONTINUITY"
+    },
+    {
+      "id": "experience",
+      "owner": "N-CONTINUITY"
+    },
+    {
+      "id": "encounter-preparation",
+      "owner": "N-HOST"
+    }
+  ],
+  "effects": [
+    {
+      "id": "checked-read",
+      "requester": "N-HOST",
+      "guard": "WH-INTEGRITY",
+      "confirmation": "Host broker grants capability; verified observation binds reply."
+    },
+    {
+      "id": "reply-release",
+      "requester": "N-HOST",
+      "guard": "WH-INTEGRITY",
+      "confirmation": "Release broker grants permission; release exact durable committed reply."
+    },
+    {
+      "id": "portable-export",
+      "requester": "N-HOST",
+      "guard": "WH-INTEGRITY",
+      "confirmation": "Consistent verified export succeeds before reporting Save."
+    }
+  ]
+}

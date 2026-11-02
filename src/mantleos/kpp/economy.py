@@ -53,7 +53,9 @@ def evaluate(recipe, proposal):
         stranded=[dep for dep in a.get("depends",[]) if dep in removed]
         if stranded:
             cautions.append(f"{a['id']}: dependencies on removed Anchors need explicit rewiring: {stranded}")
-    return {"schema":"kpp.economy-review/1", "recipe_id":recipe["id"],
+    from ..anchor_design import recipe_design, review
+    design=recipe_design(recipe)
+    return {'design_review':review(design) if design else None, "schema":"kpp.economy-review/1", "recipe_id":recipe["id"],
             "baseline_anchor_count":len(byid), "hypothetical_count":len(byid)-len(removed),
             "proposed_removals":sorted(removed),"merges":planned,
             "blocking_gaps":blocks,"required_reviews":cautions,

@@ -98,7 +98,7 @@ class PantryLabels(unittest.TestCase):
                   'engram-continuity','external-project','fidelity-trace','interface-shell',
                   'kernel-relative-cells','local-draft-recovery','mind-body-boundary',
                   'progressive-web-runtime','python-tissue','text-editor',
-                  'vcw-cartridge-memory','recipe-organ-contracts','checked-body-effects','reflex-book'}
+                  'vcw-cartridge-memory','recipe-organ-contracts','checked-body-effects','reflex-book','journal-engram'}
         catalog=ingredient_catalog(ROOT)
         self.assertEqual(set(catalog),expected)
         departments={'memory','carriers','languages','body','cognition','construction'}

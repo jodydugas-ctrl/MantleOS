@@ -49,7 +49,9 @@ def step(workspace):
                 'READY_FOR_COMPLETION' if satisfied else 'CONTINUE' if next_item else 'BLOCKED')
     from .language import implementation_plan
     from .construction import construction_plan
-    return {'construction': construction_plan(recipe), 'implementation': implementation_plan(recipe), 'schema': 'mantle.kpp-build-step/1', 'recipe_id': recipe['id'],
+    from ..anchor_design import recipe_design, projection
+    design=recipe_design(recipe)
+    return {'anchor_design':projection(design, obligations[next_item['id']].get('design_anchors')) if design and next_item else projection(design) if design else None, 'construction': construction_plan(recipe), 'implementation': implementation_plan(recipe), 'schema': 'mantle.kpp-build-step/1', 'recipe_id': recipe['id'],
         'recipe_sha256': state['recipe_hash'], 'revision': state['revision'],
         'phase': state['phase'], 'decision': decision,
         'unmet_anchors': report['unmet_anchors'],

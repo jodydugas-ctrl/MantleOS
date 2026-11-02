@@ -277,3 +277,5 @@ See [the toolkit guide](docs/REFLEX-BOOK.md) and [repository update notes](docs/
 Native Body execution remains deferred; evidence does not grant Baker acceptance.
 
 Current release, installed-wheel checks and beginner workflow: [release handoff](docs/RELEASE-HANDOFF.md).
+
+Compact Anchor responsibility contracts and the Journal carrier are described in [the design guide](docs/ANCHOR-DESIGN.md) and [qualification report](docs/ANCHOR-DESIGN-VERIFICATION.md).

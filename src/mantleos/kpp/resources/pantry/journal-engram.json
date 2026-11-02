@@ -1,0 +1,56 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "journal-engram",
+  "version": "0.1.0",
+  "function": "Durable SQLite Engram with Anchor communication and one-generation ordinary encounters",
+  "status": "experimental",
+  "preferred_for": [
+    "engram",
+    "portable-agents",
+    "low-latency"
+  ],
+  "compatible_tissues": [
+    "mixed",
+    "python",
+    "anchor"
+  ],
+  "tags": [
+    "continuity",
+    "anchor",
+    "sqlite",
+    "latency",
+    "department:memory",
+    "department:carriers"
+  ],
+  "minimum_fidelity": 3,
+  "dependencies": [],
+  "capabilities": [
+    "PRIMER-first host handoff",
+    "durable exact reply replay",
+    "checked read actions",
+    "journal, cartridge and Chroma export",
+    "Validated compact Anchor design with preparation bindings"
+  ],
+  "adaptation": "Use mantleos.journal with an explicitly authorized host. No model provider is bundled.",
+  "verified_with": "tests/test_journal.py and tools/benchmark_journal.py; consult current qualification report for actual results",
+  "provenance": "New shared MantleOS implementation; Raven heritage inspected privately; no private history included.",
+  "source": {
+    "kind": "bundled-module",
+    "module": "mantleos.journal",
+    "contract": "mantle.journal-engram/1"
+  },
+  "usage": {
+    "use_when": "Create an Engram that retains capability and experience across LLM hosts with incremental turn commits.",
+    "inputs": [
+      "Verified founding Body/PRIMER",
+      "Host-generated Anchor proposal",
+      "Explicit effect and release grants"
+    ],
+    "outputs": [
+      ".engram carrier",
+      "Committed reply and evidence",
+      "Optional cartridge/PNG export"
+    ],
+    "limits": "Experimental; current host integration requires Python. Default Raven founding material must be configured privately. Model labels are declared provenance. One read action per encounter. Runnable synthetic integration: python tools/journal_specimen.py --output UNUSED_DIRECTORY."
+  }
+}

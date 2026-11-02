@@ -1,0 +1,115 @@
+{
+  "schema": "anchor.design/1",
+  "id": "WindowsXPNotepad",
+  "purpose": "Build the single-document XP Notepad contract; the full supplied behavior checklist remains an acceptance obligation.",
+  "applications": [
+    {
+      "schema": "anchor.application/1",
+      "id": "BH-INPUT",
+      "definition": "BlackHole",
+      "type": "BlackHole",
+      "singularity": "Receive the declared input.",
+      "attributes": {
+        "responsibility": "Receive keyboard, mouse, menu, clipboard and file results as explicit commands; never mutate document state."
+      },
+      "sha256": "2d873fb4c198abc5b192ba674cfa86a926e8638782db56d1fe8d57f5d2539d9b"
+    },
+    {
+      "schema": "anchor.application/1",
+      "id": "N-DOCUMENT",
+      "definition": "Neutral",
+      "type": "Neutral",
+      "singularity": "Apply the declared relationship.",
+      "attributes": {
+        "responsibility": "Own one plain-text document, caret, selection, undo, filename, encoding, line endings and dirty state."
+      },
+      "sha256": "1a5143f0f51c76bff31fc100bdffb8bfb05ef8a63ff2f141f0ed2454bddfdd20"
+    },
+    {
+      "schema": "anchor.application/1",
+      "id": "N-WINDOWS",
+      "definition": "Neutral",
+      "type": "Neutral",
+      "singularity": "Apply the declared relationship.",
+      "attributes": {
+        "responsibility": "Present the XP window, menus and dialogs; route commands and request authorized host effects."
+      },
+      "sha256": "af81ad4f1da805ce9c56dc8d556a8f13c72766d8621f6b677e4bc49637e4ba1d"
+    },
+    {
+      "schema": "anchor.application/1",
+      "id": "WH-INTEGRITY",
+      "definition": "WhiteHole",
+      "type": "WhiteHole",
+      "singularity": "Enforce the declared boundary.",
+      "attributes": {
+        "responsibility": "Prevent data loss, honor cancellation, validate encoding and I/O, require confirmed success before marking saved."
+      },
+      "sha256": "a7f9ff080d60b33b23713c18b0bb49b50408e7914a5890139c1d02e32b22d059"
+    }
+  ],
+  "flows": [
+    {
+      "from": "BH-INPUT",
+      "to": "WH-INTEGRITY",
+      "relationship": "Check commands"
+    },
+    {
+      "from": "WH-INTEGRITY",
+      "to": "N-DOCUMENT",
+      "relationship": "Apply safe changes"
+    },
+    {
+      "from": "N-DOCUMENT",
+      "to": "N-WINDOWS",
+      "relationship": "Present state"
+    },
+    {
+      "from": "N-WINDOWS",
+      "to": "BH-INPUT",
+      "relationship": "Receive host results"
+    }
+  ],
+  "state": [
+    {
+      "id": "document",
+      "owner": "N-DOCUMENT"
+    },
+    {
+      "id": "window-presentation",
+      "owner": "N-WINDOWS"
+    }
+  ],
+  "effects": [
+    {
+      "id": "open",
+      "requester": "N-WINDOWS",
+      "guard": "WH-INTEGRITY",
+      "confirmation": "Require host permission and actual success; preserve draft on error or cancellation."
+    },
+    {
+      "id": "save",
+      "requester": "N-WINDOWS",
+      "guard": "WH-INTEGRITY",
+      "confirmation": "Require host permission and actual success; preserve draft on error or cancellation."
+    },
+    {
+      "id": "print",
+      "requester": "N-WINDOWS",
+      "guard": "WH-INTEGRITY",
+      "confirmation": "Require host permission and actual success; preserve draft on error or cancellation."
+    },
+    {
+      "id": "clipboard",
+      "requester": "N-WINDOWS",
+      "guard": "WH-INTEGRITY",
+      "confirmation": "Require host permission and actual success; preserve draft on error or cancellation."
+    },
+    {
+      "id": "discard",
+      "requester": "N-WINDOWS",
+      "guard": "WH-INTEGRITY",
+      "confirmation": "Require host permission and actual success; preserve draft on error or cancellation."
+    }
+  ]
+}
