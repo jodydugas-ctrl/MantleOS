@@ -172,3 +172,22 @@ Selective augmentation and role-neutral Baker responsibility are described in
 `docs/ARTISANAL-CONSTRUCTION.md`. Run the synthetic, provider-free example with
 `python -m mantleos.augmentation --output UNUSED_DIRECTORY`. Recipe/4 can select
 `construction.techniques: []` to refine requirements without Chase.
+
+## Optional local limb composition and Studio
+
+`mantleos.limbs` supplies a shared, explicitly selected Journal-backed limb
+coordinator. Each limb has separate identity and canonical experience. Owner-pinned
+handlers and independent grants govern execution; recipes and MIND proposals do
+not introduce callbacks or approval. Durable claims are short transactions, with
+computation outside the global writer and per-limb native leases. Canonical
+results reconcile interrupted controller metadata without uncertain retries.
+
+`mantleos.studio` selects eight roles and two worker processes around an ordinary
+Node-RED runtime. Its foreground Heart is deterministic when cognition is detached.
+The full founding PRIMER and separate embodiment addendum feed a supervised bridge;
+only exact committed replies are released. Anchor palette nodes are inert design
+applications, separate from executing automation. The portable project carries
+public contracts/layout/fixtures, not live Engram state, persona or credentials.
+See the canonical operator and qualification guides under
+`src/mantleos/kpp/resources/docs/`. This is a local pilot, not distributed or
+private-host isolation qualification. The shared implementation originates in KPP.

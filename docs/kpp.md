@@ -176,3 +176,11 @@ See docs/JOURNAL-ENGRAM.md for the protocol, limitations and qualification comma
 
 
 See docs/ANCHOR-DESIGN.md for compact responsibility contracts, recipe coverage and Journal integration.
+
+## Optional Engram limbs and Anchor Studio
+
+`mantleos.limbs` composes independently stateful Journal Engrams only when selected.
+Recipe declarations grant no host authority. Studio selects eight roles and two
+workers around an ordinary Node-RED host; other agents may use zero, one or
+sequential limbs. See docs/ENGRAM-LIMBS.md and docs/ANCHOR-STUDIO.md. Python
+implements coordination; canonical Anchor applications remain design contracts.

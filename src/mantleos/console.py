@@ -22,6 +22,12 @@ def _write_new(path, value):
 
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] == 'limbs':
+        from .limbs import main as limbs_main
+        return limbs_main(argv[1:])
+    if argv and argv[0] == 'studio':
+        from .studio import main as studio_main
+        return studio_main(argv[1:])
     if argv and argv[0] == 'skin':
         from .skin_cli import main as skin_main
         return skin_main(argv[1:])

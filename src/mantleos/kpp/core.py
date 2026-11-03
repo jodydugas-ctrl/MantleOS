@@ -187,6 +187,8 @@ def validate_recipe(recipe):
             raise KPPError("Preserved property missing mandatory Anchor coverage: " + prop)
     from ..anchor_design import recipe_design
     recipe_design(recipe)
+    from ..limbs import recipe_composition
+    recipe_composition(recipe)
     # Reflexes are recipe-declared edges in the SAME Functional Graph, not a
     # separate registry or execution engine. A declaration is not verification.
     reflexes = recipe.get("reflexes", [])

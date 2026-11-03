@@ -1,0 +1,49 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "engram-limbs",
+  "version": "0.1.0",
+  "function": "Optional independently stateful Engram limbs with bounded sequential or parallel host work.",
+  "status": "experimental",
+  "preferred_for": [
+    "mantleos",
+    "bioagent"
+  ],
+  "compatible_tissues": [
+    "python",
+    "mixed"
+  ],
+  "tags": [
+    "department:body",
+    "department:construction"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [
+    "journal-engram"
+  ],
+  "capabilities": [
+    "Per-limb identity and canonical Journal memory",
+    "Owner-granted pinned handlers",
+    "Durable intentions, bounded workers and reviewed crash recovery"
+  ],
+  "adaptation": "Compatibility is determined by interface and recipe acceptance tests; this label is advisory.",
+  "verified_with": "tests/test_limbs.py and the separately recorded Studio qualification; experimental until executed evidence is complete.",
+  "provenance": "New shared implementation; owner requested optional limb composition during Anchor Studio development.",
+  "source": {
+    "kind": "repository-files",
+    "repository": "jodydugas-ctrl/Kitchen-Party-Protocol",
+    "paths": [
+      "src/mantleos/limbs.py",
+      "tests/test_limbs.py"
+    ]
+  },
+  "usage": {
+    "use_when": "A recipe explicitly needs independently stateful limbs; omit for ordinary single-agent operation.",
+    "inputs": [
+      "Owner-selected Engrams, reviewed handlers and grants, recipe obligations"
+    ],
+    "outputs": [
+      "Canonical per-limb receipts and coordinator task state"
+    ],
+    "limits": "0..32 registered limbs, 0..8 workers, 128 pending tasks. No model client, no OS sandbox, and no exactly-once external effect guarantee."
+  }
+}

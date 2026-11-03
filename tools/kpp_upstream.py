@@ -227,7 +227,7 @@ def _validate(candidate, logs):
     env = {**os.environ, 'PYTHONPATH': str(candidate/'src'), 'PYTHONUTF8': '1'}
     for name, command in [('combined-suite', [sys.executable, '-m', 'unittest', 'discover', '-s', 'tests', '-q']),
                           ('kpp-doctor', [sys.executable, '-m', 'mantleos', 'kpp', 'doctor'])]:
-        result = subprocess.run(command, cwd=candidate, env=env, capture_output=True, timeout=1200)
+        result = subprocess.run(command, cwd=candidate, env=env, capture_output=True, timeout=1800)
         content = result.stdout + result.stderr
         (logs/(name+'.log')).write_bytes(content)
         checks.append({'name': name, 'result': 'PASS' if result.returncode == 0 else 'FAIL',

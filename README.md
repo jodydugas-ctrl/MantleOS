@@ -283,3 +283,12 @@ Compact Anchor responsibility contracts and the Journal carrier are described in
 [Private Skin AppAI pilot](docs/PRIVATE-SKIN.md) adds encrypted continuity and a private MIND bridge. Deployment qualification remains explicit.
 
 [Cumulative Anchor satisfaction](docs/ANCHOR-SATISFACTION.md) adds opt-in single/batch construction with current-candidate regression evidence and separate Baker acceptance.
+
+## Anchor Studio and optional Engram limbs
+
+[Anchor Studio](src/mantleos/kpp/resources/docs/ANCHOR-STUDIO.md) embeds local
+Node-RED with a deterministic Heart, eight independent Journal limbs and a
+supervised MIND. [Engram limbs](src/mantleos/kpp/resources/docs/ENGRAM-LIMBS.md)
+are an optional KPP ingredient; ordinary agents acquire no workers or extra model
+calls. [Qualification](src/mantleos/kpp/resources/docs/STUDIO-QUALIFICATION.md)
+separates actual bridge/browser observations, synthetic tests and open acceptance.

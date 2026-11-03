@@ -72,6 +72,8 @@ Interface names identify actual implementation ports.
 | Baking Code | Creator practice; Raven's elaboration, per supplied orientation | Reported methodology, not executable capability | Apply source selection and taste-testing discipline |
 | Heartbeat and anticipation | AppAI lineage -> `appai.tick/run` | Bounded foreground heartbeat and mission cycle tested; predictive scheduling not implemented | Optional operator-run activation; no mandatory interval or OS service |
 | Swarm/delegation kernel | Creator-described Engram history | No supplied executable implementation located; described-only | Defer; do not fabricate provider or capacity proof |
+| Optional local Engram limbs | New shared `mantleos.limbs`, owner-selected recipe composition | Actual 0/1/2/8 Journal specimens, overlapping/sequential workers, grants and crash reconciliation; experimental local scope | Opt-in; no mandatory Prime MIND or distributed deployment |
+| Node-RED Anchor Studio | New foreground embedding, native Heart and supervised Cuttlefish founding override | Real browser/native-flow and current-chat observations; see canonical Studio qualification | Local pilot; separate product acceptance and private-host isolation remain open |
 
 ## Conflict register and decisions
 
@@ -210,7 +212,7 @@ All eight hosted jobs and the final complete 302-test combined run passed;
 [verification](verification.md) retains skips and the initial restricted-run failure.
 
 
-## Reviewed Save organs and shared scanner reconciliation — 23 October 2026
+## Reviewed Save organs and shared scanner reconciliation â€” 23 October 2026
 
 The supplied Anchor/Organ bridge prototype contributes recipe-owned organ mapping.
 Development originated in KPP and its common implementation is promoted here.
@@ -231,7 +233,7 @@ are retained. The prototype archive remains external; its hash is in provenance.
 SCAN v0.28 remains deferred. Current executed outcomes and skips are recorded in
 the verification document; no automatic Baker acceptance or publication occurs.
 
-## Log clarification adoption — 23 October 2026
+## Log clarification adoption â€” 23 October 2026
 
 The supplied conversations contribute design clarification: a role-neutral Baker,
 optional Chase, selective augmentation, and distinct embodiment/authority/carrier

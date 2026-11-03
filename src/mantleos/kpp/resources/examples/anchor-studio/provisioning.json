@@ -1,0 +1,23 @@
+{
+  "schema": "anchor-studio.provisioning/1",
+  "node": {
+    "version": "24.22.2",
+    "platform": "win-x64",
+    "archive_sha256": "ca1bff5d8ead13c9f2ea404a176db46bd430704d5b5113734049fa365e7799e2",
+    "url": "https://nodejs.org/dist/v24.22.2/node-v24.22.2-win-x64.zip",
+    "verification": "Matched official SHASUMS256.txt during provisioning",
+    "upstream_commit": "f7f273a9bb6445f6f7fb6349105e7532972045fb",
+    "annotated_tag": "15227f63813695fde0387a53342d16788d611392"
+  },
+  "node_red": {
+    "version": "5.0.9",
+    "install": "project local; lifecycle scripts disabled",
+    "lock_sha256": "8835de3ce02d44bcb7ee5569c81bf34e52ed8600c67d613389c198ac7a883f62",
+    "upstream_commit": "df0a87cce1a243e21a2e0eb0fdbdbb8c4732392f",
+    "npm_integrity": "sha512-FT0tNNusFK7go9KvoKzjNPmzgrGCbBhd0UZFWUQHgVDzkzgNwvZAJfb4XNvIBBrfCTTV564/Z8wGs3Tv//ivKQ=="
+  },
+  "global_node": "Not changed",
+  "runtime_dependencies": "npm integrity pins are in package-lock.json; no dependencies bundled",
+  "scope": "Windows native development NEST; other platforms need qualification",
+  "revision_lookup": "Official version tags resolved during qualification; npm lock pins distribution bytes, not a source rebuild claim"
+}

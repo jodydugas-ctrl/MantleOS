@@ -15,7 +15,7 @@ SKIP = {'.git', '.work', '.heritage', '.venv', 'venv', 'build', 'dist', '__pycac
 PRIVATE = {'credentials.json', 'oauth-token.bin', 'engram.jsonl', 'primer.txt',
            'birth.json', 'cartridge.json', 'state.json', 'anatomy.json'}
 EXTENSIONS = {'.py', '.md', '.txt', '.json', '.toml', '.anchor', '.html', '.js', '.cjs',
-              '.css', '.ui', '.png', '.svg', '.yml', '.yaml', '.in'}
+              '.css', '.ui', '.anchorstudio', '.png', '.svg', '.yml', '.yaml', '.in'}
 
 
 class ProjectError(ValueError):

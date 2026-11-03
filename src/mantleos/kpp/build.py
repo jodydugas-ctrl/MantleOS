@@ -65,7 +65,7 @@ def step(workspace):
     from .construction import construction_plan
     from ..anchor_design import recipe_design, projection
     design=recipe_design(recipe)
-    return {'anchor_design':projection(design, obligations[next_item['id']].get('design_anchors')) if design and next_item else projection(design) if design else None, 'construction': construction_plan(recipe), 'implementation': implementation_plan(recipe), 'schema': 'mantle.kpp-build-step/1', 'recipe_id': recipe['id'],
+    return {**({'limb_composition': __import__('mantleos.limbs',fromlist=['recipe_composition']).recipe_composition(recipe)} if 'limb_composition' in recipe else {}), 'anchor_design':projection(design, obligations[next_item['id']].get('design_anchors')) if design and next_item else projection(design) if design else None, 'construction': construction_plan(recipe), 'implementation': implementation_plan(recipe), 'schema': 'mantle.kpp-build-step/1', 'recipe_id': recipe['id'],
         'recipe_sha256': state['recipe_hash'], 'revision': state['revision'],
         'phase': state['phase'], 'decision': decision,
         'unmet_anchors': report['unmet_anchors'],

@@ -111,3 +111,10 @@ read [the release handoff](docs/RELEASE-HANDOFF.md).
 See docs/ANCHOR-DESIGN.md for compact responsibility contracts, recipe coverage and Journal integration.
 
 [Private Skin AppAI pilot](docs/PRIVATE-SKIN.md) adds encrypted continuity, private MIND ports and verified release.
+
+[Anchor Studio](docs/ANCHOR-STUDIO.md) is a foreground Node-RED demonstrator with
+a native Heart and supervised MIND. [Optional Engram limbs](docs/ENGRAM-LIMBS.md)
+are reusable independently: omitted ingredients add no workers or model calls.
+
+See [Studio qualification](docs/STUDIO-QUALIFICATION.md) for executed local
+behavior, separate live/synthetic evidence, timings and remaining limits.

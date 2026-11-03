@@ -137,17 +137,24 @@ class Journal:
             if sha(raw)!=h: raise ValueError('Journal object corruption')
         snapshot = self.db.execute('SELECT payload FROM objects WHERE sha256=?',(self._meta('snapshot'),)).fetchone()
         if snapshot is None: raise ValueError('Missing snapshot')
-        # Verify source and founding bytes with the trusted host, never carried Python.
-        with tempfile.TemporaryDirectory(prefix='journal-verify-') as td:
-            archive=Path(td)/'body.vcw'; archive.write_bytes(snapshot[0])
-            body=Path(td)/'body';cartridge.unpack(archive,body)
-            original=engram.read(body/'ENGRAM.jsonl')
-            if primer.load_primer(body)!=self._meta('primer'): raise ValueError('Founding material mismatch')
-            reg=anchor_language.validate_register(json.loads((body/'ANCHOR-REGISTER.json').read_text('utf8')))
-            if reg!=self._meta('register'): raise ValueError('Register differs from snapshot')
-            birth=json.loads((body/'BIRTH.json').read_text('utf8'))
-            if birth['id']!=self._meta('identity') or birth['primer']['persona_name']!=self._meta('persona'):
-                raise ValueError('Identity mismatch')
+        # Recheck object bytes above on every refresh. An unchanged verified snapshot
+        # need not be unpacked/compiled again when a cooperating process appended.
+        # The ledger and all live metadata are still checked below; no timestamp trust.
+        key=self._meta('snapshot')
+        cached=getattr(self,'_snapshot_cache',None)
+        if cached is None or cached[0]!=key:
+            with tempfile.TemporaryDirectory(prefix='journal-verify-') as td:
+                archive=Path(td)/'body.vcw'; archive.write_bytes(snapshot[0])
+                body=Path(td)/'body';cartridge.unpack(archive,body)
+                view={'records':engram.read(body/'ENGRAM.jsonl'),'primer':primer.load_primer(body),
+                      'register':anchor_language.validate_register(json.loads((body/'ANCHOR-REGISTER.json').read_text('utf8'))),
+                      'birth':json.loads((body/'BIRTH.json').read_text('utf8'))}
+            self._snapshot_cache=(key,canon(view))
+        view=json.loads(self._snapshot_cache[1])
+        original=view['records'];reg=view['register'];birth=view['birth']
+        if view['primer']!=self._meta('primer'):raise ValueError('Founding material mismatch')
+        if reg!=self._meta('register'):raise ValueError('Register differs from snapshot')
+        if birth['id']!=self._meta('identity') or birth['primer']['persona_name']!=self._meta('persona'):raise ValueError('Identity mismatch')
         self.records=[];previous=ZERO
         for seq,h,raw in self.db.execute('SELECT seq,sha256,raw FROM records ORDER BY seq'):
             r=json.loads(raw)
