@@ -36,7 +36,7 @@ ADDENDUM = ('Anchor Studio is a fresh Node-RED resident AppAI. Its embodiment is
 
 def controller_pin():
     root=Path(__file__).parent
-    return c.digest({name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in ('studio.py','studio_handlers.py','studio_project.py','studio_demo.py','limbs.py','journal.py','anchors.py','anchor_design.py','anchor_language.py','effects.py','json_contract.py','transactions.py','primer.py','cartridge.py','kpp/resources/examples/anchor-studio/launcher.cjs','kpp/resources/examples/anchor-studio/palette/nodes.js','kpp/resources/examples/anchor-studio/palette/nodes.html')})
+    return c.digest({name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in ('studio.py','studio_handlers.py','studio_project.py','studio_demo.py','limbs.py','journal.py','anchors.py','anchor_design.py','anchor_language.py','effects.py','json_contract.py','transactions.py','primer.py','cartridge.py','kpp/resources/examples/anchor-studio/launcher.cjs','kpp/resources/examples/anchor-studio/local-access.cjs','kpp/resources/examples/anchor-studio/workspace.html','kpp/resources/examples/anchor-studio/workspace.css','kpp/resources/examples/anchor-studio/workspace.js','kpp/resources/examples/anchor-studio/conditions.cjs','kpp/resources/examples/anchor-studio/palette/nodes.js','kpp/resources/examples/anchor-studio/palette/nodes.html')})
 
 
 def rebind_source(nest,*,reviewed=False):

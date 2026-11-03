@@ -2,8 +2,11 @@
 
 Studio embeds Node-RED through its documented API; it does not fork its core.
 The ordinary editor is `/red/`, HTTP flows are `/flows/`, and the additive
-operator panel is `/studio`. All bind to loopback behind generated HTTP Basic
-credentials in the private NEST's `operator.json`. Use a foreground process;
+operator panel is `/studio`. Open the local address directly: no username or
+password is required. Top-level visits automatically receive a per-launch,
+HttpOnly, SameSite browser session. Local Host/Origin checks protect HTTP and
+WebSocket access; embedded cross-origin pages cannot open an operator session.
+Use a foreground process;
 no service or provider is installed. This is a same-user demonstration, not
 private-host isolation. The inference host receives the supplied private context.
 
@@ -26,8 +29,11 @@ python -m mantleos studio status --nest PRIVATE_DIRECTORY
 python -m mantleos studio stasis --nest PRIVATE_DIRECTORY
 ```
 
-Open the printed local address and use the credentials from `operator.json`.
-Stop through authenticated POST `/studio/shutdown`, or Ctrl+C in the launcher.
+Open the printed local address. Private `operator.json` remains for internal
+operator scripts and Node-RED's existing flow-encryption secret; do not delete it.
+It is not a user sign-in account. API access without a local session returns a
+JSON error, never a browser password challenge. Stop through authorized POST
+`/studio/shutdown`, or Ctrl+C in the launcher.
 Retain the NEST for restart. Stasis stops new Studio activity and reply release;
 ordinary Node-RED workflows continue. Work already executing is not an automatic
 external-effect cancellation. Disabling a limb revokes result admission.

@@ -1,0 +1,1699 @@
+{
+  "acceptance": "Every required anchor must carry explicit evidence; no credit for untested capabilities.",
+  "anchor_design": {
+    "applications": [
+      {
+        "attributes": {
+          "responsibility": "Receive user commands, item data and reference observations."
+        },
+        "definition": "BlackHole",
+        "id": "BH-COMMAND",
+        "schema": "anchor.application/1",
+        "sha256": "d88b6f9ddc2fd78e6a4be0e7ec2579f335e476666c87bb7f4c651ff65ec06ef0",
+        "singularity": "Receive the declared input.",
+        "type": "BlackHole"
+      },
+      {
+        "attributes": {
+          "responsibility": "Own editable workflows, item links, parameters, history and persisted execution state."
+        },
+        "definition": "Neutral",
+        "id": "N-WORKFLOW",
+        "schema": "anchor.application/1",
+        "sha256": "e6401d64373d6a7f683c1b9b4e4099f9939fe59235d17b3b97013352bd42e43f",
+        "singularity": "Apply the declared relationship.",
+        "type": "Neutral"
+      },
+      {
+        "attributes": {
+          "responsibility": "Coordinate the Node-RED Body, private Engrams, supervised cognition and portable handoff."
+        },
+        "definition": "Neutral",
+        "id": "N-HOST",
+        "schema": "anchor.application/1",
+        "sha256": "d9669877f7724c0e3c252434ed5cca3ea5fbe55fc66557ddc3d2ee448f2c9cc7",
+        "singularity": "Apply the declared relationship.",
+        "type": "Neutral"
+      },
+      {
+        "attributes": {
+          "responsibility": "Enforce typed conditions, source/revision, independent authority, error and release boundaries."
+        },
+        "definition": "WhiteHole",
+        "id": "WH-CONTRACT",
+        "schema": "anchor.application/1",
+        "sha256": "1406835c6cda22245341d99a0ffc1c0643139b9539f10e3c43ab6836d5d1b4ac",
+        "singularity": "Enforce the declared boundary.",
+        "type": "WhiteHole"
+      }
+    ],
+    "effects": [
+      {
+        "confirmation": "Explicit operator deployment/run and independently granted host effects; model text never grants authority.",
+        "guard": "WH-CONTRACT",
+        "id": "workflow-execution",
+        "requester": "N-HOST"
+      }
+    ],
+    "flows": [
+      {
+        "from": "BH-COMMAND",
+        "relationship": "Check command inputs and authority",
+        "to": "WH-CONTRACT"
+      },
+      {
+        "from": "WH-CONTRACT",
+        "relationship": "Admit valid state transitions",
+        "to": "N-WORKFLOW"
+      },
+      {
+        "from": "N-WORKFLOW",
+        "relationship": "Perform admitted Body work and retain checked observations",
+        "to": "N-HOST"
+      }
+    ],
+    "id": "Studio-Deep-Chase",
+    "purpose": "Preserve declared command consequences at reviewed Fidelity scope.",
+    "schema": "anchor.design/1",
+    "state": [
+      {
+        "id": "workflow-state",
+        "owner": "N-WORKFLOW"
+      },
+      {
+        "id": "native-host-bindings",
+        "owner": "N-HOST"
+      }
+    ]
+  },
+  "anchors": [
+    {
+      "depends": [],
+      "depth": 3,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "founding",
+      "required": true,
+      "statement": "Deliver the complete verified founding persona and separate role addendum",
+      "test": "Execute source-pinned positive and negative cases for founding and record tested scope, unknowns and independent Baker status."
+    },
+    {
+      "depends": [],
+      "depth": 3,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "heart",
+      "required": true,
+      "statement": "Observe scheduled and bounded event-driven Heart processing",
+      "test": "Execute source-pinned positive and negative cases for heart and record tested scope, unknowns and independent Baker status."
+    },
+    {
+      "depends": [],
+      "depth": 3,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "limbs",
+      "required": true,
+      "statement": "Verify independent identities, memory and intention/result coordination",
+      "test": "Execute source-pinned positive and negative cases for limbs and record tested scope, unknowns and independent Baker status."
+    },
+    {
+      "depends": [],
+      "depth": 3,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "host",
+      "required": true,
+      "statement": "Preserve native Node-RED flows through integration, stasis and removal",
+      "test": "Execute source-pinned positive and negative cases for host and record tested scope, unknowns and independent Baker status."
+    },
+    {
+      "depends": [],
+      "depth": 3,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "design",
+      "required": true,
+      "statement": "Edit and round-trip canonical designs without executing visual wires",
+      "test": "Execute source-pinned positive and negative cases for design and record tested scope, unknowns and independent Baker status."
+    },
+    {
+      "depends": [],
+      "depth": 3,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "evidence",
+      "required": true,
+      "statement": "Reject current-candidate regressions through genuine KPP gates",
+      "test": "Execute source-pinned positive and negative cases for evidence and record tested scope, unknowns and independent Baker status."
+    },
+    {
+      "depends": [],
+      "depth": 3,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "authority",
+      "required": true,
+      "statement": "Require host grants and distinct Baker decisions",
+      "test": "Execute source-pinned positive and negative cases for authority and record tested scope, unknowns and independent Baker status."
+    },
+    {
+      "depends": [],
+      "depth": 3,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "continuity",
+      "required": true,
+      "statement": "Release only committed replies with durable replay and recovery",
+      "test": "Execute source-pinned positive and negative cases for continuity and record tested scope, unknowns and independent Baker status."
+    },
+    {
+      "depends": [],
+      "depth": 3,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "project",
+      "required": true,
+      "statement": "Round-trip portable project data without private organism state",
+      "test": "Execute source-pinned positive and negative cases for project and record tested scope, unknowns and independent Baker status."
+    },
+    {
+      "depends": [],
+      "depth": 3,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "visual-workspace",
+      "required": true,
+      "statement": "Default to a canvas-led workspace with navigation rail, project header, editor tabs, connected application cards, zoom and fit controls; raw JSON is advanced detail",
+      "test": "Capture before/reference/after screenshots; manually assess composition at desktop and narrow widths without treating a pixel score as acceptance"
+    },
+    {
+      "depends": [],
+      "depth": 3,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "visual-interaction",
+      "required": true,
+      "statement": "Select and inspect actual canonical applications, move nodes, edit typed links and explicitly save layout through the existing revision check",
+      "test": "Exercise selection, keyboard selection, drag/save/reload, typed links and stale save refusal; verify canonical singularities remain unchanged"
+    },
+    {
+      "depends": [],
+      "depth": 3,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "appai-presence",
+      "required": true,
+      "statement": "Keep resident Cuttlefish conversation, supervised MIND state, Heart and eight independent limb summaries accessible in the Studio",
+      "test": "Verify status comes from the Body; submit one real host-supervised reply, commit/replay it; detached cognition remains awaiting and model text grants no authority"
+    },
+    {
+      "depends": [],
+      "depth": 3,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "visual-preservation",
+      "required": true,
+      "statement": "Keep native editor and flows, complete founding PRIMER, project export boundary, verification and Baker decisions intact",
+      "test": "Run focused and documented release suites; repeat portable project and native editor checks; no transferred acceptance"
+    },
+    {
+      "depends": [],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "WH-CONTRACT"
+      ],
+      "id": "community-scope-review",
+      "required": true,
+      "statement": "Review Community edition visibility, all nested dialogs/settings, dynamic node catalogs and operation variants against the pinned reference; do not infer completeness from static declarations",
+      "test": "Reconcile source declarations with actual reference runtime and require a disposition for every observed command, field, nested operation and guard; missing functions remain unmet"
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-1",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce create-agent from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useAgentNavigationCommands.ts:25 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-2",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce new-session from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useChatHubCommands.ts:20 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-3",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce new-session-with-model from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useChatHubCommands.ts:21 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-4",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce open-session from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useChatHubCommands.ts:22 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-5",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce delete-session from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useChatHubCommands.ts:23 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-6",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce stop-message-generation from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useChatHubCommands.ts:24 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-7",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce create-credential from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useCredentialNavigationCommands.ts:23 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-8",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce create-data-table from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useDataTableNavigationCommands.ts:21 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-9",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce delete-execution from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionCommands.ts:18 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-10",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce retry-current-workflow from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionCommands.ts:19 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-11",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce retry-original-workflow from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionCommands.ts:20 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-12",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce stop-execution from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionCommands.ts:21 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-13",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce debug-execution from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionCommands.ts:22 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-14",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce vote-up from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionCommands.ts:23 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-15",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce vote-down from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionCommands.ts:24 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-16",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce chat-hub from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts:16 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-17",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce whats-new from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts:17 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-18",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce settings from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts:18 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-19",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce sign-out from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts:19 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-20",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce templates from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts:20 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-21",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce variables from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts:21 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-22",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce insights from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts:22 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-23",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce quickstart from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts:23 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-24",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce documentation from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts:24 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-25",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce forum from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts:25 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-26",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce course from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts:26 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-27",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce report-bug from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts:27 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-28",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce about from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts:28 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-29",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce add-sticky from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useNodeCommands.ts:22 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-30",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce create-project from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useProjectNavigationCommands.ts:19 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-31",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce open-credential from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:31 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-32",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce open-sub-workflow from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:32 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-33",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce test-workflow from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:33 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-34",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce select-all from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:34 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-35",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce open-workflow-settings from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:35 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-36",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce tidy-up-workflow from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:36 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-37",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce rename-workflow from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:37 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-38",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce add-tag from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:38 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-39",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce duplicate-workflow from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:39 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-40",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce download-workflow from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:40 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-41",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce import-workflow-from-url from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:41 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-42",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce import-workflow-from-file from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:42 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-43",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce archive-workflow from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:43 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-44",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce unarchive-workflow from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:44 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-45",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce delete-workflow from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:45 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-46",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce publish-workflow from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:46 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-47",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce unpublish-workflow from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts:47 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-48",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce create-workflow from packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowNavigationCommands.ts:24 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-49",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce open from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:28 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-50",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce copy from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:29 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-51",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce toggle_activation from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:30 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-52",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce duplicate from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:31 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-53",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce execute from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:32 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-54",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce copy_test_url from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:33 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-55",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce copy_production_url from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:34 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-56",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce rename from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:35 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-57",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce replace from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:36 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-58",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce toggle_pin from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:37 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-59",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce delete from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:38 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-60",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce select_all from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:39 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-61",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce deselect_all from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:40 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-62",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce add_node from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:41 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-63",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce add_sticky from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:42 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-64",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce change_color from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:43 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-65",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce open_sub_workflow from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:44 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-66",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce tidy_up from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:45 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-67",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce extract_sub_workflow from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:46 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-68",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce group_nodes from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:47 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-69",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce rename_group from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:48 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-70",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce ungroup_nodes from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:49 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-71",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce expand_all_groups from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:50 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-72",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce collapse_all_groups from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:51 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-73",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce expand_selected_groups from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:52 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-74",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce collapse_selected_groups from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:53 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-75",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce show_all_group_descriptions from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:54 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-76",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce hide_all_group_descriptions from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:55 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-77",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce show_group_description from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:56 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-78",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce hide_group_description from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:57 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-79",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce focus_ai_on_selected from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:58 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    },
+    {
+      "depends": [
+        "community-scope-review"
+      ],
+      "depth": 5,
+      "design_anchors": [
+        "BH-COMMAND",
+        "N-WORKFLOW",
+        "N-HOST",
+        "WH-CONTRACT"
+      ],
+      "id": "reference-command-80",
+      "required": true,
+      "statement": "DRAFT REQUIRES REVIEW: reproduce add_nodes_to_chat from packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts:59 for its applicable Community states; inspect its actual handler and all child commands before admission.",
+      "test": "Compare reference/candidate visible and keyboard entry points, enabled/disabled guards, valid and invalid input, confirm/cancel, state/data effects, undo where applicable, persistence after reload, error/permission cases and interacting prior behaviors. A menu entry alone does not pass."
+    }
+  ],
+  "capabilities": {
+    "agent": true,
+    "mantleos_splice": true,
+    "mind": true
+  },
+  "delivery_mode": "artifact",
+  "fidelity": 3,
+  "goal": "Chase all reviewed self-hosted n8n Community user command consequences on Node-RED; keep missing behavior explicit",
+  "id": "anchor-studio-community-deep-chase",
+  "implementation": {
+    "components": [
+      {
+        "id": "app",
+        "languages": [
+          "python"
+        ],
+        "policy": "required"
+      },
+      {
+        "id": "visual-workspace",
+        "languages": [
+          "javascript"
+        ],
+        "policy": "required"
+      }
+    ]
+  },
+  "ingredients": [
+    "engram-limbs",
+    "anchor-satisfaction-engine"
+  ],
+  "limb_composition": {
+    "members": [
+      {
+        "id": "body-mapping",
+        "interfaces": [
+          "studio.limb"
+        ],
+        "obligations": [
+          "limbs",
+          "authority"
+        ]
+      },
+      {
+        "id": "design",
+        "interfaces": [
+          "studio.limb"
+        ],
+        "obligations": [
+          "limbs",
+          "authority"
+        ]
+      },
+      {
+        "id": "contracts",
+        "interfaces": [
+          "studio.limb"
+        ],
+        "obligations": [
+          "limbs",
+          "authority"
+        ]
+      },
+      {
+        "id": "construction",
+        "interfaces": [
+          "studio.limb"
+        ],
+        "obligations": [
+          "limbs",
+          "authority"
+        ]
+      },
+      {
+        "id": "verification",
+        "interfaces": [
+          "studio.limb"
+        ],
+        "obligations": [
+          "limbs",
+          "authority"
+        ]
+      },
+      {
+        "id": "repair",
+        "interfaces": [
+          "studio.limb"
+        ],
+        "obligations": [
+          "limbs",
+          "authority"
+        ]
+      },
+      {
+        "id": "memory",
+        "interfaces": [
+          "studio.limb"
+        ],
+        "obligations": [
+          "limbs",
+          "authority"
+        ]
+      },
+      {
+        "id": "communications",
+        "interfaces": [
+          "studio.limb"
+        ],
+        "obligations": [
+          "limbs",
+          "authority"
+        ]
+      }
+    ],
+    "schema": "mantle.limb-composition/1",
+    "workers": 2
+  },
+  "mode": "chase",
+  "oven": {
+    "assumption": "Consistent execution of sufficiently explicit recipe",
+    "implementation": "incremental",
+    "iterations": "as needed",
+    "provider": "any capable host",
+    "verification": "Baker acceptance"
+  },
+  "product_kind": "appai",
+  "schema": "kpp.recipe/4",
+  "target": {
+    "description": "Visual reference: n8n official repository editor screenshot, retrieved 2026-11-03. Runtime remains Node-RED 5.0.9. No n8n implementation or branding is incorporated.",
+    "fidelity_semantics": "Existing numeric Fidelity declaration retained. Deepen nested command, parameter, dataflow, failure, persistence and cross-system consequences; discovery completeness is an explicit mandatory gate.",
+    "reference_version": "n8n@2.46.4:261663556d98c9502663f6618edd8edd537e5688",
+    "source": "https://github.com/n8n-io/n8n/tree/261663556d98c9502663f6618edd8edd537e5688"
+  },
+  "tissue": "mixed"
+}

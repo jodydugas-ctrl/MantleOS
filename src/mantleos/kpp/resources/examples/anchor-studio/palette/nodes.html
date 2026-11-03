@@ -6,6 +6,53 @@
 <script type="text/html" data-template-name="anchor-whitehole"><div class="form-row"><label for="node-input-name">name</label><input type="text" id="node-input-name"></div><div class="form-row"><label for="node-input-applicationId">applicationId</label><input type="text" id="node-input-applicationId"></div><div class="form-row"><label for="node-input-responsibility">responsibility</label><input type="text" id="node-input-responsibility"></div><div class="form-row"><label for="node-input-tissueId">tissueId</label><input type="text" id="node-input-tissueId"></div><div class="form-row"><label for="node-input-organId">organId</label><input type="text" id="node-input-organId"></div><div class="form-row"><label for="node-input-contractRef">contractRef</label><input type="text" id="node-input-contractRef"></div><p>DESIGN ONLY. Wires remain unresolved until explicitly mapped to a canonical contract.</p></script>
 
 <script type="text/javascript">
+RED.nodes.registerType('studio-strict-if',{
+ category:'Anchor Studio automation',color:'#dbe6cb',
+ defaults:{name:{value:'If'},conditions:{value:JSON.stringify({schema:'studio.if/1',combinator:'and',caseSensitive:true,continueOnFail:false,conditions:[{field:'score',type:'number',operation:'gte',value:10}]}),required:true}},
+ inputs:1,outputs:2,outputLabels:['true','false'],label:function(){return this.name||'If';},paletteLabel:'If (strict)',
+ oneditprepare:function(){
+  const spec=JSON.parse(this.conditions),rows=$('#studio-if-rows');
+  $('#studio-if-combinator').val(spec.combinator);$('#studio-if-case').prop('checked',spec.caseSensitive);$('#studio-if-continue').prop('checked',spec.continueOnFail);
+  const operations={string:['exists','notExists','empty','notEmpty','equals','notEquals','contains','notContains','startsWith','notStartsWith','endsWith','notEndsWith'],number:['exists','notExists','empty','notEmpty','equals','notEquals','gt','gte','lt','lte'],boolean:['exists','notExists','empty','notEmpty','equals','notEquals','true','false']};
+  function add(c){
+   if(rows.children().length>=32)return;
+   const row=$('<div>').addClass('studio-if-row').css({border:'1px solid #ddd',borderRadius:6,padding:12,marginBottom:10});
+   const field=$('<input>').attr({placeholder:'JSON field, e.g. order.total','aria-label':'Condition field'}).addClass('studio-if-field').val(c.field||'score').css('width','100%');
+   const type=$('<select>').attr('aria-label','Condition type').addClass('studio-if-type').css('width','30%');for(const t of Object.keys(operations))type.append($('<option>').val(t).text(t));type.val(c.type||'number');
+   const operation=$('<select>').attr('aria-label','Condition operator').addClass('studio-if-operation').css('width','65%');
+   const value=$('<input>').attr({'aria-label':'Comparison value',placeholder:'Comparison value'}).addClass('studio-if-value').css('width','100%').val(c.value===undefined?'':typeof c.value==='string'?c.value:JSON.stringify(c.value));
+   function fill(){operation.empty();for(const op of operations[type.val()])operation.append($('<option>').val(op).text(op));value.attr('type',type.val()==='number'?'number':'text');}
+   function unary(){value.prop('disabled',['exists','notExists','empty','notEmpty','true','false'].includes(operation.val()));}
+   type.on('change',()=>{fill();unary();});operation.on('change',unary);fill();operation.val(c.operation||'equals');unary();
+   row.append(field,$('<div>').css('margin','8px 0').append(type,operation),value,$('<button type="button">').addClass('red-ui-button').css('marginTop',8).text('Remove condition').on('click',()=>row.remove()));rows.append(row);
+  }
+  for(const c of spec.conditions)add(c);$('#studio-if-add').on('click',()=>add({}));
+ },
+ oneditsave:function(){
+  const conditions=[];$('#studio-if-rows .studio-if-row').each(function(){
+   const row=$(this),type=row.find('.studio-if-type').val(),operation=row.find('.studio-if-operation').val();
+   const c={field:row.find('.studio-if-field').val(),type,operation};
+   if(!row.find('.studio-if-value').prop('disabled')){
+    const raw=row.find('.studio-if-value').val();
+    if(type==='string')c.value=raw;else {try{c.value=JSON.parse(raw);}catch{c.value=raw;}}
+   }
+   conditions.push(c);
+  });
+  $('#node-input-conditions').val(JSON.stringify({schema:'studio.if/1',combinator:$('#studio-if-combinator').val(),caseSensitive:$('#studio-if-case').prop('checked'),continueOnFail:$('#studio-if-continue').prop('checked'),conditions}));
+ }
+});
+</script>
+<script type="text/html" data-template-name="studio-strict-if">
+<div class="form-row"><label for="node-input-name">Name</label><input id="node-input-name"></div>
+<div class="form-row"><label for="studio-if-combinator">Combine</label><select id="studio-if-combinator"><option value="and">All conditions (AND)</option><option value="or">Any condition (OR)</option></select></div>
+<div id="studio-if-rows"></div><button type="button" id="studio-if-add" class="red-ui-button">Add condition</button>
+<div class="form-row" style="margin-top:20px"><label style="width:auto"><input type="checkbox" id="studio-if-case" style="width:auto"> Case sensitive</label></div>
+<div class="form-row"><label style="width:auto"><input type="checkbox" id="studio-if-continue" style="width:auto"> Continue on failure (route invalid items to false)</label></div>
+<input type="hidden" id="node-input-conditions">
+<p>Executable strict IF slice. Input msg.payload is an array of {json: {...}} items. True/false outputs preserve item pairing; empty branches emit nothing. Invalid strict batches go to ordinary Node-RED Catch nodes without partial output. Boolean comparison values are true or false.</p>
+<p>Expressions, type conversion, regex and date/array/object operators remain unsupported. This parameter editor and node do not establish full n8n parity.</p>
+</script>
+<script type="text/javascript">
 (function(){
  if(!RED.sidebar.containsTab('anchor-studio')){
   const panel=$('<iframe>').attr({src:'/studio?panel=1',title:'Anchor Studio contract and continuity'}).css({width:'100%',height:'100%',border:0});

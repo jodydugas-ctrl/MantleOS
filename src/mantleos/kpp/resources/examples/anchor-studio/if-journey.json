@@ -1,0 +1,7 @@
+[
+ {"id":"journey-tab","type":"tab","label":"KPP Chase: strict IF","disabled":false,"info":"Synthetic local workflow. Review before manual deployment; no credentials, timers, network effects or model calls."},
+ {"id":"journey-input","type":"inject","z":"journey-tab","name":"Manual sample items","props":[{"p":"payload"}],"payload":"[{\"json\":{\"score\":9}},{\"json\":{\"score\":10}},{\"json\":{\"score\":11}}]","payloadType":"json","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":170,"y":160,"wires":[["journey-if"]]},
+ {"id":"journey-if","type":"studio-strict-if","z":"journey-tab","name":"Score at least 10","conditions":"{\"schema\":\"studio.if/1\",\"combinator\":\"and\",\"caseSensitive\":true,\"continueOnFail\":false,\"conditions\":[{\"field\":\"score\",\"type\":\"number\",\"operation\":\"gte\",\"value\":10}]}","x":410,"y":160,"wires":[["journey-true"],["journey-false"]]},
+ {"id":"journey-true","type":"debug","z":"journey-tab","name":"True: 10 and 11","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","x":670,"y":120,"wires":[]},
+ {"id":"journey-false","type":"debug","z":"journey-tab","name":"False: 9","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"payload","targetType":"msg","x":660,"y":200,"wires":[]}
+]

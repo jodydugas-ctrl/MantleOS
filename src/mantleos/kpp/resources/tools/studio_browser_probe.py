@@ -19,16 +19,20 @@ def run(nest,url,chromium,output,*,reviewed=False,accept_demo=False):
     if parsed.scheme!='http' or parsed.hostname!='127.0.0.1' or parsed.path not in ('','/') or parsed.username or parsed.password:raise ValueError('Use a local loopback origin')
     from playwright.sync_api import sync_playwright
     output=Path(output);output.mkdir(parents=True,exist_ok=False)
-    auth=json.loads((Path(nest)/'operator.json').read_text('utf8'))
     origin=url.rstrip('/');original=studio_demo.project();observed=[];errors=[]
     with sync_playwright() as p:
         browser=p.chromium.launch(executable_path=str(chromium),headless=True)
-        context=browser.new_context(http_credentials={'username':auth['user'],'password':auth['password']},viewport={'width':1440,'height':1000})
+        context=browser.new_context(viewport={'width':1440,'height':1000})
         page=context.new_page();page.on('pageerror',lambda e:errors.append(str(e)))
+        response=page.goto(origin+'/studio',wait_until='networkidle')
+        assert response.status==200 and 'www-authenticate' not in response.headers
         current=context.request.get(origin+'/studio/project').json()
         if current.get('project')!=original:browser.close();raise ValueError('Probe requires the unchanged packaged calculator project')
-        page.goto(origin+'/studio',wait_until='networkidle')
         page.wait_for_function("document.getElementById('projectResult').textContent==='STRUCTURALLY_VALID'")
+        page.get_by_role('button',name='N-CALC Neutral',exact=True).click()
+        assert 'Own arithmetic result' in page.locator('#selection').inner_text()
+        page.locator('.tabs [data-view="contracts"]').click()
+        page.locator('details').filter(has=page.locator('#project')).locator('summary').click()
         def save(value):
             page.locator('#project').fill(json.dumps(value))
             with page.expect_response(lambda r:r.url==origin+'/studio/project' and r.request.method=='POST') as response:
@@ -51,6 +55,7 @@ def run(nest,url,chromium,output,*,reviewed=False,accept_demo=False):
             result=save(json.loads(page.locator('#project').input_value()))
             assert len(result['project']['recipe']['anchor_design']['flows'])==1 and not page.evaluate('window.hostile===true')
         finally:save(original)
+        page.locator('.tabs [data-view="verification"]').click()
         page.get_by_role('button',name='Run packaged regression and repair',exact=True).click()
         page.wait_for_function("document.getElementById('evaluation').textContent.includes('PENDING_BAKER')",timeout=30000)
         stages=json.loads(page.locator('#evaluation').inner_text())['stages']
@@ -59,10 +64,11 @@ def run(nest,url,chromium,output,*,reviewed=False,accept_demo=False):
             page.on('dialog',lambda dialog:dialog.accept())
             page.get_by_role('button',name='Baker: accept current verified calculator',exact=True).click()
             page.wait_for_function("document.getElementById('evaluation').textContent.includes('kpp.completion/1')",timeout=30000)
-        with page.expect_download() as download:page.get_by_role('link',name='Save portable project',exact=True).click()
+        with page.expect_download() as download:page.get_by_role('link',name='Export',exact=True).click()
         download.value.save_as(str(output/'Anchor-Studio-Demo.anchorstudio'))
+        page.locator('.tabs [data-view="canvas"]').click()
         page.screenshot(path=str(output/'studio.png'));browser.close()
-    report={'applications':observed,'typed_relationship':'PASS','hostile_label':'PASS','regression_repair':[s['all_passed'] for s in stages],
+    report={'automatic_local_access':'FRESH_BROWSER_NO_CREDENTIALS','applications':observed,'typed_relationship':'PASS','hostile_label':'PASS','regression_repair':[s['all_passed'] for s in stages],
         'baker_action':'SYNTHETIC_CALCULATOR_ONLY' if accept_demo else 'NOT_REQUESTED','page_errors':errors,
         'scope':'Real browser project editor and packaged calculator; no general product acceptance'}
     (output/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf8')

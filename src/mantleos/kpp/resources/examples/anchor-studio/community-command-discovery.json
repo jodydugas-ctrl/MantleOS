@@ -1,0 +1,525 @@
+{
+  "acceptance": "NOT_GRANTED",
+  "completeness": "NOT_ESTABLISHED: lexical command declarations only; dynamic children, dialogs, settings, node operations, credentials and edition gates require source/runtime review",
+  "declarations": [
+    {
+      "command": "create-agent",
+      "line": 25,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useAgentNavigationCommands.ts",
+      "symbol": "CREATE_AGENT"
+    },
+    {
+      "command": "new-session",
+      "line": 20,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useChatHubCommands.ts",
+      "symbol": "NEW_SESSION"
+    },
+    {
+      "command": "new-session-with-model",
+      "line": 21,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useChatHubCommands.ts",
+      "symbol": "NEW_SESSION_WITH_MODEL"
+    },
+    {
+      "command": "open-session",
+      "line": 22,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useChatHubCommands.ts",
+      "symbol": "OPEN_SESSION"
+    },
+    {
+      "command": "delete-session",
+      "line": 23,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useChatHubCommands.ts",
+      "symbol": "DELETE_SESSION"
+    },
+    {
+      "command": "stop-message-generation",
+      "line": 24,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useChatHubCommands.ts",
+      "symbol": "STOP_MESSAGE_GENERATION"
+    },
+    {
+      "command": "create-credential",
+      "line": 23,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useCredentialNavigationCommands.ts",
+      "symbol": "CREATE_CREDENTIAL"
+    },
+    {
+      "command": "create-data-table",
+      "line": 21,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useDataTableNavigationCommands.ts",
+      "symbol": "CREATE_DATA_TABLE"
+    },
+    {
+      "command": "delete-execution",
+      "line": 18,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionCommands.ts",
+      "symbol": "DELETE_EXECUTION"
+    },
+    {
+      "command": "retry-current-workflow",
+      "line": 19,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionCommands.ts",
+      "symbol": "RETRY_CURRENT_WORKFLOW"
+    },
+    {
+      "command": "retry-original-workflow",
+      "line": 20,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionCommands.ts",
+      "symbol": "RETRY_ORIGINAL_WORKFLOW"
+    },
+    {
+      "command": "stop-execution",
+      "line": 21,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionCommands.ts",
+      "symbol": "STOP_EXECUTION"
+    },
+    {
+      "command": "debug-execution",
+      "line": 22,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionCommands.ts",
+      "symbol": "DEBUG_EXECUTION"
+    },
+    {
+      "command": "vote-up",
+      "line": 23,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionCommands.ts",
+      "symbol": "VOTE_UP"
+    },
+    {
+      "command": "vote-down",
+      "line": 24,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionCommands.ts",
+      "symbol": "VOTE_DOWN"
+    },
+    {
+      "command": "chat-hub",
+      "line": 16,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts",
+      "symbol": "CHAT_HUB"
+    },
+    {
+      "command": "whats-new",
+      "line": 17,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts",
+      "symbol": "WHATS_NEW"
+    },
+    {
+      "command": "settings",
+      "line": 18,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts",
+      "symbol": "SETTINGS"
+    },
+    {
+      "command": "sign-out",
+      "line": 19,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts",
+      "symbol": "SIGN_OUT"
+    },
+    {
+      "command": "templates",
+      "line": 20,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts",
+      "symbol": "TEMPLATES"
+    },
+    {
+      "command": "variables",
+      "line": 21,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts",
+      "symbol": "VARIABLES"
+    },
+    {
+      "command": "insights",
+      "line": 22,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts",
+      "symbol": "INSIGHTS"
+    },
+    {
+      "command": "quickstart",
+      "line": 23,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts",
+      "symbol": "QUICKSTART"
+    },
+    {
+      "command": "documentation",
+      "line": 24,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts",
+      "symbol": "DOCUMENTATION"
+    },
+    {
+      "command": "forum",
+      "line": 25,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts",
+      "symbol": "FORUM"
+    },
+    {
+      "command": "course",
+      "line": 26,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts",
+      "symbol": "COURSE"
+    },
+    {
+      "command": "report-bug",
+      "line": 27,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts",
+      "symbol": "REPORT_BUG"
+    },
+    {
+      "command": "about",
+      "line": 28,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts",
+      "symbol": "ABOUT"
+    },
+    {
+      "command": "add-sticky",
+      "line": 22,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useNodeCommands.ts",
+      "symbol": "ADD_STICKY"
+    },
+    {
+      "command": "create-project",
+      "line": 19,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useProjectNavigationCommands.ts",
+      "symbol": "CREATE_PROJECT"
+    },
+    {
+      "command": "open-credential",
+      "line": 31,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "OPEN_CREDENTIAL"
+    },
+    {
+      "command": "open-sub-workflow",
+      "line": 32,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "OPEN_SUB_WORKFLOW"
+    },
+    {
+      "command": "test-workflow",
+      "line": 33,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "TEST_WORKFLOW"
+    },
+    {
+      "command": "select-all",
+      "line": 34,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "SELECT_ALL"
+    },
+    {
+      "command": "open-workflow-settings",
+      "line": 35,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "OPEN_WORKFLOW_SETTINGS"
+    },
+    {
+      "command": "tidy-up-workflow",
+      "line": 36,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "TIDY_UP_WORKFLOW"
+    },
+    {
+      "command": "rename-workflow",
+      "line": 37,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "RENAME_WORKFLOW"
+    },
+    {
+      "command": "add-tag",
+      "line": 38,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "ADD_TAG"
+    },
+    {
+      "command": "duplicate-workflow",
+      "line": 39,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "DUPLICATE_WORKFLOW"
+    },
+    {
+      "command": "download-workflow",
+      "line": 40,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "DOWNLOAD_WORKFLOW"
+    },
+    {
+      "command": "import-workflow-from-url",
+      "line": 41,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "IMPORT_WORKFLOW_FROM_URL"
+    },
+    {
+      "command": "import-workflow-from-file",
+      "line": 42,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "IMPORT_WORKFLOW_FROM_FILE"
+    },
+    {
+      "command": "archive-workflow",
+      "line": 43,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "ARCHIVE_WORKFLOW"
+    },
+    {
+      "command": "unarchive-workflow",
+      "line": 44,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "UNARCHIVE_WORKFLOW"
+    },
+    {
+      "command": "delete-workflow",
+      "line": 45,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "DELETE_WORKFLOW"
+    },
+    {
+      "command": "publish-workflow",
+      "line": 46,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "PUBLISH_WORKFLOW"
+    },
+    {
+      "command": "unpublish-workflow",
+      "line": 47,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+      "symbol": "UNPUBLISH_WORKFLOW"
+    },
+    {
+      "command": "create-workflow",
+      "line": 24,
+      "source": "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowNavigationCommands.ts",
+      "symbol": "CREATE_WORKFLOW"
+    },
+    {
+      "command": "open",
+      "line": 28,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "open"
+    },
+    {
+      "command": "copy",
+      "line": 29,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "copy"
+    },
+    {
+      "command": "toggle_activation",
+      "line": 30,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "toggle_activation"
+    },
+    {
+      "command": "duplicate",
+      "line": 31,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "duplicate"
+    },
+    {
+      "command": "execute",
+      "line": 32,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "execute"
+    },
+    {
+      "command": "copy_test_url",
+      "line": 33,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "copy_test_url"
+    },
+    {
+      "command": "copy_production_url",
+      "line": 34,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "copy_production_url"
+    },
+    {
+      "command": "rename",
+      "line": 35,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "rename"
+    },
+    {
+      "command": "replace",
+      "line": 36,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "replace"
+    },
+    {
+      "command": "toggle_pin",
+      "line": 37,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "toggle_pin"
+    },
+    {
+      "command": "delete",
+      "line": 38,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "delete"
+    },
+    {
+      "command": "select_all",
+      "line": 39,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "select_all"
+    },
+    {
+      "command": "deselect_all",
+      "line": 40,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "deselect_all"
+    },
+    {
+      "command": "add_node",
+      "line": 41,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "add_node"
+    },
+    {
+      "command": "add_sticky",
+      "line": 42,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "add_sticky"
+    },
+    {
+      "command": "change_color",
+      "line": 43,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "change_color"
+    },
+    {
+      "command": "open_sub_workflow",
+      "line": 44,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "open_sub_workflow"
+    },
+    {
+      "command": "tidy_up",
+      "line": 45,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "tidy_up"
+    },
+    {
+      "command": "extract_sub_workflow",
+      "line": 46,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "extract_sub_workflow"
+    },
+    {
+      "command": "group_nodes",
+      "line": 47,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "group_nodes"
+    },
+    {
+      "command": "rename_group",
+      "line": 48,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "rename_group"
+    },
+    {
+      "command": "ungroup_nodes",
+      "line": 49,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "ungroup_nodes"
+    },
+    {
+      "command": "expand_all_groups",
+      "line": 50,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "expand_all_groups"
+    },
+    {
+      "command": "collapse_all_groups",
+      "line": 51,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "collapse_all_groups"
+    },
+    {
+      "command": "expand_selected_groups",
+      "line": 52,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "expand_selected_groups"
+    },
+    {
+      "command": "collapse_selected_groups",
+      "line": 53,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "collapse_selected_groups"
+    },
+    {
+      "command": "show_all_group_descriptions",
+      "line": 54,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "show_all_group_descriptions"
+    },
+    {
+      "command": "hide_all_group_descriptions",
+      "line": 55,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "hide_all_group_descriptions"
+    },
+    {
+      "command": "show_group_description",
+      "line": 56,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "show_group_description"
+    },
+    {
+      "command": "hide_group_description",
+      "line": 57,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "hide_group_description"
+    },
+    {
+      "command": "focus_ai_on_selected",
+      "line": 58,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "focus_ai_on_selected"
+    },
+    {
+      "command": "add_nodes_to_chat",
+      "line": 59,
+      "source": "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts",
+      "symbol": "add_nodes_to_chat"
+    }
+  ],
+  "dynamic_sources": [
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useAgentNavigationCommands.ts",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useChatHubCommands.ts",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useCredentialNavigationCommands.ts",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useDataTableNavigationCommands.ts",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionCommands.ts",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useInstanceAiCommands.ts",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useNodeCommands.ts",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useProjectNavigationCommands.ts",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useTemplateCommands.ts",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowNavigationCommands.ts",
+    "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts"
+  ],
+  "files": {
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useAgentNavigationCommands.ts": "3585f50a75030d29888182c92ccba4c196262d3ae59ad9239fe4e19995e892d7",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useChatHubCommands.ts": "f0e299b68a913a985c7b7b8bf9ee38ac3146dd1f4d01f7498e014522c55652fb",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useCredentialNavigationCommands.ts": "c2f23d9023a906717ca6e2242f77839646e3f5e8273077773f2a82e09ea59a7c",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useDataTableNavigationCommands.ts": "9d7101719bc1e9a9c9dc7cb77b0242e0b2b353aab01d03de3b67fed82bb39c62",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionCommands.ts": "4730643bbec50e5af28dcdedcc07746cba40874feeed18e434ed82002190a85c",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useExecutionNavigationCommands.ts": "9c0544a255a78dc7edd31939f5d3e45cb68e7be0a7001b42d0685da71ff9ea79",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useGenericCommands.ts": "81b578929f10cfd0f28fe681ef886c25ce84cedbe3e37e483041ae2fee704a1a",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useInstanceAiCommands.ts": "829fb5452b52a1da8c47e184903173a64fe2880e10ac23b0d24d506dc9bd4031",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useNodeCommands.ts": "51a421a61ba11b7e2c0e865a8b2f90464b9bb44aeb826b59ecaabc5b0af4e6d7",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useProjectNavigationCommands.ts": "b66079e0fa692ddf7cce432ea4d9a6369ef4de56286275122acd2f880c2c214f",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useTemplateCommands.ts": "a16a878cc7996098e8daccf36d45d4530b606c97eb5b1f68b9be85f7c35e56e1",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowCommands.ts": "3e4f5e005a3bf7cf8d7ff31cc98ba27f10a23700ed6857441a21c26fd0c5c6ba",
+    "packages/frontend/editor-ui/src/features/shared/commandBar/composables/useWorkflowNavigationCommands.ts": "aa2b5076c11c119be232af11121d9f87d86f63dd7c78e11f0a038d124af0eea2",
+    "packages/frontend/editor-ui/src/features/shared/contextMenu/composables/useContextMenuItems.ts": "36b5cc6c9d49a687a7828cd9079e36b48c38793b79104e65542d1d8efd3157c8",
+    "packages/nodes-base/nodes/If/V2/IfV2.node.ts": "e8b93fd39d95cab63ae68edd788d5bfb10dd346695e92bbed14f0300c396ee29",
+    "packages/workflow/src/node-parameters/filter-parameter.ts": "0d13fec34d34c4b33c7ff2e6c7e65efa735c3465c97cdfb954fa53257345cd7e"
+  },
+  "reference": {
+    "commit": "261663556d98c9502663f6618edd8edd537e5688",
+    "edition": "SELF_HOSTED_COMMUNITY",
+    "release": "2.46.4",
+    "repository": "n8n-io/n8n"
+  },
+  "verification": "NOT_RUN"
+}

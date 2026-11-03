@@ -1,0 +1,243 @@
+{
+  "schema": "kpp.recipe/4",
+  "id": "anchor-studio-visual-chase",
+  "goal": "Chase n8n canvas-led GUI composition while preserving Node-RED and the resident Cuttlefish AppAI",
+  "mode": "chase",
+  "tissue": "mixed",
+  "fidelity": 3,
+  "target": {
+    "description": "Visual reference: n8n official repository editor screenshot, retrieved 2026-11-03. Runtime remains Node-RED 5.0.9. No n8n implementation or branding is incorporated.",
+    "source": "https://github.com/n8n-io/n8n/blob/master/assets/n8n-screenshot-readme.png",
+    "fidelity_semantics": "Observed layout and selected interactions, not universal feature parity or a pixel-identical clone",
+    "reference_version": "sha256:80c3ad944254b3c327c422ca24fcf05c28b45cb33a9be224aebddda78fcb0b87"
+  },
+  "ingredients": [
+    "engram-limbs",
+    "anchor-satisfaction-engine"
+  ],
+  "oven": {
+    "assumption": "Consistent execution of sufficiently explicit recipe",
+    "provider": "any capable host",
+    "iterations": "as needed",
+    "implementation": "incremental",
+    "verification": "Baker acceptance"
+  },
+  "acceptance": "Every required anchor must carry explicit evidence; no credit for untested capabilities.",
+  "anchors": [
+    {
+      "id": "founding",
+      "statement": "Deliver the complete verified founding persona and separate role addendum",
+      "test": "Execute source-pinned positive and negative cases for founding and record tested scope, unknowns and independent Baker status.",
+      "required": true,
+      "depth": 3,
+      "depends": []
+    },
+    {
+      "id": "heart",
+      "statement": "Observe scheduled and bounded event-driven Heart processing",
+      "test": "Execute source-pinned positive and negative cases for heart and record tested scope, unknowns and independent Baker status.",
+      "required": true,
+      "depth": 3,
+      "depends": []
+    },
+    {
+      "id": "limbs",
+      "statement": "Verify independent identities, memory and intention/result coordination",
+      "test": "Execute source-pinned positive and negative cases for limbs and record tested scope, unknowns and independent Baker status.",
+      "required": true,
+      "depth": 3,
+      "depends": []
+    },
+    {
+      "id": "host",
+      "statement": "Preserve native Node-RED flows through integration, stasis and removal",
+      "test": "Execute source-pinned positive and negative cases for host and record tested scope, unknowns and independent Baker status.",
+      "required": true,
+      "depth": 3,
+      "depends": []
+    },
+    {
+      "id": "design",
+      "statement": "Edit and round-trip canonical designs without executing visual wires",
+      "test": "Execute source-pinned positive and negative cases for design and record tested scope, unknowns and independent Baker status.",
+      "required": true,
+      "depth": 3,
+      "depends": []
+    },
+    {
+      "id": "evidence",
+      "statement": "Reject current-candidate regressions through genuine KPP gates",
+      "test": "Execute source-pinned positive and negative cases for evidence and record tested scope, unknowns and independent Baker status.",
+      "required": true,
+      "depth": 3,
+      "depends": []
+    },
+    {
+      "id": "authority",
+      "statement": "Require host grants and distinct Baker decisions",
+      "test": "Execute source-pinned positive and negative cases for authority and record tested scope, unknowns and independent Baker status.",
+      "required": true,
+      "depth": 3,
+      "depends": []
+    },
+    {
+      "id": "continuity",
+      "statement": "Release only committed replies with durable replay and recovery",
+      "test": "Execute source-pinned positive and negative cases for continuity and record tested scope, unknowns and independent Baker status.",
+      "required": true,
+      "depth": 3,
+      "depends": []
+    },
+    {
+      "id": "project",
+      "statement": "Round-trip portable project data without private organism state",
+      "test": "Execute source-pinned positive and negative cases for project and record tested scope, unknowns and independent Baker status.",
+      "required": true,
+      "depth": 3,
+      "depends": []
+    },
+    {
+      "id": "visual-workspace",
+      "statement": "Default to a canvas-led workspace with navigation rail, project header, editor tabs, connected application cards, zoom and fit controls; raw JSON is advanced detail",
+      "test": "Capture before/reference/after screenshots; manually assess composition at desktop and narrow widths without treating a pixel score as acceptance",
+      "required": true,
+      "depth": 3,
+      "depends": []
+    },
+    {
+      "id": "visual-interaction",
+      "statement": "Select and inspect actual canonical applications, move nodes, edit typed links and explicitly save layout through the existing revision check",
+      "test": "Exercise selection, keyboard selection, drag/save/reload, typed links and stale save refusal; verify canonical singularities remain unchanged",
+      "required": true,
+      "depth": 3,
+      "depends": []
+    },
+    {
+      "id": "appai-presence",
+      "statement": "Keep resident Cuttlefish conversation, supervised MIND state, Heart and eight independent limb summaries accessible in the Studio",
+      "test": "Verify status comes from the Body; submit one real host-supervised reply, commit/replay it; detached cognition remains awaiting and model text grants no authority",
+      "required": true,
+      "depth": 3,
+      "depends": []
+    },
+    {
+      "id": "visual-preservation",
+      "statement": "Keep native editor and flows, complete founding PRIMER, project export boundary, verification and Baker decisions intact",
+      "test": "Run focused and documented release suites; repeat portable project and native editor checks; no transferred acceptance",
+      "required": true,
+      "depth": 3,
+      "depends": []
+    }
+  ],
+  "product_kind": "appai",
+  "delivery_mode": "artifact",
+  "capabilities": {
+    "agent": true,
+    "mind": true,
+    "mantleos_splice": true
+  },
+  "implementation": {
+    "components": [
+      {
+        "id": "app",
+        "policy": "required",
+        "languages": [
+          "python"
+        ]
+      },
+      {
+        "id": "visual-workspace",
+        "policy": "required",
+        "languages": [
+          "javascript"
+        ]
+      }
+    ]
+  },
+  "limb_composition": {
+    "schema": "mantle.limb-composition/1",
+    "members": [
+      {
+        "id": "body-mapping",
+        "interfaces": [
+          "studio.limb"
+        ],
+        "obligations": [
+          "limbs",
+          "authority"
+        ]
+      },
+      {
+        "id": "design",
+        "interfaces": [
+          "studio.limb"
+        ],
+        "obligations": [
+          "limbs",
+          "authority"
+        ]
+      },
+      {
+        "id": "contracts",
+        "interfaces": [
+          "studio.limb"
+        ],
+        "obligations": [
+          "limbs",
+          "authority"
+        ]
+      },
+      {
+        "id": "construction",
+        "interfaces": [
+          "studio.limb"
+        ],
+        "obligations": [
+          "limbs",
+          "authority"
+        ]
+      },
+      {
+        "id": "verification",
+        "interfaces": [
+          "studio.limb"
+        ],
+        "obligations": [
+          "limbs",
+          "authority"
+        ]
+      },
+      {
+        "id": "repair",
+        "interfaces": [
+          "studio.limb"
+        ],
+        "obligations": [
+          "limbs",
+          "authority"
+        ]
+      },
+      {
+        "id": "memory",
+        "interfaces": [
+          "studio.limb"
+        ],
+        "obligations": [
+          "limbs",
+          "authority"
+        ]
+      },
+      {
+        "id": "communications",
+        "interfaces": [
+          "studio.limb"
+        ],
+        "obligations": [
+          "limbs",
+          "authority"
+        ]
+      }
+    ],
+    "workers": 2
+  }
+}
