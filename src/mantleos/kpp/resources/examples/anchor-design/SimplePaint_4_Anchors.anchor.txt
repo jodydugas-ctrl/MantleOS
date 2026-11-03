@@ -1,0 +1,94 @@
+ANCHOR DESIGN: SimplePaint
+STATUS: DESIGN SPECIFICATION ONLY — NOT AN EXECUTABLE ANCHOR PROFILE
+
+RECEIVING LLM:
+Build a functional, single-image, single-layer paint application. The four entries
+below apply existing MantleOS canonical Anchor types; they introduce no new
+singularities or opcodes. Make the declared conditions true using the available
+programming language and authorized host. Do not mistake a drawing-themed UI
+mockup for a working paint application.
+
+ANCHORS (ID | canonical type | canonical singularity | responsibility)
+
+BH-INPUT | BlackHole | Receive the declared input.
+  Receive pointer movements/clicks/drags, keyboard commands, menu selections,
+  color/tool choices, dialogs, and results of host file operations. Convert
+  inputs into explicit commands. Do not directly modify image pixels or state.
+
+N-CANVAS | Neutral | Apply the declared relationship.
+  Own one opaque RGB raster image: width, height, pixel colors, stroke/shape
+  transactions, history, filename, saved checkpoint, and dirty state.
+  Apply pencil, brush, eraser, fill, line, rectangle, ellipse, clear, undo,
+  and redo commands to real pixels. Commit each completed stroke or shape as
+  one history action. Report image and document state consistently.
+
+N-WINDOW | Neutral | Apply the declared relationship.
+  Present the paint window, menus, drawable viewport, tool choices, foreground
+  and background colors, brush size, zoom, cursor, and status indicators.
+  Own UI-only state: selected tool, colors, size, zoom, scroll offset, and
+  drag preview. Translate viewport coordinates into image coordinates; route
+  explicit editing commands to N-CANVAS. Display the actual image state.
+  Request real open/save operations from the authorized host and display errors.
+
+WH-INTEGRITY | WhiteHole | Enforce the declared boundary.
+  Protect unsaved edits and prevent invalid or unauthorized effects. Before
+  New, Open, or Exit could discard changes, offer Save / Don't Save / Cancel
+  and honor Cancel. Validate image dimensions, pixel bounds, supported PNG
+  files, host permissions, and failed I/O. Never discard existing pixels on
+  a failed Open or mark an image saved before successful Save confirmation.
+  Reject unsafe image sizes; show errors without pretending success.
+
+FLOW:
+  BH-INPUT -> WH-INTEGRITY -> N-CANVAS <-> N-WINDOW
+  N-WINDOW presents state and requests host operations; external host results
+  return through BH-INPUT. WH-INTEGRITY guards destructive transitions and
+  effects, not just the visible UI. Follow N-RULE-ECONOMY: use the fewest rules
+  that still cover all needed variables.
+
+SIMPLE PAINT CONTRACT (all declared features must actually work):
+  File: New (blank white canvas, default 800 x 600), Open PNG, Save PNG,
+        Save As PNG, Exit.
+  Edit: Undo, Redo, Clear Canvas.
+  Tools: Pencil (1-pixel stroke), Brush (adjustable size), Eraser (paints the
+         selected background color), Bucket Fill (contiguous equal-color area),
+         Line, Rectangle, Ellipse. Shapes have outline strokes; no layers.
+  Color: Select foreground and background colors from a visible palette;
+         apply foreground to drawing tools. Support a visible brush-size choice.
+  View: Zoom In, Zoom Out, Reset Zoom; pan/scroll when the image exceeds the
+        viewport. Zoom and scrolling affect display, never image pixels.
+  UI: Visible canvas, tool palette, color controls, menu commands, active-tool
+      indication, image size and cursor image-coordinate readout.
+  Behavior: Pointer-down begins a drawing gesture; movement previews or updates
+      it; pointer-up commits one coherent action. Cancelled gestures must not
+      leave a partial committed history action. Only in-bounds pixels change.
+      Undo and Redo restore exact pixels, with at least 10 history actions;
+      a new edit after Undo clears the redo branch. No-op edits do not create
+      history entries. Dirty state reflects divergence from the last saved
+      image, including after Undo/Redo and Clear.
+      PNG Open/Save really transfers pixel data through the host. Opening an
+      RGBA PNG composites transparent pixels on white to form the declared
+      opaque canvas. A PNG save/open round-trip reproduces image dimensions
+      and RGB pixel values exactly. If host file access is unavailable,
+      explicitly report the limitation rather than fake file operations.
+
+NON-GOALS:
+  No layers, selection/move tool, text, filters, animation, network sharing,
+  multi-document tabs, printing, or JPG/BMP support in this simple version.
+
+CONSTRUCTION:
+  Inspect the complete Anchor contract before coding. Build one Anchor or a
+  dependency-compatible batch at a time. Make the minimum reasonable code
+  changes required to satisfy newly selected obligations, then rerun tests
+  for every previously satisfied obligation. An unverified or regressed
+  condition is not TRUE. Changes to the design require explicit review;
+  source code changes may never redefine canonical Anchor singularities.
+
+ACCEPTANCE:
+  Verify every tool, command, stroke/shape state transition, coordinate map,
+  zoom behavior, fill boundary, history action, dirty-state transition,
+  PNG round-trip, cancelled operation, and applicable host error path.
+  Explicitly test: cancel during New/Open/Exit; failed Save; failed Open
+  preserving pixels; Undo after Save; Redo invalidation; out-of-bounds input;
+  large-image rejection; and drawing after zoom/scroll. Prove the application
+  modifies and saves actual raster pixels, not just an interface mockup.
+  The coding agent may report evidence but must not self-approve acceptance.

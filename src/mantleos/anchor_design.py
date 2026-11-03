@@ -99,3 +99,27 @@ def journal_design():
       'flows':[{'from':a,'to':b,'relationship':r} for a,b,r in [('BH-ENCOUNTER','WH-INTEGRITY','Validate input and bindings'),('WH-INTEGRITY','N-CONTINUITY','Admit checked records atomically'),('N-CONTINUITY','N-HOST','Project relevant committed memory'),('N-HOST','BH-ENCOUNTER','Receive semantic proposals and verified observations')]],
       'state':[{'id':i,'owner':o} for i,o in [('identity-bindings','N-CONTINUITY'),('experience','N-CONTINUITY'),('encounter-preparation','N-HOST')]],
       'effects':[{'id':i,'requester':'N-HOST','guard':'WH-INTEGRITY','confirmation':text} for i,text in [('checked-read','Host broker grants capability; verified observation binds reply.'),('reply-release','Release broker grants permission; release exact durable committed reply.'),('portable-export','Consistent verified export succeeds before reporting Save.')]]})
+
+
+def render_contract(recipe):
+    """Complete declared recipe contract; never infers omitted behavior."""
+    from .kpp.core import validate_recipe
+    recipe = validate_recipe(recipe)
+    design = recipe_design(recipe)
+    c.require(design is not None, 'Full contract needs an explicit design')
+    import json
+    lines = [render(design), 'APPLICATION CONTRACT:', 'Recipe SHA256: '+c.digest(recipe),
+             'Goal: '+recipe['goal'], 'Target: '+recipe['target']['description'],
+             'Fidelity declaration: '+str(recipe['fidelity'])]
+    for obligation in recipe['anchors']:
+        lines.extend([obligation['id']+' | '+('MANDATORY' if obligation['required'] else 'OPTIONAL'),
+                      obligation['statement'], 'Verification: '+obligation['test'],
+                      'Applications: '+', '.join(obligation.get('design_anchors', [])),
+                      'Dependencies: '+', '.join(obligation.get('depends', [])),
+                      'Preserves: '+', '.join(obligation.get('preserves', []))])
+    lines.extend(['Implementation: '+json.dumps(recipe.get('implementation', {}),sort_keys=True),
+                  'Preservation: '+json.dumps(recipe.get('transformation', {}),sort_keys=True),
+                  'VERIFICATION COVERAGE: Declared tests only; execution UNRUN in this design view.',
+                  'LIMITS: Complete relative to this pinned recipe; omitted behavior is not inferred.',
+                  'ACCEPTANCE: Current cumulative evidence and separate explicit Baker review required.'])
+    return '\n'.join(lines)+'\n'

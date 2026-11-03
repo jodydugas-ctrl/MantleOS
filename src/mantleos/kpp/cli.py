@@ -39,6 +39,7 @@ def main(argv=None):
     c.add_argument('--persona-name')
     for name in ('design-check','design-view'):
         a=sub.add_parser(name, help='Inspect a compact Anchor design; no execution or acceptance')
+        if name == 'design-view':a.add_argument('--full-contract',action='store_true')
         a.add_argument('--recipe',type=Path,required=True)
     sub.add_parser('systems', help='Describe the one shared MantleOS/KPP system')
     a=sub.add_parser('language-plan', help='Report recipe implementation choices without execution')
@@ -104,6 +105,19 @@ def main(argv=None):
     a=sub.add_parser("reflex-import",help="Recover a portable reflex bundle into a NEW directory; never execute it")
     a.add_argument("--bundle",type=Path,required=True)
     a.add_argument("--output",type=Path,required=True)
+    for name in ('satisfaction-start', 'satisfaction-plan', 'satisfaction-test', 'satisfaction-check'):
+        a=sub.add_parser(name, help='Opt-in cumulative candidate verification; no Baker approval')
+        a.add_argument('--workspace', type=Path, required=True)
+        if name == 'satisfaction-start':
+            for option in ('candidate','suite','context'):
+                a.add_argument('--'+option, type=Path, required=True)
+            a.add_argument('--reviewed', action='store_true')
+        if name in ('satisfaction-plan','satisfaction-test'):
+            a.add_argument('--batch-size', type=int, default=1)
+        if name == 'satisfaction-test':
+            a.add_argument('--execute', action='store_true')
+            a.add_argument('--reviewed', action='store_true')
+            a.add_argument('--timeout', type=int, default=15)
     a=sub.add_parser("test", help="Execute reviewed pinned Anchor scripts locally")
     a.add_argument("--workspace",type=Path,required=True)
     a.add_argument("--candidate",type=Path,required=True)
@@ -255,6 +269,15 @@ def main(argv=None):
             print_json(create(read_json(args.recipe),args.output,
                 persona=args.persona.read_text(encoding='utf-8') if args.persona else None,
                 persona_name=args.persona_name))
+        elif args.cmd.startswith('satisfaction-'):
+            from . import satisfaction as sat
+            if args.cmd == 'satisfaction-start':
+                result=sat.start(args.workspace,args.candidate,args.suite,args.context,reviewed=args.reviewed)
+            elif args.cmd == 'satisfaction-plan':result=sat.plan(args.workspace,args.batch_size)
+            elif args.cmd == 'satisfaction-check':result=sat.check(args.workspace)
+            else:result=sat.test(args.workspace,execute=args.execute,reviewed=args.reviewed,batch_size=args.batch_size,timeout=args.timeout)
+            print_json(result)
+            if result.get('all_passed') is False:return 3
         elif args.cmd=='systems':
             from .systems import describe
             print_json(describe())
@@ -262,7 +285,9 @@ def main(argv=None):
             from ..anchor_design import recipe_design, projection, render, review
             design=recipe_design(validate_recipe(read_json(args.recipe)))
             if design is None:raise KPPError('Recipe has no Anchor design')
-            if args.cmd=='design-view':print(render(design),end='')
+            if args.cmd=='design-view':
+                from ..anchor_design import render_contract
+                print(render_contract(validate_recipe(read_json(args.recipe))) if args.full_contract else render(design),end='')
             else:print_json({'design':projection(design),'review':review(design),'status':'STRUCTURALLY_VALID'})
         elif args.cmd=='language-plan':
             from .language import implementation_plan

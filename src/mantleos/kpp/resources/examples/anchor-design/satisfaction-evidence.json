@@ -1,0 +1,158 @@
+{
+  "batch": {
+    "acceptance": "PENDING_BAKER",
+    "applications": 1,
+    "planning_median_ms": 13.728149991948158,
+    "planning_p95_ms": 15.966399980243295,
+    "stages": [
+      {
+        "milliseconds": 248.1452999636531,
+        "outcomes": [
+          {
+            "id": "addition",
+            "outcome": "PASS"
+          },
+          {
+            "id": "undo",
+            "outcome": "PASS"
+          }
+        ],
+        "passed": true,
+        "targets": [
+          "direct",
+          "history"
+        ]
+      },
+      {
+        "milliseconds": 431.0045000165701,
+        "outcomes": [
+          {
+            "id": "addition",
+            "outcome": "PASS"
+          },
+          {
+            "id": "undo",
+            "outcome": "FAIL"
+          },
+          {
+            "id": "combined",
+            "outcome": "FAIL"
+          }
+        ],
+        "passed": false,
+        "targets": [
+          "integration"
+        ]
+      },
+      {
+        "milliseconds": 344.46890000253916,
+        "outcomes": [
+          {
+            "id": "addition",
+            "outcome": "PASS"
+          },
+          {
+            "id": "undo",
+            "outcome": "PASS"
+          },
+          {
+            "id": "combined",
+            "outcome": "PASS"
+          }
+        ],
+        "passed": true,
+        "targets": [
+          "integration"
+        ]
+      }
+    ]
+  },
+  "limits": "Synthetic local execution; no model, browser, OS isolation or full product parity qualification.",
+  "native": {
+    "append_cell_and_stale_boundary": "PASS",
+    "record_head": "93ba3c11e7a9ec0fa079a83b3241cbb74b4ede6bcf8969e6387a51bb5ac21a04",
+    "scope": "Native tape append, not complete Body/AppAI qualification"
+  },
+  "single": {
+    "acceptance": "PENDING_BAKER",
+    "applications": 1,
+    "planning_median_ms": 15.77835000352934,
+    "planning_p95_ms": 23.319399973843247,
+    "stages": [
+      {
+        "milliseconds": 238.29970002407208,
+        "outcomes": [
+          {
+            "id": "addition",
+            "outcome": "PASS"
+          }
+        ],
+        "passed": true,
+        "targets": [
+          "direct"
+        ]
+      },
+      {
+        "milliseconds": 242.35179997049272,
+        "outcomes": [
+          {
+            "id": "addition",
+            "outcome": "PASS"
+          },
+          {
+            "id": "undo",
+            "outcome": "PASS"
+          }
+        ],
+        "passed": true,
+        "targets": [
+          "history"
+        ]
+      },
+      {
+        "milliseconds": 435.89710001833737,
+        "outcomes": [
+          {
+            "id": "addition",
+            "outcome": "PASS"
+          },
+          {
+            "id": "undo",
+            "outcome": "FAIL"
+          },
+          {
+            "id": "combined",
+            "outcome": "FAIL"
+          }
+        ],
+        "passed": false,
+        "targets": [
+          "integration"
+        ]
+      },
+      {
+        "milliseconds": 386.30800001556054,
+        "outcomes": [
+          {
+            "id": "addition",
+            "outcome": "PASS"
+          },
+          {
+            "id": "undo",
+            "outcome": "PASS"
+          },
+          {
+            "id": "combined",
+            "outcome": "PASS"
+          }
+        ],
+        "passed": true,
+        "targets": [
+          "integration"
+        ]
+      }
+    ]
+  },
+  "archive_sha256": "f160b4dfaffd9302ce2532b32763af1f73fd7a628cf347b057917ba421aea250",
+  "qualification": "Synthetic current-source observations; Baker acceptance pending. Full suites recorded separately."
+}

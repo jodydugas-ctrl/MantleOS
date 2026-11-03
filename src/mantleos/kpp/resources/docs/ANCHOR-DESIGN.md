@@ -33,3 +33,5 @@ New journals carry the design independently of the full unchanged PRIMER. Sessio
 validate and cache its projection; preparations bind its digest. Older journals remain
 readable and explicit export attaches the current default design. Materialized Body
 exports preserve ANCHOR-DESIGN.json. A model, digest or transported file grants no authority.
+
+See [cumulative satisfaction](ANCHOR-SATISFACTION.md) for opt-in candidate-bound verification, batch planning and complete design views.

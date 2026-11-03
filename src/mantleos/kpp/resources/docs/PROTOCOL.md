@@ -75,3 +75,5 @@ old workspaces. Replacement requires a current-runtime workspace. See
 See ARTISANAL-CONSTRUCTION.md for optional recipe/4 construction.techniques and unchanged explicit acceptance.
 
 See docs/ANCHOR-DESIGN.md for compact responsibility contracts, recipe coverage and Journal integration.
+
+See [cumulative satisfaction](ANCHOR-SATISFACTION.md) for opt-in candidate-bound verification, batch planning and complete design views.

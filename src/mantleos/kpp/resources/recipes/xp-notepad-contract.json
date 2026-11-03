@@ -1,0 +1,268 @@
+{
+  "schema": "kpp.recipe/4",
+  "id": "xp-notepad-contract",
+  "goal": "Account for the complete supplied design contract; implementation and runtime verification pending.",
+  "mode": "chase",
+  "tissue": "python",
+  "fidelity": 3,
+  "target": {
+    "description": "xp-notepad-contract; no application parity is claimed",
+    "source": "Owner-supplied Anchor Satisfaction Engine Handoff v2; design-only"
+  },
+  "ingredients": [],
+  "oven": {
+    "assumption": "Consistent execution of sufficiently explicit recipe",
+    "provider": "any capable host",
+    "iterations": "as needed",
+    "implementation": "incremental",
+    "verification": "Baker acceptance"
+  },
+  "acceptance": "Every required anchor must carry explicit evidence; no credit for untested capabilities.",
+  "anchors": [
+    {
+      "id": "clause-1",
+      "statement": "ANCHOR DESIGN: WindowsXPNotepad\nSTATUS: DESIGN SPECIFICATION ONLY \u2014 NOT AN EXECUTABLE ANCHOR PROFILE",
+      "test": "Review this complete clause and execute each declared command, transition, consequence and applicable failure/cancel path; UNRUN.",
+      "required": true,
+      "depth": 1,
+      "depends": [],
+      "design_anchors": [
+        "BH-INPUT",
+        "N-DOCUMENT",
+        "N-WINDOWS",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "clause-2",
+      "statement": "RECEIVING LLM:\nBuild a faithful, single-document Windows XP Notepad clone. The four entries below\nare applications of the existing MantleOS Anchor types, not new types or opcodes.\nPreserve their responsibilities; implement with the tools actually available.\nDo not treat an interface mockup as a completed application.",
+      "test": "Review this complete clause and execute each declared command, transition, consequence and applicable failure/cancel path; UNRUN.",
+      "required": true,
+      "depth": 1,
+      "depends": [],
+      "design_anchors": [
+        "BH-INPUT",
+        "N-DOCUMENT",
+        "N-WINDOWS",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "clause-3",
+      "statement": "ANCHORS (ID | canonical type | canonical singularity | responsibility)",
+      "test": "Review this complete clause and execute each declared command, transition, consequence and applicable failure/cancel path; UNRUN.",
+      "required": true,
+      "depth": 1,
+      "depends": [],
+      "design_anchors": [
+        "BH-INPUT",
+        "N-DOCUMENT",
+        "N-WINDOWS",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "clause-4",
+      "statement": "BH-INPUT | BlackHole | Receive the declared input.\n  Receive keyboard, mouse, menu/shortcut, dialog, clipboard, and file-operation\n  results. Convert them into explicit user commands; do not change document state.",
+      "test": "Review this complete clause and execute each declared command, transition, consequence and applicable failure/cancel path; UNRUN.",
+      "required": true,
+      "depth": 1,
+      "depends": [],
+      "design_anchors": [
+        "BH-INPUT",
+        "N-DOCUMENT",
+        "N-WINDOWS",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "clause-5",
+      "statement": "N-DOCUMENT | Neutral | Apply the declared relationship.\n  Own exactly one plain-text document: characters, caret, selection, clipboard,\n  one-level undo, find/replace, filename, encoding, line endings, and dirty state.\n  Apply editing commands consistently and report the resulting state.",
+      "test": "Review this complete clause and execute each declared command, transition, consequence and applicable failure/cancel path; UNRUN.",
+      "required": true,
+      "depth": 1,
+      "depends": [],
+      "design_anchors": [
+        "BH-INPUT",
+        "N-DOCUMENT",
+        "N-WINDOWS",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "clause-6",
+      "statement": "N-WINDOWS | Neutral | Apply the declared relationship.\n  Present the Windows XP Notepad window, editor, five menus, dialogs and status.\n  Route commands to the document; request actual open/save/print/clipboard actions\n  from the authorized host; show the resulting state and errors.",
+      "test": "Review this complete clause and execute each declared command, transition, consequence and applicable failure/cancel path; UNRUN.",
+      "required": true,
+      "depth": 1,
+      "depends": [],
+      "design_anchors": [
+        "BH-INPUT",
+        "N-DOCUMENT",
+        "N-WINDOWS",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "clause-7",
+      "statement": "WH-INTEGRITY | WhiteHole | Enforce the declared boundary.\n  Prevent data loss and invalid state. Prompt Save/Don't Save/Cancel before losing\n  unsaved changes; honor Cancel; validate paths/encodings and failed I/O; only\n  mark a document saved after confirmed success. Host effects need host permission.",
+      "test": "Review this complete clause and execute each declared command, transition, consequence and applicable failure/cancel path; UNRUN.",
+      "required": true,
+      "depth": 1,
+      "depends": [],
+      "design_anchors": [
+        "BH-INPUT",
+        "N-DOCUMENT",
+        "N-WINDOWS",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "clause-8",
+      "statement": "FLOW:\n  BH-INPUT -> WH-INTEGRITY -> N-DOCUMENT <-> N-WINDOWS\n  External results -> BH-INPUT; WH-INTEGRITY guards destructive actions/effects.\n  Follow N-RULE-ECONOMY: fewest rules that still cover all required variables.",
+      "test": "Review this complete clause and execute each declared command, transition, consequence and applicable failure/cancel path; UNRUN.",
+      "required": true,
+      "depth": 1,
+      "depends": [],
+      "design_anchors": [
+        "BH-INPUT",
+        "N-DOCUMENT",
+        "N-WINDOWS",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "clause-9",
+      "statement": "XP NOTEPAD CONTRACT (all must actually work):\n  File: New, Open, Save, Save As, Page Setup, Print, Exit.\n  Edit: Undo, Cut, Copy, Paste, Delete, Find, Find Next, Replace, Go To,\n        Select All, Time/Date (F5).\n  Format: Word Wrap, Font.  View: Status Bar.\n  Help: Help Topics, About Notepad.\n  UI: XP-era title, menu layout, keyboard accelerators, dialogs, plain-text\n      editor, scrollbars, caret, selection, and line/column indicator.\n  Behavior: edits update dirty state; New/Open/Exit protect unsaved text; Open\n      and Save really exchange files with the host. Save As offers ANSI, Unicode\n      (UTF-16 LE), Unicode big-endian, and UTF-8; preserve text and report\n      unsupported/unrepresentable encodings instead of silently losing data.\n      Word Wrap changes display only, not file text; when enabled, disable\n      Go To and Status Bar as in XP. Font changes display, not document bytes.\n      Opening a text file starting with .LOG inserts a timestamp at the end.\n      Print and Page Setup operate through real host capabilities, or are\n      explicitly unavailable\u2014never fake a successful effect.",
+      "test": "Review this complete clause and execute each declared command, transition, consequence and applicable failure/cancel path; UNRUN.",
+      "required": true,
+      "depth": 1,
+      "depends": [],
+      "design_anchors": [
+        "BH-INPUT",
+        "N-DOCUMENT",
+        "N-WINDOWS",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "clause-10",
+      "statement": "ACCEPTANCE:\n  Complete only when every menu command, shortcut, state transition, file\n  round-trip, cancellation path, and relevant error path is tested. Match XP\n  behavior and appearance within the chosen host's stated limits. No visual\n  resemblance alone, generated code alone, or self-approval counts as evidence.",
+      "test": "Review this complete clause and execute each declared command, transition, consequence and applicable failure/cancel path; UNRUN.",
+      "required": true,
+      "depth": 1,
+      "depends": [],
+      "design_anchors": [
+        "BH-INPUT",
+        "N-DOCUMENT",
+        "N-WINDOWS",
+        "WH-INTEGRITY"
+      ]
+    }
+  ],
+  "product_kind": "conventional",
+  "delivery_mode": "artifact",
+  "capabilities": {},
+  "implementation": {
+    "components": [
+      {
+        "id": "app",
+        "policy": "required",
+        "languages": [
+          "python"
+        ]
+      }
+    ]
+  },
+  "anchor_design": {
+    "schema": "anchor.design/1",
+    "id": "xp-notepad-contract",
+    "purpose": "Account for the complete supplied design contract; implementation and runtime verification pending.",
+    "applications": [
+      {
+        "schema": "anchor.application/1",
+        "id": "BH-INPUT",
+        "definition": "BlackHole",
+        "type": "BlackHole",
+        "singularity": "Receive the declared input.",
+        "attributes": {
+          "responsibility": "Receive keyboard, mouse, menu/shortcut, dialog, clipboard, and file-operation\n  results. Convert them into explicit user commands; do not change document state."
+        },
+        "sha256": "008b5d1b512a5958d33d4e03aa59c24c0d5592f300d16020ed043deb6859188f"
+      },
+      {
+        "schema": "anchor.application/1",
+        "id": "N-DOCUMENT",
+        "definition": "Neutral",
+        "type": "Neutral",
+        "singularity": "Apply the declared relationship.",
+        "attributes": {
+          "responsibility": "Own exactly one plain-text document: characters, caret, selection, clipboard,\n  one-level undo, find/replace, filename, encoding, line endings, and dirty state.\n  Apply editing commands consistently and report the resulting state."
+        },
+        "sha256": "887e71258987ec4ba06eacefd89fb5b3a30ebe0f9ff1f639b19b211bbb5fd2ee"
+      },
+      {
+        "schema": "anchor.application/1",
+        "id": "N-WINDOWS",
+        "definition": "Neutral",
+        "type": "Neutral",
+        "singularity": "Apply the declared relationship.",
+        "attributes": {
+          "responsibility": "Present the Windows XP Notepad window, editor, five menus, dialogs and status.\n  Route commands to the document; request actual open/save/print/clipboard actions\n  from the authorized host; show the resulting state and errors."
+        },
+        "sha256": "c0c35a2fc7ca782096f42fd9c1147307f79c2e9949b830fd37c360866c82ec1f"
+      },
+      {
+        "schema": "anchor.application/1",
+        "id": "WH-INTEGRITY",
+        "definition": "WhiteHole",
+        "type": "WhiteHole",
+        "singularity": "Enforce the declared boundary.",
+        "attributes": {
+          "responsibility": "Prevent data loss and invalid state. Prompt Save/Don't Save/Cancel before losing\n  unsaved changes; honor Cancel; validate paths/encodings and failed I/O; only\n  mark a document saved after confirmed success. Host effects need host permission."
+        },
+        "sha256": "d10078fd088e7647efb2498c0b3c81306bb720b8c9f8629cf7f5d669097fabdc"
+      }
+    ],
+    "flows": [
+      {
+        "from": "BH-INPUT",
+        "to": "WH-INTEGRITY",
+        "relationship": "Validate commands and host results"
+      },
+      {
+        "from": "WH-INTEGRITY",
+        "to": "N-DOCUMENT",
+        "relationship": "Admit guarded transitions"
+      },
+      {
+        "from": "N-DOCUMENT",
+        "to": "N-WINDOWS",
+        "relationship": "Present owned state"
+      }
+    ],
+    "state": [
+      {
+        "id": "document-state",
+        "owner": "N-DOCUMENT"
+      },
+      {
+        "id": "presentation-state",
+        "owner": "N-WINDOWS"
+      }
+    ],
+    "effects": [
+      {
+        "id": "host-io",
+        "requester": "N-WINDOWS",
+        "guard": "WH-INTEGRITY",
+        "confirmation": "Explicit host result required; failed/cancelled effects preserve state"
+      }
+    ]
+  },
+  "provenance": {
+    "archive_sha256": "f160b4dfaffd9302ce2532b32763af1f73fd7a628cf347b057917ba421aea250",
+    "blueprint": "Windows_XP_Notepad_4_Anchors.anchor.txt",
+    "coverage": "Every nonempty source paragraph retained verbatim; runtime evidence UNRUN"
+  }
+}

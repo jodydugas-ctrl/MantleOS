@@ -1,0 +1,47 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "anchor-satisfaction-engine",
+  "version": "0.1.0",
+  "function": "Cumulative candidate-bound behavioral verification, independent of Baker acceptance.",
+  "status": "experimental",
+  "preferred_for": [
+    "mantleos",
+    "bioagent"
+  ],
+  "compatible_tissues": [
+    "python",
+    "mixed"
+  ],
+  "tags": [
+    "department:body",
+    "department:construction"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "Deterministic single/batch planning",
+    "Current-candidate regression gate",
+    "Explicit scoped evidence and separate acceptance"
+  ],
+  "adaptation": "Compatibility is determined by interface and recipe acceptance tests; this label is advisory.",
+  "verified_with": "tests/test_satisfaction.py; synthetic local scripts, no live model",
+  "provenance": "Owner handoff v2 SHA256 f160b4dfaffd9302ce2532b32763af1f73fd7a628cf347b057917ba421aea250; newly implemented shared source.",
+  "source": {
+    "kind": "repository-files",
+    "repository": "jodydugas-ctrl/Kitchen-Party-Protocol",
+    "paths": [
+      "src/mantleos/kpp/satisfaction.py",
+      "tests/test_satisfaction.py"
+    ]
+  },
+  "usage": {
+    "use_when": "Incremental construction needs preservation evidence on each candidate.",
+    "inputs": [
+      "Pinned recipe, reviewed suite/context, separate candidate"
+    ],
+    "outputs": [
+      "Plan, immutable execution receipts, known-good snapshots"
+    ],
+    "limits": "4096 files / 128 MiB per inventory; 256 cases; batch 1..32; local reviewed Python is not sandboxed; no universal equivalence or automatic acceptance."
+  }
+}

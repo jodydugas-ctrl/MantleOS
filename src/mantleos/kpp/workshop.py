@@ -344,6 +344,8 @@ def accept(workspace, anchor_id, evidence, baker, kind="manual", evidence_id=Non
 @mutating
 def finish(workspace):
     recipe,state=load(workspace)
+    from .satisfaction import completion_guard
+    completion_guard(workspace)
     report=inspection(workspace)
     if report["unmet"]:
         raise KPPError("Not complete; unmet mandatory Anchors: "+", ".join(report["unmet"]))

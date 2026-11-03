@@ -32,6 +32,20 @@ BUILD_RULE = (
 def step(workspace):
     """Small current work packet, derived from the one recipe and acceptance graph."""
     recipe, state = load(workspace)
+    if 'satisfaction' in state:
+        from .satisfaction import plan
+        packet = plan(workspace)
+        byid = {a['id']: a for a in recipe['anchors']}
+        target = packet['targets'][0] if packet['targets'] else None
+        if state['phase'] == 'COMPLETE':
+            decision = 'COMPLETE' if packet['status'] == 'VERIFIED' else 'BLOCKED'
+        else:
+            decision = 'BLOCKED' if packet['blockers'] else 'CONTINUE' if target or packet['status'] != 'VERIFIED' else 'AWAITING_REVIEW'
+        return {'schema': 'mantle.kpp-build-step/1', 'recipe_id': recipe['id'],
+                'recipe_sha256': state['recipe_hash'], 'revision': state['revision'],
+                'phase': state['phase'], 'construction': __import__('mantleos.kpp.construction', fromlist=['construction_plan']).construction_plan(recipe),
+                'decision': decision,
+                'next': deepcopy(byid[target]) if target else None, 'satisfaction': packet}
     report = coverage(recipe, state)
     obligations = {item['id']: item for item in recipe['anchors']}
     needed = set(report['unmet_anchors'])
@@ -93,7 +107,7 @@ def run(workspace, *, open_preview, refine, max_cycles=16):
         outcome = refine(deepcopy(current))
         if outcome not in ('CONTINUE', 'BLOCKED', 'AWAITING_REVIEW'):
             raise KPPError('Refinement must report CONTINUE, BLOCKED or AWAITING_REVIEW')
-        turns.append({'cycle': cycle + 1, 'anchor': current['next']['id'],
+        turns.append({'cycle': cycle + 1, 'anchor': current['next']['id'] if current['next'] else None,
                       'revision': current['revision'], 'outcome': outcome})
         if outcome != 'CONTINUE':
             return {'status': outcome, 'preview_receipt': preview, 'cycles': turns, 'step': current_step()}

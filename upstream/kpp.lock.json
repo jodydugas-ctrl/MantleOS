@@ -58,7 +58,7 @@
     },
     "src/mantleos/anchor_design.py": {
       "group": "implementation",
-      "sha256": "5e08da25600817bffff56dc9b33894009973aa8665cdb65e4f2312fefa4b920b",
+      "sha256": "a98763f4ed553eac94849fb97c0cf7dfc01baf593c2e111f1131a5cdfa7bd4b2",
       "source": "src/mantleos/anchor_design.py"
     },
     "src/mantleos/anchor_engine/SOURCE-PINS.json": {
@@ -363,7 +363,7 @@
     },
     "src/mantleos/kpp/build.py": {
       "group": "implementation",
-      "sha256": "748a32aaad72ccb7343f6144d41962a85b79a4af8802890de7c47ac4355eaa1f",
+      "sha256": "335749bba19223169f8a9f5360800b0cbf6672a96e70af2d5d308f7f8f61a8f8",
       "source": "src/mantleos/kpp/build.py"
     },
     "src/mantleos/kpp/cells.py": {
@@ -373,7 +373,7 @@
     },
     "src/mantleos/kpp/cli.py": {
       "group": "implementation",
-      "sha256": "f7e48e6d56268d5466d2bf490b98d7bb66a49b27290ca86805ab738aca9d77b7",
+      "sha256": "ebf19d3fa9f511a31c2e3e621357d8f557f624627544437ffb89fd24357fbc9c",
       "source": "src/mantleos/kpp/cli.py"
     },
     "src/mantleos/kpp/conformance.py": {
@@ -533,8 +533,13 @@
     },
     "src/mantleos/kpp/resources/docs/ANCHOR-DESIGN.md": {
       "group": "implementation",
-      "sha256": "879d210307a58632c4bbb5a219ee5c371aa48f69d79df027ffb4400f357a9018",
+      "sha256": "7de3e619714e031d6b6ff87a75d26435e5431165af22e08e8c13673c7475c624",
       "source": "src/mantleos/kpp/resources/docs/ANCHOR-DESIGN.md"
+    },
+    "src/mantleos/kpp/resources/docs/ANCHOR-SATISFACTION.md": {
+      "group": "implementation",
+      "sha256": "b3218032ac7721a0670b1bdd450ef88194f28d2f7fbd2291ac3c33af5f1b3dfc",
+      "source": "src/mantleos/kpp/resources/docs/ANCHOR-SATISFACTION.md"
     },
     "src/mantleos/kpp/resources/docs/ARCHITECTURE.md": {
       "group": "implementation",
@@ -638,7 +643,7 @@
     },
     "src/mantleos/kpp/resources/docs/PROTOCOL.md": {
       "group": "implementation",
-      "sha256": "999d5e2441679c6665edd585a8324ba91e42d590ab3065d9d8db034d33ce7cc7",
+      "sha256": "05bce05600bfdb75a0314317b4825cdf3aa028f66c2a021d67094420601b4c20",
       "source": "src/mantleos/kpp/resources/docs/PROTOCOL.md"
     },
     "src/mantleos/kpp/resources/docs/REFLEX-BOOK.md": {
@@ -776,6 +781,11 @@
       "sha256": "e130a11d81e4af1bd21ee5d5ed10685b4d5fc0b5d5a1bab0cef2a6761fb34eff",
       "source": "src/mantleos/kpp/resources/examples/adaptive-reflex/task_agent.py"
     },
+    "src/mantleos/kpp/resources/examples/anchor-design/SimplePaint_4_Anchors.anchor.txt": {
+      "group": "implementation",
+      "sha256": "08db6d5f3efb7f670f39d3cc202bbcb66ce14a49e0f1f053fb2fcb2866d0af5d",
+      "source": "src/mantleos/kpp/resources/examples/anchor-design/SimplePaint_4_Anchors.anchor.txt"
+    },
     "src/mantleos/kpp/resources/examples/anchor-design/Windows_XP_Notepad_4_Anchors.anchor.txt": {
       "group": "implementation",
       "sha256": "cd2542e6b06b615f580704b6c2e4747503139d0d2e1ef115cfab99d8fb5e23df",
@@ -805,6 +815,21 @@
       "group": "implementation",
       "sha256": "0f7f32555d23a0e14a4c75ab54f29f452becf13f8183142e33259b9fb1acdb1e",
       "source": "src/mantleos/kpp/resources/examples/anchor-design/notepad.json"
+    },
+    "src/mantleos/kpp/resources/examples/anchor-design/satisfaction-evidence.json": {
+      "group": "implementation",
+      "sha256": "04c12e50ab05c9957d7a49f5d373cabb3d84015654388463b4d20b2e3a5e73b7",
+      "source": "src/mantleos/kpp/resources/examples/anchor-design/satisfaction-evidence.json"
+    },
+    "src/mantleos/kpp/resources/examples/anchor-design/simplepaint-contract.anchor.txt": {
+      "group": "implementation",
+      "sha256": "abc8b185acbe70042d2fd6ef8d9e852f5c6f9636964d93c8b5e2f94698717797",
+      "source": "src/mantleos/kpp/resources/examples/anchor-design/simplepaint-contract.anchor.txt"
+    },
+    "src/mantleos/kpp/resources/examples/anchor-design/xp-notepad-contract.anchor.txt": {
+      "group": "implementation",
+      "sha256": "bf7947b45bcb0f5bc31477bd6f39f5f8b498eb65c11474aa135ae67cce36ff99",
+      "source": "src/mantleos/kpp/resources/examples/anchor-design/xp-notepad-contract.anchor.txt"
     },
     "src/mantleos/kpp/resources/examples/economy/notepad-file-actions.json": {
       "group": "implementation",
@@ -1075,6 +1100,11 @@
       "group": "implementation",
       "sha256": "9680ab6ce8fffb5c034427c5f3c96a9469ea57aa4d1329a73b305dcb9dae04b5",
       "source": "src/mantleos/kpp/resources/examples/reflex_book/qualify.py"
+    },
+    "src/mantleos/kpp/resources/pantry/anchor-satisfaction-engine.json": {
+      "group": "implementation",
+      "sha256": "adb3158ba48f3185850ac6d7a7ec485151657d6088c0f44e013d29ebb4daf264",
+      "source": "src/mantleos/kpp/resources/pantry/anchor-satisfaction-engine.json"
     },
     "src/mantleos/kpp/resources/pantry/anchor-tissue.json": {
       "group": "implementation",
@@ -1371,6 +1401,16 @@
       "sha256": "6d9bce006764b66bb879fc7c187261677264b465a7dd0be931c45041d8b70ef1",
       "source": "src/mantleos/kpp/resources/recipes/reflex-reference-inspector.json"
     },
+    "src/mantleos/kpp/resources/recipes/simplepaint-contract.json": {
+      "group": "implementation",
+      "sha256": "39998f6ee2d4d82cd23d96560e3c74756b85590c4285ac91267be33ebd8216fd",
+      "source": "src/mantleos/kpp/resources/recipes/simplepaint-contract.json"
+    },
+    "src/mantleos/kpp/resources/recipes/xp-notepad-contract.json": {
+      "group": "implementation",
+      "sha256": "c827bafeb93241949e8ee7c3ea16cdb4d829c5f73276a8d596a5beaf0390f4f7",
+      "source": "src/mantleos/kpp/resources/recipes/xp-notepad-contract.json"
+    },
     "src/mantleos/kpp/resources/references/synthetic-qt-inventory.json": {
       "group": "implementation",
       "sha256": "3299594cce34c88e56bee39f812d92c435edf616b6bae9ba1252f720368d36ef",
@@ -1481,6 +1521,16 @@
       "sha256": "f50e6fc78ead457acd911533228e13fcc617c99a706220fe6d17975d1aa7ef70",
       "source": "src/mantleos/kpp/resources/tools/qualify_private_skin.py"
     },
+    "src/mantleos/kpp/resources/tools/satisfaction_paint_specimen.py": {
+      "group": "implementation",
+      "sha256": "8a3b68704295a0772be16a64e4ae69113671ceee6b96ff7fdee59175223d46d7",
+      "source": "src/mantleos/kpp/resources/tools/satisfaction_paint_specimen.py"
+    },
+    "src/mantleos/kpp/resources/tools/satisfaction_specimen.py": {
+      "group": "implementation",
+      "sha256": "a27272288d0ca3a2f2c04feba84a09fc5dfe1f1d689857f0b271a133b1c1ead8",
+      "source": "src/mantleos/kpp/resources/tools/satisfaction_specimen.py"
+    },
     "src/mantleos/kpp/resources/tools/validate_release.py": {
       "group": "implementation",
       "sha256": "59fcb221c4fb36cda07841f558ec7077dac99a09617b79330e56e7fea3b180f4",
@@ -1495,6 +1545,11 @@
       "group": "implementation",
       "sha256": "4f438c9362c386130efde49f89d4771328320ff1a420cf888a031ee0fd6c3cf3",
       "source": "src/mantleos/kpp/resources/tools/verify_shared.py"
+    },
+    "src/mantleos/kpp/satisfaction.py": {
+      "group": "implementation",
+      "sha256": "07bd2c205176def557b6d1a1c68f249f372649805bb3ab17ddf18c4d0c2a1754",
+      "source": "src/mantleos/kpp/satisfaction.py"
     },
     "src/mantleos/kpp/scanner.py": {
       "group": "implementation",
@@ -1518,7 +1573,7 @@
     },
     "src/mantleos/kpp/testing.py": {
       "group": "implementation",
-      "sha256": "6dcfce1056eb1a81e657598125862099104d14e4db327b6038c7eedd89f4b96b",
+      "sha256": "0e07a0c8527b0c25cad0f1fcb21d533a6c30178aa00d7b879f6a9c7e19e7d9d3",
       "source": "src/mantleos/kpp/testing.py"
     },
     "src/mantleos/kpp/tissue.py": {
@@ -1528,7 +1583,7 @@
     },
     "src/mantleos/kpp/workshop.py": {
       "group": "implementation",
-      "sha256": "d20095b4fd1a16327038ab46a14fa2412c605f6b23a65936193ef7f783ed6714",
+      "sha256": "b561097f27b7dd07ac0310368ed8445955d1c35c4ea8845ddd259a3268b2950e",
       "source": "src/mantleos/kpp/workshop.py"
     },
     "src/mantleos/lifecycle.py": {
@@ -2503,7 +2558,7 @@
     },
     "tests/kpp/test_pantry_labels.py": {
       "group": "tests",
-      "sha256": "fa2d076d18267d52479ea8160ad42fef2bebfa57b8e3490090f1cebb465e13e3",
+      "sha256": "35153c2cc2a0de222ce67303084f059d55580db08d64722c562ee7a28ac66536",
       "source": "tests/test_pantry_labels.py"
     },
     "tests/kpp/test_portability.py": {
@@ -2561,6 +2616,11 @@
       "sha256": "ab0a20cef8f5de314b0d31739d5ac53f0cc999c07b9c4e546ee13889099c4ee9",
       "source": "tests/test_release_validation.py"
     },
+    "tests/kpp/test_satisfaction.py": {
+      "group": "tests",
+      "sha256": "e7f408412af9e352729d5fecdab963a7783b3c9d12e7a88767bdb6beba3f6432",
+      "source": "tests/test_satisfaction.py"
+    },
     "tests/kpp/test_scan_integration.py": {
       "group": "tests",
       "sha256": "f14b86d0c452132ebd2b671a8b08d64090d0f2ced10017a7175933c31c0995d2",
@@ -2587,10 +2647,10 @@
     "upstream/kpp-notices/THIRD-PARTY-NOTICES.md"
   ],
   "schema": "mantle.kpp-upstream/1",
-  "selection_digest": "13252c220e248a098885e93247eed5c4aab5754875cf36dad9b4a06e392a134f",
-  "shared_source_digest": "86b8834292651fd0c437cd8e5d9d6b82a4b82f89c5c4977c4287ab6e8b2966dc",
+  "selection_digest": "d02f401716f01d6dd582cea924a6282925cfade7ff0e77bbd236bf74601daa21",
+  "shared_source_digest": "5c4c8aa1fd094e72ae756e1baf53b36a7e14b8a0df7224c427d9f7fecebce3e6",
   "upstream": {
-    "base_commit": "1d336dd6d8e126887d26695b1504fb2cb0eda3c1",
+    "base_commit": "f9e8f880468120fcf26e103cbfac9feea3a45d39",
     "dirty": false,
     "official_url": "https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol",
     "published_revision_verified": false,

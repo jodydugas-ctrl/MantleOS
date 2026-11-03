@@ -73,6 +73,12 @@ def validated_suite(suite_dir, recipe, stage):
 
 def verify_report(report, candidate_dir, suite_dir, recipe=None):
     """Recheck freshness; does not re-execute or authenticate evidence."""
+    if isinstance(report, dict) and report.get('schema') == 'kpp.satisfaction-report/1':
+        from .satisfaction import check, _opened
+        run = _opened(report['workspace'])[2]
+        if Path(candidate_dir).resolve() != Path(run['candidate_root']) or Path(suite_dir).resolve() != Path(run['suite_root']):
+            raise KPPError('Evidence paths differ')
+        return check(report['workspace'], report)
     try:
         root, tests = Path(candidate_dir).resolve(), Path(suite_dir).resolve()
         if not isinstance(report, dict) or report.get('schema') != REPORT:
@@ -185,8 +191,11 @@ def accept_tested(workspace, report_path, candidate_dir, suite_dir, baker):
         raise KPPError('Cannot accept tests after completion')
     report = read_json(report_path)
     result = verify_report(report, candidate_dir, suite_dir, recipe=recipe)
-    if Path(report['workspace_recipe_path']).resolve() != (Path(workspace)/'recipe.json').resolve():
+    if report.get('schema') != 'kpp.satisfaction-report/1' and Path(report['workspace_recipe_path']).resolve() != (Path(workspace)/'recipe.json').resolve():
         raise KPPError('Report was produced for a different workspace')
+    if report.get('schema') == 'kpp.satisfaction-report/1':
+        from .satisfaction import accept_report
+        return accept_report(workspace, report_path, baker)
     accepted = dict(state['accepted'])
     for case in report['results']:
         aid = case['anchor']
@@ -213,6 +222,10 @@ def accept_tested(workspace, report_path, candidate_dir, suite_dir, baker):
 def evidence_current(record):
     """Used by Functional Graph. Missing/mutated bytes mean no acceptance."""
     try:
+        if record.get('kind') == 'satisfaction-executed':
+            from .satisfaction import check
+            report = read_json(record['report_path'])
+            return digest(report) == record['report_sha256'] and record['anchor_id'] in check(report['workspace'], report)['anchors']
         if record.get('kind')=='gui-reviewed':
             from .conformance import evidence_current as gui_current
             return gui_current(record)
