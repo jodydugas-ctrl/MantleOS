@@ -1,6 +1,6 @@
 """Actual Journal encounters with a synthetic provider; not live LLM evidence."""
 import json
-import os
+from contextlib import chdir
 from pathlib import Path
 import secrets
 import shutil
@@ -129,12 +129,15 @@ class AutoMindTests(unittest.TestCase):
         route=json.loads((self.nest/'mind-route.json').read_text('utf8'))
         account=Path(route['accounting_file'])
         nested=account.parent/'operator-path';nested.mkdir()
-        spelling=Path(os.path.relpath(nested/'..'/account.name,Path.cwd()))
-        status=auto.configure(self.nest,owner_file=self.owner,catalog=self.catalog,
-                              accounting_file=spelling,reviewed=True)
-        changed=json.loads((self.nest/'mind-route.json').read_text('utf8'))
-        self.assertEqual(changed['accounting_identity'],route['accounting_identity'])
-        self.assertEqual(status['budget'],before['budget'])
+        # Windows runners keep their checkout and temporary files on different
+        # drives. Relative paths are meaningful within the account's drive.
+        with chdir(account.parent):
+            for spelling in (Path(account.name),Path('operator-path')/'..'/account.name):
+                status=auto.configure(self.nest,owner_file=self.owner,catalog=self.catalog,
+                                      accounting_file=spelling,reviewed=True)
+                changed=json.loads((self.nest/'mind-route.json').read_text('utf8'))
+                self.assertEqual(changed['accounting_identity'],route['accounting_identity'])
+                self.assertEqual(status['budget'],before['budget'])
         self.assertEqual(self.configure()['budget'],before['budget'])
 
     def test_actual_journal_full_primer_commit_exact_replay_without_regeneration(self):
