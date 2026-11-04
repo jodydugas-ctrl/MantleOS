@@ -98,5 +98,42 @@ class JournalTests(unittest.TestCase):
   from unittest.mock import patch
   with patch.dict(os.environ,{},clear=True):
    with self.assertRaisesRegex(ValueError,'Raven setup'):journal.create(self.base/'missing.engram')
+ def test_concurrent_commit_keeps_verification_snapshot_consistent(self):
+  import threading
+  ready=threading.Event();commit_now=threading.Event();writing=threading.Event();done=threading.Event()
+  errors=[]
+  def writer():
+   try:
+    with journal.Journal(self.file) as other:
+     other.open('Concurrent cobalt',request_id='concurrent',model_id='SYNTHETIC_FIXTURE')
+     other.db.set_trace_callback(lambda sql:writing.set() if sql=='BEGIN IMMEDIATE' else None)
+     ready.set()
+     if not commit_now.wait(60):raise RuntimeError('Writer synchronization timeout')
+     other.submit('concurrent',self.reply(),broker=self.grant)
+   except BaseException as error:errors.append(error)
+   finally:ready.set();done.set()
+  worker=threading.Thread(target=writer);worker.start()
+  original=self.j.db
+  class Gate:
+   fired=False
+   def __getattr__(gate,name):return getattr(original,name)
+   def execute(gate,sql,*args):
+    if not gate.fired and sql.startswith('SELECT id,input,record_sha256 FROM requests'):
+     gate.fired=True;commit_now.set()
+     if not writing.wait(60):raise RuntimeError('Writer did not attempt its commit')
+     # Without a read snapshot, force the complete atomic append between the
+     # record and replay queries. A snapshot may legitimately block the writer.
+     if not original.in_transaction and not done.wait(60):
+      raise RuntimeError('Concurrent writer did not finish')
+    return original.execute(sql,*args)
+  try:
+   self.assertTrue(ready.wait(60));self.assertEqual(errors,[])
+   self.j.db=Gate()
+   self.j.verify()
+  finally:
+   self.j.db=original;commit_now.set();worker.join(60)
+  self.assertFalse(worker.is_alive());self.assertEqual(errors,[])
+  self.assertEqual(self.j.status()['records'],1)
+  self.assertEqual(self.j.submit('concurrent',None,broker=self.grant)['reply'],self.reply()['reply'])
 
 if __name__=='__main__':unittest.main()

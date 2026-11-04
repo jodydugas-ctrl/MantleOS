@@ -18,12 +18,12 @@ def echo(value):return {'observed':value}
 
 def hold(value):
     entered.set()
-    if not release.wait(10):raise RuntimeError('Test synchronization timeout')
+    if not release.wait(60):raise RuntimeError('Test synchronization timeout')
     return value
 
 
 def overlap(value):
-    barrier.wait(timeout=10)
+    barrier.wait(timeout=60)
     return value
 
 
@@ -40,11 +40,31 @@ class LimbTests(unittest.TestCase):
     def tearDownClass(cls):cls.tmp.cleanup()
 
     def setUp(self):
-        self.case=tempfile.TemporaryDirectory();self.addCleanup(self.case.cleanup)
+        self.case=tempfile.TemporaryDirectory();self.workers=[];self.worker_errors=[]
+        self.addCleanup(self.cleanup_workers)
         self.root=Path(self.case.name);self.paths=[]
         for n,seed in enumerate(self.seeds):
             p=self.root/(str(n)+'.engram');shutil.copyfile(seed,p);self.paths.append(p)
         entered.clear();release.clear()
+
+    def new_worker(self,target):
+        def checked():
+            try:target()
+            except BaseException as error:self.worker_errors.append(error)
+        worker=threading.Thread(target=checked)
+        self.workers.append(worker)
+        return worker
+
+    def cleanup_workers(self):
+        release.set()
+        for worker in self.workers:worker.join(60)
+        if any(worker.is_alive() for worker in self.workers):
+            # Preserve the fixture on a failed stop proof. Removing a live
+            # worker's database would turn the original failure into corruption.
+            self.case._finalizer.detach()
+            self.fail('Limb test worker still active; fixture retained at '+str(self.root))
+        self.case.cleanup()
+        self.assertEqual(self.worker_errors,[],'Unexpected limb worker exception')
 
     def create(self,count=2,workers=2,handler=echo):
         members=[{'id':'L'+str(n),'journal':str(self.paths[n]),'grants':['observe']} for n in range(count)]
@@ -88,10 +108,10 @@ class LimbTests(unittest.TestCase):
         def worker():
             try:runtime.run_one({'observe':hold},broker=lambda *a:True)
             except PermissionError:errors.append('revoked')
-        t=threading.Thread(target=worker);t.start()
+        t=self.new_worker(worker);t.start()
         try:
-            self.assertTrue(entered.wait(10));runtime.enable('L0',False,approved=True)
-        finally:release.set();t.join(10)
+            self.assertTrue(entered.wait(60));runtime.enable('L0',False,approved=True)
+        finally:release.set();t.join(60)
         self.assertEqual(errors,['revoked'])
         self.assertEqual(runtime.recover(reviewed=True)['tasks'][0]['phase'],'NEEDS_REVIEW')
 
@@ -102,11 +122,11 @@ class LimbTests(unittest.TestCase):
         def worker():
             try:runtime.run_one({'observe':hold},broker=lambda *a:True)
             except Exception as e:errors.append(e)
-        t=threading.Thread(target=worker);t.start()
+        t=self.new_worker(worker);t.start()
         try:
-            self.assertTrue(entered.wait(10))
+            self.assertTrue(entered.wait(60))
             with self.assertRaises(OSError):runtime.recover(reviewed=True)
-        finally:release.set();t.join(10)
+        finally:release.set();t.join(60)
         self.assertEqual(errors,[])
         self.assertEqual(runtime.run_one({'observe':hold},broker=lambda *a:True)['status'],'IDLE')
 
@@ -121,16 +141,22 @@ class LimbTests(unittest.TestCase):
         runtime=self.create(2,2,hold)
         runtime.submit('L0','observe',{},request_id='one')
         runtime.submit('L1','observe',{},request_id='two')
-        workers=[threading.Thread(target=lambda:runtime.run_one({'observe':hold},broker=lambda *a:True)) for _ in range(2)]
+        workers=[self.new_worker(lambda:runtime.run_one({'observe':hold},broker=lambda *a:True)) for _ in range(2)]
         for t in workers:t.start()
         try:
-            self.assertTrue(entered.wait(10))
+            # Cold source verification precedes handler entry. This test checks
+            # coordination during computation, not a ten-second startup promise.
+            self.assertTrue(entered.wait(60))
             # Status and a third queued intention remain available during computation.
             runtime.submit('L1','observe',{'later':True},request_id='three')
             self.assertEqual(len(runtime.status()['tasks']),3)
         finally:
             release.set()
-            for t in workers:t.join(10)
+            for t in workers:t.join(60)
+        self.assertFalse(any(t.is_alive() for t in workers))
+        self.assertEqual(self.worker_errors,[])
+        self.assertEqual({t['id']:t['phase'] for t in runtime.status()['tasks']},
+                         {'one':'RESULT','two':'RESULT','three':'READY'})
 
     def test_actual_overlap_and_worker_budget(self):
         global barrier
@@ -141,19 +167,19 @@ class LimbTests(unittest.TestCase):
         def worker():
             try:runtime.run_one({'observe':overlap},broker=lambda *a:True)
             except Exception as e:errors.append(e)
-        a=threading.Thread(target=worker);b=threading.Thread(target=worker)
-        a.start();b.start();a.join(20);b.join(20)
+        a=self.new_worker(worker);b=self.new_worker(worker)
+        a.start();b.start();a.join(60);b.join(60)
         self.assertFalse(a.is_alive() or b.is_alive());self.assertEqual(errors,[])
         self.assertTrue(all(t['phase']=='RESULT' for t in runtime.status()['tasks']))
 
     def test_single_worker_prevents_overlapping_callbacks(self):
         runtime=self.create(2,1,hold)
         for n in range(2):runtime.submit('L'+str(n),'observe',{},request_id='task-'+str(n))
-        t=threading.Thread(target=lambda:runtime.run_one({'observe':hold},broker=lambda *a:True));t.start()
+        t=self.new_worker(lambda:runtime.run_one({'observe':hold},broker=lambda *a:True));t.start()
         try:
-            self.assertTrue(entered.wait(10))
+            self.assertTrue(entered.wait(60))
             self.assertEqual(runtime.run_one({'observe':hold},broker=lambda *a:True)['status'],'BUSY')
-        finally:release.set();t.join(10)
+        finally:release.set();t.join(60)
 
     def test_queued_configuration_change_requires_review(self):
         runtime=self.create(1,1)

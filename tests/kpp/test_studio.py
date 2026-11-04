@@ -90,6 +90,15 @@ class StudioTests(unittest.TestCase):
         self.assertEqual(first['sessions'],1);self.assertEqual(second['model_calls'],0)
         self.assertEqual(len(studio._session(self.nest/'prime.engram').records),0)
 
+    def test_public_persona_is_verified_metadata_not_a_fixed_ui_label(self):
+        self.assertIsNone(studio.status(self.nest)['persona'])
+        studio.boot(self.nest)
+        verified=studio._session(self.nest/'prime.engram').status()
+        self.assertEqual(studio.status(self.nest)['persona'],{
+            'name':verified['persona'],'identity':verified['identity'],
+            'primer_sha256':verified['primer_sha256']})
+        self.assertNotEqual(verified['persona'],'Frame-Preserving Cuttlefish')
+
     def test_foreign_append_reuses_snapshot_and_still_checks_metadata(self):
         from unittest.mock import patch
         import sqlite3

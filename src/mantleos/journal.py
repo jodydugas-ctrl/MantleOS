@@ -130,6 +130,24 @@ class Journal:
         return row[0] if row else ZERO
 
     def verify(self):
+        # Ledger rows, metadata and replay bindings must come from one SQLite
+        # snapshot. A cooperating writer may commit between individual queries.
+        version=self._version()
+        owned=not self.db.in_transaction
+        if owned:self.db.execute('BEGIN')
+        try:
+            result=self._verify_snapshot()
+            # Keep the version observed before acquiring the read snapshot. A
+            # later foreign commit must trigger another refresh, never be hidden
+            # by recording its version alongside the older verified records.
+            self.version=version
+            if owned:self.db.commit()
+            return result
+        except BaseException:
+            if owned:self.db.rollback()
+            raise
+
+    def _verify_snapshot(self):
         if self.db.execute('PRAGMA integrity_check').fetchone()[0]!='ok':
             raise ValueError('SQLite integrity failure')
         if self._meta('schema')!=SCHEMA: raise ValueError('Unsupported journal schema')
@@ -191,7 +209,6 @@ class Journal:
         self.founding=self._meta('primer');self.register=reg
         from .projection import build
         self.index=build(self.records)
-        self.version=self._version()
         return {'result':'VERIFIED','records':len(self.records),'head':previous,'executed':False}
 
     def status(self):

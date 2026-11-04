@@ -1,4 +1,4 @@
-"""Node-RED resident Studio: deterministic Heart and supervised Journal MIND.
+"""Node-RED resident Studio: deterministic Heart and opt-in Journal MIND routes.
 
 No provider calls, installation or background service occurs at import.
 """
@@ -36,7 +36,7 @@ ADDENDUM = ('Anchor Studio is a fresh Node-RED resident AppAI. Its embodiment is
 
 def controller_pin():
     root=Path(__file__).parent
-    return c.digest({name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in ('studio.py','studio_handlers.py','studio_project.py','studio_demo.py','limbs.py','journal.py','anchors.py','anchor_design.py','anchor_language.py','effects.py','json_contract.py','transactions.py','primer.py','cartridge.py','kpp/resources/examples/anchor-studio/launcher.cjs','kpp/resources/examples/anchor-studio/local-access.cjs','kpp/resources/examples/anchor-studio/workspace.html','kpp/resources/examples/anchor-studio/workspace.css','kpp/resources/examples/anchor-studio/workspace.js','kpp/resources/examples/anchor-studio/conditions.cjs','kpp/resources/examples/anchor-studio/palette/nodes.js','kpp/resources/examples/anchor-studio/palette/nodes.html')})
+    return c.digest({name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in ('studio.py','studio_handlers.py','studio_project.py','studio_workflows.py','studio_auto_mind.py','studio_mind_config.py','studio_mind_budget.py','studio_mind_provider.py','studio_demo.py','limbs.py','journal.py','anchors.py','anchor_design.py','anchor_language.py','effects.py','json_contract.py','transactions.py','primer.py','cartridge.py','kpp/resources/examples/anchor-studio/launcher.cjs','kpp/resources/examples/anchor-studio/json-worker.cjs','kpp/resources/examples/anchor-studio/committed-events.cjs','kpp/resources/examples/anchor-studio/local-access.cjs','kpp/resources/examples/anchor-studio/workspace.html','kpp/resources/examples/anchor-studio/workspace.css','kpp/resources/examples/anchor-studio/workspace.js','kpp/resources/examples/anchor-studio/conditions.cjs','kpp/resources/examples/anchor-studio/palette/nodes.js','kpp/resources/examples/anchor-studio/palette/nodes.html')})
 
 
 def rebind_source(nest,*,reviewed=False):
@@ -110,13 +110,17 @@ def _setting(db,key):return json.loads(db.execute('SELECT value FROM settings WH
 
 def status(nest):
     with database(nest) as db:
+        prime=_sessions.get(str((Path(nest)/'prime.engram').resolve()))
+        persona=prime.status() if prime else None
         return {'phase':_setting(db,'phase'),'identity':_setting(db,'identity'),
+                'persona':({'name':persona['persona'],'identity':persona['identity'],
+                            'primer_sha256':persona['primer_sha256']} if persona else None),
                 'heartbeats':db.execute("SELECT count(*) FROM events WHERE kind LIKE 'heart.%'").fetchone()[0],
                 'limbs':[{'role':r,'identity':i} for r,i in db.execute('SELECT role,identity FROM limbs ORDER BY role')],
                 'pending_mind':db.execute("SELECT count(*) FROM mind WHERE phase='AWAITING_MIND'").fetchone()[0],
                 'intentions':[{'id':i,'role':r,'phase':p} for i,r,p in db.execute('SELECT id,role,phase FROM intentions ORDER BY rowid')],
                 'limb_runtime':limb_set(nest).status() if (Path(nest)/'limb-runtime/limbs.sqlite').exists() else {'status':'MIGRATION_REQUIRED'},
-                'mind_route':'SUPERVISED_HOST_ONLY'}
+                'mind_route':'OPENROUTER_OWNER_CONFIGURED' if (Path(nest)/'mind-route.json').exists() else 'SUPERVISED_HOST_ONLY'}
 
 
 def event(nest,kind,value,request_id):
@@ -228,6 +232,10 @@ def conversation(nest,user,request_id,model_label):
             if size<=available:observations.append(projection);available-=size
             else:omitted+=1
         wrapper={'frame':frame,'studio_addendum':ADDENDUM,'controller_pin':controller_pin(),'limb_observations':observations,'limb_observations_omitted':omitted,'prepared_at':time.time(),'model_label':model_label,'status':'AWAITING_MIND'}
+        if (Path(nest)/'mind-route.json').exists():
+            from .studio_auto_mind import _load
+            route,_=_load(nest)
+            wrapper['mind_route_revision']=route['revision']
         db.execute('INSERT INTO mind VALUES (?,?,?,?,?)',(request_id,user,'AWAITING_MIND',c.canonical(wrapper),None))
     event(nest,'conversation',{'request_id':request_id},'conversation-'+request_id)
     return wrapper
@@ -240,11 +248,17 @@ def submit(nest,request_id,proposal):
         if item[0]=='NEEDS_REVIEW':raise ValueError('Conversation requires recovery review')
         if item[0]=='AWAITING_MIND' and json.loads(item[2]).get('controller_pin')!=controller_pin():raise ValueError('Stale Studio preparation')
         if _setting(db,'phase')!='ACTIVE':raise ValueError('Studio is in stasis')
+        prior_wrapper=json.loads(item[2])
+        if item[0]=='AWAITING_MIND' and 'mind_route_revision' in prior_wrapper:
+            from .studio_auto_mind import validate_result
+            validate_result(nest,request_id,prior_wrapper,proposal)
         with nullcontext(_session(Path(nest)/'prime.engram')) as mind:
             result=mind.submit(request_id,proposal,broker=lambda authority,name: (authority=='release' and name=='publication.release') or (authority=='read' and name in ('body.status','engram.query')))
         reply=result.get('reply')
         if reply is None:
             wrapper={'frame':result,'studio_addendum':ADDENDUM,'controller_pin':controller_pin(),'status':'AWAITING_MIND'}
+            if 'mind_route_revision' in prior_wrapper:
+                wrapper['mind_route_revision']=prior_wrapper['mind_route_revision']
             db.execute('UPDATE mind SET frame=? WHERE id=?',(c.canonical(wrapper),request_id))
             return wrapper
         db.execute("UPDATE mind SET phase='COMMITTED',reply=? WHERE id=?",(reply,request_id))
@@ -264,11 +278,18 @@ def pulse(nest):
 def dispatch(nest,request):
     op=request.get('op');args=request.get('args',{})
     allowed={'status':status,'boot':boot,'phase':phase,'event':event,'intention':intention,
-             'conversation':conversation,'submit':submit,'pulse':pulse,'work':work,
+             'conversation':conversation,'submit':submit,'mind_pending':mind_pending,'pulse':pulse,'work':work,
              'publish_intentions':publish_intentions,'result':committed_result,'project_get':project_get,'project_set':project_set,'flow_draft':flow_draft,'kpp_prepare':kpp_prepare,
              'demo_test':demo_test,'demo_accept':demo_accept,'project_bundle':project_bundle,'project_import':project_import}
     if op not in allowed:raise ValueError('Unsupported Studio operation')
     return allowed[op](nest,**args)
+
+
+def mind_pending(nest):
+    """Controller scheduling projection; no private cognition context."""
+    with database(nest) as db:
+        row=db.execute("SELECT id FROM mind WHERE phase='AWAITING_MIND' ORDER BY rowid LIMIT 1").fetchone()
+        return {'request_id':row[0]} if row else {'status':'IDLE'}
 
 
 def publish_intentions(nest,request_id):
@@ -390,22 +411,43 @@ def main(argv=None):
     if hasattr(sys.stdout,'reconfigure'):sys.stdout.reconfigure(encoding='utf-8')
     parser=argparse.ArgumentParser(prog='mantleos studio')
     sub=parser.add_subparsers(dest='command',required=True)
-    for command in ('init','status','stasis','activate','serve','mind-next','mind-submit','import','export','run','migrate-limbs','rebind-source','recover-mind'):
+    for command in ('init','status','stasis','activate','serve','workflow-serve','mind-serve','mind-configure','mind-status','mind-next','mind-submit','import','export','run','migrate-limbs','rebind-source','recover-mind'):
         p=sub.add_parser(command);p.add_argument('--nest',type=Path,required=True)
         if command in ('rebind-source','recover-mind'):p.add_argument('--reviewed',action='store_true')
         if command=='recover-mind':p.add_argument('--request-id',required=True)
         if command=='init':p.add_argument('--founding',type=Path,required=True)
+        if command=='mind-configure':
+            p.add_argument('--owner-file',type=Path,required=True)
+            p.add_argument('--catalog',type=Path,required=True)
+            p.add_argument('--accounting-file',type=Path)
+            p.add_argument('--reviewed',action='store_true')
         if command=='run':
             p.add_argument('--node',type=Path,required=True);p.add_argument('--modules',type=Path,required=True);p.add_argument('--port',type=int,default=18880)
         if command=='mind-submit':
             p.add_argument('--request-id',required=True);p.add_argument('--proposal',type=Path,required=True)
         if command in ('import','export'):p.add_argument('--file',type=Path,required=True)
     args=parser.parse_args(argv)
+    if args.command in ('mind-serve','mind-configure','mind-status'):
+        from . import studio_auto_mind
+        if args.command=='mind-serve':return studio_auto_mind.serve(args.nest)
+        if args.command=='mind-configure':
+            result=studio_auto_mind.configure(args.nest,owner_file=args.owner_file,
+                catalog=c.loads(args.catalog.read_text('utf8')),accounting_file=args.accounting_file,
+                reviewed=args.reviewed)
+        else:result=studio_auto_mind.public_status(args.nest)
+        print(json.dumps(result,ensure_ascii=False,indent=2))
+        return 0
     if args.command=='run':
         import os,subprocess
         if not 1024<=args.port<=65535:raise ValueError('Invalid loopback port')
         env={**os.environ,'STUDIO_NEST':str(args.nest.resolve()),'STUDIO_MODULES':str(args.modules.resolve()),'STUDIO_PYTHON':sys.executable,'STUDIO_PORT':str(args.port),'PYTHONPATH':str(Path(__file__).resolve().parent.parent)}
         return subprocess.call([str(args.node.resolve()),str(Path(__file__).parent/'kpp/resources/examples/anchor-studio/launcher.cjs')],env=env)
+    if args.command=='workflow-serve':
+        from .studio_workflows import WorkflowStore, serve
+        def check_source():
+            with database(args.nest):pass  # Pinned controller, founding source and established Heart.
+        check_source()
+        return serve(WorkflowStore(args.nest/'operational-workflows'),check_source=check_source)
     if args.command=='serve':
         from concurrent.futures import ProcessPoolExecutor
         from multiprocessing import get_context

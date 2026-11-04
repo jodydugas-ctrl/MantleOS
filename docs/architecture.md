@@ -184,8 +184,12 @@ results reconcile interrupted controller metadata without uncertain retries.
 
 `mantleos.studio` selects eight roles and two worker processes around an ordinary
 Node-RED runtime. Its foreground Heart is deterministic when cognition is detached.
-The full founding PRIMER and separate embodiment addendum feed a supervised bridge;
-only exact committed replies are released. Anchor palette nodes are inert design
+The full founding PRIMER and separate embodiment addendum feed the supervised
+bridge or an explicitly configured foreground provider worker. The Body validates
+retained proposals and releases only exact committed replies. Owner-selected
+accounting retains spending across NESTs and restarts; models cannot configure
+their route or authorize effects. Operational workflow drafts have a separate
+transactional store and never deploy themselves. Anchor palette nodes are inert design
 applications, separate from executing automation. The portable project carries
 public contracts/layout/fixtures, not live Engram state, persona or credentials.
 See the canonical operator and qualification guides under

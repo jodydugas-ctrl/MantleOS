@@ -1,7 +1,8 @@
 /* Controlled embedding of the original Node-RED runtime; no core patches. */
 'use strict';
 const http=require('http'),crypto=require('crypto'),fs=require('fs'),path=require('path');
-const {spawn}=require('child_process');
+const {JsonWorker}=require('./json-worker.cjs');
+const {CommittedEvents}=require('./committed-events.cjs');
 const express=require('module').createRequire(require.resolve(process.env.STUDIO_MODULES+'/node-red'))('express');
 const RED=require(process.env.STUDIO_MODULES+'/node-red');
 const nest=path.resolve(process.env.STUDIO_NEST),userDir=path.join(nest,'node-red');
@@ -12,29 +13,62 @@ const credentials=JSON.parse(fs.readFileSync(credentialFile));
 if(!credentials.flowSecret){credentials.flowSecret=crypto.randomBytes(32).toString('hex');fs.writeFileSync(credentialFile,JSON.stringify(credentials));}
 const port=Number(process.env.STUDIO_PORT||18880);
 const access=require('./local-access.cjs').localAccess({port,credentials});
-const worker=spawn(process.env.STUDIO_PYTHON||'python',['-m','mantleos','studio','serve','--nest',nest],{stdio:['pipe','pipe','pipe'],windowsHide:true});
-let sequence=0,buffer='',alive=true;const pending=new Map();
-function call(op,args={}){
- if(!alive)return Promise.reject(Error('BODY_UNAVAILABLE'));
- if(pending.size>=32)return Promise.reject(Error('BODY_BUSY'));
- const id=String(++sequence);
- return new Promise((resolve,reject)=>{const timer=setTimeout(()=>{pending.delete(id);reject(Error('BODY_TIMEOUT'));},op==='boot'?180000:30000);
- pending.set(id,{resolve,reject,timer});worker.stdin.write(JSON.stringify({id,op,args})+'\n');});
+const python=process.env.STUDIO_PYTHON||'python';
+const body=new JsonWorker({python,args:['-m','mantleos','studio','serve','--nest',nest]});
+const workflows=new JsonWorker({python,args:['-m','mantleos','studio','workflow-serve','--nest',nest],label:'WORKFLOW',maxBytes:16*1024*1024+65536,maxPending:4});
+const automatic=fs.existsSync(path.join(nest,'mind-route.json'));
+const mind=automatic?new JsonWorker({python,args:['-m','mantleos','studio','mind-serve','--nest',nest],label:'MIND',maxBytes:512*1024,maxPending:1}):null;
+const call=(op,args={})=>body.call(op,args,op==='boot'?180000:30000);
+const releases=new CommittedEvents(request_id=>call('result',{request_id}));
+let cognitionBusy=false,cognitionFailure=null;
+async function cognize(requestId){
+ if(!mind||cognitionBusy||cognitionFailure?.request_id===requestId)return;
+ cognitionBusy=true;
+ try{
+  for(let step=0;step<2;step++){
+   const result=await mind.call('generate',{request_id:requestId},150000);
+   if(result.status==='ALREADY_COMMITTED')return;
+   if(result.status!=='RESULT'||!result.value?.proposal)throw Error('MIND_NEEDS_REVIEW');
+   const admitted=await call('submit',{request_id:requestId,proposal:result.value.proposal});
+   if(admitted.status==='COMMITTED'){await releases.release(requestId).catch(()=>{});return;}
+   if(admitted.status!=='AWAITING_MIND')throw Error('MIND_NEEDS_REVIEW');
+  }
+  throw Error('MIND_ACTION_LIMIT');
+ }catch(error){
+  cognitionFailure={request_id:requestId,status:'NEEDS_REVIEW',error:'AUTOMATIC_MIND_UNAVAILABLE'};
+  if(body.alive)call('event',{kind:'pain',value:{component:'automatic-mind',status:'NEEDS_REVIEW'},request_id:'mind-pain-'+crypto.randomUUID()}).catch(()=>{});
+ }finally{cognitionBusy=false;}
 }
-worker.stdout.on('data',data=>{buffer+=data.toString();if(buffer.length>2*1024*1024){worker.kill();return;}
- while(buffer.includes('\n')){const at=buffer.indexOf('\n'),line=buffer.slice(0,at);buffer=buffer.slice(at+1);
-  try{const response=JSON.parse(line),p=pending.get(response.id);if(p){clearTimeout(p.timer);pending.delete(response.id);response.ok?p.resolve(response.result):p.reject(Error(response.error));}}catch(e){worker.kill();}
- }});
-worker.on('exit',()=>{alive=false;for(const p of pending.values()){clearTimeout(p.timer);p.reject(Error('BODY_UNAVAILABLE'));}pending.clear();});
-// Redacted process diagnostics; do not forward arbitrary output into cognition.
-worker.stderr.on('data',()=>{});
+const workflowFailure=()=>{if(body.alive)call('event',{kind:'pain',value:{component:'workflow-state',status:'UNAVAILABLE'},request_id:'workflow-pain-'+crypto.randomUUID()}).catch(()=>{});};
+workflows.process.on('exit',workflowFailure);workflows.process.on('error',workflowFailure);
 const app=express();
 app.use(access.middleware);
 app.get('/',(req,res)=>res.redirect('/studio'));
+let workflowRequests=0;
+app.use('/studio/workflows',(req,res,next)=>{
+ if(workflowRequests>=4)return res.status(503).json({error:'WORKFLOW_BUSY'});
+ workflowRequests++;let finished=false;const release=()=>{if(!finished){finished=true;workflowRequests--;}};
+ res.once('finish',release);res.once('close',release);next();
+});
+app.use('/studio/workflows',express.json({limit:16*1024*1024+65536}));
 app.use('/studio',express.json({limit:'1mb'}));
 const route=(method,url,handler)=>app[method](url,async(req,res)=>{try{res.json(await handler(req));}catch(e){res.status(400).json({error:e.message});}});
 route('get','/studio/status',()=>call('status'));
-route('get','/studio/result/:id',req=>call('result',{request_id:req.params.id}));
+app.get('/studio/events',(req,res)=>releases.attach(req,res));
+const workflowRoute=(method,url,handler)=>app[method](url,async(req,res)=>{try{res.json(await handler(req));}catch(error){
+ const message=String(error.message||'WORKFLOW_ERROR');
+ res.status(message.startsWith('Conflict:')?409:message.startsWith('KeyError:')?404:message.startsWith('PermissionError:')?403:/^WORKFLOW_(TIMEOUT|UNAVAILABLE|BUSY)/.test(message)?503:400).json({error:message});
+}});
+workflowRoute('get','/studio/workflows',req=>{
+ let archived=false;
+ if(req.query.archived!==undefined){if(req.query.archived==='all')archived=null;else if(['true','false'].includes(req.query.archived))archived=req.query.archived==='true';else throw Error('Invalid archive filter');}
+ return workflows.call('list',{search:req.query.search||'',archived,offset:req.query.offset===undefined?0:Number(req.query.offset),limit:req.query.limit===undefined?100:Number(req.query.limit)});
+});
+workflowRoute('get','/studio/workflows/:id',req=>workflows.call('get',{id:req.params.id}));
+workflowRoute('get','/studio/workflows/:id/history',req=>workflows.call('history',{id:req.params.id}));
+workflowRoute('post','/studio/workflows/mutate',req=>workflows.call('mutate',req.body));
+route('get','/studio/result/:id',async req=>{const result=await call('result',{request_id:req.params.id});return result.status!=='COMMITTED'&&cognitionFailure?.request_id===req.params.id?cognitionFailure:result;});
+route('get','/studio/mind-status',()=>mind?mind.call('status'):({route:'SUPERVISED_HOST_ONLY'}));
 route('get','/studio/project',()=>call('project_get'));
 app.get('/studio/download',async(req,res)=>{try{const r=await call('project_bundle');res.setHeader('Content-Disposition','attachment; filename=Anchor-Studio-Demo.anchorstudio');res.type('application/zip').send(Buffer.from(r.base64,'base64'));}catch(e){res.status(400).json({error:e.message});}});
 route('post','/studio/project-import',req=>call('project_import',{encoded:req.body.encoded,expected_revision:req.body.revision}));
@@ -45,8 +79,13 @@ route('get','/studio/flows',()=>RED.runtime.flows.getFlows({user:{permissions:'*
 route('post','/studio/project',req=>call('project_set',{value:req.body.project,expected_revision:req.body.revision}));
 route('post','/studio/flow-draft',req=>call('flow_draft',{flows:req.body.flows}));
 route('post','/studio/phase',req=>{if(typeof req.body.active!=='boolean')throw Error('Boolean phase required');return call('phase',{active:req.body.active});});
-route('post','/studio/mind-submit',req=>call('submit',{request_id:req.body.request_id,proposal:req.body.proposal}));
-route('post','/studio/conversation',req=>call('conversation',{user:req.body.user,request_id:req.body.request_id,model_label:'CURRENT_CHAT_HOST'}));
+route('post','/studio/mind-submit',async req=>{const result=await call('submit',{request_id:req.body.request_id,proposal:req.body.proposal});if(result.status==='COMMITTED')await releases.release(req.body.request_id).catch(()=>{});return result;});
+route('post','/studio/conversation',async req=>{
+ const result=await call('conversation',{user:req.body.user,request_id:req.body.request_id,model_label:automatic?'OPENROUTER_OWNER_CONFIGURED':'CURRENT_CHAT_HOST'});
+ if(result.status==='COMMITTED')return result;
+ if(result.status==='AWAITING_MIND'&&automatic)setImmediate(()=>cognize(req.body.request_id));
+ return {status:result.status==='AWAITING_MIND'&&automatic?'MIND_SCHEDULED':result.status,request_id:req.body.request_id};
+});
 route('post','/studio/intention',req=>call('intention',req.body));
 route('post','/studio/publish-intentions',req=>call('publish_intentions',{request_id:req.body.request_id}));
 route('post','/studio/pain',req=>call('event',{kind:'pain',value:{cause:'operator-synthetic-fixture'},request_id:req.body.request_id}));
@@ -64,18 +103,24 @@ async function saveProject(){try{const r=await api('project',{project:JSON.parse
 let lastRequest=null;async function refresh(){const status=await api('status');document.getElementById('status').textContent=JSON.stringify(status,null,2);window.studioStatus?.(status);if(lastRequest){const r=await api('result/'+lastRequest);document.getElementById('reply').textContent=r.reply||r.status||r.error;}}
 async function publishIntentions(){if(!lastRequest)return;const r=await api('publish-intentions',{request_id:lastRequest});document.getElementById('reply').textContent=r.error||JSON.stringify(r,null,2);}
 async function phase(active){await api('phase',{active});refresh();}
-async function send(){lastRequest='user-'+crypto.randomUUID();const value=await api('conversation',{user:document.getElementById('message').value,request_id:lastRequest});document.getElementById('reply').textContent=value.error||'AWAITING_MIND: your message is queued for the supervised host.';refresh();}
+async function send(){lastRequest='user-'+crypto.randomUUID();const value=await api('conversation',{user:document.getElementById('message').value,request_id:lastRequest});document.getElementById('reply').textContent=value.error||value.reply||(value.status==='MIND_SCHEDULED'?'Your message is queued for the configured MIND.':value.status);refresh();}
+if(typeof EventSource==='function'){const updates=new EventSource('/studio/events');updates.addEventListener('committed',event=>{try{const value=JSON.parse(event.data);if(value.status==='COMMITTED'&&value.request_id===lastRequest&&typeof value.reply==='string')document.getElementById('reply').textContent=value.reply;}catch(error){}});updates.onopen=()=>{if(lastRequest)refresh();};window.addEventListener('pagehide',()=>updates.close(),{once:true});}
 setInterval(refresh,3000);refresh();loadProject();</script><script src="/studio/workspace.js"></script></body></html>`));
 const server=http.createServer(app);
 server.prependListener('upgrade',access.upgrade);
 RED.init(server,{userDir,flowFile:'flows.json',credentialSecret:credentials.flowSecret,httpAdminRoot:'/red',httpNodeRoot:'/flows',nodesDir:path.join(__dirname,'palette'),
- functionGlobalContext:{},logging:{console:{level:'info',metrics:false,audit:false},studio:{level:'warn',metrics:false,audit:false,logger:()=>msg=>{if(alive)call('event',{kind:'pain',value:{level:msg.level,type:String(msg.type||'runtime').slice(0,80)},request_id:'pain-'+crypto.randomUUID()}).catch(()=>{});}}}});
+ functionGlobalContext:{},logging:{console:{level:'info',metrics:false,audit:false},studio:{level:'warn',metrics:false,audit:false,logger:()=>msg=>{if(body.alive)call('event',{kind:'pain',value:{level:msg.level,type:String(msg.type||'runtime').slice(0,80)},request_id:'pain-'+crypto.randomUUID()}).catch(()=>{});}}}});
 app.use('/red',RED.httpAdmin);app.use('/flows',RED.httpNode);
+app.use((error,req,res,next)=>{
+ if(!req.path.startsWith('/studio/workflows'))return next(error);
+ if(res.headersSent)return next(error);
+ res.status(error.type==='entity.too.large'?413:400).json({error:error.type==='entity.too.large'?'WORKFLOW_PAYLOAD_TOO_LARGE':'INVALID_WORKFLOW_JSON'});
+});
 let pulsing=false;
-const timer=setInterval(async()=>{if(pulsing||!alive)return;pulsing=true;try{await call('pulse');}catch(e){}finally{pulsing=false;}},1000);
-async function close(){clearInterval(timer);try{await call('phase',{active:false});}catch(e){}await RED.stop();worker.stdin.end();server.close();}
+const timer=setInterval(async()=>{if(pulsing||!body.alive)return;pulsing=true;try{await call('pulse');if(mind&&!cognitionBusy){const pending=await call('mind_pending');if(pending.request_id)cognize(pending.request_id);}}catch(e){}finally{pulsing=false;}},1000);
+async function close(){clearInterval(timer);releases.close();try{await call('phase',{active:false});}catch(e){}await RED.stop();body.end();workflows.end();if(mind)mind.end();server.close();}
 route('post','/studio/shutdown',async()=>{setTimeout(()=>close().then(()=>process.exit(0)),100);return {status:'STOPPING'};});
 process.on('SIGINT',()=>close().then(()=>process.exit(0)));process.on('SIGTERM',()=>close().then(()=>process.exit(0)));
 call('boot').then(receipt=>{console.log('Studio sessions verified: '+receipt.sessions+'; local startup verification '+receipt.startup_verification_ms.toFixed(0)+' ms');return call('phase',{active:true});}).then(()=>RED.start())
  .then(()=>call('event',{kind:'host.started',value:{node_red:RED.version()},request_id:'host-'+crypto.randomUUID()})).then(()=>server.listen(port,'127.0.0.1',()=>console.log('Anchor Studio ready at http://127.0.0.1:'+port+'/studio; local access is automatic')))
- .catch(()=>{console.error('Studio startup failed; inspect NEST state');worker.kill();process.exit(1);});
+ .catch(()=>{console.error('Studio startup failed; inspect NEST state');body.process.kill();workflows.process.kill();if(mind)mind.process.kill();process.exit(1);});

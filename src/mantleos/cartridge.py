@@ -1,12 +1,16 @@
 """Generic Cartridge packing and verification helpers."""
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor
+from contextlib import closing
 import hashlib
+from itertools import islice
 import json
 import os
 from pathlib import Path
 import stat
 import tempfile
+from threading import local
 import zipfile
 
 from .primer import verify_lock
@@ -86,6 +90,39 @@ def write_manifest(root: str | Path) -> dict:
     return value
 
 
+def _manifest_fingerprint(item, buffer):
+    rel, path = item
+    digest = hashlib.sha256()
+    size = 0
+    view = memoryview(buffer)
+    # Read every byte without allocating the complete cold object. Four readers
+    # use at most four MiB of application read buffers, regardless of file size.
+    with path.open('rb') as stream:
+        while count := stream.readinto(buffer):
+            digest.update(view[:count])
+            size += count
+    return rel, digest.hexdigest(), size
+
+
+def _manifest_fingerprints(actual):
+    if not actual:
+        return
+    scratch = local()
+    def fingerprint(item):
+        if not hasattr(scratch, 'buffer'):
+            scratch.buffer = bytearray(1024 * 1024)
+        return _manifest_fingerprint(item, scratch.buffer)
+    items = iter(actual.items())
+    if len(actual) < 64:
+        yield from map(fingerprint, items)
+        return
+    # A bounded read queue, not Engram workers or executable callbacks. map
+    # returns results in inventory order, preserving deterministic diagnostics.
+    with ThreadPoolExecutor(max_workers=4, thread_name_prefix='manifest-read') as pool:
+        while batch := list(islice(items, 16)):
+            yield from pool.map(fingerprint, batch)
+
+
 def verify_manifest(root: str | Path) -> dict:
     root = Path(root)
     validate_portable_tree(root)
@@ -100,11 +137,11 @@ def verify_manifest(root: str | Path) -> dict:
         missing = sorted(set(expected) - set(actual))
         extra = sorted(set(actual) - set(expected))
         raise ValueError(f"Manifest inventory mismatch missing={missing} extra={extra}")
-    for rel, p in actual.items():
-        item = expected[rel]
-        data = p.read_bytes()
-        if sha(data) != item.get("sha256") or len(data) != item.get("bytes"):
-            raise ValueError(f"Manifest mismatch: {rel}")
+    with closing(_manifest_fingerprints(actual)) as fingerprints:
+        for rel, fingerprint, size in fingerprints:
+            item = expected[rel]
+            if fingerprint != item.get("sha256") or size != item.get("bytes"):
+                raise ValueError(f"Manifest mismatch: {rel}")
     return manifest
 
 

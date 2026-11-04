@@ -73,7 +73,7 @@ Interface names identify actual implementation ports.
 | Heartbeat and anticipation | AppAI lineage -> `appai.tick/run` | Bounded foreground heartbeat and mission cycle tested; predictive scheduling not implemented | Optional operator-run activation; no mandatory interval or OS service |
 | Swarm/delegation kernel | Creator-described Engram history | No supplied executable implementation located; described-only | Defer; do not fabricate provider or capacity proof |
 | Optional local Engram limbs | New shared `mantleos.limbs`, owner-selected recipe composition | Actual 0/1/2/8 Journal specimens, overlapping/sequential workers, grants and crash reconciliation; experimental local scope | Opt-in; no mandatory Prime MIND or distributed deployment |
-| Node-RED Anchor Studio | New foreground embedding, native Heart and supervised Cuttlefish founding override | Real browser/native-flow and current-chat observations; see canonical Studio qualification | Local pilot; separate product acceptance and private-host isolation remain open |
+| Node-RED Anchor Studio | Foreground embedding, native Heart, optional limbs, full founding override and explicitly configured MIND routes | Browser/native-flow, live provider continuity and synthetic boundary checks; see [current update](studio-community-update.md) | Local pilot; full n8n Community parity, Baker acceptance and private-host isolation remain open |
 
 ## Conflict register and decisions
 

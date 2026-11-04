@@ -288,7 +288,12 @@ Compact Anchor responsibility contracts and the Journal carrier are described in
 
 [Anchor Studio](src/mantleos/kpp/resources/docs/ANCHOR-STUDIO.md) embeds local
 Node-RED with a deterministic Heart, eight independent Journal limbs and a
-supervised MIND. [Engram limbs](src/mantleos/kpp/resources/docs/ENGRAM-LIMBS.md)
+supervised bridge or an explicitly owner-configured OpenRouter MIND.
+[Engram limbs](src/mantleos/kpp/resources/docs/ENGRAM-LIMBS.md)
 are an optional KPP ingredient; ordinary agents acquire no workers or extra model
 calls. [Qualification](src/mantleos/kpp/resources/docs/STUDIO-QUALIFICATION.md)
 separates actual bridge/browser observations, synthetic tests and open acceptance.
+
+[The Community Chase update](docs/studio-community-update.md) records durable
+workflow drafts, shared spending continuity, exact committed release and measured
+startup work. The full n8n Community GUI/runtime chase remains BUILDING.

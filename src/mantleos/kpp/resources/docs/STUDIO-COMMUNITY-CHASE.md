@@ -3,6 +3,10 @@
 Start with the [runnable Chase example](../examples/anchor-studio/README.md),
 including the importable manual-trigger/IF/Debug journey and fresh-process probe.
 
+The [full parity implementation](STUDIO-COMMUNITY-IMPLEMENTATION.md) continues
+beyond that example under a separately identified recipe, retaining every prior
+obligation and all unfinished Community scope.
+
 Owner choice: retain Node-RED as the AppAI Body; chase the self-hosted n8n
 Community edition. Reference release 2.46.4 is pinned to commit
 `261663556d98c9502663f6618edd8edd537e5688`. The previous visual recipe remains
