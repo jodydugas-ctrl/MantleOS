@@ -2,8 +2,10 @@
 
 Anchor Studio retains Node-RED as its Body and uses n8n 2.46.4 Community as the
 behavioral reference. This example demonstrates Chase construction and evidence.
-The complete Community chase remains **BUILDING**; its 94 draft obligations
-are not a declaration that all n8n functions have been implemented.
+The complete Community chase remains **BUILDING**. The original deep-Chase
+recipe has 94 draft obligations; `anchor-studio-community-parity.json` preserves
+them and adds 12 full-scope obligations. None of these declarations establishes
+that all n8n functions have been implemented.
 
 ## Run the useful slice
 
@@ -53,5 +55,13 @@ workflow and durable AppAI bridge.
 See [the deep-chase guide](../../docs/STUDIO-COMMUNITY-CHASE.md) for measured limits,
 the 281 selected reference outcomes, and unfinished expressions, node variants,
 credentials, settings and complete workflow/UI equivalence. The current AppAI uses
-full private founding context and a supervised MIND; detached requests wait for a
-host. Public projects exclude private founding bytes, memories and credentials.
+full private founding context and either a supervised MIND or an explicitly
+owner-configured automatic route. Detached supervised requests wait for a host.
+Public projects exclude private founding bytes, memories and credentials.
+
+## Optional editor source admission
+
+The [editor source guide](../../docs/STUDIO-EDITOR-SOURCE.md) describes the
+owner-reviewed static package loader and its runnable synthetic tests. It is
+an opt-in integration component; it does not replace the current launcher or
+establish Community parity or Baker acceptance.

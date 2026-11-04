@@ -61,3 +61,26 @@ and operator recovery ergonomics need further work. Private resident state,
 credentials, imported archives and conversations remain outside Git. Packaging,
 published commits and hosted CI have their own commit-bound release evidence;
 this report does not confer Baker acceptance.
+
+## Owner-reviewed editor source component
+
+The next reviewed KPP selection adds an optional static editor loader; see the
+[source admission guide](../src/mantleos/kpp/resources/docs/STUDIO-EDITOR-SOURCE.md).
+It verifies an owner-provisioned n8n editor 2.46.4 package and retains an immutable
+snapshot of its assets and original license notices. It never runs package
+scripts or installs a backend, configures cognition, or grants workflow effects.
+The current default Studio launcher is unchanged by this component.
+
+Seven focused Node tests passed, including Windows junction rejection, changed
+source, malformed paths/profiles, size limits and fresh-process reopening. The
+actual reference package verified 648 files and 39,605,145 bytes. The KPP suite
+passed 524 tests and the combined MantleOS/KPP suite passed 647; each reported five
+skips. These are component and regression observations, not Community acceptance.
+
+Separate private browser staging exercised fresh local presentation metadata,
+durable workflow naming, nested numeric IF editing and reload. A native Node-RED
+operation test confirmed the changed condition's branch consequence and retained
+strict-error behavior. That experiment does not qualify general workflow
+execution, the editor's Execute button, complete source closure or production
+authority integration. Those obligations remain open in the full Community bake;
+private prototypes, resident data and conversations are excluded from this release.

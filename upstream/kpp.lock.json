@@ -706,6 +706,11 @@
       "sha256": "95cc5f94e44d26f29b09e54bb5ab896948ed7b8b498d0c9f98a0ae934bcd792a",
       "source": "src/mantleos/kpp/resources/docs/STUDIO-COMMUNITY-QUALIFICATION.md"
     },
+    "src/mantleos/kpp/resources/docs/STUDIO-EDITOR-SOURCE.md": {
+      "group": "implementation",
+      "sha256": "f9a57d15e60d76409c3dfab3469e08fd4ab6aabea2669a11fc1c236f21aa307f",
+      "source": "src/mantleos/kpp/resources/docs/STUDIO-EDITOR-SOURCE.md"
+    },
     "src/mantleos/kpp/resources/docs/STUDIO-QUALIFICATION.md": {
       "group": "implementation",
       "sha256": "f0f0de339990460c2c99a4c00d173a8fa366e695d616d77dfd043cd555815bc9",
@@ -873,7 +878,7 @@
     },
     "src/mantleos/kpp/resources/examples/anchor-studio/README.md": {
       "group": "implementation",
-      "sha256": "f6ada4b17266efc969046277d90981519e0755b25b423c707872ae3e45d4c04c",
+      "sha256": "05b84a092223bae597dd6c8bd27180a033c491c5b4234bc5b2ce969ace60e5ff",
       "source": "src/mantleos/kpp/resources/examples/anchor-studio/README.md"
     },
     "src/mantleos/kpp/resources/examples/anchor-studio/committed-events.cjs": {
@@ -910,6 +915,16 @@
       "group": "implementation",
       "sha256": "d3f55dd15f5c502ac5b05ad6cb42173dd3a5db9632d06c049e7e7947ab550e87",
       "source": "src/mantleos/kpp/resources/examples/anchor-studio/conditions.test.cjs"
+    },
+    "src/mantleos/kpp/resources/examples/anchor-studio/editor-assets.cjs": {
+      "group": "implementation",
+      "sha256": "1d9c3886f751f322e5aa8b1bf9427bfa6add4058df451f0f0c14ca61dc33e8a2",
+      "source": "src/mantleos/kpp/resources/examples/anchor-studio/editor-assets.cjs"
+    },
+    "src/mantleos/kpp/resources/examples/anchor-studio/editor-assets.test.cjs": {
+      "group": "implementation",
+      "sha256": "ad3f3beeefb748e90d54018a047efb487044ed264e8356c6f6c7124576fa4a87",
+      "source": "src/mantleos/kpp/resources/examples/anchor-studio/editor-assets.test.cjs"
     },
     "src/mantleos/kpp/resources/examples/anchor-studio/if-journey.json": {
       "group": "implementation",
@@ -2946,6 +2961,11 @@
       "sha256": "4b12a42741048c45df78ce5fd0db99ccf796dbaf89b5e3697ed5451957791938",
       "source": "tests/test_studio_demo.py"
     },
+    "tests/kpp/test_studio_editor.py": {
+      "group": "tests",
+      "sha256": "0f8544445c1289acc8fab4b5963fc50b10f36d1b99eb24dffbca2ba162b80283",
+      "source": "tests/test_studio_editor.py"
+    },
     "tests/kpp/test_studio_local_access.py": {
       "group": "tests",
       "sha256": "4d6c5f5f14515ebce7e184e4dd6516984752fe9c489ccdf7e31c9e0ebe6fc2b1",
@@ -3002,10 +3022,10 @@
     "upstream/kpp-notices/THIRD-PARTY-NOTICES.md"
   ],
   "schema": "mantle.kpp-upstream/1",
-  "selection_digest": "d1881bab2c6d8191c3c2738db40c1aef92ec2fcef6865779771535145bd3e4af",
-  "shared_source_digest": "f9af3626e7864cbaa4d91072d93d1d8c27506e0afcb5432448f7258e2142c289",
+  "selection_digest": "79e605815147c2925aba365c64c99520689d5bd361acd1b18c8746eb8b0533c0",
+  "shared_source_digest": "85f2e051a4782c969202d26742e825106fef301475287f1c9c6da3a2c397646e",
   "upstream": {
-    "base_commit": "fdb0c1782b96e1342d4ac28ca43e4f27317875ba",
+    "base_commit": "41e0ae5310d0310145f5f70f2b01e7068204a485",
     "dirty": false,
     "official_url": "https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol",
     "published_revision_verified": false,
