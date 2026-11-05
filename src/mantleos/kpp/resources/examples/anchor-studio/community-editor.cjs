@@ -90,7 +90,7 @@ function mountCommunityEditor(app,{express,workflows,installation,context,reside
   if(req.body.expectedChecksum!==undefined&&req.body.expectedChecksum!==await calculateWorkflowChecksum(current))throw Error('Conflict: checksum');
   return {data:await dto(await workflows.call('mutate',{request_id:'http-'+crypto.randomUUID(),action:'update',id:current.id,revision:current.revision,value:{...current,...req.body}}))};
  });
- const executionRoutes=execution?mountExecutionRoutes(route,{workflows,runtime:execution.runtime,capture:execution.capture}):null;
+ const executionRoutes=execution?mountExecutionRoutes(route,{workflows,runtime:execution.runtime,capture:execution.capture,projectId:personal.id}):null;
  app.use('/rest',(req,res)=>res.status(501).json({code:501,message:'This operation is not yet implemented in this BUILDING editor.'}));
  app.use('/rest',(error,req,res,next)=>{if(res.headersSent)return next(error);res.status(error.type==='entity.too.large'?413:400).json({code:error.type==='entity.too.large'?413:400,message:'Invalid or oversized workflow JSON'});});
  for(const name of ['nodes.json','credentials.json','node-versions.json'])app.get('/types/'+name,(req,res)=>{res.setHeader('X-Content-Type-Options','nosniff');res.type('json').send(catalog.asset(name));});

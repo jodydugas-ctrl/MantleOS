@@ -145,14 +145,24 @@ grant alongside the editor source. Studio checks the configuration and active
 Body before admitting and dispatching each run. Reconfigure in stasis with the
 flag omitted to withdraw the execution grant.
 
-The current profile accepts one Manual Trigger and strict IF 2.4 nodes on
-connected, acyclic main-port graphs with a single input per node. It accepts
-literal conditions and direct `$json.field` paths in left operands. The worker
+The current profile accepts one Manual Trigger, strict IF 2.4 nodes, and
+Wait 1.1 nodes on connected, acyclic main-port graphs with a single input
+per node. It accepts literal conditions and direct `$json.field` paths in
+left operands. Wait supports literal time intervals of 1 through 20 seconds
+and carries items forward with their input pairing. The worker
 limits graphs to 64 nodes and 256 KiB, runs at most two child runtimes at once,
 and bounds each child to 30 seconds. The profile has no credential, external
 effect, arbitrary script, pinned data, published trigger or general expression
 capability. Unqualified node options or graph shapes return an explicit error
 before dispatch.
+
+The workflow's saved `executionTimeout` accepts 1 through 20 seconds, or
+`-1`, zero or omission for no workflow deadline. The worker starts the
+deadline when the graph starts. A deadline reached during Wait commits a
+canceled run with the manual cancellation error observed on n8n 2.46.4
+and the completed node outputs. The separate 30-second child limit also
+covers runtime startup. Persistent waits, other Wait modes, and disabling
+manual execution history remain outside this execution profile.
 
 The native editor runs the committed saved revision. Studio binds each
 execution to that graph and records node inputs through their source links,
@@ -167,7 +177,7 @@ child was started. If the run finishes first, its existing result wins. A
 repeated Stop reads the committed cancellation without creating another run.
 The Windows browser qualification observed a canceled run and a separate
 successful run of the same saved revision. Crash recovery and retention of
-partial node output from canceled runs remain open.
+partial node output after an explicit Stop remain open.
 
 The Windows qualification used the normal launcher and a synthetic workflow.
 Changing a numeric IF operand from 42 to 60 through the editor moved the item
@@ -175,6 +185,14 @@ from false to true, matching the reference. Both runs reopened with their
 original saved revisions. This qualifies those journeys within the manual
 profile. Full execution and expression parity and Baker acceptance remain
 separate gates.
+
+Execution history supports the personal project, workflow, executed version,
+status, mode and inclusive timestamp filters. The version selector reads only
+versions with retained executions. The first unfiltered page shows active runs
+alongside completed runs. Its cursor continues through completed runs in saved
+start order even when a newer run arrives. Summary pages omit node output,
+which remains available through the version-checked execution detail.
+Annotation, metadata and other unqualified filters remain explicit errors.
 
 ## Initialization and connection contracts
 

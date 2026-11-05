@@ -12,6 +12,7 @@ function setup({rejectCommit=false,stopAware=false}={}){
   status:'running',workflowData:saved,mode:'manual',data:null};
  mountExecutionRoutes((method,path,handler)=>handlers.set(method+' '+path,handler),{
   capture:ref=>ref==='origin'?frame=>frames.push(frame):null,
+  projectId:'personal',
   runtime:{async admit(value){
    calls.push(['admit',value]);
    return async input=>{
@@ -34,7 +35,8 @@ function setup({rejectCommit=false,stopAware=false}={}){
     return result;
    }
    if(op==='execution_get')return result;
-   if(op==='execution_list')return {count:1,data:[result]};
+   if(op==='execution_page')return {count:1,data:[result],next_cursor:null};
+   if(op==='execution_versions')return [{versionId:'saved',name:null,createdAt:result.startedAt}];
    throw Error('unexpected call');
   }},
  });
@@ -42,9 +44,12 @@ function setup({rejectCommit=false,stopAware=false}={}){
   headers:{'push-ref':ref},params:{id:'w1'},body,
  });
  const detail=()=>handlers.get('get /rest/executions/:id')({params:{id:'e1'},query:{}});
- const listing=()=>handlers.get('get /rest/executions')({query:{filter:'{"workflowId":"w1"}'}});
+ const listing=(filter={workflowId:'w1'},cursor)=>handlers.get('get /rest/executions')({
+  query:{filter:JSON.stringify(filter),cursor},
+ });
+ const versions=()=>handlers.get('get /rest/executions/versions/:id')({params:{id:'w1'}});
  const stop=body=>handlers.get('post /rest/executions/:id/stop')({params:{id:'e1'},body});
- return {run,detail,listing,stop,calls,frames};
+ return {run,detail,listing,versions,stop,calls,frames};
 }
 
 test('native run transport binds selected saved version and publishes only a committed finish',async()=>{
@@ -104,6 +109,17 @@ test('Stop preserves a run that finishes first and a failed cancellation commit 
  await assert.rejects(unresolved.stop(),/stop requires review/);
  assert.equal((await unresolved.detail()).data.status,'running');
  assert.deepEqual(unresolved.frames.map(frame=>frame.type),['executionStarted']);
+});
+
+test('execution history binds personal project, status, dates and saved version to the stored query',async()=>{
+ const server=setup();
+ const query={workflowId:'w1',status:['canceled'],startedAfter:'2026-01-01T00:00:00Z',workflowVersionId:'saved'};
+ await assert.rejects(server.listing({...query,projectId:'unavailable'}),/execution project/);
+ const page=(await server.listing({...query,projectId:'personal'},'cursor')).data;
+ assert.deepEqual(server.calls.at(-1),['execution_page',{query,cursor:'cursor',limit:50}]);
+ assert.deepEqual(page.results[0].scopes,['execution:list','execution:read','workflow:read','workflow:execute']);
+ assert.equal(page.nextCursor,null);
+ assert.equal((await server.versions()).data[0].versionId,'saved');
 });
 
 test('run-data encoding retains numeric text and nested item shape for Flatted consumers',()=>{

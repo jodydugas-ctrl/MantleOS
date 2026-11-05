@@ -6,6 +6,7 @@ effect; a saved document cannot declare itself active or supply authority.
 """
 from contextlib import contextmanager
 from datetime import datetime, timezone
+import base64
 import hashlib
 import json
 import math
@@ -23,6 +24,11 @@ VERSION = 1
 MAX_BYTES = 16 * 1024 * 1024
 MAX_EXECUTION_RESULT = 4 * 1024 * 1024
 TERMINAL_EXECUTIONS = {'success', 'error', 'canceled', 'needs_review'}
+HISTORY_STATUSES = {
+    'running': 'running', 'success': 'success', 'error': 'error',
+    'canceled': 'canceled', 'crashed': 'needs_review',
+    'new': None, 'waiting': None, 'unknown': None,
+}
 SERVER_FIELDS = {'id', 'revision', 'versionId', 'activeVersionId', 'active',
                  'isArchived', 'createdAt', 'updatedAt', 'versionCounter', 'triggerCount'}
 
@@ -63,6 +69,29 @@ def _execution_result_digest(row, status, stopped, result):
     return _digest({'execution': row['id'], 'request': row['request_sha256'],
                     'graph': row['graph_sha256'], 'status': status, 'stopped': stopped,
                     'result': result}, MAX_EXECUTION_RESULT + 4096)
+
+
+def _execution_time(value):
+    c.require(type(value) is str and bool(re.fullmatch(
+        r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})', value)),
+        'Invalid execution time bound')
+    return datetime.fromisoformat(value).astimezone(timezone.utc).isoformat(timespec='microseconds')
+
+
+def _history_cursor(value):
+    if value is None:
+        return None
+    c.require(type(value) is str and bool(re.fullmatch(r'[A-Za-z0-9_-]{1,512}', value)),
+              'Invalid execution cursor')
+    packet = c.loads(base64.urlsafe_b64decode(value + '='*(-len(value) % 4)))
+    c.shape(packet, {'version', 'v1'})
+    c.require(type(packet['version']) is int and packet['version'] == 1, 'Unsupported execution cursor')
+    position = packet['v1']
+    c.shape(position, {'id', 'timestamp'})
+    key = position['id']
+    c.require(type(key) is str and bool(re.fullmatch(r'[1-9][0-9]{0,18}', key)) and int(key) < 2**63,
+              'Invalid execution cursor position')
+    return _execution_time(position['timestamp']), int(key)
 
 
 def document(value):
@@ -353,6 +382,85 @@ class WorkflowStore:
             count = db.execute('SELECT count(*) FROM workflow_executions' + where, values).fetchone()[0]
             return {'data': [self._execution_view(db, row) for row in rows], 'count': count}
 
+    def execution_page(self, *, query, limit=50, cursor=None):
+        """Read a stable page of owner-local execution summaries."""
+        c.require(type(limit) is int and 1 <= limit <= 200, 'Invalid execution history limit')
+        c.require(type(query) is dict and query.keys() <= {
+            'workflowId', 'workflowVersionId', 'status', 'startedAfter', 'startedBefore', 'mode',
+        }, 'Unsupported execution history filter')
+        position = _history_cursor(cursor)
+        conditions = ['version IS NOT NULL']
+        values = []
+        for key, column in (('workflowId', 'workflow'), ('workflowVersionId', 'version')):
+            if key in query:
+                conditions.append(column+'=?')
+                values.append(_id(query[key]))
+        for key, operator in (('startedAfter', '>='), ('startedBefore', '<=')):
+            if key in query:
+                conditions.append('started'+operator+'?')
+                values.append(_execution_time(query[key]))
+        if 'mode' in query and c.text(query['mode'], maximum=64) != 'manual':
+            conditions.append('0')
+        statuses = query.get('status', [])
+        c.require(type(statuses) is list and len(statuses) <= len(HISTORY_STATUSES)
+                  and all(type(status) is str and status in HISTORY_STATUSES for status in statuses),
+                  'Invalid execution status filter')
+        if statuses:
+            matches = sorted({HISTORY_STATUSES[status] for status in statuses} - {None})
+            conditions.append('status IN (' + ','.join('?' for _ in matches) + ')' if matches else '0')
+            values.extend(matches)
+        else:
+            conditions.append("status<>'running'")
+
+        def fetch(db, where, arguments, *, after=None):
+            if after is not None:
+                timestamp, row_id = after
+                where = [*where, '(started<? OR (started=? AND rowid<?))']
+                arguments = [*arguments, timestamp, timestamp, row_id]
+            projection = ('id,workflow,version,status,started,stopped,result_sha256,rowid AS page_id,'
+                          "CASE WHEN result IS NULL THEN NULL ELSE '' END AS result,"
+                          'length(CAST(result AS BLOB)) AS result_size')
+            return db.execute('SELECT '+projection+' FROM workflow_executions WHERE ' +
+                              ' AND '.join(where) + ' ORDER BY started DESC,rowid DESC LIMIT ?',
+                              (*arguments, limit)).fetchall()
+
+        with self._db() as db:
+            if not _execution_table(db):
+                return {'data': [], 'count': 0, 'next_cursor': None}
+            rows = fetch(db, conditions, values, after=position)
+            count = db.execute('SELECT count(*) FROM workflow_executions WHERE ' +
+                               ' AND '.join(conditions), values).fetchone()[0]
+            next_cursor = None
+            if len(rows) == limit:
+                last = rows[-1]
+                packet = c.canonical({'version': 1, 'v1': {
+                    'id': str(last['page_id']), 'timestamp': last['started'],
+                }})
+                next_cursor = base64.urlsafe_b64encode(packet.encode('utf-8')).decode('ascii').rstrip('=')
+            if not statuses and position is None:
+                rows = fetch(db, [*conditions[:-1], "status='running'"], values) + rows
+            names = {}
+            summaries = []
+            for row in rows:
+                workflow_id = row['workflow']
+                if workflow_id not in names:
+                    workflow = self._row(db, workflow_id)
+                    names[workflow_id] = self._version(db, workflow_id, workflow['version'])['name']
+                summaries.append({**self._execution_view(db, row), 'workflowName': names[workflow_id],
+                                  'jsonSizeBytes': row['result_size'] or 0,
+                                  'binaryDataSizeBytes': 0})
+            return {'data': summaries, 'count': count, 'next_cursor': next_cursor}
+
+    def execution_versions(self, workflow_id):
+        _id(workflow_id)
+        with self._db() as db:
+            if not _execution_table(db):
+                return []
+            rows = db.execute("""SELECT v.id,v.created FROM versions v WHERE v.workflow=?
+                AND EXISTS(SELECT 1 FROM workflow_executions e WHERE e.workflow=v.workflow AND e.version=v.id)
+                ORDER BY v.created DESC,v.rowid DESC""", (workflow_id,))
+            return [{'versionId': row['id'], 'createdAt': row['created'], 'name': None} for row in rows]
+
     def mutate(self, request, *, owner=False):
         # Authority is host-supplied, not a field in the request or an Anchor digest.
         if owner is not True:
@@ -498,6 +606,11 @@ def serve(store, input_stream=None, output_stream=None, *, check_source=None, ex
                 result = store.execution_get(**args)
             elif op == 'execution_list' and execution_source:
                 result = store.execution_list(**args)
+            elif op == 'execution_page' and execution_source:
+                result = store.execution_page(**args)
+            elif op == 'execution_versions' and execution_source:
+                c.shape(args, {'workflow_id'})
+                result = store.execution_versions(**args)
             else:
                 raise ValueError('Unsupported workflow operation')
             reply = {'id': envelope['id'], 'ok': True, 'result': result}

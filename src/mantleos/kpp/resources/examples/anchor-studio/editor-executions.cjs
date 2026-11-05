@@ -44,7 +44,7 @@ function presentation(run,includeData){
   ...(includeData?{workflowData:{...workflowData,active:false},data:data===null?null:encodeRunData(data)}:{})};
 }
 
-function mountExecutionRoutes(route,{workflows,runtime,capture}){
+function mountExecutionRoutes(route,{workflows,runtime,capture,projectId}){
  if(typeof runtime?.admit!=='function'||typeof capture!=='function')throw Error('TRUSTED_EXECUTION_HOST_REQUIRED');
  const pending=new Set();
  const active=new Map();
@@ -113,17 +113,19 @@ function mountExecutionRoutes(route,{workflows,runtime,capture}){
   const run=await workflows.call('execution_get',{run_id:req.params.id});
   return {data:presentation(run,req.query.includeData!=='false')};
  });
+ route('get','/rest/executions/versions/:id',async req=>({
+  data:await workflows.call('execution_versions',{workflow_id:req.params.id}),
+ }));
  route('get','/rest/executions',async req=>{
   const filter=req.query.filter?JSON.parse(req.query.filter):{};
-  if(!filter||typeof filter!=='object'||Array.isArray(filter)||
-     Object.keys(filter).some(key=>key!=='workflowId'))throw Error('Unsupported execution: history filter');
-  const limit=Number(req.query.limit??50),cursor=req.query.cursor??'0';
-  if(typeof cursor!=='string'||!/^(0|[1-9]\d{0,7})$/.test(cursor))throw Error('Invalid execution cursor');
-  const offset=Number(cursor);
-  const page=await workflows.call('execution_list',{workflow_id:filter.workflowId??null,offset,limit});
-  const next=offset+page.data.length;
-  return {data:{results:page.data.map(row=>presentation(row,false)),
-   nextCursor:next<page.count?String(next):null,count:page.count,estimated:false,concurrentExecutionsCount:-1}};
+  if(!filter||typeof filter!=='object'||Array.isArray(filter))throw Error('Unsupported execution: history filter');
+  const {projectId:requestedProject,...query}=filter;
+  if(requestedProject!==undefined&&requestedProject!==projectId)throw Error('PermissionError: execution project');
+  const limit=Number(req.query.limit??50),cursor=req.query.cursor??null;
+  const page=await workflows.call('execution_page',{query,cursor,limit});
+  const scopes=['execution:list','execution:read','workflow:read','workflow:execute'];
+  return {data:{results:page.data.map(row=>({...presentation(row,false),scopes})),
+   nextCursor:page.next_cursor,count:page.count,estimated:false,concurrentExecutionsCount:-1}};
  });
  return Object.freeze({async close(){closing=true;await Promise.allSettled(pending);}});
 }

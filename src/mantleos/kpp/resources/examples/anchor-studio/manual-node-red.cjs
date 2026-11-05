@@ -5,7 +5,8 @@ const {spawn}=require('node:child_process');
 const {setTimeout:delay}=require('node:timers/promises');
 const conditions=require('./conditions.cjs');
 const MAX_INPUT=256*1024;
-const triggerType='n8n-nodes-base.manualTrigger',ifType='n8n-nodes-base.if';
+const triggerType='n8n-nodes-base.manualTrigger',ifType='n8n-nodes-base.if',waitType='n8n-nodes-base.wait';
+const MAX_WAIT_SECONDS=20;
 const own=(value,key)=>value!=null&&Object.hasOwn(value,key);
 const object=value=>value&&typeof value==='object'&&!Array.isArray(value);
 const only=(value,keys)=>object(value)&&Object.keys(value).every(key=>keys.includes(key));
@@ -46,14 +47,28 @@ function prepareIf(node){
  };
 }
 
+function prepareWait(node){
+ const {parameters={}}=node;
+ demand(node.typeVersion===1.1&&only(parameters,['resume','amount','unit'])&&
+  parameters.resume==='timeInterval'&&parameters.unit==='seconds'&&
+  Number.isInteger(parameters.amount)&&parameters.amount>=1&&parameters.amount<=MAX_WAIT_SECONDS,'Wait profile');
+ return async (items,signal)=>{
+  await delay(parameters.amount*1000,undefined,{signal});
+  return [items.map((item,index)=>({...item,pairedItem:{item:index}}))];
+ };
+}
+
 function compile(workflow,selection){
  demand(Buffer.byteLength(JSON.stringify(workflow))<=MAX_INPUT&&
   Array.isArray(workflow.nodes)&&workflow.nodes.length>0&&workflow.nodes.length<=64&&
   object(workflow.connections),'graph size');
  const settings=workflow.settings??{};
- demand(only(settings,['executionOrder','binaryMode','saveManualExecutions'])&&
+ demand(only(settings,['executionOrder','binaryMode','saveManualExecutions','executionTimeout'])&&
   (!own(settings,'executionOrder')||settings.executionOrder==='v1')&&
-  (!own(settings,'binaryMode')||settings.binaryMode==='separate')&&settings.saveManualExecutions!==false&&
+  (!own(settings,'binaryMode')||settings.binaryMode==='separate')&&
+  (!own(settings,'saveManualExecutions')||[true,'DEFAULT'].includes(settings.saveManualExecutions))&&
+  (!own(settings,'executionTimeout')||(Number.isInteger(settings.executionTimeout)&&
+   settings.executionTimeout>=-1&&settings.executionTimeout<=MAX_WAIT_SECONDS))&&
   (!workflow.pinData||only(workflow.pinData,[]))&&!workflow.staticData,'workflow settings or pinned data');
  const steps=new Map();
  for(const [index,node] of workflow.nodes.entries()){
@@ -63,6 +78,9 @@ function compile(workflow,selection){
   if(node.type===triggerType){
    demand(node.name===selection.trigger&&(node.typeVersion??1)===1&&(!node.parameters||only(node.parameters,[])),'manual trigger');
    execute=()=>[[{json:{},pairedItem:{item:0}}]];outputs=1;
+  }else if(node.type===waitType){
+   demand(!node.continueOnFail,'Wait error policy');
+   execute=prepareWait(node);outputs=1;
   }else{
    demand(node.type===ifType,'node type');
    execute=prepareIf(node);outputs=2;
@@ -100,7 +118,7 @@ function compile(workflow,selection){
   for(const id of byId.keys())if(!keep.has(id))byId.delete(id);
   for(const step of byId.values())step.wires=step.wires.map(port=>port.filter(id=>keep.has(id)));
  }
- return {entry,byId};
+ return {entry,byId,timeout:settings.executionTimeout};
 }
 
 async function dispatch({nodeRed,version,workflow,selection,userDir}){
@@ -114,7 +132,7 @@ async function dispatch({nodeRed,version,workflow,selection,userDir}){
   getCredentials:async()=>({}),saveCredentials:async()=>{},getSettings:async()=>({}),saveSettings:async()=>{},
   getSessions:async()=>({}),saveSessions:async()=>{}};
  const resultData={runData:Object.create(null)};
- let outstanding=1,sequence=0,resolveComplete,failed=false,initialized=false;
+ let outstanding=1,sequence=0,resolveComplete,failed=false,initialized=false,deadline;
  const complete=new Promise(resolve=>{resolveComplete=resolve;});
  try{
   fs.writeFileSync(path.join(userDir,'package.json'),JSON.stringify({name:'mantle-studio-manual',version:'1.0.0',private:true}));
@@ -125,11 +143,12 @@ async function dispatch({nodeRed,version,workflow,selection,userDir}){
   RED.nodes.registerType('studio-execution-step',function(config){
    RED.nodes.createNode(this,config);
    const step=plan.byId.get(config.id);
-   this.on('input',(msg,send,done)=>{
+   this.on('input',async (msg,send,done)=>{
     const startTime=Date.now(),executionIndex=sequence++;
     try{
-     if(failed)return;
-     const ports=step.execute(msg.items);
+     if(failed||deadline?.aborted)return;
+     const ports=await step.execute(msg.items,deadline);
+     if(failed||deadline?.aborted)return;
      resultData.lastNodeExecuted=step.name;
      resultData.runData[step.name]=[{startTime,executionIndex,source:msg.source,executionTime:Date.now()-startTime,
       executionStatus:'success',data:{main:ports}}];
@@ -139,7 +158,8 @@ async function dispatch({nodeRed,version,workflow,selection,userDir}){
       return {items,source:[{previousNode:step.name,previousNodeOutput:index,previousNodeRun:0}]};
      });
      send(outgoing);
-    }catch{
+    }catch(error){
+     if(error.name==='AbortError'&&deadline?.aborted)return;
      failed=true;
      resultData.lastNodeExecuted=step.name;
      resultData.error={name:'NodeOperationError',message:'The admitted IF condition rejected an input item.'};
@@ -152,8 +172,13 @@ async function dispatch({nodeRed,version,workflow,selection,userDir}){
   for(let attempt=0;attempt<500&&!RED.nodes.getNode(plan.entry.id);attempt++)await delay(20);
   const entry=RED.nodes.getNode(plan.entry.id);
   if(!entry)throw Error('Node-RED startup timed out');
+  if(plan.timeout>0)deadline=AbortSignal.timeout(plan.timeout*1000);
   entry.receive({items:[],source:[]});
   await complete;
+  if(deadline?.aborted){
+   resultData.error={name:'ManualExecutionCancelledError',message:'The execution was cancelled manually'};
+   return {status:'canceled',data:{version:1,resultData}};
+  }
   return {status:failed?'error':'success',data:{version:1,startData:{},resultData,executionData:{
    contextData:{},nodeExecutionStack:[],metadata:{},waitingExecution:{},waitingExecutionSource:{},
   }}};

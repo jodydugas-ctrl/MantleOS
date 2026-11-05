@@ -9,6 +9,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from mantleos.studio_workflows import Conflict, MAX_BYTES, WorkflowStore, document, serve
 
@@ -133,6 +134,51 @@ class WorkflowTests(unittest.TestCase):
                 db.execute("UPDATE workflow_executions SET status='error',result='{}' WHERE id=?", (run['id'],))
             with self.assertRaisesRegex(ValueError, 'result integrity'):
                 store.execution_get(run['id'])
+
+    def test_execution_history_filters_preserve_current_set_and_paging_across_new_runs(self):
+        with tempfile.TemporaryDirectory() as td:
+            store = WorkflowStore(td)
+            old = self.create(store)
+
+            def reserve(saved, key, time, outcome=None):
+                payload = {**self.execution_request(saved), 'request_id': key}
+                with patch('mantleos.studio_workflows._now', return_value=time):
+                    run = store.execution_start(payload, owner=True, source_pin='1'*64)
+                    if outcome:
+                        store.execution_finish(run['id'], owner=True, source_pin='1'*64,
+                                               claim=run['claim'], status=outcome, result={'resultData': {}})
+                return run['id']
+
+            first_time = '2026-01-01T14:00:00.000000+00:00'
+            canceled = reserve(old, 'old-run', first_time, 'canceled')
+            new = self.mutate(store, 'update', old, value={**old, 'name': 'New workflow name'})
+            successful = reserve(new, 'new-run', '2026-01-01T14:00:01.000000+00:00', 'success')
+            running = reserve(new, 'current-run', '2026-01-01T14:00:02.000000+00:00')
+            scope = {'workflowId': old['id']}
+            first = store.execution_page(query=scope, limit=1)
+            self.assertEqual([row['id'] for row in first['data']], [running, successful])
+            self.assertEqual(first['count'], 2)
+            self.assertTrue(first['next_cursor'])
+            reserve(new, 'inserted-run', '2026-01-01T14:00:03.000000+00:00', 'success')
+            second = store.execution_page(query=scope, limit=1, cursor=first['next_cursor'])
+            self.assertEqual([row['id'] for row in second['data']], [canceled])
+            self.assertEqual(second['data'][0]['workflowName'], 'New workflow name')
+            self.assertNotIn('data', second['data'][0])
+            self.assertEqual(second['count'], 3)
+            self.assertEqual(store.execution_page(query=scope, limit=1,
+                             cursor=second['next_cursor'])['data'], [])
+            filtered = store.execution_page(query={**scope, 'workflowVersionId': old['versionId'],
+                'startedAfter': '2026-01-01T10:00:00-04:00', 'startedBefore': '2026-01-01T14:00:00Z',
+                'status': ['canceled'], 'mode': 'manual'})
+            self.assertEqual([row['id'] for row in filtered['data']], [canceled])
+            self.assertEqual(store.execution_page(query={'status': ['new', 'waiting']})['count'], 0)
+            self.assertEqual(store.execution_page(query={'mode': 'trigger'})['count'], 0)
+            self.assertEqual([item['versionId'] for item in store.execution_versions(old['id'])],
+                             [new['versionId'], old['versionId']])
+            for kwargs in ({'cursor': 'bad cursor'}, {'query': {'startedAfter': '2026-01-01'}},
+                           {'query': {'status': 'success'}}, {'query': {'annotationTags': ['unknown']}}):
+                with self.subTest(kwargs=kwargs), self.assertRaises(ValueError):
+                    store.execution_page(**{'query': scope, **kwargs})
 
     def test_read_only_empty_store_creates_no_state(self):
         with tempfile.TemporaryDirectory() as td:

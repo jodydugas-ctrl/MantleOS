@@ -21,6 +21,16 @@ function workflow(value=42){
 }
 const full={trigger:'Manual',destination:null};
 
+function waitWorkflow(amount=1){
+ const saved=workflow();
+ saved.nodes[1]={name:'Wait',type:'n8n-nodes-base.wait',typeVersion:1.1,
+  parameters:{resume:'timeInterval',amount,unit:'seconds'}};
+ saved.nodes.pop();
+ delete saved.connections.If;
+ saved.connections.Manual.main[0][0].node='Wait';
+ return saved;
+}
+
 test('manual admission refuses unknown node types, arbitrary expressions, and unsafe connections',async()=>{
  const runner=createManualRuntime({checkActive:async()=>{}});
  await assert.rejects(runner.admit({workflow:workflow('={{ process.env.KEY }}'),selection:full}),/Unsupported execution: expression/);
@@ -32,6 +42,43 @@ test('manual admission refuses unknown node types, arbitrary expressions, and un
  await assert.rejects(runner.admit({workflow:cycle,selection:full}),/connection or fan-in/);
  const disabled=createManualRuntime({checkActive:async()=>{throw Error('STALE_CONFIGURATION');}});
  await assert.rejects(disabled.admit({workflow:workflow(),selection:full}),/STALE_CONFIGURATION/);
+});
+
+test('Wait and execution timeout require the reviewed bounded settings',async()=>{
+ const runner=createManualRuntime({checkActive:async()=>{}});
+ for(const amount of [0,21,1.5,'1']){
+  await assert.rejects(runner.admit({workflow:waitWorkflow(amount),selection:full}),/Wait profile/);
+ }
+ for(const value of ['1',21,-2,1.5,null]){
+  const saved=waitWorkflow();
+  saved.settings.executionTimeout=value;
+  await assert.rejects(runner.admit({workflow:saved,selection:full}),/workflow settings/);
+ }
+ const saved=waitWorkflow();
+ saved.settings.saveManualExecutions=false;
+ await assert.rejects(runner.admit({workflow:saved,selection:full}),/workflow settings/);
+ saved.settings.saveManualExecutions='DEFAULT';
+ assert.equal(typeof await runner.admit({workflow:saved,selection:full}),'function');
+});
+
+test('Node-RED completes a bounded Wait and reports a timed-out manual run as canceled',
+ {skip:!process.env.STUDIO_MODULES?'Owner-provisioned Node-RED runtime absent':false,timeout:90000},async()=>{
+ const nodeRed=require.resolve(path.join(process.env.STUDIO_MODULES,'node-red'));
+ const runner=createManualRuntime({nodeRed,version:require(nodeRed).version(),checkActive:async()=>{}});
+ async function run(amount,timeout){
+  const saved=waitWorkflow(amount);
+  saved.settings.executionTimeout=timeout;
+  const dispatch=await runner.admit({workflow:saved,selection:full});
+  return dispatch({workflow:saved,selection:full});
+ }
+ const completed=await run(1,-1);
+ assert.equal(completed.status,'success');
+ assert.ok(completed.data.resultData.runData.Wait[0].executionTime>=950);
+ assert.deepEqual(completed.data.resultData.runData.Wait[0].data.main,[[{json:{},pairedItem:{item:0}}]]);
+ const canceled=await run(6,1);
+ assert.equal(canceled.status,'canceled');
+ assert.equal(canceled.data.resultData.error.name,'ManualExecutionCancelledError');
+ assert.deepEqual(Object.keys(canceled.data.resultData.runData),['Manual']);
 });
 
 test('actual Node-RED worker dispatches the selected saved branch and records node data',
