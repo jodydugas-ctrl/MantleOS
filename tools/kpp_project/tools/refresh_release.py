@@ -17,7 +17,7 @@ def refresh(root=ROOT):
     if stale:
         raise ValueError('Generated views differ; export to a new directory and review: ' + ', '.join(sorted(stale)))
     actual = {name for name, _ in exporter.files(root)
-              if not name.startswith(('.git/', '.work/', '.venv/', 'workspaces/', 'dist/', 'build/'))
+              if name != '.git' and not name.startswith(('.git/', '.work/', '.venv/', 'workspaces/', 'dist/', 'build/'))
               and not any(part.endswith('.egg-info') for part in Path(name).parts)}
     extra = actual - expected.keys()
     if extra:

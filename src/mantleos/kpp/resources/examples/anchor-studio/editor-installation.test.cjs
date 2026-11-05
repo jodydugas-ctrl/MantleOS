@@ -1,0 +1,20 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+const {spawnSync}=require('node:child_process');
+const {openInstallation}=require('./editor-installation.cjs');
+const {create}=require('./editor-fixtures.cjs');
+test('installation binds both inert source snapshots and rejects substitutions in a fresh process',t=>{
+ const root=fs.mkdtempSync(path.join(os.tmpdir(),'studio-installation-'));
+ t.after(()=>{if(path.dirname(path.resolve(root))!==path.resolve(os.tmpdir())||!path.basename(root).startsWith('studio-installation-'))throw Error('Unsafe cleanup');fs.rmSync(root,{recursive:true,force:true});});
+ const options=create(root),{packageRoot,editorProfile,catalogRoot,catalogProfile}=options;
+ const installed=openInstallation(options);assert.equal(installed.inspection.authority,'NONE');
+ assert.equal(installed.inspection.workflow_execution,'NOT_GRANTED_BY_INSTALLATION');
+ assert.equal(openInstallation({...options,expectedDigest:installed.digest}).digest,installed.digest);
+ assert.throws(()=>openInstallation({...options,expectedDigest:'0'.repeat(64)}),/INSTALLATION_CHANGED/);
+ const args=[path.join(__dirname,'editor-installation.cjs'),'--package',packageRoot,'--editor-profile',editorProfile,'--catalog',catalogRoot,'--catalog-profile',catalogProfile];
+ const result=spawnSync(process.execPath,args,{encoding:'utf8',timeout:15000});
+ assert.equal(result.status,0,result.stderr);assert.deepEqual(JSON.parse(result.stdout),installed.inspection);
+ fs.writeFileSync(catalogProfile,'PRIVATE_TOKEN malformed');
+ const denied=spawnSync(process.execPath,args,{encoding:'utf8',timeout:15000});
+ assert.equal(denied.status,2);assert.equal(denied.stdout,'');assert.equal(denied.stderr.trim(),'EDITOR_INSTALLATION_REJECTED');
+});

@@ -137,6 +137,9 @@ def generate(nest, request_id, *, transport=None):
         with studio.database(nest) as db:
             if studio._setting(db,'phase')!='ACTIVE':
                 raise PermissionError('Automatic cognition requires an active Body')
+            pending=db.execute('SELECT phase,frame FROM mind WHERE id=?',(request_id,)).fetchone()
+            if pending is not None and pending[0]=='AWAITING_MIND':
+                studio.check_preparation(db,c.loads(pending[1]))
         # A route edit, even to different valid settings, invalidates this worker.
         current,_=_load(nest)
         if current!=route:
@@ -151,8 +154,7 @@ def generate(nest, request_id, *, transport=None):
         if row[0]!='AWAITING_MIND':
             raise PermissionError('Body cognition requires recovery review')
         wrapper=c.loads(row[1])
-    if wrapper.get('controller_pin')!=studio.controller_pin():
-        raise PermissionError('Stale Body cognition preparation')
+        studio.check_preparation(db,wrapper)
     if wrapper.get('mind_route_revision')!=route['revision']:
         raise PermissionError('Body cognition route requires recovery review')
     # An action's checked observation creates a different frame and one subsequent

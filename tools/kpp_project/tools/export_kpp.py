@@ -108,7 +108,7 @@ def check(output, source=ROOT):
     actual = dict(files(Path(output)))
     # Workspaces are local user state and never part of the source export.
     actual = {name: blob for name, blob in actual.items()
-              if not name.startswith(('workspaces/', '.work/', '.git/', '.venv/', 'build/', 'dist/'))
+              if name != '.git' and not name.startswith(('workspaces/', '.work/', '.git/', '.venv/', 'build/', 'dist/'))
               and not any(part.endswith('.egg-info') for part in Path(name).parts)}
     missing = sorted(set(expected) - set(actual))
     extra = sorted(set(actual) - set(expected))

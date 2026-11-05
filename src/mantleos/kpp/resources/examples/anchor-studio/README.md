@@ -62,6 +62,8 @@ Public projects exclude private founding bytes, memories and credentials.
 ## Optional editor source admission
 
 The [editor source guide](../../docs/STUDIO-EDITOR-SOURCE.md) describes the
-owner-reviewed static package loader and its runnable synthetic tests. It is
-an opt-in integration component; it does not replace the current launcher or
-establish Community parity or Baker acceptance.
+owner-reviewed package/catalog loader, optional same-resident host and runnable
+synthetic tests. The default launcher retains its current Studio surface;
+reviewed selection enables the n8n-style editor at `/` alongside `/studio` and
+the ordinary Node-RED `/red/` editor. Draft editing and resident conversation
+do not establish full workflow execution, Community parity or Baker acceptance.

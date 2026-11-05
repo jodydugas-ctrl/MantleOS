@@ -37,6 +37,15 @@ class WorkflowTests(unittest.TestCase):
                 WorkflowStore(directory).get('missing')
             self.assertFalse(directory.exists())
 
+    def test_health_is_read_only_and_refuses_unrelated_storage(self):
+        with tempfile.TemporaryDirectory() as td:
+            directory=Path(td)/'new-store';store=WorkflowStore(directory)
+            self.assertEqual(store.health(),{'status':'ok','workflow_execution':'UNAVAILABLE'})
+            self.assertFalse(directory.exists())
+            self.create(store)
+            with closing(sqlite3.connect(store.path)) as db,db:db.execute('PRAGMA application_id=12345')
+            with self.assertRaisesRegex(ValueError,'Unsupported workflow store'):store.health()
+
     def test_editor_allocated_id_survives_restart_and_replay(self):
         with tempfile.TemporaryDirectory() as td:
             store=WorkflowStore(td)

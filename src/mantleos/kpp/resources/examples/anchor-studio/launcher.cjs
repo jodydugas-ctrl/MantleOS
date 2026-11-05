@@ -43,7 +43,11 @@ const workflowFailure=()=>{if(body.alive)call('event',{kind:'pain',value:{compon
 workflows.process.on('exit',workflowFailure);workflows.process.on('error',workflowFailure);
 const app=express();
 app.use(access.middleware);
-app.get('/',(req,res)=>res.redirect('/studio'));
+let editorHost=null,sockets=null;
+app.get('/',(req,res)=>{
+ if(req.query.studio_connect==='1')return res.type('html').send('<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Studio reconnected</title></head><body><p>The local editor session is refreshed. Your existing editor tab stays open.</p><p>You can close this tab and return to the editor.</p></body></html>');
+ return editorHost?res.type('html').send(editorHost.index()):res.redirect('/studio');
+});
 let workflowRequests=0;
 app.use('/studio/workflows',(req,res,next)=>{
  if(workflowRequests>=4)return res.status(503).json({error:'WORKFLOW_BUSY'});
@@ -54,6 +58,14 @@ app.use('/studio/workflows',express.json({limit:16*1024*1024+65536}));
 app.use('/studio',express.json({limit:'1mb'}));
 const route=(method,url,handler)=>app[method](url,async(req,res)=>{try{res.json(await handler(req));}catch(e){res.status(400).json({error:e.message});}});
 route('get','/studio/status',()=>call('status'));
+app.get('/healthz',async(req,res)=>{
+ try{
+  if(!body.alive||!workflows.alive)throw Error('HOST_WORKER_UNAVAILABLE');
+  const state=await call('status'),storage=await workflows.call('health',{});
+  if(storage.status!=='ok')throw Error('WORKFLOW_STORE_UNAVAILABLE');
+  res.json({status:'ok',runtime:'node-red',version:RED.version(),resident_phase:state.phase});
+ }catch{res.status(503).json({status:'unavailable'});}
+});
 app.get('/studio/events',(req,res)=>releases.attach(req,res));
 const workflowRoute=(method,url,handler)=>app[method](url,async(req,res)=>{try{res.json(await handler(req));}catch(error){
  const message=String(error.message||'WORKFLOW_ERROR');
@@ -67,7 +79,8 @@ workflowRoute('get','/studio/workflows',req=>{
 workflowRoute('get','/studio/workflows/:id',req=>workflows.call('get',{id:req.params.id}));
 workflowRoute('get','/studio/workflows/:id/history',req=>workflows.call('history',{id:req.params.id}));
 workflowRoute('post','/studio/workflows/mutate',req=>workflows.call('mutate',req.body));
-route('get','/studio/result/:id',async req=>{const result=await call('result',{request_id:req.params.id});return result.status!=='COMMITTED'&&cognitionFailure?.request_id===req.params.id?cognitionFailure:result;});
+async function resultFor(request_id){const result=await call('result',{request_id});return result.status!=='COMMITTED'&&cognitionFailure?.request_id===request_id?cognitionFailure:result;}
+route('get','/studio/result/:id',req=>resultFor(req.params.id));
 route('get','/studio/mind-status',()=>mind?mind.call('status'):({route:'SUPERVISED_HOST_ONLY'}));
 route('get','/studio/project',()=>call('project_get'));
 app.get('/studio/download',async(req,res)=>{try{const r=await call('project_bundle');res.setHeader('Content-Disposition','attachment; filename=Anchor-Studio-Demo.anchorstudio');res.type('application/zip').send(Buffer.from(r.base64,'base64'));}catch(e){res.status(400).json({error:e.message});}});
@@ -80,16 +93,17 @@ route('post','/studio/project',req=>call('project_set',{value:req.body.project,e
 route('post','/studio/flow-draft',req=>call('flow_draft',{flows:req.body.flows}));
 route('post','/studio/phase',req=>{if(typeof req.body.active!=='boolean')throw Error('Boolean phase required');return call('phase',{active:req.body.active});});
 route('post','/studio/mind-submit',async req=>{const result=await call('submit',{request_id:req.body.request_id,proposal:req.body.proposal});if(result.status==='COMMITTED')await releases.release(req.body.request_id).catch(()=>{});return result;});
-route('post','/studio/conversation',async req=>{
- const result=await call('conversation',{user:req.body.user,request_id:req.body.request_id,model_label:automatic?'OPENROUTER_OWNER_CONFIGURED':'CURRENT_CHAT_HOST'});
+async function encounter({user,request_id}){
+ const result=await call('conversation',{user,request_id,model_label:automatic?'OPENROUTER_OWNER_CONFIGURED':'CURRENT_CHAT_HOST'});
  if(result.status==='COMMITTED')return result;
- if(result.status==='AWAITING_MIND'&&automatic)setImmediate(()=>cognize(req.body.request_id));
- return {status:result.status==='AWAITING_MIND'&&automatic?'MIND_SCHEDULED':result.status,request_id:req.body.request_id};
-});
+ if(result.status==='AWAITING_MIND'&&automatic)setImmediate(()=>cognize(request_id));
+ return {status:result.status==='AWAITING_MIND'&&automatic?'MIND_SCHEDULED':result.status,request_id};
+}
+route('post','/studio/conversation',req=>encounter(req.body));
 route('post','/studio/intention',req=>call('intention',req.body));
 route('post','/studio/publish-intentions',req=>call('publish_intentions',{request_id:req.body.request_id}));
 route('post','/studio/pain',req=>call('event',{kind:'pain',value:{cause:'operator-synthetic-fixture'},request_id:req.body.request_id}));
-for(const asset of ['workspace.css','workspace.js'])app.get('/studio/'+asset,(req,res)=>res.sendFile(path.join(__dirname,asset)));
+for(const asset of ['workspace.css','workspace.js','resident-panel.js'])app.get('/studio/'+asset,(req,res)=>res.sendFile(path.join(__dirname,asset)));
 app.get('/studio',(req,res)=>res.type('html').send(fs.readFileSync(path.join(__dirname,'workspace.html'),'utf8')+`<script>async function api(p,b){let r=await fetch('/studio/'+p,b?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}:{});return r.json();}
 async function demoTest(){document.getElementById('evaluation').textContent=JSON.stringify(await api('demo-test',{}),null,2);}
 async function demoAccept(){if(!confirm('Accept only the current verified calculator obligations as the authenticated Baker?'))return;document.getElementById('evaluation').textContent=JSON.stringify(await api('demo-accept',{confirmed:true}),null,2);}
@@ -107,8 +121,10 @@ async function send(){lastRequest='user-'+crypto.randomUUID();const value=await 
 if(typeof EventSource==='function'){const updates=new EventSource('/studio/events');updates.addEventListener('committed',event=>{try{const value=JSON.parse(event.data);if(value.status==='COMMITTED'&&value.request_id===lastRequest&&typeof value.reply==='string')document.getElementById('reply').textContent=value.reply;}catch(error){}});updates.onopen=()=>{if(lastRequest)refresh();};window.addEventListener('pagehide',()=>updates.close(),{once:true});}
 setInterval(refresh,3000);refresh();loadProject();</script><script src="/studio/workspace.js"></script></body></html>`));
 const server=http.createServer(app);
-server.prependListener('upgrade',access.upgrade);
-RED.init(server,{userDir,flowFile:'flows.json',credentialSecret:credentials.flowSecret,httpAdminRoot:'/red',httpNodeRoot:'/flows',nodesDir:path.join(__dirname,'palette'),
+// Node-RED retains every upgrade handler on a private dispatch target. A single
+// public dispatcher authenticates first, then selects editor or host sockets.
+const redServer=http.createServer();
+RED.init(redServer,{userDir,flowFile:'flows.json',credentialSecret:credentials.flowSecret,httpAdminRoot:'/red',httpNodeRoot:'/flows',nodesDir:path.join(__dirname,'palette'),
  functionGlobalContext:{},logging:{console:{level:'info',metrics:false,audit:false},studio:{level:'warn',metrics:false,audit:false,logger:()=>msg=>{if(body.alive)call('event',{kind:'pain',value:{level:msg.level,type:String(msg.type||'runtime').slice(0,80)},request_id:'pain-'+crypto.randomUUID()}).catch(()=>{});}}}});
 app.use('/red',RED.httpAdmin);app.use('/flows',RED.httpNode);
 app.use((error,req,res,next)=>{
@@ -118,9 +134,28 @@ app.use((error,req,res,next)=>{
 });
 let pulsing=false;
 const timer=setInterval(async()=>{if(pulsing||!body.alive)return;pulsing=true;try{await call('pulse');if(mind&&!cognitionBusy){const pending=await call('mind_pending');if(pending.request_id)cognize(pending.request_id);}}catch(e){}finally{pulsing=false;}},1000);
-async function close(){clearInterval(timer);releases.close();try{await call('phase',{active:false});}catch(e){}await RED.stop();body.end();workflows.end();if(mind)mind.end();server.close();}
+async function close(){clearInterval(timer);releases.close();sockets?.close();try{await call('phase',{active:false});}catch(e){}await RED.stop();body.end();workflows.end();if(mind)mind.end();server.close();}
 route('post','/studio/shutdown',async()=>{setTimeout(()=>close().then(()=>process.exit(0)),100);return {status:'STOPPING'};});
 process.on('SIGINT',()=>close().then(()=>process.exit(0)));process.on('SIGTERM',()=>close().then(()=>process.exit(0)));
-call('boot').then(receipt=>{console.log('Studio sessions verified: '+receipt.sessions+'; local startup verification '+receipt.startup_verification_ms.toFixed(0)+' ms');return call('phase',{active:true});}).then(()=>RED.start())
- .then(()=>call('event',{kind:'host.started',value:{node_red:RED.version()},request_id:'host-'+crypto.randomUUID()})).then(()=>server.listen(port,'127.0.0.1',()=>console.log('Anchor Studio ready at http://127.0.0.1:'+port+'/studio; local access is automatic')))
+call('boot').then(async receipt=>{
+ console.log('Studio sessions verified: '+receipt.sessions+'; local startup verification '+receipt.startup_verification_ms.toFixed(0)+' ms');
+ const selected=await call('editor_config');
+ if(selected){
+  const {openInstallation}=require('./editor-installation.cjs');
+  const installation=openInstallation({packageRoot:selected.package_root,editorProfile:selected.editor_profile,catalogRoot:selected.catalog_root,catalogProfile:selected.catalog_profile,expectedDigest:selected.installation_sha256});
+  const owner=require('./editor-local-context.cjs');
+  const context=owner.project({identity:owner.initialize(path.join(nest,'editor-owner.json'),{reviewed:true}),settingsTemplate:installation.catalog.json('public-settings.json'),port});
+  const resident=require('./resident-view.cjs').createResidentView({body:(op,args)=>op==='result'?resultFor(args.request_id):call(op,args),conversation:encounter});
+  editorHost=require('./community-editor.cjs').mountCommunityEditor(app,{express,workflows,installation,context,resident});
+  app.get('/studio/editor-status',(req,res)=>res.json(editorHost.inspection));
+  app.use((req,res,next)=>{
+   if(req.method!=='GET'||/^\/(?:studio|red|flows|appai|types|assets|rest)(?:\/|$)/.test(req.path))return next();
+   res.type('html').send(editorHost.index());
+  });
+ }
+ const nrRequire=require('module').createRequire(require.resolve(process.env.STUDIO_MODULES+'/node-red'));
+ sockets=require('./editor-sockets.cjs').attachEditorSockets({server,redServer,access,WebSocketServer:nrRequire('ws').Server,editorEnabled:()=>!!editorHost});
+ return call('phase',{active:true});
+}).then(()=>RED.start())
+ .then(()=>call('event',{kind:'host.started',value:{node_red:RED.version()},request_id:'host-'+crypto.randomUUID()})).then(()=>server.listen(port,'127.0.0.1',()=>console.log('Anchor Studio ready at http://127.0.0.1:'+port+(editorHost?'/':'/studio')+'; local access is automatic')))
  .catch(()=>{console.error('Studio startup failed; inspect NEST state');body.process.kill();workflows.process.kill();if(mind)mind.process.kill();process.exit(1);});

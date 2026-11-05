@@ -68,6 +68,26 @@ class StudioTests(unittest.TestCase):
             db.execute('UPDATE mind SET frame=?',(json.dumps(frame),))
         with self.assertRaises(ValueError):studio.submit(self.nest,'user-one',{'kind':'reply','reply':'Stale','observation_sha256':None})
 
+    def test_editor_selection_binds_pending_frames_and_checked_observations(self):
+        from unittest.mock import patch
+        # A synthetic binding isolates the encounter consequence from the source
+        # admission tests. Owner configuration itself refuses pending cognition.
+        with patch.object(studio,'_editor_binding',return_value='a'*64):
+            first=studio.conversation(self.nest,'Inspect','user-one','SYNTHETIC_FIXTURE')
+            self.assertEqual(first['editor_configuration_sha256'],'a'*64)
+            checked=studio.submit(self.nest,'user-one',{'kind':'action','capability':'body.status','arguments':{}})
+            self.assertEqual(checked['editor_configuration_sha256'],'a'*64)
+        with patch.object(studio,'_editor_binding',return_value='b'*64):
+            with self.assertRaisesRegex(ValueError,'Stale editor'):
+                studio.submit(self.nest,'user-one',{'kind':'reply','reply':'Stale','observation_sha256':checked['frame']['payload']['observation_sha256']})
+            with self.assertRaisesRegex(ValueError,'Stale editor'):
+                studio.conversation(self.nest,'Inspect','user-one','SYNTHETIC_FIXTURE')
+            with self.assertRaisesRegex(ValueError,'Stale editor'):
+                studio.mind_pending(self.nest)
+        with patch.object(studio,'_editor_binding',return_value='a'*64):
+            result=studio.submit(self.nest,'user-one',{'kind':'reply','reply':'Checked exact reply','observation_sha256':checked['frame']['payload']['observation_sha256']})
+            self.assertEqual(result['reply'],'Checked exact reply')
+
     def test_missing_or_changed_source_binding_fails_closed(self):
         with studio.database(self.nest) as db:db.execute("UPDATE settings SET value=? WHERE key='controller_pin'",(json.dumps('0'*64),))
         with self.assertRaises(ValueError):studio.status(self.nest)

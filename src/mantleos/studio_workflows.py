@@ -115,6 +115,11 @@ class WorkflowStore:
         self.directory = directory.resolve()
         self.path = self.directory/'workflows.sqlite'
 
+    def health(self):
+        """Read-only storage connectivity, not historical or execution certification."""
+        with self._db():pass
+        return {'status':'ok','workflow_execution':'UNAVAILABLE'}
+
     @contextmanager
     def _db(self, write=False):
         for path in (self.directory, self.path):
@@ -321,13 +326,20 @@ def serve(store, input_stream=None, output_stream=None, *, check_source=None):
             if check_source is not None:
                 check_source()
             op, args = envelope['op'], envelope['args']
-            if op == 'list':
+            if op == 'health':
+                c.shape(args,set())
+                result=store.health()
+            elif op == 'list':
                 result = store.list(**args)
             elif op in ('get', 'history'):
                 c.shape(args, {'id'})
                 result = getattr(store, op)(args['id'])
             elif op == 'mutate':
                 result = store.mutate(args, owner=True)
+            elif op == 'inventory':
+                c.shape(args,{'collection'})
+                from .studio_inventory import EditorInventory
+                result=EditorInventory(store.directory.parent).list(args['collection'])
             else:
                 raise ValueError('Unsupported workflow operation')
             reply = {'id': envelope['id'], 'ok': True, 'result': result}

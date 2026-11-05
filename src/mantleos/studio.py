@@ -36,7 +36,22 @@ ADDENDUM = ('Anchor Studio is a fresh Node-RED resident AppAI. Its embodiment is
 
 def controller_pin():
     root=Path(__file__).parent
-    return c.digest({name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in ('studio.py','studio_handlers.py','studio_project.py','studio_workflows.py','studio_auto_mind.py','studio_mind_config.py','studio_mind_budget.py','studio_mind_provider.py','studio_demo.py','limbs.py','journal.py','anchors.py','anchor_design.py','anchor_language.py','effects.py','json_contract.py','transactions.py','primer.py','cartridge.py','kpp/resources/examples/anchor-studio/launcher.cjs','kpp/resources/examples/anchor-studio/json-worker.cjs','kpp/resources/examples/anchor-studio/committed-events.cjs','kpp/resources/examples/anchor-studio/local-access.cjs','kpp/resources/examples/anchor-studio/workspace.html','kpp/resources/examples/anchor-studio/workspace.css','kpp/resources/examples/anchor-studio/workspace.js','kpp/resources/examples/anchor-studio/conditions.cjs','kpp/resources/examples/anchor-studio/palette/nodes.js','kpp/resources/examples/anchor-studio/palette/nodes.html')})
+    names=('studio.py','studio_editor.py','studio_inventory.py','studio_handlers.py','studio_project.py','studio_workflows.py','studio_auto_mind.py','studio_mind_config.py','studio_mind_budget.py','studio_mind_provider.py','studio_demo.py','limbs.py','journal.py','anchors.py','anchor_design.py','anchor_language.py','effects.py','json_contract.py','transactions.py','primer.py','cartridge.py')
+    resources=('launcher.cjs','json-worker.cjs','committed-events.cjs','local-access.cjs','workspace.html','workspace.css','workspace.js','conditions.cjs','palette/nodes.js','palette/nodes.html',
+               'editor-assets.cjs','editor-catalog.cjs','editor-installation.cjs','editor-local-context.cjs','editor-sockets.cjs','community-editor.cjs','workflow-checksum.cjs','resident-view.cjs','resident-panel.js')
+    names+=tuple('kpp/resources/examples/anchor-studio/'+name for name in resources)
+    return c.digest({name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in names})
+
+
+def _editor_binding(db):
+    from .studio_editor import from_database
+    selected=from_database(db)
+    return selected['sha256'] if selected else None
+
+
+def check_preparation(db,wrapper):
+    if wrapper.get('controller_pin')!=controller_pin():raise ValueError('Stale Studio preparation')
+    if wrapper.get('editor_configuration_sha256')!=_editor_binding(db):raise ValueError('Stale editor configuration preparation')
 
 
 def rebind_source(nest,*,reviewed=False):
@@ -205,7 +220,8 @@ def conversation(nest,user,request_id,model_label):
             if old[1]=='COMMITTED':return committed_result(nest,request_id)
             if old[1]!='AWAITING_MIND':raise ValueError('Conversation requires review')
             if _setting(db,'phase')!='ACTIVE':return {'status':'STASIS'}
-            return json.loads(old[2])
+            prior=json.loads(old[2]);check_preparation(db,prior)
+            return prior
         if _setting(db,'phase')!='ACTIVE':raise ValueError('Studio is in stasis')
         if db.execute("SELECT 1 FROM mind WHERE phase='AWAITING_MIND'").fetchone():raise ValueError('One MIND request is already pending')
         with nullcontext(_session(Path(nest)/'prime.engram')) as mind:
@@ -231,7 +247,7 @@ def conversation(nest,user,request_id,model_label):
             size=len(c.canonical(projection).encode('utf8'))
             if size<=available:observations.append(projection);available-=size
             else:omitted+=1
-        wrapper={'frame':frame,'studio_addendum':ADDENDUM,'controller_pin':controller_pin(),'limb_observations':observations,'limb_observations_omitted':omitted,'prepared_at':time.time(),'model_label':model_label,'status':'AWAITING_MIND'}
+        wrapper={'frame':frame,'studio_addendum':ADDENDUM,'controller_pin':controller_pin(),'editor_configuration_sha256':_editor_binding(db),'limb_observations':observations,'limb_observations_omitted':omitted,'prepared_at':time.time(),'model_label':model_label,'status':'AWAITING_MIND'}
         if (Path(nest)/'mind-route.json').exists():
             from .studio_auto_mind import _load
             route,_=_load(nest)
@@ -246,7 +262,7 @@ def submit(nest,request_id,proposal):
         item=db.execute('SELECT phase,reply,frame FROM mind WHERE id=?',(request_id,)).fetchone()
         if not item:raise ValueError('Unknown conversation')
         if item[0]=='NEEDS_REVIEW':raise ValueError('Conversation requires recovery review')
-        if item[0]=='AWAITING_MIND' and json.loads(item[2]).get('controller_pin')!=controller_pin():raise ValueError('Stale Studio preparation')
+        if item[0]=='AWAITING_MIND':check_preparation(db,json.loads(item[2]))
         if _setting(db,'phase')!='ACTIVE':raise ValueError('Studio is in stasis')
         prior_wrapper=json.loads(item[2])
         if item[0]=='AWAITING_MIND' and 'mind_route_revision' in prior_wrapper:
@@ -256,7 +272,7 @@ def submit(nest,request_id,proposal):
             result=mind.submit(request_id,proposal,broker=lambda authority,name: (authority=='release' and name=='publication.release') or (authority=='read' and name in ('body.status','engram.query')))
         reply=result.get('reply')
         if reply is None:
-            wrapper={'frame':result,'studio_addendum':ADDENDUM,'controller_pin':controller_pin(),'status':'AWAITING_MIND'}
+            wrapper={'frame':result,'studio_addendum':ADDENDUM,'controller_pin':controller_pin(),'editor_configuration_sha256':prior_wrapper.get('editor_configuration_sha256'),'status':'AWAITING_MIND'}
             if 'mind_route_revision' in prior_wrapper:
                 wrapper['mind_route_revision']=prior_wrapper['mind_route_revision']
             db.execute('UPDATE mind SET frame=? WHERE id=?',(c.canonical(wrapper),request_id))
@@ -277,6 +293,10 @@ def pulse(nest):
 
 def dispatch(nest,request):
     op=request.get('op');args=request.get('args',{})
+    if op=='editor_config':
+        from .studio_editor import private_config
+        c.shape(args,set())
+        return private_config(nest)  # Trusted launcher pipe; never a browser route.
     allowed={'status':status,'boot':boot,'phase':phase,'event':event,'intention':intention,
              'conversation':conversation,'submit':submit,'mind_pending':mind_pending,'pulse':pulse,'work':work,
              'publish_intentions':publish_intentions,'result':committed_result,'project_get':project_get,'project_set':project_set,'flow_draft':flow_draft,'kpp_prepare':kpp_prepare,
@@ -288,7 +308,8 @@ def dispatch(nest,request):
 def mind_pending(nest):
     """Controller scheduling projection; no private cognition context."""
     with database(nest) as db:
-        row=db.execute("SELECT id FROM mind WHERE phase='AWAITING_MIND' ORDER BY rowid LIMIT 1").fetchone()
+        row=db.execute("SELECT id,frame FROM mind WHERE phase='AWAITING_MIND' ORDER BY rowid LIMIT 1").fetchone()
+        if row:check_preparation(db,c.loads(row[1]))
         return {'request_id':row[0]} if row else {'status':'IDLE'}
 
 
@@ -411,9 +432,9 @@ def main(argv=None):
     if hasattr(sys.stdout,'reconfigure'):sys.stdout.reconfigure(encoding='utf-8')
     parser=argparse.ArgumentParser(prog='mantleos studio')
     sub=parser.add_subparsers(dest='command',required=True)
-    for command in ('init','status','stasis','activate','serve','workflow-serve','mind-serve','mind-configure','mind-status','mind-next','mind-submit','import','export','run','migrate-limbs','rebind-source','recover-mind'):
+    for command in ('init','status','stasis','activate','serve','workflow-serve','mind-serve','mind-configure','mind-status','mind-next','mind-submit','import','export','run','migrate-limbs','rebind-source','recover-mind','editor-configure','editor-status','editor-disable'):
         p=sub.add_parser(command);p.add_argument('--nest',type=Path,required=True)
-        if command in ('rebind-source','recover-mind'):p.add_argument('--reviewed',action='store_true')
+        if command in ('rebind-source','recover-mind','editor-disable'):p.add_argument('--reviewed',action='store_true')
         if command=='recover-mind':p.add_argument('--request-id',required=True)
         if command=='init':p.add_argument('--founding',type=Path,required=True)
         if command=='mind-configure':
@@ -421,12 +442,29 @@ def main(argv=None):
             p.add_argument('--catalog',type=Path,required=True)
             p.add_argument('--accounting-file',type=Path)
             p.add_argument('--reviewed',action='store_true')
+        if command=='editor-configure':
+            p.add_argument('--node',type=Path,required=True)
+            p.add_argument('--package-root',type=Path,required=True)
+            p.add_argument('--editor-profile',type=Path,required=True)
+            p.add_argument('--catalog-root',type=Path,required=True)
+            p.add_argument('--catalog-profile',type=Path,required=True)
+            p.add_argument('--reviewed',action='store_true')
         if command=='run':
             p.add_argument('--node',type=Path,required=True);p.add_argument('--modules',type=Path,required=True);p.add_argument('--port',type=int,default=18880)
         if command=='mind-submit':
             p.add_argument('--request-id',required=True);p.add_argument('--proposal',type=Path,required=True)
         if command in ('import','export'):p.add_argument('--file',type=Path,required=True)
     args=parser.parse_args(argv)
+    if args.command in ('editor-configure','editor-status','editor-disable'):
+        from . import studio_editor
+        if args.command=='editor-configure':
+            result=studio_editor.configure(args.nest,node=args.node,package_root=args.package_root,
+                editor_profile=args.editor_profile,catalog_root=args.catalog_root,catalog_profile=args.catalog_profile,
+                reviewed=args.reviewed)
+        elif args.command=='editor-disable':result=studio_editor.disable(args.nest,reviewed=args.reviewed)
+        else:result=studio_editor.public_status(args.nest)
+        print(json.dumps(result,ensure_ascii=False,indent=2))
+        return 0
     if args.command in ('mind-serve','mind-configure','mind-status'):
         from . import studio_auto_mind
         if args.command=='mind-serve':return studio_auto_mind.serve(args.nest)

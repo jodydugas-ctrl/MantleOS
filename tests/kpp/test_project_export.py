@@ -36,7 +36,12 @@ class ProjectExportTests(unittest.TestCase):
             standalone.export(second, first)
             self.assertEqual(exporter.check(second, ROOT)['result'], 'PASS')
             refresh = load(first / 'tools/refresh_release.py', 'standalone_refresh')
+            # Git worktrees use a metadata pointer FILE instead of a directory.
+            # It must not become shipped source or break exact inventory checks.
+            (first / '.git').write_text('gitdir: ../synthetic-metadata\n',encoding='utf8')
             self.assertEqual(refresh.refresh(first)['result'], 'PASS')
+            self.assertEqual(standalone.check(first,first)['result'],'PASS')
+            self.assertNotIn('.git',standalone.source_map(first))
 
     def test_refresh_refuses_stale_generated_views_and_unrepresented_source(self):
         exporter = load(ROOT / 'tools/export_kpp.py', 'project_export_drift')

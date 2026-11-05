@@ -84,3 +84,35 @@ strict-error behavior. That experiment does not qualify general workflow
 execution, the editor's Execute button, complete source closure or production
 authority integration. Those obligations remain open in the full Community bake;
 private prototypes, resident data and conversations are excluded from this release.
+
+## Optional same-resident editor host
+
+The reviewed host selection serves the owner-provisioned editor over the same
+Studio Body and durable workflow worker. Its AppAI panel uses the resident's
+verified metadata and exact committed replies. Node-RED remains available at
+`/red/`; `/studio` retains the design and KPP surface. This installs no n8n backend
+or automatic model route. Configuration and withdrawal require a stopped
+controller, stasis, no outstanding cognition and explicit owner review.
+
+Real browser checks exposed initialization failures that protocol-only fixtures
+had missed. The corrected host reads a real local descriptor inventory, preserves
+the structured Community project quota, serves source-checked backend health,
+and admits the client's inert workflow-presence notifications. Unknown execution,
+secret-management and write-authority messages remain unavailable. Descriptor
+registration never grants credential use or copies the MIND's provider keys.
+
+The isolated synthetic browser created a workflow through the normal nested menu,
+added a manual trigger, saved with Ctrl+S and restored it on reload. A real native
+Node-RED flow continued through stasis, editor selection, withdrawal and restart.
+An injected storage-schema failure returned unhealthy status while that native
+flow remained available. These are scoped host and editing observations; full
+workflow execution and complete Community behavior remain mandatory unfinished
+work. A preceding source candidate separately demonstrated one live ordinary
+resident exchange with its complete PRIMER and committed release. Later source
+revisions do not inherit that live qualification automatically.
+
+The standalone exporter also recognizes Git's worktree metadata file without
+shipping it; other unexpected source still fails inventory checks. The small
+matching MantleOS-owned export-tool changes were reviewed as promotion
+dependencies, retaining their existing ownership. Private founding material,
+Engrams, credentials and conversations remain outside both repositories.

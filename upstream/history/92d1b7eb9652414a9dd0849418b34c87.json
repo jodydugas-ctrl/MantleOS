@@ -1,0 +1,32 @@
+{
+  "at": "2026-11-05T01:18:56+00:00",
+  "authority": "Explicit local review",
+  "checks": [
+    {
+      "exit_code": 0,
+      "log_sha256": "99222e32df1b6187011322fbbfb6ab3ec13ae31848cbc62b791e460e58d740d8",
+      "name": "combined-suite",
+      "result": "PASS"
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "db04eeae12b7b8e2d1e8e9116eff27fbd3e8ead39123d0bb3f21acb7a0b999dd",
+      "name": "kpp-doctor",
+      "result": "PASS"
+    }
+  ],
+  "event": "VALIDATED_UPDATE_APPLIED",
+  "id": "92d1b7eb9652414a9dd0849418b34c87",
+  "plan_sha256": "5d4645d925c4e1445e03e91baba40a47d92a7f9c698c913756e123a02921bbdd",
+  "previous_selection": "79e605815147c2925aba365c64c99520689d5bd361acd1b18c8746eb8b0533c0",
+  "schema": "mantle.kpp-update-event/1",
+  "selected_snapshot": {
+    "base_commit": "2275c140d7a7f8de34641336ca5cf1235dc2a833",
+    "dirty": false,
+    "official_url": "https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol",
+    "published_revision_verified": false,
+    "snapshot_kind": "local-committed-snapshot",
+    "version": "1.1.0a5"
+  },
+  "selection_digest": "5591725a7f040936e8fc86d65d0a790a947bc2e29aef6c2078719ed5ae340ad5"
+}
