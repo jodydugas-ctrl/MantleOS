@@ -161,8 +161,8 @@ The workflow's saved `executionTimeout` accepts 1 through 20 seconds, or
 deadline when the graph starts. A deadline reached during Wait commits a
 canceled run with the manual cancellation error observed on n8n 2.46.4
 and the completed node outputs. The separate 30-second child limit also
-covers runtime startup. Persistent waits, other Wait modes, and disabling
-manual execution history remain outside this execution profile.
+covers runtime startup. Persistent waits and other Wait modes remain
+outside this execution profile.
 
 The native editor runs the committed saved revision. Studio binds each
 execution to that graph and records node inputs through their source links,
@@ -194,6 +194,16 @@ start order even when a newer run arrives. Summary pages omit node output,
 which remains available through the version-checked execution detail.
 Annotation, metadata and other unqualified filters remain explicit errors.
 
+Setting `saveManualExecutions` to false keeps a run visible while it is
+active and removes its terminal result from history, detail, and executed
+version lists. The Body records a source-bound terminal receipt with an
+output digest and releases node output to the captured editor connection
+only after commit. The output cannot be retrieved on reconnect. The saved
+version determines retention even if the setting changes during a run.
+The first completed run using this setting transactionally upgrades the
+workflow store. Existing retained results remain readable. Earlier builds
+reject that upgraded store.
+
 ## Initialization and connection contracts
 
 The selected editor initializes a separate owner-local descriptor index through
@@ -211,6 +221,22 @@ make it usable; the MIND's separately configured provider keys are not read or
 copied into this index. Full credential management and use remain unfinished obligations.
 The index is application metadata, not Engram experience, a secret vault or a
 second requirements/acceptance database. It stays outside saved Studio projects.
+
+On Windows, add `--credential-editor` to the reviewed editor configuration
+while Studio is stopped in stasis. This enables local create, read, masked
+edit and delete for literal HTTP Basic, Digest, Bearer, Header and Query
+credentials. The Body seals the credential data with Windows DPAPI in the
+owner-local `editor-credentials.sqlite`, binding it to the Studio identity,
+credential and revision. The vault stays outside saved Studio projects.
+Only the authenticated local editor receives the masked edit projection.
+List responses omit credential data. Opening an edit pins its revision to
+the editor tab. Reopen after a revision conflict or reconnect.
+
+This vault requires Windows DPAPI. It supplies protection against disclosure
+from copied storage under a different Windows user. Same-user process
+isolation, Linux storage, credential testing, OAuth, sharing, and workflow
+use are separate qualifications. Disable the editor grant by reconfiguring
+without the flag in stasis. Vault data remains available for owner recovery.
 
 The pinned Community project setting is a structured quota,
 `enterprise.projects.team.limit = 0`; flattening it into a Boolean breaks the

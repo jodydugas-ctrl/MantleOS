@@ -107,6 +107,47 @@ class WorkflowTests(unittest.TestCase):
             with self.assertRaises(Conflict):
                 store.execution_start(self.execution_request(other), owner=True, source_pin='1'*64)
 
+    def test_manual_history_off_keeps_only_a_receipt_after_live_execution(self):
+        with tempfile.TemporaryDirectory() as td:
+            store = WorkflowStore(td)
+            saved = self.create(store, {**workflow(), 'settings': {'saveManualExecutions': False}})
+            request = self.execution_request(saved)
+            run = store.execution_start(request, owner=True, source_pin='1'*64)
+            self.assertEqual(store.execution_page(query={})['data'][0]['status'], 'running')
+            self.assertEqual(store.execution_get(run['id'])['status'], 'running')
+            # Retention comes from the pinned run version, even if the next draft
+            # enables history before the current run finishes.
+            current = self.mutate(store, 'update', saved,
+                                  value={**saved, 'settings': {'saveManualExecutions': True}})
+            output = {'resultData': {'runData': {'Input': [{'json': 'transient-fixture'}]}}}
+            finish = {'claim': run['claim'], 'status': 'success', 'result': output,
+                      'source_pin': '1'*64, 'owner': True}
+            committed = store.execution_finish(run['id'], **finish)
+            self.assertTrue(committed['discarded'])
+            self.assertEqual(committed['data'], output)
+            reopened = WorkflowStore(td)
+            self.assertEqual(reopened.execution_finish(run['id'], **finish), committed)
+            with self.assertRaises(Conflict):
+                reopened.execution_finish(run['id'], **{**finish, 'result': {}})
+            self.assertNotIn('claim', reopened.execution_start(request, owner=True, source_pin='1'*64))
+            with self.assertRaises(KeyError):
+                reopened.execution_get(run['id'])
+            self.assertNotIn('data', reopened.execution_get(run['id'], stop_state=True))
+            self.assertEqual(reopened.execution_page(query={})['data'], [])
+            self.assertEqual(reopened.execution_page(query={'status': ['success']})['count'], 0)
+            self.assertEqual(reopened.execution_list()['count'], 0)
+            self.assertEqual(reopened.execution_versions(saved['id']), [])
+            with closing(sqlite3.connect(store.path)) as db:
+                content, = db.execute('SELECT result FROM workflow_executions').fetchone()
+                self.assertEqual(set(json.loads(content)), {'discarded_result_sha256'})
+                self.assertNotIn('transient-fixture', '\n'.join(db.iterdump()))
+            later = reopened.execution_start({**self.execution_request(current), 'request_id': 'later-run'},
+                                             owner=True, source_pin='1'*64)
+            retained = reopened.execution_finish(later['id'], **{**finish, 'claim': later['claim']})
+            self.assertNotIn('discarded', retained)
+            self.assertEqual(reopened.execution_get(later['id']), retained)
+            self.assertEqual(reopened.execution_page(query={})['count'], 1)
+
     def test_execution_worker_requires_trusted_source_and_checks_observation_integrity(self):
         with tempfile.TemporaryDirectory() as td:
             store = WorkflowStore(td)

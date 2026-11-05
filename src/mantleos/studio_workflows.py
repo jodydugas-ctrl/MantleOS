@@ -21,6 +21,7 @@ from . import json_contract as c
 
 APPLICATION = 0x41575346
 VERSION = 1
+HISTORY_POLICY_VERSION = 2
 MAX_BYTES = 16 * 1024 * 1024
 MAX_EXECUTION_RESULT = 4 * 1024 * 1024
 TERMINAL_EXECUTIONS = {'success', 'error', 'canceled', 'needs_review'}
@@ -63,6 +64,14 @@ def _execution_table(db):
     return db is not None and db.execute(
         "SELECT 1 FROM sqlite_master WHERE type='table' AND name='workflow_executions'"
     ).fetchone() is not None
+
+
+def _has_history_policy(db):
+    return db.execute('PRAGMA user_version').fetchone()[0] == HISTORY_POLICY_VERSION
+
+
+def _retained_condition(db, prefix=''):
+    return prefix+'discarded=0' if _has_history_policy(db) else '1'
 
 
 def _execution_result_digest(row, status, stopped, result):
@@ -202,7 +211,8 @@ class WorkflowStore:
                 db.commit()
                 db.execute('BEGIN IMMEDIATE')
             else:
-                c.require(app == APPLICATION and version == VERSION, 'Unsupported workflow store; explicit recovery/migration required')
+                c.require(app == APPLICATION and version in (VERSION, HISTORY_POLICY_VERSION),
+                          'Unsupported workflow store; explicit recovery/migration required')
             yield db
             db.commit()
         except BaseException:
@@ -272,6 +282,9 @@ class WorkflowStore:
             c.require(_digest(graph) == row['graph_sha256'], 'Execution graph binding failed')
             result = json.loads(row['result']) if row['result'] is not None else None
             if has_result:
+                if 'discarded' in row.keys():
+                    c.require(bool(row['discarded']) == (graph['settings'].get('saveManualExecutions') is False),
+                              'Execution retention binding failed')
                 c.require(_execution_result_digest(row, status, row['stopped'], result) == row['result_sha256'],
                           'Execution result integrity failed')
             value.update(workflowData={**graph, 'id': row['workflow'], 'versionId': row['version']},
@@ -343,26 +356,45 @@ class WorkflowStore:
             raise PermissionError('Independent owner execution authority required')
         c.require(type(status) is str and status in TERMINAL_EXECUTIONS, 'Invalid terminal execution status')
         c.require(type(result) is dict, 'Execution observation must be a JSON object')
-        content = _encoded(result, MAX_EXECUTION_RESULT)
+        observation = _encoded(result, MAX_EXECUTION_RESULT)
         with self._db(write=True) as db:
             row = self._execution_row(db, run_id)
             if (row['claim'], row['source_pin']) != (claim, source_pin):
                 raise PermissionError('Execution claim or source does not match')
-            self._execution_view(db, row)
+            prior = self._execution_view(db, row, detail=True)
+            discard = prior['workflowData']['settings'].get('saveManualExecutions') is False
+            stored = {'discarded_result_sha256': hashlib.sha256(observation.encode('utf-8')).hexdigest()} if discard else result
+            content = _encoded(stored) if discard else observation
             stopped = _now() if row['status'] == 'running' else row['stopped']
-            digest = _execution_result_digest(row, status, stopped, result)
+            digest = _execution_result_digest(row, status, stopped, stored)
             if row['status'] == 'running':
-                db.execute('UPDATE workflow_executions SET status=?,stopped=?,result=?,result_sha256=? WHERE id=?',
-                           (status, stopped, content, digest, run_id))
+                if discard and not _has_history_policy(db):
+                    db.execute('ALTER TABLE workflow_executions ADD COLUMN discarded INTEGER NOT NULL DEFAULT 0 CHECK(discarded IN (0,1))')
+                    db.execute('PRAGMA user_version='+str(HISTORY_POLICY_VERSION))
+                if discard:
+                    db.execute('UPDATE workflow_executions SET status=?,stopped=?,result=?,result_sha256=?,discarded=1 WHERE id=?',
+                               (status, stopped, content, digest, run_id))
+                else:
+                    db.execute('UPDATE workflow_executions SET status=?,stopped=?,result=?,result_sha256=? WHERE id=?',
+                               (status, stopped, content, digest, run_id))
             elif (row['status'], row['result_sha256']) != (status, digest):
                 raise Conflict('Committed execution result changed')
             value = self._execution_view(db, self._execution_row(db, run_id), detail=True)
+            if discard:
+                value.update(discarded=True, data=result)
             _encoded(value, MAX_BYTES + 32768)
             return value
 
-    def execution_get(self, run_id):
+    def execution_get(self, run_id, *, stop_state=False):
+        c.require(type(stop_state) is bool, 'Invalid execution detail mode')
         with self._db() as db:
-            return self._execution_view(db, self._execution_row(db, run_id), detail=True)
+            row = self._execution_row(db, run_id)
+            if _has_history_policy(db) and row['discarded'] and not stop_state:
+                raise KeyError('Execution not found')
+            value = self._execution_view(db, row, detail=True)
+            if stop_state:
+                del value['data'], value['workflowData']
+            return value
 
     def execution_list(self, *, workflow_id=None, limit=50, offset=0):
         c.require(type(limit) is int and 1 <= limit <= 200 and type(offset) is int and offset >= 0,
@@ -372,7 +404,7 @@ class WorkflowStore:
                 self._row(db, workflow_id)
             if not _execution_table(db):
                 return {'data': [], 'count': 0}
-            where = ' WHERE version IS NOT NULL'
+            where = ' WHERE version IS NOT NULL AND '+_retained_condition(db)
             values = ()
             if workflow_id is not None:
                 where += ' AND workflow=?'
@@ -427,6 +459,7 @@ class WorkflowStore:
         with self._db() as db:
             if not _execution_table(db):
                 return {'data': [], 'count': 0, 'next_cursor': None}
+            conditions.insert(0, _retained_condition(db))
             rows = fetch(db, conditions, values, after=position)
             count = db.execute('SELECT count(*) FROM workflow_executions WHERE ' +
                                ' AND '.join(conditions), values).fetchone()[0]
@@ -456,9 +489,10 @@ class WorkflowStore:
         with self._db() as db:
             if not _execution_table(db):
                 return []
+            retained = _retained_condition(db, 'e.')
             rows = db.execute("""SELECT v.id,v.created FROM versions v WHERE v.workflow=?
-                AND EXISTS(SELECT 1 FROM workflow_executions e WHERE e.workflow=v.workflow AND e.version=v.id)
-                ORDER BY v.created DESC,v.rowid DESC""", (workflow_id,))
+                AND EXISTS(SELECT 1 FROM workflow_executions e WHERE e.workflow=v.workflow AND e.version=v.id
+                AND """+retained+""") ORDER BY v.created DESC,v.rowid DESC""", (workflow_id,))
             return [{'versionId': row['id'], 'createdAt': row['created'], 'name': None} for row in rows]
 
     def mutate(self, request, *, owner=False):
@@ -559,7 +593,8 @@ class WorkflowStore:
             return result
 
 
-def serve(store, input_stream=None, output_stream=None, *, check_source=None, execution_source=None):
+def serve(store, input_stream=None, output_stream=None, *, check_source=None, execution_source=None,
+          credential_store=None):
     """Trusted foreground controller pipe, never a network/model RPC listener.
 
     Operational documents have a separate budget from cognition frames. The
@@ -596,6 +631,14 @@ def serve(store, input_stream=None, output_stream=None, *, check_source=None, ex
                 c.shape(args,{'collection'})
                 from .studio_inventory import EditorInventory
                 result=EditorInventory(store.directory.parent).list(args['collection'])
+            elif op in ('credential_list', 'credential_get', 'credential_save', 'credential_remove') and credential_store:
+                keys = {'credential_list': set(), 'credential_get': {'identifier', 'include_data'},
+                        'credential_save': {'value', 'identifier', 'revision'},
+                        'credential_remove': {'identifier', 'revision'}}[op]
+                c.shape(args, keys | {'configuration'})
+                with credential_store(args['configuration']) as vault:
+                    result = getattr(vault, op.removeprefix('credential_'))(
+                        **{key: args[key] for key in keys}, reviewed=True)
             elif op == 'execution_start' and execution_source:
                 result = store.execution_start(args, source_pin=execution_source, owner=True)
             elif op == 'execution_finish' and execution_source:
@@ -604,6 +647,9 @@ def serve(store, input_stream=None, output_stream=None, *, check_source=None, ex
             elif op == 'execution_get' and execution_source:
                 c.shape(args, {'run_id'})
                 result = store.execution_get(**args)
+            elif op == 'execution_stop_state' and execution_source:
+                c.shape(args, {'run_id'})
+                result = store.execution_get(**args, stop_state=True)
             elif op == 'execution_list' and execution_source:
                 result = store.execution_list(**args)
             elif op == 'execution_page' and execution_source:

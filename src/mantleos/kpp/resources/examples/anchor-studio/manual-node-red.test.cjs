@@ -55,8 +55,10 @@ test('Wait and execution timeout require the reviewed bounded settings',async()=
   await assert.rejects(runner.admit({workflow:saved,selection:full}),/workflow settings/);
  }
  const saved=waitWorkflow();
- saved.settings.saveManualExecutions=false;
+ saved.settings.saveManualExecutions='unsupported';
  await assert.rejects(runner.admit({workflow:saved,selection:full}),/workflow settings/);
+ saved.settings.saveManualExecutions=false;
+ assert.equal(typeof await runner.admit({workflow:saved,selection:full}),'function');
  saved.settings.saveManualExecutions='DEFAULT';
  assert.equal(typeof await runner.admit({workflow:saved,selection:full}),'function');
 });

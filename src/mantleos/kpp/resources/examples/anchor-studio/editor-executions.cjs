@@ -44,6 +44,24 @@ function presentation(run,includeData){
   ...(includeData?{workflowData:{...workflowData,active:false},data:data===null?null:encodeRunData(data)}:{})};
 }
 
+function pushTransientNodes(push,executionId,runData){
+ const tasks=Object.entries(runData??{}).flatMap(([name,runs])=>runs.map(run=>({name,run})));
+ tasks.sort((left,right)=>left.run.executionIndex-right.run.executionIndex);
+ let sequenceNumber=0;
+ for(const {name:nodeName,run} of tasks){
+  const {data:output,...task}=run;
+  const {executionIndex,source,startTime}=task;
+  const fields={executionId,nodeName};
+  const itemCountByConnectionType=output?.main?{main:output.main.map(items=>items?.length??0)}:{};
+  const hints=[];
+  push({type:'nodeExecuteBefore',data:{...fields,sequenceNumber:sequenceNumber++,
+   data:{executionIndex,hints,source,startTime}}});
+  push({type:'nodeExecuteAfter',data:{...fields,sequenceNumber:sequenceNumber++,itemCountByConnectionType,
+   data:{...task,hints}}});
+  push({type:'nodeExecuteAfterData',data:{...fields,itemCountByConnectionType,data:{...run,hints}}});
+ }
+}
+
 function mountExecutionRoutes(route,{workflows,runtime,capture,projectId}){
  if(typeof runtime?.admit!=='function'||typeof capture!=='function')throw Error('TRUSTED_EXECUTION_HOST_REQUIRED');
  const pending=new Set();
@@ -67,8 +85,10 @@ function mountExecutionRoutes(route,{workflows,runtime,capture,projectId}){
   const committed=await workflows.call('execution_finish',{run_id:executionId,claim,
    status:observation.status,result:observation.data});
   if(committed.id!==executionId||committed.workflowId!==workflowId||
-     committed.workflowVersionId!==started.workflowVersionId||committed.status!==observation.status)
+     committed.workflowVersionId!==started.workflowVersionId||committed.status!==observation.status||
+     (committed.discarded===true)!==(workflowData.settings?.saveManualExecutions===false))
    throw Error('UNVERIFIED_EXECUTION_COMMIT');
+  if(committed.discarded)pushTransientNodes(push,executionId,committed.data.resultData?.runData);
   push({type:'executionFinished',data:{executionId,workflowId,status:presentation(committed,false).status}});
  }
  route('post','/rest/workflows/:id/run',async req=>{
@@ -102,7 +122,7 @@ function mountExecutionRoutes(route,{workflows,runtime,capture,projectId}){
      typeof req.body!=='object'||Object.keys(req.body).length))throw Error('Unsupported execution: stop payload');
   const live=active.get(req.params.id);
   if(live){live.controller.abort();await live.lifecycle;}
-  const run=await workflows.call('execution_get',{run_id:req.params.id});
+  const run=await workflows.call('execution_stop_state',{run_id:req.params.id});
   if(run.status!=='canceled'){
    if(run.status==='running'||run.status==='needs_review')throw Error('Conflict: execution stop requires review');
    throw Error('Conflict: execution already finished');
@@ -110,8 +130,13 @@ function mountExecutionRoutes(route,{workflows,runtime,capture,projectId}){
   return {data:{mode:run.mode,startedAt:run.startedAt,stoppedAt:run.stoppedAt,finished:false,status:'canceled'}};
  });
  route('get','/rest/executions/:id',async req=>{
-  const run=await workflows.call('execution_get',{run_id:req.params.id});
-  return {data:presentation(run,req.query.includeData!=='false')};
+  try{
+   const run=await workflows.call('execution_get',{run_id:req.params.id});
+   return {data:presentation(run,req.query.includeData!=='false')};
+  }catch(error){
+   if(error.message==='KeyError: \'Execution not found\'')return {};
+   throw error;
+  }
  });
  route('get','/rest/executions/versions/:id',async req=>({
   data:await workflows.call('execution_versions',{workflow_id:req.params.id}),

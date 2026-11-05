@@ -6,6 +6,7 @@ function attachEditorSockets({server,redServer,access,WebSocketServer,editorEnab
  if(!server||!redServer||typeof access?.upgrade!=='function'||typeof WebSocketServer!=='function'||typeof editorEnabled!=='function')throw Error('TRUSTED_SOCKET_HOST_REQUIRED');
  const pushes=new WebSocketServer({noServer:true,maxPayload:65536});
  const byRef=new Map();
+ const senders=new WeakMap();
  function upgrade(req,socket,head){
   access.upgrade(req,socket);
   if(socket.destroyed)return;
@@ -43,12 +44,15 @@ function attachEditorSockets({server,redServer,access,WebSocketServer,editorEnab
    if(ws?.readyState!==1)return null;
    // A run owns the connection captured at admission. Reuse of the same
    // reference after disconnect cannot redirect an earlier execution's data.
-   return frame=>{
+   if(senders.has(ws))return senders.get(ws);
+   const send=frame=>{
     if(ws.readyState!==1||ws.bufferedAmount>1024*1024)return false;
     const encoded=JSON.stringify(frame);
     if(Buffer.byteLength(encoded)>1024*1024)return false;
     try{ws.send(encoded);return true;}catch{return false;}
    };
+   senders.set(ws,send);
+   return send;
   },
   close(){server.off('upgrade',upgrade);byRef.clear();for(const ws of pushes.clients)ws.terminate();pushes.close();}
  });

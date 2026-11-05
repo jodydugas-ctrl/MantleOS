@@ -33,10 +33,11 @@ function initialize(file,{reviewed=false}={}){
  try{fs.writeFileSync(fd,JSON.stringify(value,null,2)+'\n');fs.fsyncSync(fd);}finally{fs.closeSync(fd);}
  return validate(value);
 }
-function project({identity,settingsTemplate,port}){
+function project({identity,settingsTemplate,port,credentialEditor=false}){
  identity=validate(structuredClone(identity));
  if(!Number.isInteger(port)||port<1024||port>65535)throw Error('INVALID_LOCAL_PORT');
  const scopes=[...SCOPES],at=identity.createdAt;
+ if(credentialEditor)scopes.push(...require('./editor-credentials.cjs').SCOPES);
  const user={kind:'human',createdAt:at,id:identity.userId,email:'owner@localhost.invalid',firstName:'Local',lastName:'Studio',
   personalizationAnswers:null,settings:{userActivated:true},disabled:false,mfaEnabled:false,lastActiveAt:at,isPending:false,
   role:'global:owner',signInType:'email',isOwner:true,featureFlags:{},featureFlagPayloads:{},globalScopes:scopes,mfaAuthenticated:false};
@@ -67,6 +68,7 @@ function project({identity,settingsTemplate,port}){
  const simple=Object.fromEntries(Object.entries(personal).filter(([key])=>!['projectRelations','scopes','rolesManaged'].includes(key)));
  return {user,personal,projects:[simple],myProjects:[{...simple,role:'project:personalOwner',scopes}],projectCount:{personal:1,team:0},
   roles:{global:[role('global:owner','global')],project:[role('project:personalOwner','project')],credential:[],workflow:[]},settings,
-  capabilities:{status:'BUILDING_NOT_ACCEPTED',supported:['workflow-drafts','resident-body-view'],unavailable:['workflow-execution','credential-management','settings-mutation'],authority:'NONE'}};
+  capabilities:{status:'BUILDING_NOT_ACCEPTED',supported:['workflow-drafts','resident-body-view',...(credentialEditor?['credential-management']:[])],
+   unavailable:['workflow-execution',...(credentialEditor?[]:['credential-management']),'credential-use','settings-mutation'],authority:'NONE'}};
 }
 module.exports={initialize,read,project,SCOPES};

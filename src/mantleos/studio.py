@@ -36,9 +36,9 @@ ADDENDUM = ('Anchor Studio is a fresh Node-RED resident AppAI. Its embodiment is
 
 def controller_pin():
     root=Path(__file__).parent
-    names=('studio.py','studio_editor.py','studio_inventory.py','studio_handlers.py','studio_project.py','studio_workflows.py','studio_auto_mind.py','studio_mind_config.py','studio_mind_budget.py','studio_mind_provider.py','studio_demo.py','limbs.py','journal.py','anchors.py','anchor_design.py','anchor_language.py','effects.py','json_contract.py','transactions.py','primer.py','cartridge.py')
+    names=('studio.py','studio_editor.py','studio_inventory.py','studio_credentials.py','storage.py','studio_handlers.py','studio_project.py','studio_workflows.py','studio_auto_mind.py','studio_mind_config.py','studio_mind_budget.py','studio_mind_provider.py','studio_demo.py','limbs.py','journal.py','anchors.py','anchor_design.py','anchor_language.py','effects.py','json_contract.py','transactions.py','primer.py','cartridge.py')
     resources=('launcher.cjs','json-worker.cjs','committed-events.cjs','local-access.cjs','workspace.html','workspace.css','workspace.js','conditions.cjs','palette/nodes.js','palette/nodes.html',
-               'editor-assets.cjs','editor-catalog.cjs','editor-installation.cjs','editor-local-context.cjs','editor-sockets.cjs','community-editor.cjs','editor-executions.cjs','manual-node-red.cjs','workflow-checksum.cjs','resident-view.cjs','resident-panel.js')
+               'editor-assets.cjs','editor-catalog.cjs','editor-installation.cjs','editor-local-context.cjs','editor-sockets.cjs','community-editor.cjs','editor-credentials.cjs','editor-executions.cjs','manual-node-red.cjs','workflow-checksum.cjs','resident-view.cjs','resident-panel.js')
     names+=tuple('kpp/resources/examples/anchor-studio/'+name for name in resources)
     return c.digest({name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in names})
 
@@ -458,6 +458,7 @@ def main(argv=None):
             p.add_argument('--catalog-root',type=Path,required=True)
             p.add_argument('--catalog-profile',type=Path,required=True)
             p.add_argument('--manual-execution',action='store_true')
+            p.add_argument('--credential-editor',action='store_true')
             p.add_argument('--reviewed',action='store_true')
         if command=='run':
             p.add_argument('--node',type=Path,required=True);p.add_argument('--modules',type=Path,required=True);p.add_argument('--port',type=int,default=18880)
@@ -470,7 +471,7 @@ def main(argv=None):
         if args.command=='editor-configure':
             result=studio_editor.configure(args.nest,node=args.node,package_root=args.package_root,
                 editor_profile=args.editor_profile,catalog_root=args.catalog_root,catalog_profile=args.catalog_profile,
-                manual_execution=args.manual_execution,reviewed=args.reviewed)
+                manual_execution=args.manual_execution,credential_editor=args.credential_editor,reviewed=args.reviewed)
         elif args.command=='editor-disable':result=studio_editor.disable(args.nest,reviewed=args.reviewed)
         else:result=studio_editor.public_status(args.nest)
         print(json.dumps(result,ensure_ascii=False,indent=2))
@@ -492,11 +493,22 @@ def main(argv=None):
         return subprocess.call([str(args.node.resolve()),str(Path(__file__).parent/'kpp/resources/examples/anchor-studio/launcher.cjs')],env=env)
     if args.command=='workflow-serve':
         from .studio_workflows import WorkflowStore, serve
+        from .studio_credentials import CredentialStore
+        from .studio_editor import from_database
         def check_source():
             with database(args.nest):pass  # Pinned controller, founding source and established Heart.
+        @contextmanager
+        def credentials(expected):
+            with database(args.nest) as db:
+                db.execute('BEGIN IMMEDIATE')
+                config = from_database(db)
+                if (not config or config.get('credential_editor') is not True or config['sha256'] != expected
+                        or _setting(db, 'phase') != 'ACTIVE'):
+                    raise PermissionError('Reviewed credentials require the active selected Body')
+                yield CredentialStore(args.nest, _setting(db, 'identity'))
         check_source()
         return serve(WorkflowStore(args.nest/'operational-workflows'),
-                     check_source=check_source,execution_source=controller_pin())
+                     check_source=check_source,execution_source=controller_pin(),credential_store=credentials)
     if args.command=='serve':
         from concurrent.futures import ProcessPoolExecutor
         from multiprocessing import get_context

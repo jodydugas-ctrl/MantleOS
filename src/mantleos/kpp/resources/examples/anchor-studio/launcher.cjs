@@ -153,7 +153,7 @@ call('boot').then(async receipt=>{
   const {openInstallation}=require('./editor-installation.cjs');
   const installation=openInstallation({packageRoot:selected.package_root,editorProfile:selected.editor_profile,catalogRoot:selected.catalog_root,catalogProfile:selected.catalog_profile,expectedDigest:selected.installation_sha256});
   const owner=require('./editor-local-context.cjs');
-  const context=owner.project({identity:owner.initialize(path.join(nest,'editor-owner.json'),{reviewed:true}),settingsTemplate:installation.catalog.json('public-settings.json'),port});
+  const context=owner.project({identity:owner.initialize(path.join(nest,'editor-owner.json'),{reviewed:true}),settingsTemplate:installation.catalog.json('public-settings.json'),port,credentialEditor:selected.credential_editor===true});
   const resident=require('./resident-view.cjs').createResidentView({body:(op,args)=>op==='result'?resultFor(args.request_id):call(op,args),conversation:encounter});
   const execution=selected.manual_execution===true?{
    capture:ref=>sockets?.capture(ref),
@@ -162,7 +162,8 @@ call('boot').then(async receipt=>{
     checkActive:()=>call('editor_manual_authority',{sha256:selected.sha256}),
    }),
   }:null;
-  editorHost=require('./community-editor.cjs').mountCommunityEditor(app,{express,workflows,installation,context,resident,execution});
+  const credentials=selected.credential_editor===true?{configuration:selected.sha256,capture:ref=>sockets?.capture(ref)}:null;
+  editorHost=require('./community-editor.cjs').mountCommunityEditor(app,{express,workflows,installation,context,resident,execution,credentials});
   app.get('/studio/editor-status',(req,res)=>res.json(editorHost.inspection));
   app.use((req,res,next)=>{
    if(req.method!=='GET'||/^\/(?:studio|red|flows|appai|types|assets|rest)(?:\/|$)/.test(req.path))return next();

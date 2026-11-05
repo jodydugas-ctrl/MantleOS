@@ -63,10 +63,9 @@ def _inspection(value):
 
 
 def _validate(value):
-    manual = {'manual_execution'} if type(value) is dict and 'manual_execution' in value else set()
-    c.shape(value, FIELDS | manual)
-    if manual:
-        c.require(value['manual_execution'] is True, 'Invalid manual execution selection')
+    options = {'manual_execution', 'credential_editor'} & value.keys() if type(value) is dict else set()
+    c.shape(value, FIELDS | options)
+    c.require(all(value[key] is True for key in options), 'Invalid editor capability selection')
     c.require(value['schema'] == SCHEMA, 'Unsupported editor configuration')
     try:
         revision = uuid.UUID(value['revision'])
@@ -100,7 +99,8 @@ def public_status(nest):
     return {'enabled': False} if value is None else {
         'enabled': True, 'revision': value['revision'], 'installation': value['inspection'],
         'scope': 'BUILDING_NOT_ACCEPTED', 'context': 'RESIDENT_MEMORY',
-        **({'manual_execution': 'PURE_NODE_RED'} if value.get('manual_execution') else {})}
+        **({'manual_execution': 'PURE_NODE_RED'} if value.get('manual_execution') else {}),
+        **({'credential_editor': 'WINDOWS_OWNER_LOCAL'} if value.get('credential_editor') else {})}
 
 
 @contextmanager
@@ -117,9 +117,10 @@ def _writer(nest, reviewed):
 
 
 def configure(nest, *, node, package_root, editor_profile, catalog_root, catalog_profile,
-              manual_execution=False, reviewed=False):
+              manual_execution=False, credential_editor=False, reviewed=False):
     import time
     c.require(type(manual_execution) is bool, 'Manual execution selection requires a boolean')
+    c.require(type(credential_editor) is bool, 'Credential editor selection requires a boolean')
     with _writer(nest, reviewed) as db:
         inspection = _inspection(inspect_source(node=node, package_root=package_root, editor_profile=editor_profile,
                                                 catalog_root=catalog_root, catalog_profile=catalog_profile))
@@ -131,12 +132,17 @@ def configure(nest, *, node, package_root, editor_profile, catalog_root, catalog
                  'installation_sha256': inspection['sha256'], 'inspection': inspection}
         if manual_execution:
             value['manual_execution'] = True
+        if credential_editor:
+            from .studio import _setting
+            from .studio_credentials import CredentialStore
+            CredentialStore(nest, _setting(db, 'identity')).initialize(reviewed=True)
+            value['credential_editor'] = True
         value['sha256'] = c.digest(value)
         db.execute('INSERT OR REPLACE INTO settings VALUES (?,?)', (KEY, c.canonical(value)))
         db.execute('INSERT INTO events(id,kind,value,at) VALUES (?,?,?,?)',
                    ('editor-'+uuid.uuid4().hex, 'editor.source.reviewed',
                     c.canonical({'revision': value['revision'], 'installation_sha256': inspection['sha256'],
-                                 **({'manual_execution': True} if manual_execution else {})}), time.time()))
+                                 **{key: True for key in ('manual_execution', 'credential_editor') if key in value}}), time.time()))
     return {'enabled': True, 'revision': value['revision'], 'installation': inspection,
             'scope': 'BUILDING_NOT_ACCEPTED',
             'authority': 'Pure manual Node-RED execution' if manual_execution else 'No workflow effects or Baker acceptance granted'}

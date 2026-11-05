@@ -66,7 +66,7 @@ function compile(workflow,selection){
  demand(only(settings,['executionOrder','binaryMode','saveManualExecutions','executionTimeout'])&&
   (!own(settings,'executionOrder')||settings.executionOrder==='v1')&&
   (!own(settings,'binaryMode')||settings.binaryMode==='separate')&&
-  (!own(settings,'saveManualExecutions')||[true,'DEFAULT'].includes(settings.saveManualExecutions))&&
+  (!own(settings,'saveManualExecutions')||[true,false,'DEFAULT'].includes(settings.saveManualExecutions))&&
   (!own(settings,'executionTimeout')||(Number.isInteger(settings.executionTimeout)&&
    settings.executionTimeout>=-1&&settings.executionTimeout<=MAX_WAIT_SECONDS))&&
   (!workflow.pinData||only(workflow.pinData,[]))&&!workflow.staticData,'workflow settings or pinned data');

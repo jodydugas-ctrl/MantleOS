@@ -4,10 +4,11 @@ const assert=require('node:assert/strict');
 const {setImmediate:turn}=require('node:timers/promises');
 const {mountExecutionRoutes,encodeRunData}=require('./editor-executions.cjs');
 
-function setup({rejectCommit=false,stopAware=false}={}){
+function setup({rejectCommit=false,stopAware=false,discard=false}={}){
  const handlers=new Map(),calls=[],frames=[];
  const saved={id:'w1',name:'Workflow',versionId:'saved',revision:'rev',
-  nodes:[{name:'Manual',type:'n8n-nodes-base.manualTrigger'}]};
+  nodes:[{name:'Manual',type:'n8n-nodes-base.manualTrigger'}],
+  settings:{saveManualExecutions:!discard}};
  let result={id:'e1',workflowId:'w1',workflowVersionId:'saved',startedAt:'2026-11-05T12:00:00Z',
   status:'running',workflowData:saved,mode:'manual',data:null};
  mountExecutionRoutes((method,path,handler)=>handlers.set(method+' '+path,handler),{
@@ -21,7 +22,10 @@ function setup({rejectCommit=false,stopAware=false}={}){
      if(!input.signal.aborted)await new Promise(resolve=>input.signal.addEventListener('abort',resolve,{once:true}));
      return {status:'canceled',data:{version:1,resultData:{runData:{}}}};
     }
-    return {status:'success',data:{version:1,resultData:{runData:{},lastNodeExecuted:'Manual'}}};
+    return {status:'success',data:{version:1,resultData:{lastNodeExecuted:'Manual',runData:{Manual:[{
+     executionIndex:0,startTime:0,source:[],executionTime:1,executionStatus:'success',
+     data:{main:[[{json:{value:'ephemeral'}}]]},
+    }]}}}};
    };
   }},
   workflows:{async call(op,args){
@@ -32,10 +36,14 @@ function setup({rejectCommit=false,stopAware=false}={}){
    if(op==='execution_finish'){
     if(rejectCommit)throw Error('WORKFLOW_UNAVAILABLE');
     result={...result,status:args.status,data:args.result,stoppedAt:'2026-11-05T12:00:01Z'};
+    return discard?{...result,discarded:true}:result;
+   }
+   if(op==='execution_stop_state')return result;
+   if(op==='execution_get'){
+    if(discard&&result.status!=='running')throw Error("KeyError: 'Execution not found'");
     return result;
    }
-   if(op==='execution_get')return result;
-   if(op==='execution_page')return {count:1,data:[result],next_cursor:null};
+   if(op==='execution_page')return discard?{count:0,data:[],next_cursor:null}:{count:1,data:[result],next_cursor:null};
    if(op==='execution_versions')return [{versionId:'saved',name:null,createdAt:result.startedAt}];
    throw Error('unexpected call');
   }},
@@ -83,6 +91,24 @@ test('unsupported or detached requests never reserve work and failed commit neve
  await turn();
  assert.deepEqual(server.frames.map(frame=>frame.type),['executionStarted']);
  assert.equal((await server.detail()).data.status,'running');
+});
+
+test('a history-disabled result releases node output only through the initiating push after commit',async()=>{
+ const request={triggerToStartFrom:{name:'Manual'}};
+ const server=setup({discard:true});
+ await server.run(request);
+ await turn();
+ assert.deepEqual(server.frames.map(frame=>frame.type),[
+  'executionStarted','nodeExecuteBefore','nodeExecuteAfter','nodeExecuteAfterData','executionFinished',
+ ]);
+ assert.deepEqual(server.frames[3].data.itemCountByConnectionType,{main:[1]});
+ assert.deepEqual(server.frames[3].data.data.data.main,[[{json:{value:'ephemeral'}}]]);
+ assert.deepEqual(await server.detail(),{});
+ assert.equal((await server.listing()).data.count,0);
+ const failed=setup({discard:true,rejectCommit:true});
+ await failed.run(request);
+ await turn();
+ assert.deepEqual(failed.frames.map(frame=>frame.type),['executionStarted']);
 });
 
 test('Stop waits for the committed cancellation and repeated Stop reads the same record',async()=>{
