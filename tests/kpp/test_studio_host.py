@@ -146,6 +146,22 @@ class StudioHostTests(unittest.TestCase):
                 self.assertEqual(api('/rest/workflows/'+workflow_id)[1]['data']['name'],'Durable host graph')
                 self.assertEqual(api('/flows/qualification-ping'),(200,'native Body alive'))
                 stop()
+                studio_editor.configure(nest,node=node,package_root=selected['packageRoot'],
+                    editor_profile=selected['editorProfile'],catalog_root=selected['catalogRoot'],
+                    catalog_profile=selected['catalogProfile'],manual_execution=True,reviewed=True)
+                start('reviewed-manual-execution')
+                self.assertEqual(api('/studio/editor-status')[1]['workflow_execution'],'HOST_ADMITTED_MANUAL')
+                self.assertEqual(api('/rest/workflows/'+workflow_id+'/run',{})[0],409)
+                self.assertEqual(api('/rest/executions')[1]['data']['count'],0)
+                self.assertEqual(api('/flows/qualification-ping'),(200,'native Body alive'))
+                config=studio_editor.private_config(nest)
+                authority={'op':'editor_manual_authority','args':{'sha256':config['sha256']}}
+                self.assertEqual(studio.dispatch(nest,authority),{'admitted':True})
+                self.assertEqual(api('/studio/phase',{'active':False})[0],200)
+                with self.assertRaises(PermissionError):
+                    studio.dispatch(nest,authority)
+                self.assertEqual(api('/flows/qualification-ping'),(200,'native Body alive'))
+                stop()
                 studio_editor.disable(nest,reviewed=True)
                 start('withdrawn-editor')
                 self.assertEqual(api('/rest/settings')[0],404)

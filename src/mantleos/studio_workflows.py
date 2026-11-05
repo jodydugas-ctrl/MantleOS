@@ -10,6 +10,7 @@ import hashlib
 import json
 import math
 from pathlib import Path
+import re
 import sqlite3
 import sys
 from urllib.parse import quote
@@ -20,6 +21,8 @@ from . import json_contract as c
 APPLICATION = 0x41575346
 VERSION = 1
 MAX_BYTES = 16 * 1024 * 1024
+MAX_EXECUTION_RESULT = 4 * 1024 * 1024
+TERMINAL_EXECUTIONS = {'success', 'error', 'canceled', 'needs_review'}
 SERVER_FIELDS = {'id', 'revision', 'versionId', 'activeVersionId', 'active',
                  'isArchived', 'createdAt', 'updatedAt', 'versionCounter', 'triggerCount'}
 
@@ -48,6 +51,18 @@ def _id(value):
     c.text(value, maximum=128)
     c.require(all(x.isalnum() or x in '_.:-' for x in value), 'Invalid workflow/node identifier')
     return value
+
+
+def _execution_table(db):
+    return db is not None and db.execute(
+        "SELECT 1 FROM sqlite_master WHERE type='table' AND name='workflow_executions'"
+    ).fetchone() is not None
+
+
+def _execution_result_digest(row, status, stopped, result):
+    return _digest({'execution': row['id'], 'request': row['request_sha256'],
+                    'graph': row['graph_sha256'], 'status': status, 'stopped': stopped,
+                    'result': result}, MAX_EXECUTION_RESULT + 4096)
 
 
 def document(value):
@@ -213,6 +228,131 @@ class WorkflowStore:
                 c.require(row['parent'] == parent, 'Workflow version ancestry failed')
             return [dict(row) for row in rows]
 
+    def _execution_view(self, db, row, *, detail=False):
+        status = row['status']
+        has_result = all(row[key] is not None for key in ('result', 'result_sha256', 'stopped'))
+        pending = all(row[key] is None for key in ('result', 'result_sha256', 'stopped'))
+        c.require(row['version'] is not None and
+                  (status == 'running' and pending or status in TERMINAL_EXECUTIONS and has_result),
+                  'Invalid execution state')
+        value = {'id': row['id'], 'workflowId': row['workflow'],
+                 'workflowVersionId': row['version'], 'mode': 'manual',
+                 'status': status, 'startedAt': row['started'], 'stoppedAt': row['stopped']}
+        if detail:
+            graph = self._version(db, row['workflow'], row['version'])
+            c.require(_digest(graph) == row['graph_sha256'], 'Execution graph binding failed')
+            result = json.loads(row['result']) if row['result'] is not None else None
+            if has_result:
+                c.require(_execution_result_digest(row, status, row['stopped'], result) == row['result_sha256'],
+                          'Execution result integrity failed')
+            value.update(workflowData={**graph, 'id': row['workflow'], 'versionId': row['version']},
+                         data=result)
+        return value
+
+    def execution_start(self, request, *, source_pin, owner=False):
+        """Reserve one dispatch of a saved version, from an independently authorized host."""
+        if owner is not True:
+            raise PermissionError('Independent owner execution authority required')
+        c.require(type(source_pin) is str and re.fullmatch(r'[a-f0-9]{64}', source_pin),
+                  'Verified execution source required')
+        c.shape(request, {'request_id', 'workflow_id', 'version_id', 'revision', 'trigger', 'destination'})
+        c.identifier(request['request_id'])
+        for key in ('workflow_id', 'version_id', 'revision'):
+            _id(request[key])
+        c.text(request['trigger'], maximum=512)
+        if request['destination'] is not None:
+            c.text(request['destination'], maximum=512)
+        binding = c.digest({'request': request, 'source_pin': source_pin})
+        with self._db(write=True) as db:
+            current = self._row(db, request['workflow_id'])
+            if _execution_table(db):
+                prior = db.execute('SELECT * FROM workflow_executions WHERE request_id=?',
+                                   (request['request_id'],)).fetchone()
+                if prior:
+                    if prior['request_sha256'] != binding:
+                        raise Conflict('Duplicate execution request changed')
+                    return self._execution_view(db, prior)
+            if (current['version'], current['revision']) != (request['version_id'], request['revision']):
+                raise Conflict('Workflow changed before execution admission')
+            c.require(not current['archived'], 'Archived workflow cannot run')
+            graph = self._version(db, current['id'], current['version'])
+            names = {node['name'] for node in graph['nodes']}
+            c.require(request['trigger'] in names and
+                      (request['destination'] is None or request['destination'] in names),
+                      'Execution selection must reference saved nodes')
+            db.execute("""CREATE TABLE IF NOT EXISTS workflow_executions(
+                id TEXT PRIMARY KEY, request_id TEXT UNIQUE NOT NULL, request_sha256 TEXT NOT NULL,
+                workflow TEXT NOT NULL REFERENCES workflows(id),
+                version TEXT REFERENCES versions(id) ON DELETE SET NULL,
+                graph_sha256 TEXT, source_pin TEXT, claim TEXT,
+                status TEXT NOT NULL, started TEXT NOT NULL, stopped TEXT,
+                result TEXT, result_sha256 TEXT)""")
+            db.execute('CREATE INDEX IF NOT EXISTS execution_workflow ON workflow_executions(workflow, started)')
+            active = db.execute("SELECT count(*) FROM workflow_executions WHERE status='running'").fetchone()[0]
+            c.require(active < 8, 'Execution capacity reached; review interrupted runs before retrying')
+            run_id, claim = _token(), _token()
+            db.execute("""INSERT INTO workflow_executions
+                (id,request_id,request_sha256,workflow,version,graph_sha256,source_pin,claim,status,started)
+                VALUES (?,?,?,?,?,?,?,?,'running',?)""",
+                (run_id, request['request_id'], binding, current['id'], current['version'],
+                 _digest(graph), source_pin, claim, _now()))
+            run = self._execution_view(db, self._execution_row(db, run_id), detail=True)
+            return {**run, 'claim': claim,
+                    'selection': {'trigger': request['trigger'], 'destination': request['destination']}}
+
+    def _execution_row(self, db, run_id):
+        _id(run_id)
+        row = (db.execute('SELECT * FROM workflow_executions WHERE id=? AND version IS NOT NULL', (run_id,)).fetchone()
+               if _execution_table(db) else None)
+        if row is None:
+            raise KeyError('Execution not found')
+        return row
+
+    def execution_finish(self, run_id, *, claim, status, result, source_pin, owner=False):
+        """Admit a terminal runtime observation through the original dispatch claim."""
+        if owner is not True:
+            raise PermissionError('Independent owner execution authority required')
+        c.require(type(status) is str and status in TERMINAL_EXECUTIONS, 'Invalid terminal execution status')
+        c.require(type(result) is dict, 'Execution observation must be a JSON object')
+        content = _encoded(result, MAX_EXECUTION_RESULT)
+        with self._db(write=True) as db:
+            row = self._execution_row(db, run_id)
+            if (row['claim'], row['source_pin']) != (claim, source_pin):
+                raise PermissionError('Execution claim or source does not match')
+            self._execution_view(db, row)
+            stopped = _now() if row['status'] == 'running' else row['stopped']
+            digest = _execution_result_digest(row, status, stopped, result)
+            if row['status'] == 'running':
+                db.execute('UPDATE workflow_executions SET status=?,stopped=?,result=?,result_sha256=? WHERE id=?',
+                           (status, stopped, content, digest, run_id))
+            elif (row['status'], row['result_sha256']) != (status, digest):
+                raise Conflict('Committed execution result changed')
+            value = self._execution_view(db, self._execution_row(db, run_id), detail=True)
+            _encoded(value, MAX_BYTES + 32768)
+            return value
+
+    def execution_get(self, run_id):
+        with self._db() as db:
+            return self._execution_view(db, self._execution_row(db, run_id), detail=True)
+
+    def execution_list(self, *, workflow_id=None, limit=50, offset=0):
+        c.require(type(limit) is int and 1 <= limit <= 200 and type(offset) is int and offset >= 0,
+                  'Invalid execution pagination')
+        with self._db() as db:
+            if workflow_id is not None:
+                self._row(db, workflow_id)
+            if not _execution_table(db):
+                return {'data': [], 'count': 0}
+            where = ' WHERE version IS NOT NULL'
+            values = ()
+            if workflow_id is not None:
+                where += ' AND workflow=?'
+                values = (workflow_id,)
+            rows = db.execute('SELECT * FROM workflow_executions' + where + ' ORDER BY rowid DESC LIMIT ? OFFSET ?',
+                              (*values, limit, offset)).fetchall()
+            count = db.execute('SELECT count(*) FROM workflow_executions' + where, values).fetchone()[0]
+            return {'data': [self._execution_view(db, row) for row in rows], 'count': count}
+
     def mutate(self, request, *, owner=False):
         # Authority is host-supplied, not a field in the request or an Anchor digest.
         if owner is not True:
@@ -279,6 +419,14 @@ class WorkflowStore:
                     c.require(row['active_version'] is None, 'Unpublish through the checked runtime before archiving/deleting')
                     if action == 'delete':
                         c.require(row['archived'], 'Archive workflow before permanent removal')
+                        if _execution_table(db) and db.execute(
+                            "SELECT 1 FROM workflow_executions WHERE workflow=? AND status='running'", (workflow_id,),
+                        ).fetchone():
+                            raise Conflict('Resolve running executions before permanent removal')
+                        if _execution_table(db):
+                            db.execute("""UPDATE workflow_executions SET version=NULL,graph_sha256=NULL,
+                                source_pin=NULL,claim=NULL,status='removed',result=NULL,result_sha256=NULL
+                                WHERE workflow=?""", (workflow_id,))
                         # Operational workflow data is not append-only Engram
                         # experience. Permanent removal must also discard old
                         # replies that would otherwise retain/resurrect the graph.
@@ -303,7 +451,7 @@ class WorkflowStore:
             return result
 
 
-def serve(store, input_stream=None, output_stream=None, *, check_source=None):
+def serve(store, input_stream=None, output_stream=None, *, check_source=None, execution_source=None):
     """Trusted foreground controller pipe, never a network/model RPC listener.
 
     Operational documents have a separate budget from cognition frames. The
@@ -340,6 +488,16 @@ def serve(store, input_stream=None, output_stream=None, *, check_source=None):
                 c.shape(args,{'collection'})
                 from .studio_inventory import EditorInventory
                 result=EditorInventory(store.directory.parent).list(args['collection'])
+            elif op == 'execution_start' and execution_source:
+                result = store.execution_start(args, source_pin=execution_source, owner=True)
+            elif op == 'execution_finish' and execution_source:
+                c.shape(args, {'run_id', 'claim', 'status', 'result'})
+                result = store.execution_finish(**args, source_pin=execution_source, owner=True)
+            elif op == 'execution_get' and execution_source:
+                c.shape(args, {'run_id'})
+                result = store.execution_get(**args)
+            elif op == 'execution_list' and execution_source:
+                result = store.execution_list(**args)
             else:
                 raise ValueError('Unsupported workflow operation')
             reply = {'id': envelope['id'], 'ok': True, 'result': result}

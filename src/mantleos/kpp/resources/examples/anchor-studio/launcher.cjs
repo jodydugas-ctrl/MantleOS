@@ -134,7 +134,16 @@ app.use((error,req,res,next)=>{
 });
 let pulsing=false;
 const timer=setInterval(async()=>{if(pulsing||!body.alive)return;pulsing=true;try{await call('pulse');if(mind&&!cognitionBusy){const pending=await call('mind_pending');if(pending.request_id)cognize(pending.request_id);}}catch(e){}finally{pulsing=false;}},1000);
-async function close(){clearInterval(timer);releases.close();sockets?.close();try{await call('phase',{active:false});}catch(e){}await RED.stop();body.end();workflows.end();if(mind)mind.end();server.close();}
+let shuttingDown;
+function close(){
+ if(!shuttingDown)shuttingDown=(async()=>{
+  clearInterval(timer);releases.close();sockets?.close();
+  try{await call('phase',{active:false});}catch{}
+  await editorHost?.close();
+  await RED.stop();body.end();workflows.end();if(mind)mind.end();server.close();
+ })();
+ return shuttingDown;
+}
 route('post','/studio/shutdown',async()=>{setTimeout(()=>close().then(()=>process.exit(0)),100);return {status:'STOPPING'};});
 process.on('SIGINT',()=>close().then(()=>process.exit(0)));process.on('SIGTERM',()=>close().then(()=>process.exit(0)));
 call('boot').then(async receipt=>{
@@ -146,7 +155,14 @@ call('boot').then(async receipt=>{
   const owner=require('./editor-local-context.cjs');
   const context=owner.project({identity:owner.initialize(path.join(nest,'editor-owner.json'),{reviewed:true}),settingsTemplate:installation.catalog.json('public-settings.json'),port});
   const resident=require('./resident-view.cjs').createResidentView({body:(op,args)=>op==='result'?resultFor(args.request_id):call(op,args),conversation:encounter});
-  editorHost=require('./community-editor.cjs').mountCommunityEditor(app,{express,workflows,installation,context,resident});
+  const execution=selected.manual_execution===true?{
+   capture:ref=>sockets?.capture(ref),
+   runtime:require('./manual-node-red.cjs').createManualRuntime({
+    nodeRed:require.resolve(process.env.STUDIO_MODULES+'/node-red'),version:RED.version(),
+    checkActive:()=>call('editor_manual_authority',{sha256:selected.sha256}),
+   }),
+  }:null;
+  editorHost=require('./community-editor.cjs').mountCommunityEditor(app,{express,workflows,installation,context,resident,execution});
   app.get('/studio/editor-status',(req,res)=>res.json(editorHost.inspection));
   app.use((req,res,next)=>{
    if(req.method!=='GET'||/^\/(?:studio|red|flows|appai|types|assets|rest)(?:\/|$)/.test(req.path))return next();

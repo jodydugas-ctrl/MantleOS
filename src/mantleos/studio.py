@@ -38,7 +38,7 @@ def controller_pin():
     root=Path(__file__).parent
     names=('studio.py','studio_editor.py','studio_inventory.py','studio_handlers.py','studio_project.py','studio_workflows.py','studio_auto_mind.py','studio_mind_config.py','studio_mind_budget.py','studio_mind_provider.py','studio_demo.py','limbs.py','journal.py','anchors.py','anchor_design.py','anchor_language.py','effects.py','json_contract.py','transactions.py','primer.py','cartridge.py')
     resources=('launcher.cjs','json-worker.cjs','committed-events.cjs','local-access.cjs','workspace.html','workspace.css','workspace.js','conditions.cjs','palette/nodes.js','palette/nodes.html',
-               'editor-assets.cjs','editor-catalog.cjs','editor-installation.cjs','editor-local-context.cjs','editor-sockets.cjs','community-editor.cjs','workflow-checksum.cjs','resident-view.cjs','resident-panel.js')
+               'editor-assets.cjs','editor-catalog.cjs','editor-installation.cjs','editor-local-context.cjs','editor-sockets.cjs','community-editor.cjs','editor-executions.cjs','manual-node-red.cjs','workflow-checksum.cjs','resident-view.cjs','resident-panel.js')
     names+=tuple('kpp/resources/examples/anchor-studio/'+name for name in resources)
     return c.digest({name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in names})
 
@@ -297,6 +297,15 @@ def dispatch(nest,request):
         from .studio_editor import private_config
         c.shape(args,set())
         return private_config(nest)  # Trusted launcher pipe; never a browser route.
+    if op=='editor_manual_authority':
+        from .studio_editor import from_database
+        c.shape(args, {'sha256'})
+        with database(nest) as db:
+            selected = from_database(db)
+            if (not selected or selected.get('manual_execution') is not True or
+                    selected['sha256'] != args['sha256'] or _setting(db, 'phase') != 'ACTIVE'):
+                raise PermissionError('Reviewed manual execution requires the active selected Body')
+        return {'admitted': True}
     allowed={'status':status,'boot':boot,'phase':phase,'event':event,'intention':intention,
              'conversation':conversation,'submit':submit,'mind_pending':mind_pending,'pulse':pulse,'work':work,
              'publish_intentions':publish_intentions,'result':committed_result,'project_get':project_get,'project_set':project_set,'flow_draft':flow_draft,'kpp_prepare':kpp_prepare,
@@ -448,6 +457,7 @@ def main(argv=None):
             p.add_argument('--editor-profile',type=Path,required=True)
             p.add_argument('--catalog-root',type=Path,required=True)
             p.add_argument('--catalog-profile',type=Path,required=True)
+            p.add_argument('--manual-execution',action='store_true')
             p.add_argument('--reviewed',action='store_true')
         if command=='run':
             p.add_argument('--node',type=Path,required=True);p.add_argument('--modules',type=Path,required=True);p.add_argument('--port',type=int,default=18880)
@@ -460,7 +470,7 @@ def main(argv=None):
         if args.command=='editor-configure':
             result=studio_editor.configure(args.nest,node=args.node,package_root=args.package_root,
                 editor_profile=args.editor_profile,catalog_root=args.catalog_root,catalog_profile=args.catalog_profile,
-                reviewed=args.reviewed)
+                manual_execution=args.manual_execution,reviewed=args.reviewed)
         elif args.command=='editor-disable':result=studio_editor.disable(args.nest,reviewed=args.reviewed)
         else:result=studio_editor.public_status(args.nest)
         print(json.dumps(result,ensure_ascii=False,indent=2))
@@ -485,7 +495,8 @@ def main(argv=None):
         def check_source():
             with database(args.nest):pass  # Pinned controller, founding source and established Heart.
         check_source()
-        return serve(WorkflowStore(args.nest/'operational-workflows'),check_source=check_source)
+        return serve(WorkflowStore(args.nest/'operational-workflows'),
+                     check_source=check_source,execution_source=controller_pin())
     if args.command=='serve':
         from concurrent.futures import ProcessPoolExecutor
         from multiprocessing import get_context

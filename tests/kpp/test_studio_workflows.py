@@ -29,6 +29,111 @@ class WorkflowTests(unittest.TestCase):
         return store.mutate({'action': action, 'request_id': 'request-'+action+'-'+current['revision'],
                              'id': current['id'], 'revision': current['revision'], **extra}, owner=True)
 
+    def execution_request(self, saved):
+        return {'request_id': 'manual-run', 'workflow_id': saved['id'],
+                'version_id': saved['versionId'], 'revision': saved['revision'],
+                'trigger': 'Input', 'destination': 'If'}
+
+    def test_execution_retains_exact_saved_version_and_committed_observation(self):
+        with tempfile.TemporaryDirectory() as td:
+            store = WorkflowStore(td)
+            saved = self.create(store)
+            request = self.execution_request(saved)
+            with self.assertRaises(PermissionError):
+                store.execution_start(request, source_pin='1'*64)
+            with self.assertRaises(ValueError):
+                store.execution_start({**request, 'nodes': []}, owner=True, source_pin='1'*64)
+            self.assertEqual(store.execution_list(workflow_id=saved['id']), {'data': [], 'count': 0})
+            run = store.execution_start(request, owner=True, source_pin='1'*64)
+            self.assertEqual(run['status'], 'running')
+            self.assertEqual(run['workflowData']['nodes'], saved['nodes'])
+            self.assertEqual(run['selection'], {'trigger': 'Input', 'destination': 'If'})
+            newer = self.mutate(store, 'update', saved, value={**saved, 'name': 'Edited'})
+            replay = WorkflowStore(td).execution_start(request, owner=True, source_pin='1'*64)
+            self.assertEqual(replay['id'], run['id'])
+            self.assertNotIn('claim', replay)
+            with self.assertRaises(Conflict):
+                store.execution_start({**request, 'request_id': 'stale-start'}, owner=True, source_pin='1'*64)
+            with self.assertRaises(Conflict):
+                store.execution_start({**request, 'destination': None}, owner=True, source_pin='1'*64)
+
+            observation = {'resultData': {'runData': {'If': [{'data': {'main': [[], [{'json': {'total': 42}}]]}}]}}}
+            finish = {'claim': run['claim'], 'status': 'success', 'result': observation,
+                      'source_pin': '1'*64, 'owner': True}
+            for override in ({'claim': 'forged'}, {'source_pin': '2'*64}, {'owner': False}):
+                with self.subTest(override=override), self.assertRaises(PermissionError):
+                    store.execution_finish(run['id'], **{**finish, **override})
+            done = store.execution_finish(run['id'], **finish)
+            reopened = WorkflowStore(td)
+            self.assertEqual(reopened.execution_finish(run['id'], **finish), done)
+            self.assertEqual(reopened.execution_get(run['id']), done)
+            self.assertEqual(done['workflowVersionId'], saved['versionId'])
+            self.assertEqual(done['workflowData']['name'], saved['name'])
+            self.assertEqual(done['data'], observation)
+            self.assertEqual(reopened.get(saved['id']), newer)
+            self.assertNotIn('claim', done)
+            with self.assertRaises(Conflict):
+                reopened.execution_finish(run['id'], **{**finish, 'result': {}})
+
+    def test_execution_claim_is_single_use_and_deletion_drops_history(self):
+        with tempfile.TemporaryDirectory() as td:
+            store = WorkflowStore(td)
+            saved = self.create(store)
+            request = self.execution_request(saved)
+
+            def start(_):
+                return WorkflowStore(td).execution_start(request, owner=True, source_pin='1'*64)
+
+            with ThreadPoolExecutor(max_workers=4) as pool:
+                runs = list(pool.map(start, range(4)))
+            claims = [run for run in runs if 'claim' in run]
+            self.assertEqual(len(claims), 1)
+            run, = claims
+            self.assertEqual({item['id'] for item in runs}, {run['id']})
+            archived = self.mutate(store, 'archive', saved)
+            with self.assertRaises(Conflict):
+                self.mutate(store, 'delete', archived)
+            store.execution_finish(run['id'], claim=run['claim'], status='canceled',
+                                   result={'stop': 'confirmed'}, owner=True, source_pin='1'*64)
+            self.assertEqual(store.execution_list(workflow_id=saved['id'])['data'][0]['status'], 'canceled')
+            self.mutate(store, 'delete', archived)
+            with self.assertRaises(KeyError):
+                store.execution_get(run['id'])
+            with closing(sqlite3.connect(store.path)) as db:
+                self.assertEqual(db.execute('SELECT version,claim,result FROM workflow_executions').fetchall(),
+                                 [(None, None, None)])
+            other = self.create(store, request_id='other-workflow')
+            with self.assertRaises(Conflict):
+                store.execution_start(self.execution_request(other), owner=True, source_pin='1'*64)
+
+    def test_execution_worker_requires_trusted_source_and_checks_observation_integrity(self):
+        with tempfile.TemporaryDirectory() as td:
+            store = WorkflowStore(td)
+            saved = self.create(store)
+            packet = {'id': 'local-op', 'op': 'execution_start', 'args': self.execution_request(saved)}
+
+            def call(value, **options):
+                output = io.StringIO()
+                serve(store, io.BytesIO((json.dumps(value)+'\n').encode()), output, **options)
+                return json.loads(output.getvalue())
+
+            self.assertFalse(call(packet)['ok'])
+            result = call(packet, execution_source='1'*64)
+            self.assertTrue(result['ok'])
+            run = result['result']
+            committed = call({'id': 'local-op', 'op': 'execution_finish', 'args': {
+                'run_id': run['id'], 'claim': run['claim'], 'status': 'error', 'result': {'code': 'FIXTURE_ERROR'},
+            }}, execution_source='1'*64)
+            self.assertTrue(committed['ok'])
+            with closing(sqlite3.connect(store.path)) as db, db:
+                db.execute("UPDATE workflow_executions SET status='canceled' WHERE id=?", (run['id'],))
+            with self.assertRaisesRegex(ValueError, 'result integrity'):
+                store.execution_get(run['id'])
+            with closing(sqlite3.connect(store.path)) as db, db:
+                db.execute("UPDATE workflow_executions SET status='error',result='{}' WHERE id=?", (run['id'],))
+            with self.assertRaisesRegex(ValueError, 'result integrity'):
+                store.execution_get(run['id'])
+
     def test_read_only_empty_store_creates_no_state(self):
         with tempfile.TemporaryDirectory() as td:
             directory = Path(td)/'not-created'

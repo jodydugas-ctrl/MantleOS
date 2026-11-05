@@ -5,10 +5,12 @@
 const crypto=require('node:crypto');
 const {calculateWorkflowChecksum}=require('./workflow-checksum.cjs');
 const {mountResidentView}=require('./resident-view.cjs');
-function mountCommunityEditor(app,{express,workflows,installation,context,resident}){
+const {mountExecutionRoutes}=require('./editor-executions.cjs');
+function mountCommunityEditor(app,{express,workflows,installation,context,resident,execution=null}){
  if(typeof express?.json!=='function'||typeof workflows?.call!=='function'||!installation?.editor||!installation?.catalog||!context?.personal||!resident)throw Error('TRUSTED_EDITOR_HOST_REQUIRED');
  const {editor,catalog}=installation,{personal}=context;
  const workflowScopes=personal.scopes.filter(value=>value.startsWith('workflow:'));
+ if(execution)workflowScopes.push('workflow:execute');
  let pending=0;
  app.use('/rest',(req,res,next)=>{
   if(pending>=4)return res.status(503).json({code:503,message:'Workflow intake is busy'});
@@ -17,8 +19,10 @@ function mountCommunityEditor(app,{express,workflows,installation,context,reside
  app.use('/rest',express.json({limit:16*1024*1024+65536}));
  const route=(method,url,handler)=>app[method](url,async(req,res)=>{
   try{res.json(await handler(req));}
-  catch(error){const message=String(error.message),code=message.startsWith('Conflict:')?409:message.startsWith('KeyError:')?404:message.startsWith('PermissionError:')?403:/WORKFLOW_(BUSY|TIMEOUT|UNAVAILABLE)/.test(message)?503:400;
-   res.status(code).json({code,message:code===409?'Workflow changed or its loaded version is missing. Retain the draft and reconcile.':code===404?'Workflow not found':code===503?'Workflow storage is unavailable':'Workflow request rejected'});}
+  catch(error){const message=String(error.message),code=message.startsWith('Unsupported execution:')?501:message.startsWith('Conflict:')?409:message.startsWith('KeyError:')?404:message.startsWith('PermissionError:')?403:/WORKFLOW_(BUSY|TIMEOUT|UNAVAILABLE)/.test(message)?503:400;
+   res.status(code).json({code,message:message==='Conflict: execution stop requires review'?'Execution stop could not be verified. Review its stored state.':
+    message==='Conflict: execution already finished'?'The execution finished before it could be stopped.':
+    code===409?'Workflow changed or its loaded version is missing. Retain the draft and reconcile.':code===404?'Workflow or execution not found':code===503?'Workflow storage is unavailable':code===501?'This execution selection is unavailable.':'Workflow request rejected'});}
  });
  route('get','/rest/settings',()=>({data:context.settings}));
  route('get','/rest/login',()=>({data:context.user}));
@@ -86,6 +90,7 @@ function mountCommunityEditor(app,{express,workflows,installation,context,reside
   if(req.body.expectedChecksum!==undefined&&req.body.expectedChecksum!==await calculateWorkflowChecksum(current))throw Error('Conflict: checksum');
   return {data:await dto(await workflows.call('mutate',{request_id:'http-'+crypto.randomUUID(),action:'update',id:current.id,revision:current.revision,value:{...current,...req.body}}))};
  });
+ const executionRoutes=execution?mountExecutionRoutes(route,{workflows,runtime:execution.runtime,capture:execution.capture}):null;
  app.use('/rest',(req,res)=>res.status(501).json({code:501,message:'This operation is not yet implemented in this BUILDING editor.'}));
  app.use('/rest',(error,req,res,next)=>{if(res.headersSent)return next(error);res.status(error.type==='entity.too.large'?413:400).json({code:error.type==='entity.too.large'?413:400,message:'Invalid or oversized workflow JSON'});});
  for(const name of ['nodes.json','credentials.json','node-versions.json'])app.get('/types/'+name,(req,res)=>{res.setHeader('X-Content-Type-Options','nosniff');res.type('json').send(catalog.asset(name));});
@@ -96,6 +101,7 @@ function mountCommunityEditor(app,{express,workflows,installation,context,reside
  app.get('/favicon.ico',(req,res)=>{const value=editor.asset('favicon.ico');if(value===null)return res.sendStatus(404);res.type('ico').send(value);});
  mountResidentView(app,resident,{jsonParser:express.json({limit:'128kb'})});
  return Object.freeze({index(){return editor.index().replace('</body>','<script defer src="/studio/resident-panel.js"></script></body>');},
-  inspection:{...installation.inspection,status:'BUILDING_NOT_ACCEPTED',workflow_execution:'UNAVAILABLE',context:'RESIDENT_MEMORY'}});
+  async close(){await executionRoutes?.close();},
+  inspection:{...installation.inspection,status:'BUILDING_NOT_ACCEPTED',workflow_execution:execution?'HOST_ADMITTED_MANUAL':'UNAVAILABLE',context:'RESIDENT_MEMORY'}});
 }
 module.exports={mountCommunityEditor};

@@ -63,7 +63,10 @@ def _inspection(value):
 
 
 def _validate(value):
-    c.shape(value, FIELDS)
+    manual = {'manual_execution'} if type(value) is dict and 'manual_execution' in value else set()
+    c.shape(value, FIELDS | manual)
+    if manual:
+        c.require(value['manual_execution'] is True, 'Invalid manual execution selection')
     c.require(value['schema'] == SCHEMA, 'Unsupported editor configuration')
     try:
         revision = uuid.UUID(value['revision'])
@@ -96,7 +99,8 @@ def public_status(nest):
     value = private_config(nest)
     return {'enabled': False} if value is None else {
         'enabled': True, 'revision': value['revision'], 'installation': value['inspection'],
-        'scope': 'BUILDING_NOT_ACCEPTED', 'context': 'RESIDENT_MEMORY'}
+        'scope': 'BUILDING_NOT_ACCEPTED', 'context': 'RESIDENT_MEMORY',
+        **({'manual_execution': 'PURE_NODE_RED'} if value.get('manual_execution') else {})}
 
 
 @contextmanager
@@ -112,8 +116,10 @@ def _writer(nest, reviewed):
         yield db
 
 
-def configure(nest, *, node, package_root, editor_profile, catalog_root, catalog_profile, reviewed=False):
+def configure(nest, *, node, package_root, editor_profile, catalog_root, catalog_profile,
+              manual_execution=False, reviewed=False):
     import time
+    c.require(type(manual_execution) is bool, 'Manual execution selection requires a boolean')
     with _writer(nest, reviewed) as db:
         inspection = _inspection(inspect_source(node=node, package_root=package_root, editor_profile=editor_profile,
                                                 catalog_root=catalog_root, catalog_profile=catalog_profile))
@@ -123,13 +129,17 @@ def configure(nest, *, node, package_root, editor_profile, catalog_root, catalog
                  'package_root': _absolute(package_root), 'editor_profile': _absolute(editor_profile),
                  'catalog_root': _absolute(catalog_root), 'catalog_profile': _absolute(catalog_profile),
                  'installation_sha256': inspection['sha256'], 'inspection': inspection}
+        if manual_execution:
+            value['manual_execution'] = True
         value['sha256'] = c.digest(value)
         db.execute('INSERT OR REPLACE INTO settings VALUES (?,?)', (KEY, c.canonical(value)))
         db.execute('INSERT INTO events(id,kind,value,at) VALUES (?,?,?,?)',
                    ('editor-'+uuid.uuid4().hex, 'editor.source.reviewed',
-                    c.canonical({'revision': value['revision'], 'installation_sha256': inspection['sha256']}), time.time()))
+                    c.canonical({'revision': value['revision'], 'installation_sha256': inspection['sha256'],
+                                 **({'manual_execution': True} if manual_execution else {})}), time.time()))
     return {'enabled': True, 'revision': value['revision'], 'installation': inspection,
-            'scope': 'BUILDING_NOT_ACCEPTED', 'authority': 'No workflow effects or Baker acceptance granted'}
+            'scope': 'BUILDING_NOT_ACCEPTED',
+            'authority': 'Pure manual Node-RED execution' if manual_execution else 'No workflow effects or Baker acceptance granted'}
 
 
 def disable(nest, *, reviewed=False):

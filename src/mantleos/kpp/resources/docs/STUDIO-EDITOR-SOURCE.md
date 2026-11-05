@@ -137,6 +137,45 @@ otherwise it explicitly skips. This is native runtime and protocol evidence,
 not a real browser or live-LLM qualification of the new host. Separate socket
 tests check the shared authenticated dispatcher and preservation of host sockets.
 
+## Reviewed manual execution
+
+Add `--manual-execution` to the reviewed `studio editor-configure` command to
+select the pure manual Node-RED profile. The selected configuration pins this
+grant alongside the editor source. Studio checks the configuration and active
+Body before admitting and dispatching each run. Reconfigure in stasis with the
+flag omitted to withdraw the execution grant.
+
+The current profile accepts one Manual Trigger and strict IF 2.4 nodes on
+connected, acyclic main-port graphs with a single input per node. It accepts
+literal conditions and direct `$json.field` paths in left operands. The worker
+limits graphs to 64 nodes and 256 KiB, runs at most two child runtimes at once,
+and bounds each child to 30 seconds. The profile has no credential, external
+effect, arbitrary script, pinned data, published trigger or general expression
+capability. Unqualified node options or graph shapes return an explicit error
+before dispatch.
+
+The native editor runs the committed saved revision. Studio binds each
+execution to that graph and records node inputs through their source links,
+outputs, and terminal state. The initiating editor receives a completion
+notification after the result commits, and the native Executions view reads
+the retained snapshot. Shutdown closes execution intake and waits for
+admitted work to finish recording.
+
+The editor's Stop request targets the current run. Studio records cancellation
+after the owned child exits in response to Stop, or when it confirms that no
+child was started. If the run finishes first, its existing result wins. A
+repeated Stop reads the committed cancellation without creating another run.
+The Windows browser qualification observed a canceled run and a separate
+successful run of the same saved revision. Crash recovery and retention of
+partial node output from canceled runs remain open.
+
+The Windows qualification used the normal launcher and a synthetic workflow.
+Changing a numeric IF operand from 42 to 60 through the editor moved the item
+from false to true, matching the reference. Both runs reopened with their
+original saved revisions. This qualifies those journeys within the manual
+profile. Full execution and expression parity and Baker acceptance remain
+separate gates.
+
 ## Initialization and connection contracts
 
 The selected editor initializes a separate owner-local descriptor index through

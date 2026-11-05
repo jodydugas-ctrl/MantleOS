@@ -21,7 +21,7 @@ class StudioEditorTests(unittest.TestCase):
         names = ('editor-catalog.test.cjs', 'editor-installation.test.cjs',
                  'editor-local-context.test.cjs', 'editor-sockets.test.cjs',
                  'workflow-checksum.test.cjs', 'resident-view.test.cjs',
-                 'community-editor.test.cjs')
+                 'community-editor.test.cjs', 'editor-executions.test.cjs', 'manual-node-red.test.cjs')
         result = subprocess.run([shutil.which('node'), '--test', *(str(root/name) for name in names)],
                                 capture_output=True, text=True, timeout=60)
         self.assertEqual(result.returncode, 0, result.stdout+result.stderr)

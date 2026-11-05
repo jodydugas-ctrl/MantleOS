@@ -16,6 +16,16 @@ test('authenticated dispatcher keeps host sockets working alongside editor heart
  const headers={Authorization:'Basic '+Buffer.from(credentials.user+':'+credentials.password).toString('base64')};
  function socket(url,extra={}){const ws=new WebSocket('ws://127.0.0.1:'+port+url,{headers:{...headers,...extra}});clients.push(ws);return ws;}
  const editor=socket('/rest/push?pushRef=synthetic');await once(editor,'open');editor.send(JSON.stringify({type:'heartbeat'}));
+ const other=socket('/rest/push?pushRef=other');await once(other,'open');
+ const captured=attached.capture('synthetic');
+ const observed=[];other.on('message',value=>observed.push(value));
+ assert.equal(typeof captured,'function');
+ const originalFrame=once(editor,'message');
+ assert.equal(captured({type:'executionFinished',data:{executionId:'e1'}}),true);
+ assert.equal(JSON.parse((await originalFrame)[0]).data.executionId,'e1');
+ assert.deepEqual(observed,[]);
+ const duplicate=socket('/rest/push?pushRef=synthetic');await once(duplicate,'error');
+ assert.equal(attached.capture('unknown'),null);
  editor.send(JSON.stringify({type:'workflowOpened',workflowId:'synthetic-workflow'}));
  editor.send(JSON.stringify({type:'workflowClosed',workflowId:'synthetic-workflow'}));
  for(const route of ['/red/comms','/flows/host-owned-socket']){const ws=socket(route);assert.equal((await once(ws,'message'))[0].toString(),'host ready');}
@@ -26,5 +36,8 @@ test('authenticated dispatcher keeps host sockets working alongside editor heart
  forgedPresence.send(JSON.stringify({type:'workflowOpened',workflowId:'synthetic-workflow',authority:'APPROVED'}));
  assert.equal((await once(forgedPresence,'close'))[0],1008);
  editor.send(JSON.stringify({type:'execute',authority:'FORGED'}));assert.equal((await once(editor,'close'))[0],1008);
+ const replacement=socket('/rest/push?pushRef=synthetic');await once(replacement,'open');
+ assert.equal(captured({type:'executionFinished',data:{executionId:'e1'}}),false);
+ assert.equal(typeof attached.capture('synthetic'),'function');
  editorEnabled=false;const legacy=socket('/rest/push');assert.equal((await once(legacy,'message'))[0].toString(),'host ready');assert.equal(redUpgrades,3);
 });

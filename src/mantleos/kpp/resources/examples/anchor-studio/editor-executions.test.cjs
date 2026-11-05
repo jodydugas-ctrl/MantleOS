@@ -1,0 +1,117 @@
+'use strict';
+const test=require('node:test');
+const assert=require('node:assert/strict');
+const {setImmediate:turn}=require('node:timers/promises');
+const {mountExecutionRoutes,encodeRunData}=require('./editor-executions.cjs');
+
+function setup({rejectCommit=false,stopAware=false}={}){
+ const handlers=new Map(),calls=[],frames=[];
+ const saved={id:'w1',name:'Workflow',versionId:'saved',revision:'rev',
+  nodes:[{name:'Manual',type:'n8n-nodes-base.manualTrigger'}]};
+ let result={id:'e1',workflowId:'w1',workflowVersionId:'saved',startedAt:'2026-11-05T12:00:00Z',
+  status:'running',workflowData:saved,mode:'manual',data:null};
+ mountExecutionRoutes((method,path,handler)=>handlers.set(method+' '+path,handler),{
+  capture:ref=>ref==='origin'?frame=>frames.push(frame):null,
+  runtime:{async admit(value){
+   calls.push(['admit',value]);
+   return async input=>{
+    calls.push(['dispatch',input]);
+    if(stopAware){
+     if(!input.signal.aborted)await new Promise(resolve=>input.signal.addEventListener('abort',resolve,{once:true}));
+     return {status:'canceled',data:{version:1,resultData:{runData:{}}}};
+    }
+    return {status:'success',data:{version:1,resultData:{runData:{},lastNodeExecuted:'Manual'}}};
+   };
+  }},
+  workflows:{async call(op,args){
+   calls.push([op,args]);
+   if(op==='get')return saved;
+   if(op==='execution_start')return {...result,claim:'private-claim',
+    selection:{trigger:args.trigger,destination:args.destination}};
+   if(op==='execution_finish'){
+    if(rejectCommit)throw Error('WORKFLOW_UNAVAILABLE');
+    result={...result,status:args.status,data:args.result,stoppedAt:'2026-11-05T12:00:01Z'};
+    return result;
+   }
+   if(op==='execution_get')return result;
+   if(op==='execution_list')return {count:1,data:[result]};
+   throw Error('unexpected call');
+  }},
+ });
+ const run=(body,ref='origin')=>handlers.get('post /rest/workflows/:id/run')({
+  headers:{'push-ref':ref},params:{id:'w1'},body,
+ });
+ const detail=()=>handlers.get('get /rest/executions/:id')({params:{id:'e1'},query:{}});
+ const listing=()=>handlers.get('get /rest/executions')({query:{filter:'{"workflowId":"w1"}'}});
+ const stop=body=>handlers.get('post /rest/executions/:id/stop')({params:{id:'e1'},body});
+ return {run,detail,listing,stop,calls,frames};
+}
+
+test('native run transport binds selected saved version and publishes only a committed finish',async()=>{
+ const server=setup();
+ const request={workflowId:'w1',triggerToStartFrom:{name:'Manual'},startNodes:[]};
+ assert.deepEqual(await server.run(request),{data:{executionId:'e1'}});
+ assert.deepEqual(server.frames,[]);
+ await turn();
+ assert.deepEqual(server.frames.map(frame=>frame.type),['executionStarted','executionFinished']);
+ assert.deepEqual(server.calls.map(([op])=>op),['get','admit','execution_start','dispatch','execution_finish']);
+ assert.equal(server.calls[2][1].version_id,'saved');
+ assert.equal(server.calls[4][1].claim,'private-claim');
+ const detail=(await server.detail()).data;
+ assert.equal(detail.workflowVersionId,'saved');
+ assert.equal(detail.status,'success');
+ assert.equal(typeof detail.data,'string');
+ assert.ok(!JSON.stringify(detail).includes('private-claim'));
+ const page=(await server.listing()).data;
+ assert.equal(page.count,1);
+ assert.equal(page.results[0].id,'e1');
+ assert.ok(!('data' in page.results[0]));
+});
+
+test('unsupported or detached requests never reserve work and failed commit never sends finish',async()=>{
+ const server=setup({rejectCommit:true});
+ const request={triggerToStartFrom:{name:'Manual'}};
+ await assert.rejects(server.run(request,'unrelated'),/editor connection/);
+ await assert.rejects(server.run({...request,workflowData:{nodes:[]}}),/Unsupported execution/);
+ assert.ok(!server.calls.some(([op])=>op==='execution_start'));
+ await server.run(request);
+ await turn();
+ assert.deepEqual(server.frames.map(frame=>frame.type),['executionStarted']);
+ assert.equal((await server.detail()).data.status,'running');
+});
+
+test('Stop waits for the committed cancellation and repeated Stop reads the same record',async()=>{
+ const server=setup({stopAware:true});
+ await server.run({triggerToStartFrom:{name:'Manual'}});
+ await turn();
+ await assert.rejects(server.stop({state:'canceled'}),/Unsupported execution/);
+ const first=await server.stop({});
+ assert.deepEqual(first.data,{status:'canceled',mode:'manual',finished:false,
+  startedAt:'2026-11-05T12:00:00Z',stoppedAt:'2026-11-05T12:00:01Z'});
+ assert.deepEqual(await server.stop(),first);
+ assert.equal(server.calls.filter(([op])=>op==='execution_finish').length,1);
+ assert.equal(server.frames.at(-1).data.status,'canceled');
+});
+
+test('Stop preserves a run that finishes first and a failed cancellation commit stays unresolved',async()=>{
+ const intent={triggerToStartFrom:{name:'Manual'}};
+ const completed=setup();
+ await completed.run(intent);
+ await assert.rejects(completed.stop(),/already finished/);
+ assert.equal((await completed.detail()).data.status,'success');
+ const unresolved=setup({rejectCommit:true,stopAware:true});
+ await unresolved.run(intent);
+ await assert.rejects(unresolved.stop(),/stop requires review/);
+ assert.equal((await unresolved.detail()).data.status,'running');
+ assert.deepEqual(unresolved.frames.map(frame=>frame.type),['executionStarted']);
+});
+
+test('run-data encoding retains numeric text and nested item shape for Flatted consumers',()=>{
+ const item={json:{text:'0',n:1}};
+ const table=JSON.parse(encodeRunData({items:[item,item]}));
+ const items=table[Number(table[0].items)];
+ assert.equal(items[0],items[1]);
+ const json=table[Number(table[Number(items[0])].json)];
+ assert.equal(table[Number(json.text)],'0');
+ assert.equal(json.n,1);
+});
