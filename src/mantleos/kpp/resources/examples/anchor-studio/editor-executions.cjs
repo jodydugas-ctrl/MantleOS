@@ -73,8 +73,8 @@ function mountExecutionRoutes(route,{workflows,runtime,capture,projectId}){
    mode:'manual',startedAt,flattedRunData:'[{}]'}});
   let observation;
   try{
-   observation=await operation({id:executionId,workflow:workflowData,selection:started.selection,signal});
-   if(!observation||!['success','error','canceled'].includes(observation.status)||!observation.data||
+   observation=await operation({id:executionId,claim,workflow:workflowData,selection:started.selection,signal});
+   if(!observation||!['success','error','canceled','needs_review'].includes(observation.status)||!observation.data||
       typeof observation.data!=='object'||Array.isArray(observation.data))throw Error('Unverified observation');
   }catch{
    observation={status:'needs_review',data:{version:1,resultData:{runData:{},error:{

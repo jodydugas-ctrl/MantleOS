@@ -160,6 +160,12 @@ call('boot').then(async receipt=>{
    runtime:require('./manual-node-red.cjs').createManualRuntime({
     nodeRed:require.resolve(process.env.STUDIO_MODULES+'/node-red'),version:RED.version(),
     checkActive:()=>call('editor_manual_authority',{sha256:selected.sha256}),
+    effects:selected.credential_editor===true?{
+     check:(workflow,nodeId)=>workflows.call('credential_effect_check',{workflow_id:workflow.id,
+      version_id:workflow.versionId,node_id:nodeId,configuration:selected.sha256}),
+     observe:(execution,nodeId)=>workflows.call('credential_effect_observe',{run_id:execution.id,
+      claim:execution.claim,node_id:nodeId,configuration:selected.sha256}),
+    }:null,
    }),
   }:null;
   const credentials=selected.credential_editor===true?{configuration:selected.sha256,capture:ref=>sockets?.capture(ref)}:null;

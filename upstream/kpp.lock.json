@@ -708,7 +708,7 @@
     },
     "src/mantleos/kpp/resources/docs/STUDIO-EDITOR-SOURCE.md": {
       "group": "implementation",
-      "sha256": "3d154305d69c63d90d743eb0978b5c8fa04902990a057c8febb084bdda1ffad7",
+      "sha256": "a1a7bd03366f9b4c3f3af0a02e878177f68eac45f969ad61f33c403df05e9633",
       "source": "src/mantleos/kpp/resources/docs/STUDIO-EDITOR-SOURCE.md"
     },
     "src/mantleos/kpp/resources/docs/STUDIO-QUALIFICATION.md": {
@@ -926,6 +926,11 @@
       "sha256": "d3f55dd15f5c502ac5b05ad6cb42173dd3a5db9632d06c049e7e7947ab550e87",
       "source": "src/mantleos/kpp/resources/examples/anchor-studio/conditions.test.cjs"
     },
+    "src/mantleos/kpp/resources/examples/anchor-studio/edit-fields.cjs": {
+      "group": "implementation",
+      "sha256": "2072fc7f078f4997cb1cc934b4cd4e12755756ae6884317d05afe2e7c2c32fa7",
+      "source": "src/mantleos/kpp/resources/examples/anchor-studio/edit-fields.cjs"
+    },
     "src/mantleos/kpp/resources/examples/anchor-studio/editor-assets.cjs": {
       "group": "implementation",
       "sha256": "1d9c3886f751f322e5aa8b1bf9427bfa6add4058df451f0f0c14ca61dc33e8a2",
@@ -953,7 +958,7 @@
     },
     "src/mantleos/kpp/resources/examples/anchor-studio/editor-executions.cjs": {
       "group": "implementation",
-      "sha256": "9de8db5f5142d6928924311261976c2b9728f1f81f4b6cea3c54745cc73b5c84",
+      "sha256": "8c88a195e54f0ebc563dbcff9286b1a681727be6da7ea3319c4faa74c4b95291",
       "source": "src/mantleos/kpp/resources/examples/anchor-studio/editor-executions.cjs"
     },
     "src/mantleos/kpp/resources/examples/anchor-studio/editor-executions.test.cjs": {
@@ -1018,7 +1023,7 @@
     },
     "src/mantleos/kpp/resources/examples/anchor-studio/launcher.cjs": {
       "group": "implementation",
-      "sha256": "66ed3e06304e7e14d150c671d6eee860927c848ce006483dbf3111f94b948b08",
+      "sha256": "60b2a32c6cc6573d758a7ca358dc7413822f959b7e2d923c0e547048293472e2",
       "source": "src/mantleos/kpp/resources/examples/anchor-studio/launcher.cjs"
     },
     "src/mantleos/kpp/resources/examples/anchor-studio/local-access.cjs": {
@@ -1033,12 +1038,12 @@
     },
     "src/mantleos/kpp/resources/examples/anchor-studio/manual-node-red.cjs": {
       "group": "implementation",
-      "sha256": "97eb5acc2c705edb29c44b874d28d227c0d3afc91160921a0b3009a2697f094c",
+      "sha256": "16f7497f8f1995637ad33f1a8e4dd56024460d6f512dd4231cb9ec17ec5f2afd",
       "source": "src/mantleos/kpp/resources/examples/anchor-studio/manual-node-red.cjs"
     },
     "src/mantleos/kpp/resources/examples/anchor-studio/manual-node-red.test.cjs": {
       "group": "implementation",
-      "sha256": "cfa085a4e9e6ad61852f8c04650752ad97f9c90391f0de6e5f14cb614eda90a1",
+      "sha256": "072f3650343c4fe225fab3060b0195e86302f258ee1582bd3e2a30255ebe118e",
       "source": "src/mantleos/kpp/resources/examples/anchor-studio/manual-node-red.test.cjs"
     },
     "src/mantleos/kpp/resources/examples/anchor-studio/package-lock.json": {
@@ -2718,13 +2723,18 @@
     },
     "src/mantleos/studio.py": {
       "group": "implementation",
-      "sha256": "fbd41a2d277b6cc2e45c6549257045e25db497b4fa6120e17717bda046ff142e",
+      "sha256": "65a5535b601f0fd3877fd228695a34ce6fd5e8bdcf8a5cf80f528068d9a46031",
       "source": "src/mantleos/studio.py"
     },
     "src/mantleos/studio_auto_mind.py": {
       "group": "implementation",
       "sha256": "f935994fc9b287404bb61f7527350f8a4cafb49a2942ac52eb2534a23d71d6ab",
       "source": "src/mantleos/studio_auto_mind.py"
+    },
+    "src/mantleos/studio_credential_use.py": {
+      "group": "implementation",
+      "sha256": "710092e7e25b99be879cb58beffc972a923eb3e49575d724d16a9a4e721bbd89",
+      "source": "src/mantleos/studio_credential_use.py"
     },
     "src/mantleos/studio_credentials.py": {
       "group": "implementation",
@@ -2773,7 +2783,7 @@
     },
     "src/mantleos/studio_workflows.py": {
       "group": "implementation",
-      "sha256": "6968c39f56bf27f59e1bf55e99021d6f048e6508989c7c5f5ac6d07654fbd227",
+      "sha256": "4925f5a7cf701fe477a4480e2c5375c383f5c85122c3bf0959a7d63b454edf24",
       "source": "src/mantleos/studio_workflows.py"
     },
     "src/mantleos/synchronization.py": {
@@ -3086,6 +3096,11 @@
       "sha256": "fae4768743bf63c827c82180ff1398441990e25d184852f985845184dd8ea473",
       "source": "tests/test_studio_conditions.py"
     },
+    "tests/kpp/test_studio_credential_use.py": {
+      "group": "tests",
+      "sha256": "cb77dae3afb62e59d60cac4ed3761dc018a4ef4c300b53d6cb803fb57c76bdd0",
+      "source": "tests/test_studio_credential_use.py"
+    },
     "tests/kpp/test_studio_credentials.py": {
       "group": "tests",
       "sha256": "a0ed331a1963888137a490b93a9d00d533802d8803adb8bdd9ca178ab5ba2979",
@@ -3172,10 +3187,10 @@
     "upstream/kpp-notices/THIRD-PARTY-NOTICES.md"
   ],
   "schema": "mantle.kpp-upstream/1",
-  "selection_digest": "19aabed071bcc7cc117431769b2b6b5685e0d10fa9018717d429d8fd6f4c8711",
-  "shared_source_digest": "0e3f7f3210ac5707c0f85d71c483f5918d4780d8db2e4b473fde8617bfdde660",
+  "selection_digest": "3c0445272d359be3b4219b0d4ac7e9147522dd021389eb1f1f8fedb63d76c54b",
+  "shared_source_digest": "1c342f9de15b9edf73198f5c724004151b9bfb1f3e6d80d4141622cdb0a34119",
   "upstream": {
-    "base_commit": "9cdc97f8a40e203d5c94bbac7556d90fead0528a",
+    "base_commit": "4ebf3ff44d004e44857d6c1155b54695fb4eba5f",
     "dirty": false,
     "official_url": "https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol",
     "published_revision_verified": false,

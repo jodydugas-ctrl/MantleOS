@@ -396,6 +396,14 @@ class WorkflowStore:
                 del value['data'], value['workflowData']
             return value
 
+    def execution_authorize(self, run_id, *, claim, source_pin):
+        """Read a verified saved execution for a trusted host effect adapter."""
+        with self._db() as db:
+            row = self._execution_row(db, run_id)
+            if row['status'] != 'running' or (row['claim'], row['source_pin']) != (claim, source_pin):
+                raise PermissionError('Execution effect claim or source does not match')
+            return self._execution_view(db, row, detail=True)
+
     def execution_list(self, *, workflow_id=None, limit=50, offset=0):
         c.require(type(limit) is int and 1 <= limit <= 200 and type(offset) is int and offset >= 0,
                   'Invalid execution pagination')
@@ -594,7 +602,7 @@ class WorkflowStore:
 
 
 def serve(store, input_stream=None, output_stream=None, *, check_source=None, execution_source=None,
-          credential_store=None):
+          credential_store=None, credential_use=None):
     """Trusted foreground controller pipe, never a network/model RPC listener.
 
     Operational documents have a separate budget from cognition frames. The
@@ -639,6 +647,12 @@ def serve(store, input_stream=None, output_stream=None, *, check_source=None, ex
                 with credential_store(args['configuration']) as vault:
                     result = getattr(vault, op.removeprefix('credential_'))(
                         **{key: args[key] for key in keys}, reviewed=True)
+            elif op == 'credential_effect_check' and credential_use:
+                c.shape(args, {'workflow_id', 'node_id', 'version_id', 'configuration'})
+                result = credential_use.check(**args)
+            elif op == 'credential_effect_observe' and credential_use:
+                c.shape(args, {'run_id', 'node_id', 'claim', 'configuration'})
+                result = credential_use.observe(**args)
             elif op == 'execution_start' and execution_source:
                 result = store.execution_start(args, source_pin=execution_source, owner=True)
             elif op == 'execution_finish' and execution_source:

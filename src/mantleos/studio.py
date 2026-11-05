@@ -36,9 +36,9 @@ ADDENDUM = ('Anchor Studio is a fresh Node-RED resident AppAI. Its embodiment is
 
 def controller_pin():
     root=Path(__file__).parent
-    names=('studio.py','studio_editor.py','studio_inventory.py','studio_credentials.py','storage.py','studio_handlers.py','studio_project.py','studio_workflows.py','studio_auto_mind.py','studio_mind_config.py','studio_mind_budget.py','studio_mind_provider.py','studio_demo.py','limbs.py','journal.py','anchors.py','anchor_design.py','anchor_language.py','effects.py','json_contract.py','transactions.py','primer.py','cartridge.py')
+    names=('studio.py','studio_editor.py','studio_inventory.py','studio_credentials.py','studio_credential_use.py','storage.py','studio_handlers.py','studio_project.py','studio_workflows.py','studio_auto_mind.py','studio_mind_config.py','studio_mind_budget.py','studio_mind_provider.py','studio_demo.py','limbs.py','journal.py','anchors.py','anchor_design.py','anchor_language.py','effects.py','json_contract.py','transactions.py','primer.py','cartridge.py')
     resources=('launcher.cjs','json-worker.cjs','committed-events.cjs','local-access.cjs','workspace.html','workspace.css','workspace.js','conditions.cjs','palette/nodes.js','palette/nodes.html',
-               'editor-assets.cjs','editor-catalog.cjs','editor-installation.cjs','editor-local-context.cjs','editor-sockets.cjs','community-editor.cjs','editor-credentials.cjs','editor-executions.cjs','manual-node-red.cjs','workflow-checksum.cjs','resident-view.cjs','resident-panel.js')
+               'editor-assets.cjs','editor-catalog.cjs','editor-installation.cjs','editor-local-context.cjs','editor-sockets.cjs','community-editor.cjs','editor-credentials.cjs','editor-executions.cjs','manual-node-red.cjs','edit-fields.cjs','workflow-checksum.cjs','resident-view.cjs','resident-panel.js')
     names+=tuple('kpp/resources/examples/anchor-studio/'+name for name in resources)
     return c.digest({name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in names})
 
@@ -441,9 +441,16 @@ def main(argv=None):
     if hasattr(sys.stdout,'reconfigure'):sys.stdout.reconfigure(encoding='utf-8')
     parser=argparse.ArgumentParser(prog='mantleos studio')
     sub=parser.add_subparsers(dest='command',required=True)
-    for command in ('init','status','stasis','activate','serve','workflow-serve','mind-serve','mind-configure','mind-status','mind-next','mind-submit','import','export','run','migrate-limbs','rebind-source','recover-mind','editor-configure','editor-status','editor-disable'):
+    for command in ('init','status','stasis','activate','serve','workflow-serve','mind-serve','mind-configure','mind-status','mind-next','mind-submit','import','export','run','migrate-limbs','rebind-source','recover-mind','editor-configure','editor-status','editor-disable','credential-grant','credential-revoke'):
         p=sub.add_parser(command);p.add_argument('--nest',type=Path,required=True)
         if command in ('rebind-source','recover-mind','editor-disable'):p.add_argument('--reviewed',action='store_true')
+        if command in ('credential-grant','credential-revoke'):
+            p.add_argument('--reviewed',action='store_true')
+            if command=='credential-grant':
+                p.add_argument('--workflow',required=True)
+                p.add_argument('--node',required=True)
+                p.add_argument('--ttl',type=int,default=600)
+            else:p.add_argument('--grant',required=True)
         if command=='recover-mind':p.add_argument('--request-id',required=True)
         if command=='init':p.add_argument('--founding',type=Path,required=True)
         if command=='mind-configure':
@@ -466,6 +473,13 @@ def main(argv=None):
             p.add_argument('--request-id',required=True);p.add_argument('--proposal',type=Path,required=True)
         if command in ('import','export'):p.add_argument('--file',type=Path,required=True)
     args=parser.parse_args(argv)
+    if args.command in ('credential-grant','credential-revoke'):
+        from .studio_credential_use import CredentialUse
+        authority=CredentialUse(args.nest)
+        result=(authority.grant(args.workflow,args.node,ttl=args.ttl,reviewed=args.reviewed)
+                if args.command=='credential-grant' else authority.revoke(args.grant,reviewed=args.reviewed))
+        print(json.dumps(result,indent=2))
+        return 0
     if args.command in ('editor-configure','editor-status','editor-disable'):
         from . import studio_editor
         if args.command=='editor-configure':
@@ -493,6 +507,7 @@ def main(argv=None):
         return subprocess.call([str(args.node.resolve()),str(Path(__file__).parent/'kpp/resources/examples/anchor-studio/launcher.cjs')],env=env)
     if args.command=='workflow-serve':
         from .studio_workflows import WorkflowStore, serve
+        from .studio_credential_use import CredentialUse
         from .studio_credentials import CredentialStore
         from .studio_editor import from_database
         def check_source():
@@ -508,7 +523,8 @@ def main(argv=None):
                 yield CredentialStore(args.nest, _setting(db, 'identity'))
         check_source()
         return serve(WorkflowStore(args.nest/'operational-workflows'),
-                     check_source=check_source,execution_source=controller_pin(),credential_store=credentials)
+                     check_source=check_source,execution_source=controller_pin(),credential_store=credentials,
+                     credential_use=CredentialUse(args.nest))
     if args.command=='serve':
         from concurrent.futures import ProcessPoolExecutor
         from multiprocessing import get_context
