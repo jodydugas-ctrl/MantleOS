@@ -18,21 +18,48 @@ function encodeRunData(value){
 
 function selection(body,workflow){
  if(!body||typeof body!=='object'||Array.isArray(body)||
-    Object.keys(body).some(key=>!['workflowId','triggerToStartFrom','destinationNode','startNodes'].includes(key)))
+    Object.keys(body).some(key=>!['workflowId','triggerToStartFrom','destinationNode','startNodes','runData','dirtyNodeNames'].includes(key)))
   throw Error('Unsupported execution: selection');
  if(body.workflowId!==undefined&&body.workflowId!==workflow.id)throw Error('Conflict: execution workflow');
- if(body.startNodes!==undefined&&(!Array.isArray(body.startNodes)||body.startNodes.length))
-  throw Error('Unsupported execution: precomputed start nodes');
  const source=body.triggerToStartFrom,destination=body.destinationNode;
  if(source!==undefined&&(!source||typeof source!=='object'||Object.keys(source).join(',')!=='name'||typeof source.name!=='string'))
   throw Error('Unsupported execution: trigger data');
  if(destination!==undefined&&(!destination||typeof destination!=='object'||
     Object.keys(destination).sort().join(',')!=='mode,nodeName'||destination.mode!=='inclusive'||typeof destination.nodeName!=='string'))
   throw Error('Unsupported execution: destination');
+ const hints=body.startNodes;
+ if(hints!==undefined&&(!Array.isArray(hints)||hints.length>64||
+    (hints.length>0&&!destination)||hints.some(hint=>!hint||typeof hint.name!=='string'||
+     Object.keys(hint).sort().join(',')!=='name,sourceData')))
+  throw Error('Unsupported execution: precomputed start nodes');
+ if(body.runData!==undefined&&(!destination||!body.runData||typeof body.runData!=='object'||Array.isArray(body.runData)))
+  throw Error('Unsupported execution: partial cache');
+ if(body.dirtyNodeNames!==undefined&&(!destination||!Array.isArray(body.dirtyNodeNames)||
+    body.dirtyNodeNames.length>64||body.dirtyNodeNames.some(name=>typeof name!=='string')))
+  throw Error('Unsupported execution: dirty node names');
  const triggers=workflow.nodes.filter(node=>node.type==='n8n-nodes-base.manualTrigger'&&!node.disabled);
  const trigger=source?.name??(destination&&triggers.length===1?triggers[0].name:null);
  if(!trigger||!triggers.some(node=>node.name===trigger))throw Error('Unsupported execution: manual trigger');
  return {trigger,destination:destination?.nodeName??null};
+}
+
+function reusableAncestors(workflow,selected,dirtyNames){
+ const parent=new Map();
+ for(const [name,ports] of Object.entries(workflow.connections)){
+  for(const edges of ports.main??[]){
+   for(const edge of edges)parent.set(edge.node,name);
+  }
+ }
+ const path=[],visited=new Set([selected.destination]);
+ for(let name=parent.get(selected.destination);name!==undefined;name=parent.get(name)){
+  if(visited.has(name))throw Error('Unsupported execution: partial cycle');
+  visited.add(name);
+  path.unshift(name);
+  if(name===selected.trigger)break;
+ }
+ const dirty=new Set(dirtyNames??[]);
+ const firstDirty=path.findIndex(name=>dirty.has(name));
+ return firstDirty===-1?path:path.slice(0,firstDirty);
 }
 
 function presentation(run,includeData){
@@ -100,8 +127,8 @@ function mountExecutionRoutes(route,{workflows,runtime,capture,projectId,configu
   const done=()=>{pending.delete(lifecycle);release();};
   pending.add(lifecycle);
   try{
-   const {workflow,selected,revision,retry,request}=await prepare();
-   const operation=await runtime.admit({workflow,selection:selected,...(retry?{retry}:{})});
+   const {workflow,selected,revision,retry,partial,request}=await prepare();
+   const operation=await runtime.admit({workflow,selection:selected,...(retry?{retry}:{}),...(partial?{partial}:{})});
    if(typeof operation!=='function')throw Error('Unsupported execution: runtime capability');
    if(closing)throw Error('PermissionError: execution intake stopped');
    const run=await workflows.call('execution_start',{request_id:'run-'+randomUUID(),
@@ -124,7 +151,19 @@ function mountExecutionRoutes(route,{workflows,runtime,capture,projectId,configu
   if(!push)throw Error('Conflict: execution editor connection');
   const {run}=await launch(async()=>{
    const workflow=await workflows.call('get',{id:req.params.id});
-   return {workflow,selected:selection(req.body,workflow),revision:workflow.revision};
+   const selected=selection(req.body,workflow);
+   const preparation={workflow,selected,revision:workflow.revision};
+   if(req.body.runData!==undefined){
+    const ancestors=reusableAncestors(workflow,selected,req.body.dirtyNodeNames);
+    const checkpoint=ancestors.length&&Object.keys(req.body.runData).length
+     ?await workflows.call('execution_partial_prepare',{
+       workflow_id:workflow.id,version_id:workflow.versionId,revision:workflow.revision,
+       ancestors,run_data:req.body.runData,
+      }):null;
+    preparation.partial={checkpoint};
+    if(checkpoint)preparation.request={partial_of:checkpoint.run_id,partial_binding:checkpoint.binding};
+   }
+   return preparation;
   },push);
   return {data:{executionId:run.id}};
  });

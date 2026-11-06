@@ -21,6 +21,92 @@ function workflow(value=42){
 }
 const full={trigger:'Manual',destination:null};
 
+test('Execute Step reuses the retained path and stops at the selected node',
+ {skip:!process.env.STUDIO_MODULES?'Owner-provisioned Node-RED runtime absent':false,timeout:90000},async()=>{
+ const nodeRed=require.resolve(path.join(process.env.STUDIO_MODULES,'node-red'));
+ const runtime=createManualRuntime({nodeRed,version:require(nodeRed).version(),checkActive:async()=>{}});
+ const saved=workflow();
+ const selection={trigger:'Manual',destination:'If'};
+ async function run(selected,partial){
+  const operation=await runtime.admit({workflow:saved,selection:selected,partial});
+  return operation({workflow:saved,selection:selected});
+ }
+ const completed=await run(full);
+ assert.equal(completed.status,'success');
+ const previous=completed.data.resultData.runData;
+ const checkpoint={run_id:'prior',prefix:{Manual:previous.Manual}};
+ const warm=await run(selection,{checkpoint});
+ assert.equal(warm.status,'success');
+ assert.deepEqual(warm.data.resultData.runData.Manual,previous.Manual);
+ assert.deepEqual(Object.keys(warm.data.resultData.runData),['Manual','If']);
+ assert.deepEqual(warm.data.startData.studioPartial,{checkpoint:'prior',reused:['Manual']});
+ const dirty=await run(selection,{checkpoint:null});
+ assert.equal(dirty.status,'success');
+ assert.ok(dirty.data.resultData.runData.Manual[0].startTime>previous.Manual[0].startTime);
+ assert.equal(dirty.data.startData.studioPartial,undefined);
+});
+
+test('saved pins replace manual output, preserve pairing, stop empty paths, and survive a retry',
+ {skip:!process.env.STUDIO_MODULES?'Owner-provisioned Node-RED runtime absent':false,timeout:90000},async()=>{
+ const nodeRed=require.resolve(path.join(process.env.STUDIO_MODULES,'node-red'));
+ const runner=createManualRuntime({nodeRed,version:require(nodeRed).version(),checkActive:async()=>{}});
+ const saved=workflow();
+ const edit=(name,value)=>({name,type:'n8n-nodes-base.set',typeVersion:3.5,parameters:{
+  assignments:{assignments:[{name:'value',type:'number',value}]},options:{},
+ }});
+ const edge=node=>({main:[[{node,type:'main',index:0}]]});
+ saved.nodes.splice(1,2,edit('Seed','={{ $json.seed }}'),edit('Project','={{ $json.value }}'));
+ saved.connections={Manual:edge('Seed'),Seed:edge('Project')};
+ saved.pinData={Manual:[{json:{seed:19}},{json:{seed:23}}]};
+ async function run(workflow,retry){
+  const operation=await runner.admit({workflow,selection:full,retry});
+  return operation({workflow,selection:full});
+ }
+ const original=await run(saved);
+ assert.equal(original.status,'success');
+ const output=result=>result.data.resultData.runData.Project[0].data.main[0];
+ assert.deepEqual(output(original),[{json:{value:19},pairedItem:{item:0}},{json:{value:23},pairedItem:{item:1}}]);
+ assert.equal(saved.pinData.Manual[0].pairedItem,undefined);
+ const intermediate=structuredClone(saved);
+ intermediate.nodes[1]=edit('Seed','invalid');
+ intermediate.pinData.Seed=[{json:{value:71},pairedItem:{item:1}}];
+ const copied=await run(intermediate);
+ assert.equal(copied.status,'success');
+ assert.deepEqual(copied.data.resultData.pinData.Seed,intermediate.pinData.Seed);
+ assert.equal(output(copied)[0].json.value,71);
+
+ const empty=structuredClone(intermediate);
+ empty.pinData.Manual=[];
+ const stopped=await run(empty);
+ assert.equal(stopped.status,'success');
+ assert.deepEqual(Object.keys(stopped.data.resultData.runData),['Manual']);
+ assert.deepEqual(stopped.data.resultData.runData.Manual[0].data.main,[[]]);
+
+ const failed=structuredClone(saved);
+ failed.nodes[2]=edit('Project','invalid');
+ const checkpoint=await run(failed);
+ assert.equal(checkpoint.status,'error');
+ const current=structuredClone(failed);
+ current.pinData={Manual:[{json:{seed:999}}],Project:[{json:{value:81}}]};
+ const retried=await run(current,checkpoint.data);
+ assert.equal(retried.status,'error');
+ assert.deepEqual(retried.data.resultData.pinData,checkpoint.data.resultData.pinData);
+});
+
+test('pinned data cannot stand in for binary or checked effects',async()=>{
+ const runner=createManualRuntime({checkActive:async()=>{},effects:{
+  check:async()=>assert.fail('A pin must not activate a grant check'),observe:async()=>assert.fail('No effect permitted'),
+ }});
+ const binary=workflow();binary.pinData.Manual=[{json:{},binary:{data:{id:'remote'}}}];
+ await assert.rejects(runner.admit({workflow:binary,selection:full}),/pinned item must contain JSON output/);
+ const branch=workflow();branch.pinData.If=[{json:{}}];
+ await assert.rejects(runner.admit({workflow:branch,selection:full}),/pinned node must have one output/);
+ const checked=waitWorkflow();
+ checked.nodes[1]={id:'effect',name:'Wait',type:'n8n-nodes-base.httpRequest',typeVersion:4.5};
+ checked.pinData.Wait=[{json:{}}];
+ await assert.rejects(runner.admit({workflow:checked,selection:full}),/pinned node must have one output and no external effect/);
+});
+
 test('Node-RED retries the failed step with the committed prefix and rejects changed checkpoint paths',
  {skip:!process.env.STUDIO_MODULES?'Owner-provisioned Node-RED runtime absent':false,timeout:45000},async()=>{
  const nodeRed=require.resolve(path.join(process.env.STUDIO_MODULES,'node-red'));
@@ -264,6 +350,13 @@ test('the pinned n8n QuickJS engine evaluates real Node-RED items and previous-n
   assert.equal(result.status,'success',JSON.stringify(result));
   assert.deepEqual(result.data.resultData.runData.If[0].data.main,[[{
    json:{value:42,fromSeed:40,label:'total 40',private:null},pairedItem:{item:0},
+  }],[]]);
+  saved.pinData.Seed=[{json:{value:52}}];
+  const pinned=await runner.admit({workflow:saved,selection:full});
+  const repeated=await pinned({id:'pinned-run',workflow:saved,selection:full});
+  assert.equal(repeated.status,'success',JSON.stringify(repeated));
+  assert.deepEqual(repeated.data.resultData.runData.If[0].data.main,[[{
+   json:{value:54,fromSeed:52,label:'total 52',private:null},pairedItem:{item:0},
   }],[]]);
  }finally{delete process.env.STUDIO_EXPRESSION_TEST_CANARY;await runner.close();}
 });

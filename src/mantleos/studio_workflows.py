@@ -373,6 +373,48 @@ class WorkflowStore:
         with self._db() as db:
             return self._retry_context(db, run_id, load_workflow, source_pin)
 
+    def execution_partial_prepare(self, *, workflow_id, version_id, revision, ancestors,
+                                  run_data, source_pin, owner=False):
+        """Find a retained prefix that matches the browser's cache hints."""
+        if owner is not True:
+            raise PermissionError('Independent owner execution authority required')
+        c.require(type(ancestors) is list and len(ancestors) <= 64 and
+                  all(type(name) is str for name in ancestors), 'Invalid partial execution path')
+        c.require(type(run_data) is dict and len(run_data) <= 64, 'Invalid partial execution cache')
+        _encoded(run_data, MAX_EXECUTION_RESULT)
+        with self._db() as db:
+            current = self._row(db, workflow_id)
+            if (current['version'], current['revision']) != (version_id, revision):
+                raise Conflict('Workflow changed before partial execution')
+            if not ancestors or not _execution_table(db):
+                return None
+            rows = db.execute(
+                'SELECT * FROM workflow_executions WHERE workflow=? AND version=? AND source_pin=? '
+                "AND status='success' AND "+_retained_condition(db)+' ORDER BY rowid DESC LIMIT 16',
+                (workflow_id, version_id, source_pin),
+            )
+            best = None
+            fields = ('startTime', 'executionIndex', 'source', 'data')
+            for row in rows:
+                result = self._execution_view(db, row, detail=True)['data'].get('resultData', {})
+                stored = result.get('runData', {})
+                prefix = {}
+                for name in ancestors:
+                    actual, hint = stored.get(name), run_data.get(name)
+                    if not isinstance(actual, list) or len(actual) != 1 or not isinstance(hint, list) or len(hint) != 1:
+                        break
+                    task, claimed = actual[0], hint[0]
+                    if not isinstance(task, dict) or not isinstance(claimed, dict) or task.get('executionStatus') != 'success':
+                        break
+                    if _encoded([task.get(key) for key in fields]) != _encoded([claimed.get(key) for key in fields]):
+                        break
+                    prefix[name] = actual
+                if prefix and (best is None or len(prefix) > len(best['prefix'])):
+                    best = {'run_id': row['id'], 'binding': row['result_sha256'], 'prefix': prefix}
+                if len(prefix) == len(ancestors):
+                    break
+            return best
+
     def execution_start(self, request, *, source_pin, owner=False):
         """Reserve one dispatch of a saved version, from an independently authorized host."""
         if owner is not True:
@@ -380,10 +422,13 @@ class WorkflowStore:
         c.require(type(source_pin) is str and re.fullmatch(r'[a-f0-9]{64}', source_pin),
                   'Verified execution source required')
         retry_keys = {'retry_of', 'retry_current', 'retry_binding'}
+        partial_keys = {'partial_of', 'partial_binding'}
         base_keys = {'request_id', 'workflow_id', 'version_id', 'revision', 'trigger', 'destination'}
         c.require(type(request) is dict, 'Invalid execution request')
         retry = 'retry_of' in request
-        c.shape(request, base_keys | (retry_keys if retry else set()))
+        partial = 'partial_of' in request
+        c.require(not (retry and partial), 'Conflicting execution modes')
+        c.shape(request, base_keys | (retry_keys if retry else partial_keys if partial else set()))
         if retry:
             _id(request['retry_of'])
             c.require(type(request['retry_current']) is bool, 'Invalid retry mode')
@@ -415,6 +460,13 @@ class WorkflowStore:
                     raise Conflict('Retry checkpoint changed before admission')
             if (target, current['revision']) != (request['version_id'], request['revision']):
                 raise Conflict('Workflow changed before execution admission')
+            if partial:
+                row = self._execution_row(db, request['partial_of'])
+                if (request['destination'] is None or
+                    (row['workflow'], row['version'], row['source_pin'], row['status'], row['result_sha256']) !=
+                    (current['id'], target, source_pin, 'success', request['partial_binding']) or
+                    (_has_history_policy(db) and row['discarded'])):
+                    raise Conflict('Partial execution checkpoint changed before admission')
             c.require(not current['archived'], 'Archived workflow cannot run')
             graph = self._version(db, current['id'], target)
             names = {node['name'] for node in graph['nodes']}
@@ -777,6 +829,9 @@ def serve(store, input_stream=None, output_stream=None, *, check_source=None, ex
             elif op == 'execution_retry_prepare' and execution_source:
                 c.shape(args, {'run_id', 'load_workflow'})
                 result = store.execution_retry_prepare(**args, source_pin=execution_source, owner=True)
+            elif op == 'execution_partial_prepare' and execution_source:
+                c.shape(args, {'workflow_id', 'version_id', 'revision', 'ancestors', 'run_data'})
+                result = store.execution_partial_prepare(**args, source_pin=execution_source, owner=True)
             elif op == 'execution_finish' and execution_source:
                 c.shape(args, {'run_id', 'claim', 'status', 'result'})
                 result = store.execution_finish(**args, source_pin=execution_source, owner=True)

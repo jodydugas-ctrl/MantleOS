@@ -35,6 +35,41 @@ class WorkflowTests(unittest.TestCase):
                 'version_id': saved['versionId'], 'revision': saved['revision'],
                 'trigger': 'Input', 'destination': 'If'}
 
+    def test_partial_execution_reuses_only_retained_bound_observations(self):
+        with tempfile.TemporaryDirectory() as td:
+            store = WorkflowStore(td)
+            saved = self.create(store)
+            request = self.execution_request(saved)
+            authority = {'owner': True, 'source_pin': '1'*64}
+            initial = store.execution_start(request, **authority)
+            trace = {'Input': [{'executionIndex': 0, 'executionStatus': 'success',
+                                'startTime': 10, 'source': [],
+                                'data': {'main': [[{'json': {'total': 42}}]]}}]}
+            store.execution_finish(initial['id'], claim=initial['claim'], status='success',
+                                   result={'resultData': {'runData': trace}}, **authority)
+            target = {key: request[key] for key in ('workflow_id', 'version_id', 'revision')}
+            forged = json.loads(json.dumps(trace))
+            forged['Input'][0]['data']['main'][0][0]['json']['total'] = 99
+            prepare = {**target, 'ancestors': ['Input'], 'run_data': trace}
+            self.assertIsNone(store.execution_partial_prepare(**{**prepare, 'run_data': forged}, **authority))
+            self.assertIsNone(store.execution_partial_prepare(**prepare, owner=True, source_pin='2'*64))
+            with self.assertRaises(PermissionError):
+                store.execution_partial_prepare(**prepare, source_pin='1'*64)
+            checkpoint = store.execution_partial_prepare(**prepare, **authority)
+            self.assertEqual(checkpoint['prefix'], trace)
+            resumed = {**request, 'request_id': 'execute-step', 'partial_of': checkpoint['run_id'],
+                       'partial_binding': checkpoint['binding']}
+            with self.assertRaises(Conflict):
+                store.execution_start({**resumed, 'partial_binding': 'forged'}, **authority)
+            self.assertIn('claim', store.execution_start(resumed, **authority))
+            store.execution_delete(ids=[initial['id']], before=None, query={}, owner=True)
+            with self.assertRaises(KeyError):
+                store.execution_start({**resumed, 'request_id': 'deleted-checkpoint'}, **authority)
+            newer = self.mutate(store, 'update', saved, value={**saved, 'name': 'Edited'})
+            self.assertNotEqual(newer['versionId'], saved['versionId'])
+            with self.assertRaises(Conflict):
+                store.execution_partial_prepare(**prepare, **authority)
+
     def test_execution_retains_exact_saved_version_and_committed_observation(self):
         with tempfile.TemporaryDirectory() as td:
             store = WorkflowStore(td)

@@ -4,10 +4,11 @@ const assert=require('node:assert/strict');
 const {setImmediate:turn}=require('node:timers/promises');
 const {mountExecutionRoutes,encodeRunData}=require('./editor-executions.cjs');
 
-function setup({rejectCommit=false,stopAware=false,discard=false,configuration}={}){
+function setup({rejectCommit=false,stopAware=false,discard=false,configuration,checkpoint}={}){
  const handlers=new Map(),calls=[],frames=[];
  const saved={id:'w1',name:'Workflow',versionId:'saved',revision:'rev',
-  nodes:[{name:'Manual',type:'n8n-nodes-base.manualTrigger'}],
+  nodes:[{name:'Manual',type:'n8n-nodes-base.manualTrigger'},{name:'Seed'},{name:'Project'}],
+  connections:{Manual:{main:[[{node:'Seed'}]]},Seed:{main:[[{node:'Project'}]]}},
   settings:{saveManualExecutions:!discard}};
  let result={id:'e1',workflowId:'w1',workflowVersionId:'saved',startedAt:'2026-11-05T12:00:00Z',
   status:'running',workflowData:saved,mode:'manual',data:null};
@@ -34,6 +35,7 @@ function setup({rejectCommit=false,stopAware=false,discard=false,configuration}=
    if(op==='get')return saved;
    if(op==='execution_retry_prepare')return {workflow:saved,revision:saved.revision,
     selection:{trigger:'Manual',destination:null},observation:{checkpoint:'committed'},binding:'verified'};
+   if(op==='execution_partial_prepare')return checkpoint;
    if(op==='execution_start'){
     if(args.retry_of)result={...result,mode:'retry',retryOf:args.retry_of};
     return {...result,claim:'private-claim',selection:{trigger:args.trigger,destination:args.destination}};
@@ -123,6 +125,26 @@ test('native run transport binds selected saved version and publishes only a com
  assert.equal(page.count,1);
  assert.equal(page.results[0].id,'e1');
  assert.ok(!('data' in page.results[0]));
+});
+
+test('partial browser runs use verified cache and invalidate dirty descendants',async()=>{
+ const checkpoint={run_id:'cached',binding:'verified',prefix:{Manual:[{data:{main:[[{json:{value:42}}]]}}]}};
+ const server=setup({checkpoint});
+ const runData={Manual:[{data:{main:[[{json:{value:999}}]]}}],Seed:[{}]};
+ await server.run({workflowId:'w1',destinationNode:{nodeName:'Project',mode:'inclusive'},
+  runData,dirtyNodeNames:['Seed'],startNodes:[{name:'Project',sourceData:null}]});
+ await turn();
+ const prepare=server.calls.find(([op])=>op==='execution_partial_prepare')[1];
+ assert.deepEqual(prepare.ancestors,['Manual']);
+ assert.equal(prepare.run_data,runData);
+ const admission=server.calls.find(([op])=>op==='admit')[1];
+ assert.deepEqual(admission.partial,{checkpoint});
+ assert.equal(admission.runData,undefined);
+ const start=server.calls.find(([op])=>op==='execution_start')[1];
+ assert.equal(start.partial_of,'cached');
+ assert.equal(start.partial_binding,'verified');
+ assert.equal(start.destination,'Project');
+ await assert.rejects(server.run({triggerToStartFrom:{name:'Manual'},runData}),/partial cache/);
 });
 
 test('unsupported or detached requests never reserve work and failed commit never sends finish',async()=>{

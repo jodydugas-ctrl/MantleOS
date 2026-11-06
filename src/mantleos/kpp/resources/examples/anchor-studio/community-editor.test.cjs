@@ -4,6 +4,53 @@ const {createRequire}=require('node:module'),{once}=require('node:events');
 const {JsonWorker}=require('./json-worker.cjs'),{localAccess}=require('./local-access.cjs');
 const {mountCommunityEditor}=require('./community-editor.cjs'),{createResidentView}=require('./resident-view.cjs');
 const {initialize,project}=require('./editor-local-context.cjs');
+
+test('credential picker projects only owned references and cannot request secrets or execution grants',async()=>{
+ const routes=new Map(),calls=[];
+ const app={use(){}};
+ for(const method of ['get','post','patch','delete'])app[method]=(path,handler)=>routes.set(method+' '+path,handler);
+ const personal={id:'local-project',name:'Local Studio',type:'personal',scopes:[]};
+ const workflows={async call(op,args){
+  calls.push([op,args]);
+  if(op==='get'){
+   if(args.id==='missing')throw Error("KeyError: 'Workflow not found'");
+   return {id:args.id};
+  }
+  if(op==='credential_list')return [{id:'synthetic-credential',name:'Synthetic',type:'httpBasicAuth',
+   createdAt:'2026-11-05T12:00:00Z',updatedAt:'2026-11-05T12:00:00Z',revision:'private-revision',
+   data:{password:'DO_NOT_PROJECT'},grant:'FORGED'}];
+  throw Error('Unexpected picker operation');
+ }};
+ mountCommunityEditor(app,{express:{json:()=>()=>{}},workflows,installation:{
+  editor:{},catalog:{},inspection:{},
+ },context:{personal},resident:{},credentials:{configuration:'reviewed-fixture',capture:()=>null}});
+ async function picker(query){
+  const handler=routes.get('get /rest/credentials/for-workflow');
+  const response={code:200,status(code){this.code=code;return this;},json(value){this.value=value;}};
+  await handler({query},response);
+  return response;
+ }
+ const fromWorkflow=await picker({workflowId:'saved-fixture',forAgent:'false'});
+ assert.equal(fromWorkflow.code,200);
+ assert.equal(fromWorkflow.value.scope,'OWNER_LOCAL_REFERENCE_ONLY');
+ const [descriptor]=fromWorkflow.value.data;
+ assert.equal(descriptor.id,'synthetic-credential');
+ assert.equal(descriptor.homeProject.id,personal.id);
+ assert.equal(descriptor.sharedRoute,'project');
+ assert.equal(descriptor.currentUserHasAccess,true);
+ assert.ok(!JSON.stringify(descriptor).includes('DO_NOT_PROJECT'));
+ for(const key of ['data','grant','revision'])assert.equal(descriptor[key],undefined);
+ assert.deepEqual((await picker({projectId:personal.id})).value,fromWorkflow.value);
+ assert.deepEqual((await picker({workflowId:'missing'})).value.data,[]);
+ assert.equal((await picker({projectId:'foreign'})).code,403);
+ for(const query of [{},{projectId:personal.id,workflowId:'saved-fixture'},
+  {projectId:personal.id,forAgent:'true'},{projectId:personal.id,includeData:'true'}]){
+  assert.equal((await picker(query)).code,400);
+ }
+ assert.deepEqual(calls,[['get',{id:'saved-fixture'}],['credential_list',{configuration:'reviewed-fixture'}],
+  ['credential_list',{configuration:'reviewed-fixture'}],['get',{id:'missing'}]]);
+});
+
 test('same-host adapter uses real durable workflow storage and a bounded Body view',
  {skip:!process.env.STUDIO_MODULES?'Owner-provisioned Node-RED runtime absent; HTTP integration untested':false,timeout:30000},async t=>{
  const root=fs.mkdtempSync(path.join(os.tmpdir(),'studio-community-'));

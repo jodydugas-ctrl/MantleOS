@@ -6,6 +6,7 @@ const editable=new Set(['name','type','data','id','projectId','homeProject','isG
 function credentialRoutes(route,{workflows,configuration,capture,personal}){
  const edits=new WeakMap(),deletions=new WeakMap();
  const tabs=new Map();
+ const homeProject={id:personal.id,name:personal.name,type:personal.type};
  const call=(op,args={})=>workflows.call('credential_'+op,{configuration,...args});
  function connection(req,required=true){
   const ref=req.headers['push-ref'],browser=req.headers['browser-id'];
@@ -91,13 +92,22 @@ function credentialRoutes(route,{workflows,configuration,capture,personal}){
   deletions.get(socket)?.delete(identifier);
   return {data:result};
  });
- return {async list(req){
-  const socket=connection(req,false);
-  const rows=await call('list');
-  return rows.map(row=>{
-   remember(deletions,socket,row,2048);
-   return {...dto(row),homeProject:{id:personal.id,name:personal.name,type:personal.type},sharedWithProjects:[]};
-  });
- }};
+ return {
+  async list(req){
+   const socket=connection(req,false);
+   const rows=await call('list');
+   return rows.map(row=>{
+    remember(deletions,socket,row,2048);
+    return {...dto(row),homeProject,sharedWithProjects:[]};
+   });
+  },
+  async forWorkflow(){
+   const rows=await call('list');
+   return rows.map(({id,name,type,createdAt,updatedAt})=>({
+    id,name,type,createdAt,updatedAt,homeProject,sharedWithProjects:[],scopes:SCOPES,
+    currentUserHasAccess:true,sharedRoute:'project',isGlobal:false,isManaged:false,isResolvable:false,
+   }));
+  },
+ };
 }
 module.exports={credentialRoutes,SCOPES};

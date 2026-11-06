@@ -156,7 +156,7 @@ and carries items forward with their input pairing. The worker
 limits graphs to 64 nodes and 256 KiB, runs at most two child runtimes at once,
 and bounds each child to 30 seconds. The base profile supports pure work.
 The separate checked HTTP profile below requires both reviewed capabilities
-and a per-node grant. Arbitrary script, pinned data, published triggers and
+and a per-node grant. Arbitrary script, published triggers and
 general expressions remain unavailable. Unqualified node options or graph
 shapes return an explicit error before dispatch.
 
@@ -207,6 +207,41 @@ version determines retention even if the setting changes during a run.
 The first completed run using this setting transactionally upgrades the
 workflow store. Existing retained results remain readable. Earlier builds
 reject that upgraded store.
+
+### Pinned data in manual runs
+
+The editor's Pin data, Edit Output and Unpin controls save test data in the
+workflow revision. During a manual execution, a pin replaces that node's
+computed output. Downstream nodes receive the pinned JSON items and their
+item links. An empty pin stops its path. A retry preserves the failed run's
+pin snapshot, including when using the current workflow version.
+
+The runtime accepts pins for supported single-output pure nodes, up to
+256 JSON items per pinned node within the existing graph budget. Binary
+items, multi-output nodes and checked-effect outputs cannot run with pins.
+An effect still requires its own grant and verified observation.
+
+Matched n8n 2.46.4 cases checked trigger and intermediate pins, default and
+explicit pairing, empty output, and the interaction with retry. The Windows
+browser saved an edited pin of 73, ran the workflow, unpinned, saved and ran
+again. The three committed histories reopened with distinct saved versions
+and output values of 1, 73 and 1. The provisioned QuickJS runtime also read
+the pinned items. This evidence covers part of the KPP workflow and execution
+lifecycle obligations. Binary pin execution, additional node profiles and
+Baker acceptance remain open.
+
+### Execute Step
+
+Execute Step runs through the selected node and stops there. On a repeat run,
+Studio can reuse a contiguous prefix from the same saved workflow revision and
+runtime. The server compares the editor's cache hints with up to sixteen retained
+successful executions and takes reused values from verified history. A dirty or
+unmatched ancestor ends the reusable prefix. Changed revisions run from their
+saved inputs. The execution receipt identifies the checkpoint and reused nodes.
+
+Step execution inherits the manual runtime's supported node and graph limits.
+Cached requests that would repeat a checked HTTP ancestor are rejected. A checked
+HTTP destination still requires a grant bound to that saved version and node.
 
 ### Failed execution retry
 
@@ -286,11 +321,12 @@ routes can read this index but cannot register metadata, secrets or grants.
 An absent or damaged index fails explicitly instead of reporting an invented
 empty inventory. A newly initialized index genuinely has no entries.
 
-The credential picker remains empty. A saved credential reference requires
-an independent checked-use grant. Registering a descriptor confers no grant.
-The MIND's separately configured provider keys are never copied into this index.
-The index is application metadata, not Engram experience, a secret vault or a
-second requirements/acceptance database. It stays outside saved Studio projects.
+The credential picker lists owned vault entries when the local credential editor
+is enabled. It supports the personal project and saved workflows in that
+project. It returns the ID, display name, type, and owner metadata. A node saves
+only the selected reference. The picker excludes values, vault revisions,
+grants, and MIND provider keys. Registered inventory descriptors stay separate
+from vault entries. The index stays outside saved Studio projects.
 
 On Windows, add `--credential-editor` to the reviewed editor configuration
 while Studio is stopped in stasis. This enables local create, read, masked
@@ -323,8 +359,13 @@ contains the password or encoded Basic authorization is rejected.
 The isolated Node-RED worker requests the observation over its private child
 channel and receives no credential or execution claim. The runtime admits
 one checked HTTP node per run and verifies its grant before dispatch.
-The credential picker, general HTTP Request profiles and external URLs
-are pending.
+The Windows browser selected a disposable Basic Auth credential and saved
+its reference. The authenticated workflow API exercised that saved revision.
+The checked request committed a verified loopback response under a reviewed
+grant. After revocation the same request returned 403. These checks cover
+the picker and the supported use profile within the KPP credential lifecycle
+obligation. General HTTP Request profiles, external URLs, credential tests
+and OAuth remain open.
 
 The pinned Community project setting is a structured quota,
 `enterprise.projects.team.limit = 0`; flattening it into a Boolean breaks the

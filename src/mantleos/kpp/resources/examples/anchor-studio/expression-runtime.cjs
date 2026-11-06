@@ -69,11 +69,11 @@ async function open({root,sha256,scratch}){
   poolSize:1,maxCodeCacheSize:128});
  return {
   installation,
-  evaluate({workflow,value,node,items,itemIndex,source,runData,executionId}){
+  evaluate({workflow,value,node,items,itemIndex,source,runData,pinData,executionId}){
    demand(typeof node==='string'&&Array.isArray(workflow?.nodes)&&Array.isArray(items)&&
     Number.isInteger(itemIndex)&&itemIndex>=0&&itemIndex<items.length&&workflow.nodes.some(entry=>entry.name===node));
-   const graph=new lib.Workflow({...workflow,nodeTypes:{getByNameAndVersion:()=>undefined}});
-   const execution=lib.createRunExecutionData({resultData:{runData}});
+   const graph=new lib.Workflow({...workflow,pinData,nodeTypes:{getByNameAndVersion:()=>undefined}});
+   const execution=lib.createRunExecutionData({resultData:{runData,pinData}});
    const executeData={data:{main:[items]},node:graph.nodes[node],source:{main:source}};
    return graph.expression.withIsolate(()=>graph.expression.getParameterValue(value,execution,0,itemIndex,node,
     items,'manual',{$execution:{id:executionId,mode:'test'}},executeData,false,{},node));

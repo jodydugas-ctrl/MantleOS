@@ -23,6 +23,7 @@ function mountCommunityEditor(app,{express,workflows,installation,context,reside
   try{res.json(await handler(req));}
   catch(error){const message=String(error.message),code=message.startsWith('Unsupported execution:')?501:message.startsWith('Conflict:')?409:message.startsWith('KeyError:')?404:message.startsWith('PermissionError:')?403:/WORKFLOW_(BUSY|TIMEOUT|UNAVAILABLE)/.test(message)?503:400;
    res.status(code).json({code,message:message==='Conflict: execution stop requires review'?'Execution stop could not be verified. Review its stored state.':
+    message==='PermissionError: Checked HTTP request has no current credential grant'?'This saved HTTP request needs an owner credential grant before it can run.':
     message==='Conflict: execution already finished'?'The execution finished before it could be stopped.':
     message==='Conflict: Retry requires a retained failed execution'?'Only a retained failed execution can be retried.':
     message==='Conflict: Retry checkpoint was produced by a different runtime'?'This execution predates the current runtime and cannot be resumed.':
@@ -58,12 +59,20 @@ function mountCommunityEditor(app,{express,workflows,installation,context,reside
    scope:managed?'OWNER_LOCAL_NO_WORKFLOW_GRANTS':'DESCRIPTORS_ONLY_NO_SECRET_DATA'};
  });
  route('get','/rest/credentials/for-workflow',async req=>{
-  if(req.query.forAgent!==undefined)throw Error('Unsupported agent credential use');
-  if(req.query.workflowId!==undefined)await workflows.call('get',{id:req.query.workflowId});
-  await inventory(req,'credentials');
-  // This runtime has no qualified workflow credential-use grants. A descriptor
-  // is not a capability, and the MIND's provider key is never a workflow key.
-  return {data:[],scope:'NO_QUALIFIED_WORKFLOW_CREDENTIAL_USE'};
+  const {workflowId,projectId,forAgent}=req.query;
+  if(Object.keys(req.query).some(key=>!['workflowId','projectId','forAgent'].includes(key))||
+     (workflowId===undefined)===(projectId===undefined)||
+     (workflowId!==undefined&&typeof workflowId!=='string')||
+     (projectId!==undefined&&typeof projectId!=='string')||
+     (forAgent!==undefined&&forAgent!=='false'))
+   throw Error('Unsupported credential picker scope');
+  if(projectId!==undefined&&projectId!==personal.id)throw Error('PermissionError: credential project');
+  const scope=managed?'OWNER_LOCAL_REFERENCE_ONLY':'NO_QUALIFIED_WORKFLOW_CREDENTIAL_USE';
+  if(workflowId!==undefined){
+   try{await workflows.call('get',{id:workflowId});}
+   catch(error){if(String(error.message).startsWith('KeyError:'))return {data:[],scope};throw error;}
+  }
+  return {data:managed?await managed.forWorkflow():[],scope};
  });
  if(credentials)managed=credentialRoutes(route,{workflows,personal,...credentials});
  route('get','/rest/tags',req=>inventory(req,'tags'));
