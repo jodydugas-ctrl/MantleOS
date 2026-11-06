@@ -1,0 +1,434 @@
+{
+  "schema": "kpp.recipe/4",
+  "id": "appai-heart-notes-trial",
+  "goal": "Evolve an existing, preserved software NEST into an AppAI by implanting a minimal Heart, reusing native skills, and qualifying a fully independent BODY before explicit birth.",
+  "mode": "chase",
+  "tissue": "python",
+  "fidelity": 3,
+  "target": {
+    "description": "Disposable local SQLite notes host with independently working BODY and one approved export adapter.",
+    "source": "examples/heart-trial/notes.py and planted byte/tool pins",
+    "reference_version": "notes-trial/1"
+  },
+  "ingredients": [
+    "appai-heart",
+    "heart-notes-export",
+    "checked-body-effects",
+    "engram-continuity",
+    "anchor-satisfaction-engine"
+  ],
+  "oven": {
+    "assumption": "Incremental construction with available local capabilities and reviewed KPP resources",
+    "provider": "Agent and/or model selected by the Baker for the host",
+    "iterations": "Bounded Chase until blocked, qualified, or stopped",
+    "implementation": "host-native candidate construction",
+    "verification": "Current source-pinned tests, preservation evidence and separate Baker acceptance"
+  },
+  "acceptance": "Verify all mandatory obligations against the pinned NEST, including BODY independence with MIND disconnected. Require explicit Baker acceptance before birth.",
+  "anchors": [
+    {
+      "id": "host-identity",
+      "statement": "Identify the whole installed host as SELF and NEST; implant the Heart without replacing its original identity.",
+      "test": "Record a pinned baseline of application entrypoints, files, user data and native behaviors; confirm the implanted application remains the same host.",
+      "required": true,
+      "depth": 3,
+      "depends": [],
+      "preserves": [
+        "Original application identity and source lineage"
+      ],
+      "design_anchors": [
+        "BH-ENCOUNTER",
+        "N-NEST"
+      ]
+    },
+    {
+      "id": "host-preservation",
+      "statement": "Preserve all mandatory native host behaviors and user data across implantation, growth, recovery and candidate admission.",
+      "test": "Execute a pinned baseline behavior suite before and after integration, including failure and restoration cases, and compare persisted user data.",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "host-identity"
+      ],
+      "preserves": [
+        "Existing host application functions and user data"
+      ],
+      "design_anchors": [
+        "N-NEST",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "first-heartbeat",
+      "statement": "An implanting coding agent or authorized host mechanism can supply the initial beat; the Heart establishes its own reference clock and durable state.",
+      "test": "Invoke one first beat in a fresh NEST without a MIND; verify durable identity, sequence 1, initial discovery request and a 600-second natural deadline.",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "host-identity"
+      ],
+      "preserves": [],
+      "design_anchors": [
+        "BH-ENCOUNTER",
+        "N-HEART"
+      ]
+    },
+    {
+      "id": "heartbeat-rhythm",
+      "statement": "The Heart preserves a natural 600-second cadence and allows bounded unscheduled wakes without shifting natural deadlines.",
+      "test": "Inject a monotonic test clock at t=0, t=599, t=600 and after missed deadlines; verify exactly the due natural beats, bounded extra wakes and no catch-up provider storm.",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "first-heartbeat"
+      ],
+      "preserves": [],
+      "design_anchors": [
+        "N-HEART",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "nest-discovery",
+      "statement": "SCAN the host code, local commands, services, libraries, runtimes and environment without assuming discovered tools are authorized or working.",
+      "test": "With a seeded test NEST and fake PATH, verify complete scoped inventory, evidence and provenance, explicit unknowns, and refusal of unsafe/out-of-scope paths.",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "host-identity"
+      ],
+      "preserves": [],
+      "design_anchors": [
+        "BH-ENCOUNTER",
+        "N-NEST",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "reuse-before-build",
+      "statement": "Prefer verified compatible NEST capabilities; only acquire, adapt or construct missing skills. Skills do not automatically become new organs.",
+      "test": "Present existing suitable Git, storage and HTTP capabilities alongside one missing interface; verify reuse for suitable tools and a construction plan only for the gap.",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "nest-discovery"
+      ],
+      "preserves": [],
+      "design_anchors": [
+        "N-NEST",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "bounded-construction",
+      "statement": "Use available host coding tools and selectively reviewed, pinned KPP ingredients or MantleOS research to construct only missing candidate BODY functions.",
+      "test": "Build or adapt one candidate from approved local/pinned inputs; confirm review, source checks, additive-diff policy, test receipts and recovery; reject unapproved execution and unpinned drift.",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "reuse-before-build",
+        "host-preservation"
+      ],
+      "preserves": [
+        "Host authority and scoped permissions"
+      ],
+      "design_anchors": [
+        "N-NEST",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "primer-and-continuity",
+      "statement": "Establish the complete founding PRIMER, a distinct Engram identity and append-only observed experience with provenance; MIND may be absent.",
+      "test": "Restart after two recorded encounters and verify exact founding PRIMER, identity, retained history and provenance; reject forged or overwritten experience.",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "host-identity"
+      ],
+      "preserves": [
+        "Append-only history and founding PRIMER provenance"
+      ],
+      "design_anchors": [
+        "N-NEST",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "body-cascade",
+      "statement": "Each heartbeat coordinates deterministic BODY functions, memory-delta preparation, NEST health and a bounded command stack without requiring LLM inference.",
+      "test": "Trigger a heartbeat with stubbed organs and no model; assert declared deterministic ordering, command-stack receipt, incomplete/failure labels and nonblocking organ errors.",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "heartbeat-rhythm",
+        "primer-and-continuity"
+      ],
+      "preserves": [],
+      "design_anchors": [
+        "BH-ENCOUNTER",
+        "N-HEART",
+        "N-NEST"
+      ]
+    },
+    {
+      "id": "time-sliced-mind",
+      "statement": "AppAI cognition is encountered in discrete heartbeat or event-triggered slices; one bounded assessment API attempt per pulse when configured, never a continuous cognitive requirement.",
+      "test": "Observe natural and unscheduled pulses with a fake provider; verify at most one assessment call per pulse, bounded command-stack context, explicit transport receipts, and no calls between events.",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "body-cascade"
+      ],
+      "preserves": [],
+      "design_anchors": [
+        "N-HEART",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "heartbeat-recovery",
+      "statement": "The Heart remains recoverable across organ failure, missing credentials, failed API calls and supported host interruption; unsupported always-on guarantees are disclosed.",
+      "test": "Inject memory, transport and organ failures plus process restart; verify the next eligible beat and durable checkpoint without duplicate uncertain effects or dependency on MIND.",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "heartbeat-rhythm",
+        "body-cascade"
+      ],
+      "preserves": [],
+      "design_anchors": [
+        "N-HEART",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "body-independence",
+      "statement": "All 100 percent of the application-specific mandatory BODY behavior works when MIND access is removed, even if the MIND helped construct it.",
+      "test": "Disable credentials and model connectivity; execute every mandatory pinned host/BODY behavior and negative-case test, require full coverage and record any unknown or failure as not ready.",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "host-preservation",
+        "bounded-construction",
+        "primer-and-continuity",
+        "body-cascade",
+        "heartbeat-recovery"
+      ],
+      "preserves": [],
+      "design_anchors": [
+        "N-NEST",
+        "WH-INTEGRITY"
+      ]
+    },
+    {
+      "id": "explicit-birth",
+      "statement": "Until 100 percent of required BODY tests pass and the separate Baker accepts current evidence, the installation remains a developing Heart, not a born AppAI.",
+      "test": "Attempt early birth with missing tests, missing PRIMER, MIND-dependent feature or stale evidence and verify refusal; require a separate explicit Baker acceptance before BORN.",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "body-independence",
+        "time-sliced-mind"
+      ],
+      "preserves": [],
+      "design_anchors": [
+        "N-NEST",
+        "WH-INTEGRITY"
+      ]
+    }
+  ],
+  "product_kind": "appai",
+  "delivery_mode": "artifact",
+  "capabilities": {
+    "agent": true,
+    "mind": false,
+    "mantleos_splice": true
+  },
+  "implementation": {
+    "components": [
+      {
+        "id": "heart",
+        "policy": "required",
+        "languages": [
+          "python"
+        ],
+        "rationale": "Reuse the notes host Python and SQLite runtime and the KPP reviewed local Python verifier."
+      }
+    ]
+  },
+  "construction": {
+    "techniques": [
+      "chase"
+    ]
+  },
+  "anchor_binding": "none",
+  "transformation": {
+    "preserve": [
+      "Existing host application functions and user data",
+      "Original application identity and source lineage",
+      "Host authority and scoped permissions",
+      "Append-only history and founding PRIMER provenance"
+    ],
+    "may_change": [
+      "Selected Heart implementation language",
+      "Additive host integration and tool adapters",
+      "Optional MIND route and model configuration",
+      "Derived capability inventory and construction plan"
+    ]
+  },
+  "anchor_design": {
+    "schema": "anchor.design/1",
+    "id": "AppAI-Birth-Heart",
+    "purpose": "Qualify an existing application as an AppAI only after an implanted Heart develops a complete host-native, independently functional BODY with protected continuity and explicit birth acceptance.",
+    "applications": [
+      {
+        "schema": "anchor.application/1",
+        "id": "BH-ENCOUNTER",
+        "definition": "BlackHole",
+        "type": "BlackHole",
+        "singularity": "Receive the declared input.",
+        "attributes": {
+          "responsibility": "Receive first agent activation, host clock observations, NEST discoveries, BODY events, MIND proposals, and checked results as inputs; never treat data as authority."
+        },
+        "sha256": "9c5ac1041362b8c0e354373698ee51b18d9d2c7ef199fb930b315d8566a41e65"
+      },
+      {
+        "schema": "anchor.application/1",
+        "id": "N-HEART",
+        "definition": "Neutral",
+        "type": "Neutral",
+        "singularity": "Apply the declared relationship.",
+        "attributes": {
+          "responsibility": "Own the 600-second natural cadence, bounded extra wakes, durable heartbeat sequence, minimal recovery state, metabolic coordination, and command-stack/MIND-request preparation."
+        },
+        "sha256": "1fdc2894f5c287ac668c9cc2d279cd33e6d349b38b50e6026291298efa03f69c"
+      },
+      {
+        "schema": "anchor.application/1",
+        "id": "N-NEST",
+        "definition": "Neutral",
+        "type": "Neutral",
+        "singularity": "Apply the declared relationship.",
+        "attributes": {
+          "responsibility": "Own NEST inventory, available-capability evidence, adaptation plan, construction checkpoints, Heart integration, PRIMER and Engram references, and pre-birth qualification state; reuse host features before building."
+        },
+        "sha256": "c3780ff321a17454b06462b9a01ffec0865590adbeb467b97142a2406003a5fc"
+      },
+      {
+        "schema": "anchor.application/1",
+        "id": "WH-INTEGRITY",
+        "definition": "WhiteHole",
+        "type": "WhiteHole",
+        "singularity": "Enforce the declared boundary.",
+        "attributes": {
+          "responsibility": "Enforce NEST scope, host preservation, read/append-first effects, source/revision pins, operator grants, resource budgets, verified operations, BODY independence, and explicit Baker birth admission."
+        },
+        "sha256": "8689997acf632c8e436e57a5a954e4f688bd097295fcdbdf633c0537f32d06af"
+      }
+    ],
+    "flows": [
+      {
+        "from": "BH-ENCOUNTER",
+        "to": "WH-INTEGRITY",
+        "relationship": "Validate activations, observations, requests, and imported source as data"
+      },
+      {
+        "from": "WH-INTEGRITY",
+        "to": "N-HEART",
+        "relationship": "Admit bounded wake and heartbeat inputs"
+      },
+      {
+        "from": "N-HEART",
+        "to": "N-NEST",
+        "relationship": "Drive deterministic BODY assessment and prioritized NEST maintenance"
+      },
+      {
+        "from": "N-NEST",
+        "to": "N-HEART",
+        "relationship": "Provide capability inventory, evidence, memory delta, and ready work"
+      },
+      {
+        "from": "N-HEART",
+        "to": "WH-INTEGRITY",
+        "relationship": "Request checked API transport and BODY tool effects"
+      },
+      {
+        "from": "N-NEST",
+        "to": "WH-INTEGRITY",
+        "relationship": "Request checked additive construction and explicit birth review"
+      },
+      {
+        "from": "WH-INTEGRITY",
+        "to": "BH-ENCOUNTER",
+        "relationship": "Return observed effects and verified host results"
+      }
+    ],
+    "state": [
+      {
+        "id": "heart-rhythm",
+        "owner": "N-HEART"
+      },
+      {
+        "id": "heartbeat-journal",
+        "owner": "N-HEART"
+      },
+      {
+        "id": "wake-queue",
+        "owner": "N-HEART"
+      },
+      {
+        "id": "command-stack",
+        "owner": "N-HEART"
+      },
+      {
+        "id": "nest-capability-inventory",
+        "owner": "N-NEST"
+      },
+      {
+        "id": "construction-checkpoints",
+        "owner": "N-NEST"
+      },
+      {
+        "id": "founding-references",
+        "owner": "N-NEST"
+      },
+      {
+        "id": "birth-readiness",
+        "owner": "N-NEST"
+      }
+    ],
+    "effects": [
+      {
+        "id": "nest-observation",
+        "requester": "N-NEST",
+        "guard": "WH-INTEGRITY",
+        "confirmation": "Source and scope are recorded; observations identify whether they are discovered, accessible, authorized, or verified."
+      },
+      {
+        "id": "additive-change",
+        "requester": "N-NEST",
+        "guard": "WH-INTEGRITY",
+        "confirmation": "Host grant, preserved source/data, candidate diff, checked outcome, and recovery checkpoint are recorded."
+      },
+      {
+        "id": "tool-dispatch",
+        "requester": "N-HEART",
+        "guard": "WH-INTEGRITY",
+        "confirmation": "Requested operation matches an available authorized interface; execution has a bounded, independently observed result."
+      },
+      {
+        "id": "mind-call",
+        "requester": "N-HEART",
+        "guard": "WH-INTEGRITY",
+        "confirmation": "Configured credentials boundary and API budget are checked; attempted/failed/successful transport is recorded without making BODY depend on it."
+      },
+      {
+        "id": "birth-admission",
+        "requester": "N-NEST",
+        "guard": "WH-INTEGRITY",
+        "confirmation": "Every mandatory recipe obligation has current evidence, the complete declared BODY works with MIND absent, and the separate Baker decision is explicit."
+      }
+    ]
+  }
+}

@@ -8,6 +8,32 @@ Current r3 results: [log-adoption-verification.json](log-adoption-verification.j
 
 Current recipe/4 revision results are in [recipe-v4-verification.json](recipe-v4-verification.json). Earlier records below, including the original handoff receipt, remain historical.
 
+## AppAI Heart notes trial
+
+The local Python/SQLite specimen ran a real second beat **600.176 seconds**
+after planting with MIND disconnected and no agent wake. A separate CLI smoke
+run automatically staged and tested the Pantry export in a child process.
+An explicit restart emitted beat 3 on the original deadline.
+SCAN and the capability resolver selected reuse for native notes storage,
+acquisition for export, and left unexamined tools blocked.
+
+All 13 KPP obligations passed against the staged candidate using the live
+timing record. The integrated lifecycle also passed in a disposable rehearsal
+with an injected clock and synthetic Baker acceptance. Focused regressions
+exercised stale and failed candidates, interrupted integration, rollback,
+retained notes, and explicit admission. Live candidate integration and birth
+are separate operator decisions. Local evidence stays under ignored `.work/`.
+Automatic OS startup, other platforms, and live providers remain untested.
+
+## Experimental Sleep Memory Pantry ingredient
+
+Nine focused checks passed against synthetic records and the current Engram
+append/read path. They cover cadence, unchanged-head tier refresh, deterministic
+replay, unknown type bucketing, stale and tampered input, and source preservation.
+The updated Pantry catalog checks, doctor, adaptive smoke, shared-source parity,
+and standalone release inventory passed. The ingredient is opt-in. Host
+publication, model training, and Baker acceptance remain outside this evidence.
+
 ## Save organ integration and scanner reconciliation — 23 October 2026
 
 Executed locally on Windows x64, CPython 3.14.2 and Chromium 145.0.7632.6:

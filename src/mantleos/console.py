@@ -22,6 +22,9 @@ def _write_new(path, value):
 
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] == 'heart':
+        from .heart_trial import main as heart_main
+        return heart_main(argv[1:])
     if argv and argv[0] == 'limbs':
         from .limbs import main as limbs_main
         return limbs_main(argv[1:])

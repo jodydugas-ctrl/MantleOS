@@ -1,0 +1,54 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "sleep-memory-consolidation",
+  "version": "0.1.0",
+  "function": "Deterministic, MIND-independent multi-cadence projections of append-only Engram records during BODY idle/sleep cycles",
+  "status": "experimental",
+  "preferred_for": [
+    "appai",
+    "engram",
+    "mantleos"
+  ],
+  "compatible_tissues": [
+    "python",
+    "mixed"
+  ],
+  "tags": [
+    "department:memory",
+    "department:body",
+    "sleep",
+    "consolidation",
+    "multi-cadence",
+    "derived-index"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "Produce fast, medium, and slow replayable memory-reference views without an LLM",
+    "Detect new Engram records from a verified previous source head",
+    "Preserve unmodified source history, provenance references, and exact source-head bindings"
+  ],
+  "adaptation": "Use existing NEST/Engram storage and Heart pulses; this is a BODY function, not a mandatory new organ. Adapt a host reader and checked projection publisher only when absent.",
+  "verified_with": "Synthetic current KPP tests cover actual Engram records, cadence, unchanged-head tier refresh, replay, privacy buckets, tampering and bounds. Host integration and Baker acceptance are separate.",
+  "provenance": "Adapted from the supplied KPP Pantry proposal, archive SHA-256 029642815c02ac0ed8ca906ccc6412ffc6c006d6f329e3336760bee7f84f969. Its cited Google Research publications are conceptual inspiration.",
+  "source": {
+    "kind": "bundled-files",
+    "files": {
+      "src/mantleos/kpp/sleep_memory.py": "a3834928d25e571588910ca5bf0a57f521714eff4185ffc62bc00b19a3f91311",
+      "src/mantleos/kpp/resources/docs/SLEEP-MEMORY.md": "b3ef00987f73c9297c13cc8f7dbc8f8302b21d474fb84452eae43e054d3906e4"
+    }
+  },
+  "usage": {
+    "use_when": "The BODY must organize verified experience while the MIND is asleep or unavailable, without rewriting canonical Engram history or creating unnecessary organs.",
+    "inputs": [
+      "Verified bounded complete Engram record prefix",
+      "Heart beat number and optional cadences",
+      "Previously observed canonical source head"
+    ],
+    "outputs": [
+      "Deterministic tiered source-reference projection and delta receipt",
+      "Source-bound projection digest without effect authority"
+    ],
+    "limits": "Reference handles <=512 records at <=64 KiB each; no semantic summarization, storage writes, API calls, model weight updates, background scheduler, authority, or Baker acceptance. Caller owns permitted reads and durable publication."
+  }
+}

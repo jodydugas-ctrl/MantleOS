@@ -1,0 +1,34 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "heart-notes-export",
+  "version": "0.1.0",
+  "function": "Deterministic text export over native notes rows",
+  "status": "experimental",
+  "preferred_for": [
+    "appai"
+  ],
+  "compatible_tissues": [
+    "python"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "Deterministic text export over native notes rows"
+  ],
+  "adaptation": "Verify in the selected NEST. No effects are granted by the label.",
+  "verified_with": "Local notes Heart trial and focused regressions.",
+  "provenance": "Shared MantleOS/KPP experimental source and synthetic fixture.",
+  "source": {
+    "kind": "bundled-files",
+    "files": {
+      "src/mantleos/kpp/resources/examples/heart-trial/notes_export.py": "b95727486deb0c398a55f545baa8af3595e1be463d40337affc81294acf9a253"
+    }
+  },
+  "usage": {
+    "use_when": "Deterministic text export over native notes rows",
+    "limits": "Reviewed local Python only; scoped trial evidence."
+  },
+  "tags": [
+    "department:body"
+  ]
+}
