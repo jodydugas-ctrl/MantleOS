@@ -208,6 +208,73 @@ The first completed run using this setting transactionally upgrades the
 workflow store. Existing retained results remain readable. Earlier builds
 reject that upgraded store.
 
+### Failed execution retry
+
+Retry with the original workflow uses the failed run's saved version. Retry
+with the current workflow uses the latest saved version. Both start at the
+failed node with the committed upstream output. Each creates a new execution
+linked to the failed run. For example, if the upstream node produced 42 and
+was later edited to produce 999, a retry downstream still receives 42.
+
+This profile covers retained, full manual executions on a single path of
+supported nodes without external effects. A retry requires a checkpoint
+created by the current reviewed runtime and an unchanged path to the failed
+node. Partial executions, external effects, and canceled or uncertain results
+cannot be retried through this profile. The selected version must retain
+execution history. The first admitted retry upgrades the workflow store
+transactionally. Earlier builds reject the upgraded schema.
+
+The matched n8n Community 2.46.4 and Windows Studio cases observed the same
+failed original retry and successful current retry with stored input 42.
+The Studio browser exercised both execution-menu items and displayed distinct
+history entries linked to the initial failure. The HTTP test checked
+cross-origin refusal and rejection of successful executions. This is scoped
+evidence for the KPP Chase obligations `reference-command-10` and
+`reference-command-11`. Command-palette coverage, broader checkpoints,
+and Baker acceptance are pending.
+
+### Execution history deletion
+
+The reviewed owner editor enables Delete from the execution row, workflow
+execution detail, and command palette. The storage operation accepts either
+explicit IDs or an exclusive cutoff with the supported history filters.
+Explicit IDs take precedence over filters, matching n8n Community 2.46.4.
+Project and source authority are verified independently of the request.
+Delete is unavailable in stasis.
+
+Deletion removes settled runs and their stored output from history, detail,
+and executed-version lists. It preserves saved workflows and version history.
+A minimal dispatch tombstone prevents an old request from running again.
+Running executions and those requiring review stay available for resolution.
+Selecting one by ID rejects the whole batch. Cutoff deletion skips them. This
+differs from the upstream direct API, which was observed hiding an active
+execution. The operation does not erase backups or storage remnants.
+
+The Windows browser exercised the row action, command-palette cancellation,
+and detail confirmation with two disposable runs. Matched HTTP checks
+covered single deletion, selected batches, repeat requests, filtered cutoff,
+and out-of-scope refusal. This provides scoped evidence for KPP
+`reference-command-9`. Browser select-all and Baker acceptance remain open.
+
+## Reviewed native expressions
+
+With reviewed manual execution enabled, `studio editor-configure
+--expression-root LOCAL_RUNTIME` selects an owner-provisioned npm install
+of `n8n-workflow@2.46.4` with its package lock and complete `node_modules`
+tree. The controller binds the installation digest. On launch a separate
+QuickJS process verifies and copies the tree once. The editor status reports
+`STARTING`, `READY`, or `UNAVAILABLE`. The verified snapshot is reused by
+warm runs and removed when the process exits. A source change requires a
+reviewed configuration update. Source packages retain their upstream licenses.
+
+Edit Fields and IF evaluate expressions using saved workflow structure,
+current items, previous output, and the execution ID. Expressions can return
+finite JSON or a missing value. The worker runs with a limited environment,
+Node file permissions for the provisioned source and its scratch directory,
+and no child-process permission. This is a local execution profile.
+Expression previews, additional node parameters, binary data, and independent
+OS process isolation remain separate qualifications.
+
 ## Initialization and connection contracts
 
 The selected editor initializes a separate owner-local descriptor index through

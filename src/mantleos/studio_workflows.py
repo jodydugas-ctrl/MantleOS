@@ -22,6 +22,7 @@ from . import json_contract as c
 APPLICATION = 0x41575346
 VERSION = 1
 HISTORY_POLICY_VERSION = 2
+RETRY_VERSION = 3
 MAX_BYTES = 16 * 1024 * 1024
 MAX_EXECUTION_RESULT = 4 * 1024 * 1024
 TERMINAL_EXECUTIONS = {'success', 'error', 'canceled', 'needs_review'}
@@ -67,7 +68,16 @@ def _execution_table(db):
 
 
 def _has_history_policy(db):
-    return db.execute('PRAGMA user_version').fetchone()[0] == HISTORY_POLICY_VERSION
+    return db.execute('PRAGMA user_version').fetchone()[0] >= HISTORY_POLICY_VERSION
+
+
+def _has_retry(db):
+    return db.execute('PRAGMA user_version').fetchone()[0] == RETRY_VERSION
+
+
+def _add_history_policy(db):
+    db.execute('ALTER TABLE workflow_executions ADD COLUMN discarded INTEGER NOT NULL DEFAULT 0 CHECK(discarded IN (0,1))')
+    db.execute('PRAGMA user_version='+str(HISTORY_POLICY_VERSION))
 
 
 def _retained_condition(db, prefix=''):
@@ -75,9 +85,11 @@ def _retained_condition(db, prefix=''):
 
 
 def _execution_result_digest(row, status, stopped, result):
-    return _digest({'execution': row['id'], 'request': row['request_sha256'],
-                    'graph': row['graph_sha256'], 'status': status, 'stopped': stopped,
-                    'result': result}, MAX_EXECUTION_RESULT + 4096)
+    binding = {'execution': row['id'], 'request': row['request_sha256'],
+               'graph': row['graph_sha256'], 'status': status, 'stopped': stopped, 'result': result}
+    if 'retry_of' in row.keys() and row['retry_of'] is not None:
+        binding['retry_of'] = row['retry_of']
+    return _digest(binding, MAX_EXECUTION_RESULT + 4096)
 
 
 def _execution_time(value):
@@ -85,6 +97,34 @@ def _execution_time(value):
         r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})', value)),
         'Invalid execution time bound')
     return datetime.fromisoformat(value).astimezone(timezone.utc).isoformat(timespec='microseconds')
+
+
+def _execution_filter(query, *, retry):
+    c.require(type(query) is dict and query.keys() <= {
+        'workflowId', 'workflowVersionId', 'status', 'startedAfter', 'startedBefore', 'mode',
+    }, 'Unsupported execution history filter')
+    conditions, values = [], []
+    for key, column in (('workflowId', 'workflow'), ('workflowVersionId', 'version')):
+        if key in query:
+            conditions.append(column+'=?')
+            values.append(_id(query[key]))
+    for key, operator in (('startedAfter', '>='), ('startedBefore', '<=')):
+        if key in query:
+            conditions.append('started'+operator+'?')
+            values.append(_execution_time(query[key]))
+    if 'mode' in query:
+        mode = c.text(query['mode'], maximum=64)
+        modes = {'manual': 'retry_of IS NULL', 'retry': 'retry_of IS NOT NULL'} if retry else {'manual': '1'}
+        conditions.append(modes.get(mode, '0'))
+    statuses = query.get('status', [])
+    c.require(type(statuses) is list and len(statuses) <= len(HISTORY_STATUSES)
+              and all(type(status) is str and status in HISTORY_STATUSES for status in statuses),
+              'Invalid execution status filter')
+    if statuses:
+        matches = sorted({HISTORY_STATUSES[status] for status in statuses} - {None})
+        conditions.append('status IN (' + ','.join('?' for _ in matches) + ')' if matches else '0')
+        values.extend(matches)
+    return conditions, values
 
 
 def _history_cursor(value):
@@ -211,7 +251,7 @@ class WorkflowStore:
                 db.commit()
                 db.execute('BEGIN IMMEDIATE')
             else:
-                c.require(app == APPLICATION and version in (VERSION, HISTORY_POLICY_VERSION),
+                c.require(app == APPLICATION and version in (VERSION, HISTORY_POLICY_VERSION, RETRY_VERSION),
                           'Unsupported workflow store; explicit recovery/migration required')
             yield db
             db.commit()
@@ -277,6 +317,8 @@ class WorkflowStore:
         value = {'id': row['id'], 'workflowId': row['workflow'],
                  'workflowVersionId': row['version'], 'mode': 'manual',
                  'status': status, 'startedAt': row['started'], 'stoppedAt': row['stopped']}
+        if 'retry_of' in row.keys() and row['retry_of'] is not None:
+            value.update(mode='retry', retryOf=row['retry_of'])
         if detail:
             graph = self._version(db, row['workflow'], row['version'])
             c.require(_digest(graph) == row['graph_sha256'], 'Execution graph binding failed')
@@ -291,13 +333,60 @@ class WorkflowStore:
                          data=result)
         return value
 
+    def _retry_context(self, db, run_id, load_workflow, source_pin):
+        row = self._execution_row(db, run_id)
+        if _has_history_policy(db) and row['discarded']:
+            raise KeyError('Execution not found')
+        if row['status'] != 'error':
+            raise Conflict('Retry requires a retained failed execution')
+        if row['source_pin'] != source_pin:
+            raise Conflict('Retry checkpoint was produced by a different runtime')
+        failed = self._execution_view(db, row, detail=True)
+        current = self._row(db, row['workflow'])
+        c.require(not current['archived'], 'Archived workflow cannot run')
+        workflow = self._view(db, current) if load_workflow else failed['workflowData']
+        c.require(workflow['settings'].get('saveManualExecutions') is not False,
+                  'Retry requires a saved version that retains execution history')
+        for graph in (failed['workflowData'], workflow):
+            c.require(all(node['type'] in {'n8n-nodes-base.manualTrigger', 'n8n-nodes-base.set',
+                                         'n8n-nodes-base.if', 'n8n-nodes-base.wait'}
+                          for node in graph['nodes']), 'Retry is limited to workflows without external effects')
+        data = failed['data']
+        result = data.get('resultData')
+        error = result.get('error') if isinstance(result, dict) else None
+        c.require(isinstance(error, dict) and error.get('name') == 'NodeOperationError' and
+                  not result.get('studioCheckedEffects'), 'Retry requires a verified node failure')
+        start = data.get('startData')
+        selection = start.get('studioSelection') if isinstance(start, dict) else None
+        c.shape(selection, {'trigger', 'destination'})
+        c.text(selection['trigger'], maximum=512)
+        c.require(selection['destination'] is None, 'Retry requires a full execution checkpoint')
+        binding = c.digest({'run': run_id, 'result': row['result_sha256'], 'load': load_workflow,
+                            'version': workflow['versionId'], 'revision': current['revision']})
+        return {'workflow': workflow, 'selection': selection, 'observation': data,
+                'binding': binding, 'revision': current['revision']}
+
+    def execution_retry_prepare(self, *, run_id, load_workflow, source_pin, owner=False):
+        if owner is not True:
+            raise PermissionError('Independent owner execution authority required')
+        c.require(type(load_workflow) is bool, 'Invalid retry mode')
+        with self._db() as db:
+            return self._retry_context(db, run_id, load_workflow, source_pin)
+
     def execution_start(self, request, *, source_pin, owner=False):
         """Reserve one dispatch of a saved version, from an independently authorized host."""
         if owner is not True:
             raise PermissionError('Independent owner execution authority required')
         c.require(type(source_pin) is str and re.fullmatch(r'[a-f0-9]{64}', source_pin),
                   'Verified execution source required')
-        c.shape(request, {'request_id', 'workflow_id', 'version_id', 'revision', 'trigger', 'destination'})
+        retry_keys = {'retry_of', 'retry_current', 'retry_binding'}
+        base_keys = {'request_id', 'workflow_id', 'version_id', 'revision', 'trigger', 'destination'}
+        c.require(type(request) is dict, 'Invalid execution request')
+        retry = 'retry_of' in request
+        c.shape(request, base_keys | (retry_keys if retry else set()))
+        if retry:
+            _id(request['retry_of'])
+            c.require(type(request['retry_current']) is bool, 'Invalid retry mode')
         c.identifier(request['request_id'])
         for key in ('workflow_id', 'version_id', 'revision'):
             _id(request[key])
@@ -313,11 +402,21 @@ class WorkflowStore:
                 if prior:
                     if prior['request_sha256'] != binding:
                         raise Conflict('Duplicate execution request changed')
+                    if prior['version'] is None:
+                        raise Conflict('Execution history was removed')
                     return self._execution_view(db, prior)
-            if (current['version'], current['revision']) != (request['version_id'], request['revision']):
+            target = current['version']
+            if retry:
+                checkpoint = self._retry_context(db, request['retry_of'], request['retry_current'], source_pin)
+                target = checkpoint['workflow']['versionId']
+                if (checkpoint['binding'] != request['retry_binding'] or
+                    checkpoint['workflow']['id'] != current['id'] or
+                    checkpoint['selection'] != {key: request[key] for key in ('trigger', 'destination')}):
+                    raise Conflict('Retry checkpoint changed before admission')
+            if (target, current['revision']) != (request['version_id'], request['revision']):
                 raise Conflict('Workflow changed before execution admission')
             c.require(not current['archived'], 'Archived workflow cannot run')
-            graph = self._version(db, current['id'], current['version'])
+            graph = self._version(db, current['id'], target)
             names = {node['name'] for node in graph['nodes']}
             c.require(request['trigger'] in names and
                       (request['destination'] is None or request['destination'] in names),
@@ -333,11 +432,19 @@ class WorkflowStore:
             active = db.execute("SELECT count(*) FROM workflow_executions WHERE status='running'").fetchone()[0]
             c.require(active < 8, 'Execution capacity reached; review interrupted runs before retrying')
             run_id, claim = _token(), _token()
+            if retry and not _has_retry(db):
+                if not _has_history_policy(db):
+                    _add_history_policy(db)
+                db.execute('ALTER TABLE workflow_executions ADD COLUMN retry_of TEXT REFERENCES workflow_executions(id)')
+                db.execute('CREATE INDEX execution_retry ON workflow_executions(retry_of)')
+                db.execute('PRAGMA user_version='+str(RETRY_VERSION))
             db.execute("""INSERT INTO workflow_executions
                 (id,request_id,request_sha256,workflow,version,graph_sha256,source_pin,claim,status,started)
                 VALUES (?,?,?,?,?,?,?,?,'running',?)""",
-                (run_id, request['request_id'], binding, current['id'], current['version'],
+                (run_id, request['request_id'], binding, current['id'], target,
                  _digest(graph), source_pin, claim, _now()))
+            if retry:
+                db.execute('UPDATE workflow_executions SET retry_of=? WHERE id=?', (request['retry_of'], run_id))
             run = self._execution_view(db, self._execution_row(db, run_id), detail=True)
             return {**run, 'claim': claim,
                     'selection': {'trigger': request['trigger'], 'destination': request['destination']}}
@@ -369,8 +476,7 @@ class WorkflowStore:
             digest = _execution_result_digest(row, status, stopped, stored)
             if row['status'] == 'running':
                 if discard and not _has_history_policy(db):
-                    db.execute('ALTER TABLE workflow_executions ADD COLUMN discarded INTEGER NOT NULL DEFAULT 0 CHECK(discarded IN (0,1))')
-                    db.execute('PRAGMA user_version='+str(HISTORY_POLICY_VERSION))
+                    _add_history_policy(db)
                 if discard:
                     db.execute('UPDATE workflow_executions SET status=?,stopped=?,result=?,result_sha256=?,discarded=1 WHERE id=?',
                                (status, stopped, content, digest, run_id))
@@ -425,32 +531,7 @@ class WorkflowStore:
     def execution_page(self, *, query, limit=50, cursor=None):
         """Read a stable page of owner-local execution summaries."""
         c.require(type(limit) is int and 1 <= limit <= 200, 'Invalid execution history limit')
-        c.require(type(query) is dict and query.keys() <= {
-            'workflowId', 'workflowVersionId', 'status', 'startedAfter', 'startedBefore', 'mode',
-        }, 'Unsupported execution history filter')
         position = _history_cursor(cursor)
-        conditions = ['version IS NOT NULL']
-        values = []
-        for key, column in (('workflowId', 'workflow'), ('workflowVersionId', 'version')):
-            if key in query:
-                conditions.append(column+'=?')
-                values.append(_id(query[key]))
-        for key, operator in (('startedAfter', '>='), ('startedBefore', '<=')):
-            if key in query:
-                conditions.append('started'+operator+'?')
-                values.append(_execution_time(query[key]))
-        if 'mode' in query and c.text(query['mode'], maximum=64) != 'manual':
-            conditions.append('0')
-        statuses = query.get('status', [])
-        c.require(type(statuses) is list and len(statuses) <= len(HISTORY_STATUSES)
-                  and all(type(status) is str and status in HISTORY_STATUSES for status in statuses),
-                  'Invalid execution status filter')
-        if statuses:
-            matches = sorted({HISTORY_STATUSES[status] for status in statuses} - {None})
-            conditions.append('status IN (' + ','.join('?' for _ in matches) + ')' if matches else '0')
-            values.extend(matches)
-        else:
-            conditions.append("status<>'running'")
 
         def fetch(db, where, arguments, *, after=None):
             if after is not None:
@@ -460,14 +541,19 @@ class WorkflowStore:
             projection = ('id,workflow,version,status,started,stopped,result_sha256,rowid AS page_id,'
                           "CASE WHEN result IS NULL THEN NULL ELSE '' END AS result,"
                           'length(CAST(result AS BLOB)) AS result_size')
+            if _has_retry(db):
+                projection += ',retry_of'
             return db.execute('SELECT '+projection+' FROM workflow_executions WHERE ' +
                               ' AND '.join(where) + ' ORDER BY started DESC,rowid DESC LIMIT ?',
                               (*arguments, limit)).fetchall()
 
         with self._db() as db:
+            filtered, values = _execution_filter(query, retry=db is not None and _has_retry(db))
             if not _execution_table(db):
                 return {'data': [], 'count': 0, 'next_cursor': None}
-            conditions.insert(0, _retained_condition(db))
+            statuses = query.get('status')
+            base = ['version IS NOT NULL', _retained_condition(db), *filtered]
+            conditions = base if statuses else [*base, "status<>'running'"]
             rows = fetch(db, conditions, values, after=position)
             count = db.execute('SELECT count(*) FROM workflow_executions WHERE ' +
                                ' AND '.join(conditions), values).fetchone()[0]
@@ -479,7 +565,7 @@ class WorkflowStore:
                 }})
                 next_cursor = base64.urlsafe_b64encode(packet.encode('utf-8')).decode('ascii').rstrip('=')
             if not statuses and position is None:
-                rows = fetch(db, [*conditions[:-1], "status='running'"], values) + rows
+                rows = fetch(db, [*base, "status='running'"], values) + rows
             names = {}
             summaries = []
             for row in rows:
@@ -491,6 +577,38 @@ class WorkflowStore:
                                   'jsonSizeBytes': row['result_size'] or 0,
                                   'binaryDataSizeBytes': 0})
             return {'data': summaries, 'count': count, 'next_cursor': next_cursor}
+
+    def execution_delete(self, *, ids, before, query, owner=False):
+        """Remove selected settled history, keeping dispatch tombstones."""
+        if owner is not True:
+            raise PermissionError('Independent owner execution-history authority required')
+        c.require((ids is None) != (before is None), 'Select execution IDs or a cutoff')
+        if ids is not None:
+            c.require(type(ids) is list and len(ids) <= 500, 'Invalid execution deletion selection')
+            selected = list(dict.fromkeys(_id(identifier) for identifier in ids))
+        else:
+            cutoff = _execution_time(before)
+        with self._db(write=True) as db:
+            filtered, values = _execution_filter(query, retry=_has_retry(db))
+            if not _execution_table(db):
+                return
+            conditions = ['version IS NOT NULL', _retained_condition(db), "status IN ('success','error','canceled')"]
+            if ids is not None:
+                if not selected:
+                    return
+                # The pinned client treats explicitly selected IDs as authoritative.
+                selector = 'id IN ('+','.join('?' for _ in selected)+')'
+                if db.execute("SELECT 1 FROM workflow_executions WHERE status IN ('running','needs_review') AND "+
+                              selector+' LIMIT 1', selected).fetchone():
+                    raise Conflict('Resolve selected executions before deleting their history')
+                conditions.append(selector)
+                values = selected
+            else:
+                conditions += [*filtered, 'started<?']
+                values.append(cutoff)
+            db.execute("""UPDATE workflow_executions SET version=NULL,graph_sha256=NULL,source_pin=NULL,
+                       claim=NULL,status='removed',result=NULL,result_sha256=NULL WHERE """ +
+                       ' AND '.join(conditions), values)
 
     def execution_versions(self, workflow_id):
         _id(workflow_id)
@@ -602,6 +720,7 @@ class WorkflowStore:
 
 
 def serve(store, input_stream=None, output_stream=None, *, check_source=None, execution_source=None,
+          execution_history_authority=None,
           credential_store=None, credential_use=None):
     """Trusted foreground controller pipe, never a network/model RPC listener.
 
@@ -655,6 +774,9 @@ def serve(store, input_stream=None, output_stream=None, *, check_source=None, ex
                 result = credential_use.observe(**args)
             elif op == 'execution_start' and execution_source:
                 result = store.execution_start(args, source_pin=execution_source, owner=True)
+            elif op == 'execution_retry_prepare' and execution_source:
+                c.shape(args, {'run_id', 'load_workflow'})
+                result = store.execution_retry_prepare(**args, source_pin=execution_source, owner=True)
             elif op == 'execution_finish' and execution_source:
                 c.shape(args, {'run_id', 'claim', 'status', 'result'})
                 result = store.execution_finish(**args, source_pin=execution_source, owner=True)
@@ -668,6 +790,11 @@ def serve(store, input_stream=None, output_stream=None, *, check_source=None, ex
                 result = store.execution_list(**args)
             elif op == 'execution_page' and execution_source:
                 result = store.execution_page(**args)
+            elif op == 'execution_delete' and execution_history_authority:
+                c.shape(args, {'ids', 'before', 'query', 'configuration'})
+                with execution_history_authority(args['configuration']):
+                    result = store.execution_delete(ids=args['ids'], before=args['before'],
+                                                    query=args['query'], owner=True)
             elif op == 'execution_versions' and execution_source:
                 c.shape(args, {'workflow_id'})
                 result = store.execution_versions(**args)

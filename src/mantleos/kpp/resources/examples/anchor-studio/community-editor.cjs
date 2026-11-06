@@ -12,6 +12,7 @@ function mountCommunityEditor(app,{express,workflows,installation,context,reside
  const {editor,catalog}=installation,{personal}=context;
  const workflowScopes=personal.scopes.filter(value=>value.startsWith('workflow:'));
  if(execution)workflowScopes.push('workflow:execute');
+ if(execution?.configuration)workflowScopes.push('execution:list','execution:read','execution:delete');
  let pending=0;
  app.use('/rest',(req,res,next)=>{
   if(pending>=4)return res.status(503).json({code:503,message:'Workflow intake is busy'});
@@ -23,6 +24,9 @@ function mountCommunityEditor(app,{express,workflows,installation,context,reside
   catch(error){const message=String(error.message),code=message.startsWith('Unsupported execution:')?501:message.startsWith('Conflict:')?409:message.startsWith('KeyError:')?404:message.startsWith('PermissionError:')?403:/WORKFLOW_(BUSY|TIMEOUT|UNAVAILABLE)/.test(message)?503:400;
    res.status(code).json({code,message:message==='Conflict: execution stop requires review'?'Execution stop could not be verified. Review its stored state.':
     message==='Conflict: execution already finished'?'The execution finished before it could be stopped.':
+    message==='Conflict: Retry requires a retained failed execution'?'Only a retained failed execution can be retried.':
+    message==='Conflict: Retry checkpoint was produced by a different runtime'?'This execution predates the current runtime and cannot be resumed.':
+    message==='Conflict: Resolve selected executions before deleting their history'?'Stop or resolve the selected executions before deleting their history.':
     code===409?(url.startsWith('/rest/credentials')?'Credential changed. Reopen it before saving.':'Workflow changed or its loaded version is missing. Retain the draft and reconcile.'):code===404?'Resource not found':code===503?'Workflow storage is unavailable':code===501?'This execution selection is unavailable.':'Editor request rejected'});}
  });
  route('get','/rest/settings',()=>({data:context.settings}));
@@ -94,7 +98,7 @@ function mountCommunityEditor(app,{express,workflows,installation,context,reside
   if(req.body.expectedChecksum!==undefined&&req.body.expectedChecksum!==await calculateWorkflowChecksum(current))throw Error('Conflict: checksum');
   return {data:await dto(await workflows.call('mutate',{request_id:'http-'+crypto.randomUUID(),action:'update',id:current.id,revision:current.revision,value:{...current,...req.body}}))};
  });
- const executionRoutes=execution?mountExecutionRoutes(route,{workflows,runtime:execution.runtime,capture:execution.capture,projectId:personal.id}):null;
+ const executionRoutes=execution?mountExecutionRoutes(route,{workflows,...execution,projectId:personal.id}):null;
  app.use('/rest',(req,res)=>res.status(501).json({code:501,message:'This operation is not yet implemented in this BUILDING editor.'}));
  app.use('/rest',(error,req,res,next)=>{if(res.headersSent)return next(error);res.status(error.type==='entity.too.large'?413:400).json({code:error.type==='entity.too.large'?413:400,message:'Invalid or oversized workflow JSON'});});
  for(const name of ['nodes.json','credentials.json','node-versions.json'])app.get('/types/'+name,(req,res)=>{res.setHeader('X-Content-Type-Options','nosniff');res.type('json').send(catalog.asset(name));});

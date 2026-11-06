@@ -5,6 +5,7 @@ const {spawn}=require('node:child_process');
 const {setTimeout:delay}=require('node:timers/promises');
 const conditions=require('./conditions.cjs');
 const {prepareEditFields}=require('./edit-fields.cjs');
+const expressionRuntime=require('./expression-runtime.cjs');
 const MAX_INPUT=256*1024;
 const triggerType='n8n-nodes-base.manualTrigger',ifType='n8n-nodes-base.if',waitType='n8n-nodes-base.wait';
 const httpType='n8n-nodes-base.httpRequest';
@@ -15,12 +16,18 @@ const object=value=>value&&typeof value==='object'&&!Array.isArray(value);
 const only=(value,keys)=>object(value)&&Object.keys(value).every(key=>keys.includes(key));
 function demand(ok,message){if(!ok)throw Error('Unsupported execution: '+message);}
 
-function operand(value){
+function operand(value,native=false){
  if(typeof value!=='string'||!value.startsWith('='))return ()=>value;
+ if(native)return (_item,evaluate)=>evaluate(value);
  if(/^=\{\{\s*\$json\s*\}\}$/.test(value))return item=>item;
  const match=/^=\{\{\s*\$json\.([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)\s*\}\}$/.exec(value);
  demand(match&&match[1].split('.').every(key=>!['constructor','prototype','__proto__'].includes(key)),'expression');
  return item=>match[1].split('.').reduce((current,key)=>own(current,key)?current[key]:undefined,item);
+}
+
+function hasExpression(value){
+ if(typeof value==='string')return value.startsWith('=');
+ return value!==null&&typeof value==='object'&&Object.values(value).some(hasExpression);
 }
 
 function assignmentValue(value,depth=0){
@@ -36,7 +43,7 @@ function assignmentValue(value,depth=0){
  return operand(value);
 }
 
-function prepareIf(node){
+function prepareIf(node,native){
  const {parameters={}}=node;
  demand(node.typeVersion===2.4&&only(parameters,['conditions','options'])&&
   (!parameters.options||only(parameters.options,[])),'IF profile');
@@ -47,32 +54,30 @@ function prepareIf(node){
  const clauses=filter.conditions.map((clause,index)=>{
   demand(only(clause,['id','leftValue','rightValue','operator'])&&only(clause.operator,['type','operation','singleValue']),'IF operand');
   const {type,operation}=clause.operator;
-  const readRight=typeof clause.rightValue==='string'&&clause.rightValue.startsWith('=')?operand(clause.rightValue):null;
-  return {read:operand(clause.leftValue),readRight,comparison:{field:'value'+index,type,operation,
+  const readRight=typeof clause.rightValue==='string'&&clause.rightValue.startsWith('=')?operand(clause.rightValue,native):null;
+  return {read:operand(clause.leftValue,native),readRight,comparison:{field:'value'+index,type,operation,
    ...(own(clause,'rightValue')?{value:readRight?null:clause.rightValue}:{})}};
  });
  const spec={schema:'studio.if/1',combinator:filter.combinator,caseSensitive:options.caseSensitive,
   continueOnFail:node.continueOnFail===true,conditions:clauses.map(clause=>clause.comparison)};
  try{conditions.validate(spec);}catch{demand(false,'IF operator');}
- return items=>{
-  const projected=items.map((item,index)=>({
-   json:Object.fromEntries(clauses.map(({read,comparison})=>[comparison.field,read(item.json)]).filter(([,value])=>value!==undefined)),
-   pairedItem:{item:index},
-  }));
-  if(clauses.some(clause=>clause.readRight)){
-   const ports=[[],[]];
-   for(const [index,item] of items.entries()){
-    const comparisons=clauses.map(({readRight,comparison})=>readRight?
-     {...comparison,value:readRight(item.json)??null}:comparison);
-    let pass=false;
-    try{pass=conditions.partition({...spec,conditions:comparisons},[projected[index]]).true.length===1;}
-    catch(error){if(!spec.continueOnFail)throw error;}
-    ports[pass?0:1].push({...item,pairedItem:{item:index}});
-   }
-   return ports;
+ return async (items,_signal,_observe,evaluate)=>{
+  const ports=[[],[]];
+  for(const [index,item] of items.entries()){
+   const projected={json:{},pairedItem:{item:index}},comparisons=[];
+   let pass=false;
+   try{
+    for(const {read,readRight,comparison} of clauses){
+     const evaluateItem=value=>evaluate(value,index);
+     const left=await read(item.json,evaluateItem);
+     if(left!==undefined)projected.json[comparison.field]=left;
+     comparisons.push(readRight?{...comparison,value:(await readRight(item.json,evaluateItem))??null}:comparison);
+    }
+    pass=conditions.partition({...spec,conditions:comparisons},[projected]).true.length===1;
+   }catch(error){if(!spec.continueOnFail)throw error;}
+   ports[pass?0:1].push({...item,pairedItem:{item:index}});
   }
-  const output=conditions.partition(spec,projected);
-  return [output.true,output.false].map(port=>port.map(({pairedItem})=>({...items[pairedItem.item],pairedItem})));
+  return ports;
  };
 }
 
@@ -87,12 +92,12 @@ function prepareWait(node){
  };
 }
 
-function compile(workflow,selection,allowEffects=false){
+function compile(workflow,selection,allowEffects=false,native=false){
  demand(Buffer.byteLength(JSON.stringify(workflow))<=MAX_INPUT&&
   Array.isArray(workflow.nodes)&&workflow.nodes.length>0&&workflow.nodes.length<=64&&
   object(workflow.connections),'graph size');
  const settings=workflow.settings??{};
- demand(only(settings,['executionOrder','binaryMode','saveManualExecutions','executionTimeout'])&&
+ demand(only(settings,['executionOrder','binaryMode','saveManualExecutions','executionTimeout',...(native?['timezone']:[])])&&
   (!own(settings,'executionOrder')||settings.executionOrder==='v1')&&
   (!own(settings,'binaryMode')||settings.binaryMode==='separate')&&
   (!own(settings,'saveManualExecutions')||[true,false,'DEFAULT'].includes(settings.saveManualExecutions))&&
@@ -104,6 +109,7 @@ function compile(workflow,selection,allowEffects=false){
   demand(!steps.has(node.name)&&!node.disabled&&(node.type===httpType||!node.credentials||only(node.credentials,[]))&&
    !node.executeOnce&&!node.retryOnFail&&!node.alwaysOutputData&&(!node.onError||node.onError==='stopWorkflow'),'node configuration');
   let execute,outputs,effectNode;
+  const expressions=native&&[editType,ifType].includes(node.type)&&hasExpression(node.parameters??{});
   if(node.type===triggerType){
    demand(node.name===selection.trigger&&(node.typeVersion??1)===1&&(!node.parameters||only(node.parameters,[])),'manual trigger');
    execute=()=>[[{json:{},pairedItem:{item:0}}]];outputs=1;
@@ -111,7 +117,8 @@ function compile(workflow,selection,allowEffects=false){
    demand(!node.continueOnFail,'Wait error policy');
    execute=prepareWait(node);outputs=1;
   }else if(node.type===editType){
-   execute=prepareEditFields(node,assignmentValue);outputs=1;
+   const read=value=>expressions&&hasExpression(value)?(_item,evaluate)=>evaluate(value):assignmentValue(value);
+   execute=prepareEditFields(node,read);outputs=1;
   }else if(node.type===httpType){
    demand(allowEffects&&node.typeVersion===4.5&&typeof node.id==='string'&&!node.continueOnFail,'checked HTTP profile');
    effectNode=node.id;outputs=1;
@@ -121,9 +128,9 @@ function compile(workflow,selection,allowEffects=false){
    };
   }else{
    demand(node.type===ifType,'node type');
-   execute=prepareIf(node);outputs=2;
+   execute=prepareIf(node,expressions);outputs=2;
   }
-  steps.set(node.name,{id:'studio-step-'+index,name:node.name,execute,outputs,effectNode,
+  steps.set(node.name,{id:'studio-step-'+index,name:node.name,execute,outputs,effectNode,expressions,
    wires:Array.from({length:outputs},()=>[])});
  }
  const entry=steps.get(selection.trigger);
@@ -159,22 +166,61 @@ function compile(workflow,selection,allowEffects=false){
  }
  const effectNodes=Array.from(byId.values()).flatMap(step=>step.effectNode?[step.effectNode]:[]);
  demand(effectNodes.length<=1,'checked HTTP node count');
- return {entry,byId,effectNodes,timeout:settings.executionTimeout};
+ return {entry,byId,effectNodes,expressionNodes:Array.from(byId.values()).filter(step=>step.expressions).map(step=>step.name),
+  timeout:settings.executionTimeout};
 }
 
-function requestEffect(nodeId){
- return new Promise((resolve,reject)=>{
-  if(!process.connected)return reject(Error('Checked HTTP bridge unavailable'));
+let requestQueue=Promise.resolve(),requestSequence=0;
+function requestHost(kind,args){
+ const result=requestQueue.then(()=>new Promise((resolve,reject)=>{
+  if(!process.connected)return reject(Error('Execution bridge unavailable'));
+  const ticket=++requestSequence;
   process.once('message',message=>{
-   if(message?.nodeId!==nodeId||!message.observation)return reject(Error('Unverified HTTP observation'));
-   resolve(message.observation);
+   if(message?.ticket!==ticket||!message.result)return reject(Error('Execution bridge rejected the request'));
+   resolve(message.result);
   });
-  process.send({nodeId});
- });
+  process.send({kind,args,ticket});
+ }));
+ requestQueue=result.catch(()=>{});
+ return result;
 }
 
-async function dispatch({nodeRed,version,workflow,selection,userDir,allowEffects}){
- const plan=compile(workflow,selection,allowEffects),RED=require(nodeRed);
+// The reviewed retry subset resumes a single pure path. Prior outputs become
+// context for expressions but never generate new Node-RED messages.
+function resumePoint(plan,selection,observation){
+ const prior=observation?.resultData;
+ const history=prior?.runData;
+ demand(selection.destination===null&&observation?.version===1&&object(history)&&
+  prior.error?.name==='NodeOperationError'&&!prior.studioCheckedEffects&&
+  observation.startData?.studioSelection?.trigger===selection.trigger&&
+  observation.startData.studioSelection.destination===null,'retry has no eligible checkpoint');
+ for(const step of plan.byId.values())demand(step.wires.flat().length<=1,'retry requires a single path');
+ const prefix=Object.create(null);
+ let step=plan.entry,source=[],items=[],index=0;
+ while(step){
+  const attempts=own(history,step.name)?history[step.name]:null;
+  const task=attempts?.[0];
+  demand(Array.isArray(attempts)&&attempts.length===1&&task?.executionIndex===index&&
+   JSON.stringify(task.source)===JSON.stringify(source),'retry checkpoint path changed');
+  if(step.name===prior.lastNodeExecuted){
+   demand(index>0&&task.executionStatus==='error'&&Object.keys(history).length===index+1,
+    'retry checkpoint is incomplete');
+   return {entry:step,prefix,source,items,index};
+  }
+  const port=step.wires.findIndex(edges=>edges.length);
+  items=task.data?.main?.[port];
+  demand(task.executionStatus==='success'&&Array.isArray(items)&&items.length>0,'retry input is unavailable');
+  prefix[step.name]=attempts;
+  source=[{previousNode:step.name,previousNodeOutput:port,previousNodeRun:0}];
+  index++;
+  step=plan.byId.get(step.wires[port][0]);
+ }
+ throw Error('Unsupported execution: retry checkpoint is unreachable');
+}
+
+async function dispatch({nodeRed,version,workflow,selection,userDir,allowEffects,native,retry}){
+ const plan=compile(workflow,selection,allowEffects&&!retry,native),RED=require(nodeRed);
+ const resume=retry?resumePoint(plan,selection,retry):null;
  demand(RED.version()===version,'Node-RED runtime version changed');
  const tab='studio-execution',flows=[{id:tab,type:'tab',label:'Studio manual execution'}];
  for(const [index,step] of Array.from(plan.byId.values()).entries()){
@@ -183,12 +229,12 @@ async function dispatch({nodeRed,version,workflow,selection,userDir,allowEffects
  const storage={init:async()=>{},getFlows:async()=>flows,saveFlows:async()=>{throw Error('Read-only graph');},
   getCredentials:async()=>({}),saveCredentials:async()=>{},getSettings:async()=>({}),saveSettings:async()=>{},
   getSessions:async()=>({}),saveSessions:async()=>{}};
- const resultData={runData:Object.create(null)};
- let outstanding=1,sequence=0,resolveComplete,failed=false,uncertain=false,initialized=false,deadline;
+ const resultData={runData:resume?.prefix??Object.create(null)};
+ let outstanding=1,sequence=resume?.index??0,resolveComplete,failed=false,uncertain=false,initialized=false,deadline;
  const complete=new Promise(resolve=>{resolveComplete=resolve;});
  async function observe(nodeId){
   let observed;
-  try{observed=await requestEffect(nodeId);}
+  try{observed=await requestHost('effect',{nodeId});}
   catch{uncertain=true;throw Error('Checked HTTP observation unavailable');}
   if(observed.stage==='UNKNOWN')uncertain=true;
   if(observed.binding_sha256)resultData.studioCheckedEffects=[{nodeId,stage:observed.stage,binding_sha256:observed.binding_sha256}];
@@ -208,7 +254,12 @@ async function dispatch({nodeRed,version,workflow,selection,userDir,allowEffects
     const startTime=Date.now(),executionIndex=sequence++;
     try{
      if(failed||deadline?.aborted)return;
-     const ports=await step.execute(msg.items,deadline,observe);
+     const evaluate=async(value,itemIndex)=>{
+      const result=await requestHost('expression',{value,node:step.name,items:msg.items,itemIndex,
+       source:msg.source,runData:resultData.runData});
+      return result.kind==='missing'?undefined:result.value;
+     };
+     const ports=await step.execute(msg.items,deadline,observe,evaluate);
      if(failed||deadline?.aborted)return;
      resultData.lastNodeExecuted=step.name;
      resultData.runData[step.name]=[{startTime,executionIndex,source:msg.source,executionTime:Date.now()-startTime,
@@ -231,18 +282,19 @@ async function dispatch({nodeRed,version,workflow,selection,userDir,allowEffects
    });
   });
   await RED.start();
-  for(let attempt=0;attempt<500&&!RED.nodes.getNode(plan.entry.id);attempt++)await delay(20);
-  const entry=RED.nodes.getNode(plan.entry.id);
+  const entryId=(resume?.entry??plan.entry).id;
+  for(let attempt=0;attempt<500&&!RED.nodes.getNode(entryId);attempt++)await delay(20);
+  const entry=RED.nodes.getNode(entryId);
   if(!entry)throw Error('Node-RED startup timed out');
   if(plan.timeout>0)deadline=AbortSignal.timeout(plan.timeout*1000);
-  entry.receive({items:[],source:[]});
+  entry.receive({items:resume?.items??[],source:resume?.source??[]});
   await complete;
   if(uncertain)return {status:'needs_review',data:{version:1,resultData}};
   if(deadline?.aborted){
    resultData.error={name:'ManualExecutionCancelledError',message:'The execution was cancelled manually'};
    return {status:'canceled',data:{version:1,resultData}};
   }
-  return {status:failed?'error':'success',data:{version:1,startData:{},resultData,executionData:{
+  return {status:failed?'error':'success',data:{version:1,startData:{studioSelection:selection},resultData,executionData:{
    contextData:{},nodeExecutionStack:[],metadata:{},waitingExecution:{},waitingExecutionSource:{},
   }}};
  }finally{
@@ -254,13 +306,13 @@ function canceled(){
  return {status:'canceled',data:{version:1,resultData:{runData:{}}}};
 }
 
-function runWorker(frame,signal,effectNodes,observe){
+function runWorker(frame,signal,plan,observe,evaluate){
  return new Promise((resolve,reject)=>{
   const child=spawn(process.execPath,[__filename,'--worker'],{windowsHide:true,
-   stdio:['pipe','pipe','ignore',...(effectNodes.length?['ipc']:[])]});
+   stdio:['pipe','pipe','ignore',...(plan.effectNodes.length||plan.expressionNodes.length?['ipc']:[])]});
   const output=[];
   let bytes=0,termination=null,failed=false;
-  let effectPending;
+  let effectPending,busy=false,evaluations=0;
   const terminate=reason=>{
    if(termination||child.exitCode!==null||child.signalCode!==null)return;
    try{if(child.kill('SIGTERM'))termination=reason;}catch{failed=true;}
@@ -270,19 +322,26 @@ function runWorker(frame,signal,effectNodes,observe){
   child.on('error',()=>{failed=true;});
   child.stdin.on('error',()=>{});
   child.on('message',message=>{
-   if(effectPending||termination||signal?.aborted||!effectNodes.includes(message?.nodeId)){
-    failed=true;terminate('effect protocol');return;
+   const args=message?.args;
+   const effect=message?.kind==='effect'&&only(args,['nodeId'])&&plan.effectNodes.includes(args.nodeId)&&!effectPending;
+   const expression=message?.kind==='expression'&&only(args,['value','node','items','itemIndex','source','runData'])&&
+    plan.expressionNodes.includes(args.node)&&++evaluations<=512;
+   if(busy||termination||signal?.aborted||!Number.isSafeInteger(message?.ticket)||(!effect&&!expression)){
+    failed=true;terminate('execution protocol');return;
    }
-   effectPending=(async()=>{
-    let observation;
-    try{observation=await observe(message.nodeId);}
+   busy=true;
+   const pending=(async()=>{
+    let result;
+    try{result=await (effect?observe(args.nodeId):evaluate(args));}
     catch(error){
-     observation={stage:String(error.message).startsWith('PermissionError:')?'FAILED':'UNKNOWN'};
+     if(effect)result={stage:String(error.message).startsWith('PermissionError:')?'FAILED':'UNKNOWN'};
     }
-    try{if(child.connected)child.send({nodeId:message.nodeId,observation},()=>{});}
-    catch{failed=true;terminate('effect reply');}
-    return observation;
+    busy=false;
+    try{if(child.connected)child.send({ticket:message.ticket,result},()=>{});}
+    catch{failed=true;terminate('execution reply');}
+    return result;
    })();
+   if(effect)effectPending=pending;
   });
   child.stdout.on('data',chunk=>{
    bytes+=chunk.length;
@@ -303,11 +362,40 @@ function runWorker(frame,signal,effectNodes,observe){
  });
 }
 
-function createManualRuntime({nodeRed,version,checkActive,effects=null}){
- let running=0;
- return {async admit({workflow,selection}){
+function createManualRuntime({nodeRed,version,checkActive,effects=null,expression=null}){
+ let running=0,service,expressionState='UNAVAILABLE';
+ function warm(){
+  if(!expression)return;
+  if(!service){
+   const parent=fs.realpathSync(os.tmpdir());
+   const scratch=fs.mkdtempSync(path.join(parent,'mantle-studio-expression-'));
+   service=expressionRuntime.start(expression,scratch);
+   expressionState='STARTING';
+   service.ready.then(()=>{expressionState='READY';},()=>{expressionState='UNAVAILABLE';});
+   service.worker.process.once('close',()=>{
+    expressionState='UNAVAILABLE';
+    if(fs.existsSync(scratch)&&path.dirname(fs.realpathSync(scratch))===parent)
+     fs.rmSync(scratch,{recursive:true,force:true});
+   });
+  }
+  return service.ready;
+ }
+ return {warm,expressionStatus:()=>expression?expressionState:null,
+ async close(){
+  if(service?.worker.process.exitCode===null&&service.worker.process.signalCode===null){
+   const closed=new Promise(resolve=>service.worker.process.once('close',resolve));
+   service.worker.process.kill();await closed;
+  }
+ },
+ async admit({workflow,selection,retry=null}){
   await checkActive();
-  const plan=compile(workflow,selection,Boolean(effects));
+  const plan=compile(workflow,selection,Boolean(effects)&&!retry,Boolean(expression));
+  if(retry)resumePoint(plan,selection,retry);
+  if(plan.expressionNodes.length){
+   try{await warm();}
+   catch{throw Error('Unsupported execution: reviewed expression runtime unavailable');}
+   demand(expressionState==='READY'&&service.worker.alive,'reviewed expression runtime unavailable');
+  }
   for(const nodeId of plan.effectNodes)await effects.check(workflow,nodeId);
   return async input=>{
    if(input.signal?.aborted)return canceled();
@@ -320,8 +408,12 @@ function createManualRuntime({nodeRed,version,checkActive,effects=null}){
    let userDir;
    try{
     userDir=fs.mkdtempSync(path.join(parent,'mantle-studio-manual-'));
-    return await runWorker({nodeRed,version,workflow:input.workflow,selection:input.selection,userDir,allowEffects:Boolean(effects)},
-     input.signal,plan.effectNodes,nodeId=>effects.observe(input,nodeId));
+    const {id,name,nodes,connections,settings}=input.workflow;
+    const graph={id,name,nodes:nodes.map(({id,name,type,typeVersion,position,parameters})=>({id,name,type,typeVersion,position,parameters})),
+     connections,settings,active:false};
+    return await runWorker({nodeRed,version,workflow:input.workflow,selection:input.selection,userDir,
+     allowEffects:Boolean(effects),native:Boolean(expression),retry},input.signal,plan,nodeId=>effects.observe(input,nodeId),
+     args=>service.worker.call('evaluate',{...args,workflow:graph,executionId:input.id},5000));
    }finally{
     running--;
     if(userDir&&path.dirname(fs.realpathSync(userDir))===parent)fs.rmSync(userDir,{recursive:true,force:true});
@@ -335,7 +427,7 @@ async function main(){
  let size=0;
  for await(const bytes of process.stdin){
   size+=bytes.length;
-  if(size>MAX_INPUT+65536)throw Error('Manual worker input too large');
+  if(size>MAX_INPUT+65536+4*1024*1024)throw Error('Manual worker input too large');
   chunks.push(bytes);
  }
  const result=await dispatch(JSON.parse(Buffer.concat(chunks).toString('utf8')));

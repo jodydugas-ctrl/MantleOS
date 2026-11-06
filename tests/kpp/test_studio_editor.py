@@ -1,5 +1,6 @@
 """Optional editor admission is source integrity, never execution permission."""
 from pathlib import Path
+import os
 import shutil
 import subprocess
 import unittest
@@ -23,7 +24,8 @@ class StudioEditorTests(unittest.TestCase):
                  'workflow-checksum.test.cjs', 'resident-view.test.cjs',
                  'community-editor.test.cjs', 'editor-executions.test.cjs', 'manual-node-red.test.cjs')
         result = subprocess.run([shutil.which('node'), '--test', *(str(root/name) for name in names)],
-                                capture_output=True, text=True, timeout=60)
+                                capture_output=True, text=True,
+                                timeout=300 if os.environ.get('STUDIO_EXPRESSION_ROOT') else 60)
         self.assertEqual(result.returncode, 0, result.stdout+result.stderr)
         # The HTTP integration case explicitly reports an internal skip unless
         # the host supplies STUDIO_MODULES. This wrapper is not browser evidence.

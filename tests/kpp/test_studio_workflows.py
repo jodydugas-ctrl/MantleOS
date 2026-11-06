@@ -107,6 +107,101 @@ class WorkflowTests(unittest.TestCase):
             with self.assertRaises(Conflict):
                 store.execution_start(self.execution_request(other), owner=True, source_pin='1'*64)
 
+    def test_delete_execution_selection_preserves_dispatch_and_workflow_history(self):
+        with tempfile.TemporaryDirectory() as td:
+            store = WorkflowStore(td)
+            saved = self.create(store)
+            other = self.create(store, request_id='other-workflow')
+            authority = {'owner': True, 'source_pin': '1'*64}
+
+            def create_run(workflow, request_id, status):
+                request = {**self.execution_request(workflow), 'request_id': request_id}
+                run = store.execution_start(request, **authority)
+                if status is not None:
+                    store.execution_finish(run['id'], claim=run['claim'], status=status,
+                                           result={'fixture': request_id}, **authority)
+                return run['id'], request
+
+            first, request = create_run(saved, 'first', 'success')
+            second, _ = create_run(saved, 'second', 'error')
+            third, _ = create_run(other, 'third', 'success')
+            active, _ = create_run(saved, 'active', None)
+            review, _ = create_run(saved, 'review', 'needs_review')
+            with self.assertRaises(PermissionError):
+                store.execution_delete(ids=[first], before=None, query={})
+            with self.assertRaises(Conflict):
+                store.execution_delete(ids=[first, active, review], before=None, query={}, owner=True)
+            self.assertEqual(store.execution_get(first)['status'], 'success')
+
+            # Explicit IDs take precedence over stale workflow/filter selections.
+            selection = {'ids': [first, first], 'before': None, 'query': {'workflowId': other['id']}, 'owner': True}
+            store.execution_delete(**selection)
+            store.execution_delete(**selection)
+            reopened = WorkflowStore(td)
+            with self.assertRaises(KeyError):
+                reopened.execution_get(first)
+            with self.assertRaises(Conflict):
+                reopened.execution_start(request, **authority)
+            with closing(sqlite3.connect(reopened.path)) as db:
+                self.assertEqual(db.execute('SELECT version,claim,result,status FROM workflow_executions WHERE id=?',
+                                            (first,)).fetchone(), (None, None, None, 'removed'))
+            cutoff = {'ids': None, 'before': '2099-01-01T00:00:00.000Z',
+                      'query': {'workflowId': saved['id'], 'status': ['error']}, 'owner': True}
+            reopened.execution_delete(**cutoff)
+            with self.assertRaises(KeyError):
+                reopened.execution_get(second)
+            self.assertEqual(reopened.execution_get(third)['status'], 'success')
+            self.assertEqual(reopened.execution_get(active)['status'], 'running')
+            self.assertEqual(reopened.execution_get(review)['status'], 'needs_review')
+            self.assertEqual(reopened.get(saved['id']), saved)
+            self.assertEqual(len(reopened.history(saved['id'])), 1)
+            self.assertEqual({entry['id'] for entry in reopened.execution_page(query={})['data']},
+                             {third, active, review})
+
+    def test_retry_binds_retained_failure_revision_and_single_dispatch(self):
+        with tempfile.TemporaryDirectory() as td:
+            store = WorkflowStore(td)
+            saved = self.create(store)
+            authority = {'owner': True, 'source_pin': '1'*64}
+            selection = {'trigger': 'Input', 'destination': None}
+            request = {**self.execution_request(saved), **selection}
+            failed = store.execution_start(request, **authority)
+            observation = {'startData': {'studioSelection': selection},
+                           'resultData': {'runData': {}, 'error': {'name': 'NodeOperationError'}}}
+            store.execution_finish(failed['id'], claim=failed['claim'], status='error',
+                                   result=observation, **authority)
+            with self.assertRaises(PermissionError):
+                store.execution_retry_prepare(run_id=failed['id'], load_workflow=True, source_pin='1'*64)
+            with self.assertRaises(Conflict):
+                store.execution_retry_prepare(run_id=failed['id'], load_workflow=True,
+                                              **{**authority, 'source_pin': '2'*64})
+
+            def retry_request(current):
+                prepared = store.execution_retry_prepare(run_id=failed['id'], load_workflow=current, **authority)
+                return {**request, 'request_id': 'retry-'+str(current), 'retry_of': failed['id'],
+                        'retry_current': current, 'retry_binding': prepared['binding'],
+                        'revision': prepared['revision'], 'version_id': prepared['workflow']['versionId']}
+
+            stale = retry_request(True)
+            newer = self.mutate(store, 'update', saved, value={**saved, 'name': 'Repaired'})
+            with self.assertRaises(Conflict):
+                store.execution_start(stale, **authority)
+            for load_workflow, version in ((False, saved), (True, newer)):
+                prepared = retry_request(load_workflow)
+                retried = store.execution_start(prepared, **authority)
+                self.assertEqual(retried['retryOf'], failed['id'])
+                self.assertEqual(retried['workflowVersionId'], version['versionId'])
+                self.assertNotEqual(retried['id'], failed['id'])
+                reopened = WorkflowStore(td)
+                self.assertNotIn('claim', reopened.execution_start(prepared, **authority))
+                done = reopened.execution_finish(retried['id'], claim=retried['claim'], status='success',
+                                                 result={}, **authority)
+                self.assertEqual(reopened.execution_get(retried['id']), done)
+                with self.assertRaises(Conflict):
+                    reopened.execution_retry_prepare(run_id=retried['id'], load_workflow=False, **authority)
+            self.assertEqual(store.execution_page(query={'mode': 'retry'})['count'], 2)
+            self.assertEqual(store.execution_page(query={'mode': 'manual'})['count'], 1)
+
     def test_manual_history_off_keeps_only_a_receipt_after_live_execution(self):
         with tempfile.TemporaryDirectory() as td:
             store = WorkflowStore(td)

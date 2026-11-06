@@ -38,7 +38,7 @@ function selection(body,workflow){
 function presentation(run,includeData){
  const status=run.status==='needs_review'?'crashed':run.status;
  const {data,workflowData,...base}=run;
- return {...base,status,finished:status==='success',createdAt:run.startedAt,retryOf:null,retrySuccessId:null,
+ return {...base,status,finished:status==='success',createdAt:run.startedAt,retryOf:run.retryOf??null,retrySuccessId:null,
   waitTill:null,deletedAt:null,storedAt:'db',usedPrivateCredentials:false,
   ...(run.status==='needs_review'?{executionReviewRequired:true}:{}),
   ...(includeData?{workflowData:{...workflowData,active:false},data:data===null?null:encodeRunData(data)}:{})};
@@ -62,7 +62,7 @@ function pushTransientNodes(push,executionId,runData){
  }
 }
 
-function mountExecutionRoutes(route,{workflows,runtime,capture,projectId}){
+function mountExecutionRoutes(route,{workflows,runtime,capture,projectId,configuration}){
  if(typeof runtime?.admit!=='function'||typeof capture!=='function')throw Error('TRUSTED_EXECUTION_HOST_REQUIRED');
  const pending=new Set();
  const active=new Map();
@@ -70,7 +70,7 @@ function mountExecutionRoutes(route,{workflows,runtime,capture,projectId}){
  async function finish(started,operation,push,signal){
   const {id:executionId,workflowId,workflowData,startedAt,claim}=started;
   push({type:'executionStarted',data:{executionId,workflowId,workflowName:workflowData.name,
-   mode:'manual',startedAt,flattedRunData:'[{}]'}});
+   mode:started.mode,startedAt,flattedRunData:'[{}]'}});
   let observation;
   try{
    observation=await operation({id:executionId,claim,workflow:workflowData,selection:started.selection,signal});
@@ -86,36 +86,62 @@ function mountExecutionRoutes(route,{workflows,runtime,capture,projectId}){
    status:observation.status,result:observation.data});
   if(committed.id!==executionId||committed.workflowId!==workflowId||
      committed.workflowVersionId!==started.workflowVersionId||committed.status!==observation.status||
+     committed.retryOf!==started.retryOf||
      (committed.discarded===true)!==(workflowData.settings?.saveManualExecutions===false))
    throw Error('UNVERIFIED_EXECUTION_COMMIT');
   if(committed.discarded)pushTransientNodes(push,executionId,committed.data.resultData?.runData);
   push({type:'executionFinished',data:{executionId,workflowId,status:presentation(committed,false).status}});
+  return committed;
  }
- route('post','/rest/workflows/:id/run',async req=>{
+ async function launch(prepare,push){
   if(closing)throw Error('PermissionError: execution intake stopped');
   let release,dispatched=false;
   const lifecycle=new Promise(resolve=>{release=resolve;});
   const done=()=>{pending.delete(lifecycle);release();};
   pending.add(lifecycle);
   try{
-   const push=capture(req.headers['push-ref']);
-   if(!push)throw Error('Conflict: execution editor connection');
-   const saved=await workflows.call('get',{id:req.params.id});
-   const selected=selection(req.body,saved);
-   const operation=await runtime.admit({workflow:saved,selection:selected});
+   const {workflow,selected,revision,retry,request}=await prepare();
+   const operation=await runtime.admit({workflow,selection:selected,...(retry?{retry}:{})});
    if(typeof operation!=='function')throw Error('Unsupported execution: runtime capability');
    if(closing)throw Error('PermissionError: execution intake stopped');
    const run=await workflows.call('execution_start',{request_id:'run-'+randomUUID(),
-    workflow_id:saved.id,version_id:saved.versionId,revision:saved.revision,...selected});
+    workflow_id:workflow.id,version_id:workflow.versionId,revision,...selected,...request});
    if(!run.claim)throw Error('Conflict: execution already dispatched');
    const controller=new AbortController();
    active.set(run.id,{controller,lifecycle});
-   setImmediate(()=>finish(run,operation,push,controller.signal).catch(()=>{}).finally(()=>{
-    active.delete(run.id);done();
-   }));
+   const finished=new Promise((resolve,reject)=>{
+    setImmediate(()=>finish(run,operation,push,controller.signal).then(resolve,reject).finally(()=>{
+     active.delete(run.id);done();
+    }));
+   });
+   finished.catch(()=>{});
    dispatched=true;
-   return {data:{executionId:run.id}};
+   return {run,finished};
   }finally{if(!dispatched)done();}
+ }
+ route('post','/rest/workflows/:id/run',async req=>{
+  const push=capture(req.headers['push-ref']);
+  if(!push)throw Error('Conflict: execution editor connection');
+  const {run}=await launch(async()=>{
+   const workflow=await workflows.call('get',{id:req.params.id});
+   return {workflow,selected:selection(req.body,workflow),revision:workflow.revision};
+  },push);
+  return {data:{executionId:run.id}};
+ });
+ route('post','/rest/executions/:id/retry',async req=>{
+  const body=req.body??{};
+  if(typeof body!=='object'||Array.isArray(body)||Object.keys(body).some(key=>key!=='loadWorkflow')||
+     (Object.hasOwn(body,'loadWorkflow')&&typeof body.loadWorkflow!=='boolean'))
+   throw Error('Unsupported execution: retry payload');
+  const load=body.loadWorkflow??false;
+  const push=capture(req.headers['push-ref'])??(()=>{});
+  const {finished}=await launch(async()=>{
+   const prepared=await workflows.call('execution_retry_prepare',{run_id:req.params.id,load_workflow:load});
+   return {workflow:prepared.workflow,selected:prepared.selection,revision:prepared.revision,
+    retry:prepared.observation,request:{retry_of:req.params.id,retry_current:load,retry_binding:prepared.binding}};
+  },push);
+  const committed=await finished;
+  return {data:{...presentation(committed,false),data:committed.data,workflowData:committed.workflowData}};
  });
  route('post','/rest/executions/:id/stop',async req=>{
   if(req.body!==undefined&&(!req.body||Array.isArray(req.body)||
@@ -141,18 +167,34 @@ function mountExecutionRoutes(route,{workflows,runtime,capture,projectId}){
  route('get','/rest/executions/versions/:id',async req=>({
   data:await workflows.call('execution_versions',{workflow_id:req.params.id}),
  }));
- route('get','/rest/executions',async req=>{
-  const filter=req.query.filter?JSON.parse(req.query.filter):{};
+ function personalQuery(filter){
   if(!filter||typeof filter!=='object'||Array.isArray(filter))throw Error('Unsupported execution: history filter');
   const {projectId:requestedProject,...query}=filter;
   if(requestedProject!==undefined&&requestedProject!==projectId)throw Error('PermissionError: execution project');
+  return query;
+ }
+ if(configuration)route('post','/rest/executions/delete',async req=>{
+  if(closing)throw Error('PermissionError: execution intake stopped');
+  const body=req.body;
+  if(!body||typeof body!=='object'||Array.isArray(body)||
+     Object.keys(body).some(key=>!['ids','deleteBefore','filters'].includes(key))||
+     Object.hasOwn(body,'ids')===Object.hasOwn(body,'deleteBefore'))
+   throw Error('Unsupported execution: deletion selection');
+  const query=personalQuery(body.filters===undefined?{}:body.filters);
+  await workflows.call('execution_delete',{ids:body.ids??null,before:body.deleteBefore??null,query,configuration});
+  return {};
+ });
+ route('get','/rest/executions',async req=>{
+  const filter=req.query.filter?JSON.parse(req.query.filter):{};
+  const query=personalQuery(filter);
   const limit=Number(req.query.limit??50),cursor=req.query.cursor??null;
   const page=await workflows.call('execution_page',{query,cursor,limit});
   const scopes=['execution:list','execution:read','workflow:read','workflow:execute'];
+  if(configuration)scopes.push('execution:delete');
   return {data:{results:page.data.map(row=>({...presentation(row,false),scopes})),
    nextCursor:page.next_cursor,count:page.count,estimated:false,concurrentExecutionsCount:-1}};
  });
- return Object.freeze({async close(){closing=true;await Promise.allSettled(pending);}});
+ return Object.freeze({async close(){closing=true;await Promise.allSettled(pending);await runtime.close?.();}});
 }
 
 module.exports={mountExecutionRoutes,encodeRunData};

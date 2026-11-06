@@ -73,8 +73,9 @@ function prepareEditFields(node,operand){
   demand(only(field,['id','name','type','value'])&&types.has(field.type),'assignment shape');
   return {path:fieldPath(field.name,dots),type:field.type,read:operand(field.value)};
  });
- return items=>{
-  const mapped=items.map((item,index)=>{
+ return async (items,_signal,_observe,evaluate)=>{
+  const mapped=[];
+  for(const [index,item] of items.entries()){
    const pairedItem={item:index};
    try{
     const json=['all','except'].includes(include)?structuredClone(item.json):{};
@@ -85,19 +86,19 @@ function prepareEditFields(node,operand){
     }
     const values=new Map();
     for(const operation of operations){
-     const raw=operation.read(item.json);
+     const raw=await operation.read(item.json,value=>evaluate(value,index));
      let value;
      try{value=convert(raw,operation.type);}
      catch(error){if(!options.ignoreConversionErrors)throw error;value=raw??null;}
      values.set(operation.path.value,{path:operation.path,value});
     }
     for(const {path,value} of values.values())set(json,path,value);
-    return {json,pairedItem};
+    mapped.push({json,pairedItem});
    }catch(error){
     if(!node.continueOnFail)throw error;
-    return {json:{error:'Edit Fields could not assign an input value.'},pairedItem};
+    mapped.push({json:{error:'Edit Fields could not assign an input value.'},pairedItem});
    }
-  });
+  }
   demand(Buffer.byteLength(JSON.stringify(mapped))<=256*1024,'output size');
   return [mapped];
  };

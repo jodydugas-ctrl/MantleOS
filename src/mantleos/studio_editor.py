@@ -62,10 +62,34 @@ def _inspection(value):
     return value
 
 
+def _expression(value):
+    c.shape(value, {'root', 'reference', 'engine', 'sha256', 'files', 'bytes'})
+    c.text(value['root'], maximum=32768)
+    c.require(os.path.isabs(value['root']) and value['reference'] == 'n8n-workflow@2.46.4'
+              and value['engine'] == 'quickjs', 'Invalid expression runtime profile')
+    _hash(value['sha256'])
+    c.require(type(value['files']) is int and 1 <= value['files'] <= 16000
+              and type(value['bytes']) is int and 1 <= value['bytes'] <= 128*1024*1024,
+              'Invalid expression installation counts')
+    return value
+
+
+def _inspect_expression(node, root):
+    script = Path(__file__).parent/'kpp/resources/examples/anchor-studio/expression-runtime.cjs'
+    root = _absolute(root)
+    result = subprocess.run([os.fspath(node), str(script), root], capture_output=True, timeout=120)
+    c.require(result.returncode == 0 and len(result.stdout) <= 4096, 'Expression installation rejected')
+    return _expression({**c.loads(result.stdout), 'root': root})
+
+
 def _validate(value):
     options = {'manual_execution', 'credential_editor'} & value.keys() if type(value) is dict else set()
-    c.shape(value, FIELDS | options)
+    expression = {'expression_runtime'} if type(value) is dict and 'expression_runtime' in value else set()
+    c.shape(value, FIELDS | options | expression)
     c.require(all(value[key] is True for key in options), 'Invalid editor capability selection')
+    if expression:
+        c.require('manual_execution' in options, 'Expressions require reviewed manual execution')
+        _expression(value['expression_runtime'])
     c.require(value['schema'] == SCHEMA, 'Unsupported editor configuration')
     try:
         revision = uuid.UUID(value['revision'])
@@ -100,7 +124,9 @@ def public_status(nest):
         'enabled': True, 'revision': value['revision'], 'installation': value['inspection'],
         'scope': 'BUILDING_NOT_ACCEPTED', 'context': 'RESIDENT_MEMORY',
         **({'manual_execution': 'PURE_NODE_RED'} if value.get('manual_execution') else {}),
-        **({'credential_editor': 'WINDOWS_OWNER_LOCAL'} if value.get('credential_editor') else {})}
+        **({'credential_editor': 'WINDOWS_OWNER_LOCAL'} if value.get('credential_editor') else {}),
+        **({'expression_runtime': {key: value['expression_runtime'][key] for key in ('reference', 'engine', 'sha256')}}
+           if value.get('expression_runtime') else {})}
 
 
 @contextmanager
@@ -117,10 +143,11 @@ def _writer(nest, reviewed):
 
 
 def configure(nest, *, node, package_root, editor_profile, catalog_root, catalog_profile,
-              manual_execution=False, credential_editor=False, reviewed=False):
+              manual_execution=False, credential_editor=False, expression_root=None, reviewed=False):
     import time
     c.require(type(manual_execution) is bool, 'Manual execution selection requires a boolean')
     c.require(type(credential_editor) is bool, 'Credential editor selection requires a boolean')
+    c.require(expression_root is None or manual_execution, 'Expressions require reviewed manual execution')
     with _writer(nest, reviewed) as db:
         inspection = _inspection(inspect_source(node=node, package_root=package_root, editor_profile=editor_profile,
                                                 catalog_root=catalog_root, catalog_profile=catalog_profile))
@@ -132,6 +159,8 @@ def configure(nest, *, node, package_root, editor_profile, catalog_root, catalog
                  'installation_sha256': inspection['sha256'], 'inspection': inspection}
         if manual_execution:
             value['manual_execution'] = True
+        if expression_root is not None:
+            value['expression_runtime'] = _inspect_expression(node, expression_root)
         if credential_editor:
             from .studio import _setting
             from .studio_credentials import CredentialStore
