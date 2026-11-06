@@ -1,6 +1,8 @@
 """Repository preparation must preserve shared bytes and reproducible releases."""
 import importlib.util
-from pathlib import Path
+from pathlib import Path, PurePosixPath
+import posixpath
+import re
 import tempfile
 import tomllib
 import unittest
@@ -17,6 +19,21 @@ def load(path, name):
 
 
 class ProjectExportTests(unittest.TestCase):
+    def test_organ_shelves_link_to_single_canonical_manifests(self):
+        files = load(ROOT / 'tools/export_kpp.py', 'project_export_shelves').source_map(ROOT)
+        base = 'pantry/organs/'
+        pages = {name: blob.decode() for name, blob in files.items() if name.startswith(base)}
+        self.assertEqual({name.removeprefix(base) for name in pages},
+                         {'README.md', 'heart/README.md', 'senses/README.md', 'nervous-system/README.md',
+                          'immune-system/README.md', 'limbs/README.md', 'memory/README.md'})
+        for name, content in pages.items():
+            self.assertEqual(files['src/mantleos/kpp/resources/' + name], files[name])
+            for target in re.findall(r'\]\(([^)]+)\)', content):
+                self.assertIn(posixpath.normpath(str(PurePosixPath(name).parent / target)), files)
+        for organ in ('heart', 'memory'):
+            self.assertIn('../../sleep-memory-consolidation.json', pages[base + organ + '/README.md'])
+        self.assertIn('../text-editor.json', pages[base + 'README.md'])
+
     def test_install_metadata_keeps_runtime_dependency_free_and_licenses_scoped(self):
         files = load(ROOT / 'tools/export_kpp.py', 'project_export_metadata').source_map(ROOT)
         metadata = tomllib.loads(files['pyproject.toml'].decode())

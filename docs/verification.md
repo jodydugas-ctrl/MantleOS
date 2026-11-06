@@ -8,6 +8,33 @@ Current r3 results: [log-adoption-verification.json](log-adoption-verification.j
 
 Current recipe/4 revision results are in [recipe-v4-verification.json](recipe-v4-verification.json). Earlier records below, including the original handoff receipt, remain historical.
 
+## Pantry organ shelves and ingredient fit
+
+The standalone focused run passed 21 checks. The MantleOS focused run passed
+17. Doctor, adaptive smoke, the exact standalone inventory, and shared-source
+parity passed. The generated shelf pages link to the same canonical manifests
+in both the root Pantry and the bundled guides.
+
+The full Windows suites passed. The standalone Pantry implementation export
+ran 567 tests and MantleOS ran 690. Each skipped five symlink cases and one
+Node-RED embedding case because the host lacked the required privileges or
+owner-provisioned installation. Other platforms and manual browser checks
+were not exercised. The anticipation documentation and recipe were added
+after the standalone suite snapshot and checked by design validation, doctor,
+and the final exact export.
+
+An injected Heart clock produced beat 6, which Sleep Memory used with a
+verified synthetic Engram prefix. Fast and medium views were present and the
+ledger bytes were identical before and after projection. This exercises the
+example composition with local Python. The fit report itself describes
+declared interfaces and supplies no execution evidence or authority.
+
+The published Heart Spore and notes trial recipes retained their original
+bytes. The existing notes specimen opened with its original candidate review
+pending. The new AppAI anticipation recipe passed structural Anchor validation
+and doctor. Forecast ingestion and Immune investigation have no runtime
+qualification in the notes specimen.
+
 ## AppAI Heart notes trial
 
 The local Python/SQLite specimen ran a real second beat **600.176 seconds**

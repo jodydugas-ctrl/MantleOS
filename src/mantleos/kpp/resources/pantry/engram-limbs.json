@@ -45,5 +45,8 @@
       "Canonical per-limb receipts and coordinator task state"
     ],
     "limits": "0..32 registered limbs, 0..8 workers, 128 pending tasks. No model client, no OS sandbox, and no exactly-once external effect guarantee."
-  }
+  },
+  "organs": [
+    "limbs"
+  ]
 }

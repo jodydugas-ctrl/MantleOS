@@ -49,6 +49,21 @@ from the same canonical `mantleos` source; its `kpp` namespace aliases those
 modules. `docs/kpp.md` and standalone `SYSTEMS.md` are byte-identical views of
 one common document. Export and drift checks prevent silent source divergence.
 
+The Pantry's organ shelves are generated views of ingredient manifests. An
+ingredient may appear on several shelves, while the recipe determines the
+organ composition. `python -m mantleos kpp pantry-fit` compares declared
+interfaces with the recipe's selection and host capabilities. The report
+informs integration and leaves recipe pins, execution evidence, and Baker
+acceptance to their existing contracts. See the
+[Pantry guide](../src/mantleos/kpp/resources/docs/INGREDIENT-LABELS.md).
+
+The AppAI anticipation contract uses the natural 600-second beat to advance
+one page. MIND proposes the next page from checked observations, recent
+changes, and comparable Engram history. Immune owns the forecast comparison
+and queues material deviations for investigation at the following scheduled
+beat. The Body sets the tolerance and controls effect grants. See the
+[AppAI anticipation contract](../src/mantleos/kpp/resources/docs/APPAI-ANTICIPATION.md).
+
 Chat construction uses the shared `mantleos.kpp.build` preview-first contract and
 bounded Chase driver. A small current work packet derives remaining obligations
 from the existing recipe graph; it is not another writable requirements model.

@@ -1,6 +1,7 @@
 """Export/check the KPP project from the shared implementation in either checkout."""
 import argparse
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import sys
@@ -37,6 +38,21 @@ def source_map(source=ROOT):
         raise ValueError('Common systems document drift; reconcile the published view')
     result = {'src/mantleos/' + name: blob for name, blob in files(package)}
     result.update(dict(files(package / 'kpp/resources')))
+    spec = importlib.util.spec_from_file_location('pantry_shelves', package / 'kpp/pantry_index.py')
+    pantry = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(pantry)
+    manifests = {path.name: json.loads(result[path.as_posix()])
+                 for path in sorted(Path(name) for name in result)
+                 if path.parent == Path('pantry') and path.suffix == '.json'}
+    for item in manifests.values():
+        pantry.validate_metadata(item)
+    # Shelf pages are generated for both the root Pantry and the bundled guide.
+    bundled_shelves = 'src/mantleos/kpp/resources/pantry/organs/'
+    result = {name: blob for name, blob in result.items()
+              if not name.startswith(('pantry/organs/', bundled_shelves))}
+    shelves = pantry.shelf_views(manifests)
+    result.update(shelves)
+    result.update({f'src/mantleos/kpp/resources/{name}': blob for name, blob in shelves.items()})
     test_root = source / 'tests/kpp'
     if not test_root.is_dir():
         test_root = source / 'tests'
@@ -73,7 +89,6 @@ for _name in MODULES:
         for name, blob in files(templates):
             result[name] = blob
             result['tools/kpp_project/' + name] = blob
-    import importlib.util
     spec=importlib.util.spec_from_file_location('reviewed_examples',package/'kpp/artifacts.py')
     module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
     for name in module.inventory(source):

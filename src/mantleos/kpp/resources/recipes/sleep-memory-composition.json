@@ -1,0 +1,61 @@
+{
+  "schema": "kpp.recipe/4",
+  "id": "sleep-memory-composition",
+  "goal": "Compose a read-only Sleep Memory view from a supplied Heart beat and a verified Engram prefix.",
+  "mode": "composition",
+  "tissue": "python",
+  "fidelity": 1,
+  "target": {
+    "description": "A deterministic, offline projection over a bounded synthetic Engram ledger.",
+    "source": "Shared Heart, Engram and Sleep Memory ingredient contracts.",
+    "reference_version": "1"
+  },
+  "ingredients": [
+    "appai-heart",
+    "engram-continuity",
+    "sleep-memory-consolidation"
+  ],
+  "oven": {
+    "assumption": "A reviewed local Python integration can supply the declared interfaces.",
+    "provider": "Local Python",
+    "iterations": "As needed",
+    "implementation": "Invoke the read-only projection on a supplied beat.",
+    "verification": "Exercise the supplied beat and compare the ledger bytes before and after projection."
+  },
+  "acceptance": "Record deterministic projection and byte preservation for a synthetic ledger. Require separate Baker acceptance.",
+  "anchors": [
+    {
+      "id": "projection-on-beat",
+      "statement": "Produce the due derived views from the supplied Heart beat and verified prefix.",
+      "test": "Pass beat 6 and a verified synthetic Engram prefix, then check fast and medium views against the source head.",
+      "required": true,
+      "depth": 1,
+      "depends": []
+    },
+    {
+      "id": "preserve-ledger",
+      "statement": "Preserve the original Engram bytes while producing the view.",
+      "test": "Compare the complete ledger bytes before and after projection.",
+      "required": true,
+      "depth": 1,
+      "depends": [
+        "projection-on-beat"
+      ]
+    }
+  ],
+  "product_kind": "conventional",
+  "delivery_mode": "artifact",
+  "capabilities": {},
+  "implementation": {
+    "components": [
+      {
+        "id": "projection",
+        "policy": "required",
+        "languages": [
+          "python"
+        ]
+      }
+    ]
+  },
+  "anchor_binding": "none"
+}

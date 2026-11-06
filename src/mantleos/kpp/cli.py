@@ -62,10 +62,17 @@ def main(argv=None):
     a.add_argument("--query",default="", help="Search label text without reading source")
     a.add_argument("--context",help="Preferred environment hint; not a compatibility guarantee")
     a.add_argument("--tissue",help="Implementation tissue filter")
+    from .pantry_index import ORGANS
+    a.add_argument("--organ", choices=ORGANS, help="Filter by organ shelf")
     a.add_argument("--limit",type=int,default=20)
     a.add_argument("--id",help="Select exactly one ingredient")
     a.add_argument("--level",choices=("label","contract","source"),default="label")
     a.add_argument("--check-source",action="store_true",help="Explicitly recheck bounded external inventory")
+    a=sub.add_parser("pantry-fit", help="Compare declared ingredient inputs and outputs")
+    a.add_argument("--repo", type=Path)
+    a.add_argument("--recipe", type=Path)
+    a.add_argument("--ingredient", action="append", default=[])
+    a.add_argument("--host-capability", action="append", default=[])
     a=sub.add_parser("fit",help="Review new capability versus declared baseline and Pantry labels; read-only")
     a.add_argument("--request",type=Path,required=True)
     a.add_argument("--repo",type=Path)
@@ -262,7 +269,7 @@ def main(argv=None):
     a.add_argument("--evidence",required=True)
     args=p.parse_args(argv)
     try:
-        if args.cmd in ("doctor","pantry","new","fit","reflex-plan"):
+        if args.cmd in ("doctor","pantry","pantry-fit","new","fit","reflex-plan"):
             repo=args.repo or find_repo_root()
         if args.cmd=='engram':
             from .engram_carriers import create
@@ -315,11 +322,18 @@ def main(argv=None):
                         "anchor_profile":"EMIT_TEXT/0.2", "shared_systems":__import__("mantleos.kpp.systems", fromlist=["describe"]).describe(), "model_api_required":False})
         elif args.cmd=="pantry":
             if args.id:
+                if args.organ:
+                    raise KPPError("--organ filters discovery and cannot be combined with --id")
                 print_json(ingredient_view(repo,args.id,level=args.level,check_external=args.check_source))
             else:
                 if args.level!="label" or args.check_source:
                     raise KPPError("--level/--check-source require --id; discovery uses labels only")
-                print_json(discover_ingredients(repo,args.query,args.tissue,args.context,args.limit))
+                print_json(discover_ingredients(repo,args.query,args.tissue,args.context,args.limit,organ=args.organ))
+        elif args.cmd=="pantry-fit":
+            from .pantry_index import fit as fit_ingredients
+            print_json(fit_ingredients(ingredient_catalog(repo, check_sources=False),
+                                      recipe=read_json(args.recipe) if args.recipe is not None else None,
+                                      ingredients=args.ingredient, host_capabilities=args.host_capability))
         elif args.cmd=="fit":
             result=assess_fit(repo,read_json(args.request),args.limit)
             if args.out:write_json(args.out,result);print(args.out)

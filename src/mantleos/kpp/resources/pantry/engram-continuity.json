@@ -48,5 +48,14 @@
     "emits": "python",
     "sha256": "ed9f040a3d8c74f781adf02638445c85ccbbee4cbccf99909287208f3c049924",
     "scope": "Anchor emits a runnable Python reference; the Anchor emitter itself has no dynamic state or Python effects."
-  }
+  },
+  "organs": [
+    "memory"
+  ],
+  "provides": [
+    "verified-engram-prefix/1"
+  ],
+  "requires": [
+    "engram-ledger-source/1"
+  ]
 }

@@ -134,6 +134,18 @@ existing licenses. Component notices and source provenance accompany both builds
 
 ## Recipe-owned organs and source revision evidence
 
+The Pantry exposes organ shelves as views of ingredient metadata. Ingredients
+can belong to several shelves. `pantry-fit` reports gaps between declared
+interfaces, selected ingredients, and host capabilities. Recipe-owned organ
+mappings, workspace pins, and acceptance retain their own contracts.
+
+The AppAI anticipation design treats each natural 600-second Heart beat as a
+new page. MIND forecasts the next page from current observations, recent
+changes, and comparable history. The Immune System owns forecast admission,
+comparison, and the investigation queue for the following scheduled page.
+See [AppAI anticipation](docs/APPAI-ANTICIPATION.md) for the responsibility and
+qualification contract.
+
 `mantleos.kpp.organs` validates a read-only ownership/dependency projection of the
 existing recipe; it adds no Anchor meanings, CELL types or approval registry.
 The maintained SCAN engine supplies source observations with explicit coverage

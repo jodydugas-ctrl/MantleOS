@@ -99,6 +99,9 @@ def source_identity(repo, item, check_external=False):
 
 
 def label(repo, item, check_external=False):
+    from .pantry_index import validate_metadata
+
+    validate_metadata(item)
     usage=_usage(item)
     origin=source_identity(repo,item,check_external)
     status=item.get("status","reference")
@@ -118,6 +121,7 @@ def label(repo, item, check_external=False):
 
 def _contract(item, lbl):
     return {**lbl, "capabilities":item.get("capabilities",[]),"tags":item.get("tags",[]),
+            "organs":item.get("organs",[]),"provides":item.get("provides"),"requires":item.get("requires"),
             "dependencies":item.get("dependencies",[]),"minimum_fidelity":item.get("minimum_fidelity"),
             "adaptation":item.get("adaptation"),"provenance":item.get("provenance"),
             "specimen":item.get("specimen"), "source_declaration":item.get("source")}
@@ -139,14 +143,20 @@ def view(repo, ingredient_id, level="label", check_external=False, catalog=None)
             "contract":_contract(item,lbl)}
 
 
-def discover(repo, query="", tissue=None, context=None, limit=10):
+def discover(repo, query="", tissue=None, context=None, limit=10, *, organ=None):
     """Deterministic label-only discovery; ranking is relevance, NOT compatibility."""
+    from .pantry_index import ORGANS
+
     if type(limit) is not int or not 1<=limit<=100:
         raise KPPError("Pantry limit must be 1..100")
+    if organ is not None and organ not in ORGANS:
+        raise KPPError("Unknown Pantry organ: " + organ)
     catalog=ingredient_catalog(repo,check_sources=False)
     words=[w for w in query.lower().split() if w]
     candidates=[]
     for item in catalog.values():
+        if organ is not None and organ not in item.get("organs", ()):
+            continue
         lbl=label(repo,item)
         text=" ".join([item["id"],item["function"],*item.get("capabilities",[]),*item.get("tags",[]),
                        *item.get("preferred_for",[]),lbl["use_when"]]).lower()
@@ -158,5 +168,6 @@ def discover(repo, query="", tissue=None, context=None, limit=10):
         candidates.append((score,item["id"],lbl))
     candidates.sort(key=lambda r:(-r[0],r[1]))
     return {"schema":"kpp.pantry-discovery/1", "query":query,"context":context,"tissue":tissue,
+            **({"organ": organ} if organ is not None else {}),
             "scope":"Metadata match only; neither code review nor recipe compatibility proof",
             "matches":[record for _,_,record in candidates[:limit]],"count":len(candidates)}

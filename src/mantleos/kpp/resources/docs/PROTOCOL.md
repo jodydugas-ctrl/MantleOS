@@ -22,6 +22,19 @@ name for obligations. Adds required `implementation.components` and optional
 obligations requires the selected adapter. No recipe is rewritten on validation.
 See LANGUAGE-CHOICES.md for selection, tissue consistency and preparation rules.
 
+## Pantry browsing and fit
+
+Ingredient manifests can declare browsing shelves through `organs` and exact
+versioned interface IDs through `provides` and `requires`. `pantry-fit` reads
+these declarations alongside the selected recipe and caller-supplied host
+capabilities. Its advisory gaps and suggestions are independent of workspace
+creation, execution evidence, and acceptance. See [the Pantry guide](INGREDIENT-LABELS.md).
+
+The [AppAI anticipation contract](APPAI-ANTICIPATION.md) adds recipe obligations
+for an Immune-owned forecast comparison and deferred investigation. A
+scheduled comparison uses checked Body observations and leaves the normal
+grant and acceptance boundaries in place.
+
 ## Workspace: kpp.workspace/3
 
 new validates recipe, Pantry and pins before publishing. recipe.json and ingredient-labels.json are fixed. state owns workspace_id, revision, phase, enabled module records, acceptance and GUI inventory/evidence. load refuses changed recipe, seeds, shipped runtime, modules or inventory.

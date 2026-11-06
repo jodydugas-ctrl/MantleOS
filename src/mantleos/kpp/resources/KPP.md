@@ -86,7 +86,10 @@ See `specimens/README.md` for the supported portable Anchor profile and the opt-
 
 **KPP-20 · Disclosure follows need.** The Oven should first consult `kpp pantry --query` and selected labels (`kpp pantry --id <id>`). Use `--level contract` to understand compatibility, `--level source` to locate code for deliberate inspection. Recheck untrusted external checkout identity using `--check-source` before modifying or integrating it. Discovery is advisory; verified recipe Anchors govern completion. A bake workspace pins the selection-time labels for portable agent handoff.
 
-This is a small pantry improvement, not a new organ or universal source-to-code compiler. See `docs/INGREDIENT-LABELS.md` for exact statuses and examples.
+Generated organ shelves offer another way to browse the same manifests.
+`pantry-fit` compares declared, versioned ingredient interfaces with a proposed
+recipe selection and available host interfaces. Review gaps and suggestions
+before qualifying the integration. See [the Pantry guide](docs/INGREDIENT-LABELS.md).
 
 
 ## Interactive reference construction

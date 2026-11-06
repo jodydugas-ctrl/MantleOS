@@ -50,5 +50,16 @@
       "Source-bound projection digest without effect authority"
     ],
     "limits": "Reference handles <=512 records at <=64 KiB each; no semantic summarization, storage writes, API calls, model weight updates, background scheduler, authority, or Baker acceptance. Caller owns permitted reads and durable publication."
-  }
+  },
+  "organs": [
+    "heart",
+    "memory"
+  ],
+  "provides": [
+    "memory-retrieval-view/1"
+  ],
+  "requires": [
+    "heartbeat-sequence/1",
+    "verified-engram-prefix/1"
+  ]
 }
