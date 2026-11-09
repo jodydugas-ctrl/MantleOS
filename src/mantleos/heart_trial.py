@@ -2,8 +2,10 @@
 import argparse
 from copy import deepcopy
 import json
+import os
 from pathlib import Path
 import sqlite3
+import stat
 import subprocess
 import sys
 
@@ -76,9 +78,28 @@ def plant(nest):
 
 def owned(path):
     path = Path(path).absolute()
-    if path.resolve() != path or path.is_symlink() or getattr(path, "is_junction", lambda: False)():
+    if ".." in path.parts:
+        raise ValueError(f"Traversal in specimen path: {path.name}")
+    resolved = path.resolve()
+    if resolved != path and (os.name != "nt" or path.anchor != resolved.anchor
+                             or len(path.parts) != len(resolved.parts)):
         raise ValueError(f"Linked specimen path: {path.name}")
-    return path
+
+    # Windows can expand a DOS short name without crossing a filesystem link.
+    # Inspect every original component, including ancestors of a missing leaf.
+    for part, target in zip((path, *path.parents), (resolved, *resolved.parents), strict=True):
+        different_name = part != target and part.name != target.name
+        try:
+            info = part.lstat()
+        except FileNotFoundError:
+            if different_name:
+                raise ValueError(f"Linked specimen path: {path.name}") from None
+            continue
+        if (stat.S_ISLNK(info.st_mode)
+                or getattr(info, "st_file_attributes", 0) & stat.FILE_ATTRIBUTE_REPARSE_POINT
+                or (different_name and not part.samefile(target))):
+            raise ValueError(f"Linked specimen path: {path.name}")
+    return resolved
 
 
 def current(nest):

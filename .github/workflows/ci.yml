@@ -21,11 +21,12 @@ jobs:
       - run: python -m pip install -r requirements-dev.txt
       - name: Provision optional private Skin test dependency
         run: python -m pip install "cryptography>=46,<47"
-      - name: Verify reviewed source inventory and KPP alignment
-        run: |
-          python tools/project_container.py check
-          python tools/kpp_upstream.py check
-          python tools/archive_inventory.py --reviewed
+      - name: Verify reviewed source inventory
+        run: python tools/project_container.py check
+      - name: Verify local KPP alignment
+        run: python tools/kpp_upstream.py check
+      - name: Verify reviewed archives
+        run: python tools/archive_inventory.py --reviewed
       - name: Read the reviewed KPP commit
         id: kpp-pin
         shell: bash

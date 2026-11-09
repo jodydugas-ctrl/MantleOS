@@ -46,14 +46,18 @@ class SatisfactionTests(unittest.TestCase):
 
     def test_cumulative_regression_repair_and_baker(self):
         self.assertEqual(s.plan(self.ws)['targets'],['a'])
+        self.assertEqual(s.plan(self.ws)['status'],'PENDING')
         a=self.execute();self.assertTrue(a['all_passed'])
+        self.assertEqual(s.plan(self.ws)['status'],'PENDING')
         self.assertEqual(load(self.ws)[1]['accepted'],{})
         write_json(self.data,dict(a=True,b=True,c=True,deep=False))
         self.assertEqual(s.plan(self.ws)['status'],'STALE')
         fail=self.execute();self.assertFalse(fail['all_passed'])
         self.assertEqual([(x['id'],x['outcome']) for x in fail['results']],[('a','PASS'),('deep','FAIL'),('b','PASS')])
         self.assertEqual(s.plan(self.ws)['prior'],['a'])
+        self.assertEqual(s.plan(self.ws)['status'],'FAILED')
         write_json(self.data,dict(a=True,b=True,c=True,deep=True))
+        self.assertEqual(s.plan(self.ws)['status'],'STALE')
         self.assertTrue(self.execute()['all_passed'])
         final=self.execute();self.assertEqual(final['verified'],['a','b','c'])
         self.assertEqual(step(self.ws)['decision'],'AWAITING_REVIEW')
@@ -67,7 +71,9 @@ class SatisfactionTests(unittest.TestCase):
         write_json(self.data,dict(a=True,b=False,c=True,deep=True))
         self.assertFalse(self.execute(batch_size=2)['all_passed'])
         self.assertEqual(s.plan(self.ws)['prior'],[])
+        self.assertEqual(s.plan(self.ws)['status'],'FAILED')
         write_json(self.data,dict(a=True,b=True,c=True,deep=True))
+        self.assertEqual(s.plan(self.ws)['status'],'STALE')
         self.execute(batch_size=2)
         self.assertEqual(s.plan(self.ws)['targets'],['c'])
 
