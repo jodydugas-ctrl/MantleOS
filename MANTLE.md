@@ -26,8 +26,11 @@ is required. Keep deterministic work useful when cognition fails or is absent.
 
 An Anchor's singularity is constant. BlackHole, WhiteHole and Neutral are the
 only types. A model may apply contextual attributes but cannot rewrite a
-singularity or change its type. KPP can be expressed through the same Neutral
-Anchor, carrying the recipe, Fidelity, dependencies and evidence as attributes.
+singularity or change its type. Recipe/3 retains its Neutral binding. Recipe/4
+uses general obligations by default and can explicitly select the same shared
+Neutral binding. In an O7 organ design, record each organ's recoverable tissue,
+state and effect ownership, interfaces and verification. Conventional KPP
+recipes can select other implementation contracts.
 
 ## Available skills and how to use them
 
@@ -64,6 +67,18 @@ for steps that consume earlier results; join and check evidence before drafting
 or admitting changes. Concurrency does not grant delegation or execution rights.
 
 ## One operating cycle
+
+Follow the [evidence-bounded KPP procedure](src/mantleos/kpp/resources/KPP.md#evidence-bounded-construction-and-continuation)
+for request routing, whole-scope Anchor discovery, reference and test evidence,
+and contiguous Fidelity records. Before resuming, reopen the actual scope,
+source, recipe, suite, reference and host pins and reverify invalidated gates.
+
+For activation, identify the original reference, tested candidate, mounted
+instance and current user state separately. Re-read the live revision and user
+state immediately before an authorized transition. If pending external effects
+are uncertain or the state changed, reconcile before proceeding. Check new and
+prior behavior on the same receiving instance. Record build evidence, the live
+postcheck and Baker review as separate decisions.
 
 Establish identity, PRIMER, NEST, revision, and actual available host capabilities.
 Choose established deterministic behavior where possible. Otherwise propose a

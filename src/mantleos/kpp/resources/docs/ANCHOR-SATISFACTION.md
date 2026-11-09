@@ -29,7 +29,10 @@ obligations. Interrupted unreferenced artifacts are not adopted. Existing review
 writer recovery applies. Restore code only through a deliberate host operation;
 historical evidence never certifies a restored candidate without fresh testing.
 
-Evidence statuses are PENDING, VERIFIED, FAILED, STALE and BLOCKED. Prior verified
+Evidence statuses are PENDING, VERIFIED, FAILED, STALE and BLOCKED. Planning
+reports FAILED when the latest execution failed on the current candidate.
+Changing its bytes makes that execution STALE. A current successful partial
+run remains PENDING while required obligations remain. Prior verified
 prerequisites unlock construction, independently of Baker acceptance. Every new
 stage includes its targets, established cases and declared preservation obligations.
 Batch members must already have verified prerequisites outside the batch.

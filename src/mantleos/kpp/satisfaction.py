@@ -182,15 +182,25 @@ def plan(workspace, batch_size=1):
     caps = read_json(run['context_path'])['capabilities']
     blockers = ['Unavailable capability: ' + cap for c in cases for cap in c['requires'] if caps.get(cap) is not True]
     current = inventory(run['candidate_root'])
-    fresh = bool(reports and reports[-1]['all_passed'] and reports[-1]['candidate'] == current)
     if needed - established and not targets:
         blockers.append('No independently ready target')
+    status = 'PENDING'
+    if blockers:
+        status = 'BLOCKED'
+    elif reports:
+        latest = reports[-1]
+        if latest['candidate'] != current:
+            status = 'STALE'
+        elif not latest['all_passed']:
+            status = 'FAILED'
+        elif not needed - established:
+            status = 'VERIFIED'
     return {'schema': 'kpp.satisfaction-plan/1', 'run': state['satisfaction']['run'],
             'revision': state['revision'], 'targets': targets, 'prior': sorted(established),
             'required_obligations': sorted(required), 'required_cases': cases,
             'candidate': current, 'fidelity': recipe['fidelity'],
             'design_applications': sorted({x for aid in targets for x in byid[aid].get('design_anchors', [])}),
-            'status': 'BLOCKED' if blockers else 'VERIFIED' if fresh and not needed - established else 'STALE' if established and not fresh else 'PENDING',
+            'status': status,
             'blockers': sorted(set(blockers)), 'acceptance': 'PENDING_BAKER', 'authority': 'NONE'}
 
 

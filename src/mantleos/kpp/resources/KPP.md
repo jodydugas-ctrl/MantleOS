@@ -62,6 +62,54 @@ The central engineering assumption is a **dependably executing Oven**. KPP evalu
 
 **Transformation** changes underlying embodiment or implementation while preserving recipe-protected behavior. The recipe can explicitly list what must survive and what may differ; for example, an Anchor source emitting a Python body-side memory demonstration. All routes require source provenance, permissions, a realistic acceptance scope and recorded tests.
 
+## Evidence-bounded construction and continuation
+
+Route design, encoding, construction, GUI Chase, activation, resume and Baker
+review separately. For an Anchor inventory without a requested depth, use
+`AUTO_DISCOVER` as an operating procedure. Revisit the whole accessible scope
+until every known required task, failure and independent boundary has a
+checkable contract. Report unavailable evidence and lead with the retained
+applications. For encoding through N, refine the full responsibility set at
+each level and retain reviewed level manifests. For building through N, require
+that encoding and select dependency-ready gates. A build without N follows its
+reviewed recipe and scope without selecting F1 by default. Recipe JSON still
+requires its declared integer Fidelity.
+
+For each mandatory task, record inputs, preconditions, expected state and
+effects, and normal, failure, cancellation and recovery oracles. Trace the task
+and visual state through a retained application, an actual recipe obligation,
+its dependencies and preservation rules, an executable case, and a current
+source-bound receipt. Reuse responsibilities before splitting them. A design
+worksheet, blueprint or readable `.anchor.txt` describes a contract. Use only the
+execution profile and host capabilities that the recipe actually selects.
+
+For Chase, pin the original target and derive the comparison before editing.
+Distinguish documentary structure, static source declarations, calibrated
+native captures and observed reference interactions. Record same-state geometry,
+theme, DPI, viewport and input-to-document mapping when relevant, with reviewed
+tolerances, host deviations and untested branches. An authored GUI uses an
+explicit design oracle. Keep [GUI evidence](docs/GUI-REFERENCE.md) and
+[cumulative verification](docs/ANCHOR-SATISFACTION.md) tied to the actual candidate.
+
+Keep original reference, tested candidate, mounted instance and current user
+state separately identified. After a verified build and explicit host approval,
+check the receiving environment, the latest mounted revision and user state,
+pending effects, and available recovery before a supported transition. Recheck
+the same live instance for new and prior behavior. Stop on stale state or
+uncertain effects and reconcile before retrying. Record actual host evidence
+separately from build receipts and Baker review.
+
+Record `F_goal` as requested, AUTO or unknown. Record `F_enc`, `F_build` and
+`F_active` as separately evidenced contiguous levels. A built level needs all
+current mandatory cases through that level on one compatible candidate, recipe
+and suite. An active level also needs a postcheck on the actual receiving
+instance. Keep partial, stale, failed or unavailable gates visible. Store a
+project checkpoint after each reviewed encoding level, verified build gate or
+authorized activation. Include scope, contract and source pins, receipt and
+recovery references, current host/state when applicable, and one next eligible
+action or blocker. On resume, reopen the actual inputs and reverify invalidated
+evidence before proceeding. Keep private live state in authorized storage.
+
 ## Developer practice
 
 The Python CLI works with no external models. It demonstrates a runnable subset: recipe acceptance, read-only static Scan, recipe-selected requirement scheduling, a local browser app with built-in progressive JS modules, and a project-specific Oven handoff. It does not implement universal code synthesis, arbitrary deep dynamic tracing, semantic equivalence for all programs, or automated hot reload of arbitrary unsafe code. For those tasks an AI Oven and permitted external tooling are needed. Refer to `docs/PROTOCOL.md` for exact state transitions.
