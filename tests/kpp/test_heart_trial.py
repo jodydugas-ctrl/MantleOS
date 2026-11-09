@@ -1,5 +1,7 @@
 import json
+import os
 from pathlib import Path
+import subprocess
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -9,6 +11,56 @@ from mantleos.heart_trial_checks import Clock
 
 
 class HeartTrialTests(unittest.TestCase):
+    def test_owned_accepts_ordinary_path_and_rejects_traversal(self):
+        with tempfile.TemporaryDirectory() as work:
+            root = Path(work).resolve()
+            self.assertEqual(trial.owned(root / "notes"), root / "notes")
+            with self.assertRaisesRegex(ValueError, "Traversal"):
+                trial.owned(root / ".." / "notes")
+
+    @unittest.skipUnless(os.name == "nt", "Windows DOS short names")
+    def test_owned_accepts_windows_short_name_for_same_directory(self):
+        import ctypes
+
+        with tempfile.TemporaryDirectory() as work:
+            root = Path(work).resolve() / "Heart trial specimen folder"
+            root.mkdir()
+            short_name = ctypes.WinDLL("kernel32", use_last_error=True).GetShortPathNameW
+            buffer = ctypes.create_unicode_buffer(32768)
+            size = short_name(str(root), buffer, len(buffer))
+            if not 0 < size < len(buffer) or Path(buffer.value) == root:
+                self.skipTest("DOS short names unavailable for this volume")
+            self.assertEqual(trial.owned(Path(buffer.value) / "notes"), root / "notes")
+
+    def test_owned_rejects_linked_specimen_and_descendant(self):
+        with tempfile.TemporaryDirectory() as work:
+            root = Path(work).resolve()
+            target = root / "target"
+            target.mkdir()
+            link = root / "linked"
+            try:
+                link.symlink_to(target, target_is_directory=True)
+            except (OSError, NotImplementedError):
+                self.skipTest("Directory symlink creation unavailable")
+            for path in (link, link / "notes"):
+                with self.subTest(path=path), self.assertRaisesRegex(ValueError, "Linked specimen"):
+                    trial.owned(path)
+
+    @unittest.skipUnless(os.name == "nt", "Windows junctions")
+    def test_owned_rejects_junction_and_missing_descendant(self):
+        with tempfile.TemporaryDirectory() as work:
+            root = Path(work).resolve()
+            target = root / "target"
+            target.mkdir()
+            link = root / "junction"
+            result = subprocess.run(["cmd", "/d", "/c", "mklink", "/J", str(link), str(target)],
+                                    capture_output=True)
+            if result.returncode:
+                self.skipTest("Directory junction creation unavailable")
+            for path in (link, link / "notes"):
+                with self.subTest(path=path), self.assertRaisesRegex(ValueError, "Linked specimen"):
+                    trial.owned(path)
+
     def test_checked_candidate_rollback_and_synthetic_birth(self):
         with tempfile.TemporaryDirectory() as work:
             nest = Path(work) / "notes"

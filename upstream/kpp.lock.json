@@ -3,7 +3,7 @@
   "files": {
     "docs/kpp.md": {
       "group": "generated-view",
-      "sha256": "3e9fad896d7df45489b40ccfd3b7d6b16aa364ae7eb0b7d9172e4021c980bdb2",
+      "sha256": "7e73f6684110a2a61cb7607d883671433c6f7f03cc6cf03bfe172318a7dd70fe",
       "source": "src/mantleos/kpp/resources/SYSTEMS.md"
     },
     "src/mantleos/__init__.py": {
@@ -248,7 +248,7 @@
     },
     "src/mantleos/console.py": {
       "group": "implementation",
-      "sha256": "075e711b0082786558a5582a95492d4e7ac6c7f0ecfc02d29610be9f35c3eeaf",
+      "sha256": "425120a8f19bdb22337a8583577275ac9ce2715b40f7d4cc609811058cbfb835",
       "source": "src/mantleos/console.py"
     },
     "src/mantleos/continuity.py": {
@@ -290,6 +290,21 @@
       "group": "implementation",
       "sha256": "62c4347d1a19578678f1daf58e13ba3c5782e03bbfd3ca5a52aca46177a36aa5",
       "source": "src/mantleos/harness_adapter.py"
+    },
+    "src/mantleos/heart.py": {
+      "group": "implementation",
+      "sha256": "f3c1e51690d25ad5b782ef78aef87db6d92161b7b0213197d1ad5ce6e092b1c3",
+      "source": "src/mantleos/heart.py"
+    },
+    "src/mantleos/heart_trial.py": {
+      "group": "implementation",
+      "sha256": "3c88c80521aea975b1a29b3af7f1e7ab33d0dc47c6c1209efb03c75fde0bc835",
+      "source": "src/mantleos/heart_trial.py"
+    },
+    "src/mantleos/heart_trial_checks.py": {
+      "group": "implementation",
+      "sha256": "515f6ce8a70043cf64eba3271d0d6b8ea4a6b0d59e9398dbdb9e50e6ddc5e29a",
+      "source": "src/mantleos/heart_trial_checks.py"
     },
     "src/mantleos/hosted.py": {
       "group": "implementation",
@@ -373,7 +388,7 @@
     },
     "src/mantleos/kpp/cli.py": {
       "group": "implementation",
-      "sha256": "ebf19d3fa9f511a31c2e3e621357d8f557f624627544437ffb89fd24357fbc9c",
+      "sha256": "f3128c092d60c51f7e762cca1a84c6fd9397bb98c81f8240afd3e4e55e12e98f",
       "source": "src/mantleos/kpp/cli.py"
     },
     "src/mantleos/kpp/conformance.py": {
@@ -438,8 +453,13 @@
     },
     "src/mantleos/kpp/pantry.py": {
       "group": "implementation",
-      "sha256": "76e4cc87047eb5a446cd06be23e34ffa05495956fa5c316c10625a33caa03384",
+      "sha256": "e0c48ecaa2c09c067267d09dab63f47e843c989eb14e41efe9cf1d407e0f7ebb",
       "source": "src/mantleos/kpp/pantry.py"
+    },
+    "src/mantleos/kpp/pantry_index.py": {
+      "group": "implementation",
+      "sha256": "088dddf94763843c6d535830c7d76d85701e9c3bd75e5388312ae68cc14186ad",
+      "source": "src/mantleos/kpp/pantry_index.py"
     },
     "src/mantleos/kpp/png.py": {
       "group": "implementation",
@@ -483,7 +503,7 @@
     },
     "src/mantleos/kpp/resources/KPP.md": {
       "group": "implementation",
-      "sha256": "5ad8235eb3f5501dc72374379e3017366a3a02571be495e4436f8e56cbba9f91",
+      "sha256": "6acd387eb5ded069f680070155aa0a5aa5218b40548fb70301282366d4c1c62e",
       "source": "src/mantleos/kpp/resources/KPP.md"
     },
     "src/mantleos/kpp/resources/LICENSE": {
@@ -508,7 +528,7 @@
     },
     "src/mantleos/kpp/resources/SYSTEMS.md": {
       "group": "implementation",
-      "sha256": "3e9fad896d7df45489b40ccfd3b7d6b16aa364ae7eb0b7d9172e4021c980bdb2",
+      "sha256": "7e73f6684110a2a61cb7607d883671433c6f7f03cc6cf03bfe172318a7dd70fe",
       "source": "src/mantleos/kpp/resources/SYSTEMS.md"
     },
     "src/mantleos/kpp/resources/THIRD-PARTY-NOTICES.md": {
@@ -545,6 +565,16 @@
       "group": "implementation",
       "sha256": "92d6daa6e1b7eed35699727d095ec9d6c07e86af8384fcf986bf55e6aa65633a",
       "source": "src/mantleos/kpp/resources/docs/ANCHOR-STUDIO.md"
+    },
+    "src/mantleos/kpp/resources/docs/APPAI-ANTICIPATION.md": {
+      "group": "implementation",
+      "sha256": "fb92b67f186197d4438775c3303b7a0c54c1a3aec5a27944c96c602cf4d2e7d4",
+      "source": "src/mantleos/kpp/resources/docs/APPAI-ANTICIPATION.md"
+    },
+    "src/mantleos/kpp/resources/docs/APPai-HEART-TRIAL.md": {
+      "group": "implementation",
+      "sha256": "1279d96296d05cbfb8fe0eb023e4dd5aee972a69d15dd6ef136ee7f2f98024da",
+      "source": "src/mantleos/kpp/resources/docs/APPai-HEART-TRIAL.md"
     },
     "src/mantleos/kpp/resources/docs/ARCHITECTURE.md": {
       "group": "implementation",
@@ -593,7 +623,7 @@
     },
     "src/mantleos/kpp/resources/docs/INGREDIENT-LABELS.md": {
       "group": "implementation",
-      "sha256": "7276e97707fc921a65eb1e182b8fa6721184fd324664b6a728621683353c5b09",
+      "sha256": "a938ee1c3629297c0c796c344f3800e3fa44b4098aa7c7ba1f0d868754072b9c",
       "source": "src/mantleos/kpp/resources/docs/INGREDIENT-LABELS.md"
     },
     "src/mantleos/kpp/resources/docs/JOURNAL-ENGRAM.md": {
@@ -653,7 +683,7 @@
     },
     "src/mantleos/kpp/resources/docs/PROTOCOL.md": {
       "group": "implementation",
-      "sha256": "05bce05600bfdb75a0314317b4825cdf3aa028f66c2a021d67094420601b4c20",
+      "sha256": "326620b536552ddb9c9e78f9488580ccb22eb628f40744fb390a08b28e944fa0",
       "source": "src/mantleos/kpp/resources/docs/PROTOCOL.md"
     },
     "src/mantleos/kpp/resources/docs/REFLEX-BOOK.md": {
@@ -690,6 +720,11 @@
       "group": "implementation",
       "sha256": "eb1a87cbc81a7b8882b2c5f8cc724089f3bb0caf2f5d7a03b2bb7aa518e79e4e",
       "source": "src/mantleos/kpp/resources/docs/SECURITY.md"
+    },
+    "src/mantleos/kpp/resources/docs/SLEEP-MEMORY.md": {
+      "group": "implementation",
+      "sha256": "b3ef00987f73c9297c13cc8f7dbc8f8302b21d474fb84452eae43e054d3906e4",
+      "source": "src/mantleos/kpp/resources/docs/SLEEP-MEMORY.md"
     },
     "src/mantleos/kpp/resources/docs/STUDIO-COMMUNITY-CHASE.md": {
       "group": "implementation",
@@ -1146,6 +1181,16 @@
       "sha256": "4b1613f8b1db1a6454d4932dd3860df90c33aeabceb558132f9c45e021539226",
       "source": "src/mantleos/kpp/resources/examples/engrams/generate.py"
     },
+    "src/mantleos/kpp/resources/examples/heart-trial/notes.py": {
+      "group": "implementation",
+      "sha256": "8b19117bf1ddeb25e4a5acad172bdf3f4a8ad047772d08b750371365cb88e38f",
+      "source": "src/mantleos/kpp/resources/examples/heart-trial/notes.py"
+    },
+    "src/mantleos/kpp/resources/examples/heart-trial/notes_export.py": {
+      "group": "implementation",
+      "sha256": "b95727486deb0c398a55f545baa8af3595e1be463d40337affc81294acf9a253",
+      "source": "src/mantleos/kpp/resources/examples/heart-trial/notes_export.py"
+    },
     "src/mantleos/kpp/resources/examples/reflex-anchors/check_absent.py": {
       "group": "implementation",
       "sha256": "a4748d72ad8ca8a00846eec112c8dbfae28964c5e32f83fdd57c9178fb7dd9c3",
@@ -1411,6 +1456,11 @@
       "sha256": "b22a500b5e454eaa276fbf8ad83262b2babf671f2c58b07953e8cabd2e418d3a",
       "source": "src/mantleos/kpp/resources/pantry/anchor-tissue.json"
     },
+    "src/mantleos/kpp/resources/pantry/appai-heart.json": {
+      "group": "implementation",
+      "sha256": "7339b7f4599618b8b30aa9774c357bbf6acf38d494795d2a9b8de9cfda0c6d8b",
+      "source": "src/mantleos/kpp/resources/pantry/appai-heart.json"
+    },
     "src/mantleos/kpp/resources/pantry/browser-file-io.json": {
       "group": "implementation",
       "sha256": "e09d14818d2945979cd07f7492f687b2aef1c8b899f63056adb4f850b46d02e7",
@@ -1423,7 +1473,7 @@
     },
     "src/mantleos/kpp/resources/pantry/checked-body-effects.json": {
       "group": "implementation",
-      "sha256": "4b820c284f2da36978a927e442059bb3f6713c086f2af4ced3c2e8348c1f9505",
+      "sha256": "34436b56cb8bf54c7e31024ba466fa7e798559cb932d8320e875cfb6aecb81c4",
       "source": "src/mantleos/kpp/resources/pantry/checked-body-effects.json"
     },
     "src/mantleos/kpp/resources/pantry/chroma-png-memory.json": {
@@ -1433,12 +1483,12 @@
     },
     "src/mantleos/kpp/resources/pantry/engram-continuity.json": {
       "group": "implementation",
-      "sha256": "d28154efbfb5d920c22d95cc2b939f85314247ad965668d3f017c9e8d65ebcfc",
+      "sha256": "deeac548c75d6e659e2e4c268f0130a60224b556d57efb0ab1f3996cb2ae6570",
       "source": "src/mantleos/kpp/resources/pantry/engram-continuity.json"
     },
     "src/mantleos/kpp/resources/pantry/engram-limbs.json": {
       "group": "implementation",
-      "sha256": "473df2c75b341aa843fe40b6ccac83d38b3d4d7dcb6c325a313cbb2ae4351dc3",
+      "sha256": "2f297d58b56dea331ce546a8903961cca81e8eaf6d7dfffd8d0dcc3296755f9f",
       "source": "src/mantleos/kpp/resources/pantry/engram-limbs.json"
     },
     "src/mantleos/kpp/resources/pantry/external-project.json": {
@@ -1448,12 +1498,17 @@
     },
     "src/mantleos/kpp/resources/pantry/fidelity-trace.json": {
       "group": "implementation",
-      "sha256": "bf20ca4adca34de6e57ca89549a9333040b46a4cdaa9bd30baf5e985c85dcfe3",
+      "sha256": "16ba55e7fe0d5b1d336176321728f29da5f3f5167c7b084d1b9d314d43c33929",
       "source": "src/mantleos/kpp/resources/pantry/fidelity-trace.json"
+    },
+    "src/mantleos/kpp/resources/pantry/heart-notes-export.json": {
+      "group": "implementation",
+      "sha256": "ab5b0a10c4559f234ecd8f90ff007ab67677fdf8210d4b2c5f14b03e9a216b97",
+      "source": "src/mantleos/kpp/resources/pantry/heart-notes-export.json"
     },
     "src/mantleos/kpp/resources/pantry/immune-boundary.json": {
       "group": "implementation",
-      "sha256": "176bd920133e7285bfa79b5e6001656f8eaad36f05a900d844fc679debd34201",
+      "sha256": "f8ecbf5d0eae6ce2ae23a434d6caf3155c919b490f98f8e32303d424db104894",
       "source": "src/mantleos/kpp/resources/pantry/immune-boundary.json"
     },
     "src/mantleos/kpp/resources/pantry/interface-shell.json": {
@@ -1463,7 +1518,7 @@
     },
     "src/mantleos/kpp/resources/pantry/journal-engram.json": {
       "group": "implementation",
-      "sha256": "46c6d4a46dbea9f0c04ee88b7f1d106f3d3e4f898dd68ef805038cbeaab104ae",
+      "sha256": "1851518f61584dd59629842723d6657ca61ff6418530a7695ebbaa41c61e78c5",
       "source": "src/mantleos/kpp/resources/pantry/journal-engram.json"
     },
     "src/mantleos/kpp/resources/pantry/kernel-relative-cells.json": {
@@ -1478,13 +1533,48 @@
     },
     "src/mantleos/kpp/resources/pantry/mind-body-boundary.json": {
       "group": "implementation",
-      "sha256": "1e5f4cc543806c177a504a16e56d2d85830f838d47632895041ab9b4a9349829",
+      "sha256": "ce61b7a2d624b735500021aa9536a874392e861ae56ca1cd37c2b56b39c9a579",
       "source": "src/mantleos/kpp/resources/pantry/mind-body-boundary.json"
     },
     "src/mantleos/kpp/resources/pantry/openrouter-mind.json": {
       "group": "implementation",
       "sha256": "e8b6c99172f42c909992b7b44d7970456020a5c5c36e5c24470a7b3cc328dae7",
       "source": "src/mantleos/kpp/resources/pantry/openrouter-mind.json"
+    },
+    "src/mantleos/kpp/resources/pantry/organs/README.md": {
+      "group": "implementation",
+      "sha256": "a4255244f0506992436262dc94d2f70c800e8b3e59a36138b23030b8895b88bc",
+      "source": "src/mantleos/kpp/resources/pantry/organs/README.md"
+    },
+    "src/mantleos/kpp/resources/pantry/organs/heart/README.md": {
+      "group": "implementation",
+      "sha256": "186f32a6554bcaf2701a48d3d37f9fc6f8232e74505c73687437f53da7a85dc4",
+      "source": "src/mantleos/kpp/resources/pantry/organs/heart/README.md"
+    },
+    "src/mantleos/kpp/resources/pantry/organs/immune-system/README.md": {
+      "group": "implementation",
+      "sha256": "a831fd5bce3ee08df1785321ff90f16814e8d48c7794d99b66ecd2cff40fc2bf",
+      "source": "src/mantleos/kpp/resources/pantry/organs/immune-system/README.md"
+    },
+    "src/mantleos/kpp/resources/pantry/organs/limbs/README.md": {
+      "group": "implementation",
+      "sha256": "58316315ab3cb6c3c39a2e8afecba2fa67206e53ccc0e889f98298bd272e43ab",
+      "source": "src/mantleos/kpp/resources/pantry/organs/limbs/README.md"
+    },
+    "src/mantleos/kpp/resources/pantry/organs/memory/README.md": {
+      "group": "implementation",
+      "sha256": "af81048707af531106a2ed61091c4609115c0065aa80d1ba834702eaa24a8c68",
+      "source": "src/mantleos/kpp/resources/pantry/organs/memory/README.md"
+    },
+    "src/mantleos/kpp/resources/pantry/organs/nervous-system/README.md": {
+      "group": "implementation",
+      "sha256": "b64f9d33f3fbadd3f9ddd858667cf3363aa79da7561fcc8f356d8c330af3578c",
+      "source": "src/mantleos/kpp/resources/pantry/organs/nervous-system/README.md"
+    },
+    "src/mantleos/kpp/resources/pantry/organs/senses/README.md": {
+      "group": "implementation",
+      "sha256": "4b00faca615fd5858af1a0e031f592cc071302a214a1a7f9dcb7c34442bd1aeb",
+      "source": "src/mantleos/kpp/resources/pantry/organs/senses/README.md"
     },
     "src/mantleos/kpp/resources/pantry/private-mind-bridge.json": {
       "group": "implementation",
@@ -1515,6 +1605,11 @@
       "group": "implementation",
       "sha256": "b478589fa6d4f933dc7e84b0d19728da00f6ad36940b0019eccc3d3644e383aa",
       "source": "src/mantleos/kpp/resources/pantry/reflex-book.json"
+    },
+    "src/mantleos/kpp/resources/pantry/sleep-memory-consolidation.json": {
+      "group": "implementation",
+      "sha256": "7332cdc2b9230ba8b34fd8600a33edc3906a746fed812417fa5996cc4590a9be",
+      "source": "src/mantleos/kpp/resources/pantry/sleep-memory-consolidation.json"
     },
     "src/mantleos/kpp/resources/pantry/text-editor.json": {
       "group": "implementation",
@@ -1641,6 +1736,21 @@
       "sha256": "1db3f284d0a548a0a25d0f20141fb09b323dbab257dd728f46882fe8ff532f7b",
       "source": "src/mantleos/kpp/resources/recipes/anchor-studio-visual-chase.json"
     },
+    "src/mantleos/kpp/resources/recipes/appai-heart-notes-trial.json": {
+      "group": "implementation",
+      "sha256": "b7396f4768678086e33756fcfe2e779203c515c2b78210808786c40aa18a480b",
+      "source": "src/mantleos/kpp/resources/recipes/appai-heart-notes-trial.json"
+    },
+    "src/mantleos/kpp/resources/recipes/appai-heart-spore-anticipation.json": {
+      "group": "implementation",
+      "sha256": "8b371b7ee410b86d7d99231fd7924c4bbab996595039899f2b431652b25a33cc",
+      "source": "src/mantleos/kpp/resources/recipes/appai-heart-spore-anticipation.json"
+    },
+    "src/mantleos/kpp/resources/recipes/appai-heart-spore.json": {
+      "group": "implementation",
+      "sha256": "9b47b2996a5e956bd41e6b974e033cc2bc5f5a7695da3bdc7afe216c1358287d",
+      "source": "src/mantleos/kpp/resources/recipes/appai-heart-spore.json"
+    },
     "src/mantleos/kpp/resources/recipes/augmentation-v4.json": {
       "group": "implementation",
       "sha256": "48ce81e3e53a5dff04ac84991099b1ab687652f7f7eeac4fe59012ac7c4a38b7",
@@ -1745,6 +1855,11 @@
       "group": "implementation",
       "sha256": "6e85762b19c0f9a166135907e9ccadeb8d73e642a29a43fcd8720734627d5772",
       "source": "src/mantleos/kpp/resources/recipes/single-limb-agent.json"
+    },
+    "src/mantleos/kpp/resources/recipes/sleep-memory-composition.json": {
+      "group": "implementation",
+      "sha256": "5002278eea91dd1f8a3efc11d82235aab41bdb48b433a2599687584582f2f991",
+      "source": "src/mantleos/kpp/resources/recipes/sleep-memory-composition.json"
     },
     "src/mantleos/kpp/resources/recipes/xp-notepad-contract.json": {
       "group": "implementation",
@@ -1935,6 +2050,11 @@
       "group": "implementation",
       "sha256": "40bdb674b73ebbb8f03670d5e6df57ec4a0d5312da5f19f66d4d6ce2955e4f46",
       "source": "src/mantleos/kpp/server.py"
+    },
+    "src/mantleos/kpp/sleep_memory.py": {
+      "group": "implementation",
+      "sha256": "a3834928d25e571588910ca5bf0a57f521714eff4185ffc62bc00b19a3f91311",
+      "source": "src/mantleos/kpp/sleep_memory.py"
     },
     "src/mantleos/kpp/specimens.py": {
       "group": "implementation",
@@ -2976,6 +3096,11 @@
       "sha256": "37f059e0e7932889671b586278473acaafe27c90604755d973fbefa70c3d1c28",
       "source": "tests/test_gui_matrix.py"
     },
+    "tests/kpp/test_heart_trial.py": {
+      "group": "tests",
+      "sha256": "691475f2be2601f7428af87f11741e66fc2c4ebe2f0162471c7d436616c76b60",
+      "source": "tests/test_heart_trial.py"
+    },
     "tests/kpp/test_ingest.py": {
       "group": "tests",
       "sha256": "006529a8dbacd3b3cc35854537f5808c7cbbc730ad4463d034595fc873c69e39",
@@ -3011,9 +3136,14 @@
       "sha256": "520e5af02a840982ad1dc3ac13af6280696ec22f60dffdd477d03357a55a7849",
       "source": "tests/test_organs.py"
     },
+    "tests/kpp/test_pantry_fit.py": {
+      "group": "tests",
+      "sha256": "6ddb99992e2bdd1dbbcc3f139b133181154cf6dda4888686ca17567011acf6bf",
+      "source": "tests/test_pantry_fit.py"
+    },
     "tests/kpp/test_pantry_labels.py": {
       "group": "tests",
-      "sha256": "5556165ddfecdf1746dd771d00775acb9269525f3f94a6679a5342ae8cfd6548",
+      "sha256": "4a19fd784ba33aad2f98d60e8a2b586db4c7c6420eaf97b6e0adc1ad4554dfe6",
       "source": "tests/test_pantry_labels.py"
     },
     "tests/kpp/test_portability.py": {
@@ -3038,7 +3168,7 @@
     },
     "tests/kpp/test_project_export.py": {
       "group": "tests",
-      "sha256": "5f1946f391fa7cc9ed7693a69533eeb27af76e6f98cac06f55e6616803a26b19",
+      "sha256": "b1480a62a059ce722433bcde34ed476b5928b91ab9ec77d08f328d91e9debed3",
       "source": "tests/test_project_export.py"
     },
     "tests/kpp/test_reflex_book_compatibility.py": {
@@ -3080,6 +3210,11 @@
       "group": "tests",
       "sha256": "f14b86d0c452132ebd2b671a8b08d64090d0f2ced10017a7175933c31c0995d2",
       "source": "tests/test_scan_integration.py"
+    },
+    "tests/kpp/test_sleep_memory.py": {
+      "group": "tests",
+      "sha256": "cfbb187d2197d2e28e05183318d6a63a720042495c548990843bf6b8f02227e9",
+      "source": "tests/test_sleep_memory.py"
     },
     "tests/kpp/test_studio.py": {
       "group": "tests",
@@ -3192,10 +3327,10 @@
     "upstream/kpp-notices/THIRD-PARTY-NOTICES.md"
   ],
   "schema": "mantle.kpp-upstream/1",
-  "selection_digest": "c8d0ff18f0c9f2563e9afc3ce75ba2cd544cbfbb30b4915781411f96cab9049e",
-  "shared_source_digest": "fc4791f9ad8baa2bc5d771fefa47fa01a2e86b4d9a2c7ec7af1c09716c522a88",
+  "selection_digest": "fce5fd0e1dd2e3390317b3ffeaf1cc764ccaed981d6aa332ebf542b4acd1f9c3",
+  "shared_source_digest": "87bab5c09c338b98cf82512b2ed7db6309f9ec3d138006fa15e42d213067fe92",
   "upstream": {
-    "base_commit": "201cd9e2cdb67b38a9144212a66c1d40191afdbf",
+    "base_commit": "b0b1c252fff5d81717536d533ac330a127673c36",
     "dirty": false,
     "official_url": "https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol",
     "published_revision_verified": false,
