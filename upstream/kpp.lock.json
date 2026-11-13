@@ -136,10 +136,25 @@
       "sha256": "cd1efc3920315e240c5b131dd372046b989f97755770242a1adb7c0afdee0f8a",
       "source": "src/mantleos/anchor_engine/tools/unicode_fold.py"
     },
+    "src/mantleos/anchor_handoff.py": {
+      "group": "implementation",
+      "sha256": "09726dec45f9663c152790af7e95e2717c0d7a7e14cb8b7f07e4c862232835dc",
+      "source": "src/mantleos/anchor_handoff.py"
+    },
+    "src/mantleos/anchor_handoff_build.py": {
+      "group": "implementation",
+      "sha256": "ced3cc97570a2d208cfb66e37c12a030e56e98d5508a76b5d01693423e643ca2",
+      "source": "src/mantleos/anchor_handoff_build.py"
+    },
     "src/mantleos/anchor_language.py": {
       "group": "implementation",
       "sha256": "e46a60e4080dc12f6ee7fc594f941f7e70ad9588523b5820bd7a017278562774",
       "source": "src/mantleos/anchor_language.py"
+    },
+    "src/mantleos/anchor_logic_evidence.py": {
+      "group": "implementation",
+      "sha256": "c64f3f2aa01eb4fba0483f46b7c71aac3c8a0cca48efe3c411be0a614d79e870",
+      "source": "src/mantleos/anchor_logic_evidence.py"
     },
     "src/mantleos/anchor_qualification.py": {
       "group": "implementation",
@@ -518,7 +533,7 @@
     },
     "src/mantleos/kpp/resources/README.md": {
       "group": "implementation",
-      "sha256": "583d8f7a9ab962bef056f54ab4fc0f4db6370dbf9b1b0532104778eaf8c9f51e",
+      "sha256": "f07527ade85b6dd6204452ab5a5ac4884e03e4ca3624e81942be280a885383cd",
       "source": "src/mantleos/kpp/resources/README.md"
     },
     "src/mantleos/kpp/resources/START-HERE.md": {
@@ -555,6 +570,16 @@
       "group": "implementation",
       "sha256": "7de3e619714e031d6b6ff87a75d26435e5431165af22e08e8c13673c7475c624",
       "source": "src/mantleos/kpp/resources/docs/ANCHOR-DESIGN.md"
+    },
+    "src/mantleos/kpp/resources/docs/ANCHOR-HANDOFF.md": {
+      "group": "implementation",
+      "sha256": "5f8013ae86afb2d8ac31bec773067ad56bf7d6a8ffe44d0e262e40041ce75473",
+      "source": "src/mantleos/kpp/resources/docs/ANCHOR-HANDOFF.md"
+    },
+    "src/mantleos/kpp/resources/docs/ANCHOR-LOGICAL-EVIDENCE.md": {
+      "group": "implementation",
+      "sha256": "309b7f7615a8ee63bcab56dbcb40c52f84e42f7bde49dc7e75512ec366125a83",
+      "source": "src/mantleos/kpp/resources/docs/ANCHOR-LOGICAL-EVIDENCE.md"
     },
     "src/mantleos/kpp/resources/docs/ANCHOR-SATISFACTION.md": {
       "group": "implementation",
@@ -1190,6 +1215,236 @@
       "group": "implementation",
       "sha256": "b95727486deb0c398a55f545baa8af3595e1be463d40337affc81294acf9a253",
       "source": "src/mantleos/kpp/resources/examples/heart-trial/notes_export.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/AGENT-FEEDBACK-RECONCILIATION.md": {
+      "group": "implementation",
+      "sha256": "b7c7631b38096bbc3b6efec2c234ac27da72620f78bd1e3adb798bc0a013f6d2",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/AGENT-FEEDBACK-RECONCILIATION.md"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/ANCHOR-DESIGN.md": {
+      "group": "implementation",
+      "sha256": "7564b6bb4fb597923c52f74219cd5eef6ff71c9524263c9f819a5666c8a50206",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/ANCHOR-DESIGN.md"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/CODING-AGENT-CONTRACT.md": {
+      "group": "implementation",
+      "sha256": "a48a9a9d5ec6181a8aafa31b8bde77692c88a1fc404b0e6956cb64ffacaa982b",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/CODING-AGENT-CONTRACT.md"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/ECONOMY-DECISION.md": {
+      "group": "implementation",
+      "sha256": "58f120a4336949a66b405dd1e6dc4f7b959048adcb646d3f796be28ead58b200",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/ECONOMY-DECISION.md"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/GATE-ECONOMY.json": {
+      "group": "implementation",
+      "sha256": "23680c8ce952dc4998d6170f084cf8ae0832d74aaa6705d71a55b3e3a94fb792",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/GATE-ECONOMY.json"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/IMPORT-PROVENANCE.json": {
+      "group": "implementation",
+      "sha256": "3fdc0896841e853dd0a5061521f0f0959fb70395908aa40d2a6b45e4aa37c881",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/IMPORT-PROVENANCE.json"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/LOGICAL-CONTRACT.json": {
+      "group": "implementation",
+      "sha256": "62da4e9f67969b7e0e832217f1a9b8729d2c3935478502f66e08e8aa7aed21a1",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/LOGICAL-CONTRACT.json"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/LOGICAL-INTERPRETATION.md": {
+      "group": "implementation",
+      "sha256": "edcf1e27ae8ff5f58091c4ff12be05dda383d9d8f24c2260dbde8c95f6613219",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/LOGICAL-INTERPRETATION.md"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/LOGICAL-TRACE-CORPUS.json": {
+      "group": "implementation",
+      "sha256": "4897f3325414432d32fb42821449b5f35e9a96532f009e577d250ed4c71dc732",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/LOGICAL-TRACE-CORPUS.json"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/Notepad.anchor.txt": {
+      "group": "implementation",
+      "sha256": "acf80b5b8f4e8ac3d7807a4bb50332b8b377d976c6fb1a8d3918ed96f7382c5b",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/Notepad.anchor.txt"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/README.md": {
+      "group": "implementation",
+      "sha256": "259dfd74f9aa8b95f47100771330db2db9ba991d05aff190ab984a7bc85e8293",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/README.md"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/anchorforge-spec.json": {
+      "group": "implementation",
+      "sha256": "9db3332ac4d06476ae4479e0e9a5fcab88bcf7339adfc5c4699d433e6ddba210",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/anchorforge-spec.json"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/blind_public/START-HERE.md": {
+      "group": "implementation",
+      "sha256": "d65ef58c94e5f753905aff65bba9d876bebf71842291b320a05443473da7f25c",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/blind_public/START-HERE.md"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/blind_public/challenge.json": {
+      "group": "implementation",
+      "sha256": "50f6eeea18a6d5c922a686d6a02892bd2bd15e23feb7bf76b3792f58d38b241e",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/blind_public/challenge.json"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/blind_trial.py": {
+      "group": "implementation",
+      "sha256": "558ef52b772833a74ff0267c3479097ffe96cd4ece4cc4409206bb2ac3698fa0",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/blind_trial.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/blueprint-manifest.json": {
+      "group": "implementation",
+      "sha256": "71b465229a0da0f1b39bf020c8077fd5843184a5df1e2e6a5cdf75c173076616",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/blueprint-manifest.json"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/bridge-client.js": {
+      "group": "implementation",
+      "sha256": "4cbd28bd21c982f0df54e7ce6f56abe5a8ad186b3d8065393c74724e90428450",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/bridge-client.js"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/bridge.py": {
+      "group": "implementation",
+      "sha256": "0e0aa6dbf598c49cb66581be2eb3df2559bfc647e9dbd3416f0d6568ae30c987",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/bridge.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/browser_smoke.py": {
+      "group": "implementation",
+      "sha256": "5f934d78c6aff973e5e53d3000cc5340f35a9bedae5623491f844dd94b8b9b5d",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/browser_smoke.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/logical_engine.py": {
+      "group": "implementation",
+      "sha256": "c76493d00dfe91b69297dae518510e861cbde75a620b307162a831baab91ebbe",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/logical_engine.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/logical_shell.py": {
+      "group": "implementation",
+      "sha256": "dbcabf2f0d5cdfa53e437a2231d0d4fa073d3f741e44de0f3c1b9d593e4ee143",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/logical_shell.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_blueprint_gate.py": {
+      "group": "implementation",
+      "sha256": "5835c4c8940dba8eb9555572960959eca10a316adaf4a81fec6cb9e9943f01e0",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_blueprint_gate.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_clipboard.py": {
+      "group": "implementation",
+      "sha256": "256a63e8218970df2a1d77a37c01e9f3365bbdbaed3c64b53a2e299b9c18d6ea",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_clipboard.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_document.py": {
+      "group": "implementation",
+      "sha256": "2e315b6bec72c5222666cd08bffe8e3b5abe64d80b621391ad1f2b5e45a2859f",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_document.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_files.py": {
+      "group": "implementation",
+      "sha256": "067e80c68b4f9d387ed0f47e1f7cea6abfff1ccc12c959e0beaa5786f16a2039",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_files.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_guard.py": {
+      "group": "implementation",
+      "sha256": "778546d4c80eccff7a07f125314012b0c9d889c1d17d8d30328b9a761737888e",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_guard.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_history.py": {
+      "group": "implementation",
+      "sha256": "6172c1a8a99b277f6c63a54f9fd19861c003e3c9d691bd6735a48220321516ea",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_history.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_input.py": {
+      "group": "implementation",
+      "sha256": "bf9ff5d43a25199487b5f2aa365b147f300fdaf6ed58902606a1b3df0b6a9c5f",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_input.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_search.py": {
+      "group": "implementation",
+      "sha256": "975d7e8141294724e8da01007347cbb1055e73e13a5dfbf24540b603f9111b7f",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_search.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_surface.py": {
+      "group": "implementation",
+      "sha256": "8f7231e71c8d632ae78ad6afd65935f11627f0b8e6a445df8ec6cface2fe61d2",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/notepad_surface.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/shell.css": {
+      "group": "implementation",
+      "sha256": "faf0c69234fdc69fad8b9d828618563feef56b9817a87b08434f3212cbd172ac",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/shell.css"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/shell.html": {
+      "group": "implementation",
+      "sha256": "8fc1de97d3e495969c0c7be2e1b8a5fc980ec808009f669ee32d48f108863afd",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/shell.html"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/shell.js": {
+      "group": "implementation",
+      "sha256": "cfba5ffda2d46cdd22211feb8b81d0b611f27dd92997cc72b88bd600c2333745",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/shell.js"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/source-originals/test_notepad_clipboard.py": {
+      "group": "implementation",
+      "sha256": "3591ec1d5e12bff4c55d92e860c8cea9f9ef07cc11318dfe2011314262cea5a4",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/source-originals/test_notepad_clipboard.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_blind_trial.py": {
+      "group": "implementation",
+      "sha256": "9345d75c927c6a7608eee08b440278a486910f06cabee568a1545166d1b2716d",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_blind_trial.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_logical_next.py": {
+      "group": "implementation",
+      "sha256": "ae51fc6f9311dd59958a3f3781ab13068195211c81da44258a955008bd871828",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_logical_next.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_blueprint_gate.py": {
+      "group": "implementation",
+      "sha256": "6bfdf845304ba6f58d115cd84c51cc34b3b519992a72883e27022fb62033cf8e",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_blueprint_gate.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_clipboard.py": {
+      "group": "implementation",
+      "sha256": "4525f1adeba7f0b55f7e498705a96c1e6d3ac817235c048785bc0ea188294fc2",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_clipboard.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_document.py": {
+      "group": "implementation",
+      "sha256": "763ec6e5b2daa5923dfc58d00f2b35872e39cb1849b12e39e012e5ba9e44247e",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_document.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_files.py": {
+      "group": "implementation",
+      "sha256": "c17889063e1ba593447ce53d2ee5d78a46592ae3aa2cd7979bca4e7ade4e89b8",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_files.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_guard.py": {
+      "group": "implementation",
+      "sha256": "ceabce3187bb2e148a4b5d357055c81351b7d417316ea8d77e5271f335f111d1",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_guard.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_history.py": {
+      "group": "implementation",
+      "sha256": "f17dc641029634d1918cb4890c312c032f046f85d99c9d940aa923738cbf0618",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_history.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_input.py": {
+      "group": "implementation",
+      "sha256": "912c6583164128350b0d17fdfbc18335c887bff0b9fd7c96563df6aed6e5d25a",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_input.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_logical_contract.py": {
+      "group": "implementation",
+      "sha256": "bcc15c6bedc73151f38ca6b7a32766999676c878fc76f62db486130747ed46f7",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_logical_contract.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_search.py": {
+      "group": "implementation",
+      "sha256": "d63033a202517f0413a22f6aeb0fb31aba536cd9ac9258d7cb4690339f152d56",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_search.py"
+    },
+    "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_surface.py": {
+      "group": "implementation",
+      "sha256": "f43bdd13b3c8b8d252580d5d4d78224784ab2e1e1c1c98fc1cb109a72cb2ce2e",
+      "source": "src/mantleos/kpp/resources/examples/notepad-fidelity9/test_notepad_surface.py"
     },
     "src/mantleos/kpp/resources/examples/reflex-anchors/check_absent.py": {
       "group": "implementation",
@@ -1896,6 +2151,11 @@
       "sha256": "b08ffcc62acaff5ec65a90f8c5c971d08e130b38e4345148cbaabf68c83930be",
       "source": "src/mantleos/kpp/resources/release-evidence/UNIFICATION.json"
     },
+    "src/mantleos/kpp/resources/release-evidence/anchor-handoff.json": {
+      "group": "implementation",
+      "sha256": "0cf433c601785d2a548f1437ecbdcb9f2d5cc65b2401754d7c5e52b7b267279d",
+      "source": "src/mantleos/kpp/resources/release-evidence/anchor-handoff.json"
+    },
     "src/mantleos/kpp/resources/release-evidence/anchorforge-organ-0.3.0.json": {
       "group": "implementation",
       "sha256": "912f77f7fdc9e9f097d74900d4c2e45efe3c34674a5cc6933af4d831faee3f8a",
@@ -1905,6 +2165,11 @@
       "group": "implementation",
       "sha256": "fa05c4b9e864cf150d84abb37989b09ba6c8b1f9784e624bdf8dc7d969b4cfbb",
       "source": "src/mantleos/kpp/resources/specimens/AnchorForgeOrgan.anchor"
+    },
+    "src/mantleos/kpp/resources/specimens/Notepad-Fidelity9-HANDOFF.md": {
+      "group": "implementation",
+      "sha256": "cc58b519654882533dd36689cf5fd9358e9768212d6c6e911b1686e6ce7d2259",
+      "source": "src/mantleos/kpp/resources/specimens/Notepad-Fidelity9-HANDOFF.md"
     },
     "src/mantleos/kpp/resources/specimens/README.md": {
       "group": "implementation",
@@ -3046,6 +3311,16 @@
       "sha256": "74580906ea06149d69c9bde636002e840f6b2be8fb5cc88c9c6b0ecf4fe40353",
       "source": "tests/test_anchor_design.py"
     },
+    "tests/kpp/test_anchor_handoff.py": {
+      "group": "tests",
+      "sha256": "75f633963edc107aeaa73aeeec9a86966dc494907797b99574789d0c7de5bffa",
+      "source": "tests/test_anchor_handoff.py"
+    },
+    "tests/kpp/test_anchor_logic_evidence.py": {
+      "group": "tests",
+      "sha256": "4a5ca75bb3d7847a5764b1ed4d4f0ff1331e8cb0b5501e28afb2194ae9b29567",
+      "source": "tests/test_anchor_logic_evidence.py"
+    },
     "tests/kpp/test_attachments.py": {
       "group": "tests",
       "sha256": "6b7e3e0b6e9103e5dd94eb001b8d96d47af0884b2afbe7653338b113086f1b7e",
@@ -3342,10 +3617,10 @@
     "upstream/kpp-notices/THIRD-PARTY-NOTICES.md"
   ],
   "schema": "mantle.kpp-upstream/1",
-  "selection_digest": "26892e56ef5ab53acbe38fd43da23fb604bd366baef996f3aff8ff64638ec319",
-  "shared_source_digest": "336e44ee07b1046f8ee308530a1c366d11c13c6a9f89378934ffc27e0555f892",
+  "selection_digest": "61ba373071c09ad25072556400e4da83c1e410e4d9f0d073ff13393ea3cd0ca9",
+  "shared_source_digest": "e4ef6fb519f7ae5f113ee9fa78f5d874a60b88a660b67b5eeb7b6fb5bf3184c1",
   "upstream": {
-    "base_commit": "66979c9e0a3f050a90ae0b2e6c1dffccb781b247",
+    "base_commit": "2ddd96aef5b20ffeae462eec8af1ab6eb11e0bf1",
     "dirty": false,
     "official_url": "https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol",
     "published_revision_verified": false,

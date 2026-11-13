@@ -118,3 +118,8 @@ are reusable independently: omitted ingredients add no workers or model calls.
 
 See [Studio qualification](docs/STUDIO-QUALIFICATION.md) for executed local
 behavior, separate live/synthetic evidence, timings and remaining limits.
+
+[Portable single-file Anchor handoff](docs/ANCHOR-HANDOFF.md) carries the complete
+Fidelity 9 Notepad source, contracts, tests and an optional Python language bridge.
+
+Download the [complete Notepad handoff](specimens/Notepad-Fidelity9-HANDOFF.md) as raw UTF-8 to preserve exact payload bytes.

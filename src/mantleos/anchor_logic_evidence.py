@@ -34,7 +34,8 @@ def _unique(pairs):
 
 
 def _read(path, limit=MAX_BYTES):
-    raw = Path(path).read_bytes()
+    with Path(path).open('rb') as stream:
+        raw = stream.read(limit + 1)
     if len(raw) > limit:
         raise ValueError('Input exceeds byte limit')
     return raw.decode('utf-8')

@@ -1,0 +1,715 @@
+{
+  "schema": "anchorforge.organ-spec/1",
+  "id": "generic-notepad-round-09",
+  "goal": "Build a usable generic notepad while retaining all previously established obligations after each new Anchor. Enforce cumulative blueprint integrity as a build-time WhiteHole gate for coding agents.",
+  "target": "A desktop plain-text editor supporting new/open/edit/save/save-as, undo/redo, cut/copy/paste/select-all, find/replace, keyboard shortcuts, and unsaved-change protection.",
+  "mode": "composition",
+  "product_kind": "software",
+  "tissue": "python",
+  "fidelity": 9,
+  "ingredients": [],
+  "responsibilities": [
+    {
+      "id": "BH-EDITOR-INPUT",
+      "definition": "BlackHole",
+      "responsibility": "Receive editor, file, clipboard, selection, search and replacement intents verbatim; no authorization, state change or host effect from capture."
+    },
+    {
+      "id": "N-DOCUMENT",
+      "definition": "Neutral",
+      "responsibility": "Sole owner of document text, clean baseline, revision and derived dirty status; expose trusted clean-load and save-confirmation hooks invoked only after guarded file actions."
+    },
+    {
+      "id": "WH-COMMAND-GUARD",
+      "definition": "WhiteHole",
+      "responsibility": "Authorize exact, typed editing, history, file, clipboard and document-bound search/replace commands; reject unbound capabilities, invalid ranges and mismatches; route permitted state changes only to their Neutral owners."
+    },
+    {
+      "id": "N-EDIT-HISTORY",
+      "definition": "Neutral",
+      "responsibility": "Sole owner of bounded, document-bound undo/redo transitions and its expected revision; use N-DOCUMENT to apply reversals without owning text."
+    },
+    {
+      "id": "N-EDITOR-SURFACE",
+      "definition": "Neutral",
+      "responsibility": "Project Tk document/history/path snapshots; route menu, keyboard, file, clipboard and Find/Replace interactions through BlackHole/WhiteHole; hold only transient visual selection and find dialog input, not document text."
+    },
+    {
+      "id": "N-FILE-SESSION",
+      "definition": "Neutral",
+      "responsibility": "Sole owner of active file path and last confirmed on-disk content digest. Read UTF-8, atomically write UTF-8, detect external conflicts, and coordinate fresh document/history baselines only upon authorized file operations."
+    },
+    {
+      "id": "N-CLIPBOARD-SELECTION",
+      "definition": "Neutral",
+      "responsibility": "Interpret document-codepoint selection ranges and own the explicit, document/history-bound clipboard capability using injected host callbacks. Return selected text / host acknowledgement to WH, without owning document text, undo history, or a parallel clipboard buffer."
+    },
+    {
+      "id": "N-SEARCH-REPLACE",
+      "definition": "Neutral",
+      "responsibility": "Document/history-bound literal search and replace semantics, Unicode codepoint match ranges, case/wrap/direction options, and pure replacement calculations. Own no document text, search result cache or undo history."
+    },
+    {
+      "id": "WH-BLUEPRINT-GATE",
+      "definition": "WhiteHole",
+      "responsibility": "Build-time, fail-closed conformance gate for the complete nine-Anchor blueprint: check distinct Anchor identities and roles, source mapping, Neutral state owners, effect boundaries, dependency-ready mandatory obligations, preserved test identities and command allowlist; never dispatch runtime user intents or claim formal KPP satisfaction."
+    }
+  ],
+  "flows": [
+    {
+      "from": "BH-EDITOR-INPUT",
+      "to": "WH-COMMAND-GUARD",
+      "relationship": "Pass captured, untrusted intent for validation."
+    },
+    {
+      "from": "WH-COMMAND-GUARD",
+      "to": "N-DOCUMENT",
+      "relationship": "Dispatch only validated in-memory actions to the state owner."
+    },
+    {
+      "from": "WH-COMMAND-GUARD",
+      "to": "N-EDIT-HISTORY",
+      "relationship": "After validation, record successful edits or request undo/redo from the bound history owner."
+    },
+    {
+      "from": "N-EDIT-HISTORY",
+      "to": "N-DOCUMENT",
+      "relationship": "Apply undo/redo through the document state owner, preserving its clean baseline."
+    },
+    {
+      "from": "N-EDITOR-SURFACE",
+      "to": "BH-EDITOR-INPUT",
+      "relationship": "Forward GUI text changes, read/history, file, selection and clipboard intents through capture before WH authorization."
+    },
+    {
+      "from": "WH-COMMAND-GUARD",
+      "to": "N-EDITOR-SURFACE",
+      "relationship": "Return authoritative document snapshots or a pure selected-range result for projection in Tk."
+    },
+    {
+      "from": "WH-COMMAND-GUARD",
+      "to": "N-FILE-SESSION",
+      "relationship": "After authorization and confirmation validation, request New/Open/Save/Save As on the bound file session."
+    },
+    {
+      "from": "N-FILE-SESSION",
+      "to": "N-DOCUMENT",
+      "relationship": "Install new/opened text as clean baseline, or acknowledge completed save without taking over document ownership."
+    },
+    {
+      "from": "N-FILE-SESSION",
+      "to": "N-EDIT-HISTORY",
+      "relationship": "Reset the bound edit timeline after New or Open; preserve history on Save/Save As."
+    },
+    {
+      "from": "N-EDITOR-SURFACE",
+      "to": "N-FILE-SESSION",
+      "relationship": "Render the confirmed active file path from an immutable session snapshot; not an unguarded file command."
+    },
+    {
+      "from": "WH-COMMAND-GUARD",
+      "to": "N-CLIPBOARD-SELECTION",
+      "relationship": "Dispatch authorized copy/cut/paste/select-all selections after type, range, binding and history validation."
+    },
+    {
+      "from": "N-CLIPBOARD-SELECTION",
+      "to": "WH-COMMAND-GUARD",
+      "relationship": "Return host clipboard read content or confirmed copy acknowledgement; WH rechecks history and text snapshot before any Cut/Paste mutation."
+    },
+    {
+      "from": "N-EDITOR-SURFACE",
+      "to": "N-CLIPBOARD-SELECTION",
+      "relationship": "Inject only the explicit Tk host clipboard adapter; physical selection is transient UI state, not authoritative document text."
+    },
+    {
+      "from": "WH-COMMAND-GUARD",
+      "to": "N-DOCUMENT",
+      "relationship": "After successful guarded cut/paste external interaction, apply one validated codepoint selection replacement, with N-EDIT-HISTORY recording one undoable transition."
+    },
+    {
+      "from": "WH-COMMAND-GUARD",
+      "to": "N-SEARCH-REPLACE",
+      "relationship": "After exact payload and capability/history validation, request pure literal find/match/replacement calculations."
+    },
+    {
+      "from": "N-SEARCH-REPLACE",
+      "to": "WH-COMMAND-GUARD",
+      "relationship": "Return immutable match ranges or calculated replacement text/count; no state mutations or external effects."
+    },
+    {
+      "from": "WH-COMMAND-GUARD",
+      "to": "N-DOCUMENT",
+      "relationship": "Apply approved Replace or Replace All as a single document-owned text revision if changed."
+    },
+    {
+      "from": "N-EDITOR-SURFACE",
+      "to": "N-SEARCH-REPLACE",
+      "relationship": "Bind search semantics to the existing document/history; transient query/replacement widgets remain UI-only inputs."
+    },
+    {
+      "from": "WH-BLUEPRINT-GATE",
+      "to": "WH-COMMAND-GUARD",
+      "relationship": "During candidate-build review, inspect the runtime guard role, approved commands and external-effect guard declarations; offline audit only, never editor-command dispatch."
+    },
+    {
+      "from": "WH-BLUEPRINT-GATE",
+      "to": "N-EDITOR-SURFACE",
+      "relationship": "During candidate-build review, verify user commands still enter through BH capture and the runtime WH guard; offline audit only."
+    },
+    {
+      "from": "WH-BLUEPRINT-GATE",
+      "to": "N-DOCUMENT",
+      "relationship": "During candidate-build review, check preserved Neutral ownership of text, baseline and revision; offline audit only."
+    }
+  ],
+  "state": [
+    {
+      "id": "document.text",
+      "owner": "N-DOCUMENT"
+    },
+    {
+      "id": "document.clean_baseline",
+      "owner": "N-DOCUMENT"
+    },
+    {
+      "id": "document.revision",
+      "owner": "N-DOCUMENT"
+    },
+    {
+      "id": "history.undo_stack",
+      "owner": "N-EDIT-HISTORY"
+    },
+    {
+      "id": "history.redo_stack",
+      "owner": "N-EDIT-HISTORY"
+    },
+    {
+      "id": "history.expected_revision",
+      "owner": "N-EDIT-HISTORY"
+    },
+    {
+      "id": "file_session.active_path",
+      "owner": "N-FILE-SESSION"
+    },
+    {
+      "id": "file_session.confirmed_disk_digest",
+      "owner": "N-FILE-SESSION"
+    },
+    {
+      "id": "clipboard.document_history_binding",
+      "owner": "N-CLIPBOARD-SELECTION"
+    },
+    {
+      "id": "clipboard.host_callback_capability",
+      "owner": "N-CLIPBOARD-SELECTION"
+    },
+    {
+      "id": "editor.transient_tk_selection",
+      "owner": "N-EDITOR-SURFACE"
+    },
+    {
+      "id": "search.document_history_binding",
+      "owner": "N-SEARCH-REPLACE"
+    },
+    {
+      "id": "editor.transient_find_dialog_inputs",
+      "owner": "N-EDITOR-SURFACE"
+    }
+  ],
+  "effects": [
+    {
+      "id": "open-file-read",
+      "requester": "N-EDITOR-SURFACE",
+      "guard": "WH-COMMAND-GUARD",
+      "executor": "N-FILE-SESSION",
+      "description": "Read a user-selected absolute UTF-8 file after dirty-discard authorization.",
+      "confirmation": "Full read and UTF-8 decode succeed before any document, history or association change."
+    },
+    {
+      "id": "save-file-write",
+      "requester": "N-EDITOR-SURFACE",
+      "guard": "WH-COMMAND-GUARD",
+      "executor": "N-FILE-SESSION",
+      "description": "Write a selected, authorized destination via a sibling temporary file and os.replace; require explicit overwrite grant for unrelated existing targets.",
+      "confirmation": "Successful host replacement and unchanged in-memory document revision precede clean-baseline acknowledgement."
+    },
+    {
+      "id": "clipboard-read",
+      "requester": "N-EDITOR-SURFACE",
+      "guard": "WH-COMMAND-GUARD",
+      "executor": "N-CLIPBOARD-SELECTION",
+      "description": "Read plain text via the explicitly injected Tk host adapter only for a valid guarded Paste selection. Never read on malformed or unbound requests.",
+      "confirmation": "Host callback returns actual plain text, and document/history remain current, before WH replaces text once and records undo."
+    },
+    {
+      "id": "clipboard-write",
+      "requester": "N-EDITOR-SURFACE",
+      "guard": "WH-COMMAND-GUARD",
+      "executor": "N-CLIPBOARD-SELECTION",
+      "description": "Write exactly the selected Unicode text via the injected Tk host adapter only for a valid guarded Copy/Cut request.",
+      "confirmation": "Host callback returns without error, and document/history remain current, before WH deletes Cut selection and records undo. Copy never changes document/history."
+    }
+  ],
+  "obligations": [
+    {
+      "id": "capture-intent",
+      "statement": "An inbound editor intent preserves its action and payload. Receiving it does not validate it, mutate document state, or cause external effects.",
+      "test": "Capture edit, save-as, and unknown actions; verify returned action and payload match and no document/file effect is performed.",
+      "required": true,
+      "depth": 1,
+      "depends": [],
+      "design_anchors": [
+        "BH-EDITOR-INPUT"
+      ]
+    },
+    {
+      "id": "document-edit-state",
+      "statement": "Neutral owns the in-memory content, baseline, revision, and derived dirty status. Valid replace/insert/delete edits update that state; invalid operations make no changes; snapshots cannot modify document state.",
+      "test": "Exercise replace/insert/delete, Unicode, no-ops, invalid offsets and types, dirty-revert, and immutable snapshots.",
+      "required": true,
+      "depth": 2,
+      "depends": [],
+      "design_anchors": [
+        "N-DOCUMENT"
+      ]
+    },
+    {
+      "id": "intent-remains-unexecuted",
+      "statement": "Capturing an editor intent alone never changes the document; only an explicit WhiteHole dispatch may apply a validated operation.",
+      "test": "Capture an edit intent, verify the document is unchanged, then dispatch through WhiteHole and verify the expected update.",
+      "required": true,
+      "depth": 2,
+      "depends": [
+        "capture-intent",
+        "document-edit-state"
+      ],
+      "design_anchors": [
+        "BH-EDITOR-INPUT",
+        "N-DOCUMENT"
+      ]
+    },
+    {
+      "id": "guard-dispatch",
+      "statement": "Only the WhiteHole can authorize untrusted edit, insert, delete, and read requests in the integrated flow. Validate payloads fully before state change.",
+      "test": "Exercise valid BH -> WH -> N commands and invalid actions, index ranges, types, and payloads. Assert state unchanged for rejections.",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "capture-intent",
+        "document-edit-state"
+      ],
+      "design_anchors": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-DOCUMENT"
+      ]
+    },
+    {
+      "id": "reject-external-effects",
+      "statement": "File and clipboard actions without a matching explicitly bound capability, malformed selection commands, and unrecognized/network effects remain denied. Only guarded opted-in file and clipboard paths are authorized.",
+      "test": "Run legacy unsupported-command checks without file/clipboard bindings; assert no document/history/host effect. Exercise malformed clipboard ranges and matching-history requirements.",
+      "required": true,
+      "depth": 3,
+      "depends": [
+        "guard-dispatch"
+      ],
+      "design_anchors": [
+        "WH-COMMAND-GUARD",
+        "N-DOCUMENT"
+      ]
+    },
+    {
+      "id": "undo-redo",
+      "statement": "Valid guarded edits record bounded undo history. Undo restores prior text; redo reapplies an undone edit; document text and revision remain owned by N-DOCUMENT.",
+      "test": "Perform edit/insert/delete and several undo/redo actions; assert exact text, revision, dirty, and independent history counts.",
+      "required": true,
+      "depth": 4,
+      "depends": [
+        "guard-dispatch",
+        "document-edit-state"
+      ],
+      "design_anchors": [
+        "WH-COMMAND-GUARD",
+        "N-EDIT-HISTORY",
+        "N-DOCUMENT"
+      ]
+    },
+    {
+      "id": "history-boundary",
+      "statement": "Invalid or stale history, wrong document, missing transitions, and malformed requests must be rejected without changing document or history state.",
+      "test": "Try stale or foreign histories, unsupported requests, extra undo/redo payloads, empty stacks; verify both snapshots remain intact.",
+      "required": true,
+      "depth": 4,
+      "depends": [
+        "undo-redo",
+        "reject-external-effects"
+      ],
+      "design_anchors": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-EDIT-HISTORY",
+        "N-DOCUMENT"
+      ]
+    },
+    {
+      "id": "history-preservation",
+      "statement": "A new valid edit clears redo; a no-op does not create a history entry; legacy guarded edit/read behavior remains intact without optional history.",
+      "test": "Undo followed by new edit, noop edits, and the full original test suite of 38 cases.",
+      "required": true,
+      "depth": 4,
+      "depends": [
+        "undo-redo",
+        "capture-intent",
+        "intent-remains-unexecuted"
+      ],
+      "design_anchors": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-EDIT-HISTORY",
+        "N-DOCUMENT"
+      ]
+    },
+    {
+      "id": "desktop-surface",
+      "statement": "The Tk window projects document and history state, plus active file association, from corresponding owners; text and undo behavior remain routed through the WhiteHole without parallel authoritative text state.",
+      "test": "Use a real Tk window to enter multiline Unicode text; read the Neutral state; undo and redo; verify text view, revision, history and dirty indicator agree.",
+      "required": true,
+      "depth": 5,
+      "depends": [
+        "guard-dispatch",
+        "undo-redo",
+        "history-preservation"
+      ],
+      "design_anchors": [
+        "N-EDITOR-SURFACE",
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ]
+    },
+    {
+      "id": "ui-effect-boundary",
+      "statement": "Tk File and clipboard menu/keyboard commands may invoke only WH-guarded file session and clipboard selection actions. Unsupported native Tk clipboard operations are intercepted. Find/Replace are explicitly routed through WH without any additional host I/O; no unguarded host I/O is authorized.",
+      "test": "Real Tk tests for guarded file menu and clipboard/selection routing, native unsupported-event blocking, cancellation and failure preservation.",
+      "required": true,
+      "depth": 5,
+      "depends": [
+        "reject-external-effects",
+        "desktop-surface"
+      ],
+      "design_anchors": [
+        "N-EDITOR-SURFACE",
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-DOCUMENT"
+      ]
+    },
+    {
+      "id": "unsaved-exit-confirm",
+      "statement": "Closing a dirty document requires affirmative discard confirmation; cancel preserves it. Clean documents close without prompting. Now that files exist, saving first marks the document clean and permits exit.",
+      "test": "Run inherited dirty/clean close checks, then save and verify clean status.",
+      "required": true,
+      "depth": 5,
+      "depends": [
+        "document-edit-state",
+        "desktop-surface"
+      ],
+      "design_anchors": [
+        "N-EDITOR-SURFACE",
+        "WH-COMMAND-GUARD",
+        "N-DOCUMENT"
+      ]
+    },
+    {
+      "id": "guard-file-operations",
+      "statement": "Only New/Open/Save/Save As with a matching file session, validated absolute paths, exact payloads and explicit discard/overwrite grants can reach file effects. Unguarded or malformed commands never change document/history/files.",
+      "test": "Exercise invalid paths, malformed payloads, mismatched sessions, missing confirmations, unbound guard and disabled unrelated effects.",
+      "required": true,
+      "depth": 6,
+      "depends": [
+        "guard-dispatch",
+        "reject-external-effects",
+        "desktop-surface"
+      ],
+      "design_anchors": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-FILE-SESSION",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ]
+    },
+    {
+      "id": "file-persistence",
+      "statement": "New resets to an untitled clean document; Open fully reads/decodes UTF-8 before replacing state and resetting history; Save and Save As write UTF-8 then update the baseline and association only after a confirmed write.",
+      "test": "Use temporary UTF-8 files and disk roundtrips, open/new, revision and dirty assertions, file association checks, preservation of undo when saving.",
+      "required": true,
+      "depth": 6,
+      "depends": [
+        "guard-file-operations",
+        "undo-redo"
+      ],
+      "design_anchors": [
+        "WH-COMMAND-GUARD",
+        "N-FILE-SESSION",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ]
+    },
+    {
+      "id": "file-failure-preservation",
+      "statement": "Cancelled or rejected destructive actions and failed reads/writes leave prior user text and history intact; successful saves use temporary-file replacement and detect changed/missing associated files.",
+      "test": "Check cancelled dirty New/Open, missing/non-UTF-8 files, injected os.replace failure, externally modified/deleted files and leftover temporary files.",
+      "required": true,
+      "depth": 6,
+      "depends": [
+        "file-persistence",
+        "history-preservation"
+      ],
+      "design_anchors": [
+        "N-EDITOR-SURFACE",
+        "WH-COMMAND-GUARD",
+        "N-FILE-SESSION",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ]
+    },
+    {
+      "id": "gui-file-actions",
+      "statement": "Tk File menu and file shortcuts enable New/Open/Save/Save As with native dialogs and confirmations. UI file and dirty indicators reflect owner snapshots; clipboard actions coexist without changing file guards.",
+      "test": "Real Tk tests under Xvfb for New, Open, Save As, cancel, saved title, new file action failure and file keyboard bindings.",
+      "required": true,
+      "depth": 6,
+      "depends": [
+        "file-persistence",
+        "ui-effect-boundary",
+        "unsaved-exit-confirm"
+      ],
+      "design_anchors": [
+        "N-EDITOR-SURFACE",
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-FILE-SESSION",
+        "N-DOCUMENT"
+      ]
+    },
+    {
+      "id": "guard-clipboard-selection",
+      "statement": "All Cut/Copy/Paste/Select All requests are captured by BH and validated by WH against exact fields, codepoint range, document/history binding and explicit clipboard capability. Invalid requests must have no document/history/host effect.",
+      "test": "Exercise unbound commands, malformed payloads, boolean/negative/reversed/out-of-bounds offsets, stale and cross-document bindings, and selection of Unicode text.",
+      "required": true,
+      "depth": 7,
+      "depends": [
+        "capture-intent",
+        "guard-dispatch",
+        "history-boundary",
+        "reject-external-effects"
+      ],
+      "design_anchors": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-CLIPBOARD-SELECTION",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ]
+    },
+    {
+      "id": "copy-cut-host-safety",
+      "statement": "Copy and Select All never modify document/history. Cut performs one undoable edit only after a confirmed clipboard write, and failed host writes or a stale document/history prevent Cut mutation.",
+      "test": "Copy Unicode selection; cut and undo/redo; verify Copy history unchanged; inject failed/reentrant host write and assert no Cut deletion; Select All returns pure range.",
+      "required": true,
+      "depth": 7,
+      "depends": [
+        "guard-clipboard-selection",
+        "undo-redo"
+      ],
+      "design_anchors": [
+        "N-CLIPBOARD-SELECTION",
+        "WH-COMMAND-GUARD",
+        "N-EDIT-HISTORY",
+        "N-DOCUMENT"
+      ]
+    },
+    {
+      "id": "paste-undo-preservation",
+      "statement": "Paste reads host plain text only after guarded validation, replacing selection or inserting at caret as one document-owned transition. Empty content and noop edits preserve history semantics; failure does not mutate document/history.",
+      "test": "Plain-text Unicode paste, selected-range replacement, empty paste behavior, read failures, wrong data type, reentrant changes, dirty baseline and file persistence preservation.",
+      "required": true,
+      "depth": 7,
+      "depends": [
+        "guard-clipboard-selection",
+        "history-preservation",
+        "file-persistence"
+      ],
+      "design_anchors": [
+        "N-CLIPBOARD-SELECTION",
+        "WH-COMMAND-GUARD",
+        "N-EDIT-HISTORY",
+        "N-DOCUMENT",
+        "N-FILE-SESSION"
+      ]
+    },
+    {
+      "id": "gui-clipboard-selection",
+      "statement": "Tk Edit menu plus Ctrl/Command Cut/Copy/Paste/Select All and conventional alternate shortcuts route through BH/WH. Transient selection maps to Python Unicode codepoint offsets. No unsupported native Tk clipboard effect can bypass WH.",
+      "test": "Run real Tk clipboard and menu binding tests under Xvfb, including supplementary Unicode, full selection, selected-range replacement, caret positioning and coexistence with now-authorized Find/Replace.",
+      "required": true,
+      "depth": 7,
+      "depends": [
+        "gui-file-actions",
+        "ui-effect-boundary",
+        "copy-cut-host-safety",
+        "paste-undo-preservation"
+      ],
+      "design_anchors": [
+        "N-EDITOR-SURFACE",
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-CLIPBOARD-SELECTION",
+        "N-DOCUMENT"
+      ]
+    },
+    {
+      "id": "guard-search-requests",
+      "statement": "Find, Replace and Replace All require an explicitly bound N-SEARCH-REPLACE tied to the current document/history. WH requires exact payload keys, nonempty literal query, correct boolean/options, valid Unicode offsets and replacement text; unbound or malformed requests never edit the document/history.",
+      "test": "Test unbound, wrong-document, stale-history and malformed search/replace commands; verify no document/history/host effect, including rejected mismatched selected text.",
+      "required": true,
+      "depth": 8,
+      "depends": [
+        "guard-dispatch",
+        "history-boundary",
+        "reject-external-effects"
+      ],
+      "design_anchors": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-SEARCH-REPLACE",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ]
+    },
+    {
+      "id": "pure-find-search",
+      "statement": "Find/Find Next/Previous calculate literal case-sensitive/insensitive, forward/backward and wrapped matches in Unicode codepoint ranges. No match returns None. Search alone never changes document revision, dirty baseline, edit history or host state.",
+      "test": "Check Unicode/emoji, multiline and regex-literal strings, case options, forward/backward and wrap/no-wrap, missing matches, empty document and unchanged document/history snapshots.",
+      "required": true,
+      "depth": 8,
+      "depends": [
+        "guard-search-requests",
+        "document-edit-state"
+      ],
+      "design_anchors": [
+        "N-SEARCH-REPLACE",
+        "WH-COMMAND-GUARD",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ]
+    },
+    {
+      "id": "replacement-history-preservation",
+      "statement": "Replace One affects only a matching selected range; Replace All performs non-overlapping literal replacement in a single undoable document transition. No matches/identical results are no-ops, redo is invalidated only by changed content, and file/clipboard/dirty invariants persist.",
+      "test": "Exercise selected match rejection, Unicode, backslashes, replacement deletion, multiple replacements, one-step undo/redo, no-op redo preservation, saved baseline and existing clipboard/file flows.",
+      "required": true,
+      "depth": 8,
+      "depends": [
+        "guard-search-requests",
+        "pure-find-search",
+        "undo-redo",
+        "history-preservation",
+        "file-persistence",
+        "paste-undo-preservation"
+      ],
+      "design_anchors": [
+        "N-SEARCH-REPLACE",
+        "WH-COMMAND-GUARD",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY",
+        "N-FILE-SESSION",
+        "N-CLIPBOARD-SELECTION"
+      ]
+    },
+    {
+      "id": "gui-find-replace",
+      "statement": "Tk Edit menu and Ctrl/Command+F/H, F3, Shift+F3 route Find/Replace through BH/WH. The transient Find/Replace window and highlights never become authoritative text; replacements are repaint-from-snapshot operations. Unsupported native clipboard effects remain blocked.",
+      "test": "Run real Tk dialog, menu, keyboard-binding, Unicode highlight, forward/backward navigation, replace-one/all, undo and failure-preservation checks under Xvfb, plus all inherited tests.",
+      "required": true,
+      "depth": 8,
+      "depends": [
+        "gui-clipboard-selection",
+        "ui-effect-boundary",
+        "pure-find-search",
+        "replacement-history-preservation"
+      ],
+      "design_anchors": [
+        "N-EDITOR-SURFACE",
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-SEARCH-REPLACE",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ]
+    },
+    {
+      "id": "blueprint-role-state-gate",
+      "statement": "The build-time WhiteHole rejects any candidate missing or duplicating one of the nine declared Anchors, mislabeling Anchor classes or types, changing a preserved state owner, or introducing a second writer for protected state attributes; it holds no document state.",
+      "test": "Run the gate on the shipped artifact and on altered temporary candidates that drop/rename an Anchor, assign a state owner incorrectly, or introduce a forbidden duplicate state write. Assert rejection of altered copies.",
+      "required": true,
+      "depth": 9,
+      "depends": [
+        "capture-intent",
+        "document-edit-state",
+        "guard-dispatch"
+      ],
+      "design_anchors": [
+        "WH-BLUEPRINT-GATE",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ]
+    },
+    {
+      "id": "blueprint-effects-and-actions-gate",
+      "statement": "The offline gate checks each declared host effect for requester, runtime WH guard, executor and explicit confirmation, preserves permitted effect executors and command action allowlist, and flags known forbidden host calls or network imports in mapped Anchor sources. It does not replace WH-COMMAND-GUARD.",
+      "test": "Mutate a copied effect guard/confirmation, command allowlist, or add an unauthorized file/clipboard/network call; assert build gate fails while shipped app remains unaffected.",
+      "required": true,
+      "depth": 9,
+      "depends": [
+        "reject-external-effects",
+        "blueprint-role-state-gate"
+      ],
+      "design_anchors": [
+        "WH-BLUEPRINT-GATE",
+        "WH-COMMAND-GUARD",
+        "N-FILE-SESSION",
+        "N-CLIPBOARD-SELECTION"
+      ]
+    },
+    {
+      "id": "blueprint-obligation-preservation-gate",
+      "statement": "All eight established Anchors and their mandatory obligations stay in the blueprint. Every Anchor must be covered by a mandatory testable obligation; prerequisites must resolve without cycles. Baseline 181 inherited test identities remain present unless deliberately revised under Baker review.",
+      "test": "Modify copied candidate to remove a prior obligation or test, break a prerequisite, create a cycle or omit the gate obligation; assert the offline WhiteHole rejects it; run the full actual Python test suite separately.",
+      "required": true,
+      "depth": 9,
+      "depends": [
+        "blueprint-role-state-gate"
+      ],
+      "design_anchors": [
+        "WH-BLUEPRINT-GATE"
+      ]
+    },
+    {
+      "id": "blueprint-gate-nonacceptance",
+      "statement": "A passing static gate plus regression tests is necessary local evidence, not AnchorForge review, formal KPP satisfaction or Baker acceptance. The gate must not mutate the application or claim to cryptographically secure untrusted agents.",
+      "test": "Check gate report presents scoped claims; run against an unchanged project and verify no file hashes change; assert CLI exits nonzero on drift and succeeds on valid static candidate.",
+      "required": true,
+      "depth": 9,
+      "depends": [
+        "blueprint-effects-and-actions-gate",
+        "blueprint-obligation-preservation-gate"
+      ],
+      "design_anchors": [
+        "WH-BLUEPRINT-GATE"
+      ]
+    }
+  ]
+}

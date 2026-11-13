@@ -1,0 +1,30 @@
+# Notepad Fidelity 9 — human-readable design, NOT executable native .anchor
+# 9 Anchors; exactly one new from Fidelity 8: WH-BLUEPRINT-GATE (WhiteHole)
+
+BH-EDITOR-INPUT        BlackHole    capture raw intent, no permission or state change
+N-DOCUMENT            Neutral      sole authoritative text/revision/clean baseline
+WH-COMMAND-GUARD      WhiteHole    authorize runtime commands and host effects
+N-EDIT-HISTORY        Neutral      sole undo/redo history + expected revision
+N-EDITOR-SURFACE      Neutral      Tk GUI projection and runtime BH→WH routing
+N-FILE-SESSION        Neutral      authorized UTF-8 file path/digest/persistence
+N-CLIPBOARD-SELECTION Neutral      selection and injected clipboard capability
+N-SEARCH-REPLACE      Neutral      stateless literal search/replacement computation
+WH-BLUEPRINT-GATE     WhiteHole    OFFLINE candidate build conformity (NEW)
+
+RUNTIME: UI -> BH -> WH-COMMAND-GUARD -> Neutral owner(s) -> UI snapshot
+OFFLINE: draft spec + mapping + Anchor sources + tests -> WH-BLUEPRINT-GATE
+          -> cumulative Python tests -> REVIEW EVIDENCE (not Baker acceptance)
+
+All 13 previous declared state ownership records remain unchanged. Four declared
+file/clipboard effects remain runtime-guarded. The new WhiteHole is stateless
+and does not participate in runtime editor command flow.
+
+Draft mandatory obligations: 27 (23 inherited + 4 for new gate).
+Tests: 213/213 local under Xvfb (181 inherited unchanged + 32 added).
+Chase basic features locally met. Formal KPP satisfaction and Baker acceptance
+remain pending; this design is not a native Anchor profile.
+
+# Completion-readiness logical overlay (no new Anchor added):
+# LOGICAL-CONTRACT.json defines 17 independent GateConditions linked to these nine Anchors.
+# LOGICAL-INTERPRETATION.md defines an LLM prediction method; this remains NOT native executable .anchor.
+# Feature Chase locally covered; formal KPP satisfaction and Baker acceptance pending.
