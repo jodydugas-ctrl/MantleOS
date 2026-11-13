@@ -12,6 +12,11 @@ payload. This is not a claim that a static scan can automatically reconstruct an
 arbitrary application. Notepad has its own complete deterministic profile,
 `NOTEPAD_LLM/1.3`, with independently executable editing semantics.
 
+For recipe and design authoring, the [shared Pantry entry](../src/mantleos/kpp/resources/pantry/anchorforge-organ.json)
+links to the pinned [AnchorForge carrier](../src/mantleos/kpp/resources/specimens/AnchorForgeOrgan.anchor).
+It emits the Python controller as literal data. Use the KPP Python bridge to
+recover the source for review. See the [portable specimen guide](../src/mantleos/kpp/resources/specimens/README.md).
+
 ## Scan and author
 
 Set `PYTHONPATH=src` as in README, then use fresh paths:

@@ -86,7 +86,10 @@ class AnchorSpecimenTests(unittest.TestCase):
 
     def test_pantry_pin_and_transformation_recipe(self):
         catalog=ingredient_catalog(ROOT)
-        self.assertEqual(sum('specimen' in v for v in catalog.values()),4)
+        self.assertEqual({name for name, item in catalog.items() if 'specimen' in item}, {
+            'anchorforge-organ', 'chase-gate', 'engram-continuity',
+            'kernel-relative-cells', 'mind-body-boundary',
+        })
         recipe=validate_recipe(json.loads((ROOT/'recipes'/'portable-memory-bake.json').read_text()))
         self.assertEqual(recipe['mode'],'transformation')
         bad=json.loads(json.dumps(recipe))
@@ -101,5 +104,20 @@ class AnchorSpecimenTests(unittest.TestCase):
             self.assertEqual(report['disposition'],'BAKER_REVIEW_REQUIRED; NOT_A_RECIPE_ANCHOR')
             self.assertEqual(inspection(ws)['accepted'],0)
             self.assertFalse(inspection(ws)['all_required_satisfied'])
+
+    def test_anchorforge_specimen_matches_qualified_controller(self):
+        ingredient = ingredient_catalog(ROOT)['anchorforge-organ']
+        self.assertEqual(ingredient['status'], 'ready')
+        report = json.loads((ROOT / 'release-evidence/anchorforge-organ-0.3.0.json').read_bytes())
+        self.assertEqual(report['organ_version'], ingredient['version'])
+        with tempfile.TemporaryDirectory() as directory:
+            controller = Path(directory) / 'anchorforge_organ.py'
+            bridge_python(ROOT / ingredient['specimen']['path'], controller)
+            source_sha256 = hashlib.sha256(controller.read_bytes()).hexdigest()
+            expected = {run['static_carrier']['python_sha256'] for run in report['installed_kpp_runs']}
+            self.assertEqual(expected, {source_sha256})
+            health = json.loads(self.run_script(controller, 'doctor').stdout)
+            self.assertEqual(health['organ_version'], ingredient['version'])
+            self.assertEqual(health['kpp_shared_runtime'], 'AVAILABLE')
 
 if __name__=='__main__':unittest.main()

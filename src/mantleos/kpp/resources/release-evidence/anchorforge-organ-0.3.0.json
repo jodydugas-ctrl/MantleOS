@@ -1,0 +1,393 @@
+{
+  "authority": "NONE",
+  "date": "2026-11-12",
+  "installed_kpp_runs": [
+    {
+      "authority": "NONE",
+      "counter_workspaces": {
+        "base": {
+          "completion_without_baker": "REJECTED",
+          "inherited_passes": [
+            [
+              {
+                "id": "increment",
+                "outcome": "PASS",
+                "output": ""
+              }
+            ],
+            [
+              {
+                "id": "increment",
+                "outcome": "PASS",
+                "output": ""
+              },
+              {
+                "id": "reject-invalid",
+                "outcome": "PASS",
+                "output": ""
+              }
+            ]
+          ],
+          "recipe_sha256": "69d1f3600f2966d47552440a486e3c0b05b2e99810f077e10e6f882b8c545f72",
+          "workspace_id": "ec89dd9e18394bbeb29e78b7b91b01bc"
+        },
+        "extended": {
+          "blank_baker": "REJECTED",
+          "completion_receipt_sha256": "741d5b47bf4f3fe1266a27a61b546c4c7f6ac935e8aaf0275e00e38906bc81e8",
+          "completion_without_baker": "REJECTED",
+          "fresh_candidate_manifest_sha256": "198ff0b321e8c5984bb09ca90eba943977b436c0f6e5b55f0d9ede323c0bbca3",
+          "inherited_passes": [
+            [
+              {
+                "id": "increment",
+                "outcome": "PASS",
+                "output": ""
+              }
+            ],
+            [
+              {
+                "id": "increment",
+                "outcome": "PASS",
+                "output": ""
+              },
+              {
+                "id": "reject-invalid",
+                "outcome": "PASS",
+                "output": ""
+              }
+            ]
+          ],
+          "recipe_sha256": "7b62a41c28c2a47d295b7426894c180407f45a1fe979dc7efc9aa664a618812e",
+          "regression_outcomes": {
+            "increment": "FAIL",
+            "reject-invalid": "FAIL",
+            "reset": "PASS"
+          },
+          "repaired_case_ids": [
+            "increment",
+            "reject-invalid",
+            "reset"
+          ],
+          "stale_baker_acceptance": "REJECTED",
+          "stale_candidate": "REJECTED",
+          "suite_manifest_sha256": "3bf3b44900478cb0d43266d7d8e31839e168b1d5f5f79773c0c25d5a41f1b805",
+          "synthetic_acceptance": {
+            "acceptance": "BAKER_ATTESTED",
+            "accepted_anchors": [
+              "increment",
+              "reject-invalid",
+              "reset"
+            ]
+          },
+          "workspace_id": "ebf2e10c63144c06865892b0d4fef5f9"
+        }
+      },
+      "fixtures_sha256": {
+        "examples/counter-spec.json": "b880195ef6e010975b68ff33344ad3254e81fa642b94cf8c989829d4b397f05f",
+        "examples/counter.py": "8850bbc09ced7e92c1f4156584571f05c98eb6a34f2e63079ca2fe012a32ebbc",
+        "examples/extension.json": "5dd83435e125bc31504ab78b5f093344a647e6887b883d063538d5d5d6fc1455",
+        "pantry/anchorforge-organ.json": "5f84dab2f609a9c051906ea2cb22f3cf02bff1e6d5f3788e9f71c4b152b17f4f",
+        "tests/check_carrier.py": "cc83d11a61670a31f3c3b8a093a94751f540bc65508a37d1f485c3afee522849",
+        "tests/counter_checks.py": "d0acac71a06964b93aac9c4c07974dea50f2fdd0b3018f47c8e678da1ef01b18",
+        "tests/qualify_release.py": "e591ca85ca7def116484b5544eb2a5462a4846c0d9639c96d09b98e733b47b75",
+        "tests/test_organ.py": "e0e7fc996b1bc930c7cc009f2260d565fa179da5ac664972076fa0209e73a1be"
+      },
+      "installed_kpp_distribution_version": "1.1.0a5",
+      "native_carrier_and_bridge": "PASS",
+      "native_qualification": {
+        "append_only_obligations": true,
+        "artifacts_sha256": {
+          "carrier": "d9f14b62d89e87cf8a1c21c8a254615413c10ea6e566e8593bfd6dddeb3740fe",
+          "extended_recipe": "b9a9edddcfc24cd81ffeb0c61abc6a9904408a5e678be997a77419feaaea6f7a",
+          "extension": "5dd83435e125bc31504ab78b5f093344a647e6887b883d063538d5d5d6fc1455",
+          "oven_contract": "f6367c365ba0a096b779d5baa9d2687c5dcd9cb0b7f155fdd08a2e5e423ba7a4",
+          "python": "8850bbc09ced7e92c1f4156584571f05c98eb6a34f2e63079ca2fe012a32ebbc",
+          "recipe": "171da29423b4b9636e9793dbc948f8e83b1ac43777d138573f06289d80c7b263",
+          "spec": "b880195ef6e010975b68ff33344ad3254e81fa642b94cf8c989829d4b397f05f"
+        },
+        "authority": "NONE",
+        "baker_acceptance": "NOT_GRANTED",
+        "limitations": "Structural/transport checks only. Does not establish application behavior, recipe fitness, KPP satisfaction coverage or approval.",
+        "native_anchor_inspection": "PASS",
+        "native_contract_renderer": "PASS",
+        "native_design_validation": "PASS",
+        "native_python_bridge_roundtrip": "PASS",
+        "native_recipe_validation": "PASS",
+        "organ_version": "0.3.0",
+        "runtime": {
+          "declared_kpp_revision": "4fd2aef58c8f965ff1a96e3037ac196ed0d11c79",
+          "kpp_version": "1.1.0a5",
+          "mantleos_version": "0.1.0a9",
+          "native_module_sha256": {
+            "anchor_design": "a98763f4ed553eac94849fb97c0cf7dfc01baf593c2e111f1131a5cdfa7bd4b2",
+            "anchor_runtime": "fc23145450f5c5d12eab50a362b043ed4bb8c05aeb0c15b0293298a0f0b4323e",
+            "anchors": "891f2c3e02eaaba9cd16ec155dbee3f0ec65ca76774fa22d8ca5df8f727ae429",
+            "kpp_anchor": "ba92e01ad4262cce47622ff9e963b6b2ef6e538a05fc2d72dea1f99a1e3f54d4",
+            "kpp_core": "2c5b4798b7305dd83b8ac87a8c8a54f058cc61dc4112c1024975b7ea30fc5202"
+          },
+          "platform": "Windows-11-10.0.26200-SP0",
+          "python_version": "3.14.2"
+        },
+        "satisfaction_suite_execution": "NOT_RUN",
+        "schema": "anchorforge.qualify/1",
+        "source_runtime_execution": "NOT_RUN",
+        "source_sha256": "8850bbc09ced7e92c1f4156584571f05c98eb6a34f2e63079ca2fe012a32ebbc",
+        "status": "PASS"
+      },
+      "pantry": {
+        "source": {
+          "integrity": "PIN_MATCH",
+          "kind": "anchor-specimen",
+          "pin_sha256": "fa05c4b9e864cf150d84abb37989b09ba6c8b1f9784e624bdf8dc7d969b4cfbb",
+          "profile": "EMIT_TEXT/0.2",
+          "relative_path": "specimens/AnchorForgeOrgan.anchor",
+          "source_access": "EXPLICIT_ONLY"
+        },
+        "status": "ready"
+      },
+      "progressive_web_asset_pins": {
+        "base.js": "c9dba278d8e13afcd15d9f17d84e880ea6239f85834873bf4718898931591fc0",
+        "index.html": "38af2443b52203896e8f79a6e9c3db0dff026dcff3f1bbecd97067a3113f9c19",
+        "style.css": "fbdc31dbdbf7a4e7e5a0d15d1874908d9bb6a0d22694e170e3cc62c084e7683f"
+      },
+      "release_baker_acceptance": "NOT_GRANTED",
+      "schema": "anchorforge.release-check/1",
+      "static_carrier": {
+        "anchor_bytes": 31558,
+        "anchor_sha256": "fa05c4b9e864cf150d84abb37989b09ba6c8b1f9784e624bdf8dc7d969b4cfbb",
+        "python_bytes": 29596,
+        "python_sha256": "625d54c737566003b917853a710abdaf491327be87848b934f83e53faf78f036",
+        "scope": "STATIC_SHIPPED_SPECIMEN_BYTE_MATCH",
+        "status": "PASS"
+      },
+      "status": "PASS",
+      "unit_tests": {
+        "passed": 27,
+        "skipped": 0
+      }
+    },
+    {
+      "authority": "NONE",
+      "counter_workspaces": {
+        "base": {
+          "completion_without_baker": "REJECTED",
+          "inherited_passes": [
+            [
+              {
+                "id": "increment",
+                "outcome": "PASS",
+                "output": ""
+              }
+            ],
+            [
+              {
+                "id": "increment",
+                "outcome": "PASS",
+                "output": ""
+              },
+              {
+                "id": "reject-invalid",
+                "outcome": "PASS",
+                "output": ""
+              }
+            ]
+          ],
+          "recipe_sha256": "69d1f3600f2966d47552440a486e3c0b05b2e99810f077e10e6f882b8c545f72",
+          "workspace_id": "fcbffec3e9d04a24aab6df392db85a37"
+        },
+        "extended": {
+          "blank_baker": "REJECTED",
+          "completion_receipt_sha256": "4e346672ebbf7f3cbb41e26142fff8c4fcbcec68bc73123f95d237bae67adfb0",
+          "completion_without_baker": "REJECTED",
+          "fresh_candidate_manifest_sha256": "198ff0b321e8c5984bb09ca90eba943977b436c0f6e5b55f0d9ede323c0bbca3",
+          "inherited_passes": [
+            [
+              {
+                "id": "increment",
+                "outcome": "PASS",
+                "output": ""
+              }
+            ],
+            [
+              {
+                "id": "increment",
+                "outcome": "PASS",
+                "output": ""
+              },
+              {
+                "id": "reject-invalid",
+                "outcome": "PASS",
+                "output": ""
+              }
+            ]
+          ],
+          "recipe_sha256": "7b62a41c28c2a47d295b7426894c180407f45a1fe979dc7efc9aa664a618812e",
+          "regression_outcomes": {
+            "increment": "FAIL",
+            "reject-invalid": "FAIL",
+            "reset": "PASS"
+          },
+          "repaired_case_ids": [
+            "increment",
+            "reject-invalid",
+            "reset"
+          ],
+          "stale_baker_acceptance": "REJECTED",
+          "stale_candidate": "REJECTED",
+          "suite_manifest_sha256": "3bf3b44900478cb0d43266d7d8e31839e168b1d5f5f79773c0c25d5a41f1b805",
+          "synthetic_acceptance": {
+            "acceptance": "BAKER_ATTESTED",
+            "accepted_anchors": [
+              "increment",
+              "reject-invalid",
+              "reset"
+            ]
+          },
+          "workspace_id": "6b08810a916146cfb3169497dcdbad3b"
+        }
+      },
+      "fixtures_sha256": {
+        "examples/counter-spec.json": "b880195ef6e010975b68ff33344ad3254e81fa642b94cf8c989829d4b397f05f",
+        "examples/counter.py": "8850bbc09ced7e92c1f4156584571f05c98eb6a34f2e63079ca2fe012a32ebbc",
+        "examples/extension.json": "5dd83435e125bc31504ab78b5f093344a647e6887b883d063538d5d5d6fc1455",
+        "pantry/anchorforge-organ.json": "5f84dab2f609a9c051906ea2cb22f3cf02bff1e6d5f3788e9f71c4b152b17f4f",
+        "tests/check_carrier.py": "cc83d11a61670a31f3c3b8a093a94751f540bc65508a37d1f485c3afee522849",
+        "tests/counter_checks.py": "d0acac71a06964b93aac9c4c07974dea50f2fdd0b3018f47c8e678da1ef01b18",
+        "tests/qualify_release.py": "e591ca85ca7def116484b5544eb2a5462a4846c0d9639c96d09b98e733b47b75",
+        "tests/test_organ.py": "e0e7fc996b1bc930c7cc009f2260d565fa179da5ac664972076fa0209e73a1be"
+      },
+      "installed_kpp_distribution_version": "1.1.0a5",
+      "native_carrier_and_bridge": "PASS",
+      "native_qualification": {
+        "append_only_obligations": true,
+        "artifacts_sha256": {
+          "carrier": "d9f14b62d89e87cf8a1c21c8a254615413c10ea6e566e8593bfd6dddeb3740fe",
+          "extended_recipe": "b9a9edddcfc24cd81ffeb0c61abc6a9904408a5e678be997a77419feaaea6f7a",
+          "extension": "5dd83435e125bc31504ab78b5f093344a647e6887b883d063538d5d5d6fc1455",
+          "oven_contract": "f6367c365ba0a096b779d5baa9d2687c5dcd9cb0b7f155fdd08a2e5e423ba7a4",
+          "python": "8850bbc09ced7e92c1f4156584571f05c98eb6a34f2e63079ca2fe012a32ebbc",
+          "recipe": "171da29423b4b9636e9793dbc948f8e83b1ac43777d138573f06289d80c7b263",
+          "spec": "b880195ef6e010975b68ff33344ad3254e81fa642b94cf8c989829d4b397f05f"
+        },
+        "authority": "NONE",
+        "baker_acceptance": "NOT_GRANTED",
+        "limitations": "Structural/transport checks only. Does not establish application behavior, recipe fitness, KPP satisfaction coverage or approval.",
+        "native_anchor_inspection": "PASS",
+        "native_contract_renderer": "PASS",
+        "native_design_validation": "PASS",
+        "native_python_bridge_roundtrip": "PASS",
+        "native_recipe_validation": "PASS",
+        "organ_version": "0.3.0",
+        "runtime": {
+          "declared_kpp_revision": "4fd2aef58c8f965ff1a96e3037ac196ed0d11c79",
+          "kpp_version": "1.1.0a5",
+          "mantleos_version": "0.1.0a9",
+          "native_module_sha256": {
+            "anchor_design": "a98763f4ed553eac94849fb97c0cf7dfc01baf593c2e111f1131a5cdfa7bd4b2",
+            "anchor_runtime": "fc23145450f5c5d12eab50a362b043ed4bb8c05aeb0c15b0293298a0f0b4323e",
+            "anchors": "891f2c3e02eaaba9cd16ec155dbee3f0ec65ca76774fa22d8ca5df8f727ae429",
+            "kpp_anchor": "ba92e01ad4262cce47622ff9e963b6b2ef6e538a05fc2d72dea1f99a1e3f54d4",
+            "kpp_core": "2c5b4798b7305dd83b8ac87a8c8a54f058cc61dc4112c1024975b7ea30fc5202"
+          },
+          "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+          "python_version": "3.12.3"
+        },
+        "satisfaction_suite_execution": "NOT_RUN",
+        "schema": "anchorforge.qualify/1",
+        "source_runtime_execution": "NOT_RUN",
+        "source_sha256": "8850bbc09ced7e92c1f4156584571f05c98eb6a34f2e63079ca2fe012a32ebbc",
+        "status": "PASS"
+      },
+      "pantry": {
+        "source": {
+          "integrity": "PIN_MATCH",
+          "kind": "anchor-specimen",
+          "pin_sha256": "fa05c4b9e864cf150d84abb37989b09ba6c8b1f9784e624bdf8dc7d969b4cfbb",
+          "profile": "EMIT_TEXT/0.2",
+          "relative_path": "specimens/AnchorForgeOrgan.anchor",
+          "source_access": "EXPLICIT_ONLY"
+        },
+        "status": "ready"
+      },
+      "progressive_web_asset_pins": {
+        "base.js": "c9dba278d8e13afcd15d9f17d84e880ea6239f85834873bf4718898931591fc0",
+        "index.html": "38af2443b52203896e8f79a6e9c3db0dff026dcff3f1bbecd97067a3113f9c19",
+        "style.css": "fbdc31dbdbf7a4e7e5a0d15d1874908d9bb6a0d22694e170e3cc62c084e7683f"
+      },
+      "release_baker_acceptance": "NOT_GRANTED",
+      "schema": "anchorforge.release-check/1",
+      "static_carrier": {
+        "anchor_bytes": 31558,
+        "anchor_sha256": "fa05c4b9e864cf150d84abb37989b09ba6c8b1f9784e624bdf8dc7d969b4cfbb",
+        "python_bytes": 29596,
+        "python_sha256": "625d54c737566003b917853a710abdaf491327be87848b934f83e53faf78f036",
+        "scope": "STATIC_SHIPPED_SPECIMEN_BYTE_MATCH",
+        "status": "PASS"
+      },
+      "status": "PASS",
+      "unit_tests": {
+        "passed": 27,
+        "skipped": 0
+      }
+    }
+  ],
+  "kpp_source": {
+    "archive_sha256": "c30ef426884d045fe16b3b02526126f0ec624031cb8a28d5e742069f7a058d73",
+    "revision": "4fd2aef58c8f965ff1a96e3037ac196ed0d11c79"
+  },
+  "mantleos_source_smoke": {
+    "archive_sha256": "4db95d941bc19d0d476eb6bc7e77adc6db55c5e816b764cf59e1ff527dac1af4",
+    "native_qualification": {
+      "append_only_obligations": true,
+      "artifacts_sha256": {
+        "carrier": "d9f14b62d89e87cf8a1c21c8a254615413c10ea6e566e8593bfd6dddeb3740fe",
+        "extended_recipe": "b9a9edddcfc24cd81ffeb0c61abc6a9904408a5e678be997a77419feaaea6f7a",
+        "extension": "5dd83435e125bc31504ab78b5f093344a647e6887b883d063538d5d5d6fc1455",
+        "oven_contract": "f6367c365ba0a096b779d5baa9d2687c5dcd9cb0b7f155fdd08a2e5e423ba7a4",
+        "python": "8850bbc09ced7e92c1f4156584571f05c98eb6a34f2e63079ca2fe012a32ebbc",
+        "recipe": "171da29423b4b9636e9793dbc948f8e83b1ac43777d138573f06289d80c7b263",
+        "spec": "b880195ef6e010975b68ff33344ad3254e81fa642b94cf8c989829d4b397f05f"
+      },
+      "authority": "NONE",
+      "baker_acceptance": "NOT_GRANTED",
+      "limitations": "Structural/transport checks only. Does not establish application behavior, recipe fitness, KPP satisfaction coverage or approval.",
+      "native_anchor_inspection": "PASS",
+      "native_contract_renderer": "PASS",
+      "native_design_validation": "PASS",
+      "native_python_bridge_roundtrip": "PASS",
+      "native_recipe_validation": "PASS",
+      "organ_version": "0.3.0",
+      "runtime": {
+        "declared_kpp_revision": null,
+        "kpp_version": "1.1.0a5",
+        "mantleos_version": "0.1.0a9",
+        "native_module_sha256": {
+          "anchor_design": "a98763f4ed553eac94849fb97c0cf7dfc01baf593c2e111f1131a5cdfa7bd4b2",
+          "anchor_runtime": "fc23145450f5c5d12eab50a362b043ed4bb8c05aeb0c15b0293298a0f0b4323e",
+          "anchors": "891f2c3e02eaaba9cd16ec155dbee3f0ec65ca76774fa22d8ca5df8f727ae429",
+          "kpp_anchor": "ba92e01ad4262cce47622ff9e963b6b2ef6e538a05fc2d72dea1f99a1e3f54d4",
+          "kpp_core": "2c5b4798b7305dd83b8ac87a8c8a54f058cc61dc4112c1024975b7ea30fc5202"
+        },
+        "platform": "Windows-11-10.0.26200-SP0",
+        "python_version": "3.14.2"
+      },
+      "satisfaction_suite_execution": "NOT_RUN",
+      "schema": "anchorforge.qualify/1",
+      "source_runtime_execution": "NOT_RUN",
+      "source_sha256": "8850bbc09ced7e92c1f4156584571f05c98eb6a34f2e63079ca2fe012a32ebbc",
+      "status": "PASS"
+    },
+    "revision": "15244d10cd67c50147d3329f2eea6fb93f1790fc"
+  },
+  "organ_version": "0.3.0",
+  "pantry_status": "ready",
+  "release_baker_acceptance": "NOT_GRANTED",
+  "schema": "anchorforge.qualify-report/2",
+  "scope": "Qualified authoring, review publication, and exact Python transport at the pinned KPP revision",
+  "scope_limits": [
+    "Counter Baker attestation is synthetic and scoped to its fixture workspace.",
+    "Preview qualification verifies pinned assets and workspace creation.",
+    "Platform and runtime coverage are limited to the recorded runs."
+  ],
+  "status": "PASS"
+}

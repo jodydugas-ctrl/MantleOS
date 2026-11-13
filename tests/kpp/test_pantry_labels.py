@@ -94,7 +94,7 @@ class PantryLabels(unittest.TestCase):
             with self.assertRaises(KPPError): ingredient_catalog(root)
 
     def test_stable_ids_and_department_tags_are_catalog_metadata(self):
-        expected={'engram-limbs','anchor-satisfaction-engine','anchor-tissue','browser-file-io','chase-gate','chroma-png-memory',
+        expected={'anchorforge-organ','engram-limbs','anchor-satisfaction-engine','anchor-tissue','browser-file-io','chase-gate','chroma-png-memory',
                   'engram-continuity','external-project','fidelity-trace','interface-shell',
                   'kernel-relative-cells','local-draft-recovery','mind-body-boundary',
                   'progressive-web-runtime','python-tissue','text-editor',

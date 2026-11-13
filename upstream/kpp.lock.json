@@ -648,7 +648,7 @@
     },
     "src/mantleos/kpp/resources/docs/PANTRY.md": {
       "group": "implementation",
-      "sha256": "47f99e08bc5b62f010cd916ab2dd9bdb8b6a745d0a006490fac17e0c836648f2",
+      "sha256": "e67bdfc4525b75b1a07bb4f0ec08015c597aac4b9c99e6bc3c1a4ae7abb93f46",
       "source": "src/mantleos/kpp/resources/docs/PANTRY.md"
     },
     "src/mantleos/kpp/resources/docs/PORTABLE-REFLEX-BUNDLES.md": {
@@ -1456,6 +1456,11 @@
       "sha256": "b22a500b5e454eaa276fbf8ad83262b2babf671f2c58b07953e8cabd2e418d3a",
       "source": "src/mantleos/kpp/resources/pantry/anchor-tissue.json"
     },
+    "src/mantleos/kpp/resources/pantry/anchorforge-organ.json": {
+      "group": "implementation",
+      "sha256": "ca4096eaa15de952339c6503717e5d889f537fc91fdd22f050839c689babf1ab",
+      "source": "src/mantleos/kpp/resources/pantry/anchorforge-organ.json"
+    },
     "src/mantleos/kpp/resources/pantry/appai-heart.json": {
       "group": "implementation",
       "sha256": "7339b7f4599618b8b30aa9774c357bbf6acf38d494795d2a9b8de9cfda0c6d8b",
@@ -1543,7 +1548,7 @@
     },
     "src/mantleos/kpp/resources/pantry/organs/README.md": {
       "group": "implementation",
-      "sha256": "a4255244f0506992436262dc94d2f70c800e8b3e59a36138b23030b8895b88bc",
+      "sha256": "43b442fb36909864895743abb02176126502b994dcedf7d41245210ce1e87fbb",
       "source": "src/mantleos/kpp/resources/pantry/organs/README.md"
     },
     "src/mantleos/kpp/resources/pantry/organs/heart/README.md": {
@@ -1891,9 +1896,19 @@
       "sha256": "b08ffcc62acaff5ec65a90f8c5c971d08e130b38e4345148cbaabf68c83930be",
       "source": "src/mantleos/kpp/resources/release-evidence/UNIFICATION.json"
     },
+    "src/mantleos/kpp/resources/release-evidence/anchorforge-organ-0.3.0.json": {
+      "group": "implementation",
+      "sha256": "912f77f7fdc9e9f097d74900d4c2e45efe3c34674a5cc6933af4d831faee3f8a",
+      "source": "src/mantleos/kpp/resources/release-evidence/anchorforge-organ-0.3.0.json"
+    },
+    "src/mantleos/kpp/resources/specimens/AnchorForgeOrgan.anchor": {
+      "group": "implementation",
+      "sha256": "fa05c4b9e864cf150d84abb37989b09ba6c8b1f9784e624bdf8dc7d969b4cfbb",
+      "source": "src/mantleos/kpp/resources/specimens/AnchorForgeOrgan.anchor"
+    },
     "src/mantleos/kpp/resources/specimens/README.md": {
       "group": "implementation",
-      "sha256": "aeec0b93d83d56ff70d00d38d1369997c7b0a828d8597d93a42d3cec427fd912",
+      "sha256": "3f90d91171d15ef8c64bd2328ffa04d6f6ed23f91e3b9b539231c9b68f93dd8f",
       "source": "src/mantleos/kpp/resources/specimens/README.md"
     },
     "src/mantleos/kpp/resources/specimens/mantleos/chase-stop.anchor": {
@@ -3023,7 +3038,7 @@
     },
     "tests/kpp/test_anchor.py": {
       "group": "tests",
-      "sha256": "a17d6a806db56fd923dbd6cdda5be15f49b24c239e8c7e7f57b3ab9061e6075e",
+      "sha256": "1bb7cecb35e685426be7e1cd7cc8a4f1cb270800d51f9d79b99800339458c8ac",
       "source": "tests/test_anchor.py"
     },
     "tests/kpp/test_anchor_design.py": {
@@ -3143,7 +3158,7 @@
     },
     "tests/kpp/test_pantry_labels.py": {
       "group": "tests",
-      "sha256": "4a19fd784ba33aad2f98d60e8a2b586db4c7c6420eaf97b6e0adc1ad4554dfe6",
+      "sha256": "cf61c577acbe79bf06e612e2cb4adeab23bf12b8b50ee37733192fd677eca6c3",
       "source": "tests/test_pantry_labels.py"
     },
     "tests/kpp/test_portability.py": {
@@ -3168,7 +3183,7 @@
     },
     "tests/kpp/test_project_export.py": {
       "group": "tests",
-      "sha256": "b1480a62a059ce722433bcde34ed476b5928b91ab9ec77d08f328d91e9debed3",
+      "sha256": "50402a9708ac29fee44e98b043a8e6465b975e91d407677ac0ec62a8d9046176",
       "source": "tests/test_project_export.py"
     },
     "tests/kpp/test_reflex_book_compatibility.py": {
@@ -3327,10 +3342,10 @@
     "upstream/kpp-notices/THIRD-PARTY-NOTICES.md"
   ],
   "schema": "mantle.kpp-upstream/1",
-  "selection_digest": "f9290e09fc303fd4c7ffc5463930cdc0072622851929e4559365038a501f6d55",
-  "shared_source_digest": "0c2af6954df3906a8779405728a7c80b393b2a7e08f42a05a467511b1ada13e2",
+  "selection_digest": "26892e56ef5ab53acbe38fd43da23fb604bd366baef996f3aff8ff64638ec319",
+  "shared_source_digest": "336e44ee07b1046f8ee308530a1c366d11c13c6a9f89378934ffc27e0555f892",
   "upstream": {
-    "base_commit": "a9686c133eb7e69adce083bf23e6d3d362da0944",
+    "base_commit": "66979c9e0a3f050a90ae0b2e6c1dffccb781b247",
     "dirty": false,
     "official_url": "https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol",
     "published_revision_verified": false,
