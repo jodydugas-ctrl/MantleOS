@@ -23,6 +23,20 @@ Eligible manifests may declare `source: {"kind":"repository-files","repository":
 
 The original supplied Anchor specimens retain exact supported literal semantics. Browser ingredients support their declared browser contracts; they do not automatically produce native Qt or Python GUI runtimes. Read labels before source and expand only when resolving a concrete compatibility question.
 
+## Anchor authoring and specimens
+
+Browse the [Pantry ingredient index](../pantry/organs/README.md) and the
+[portable Anchor specimen guide](../specimens/README.md). Select
+[`anchorforge-organ`](../pantry/anchorforge-organ.json) to author and extend
+`anchor.design/1` and `kpp.recipe/4` proposals. Its
+[`EMIT_TEXT/0.2` carrier](../specimens/AnchorForgeOrgan.anchor) contains the
+qualified Python controller. The KPP Python bridge writes the source for review.
+
+```console
+python -m kpp pantry --id anchorforge-organ --level source --check-source
+python -m mantleos kpp pantry --id anchorforge-organ --level source --check-source
+```
+
 ## Historical research
 
 VCW Cube is archive-only research and is excluded from the current-source inventory. VCW Stack remains unresolved. Neither is a Pantry ingredient or selectable manifest. Historical archive files are not current-source evidence.

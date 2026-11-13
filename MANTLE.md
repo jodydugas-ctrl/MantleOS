@@ -44,6 +44,7 @@ Use new output locations outside the specimen and private Body.
 | Discover code and Qt together | `scan discover SOURCE --gui-root UI_SUBTREE --identity REVISION --output NEW_DIRECTORY` | Run independent scans concurrently; require shared source pins and a complete join |
 | Explore source/behavior | `scan --help`, `blueprint --help` | Retain uncertainty; semantic discovery proposals require source evidence and review |
 | KPP construction and workflow | `kpp --help` (through `python -m mantleos`) | Full workflow; recipe/4 binding is optional, recipe/3 retains Neutral binding; no automatic Baker acceptance |
+| Find Anchor authoring tools | `kpp pantry --id anchorforge-organ --level source --check-source` | Find the pinned AnchorForge carrier in the [shared Pantry guide](src/mantleos/kpp/resources/docs/PANTRY.md) |
 | Write Anchor code | `anchor-code language`, `anchor-code inspect FILE` | Complete profile rules; never invent opcodes |
 | Build an app in chat | Pin a KPP recipe, mount a usable first slice, then `kpp build-step --workspace DIR` after every refinement | Keep Canvas mounted and Chase active against unmet Anchors; final packaging follows the first preview |
 | Package a portable app | `anchor-code emit --input APP.html --name App --output App.anchor --permit-effect` | Complete source/targets for transfer; serialization does not certify app behavior |

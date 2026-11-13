@@ -15,6 +15,7 @@ These are browsing categories. Each recipe chooses its organ composition.
 
 - [anchor-satisfaction-engine](../anchor-satisfaction-engine.json)
 - [anchor-tissue](../anchor-tissue.json)
+- [anchorforge-organ](../anchorforge-organ.json)
 - [browser-file-io](../browser-file-io.json)
 - [chase-gate](../chase-gate.json)
 - [chroma-png-memory](../chroma-png-memory.json)

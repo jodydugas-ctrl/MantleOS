@@ -11,10 +11,17 @@ It emits a self-contained Python demonstration of the real mantle.cell/2 schema:
 chroma.rgb/1 has an RGB payload; tape.segment/1 has a sequence and record.
 Convenience CLI names pixel/tape select those kernels; they do not define new ones.
 
-The other three unchanged teaching programs illustrate intention validation,
+Three teaching programs illustrate intention validation,
 an append-only toy journal and a supplied-measurement Chase decision. They do
 not replace the actual Body, Engram or Chase implementations, all of which are
 included in the canonical package. A teaching program is not a second system.
+
+[`AnchorForgeOrgan.anchor`](AnchorForgeOrgan.anchor) carries the AnchorForge 0.3.0
+authoring controller. Find it with `python -m kpp pantry --id anchorforge-organ`.
+Use the bridge below to materialize the controller and then review it before
+running `python anchorforge_organ.py doctor`. See the
+[qualification report](../release-evidence/anchorforge-organ-0.3.0.json) for the
+tested authoring and literal Python transport scope.
 
 Use `python -m kpp anchor inspect FILE`, `anchor run FILE`, or
 `anchor bridge-python FILE --out NEW.py`. The bridge validates and materializes

@@ -1,0 +1,71 @@
+{
+  "schema": "kpp.ingredient/1",
+  "id": "anchorforge-organ",
+  "version": "0.3.0",
+  "function": "KPP-native authoring of Anchor design and recipe proposals, append-only obligation extension, and exact UTF-8 Python source transport through EMIT_TEXT/0.2.",
+  "status": "ready",
+  "preferred_for": [
+    "biosoftware",
+    "bioagent",
+    "appai",
+    "conventional"
+  ],
+  "compatible_tissues": [
+    "anchor",
+    "python",
+    "mixed"
+  ],
+  "tags": [
+    "department:construction",
+    "anchor",
+    "authoring",
+    "design",
+    "bridge",
+    "preservation"
+  ],
+  "minimum_fidelity": 1,
+  "dependencies": [],
+  "capabilities": [
+    "Canonical BlackHole/Neutral/WhiteHole design applications through existing mantleos.anchors",
+    "KPP recipe/4 and anchor.design/1 validation without a second registry",
+    "Append-only requirement extension with earlier obligation preservation",
+    "Python-as-literal transport using the existing KPP EMIT_TEXT/0.2 runtime and bridge",
+    "Native inspection and explicit unverified/Baker-pending review output",
+    "Native KPP full-contract Oven work packet using existing anchor_design renderer",
+    "Native structural and transport qualification with runtime and artifact fingerprints",
+    "Byte-compiled UTF-8/LF source transport with exact readback and native profile inspection"
+  ],
+  "adaptation": "Optional Oven companion. Requires a reviewed spec and the shared KPP/MantleOS runtime. Use host-controlled output paths, native Satisfaction for candidate evidence, and separate Baker acceptance.",
+  "verified_with": "AnchorForge 0.3.0 release tests on installed KPP 1.1.0a5 at 4fd2aef58c8f965ff1a96e3037ac196ed0d11c79. See release-evidence/anchorforge-organ-0.3.0.json for platform and counter Satisfaction evidence.",
+  "provenance": "Revised from AnchorForge 0.2; qualification uses the pinned KPP source revision and local reviewed counter fixtures.",
+  "usage": {
+    "use_when": "An LLM/Oven must quickly turn scoped requirements into canonical KPP Anchor design and optionally package Python source as an actual supported .anchor carrier.",
+    "inputs": [
+      "Reviewed authoring spec or existing recipe plus new obligations",
+      "Optional reviewed UTF-8 Python source",
+      "Existing mantleos shared runtime"
+    ],
+    "outputs": [
+      "Proposed kpp.recipe/4 with anchor.design/1",
+      "Review and preservation metadata",
+      "Profile-scoped .anchor output",
+      "Optional syntax-checked Python bridge output"
+    ],
+    "limits": "Readiness covers the stated authoring and Python transport contract at the tested KPP revision. Recipe fitness, user application behavior, and host authority require their own evidence and review. UTF-8/LF Python only."
+  },
+  "specimen": {
+    "path": "specimens/AnchorForgeOrgan.anchor",
+    "profile": "EMIT_TEXT/0.2",
+    "emits": "python",
+    "sha256": "fa05c4b9e864cf150d84abb37989b09ba6c8b1f9784e624bdf8dc7d969b4cfbb"
+  },
+  "source": {
+    "kind": "repository-files",
+    "repository": "jodydugas-ctrl/Kitchen-Party-Protocol",
+    "paths": [
+      "specimens/AnchorForgeOrgan.anchor",
+      "tests/test_anchor.py",
+      "release-evidence/anchorforge-organ-0.3.0.json"
+    ]
+  }
+}

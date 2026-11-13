@@ -33,6 +33,16 @@ class ProjectExportTests(unittest.TestCase):
         for organ in ('heart', 'memory'):
             self.assertIn('../../sleep-memory-consolidation.json', pages[base + organ + '/README.md'])
         self.assertIn('../text-editor.json', pages[base + 'README.md'])
+        self.assertIn('../anchorforge-organ.json', pages[base + 'README.md'])
+
+    def test_pantry_guide_links_to_anchorforge_in_both_distributions(self):
+        files = load(ROOT / 'tools/export_kpp.py', 'project_export_anchorforge').source_map(ROOT)
+        guide = 'docs/PANTRY.md'
+        self.assertEqual(files[guide], files['src/mantleos/kpp/resources/' + guide])
+        for target in ('pantry/organs/README.md', 'pantry/anchorforge-organ.json',
+                       'specimens/README.md', 'specimens/AnchorForgeOrgan.anchor'):
+            self.assertIn(f'](../{target})', files[guide].decode())
+            self.assertEqual(files[target], files['src/mantleos/kpp/resources/' + target])
 
     def test_install_metadata_keeps_runtime_dependency_free_and_licenses_scoped(self):
         files = load(ROOT / 'tools/export_kpp.py', 'project_export_metadata').source_map(ROOT)

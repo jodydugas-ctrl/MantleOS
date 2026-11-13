@@ -280,6 +280,8 @@ Current release, installed-wheel checks and beginner workflow: [release handoff]
 
 Compact Anchor responsibility contracts and the Journal carrier are described in [the design guide](docs/ANCHOR-DESIGN.md) and [qualification report](docs/ANCHOR-DESIGN-VERIFICATION.md).
 
+For Anchor authoring tools, browse the [shared KPP Pantry guide](src/mantleos/kpp/resources/docs/PANTRY.md#anchor-authoring-and-specimens) or look up `anchorforge-organ` with `python -m mantleos kpp pantry --id anchorforge-organ`.
+
 [Private Skin AppAI pilot](docs/PRIVATE-SKIN.md) adds encrypted continuity and a private MIND bridge. Deployment qualification remains explicit.
 
 [Cumulative Anchor satisfaction](docs/ANCHOR-SATISFACTION.md) adds opt-in single/batch construction with current-candidate regression evidence and separate Baker acceptance.
