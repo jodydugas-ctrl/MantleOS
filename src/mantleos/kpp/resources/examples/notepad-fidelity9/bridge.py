@@ -32,7 +32,8 @@ def main():
             result = machine.send(value['action'], value['payload'])
         except (ValueError, UnicodeError) as error:
             result = {'error': str(error)}
-        print(json.dumps(result, ensure_ascii=False), flush=True)
+        # Escaped JSON preserves Unicode through legacy Windows stdout encodings.
+        print(json.dumps(result, ensure_ascii=True), flush=True)
 
 
 if __name__ == '__main__':

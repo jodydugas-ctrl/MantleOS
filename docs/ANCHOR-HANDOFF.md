@@ -78,7 +78,8 @@ must match those cases or return UNDETERMINED where required semantics are absen
 
 A host can instead call `python notepad/bridge.py` as a persistent JSONL child
 process. Each input is exactly `{"action":...,"payload":...}`; each output is
-one shell response. The process owns one in-memory document and returns simulated
+one shell response, with non-ASCII characters JSON-escaped so legacy Windows
+stdout encodings preserve every Unicode code point. The process owns one in-memory document and returns simulated
 effects only. `node notepad/bridge-client.js` demonstrates this from JavaScript,
 using `PYTHON` or `python3` and passing stdin/stdout unchanged. Other languages can
 use the same protocol. This is verified Python-backed execution, not an independent

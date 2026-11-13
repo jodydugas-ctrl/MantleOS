@@ -85,14 +85,15 @@ class HandoffTests(unittest.TestCase):
                 {'action':'insert','payload':{'offset':0,'text':'🐦é'}},
                 {'action':'select-all','payload':None}, {'action':'undo','payload':None},
                 {'action':'insert','payload':{'offset':True,'text':'bad'}}])+'\n'
-            python = subprocess.run([sys.executable, str(imported/'bridge.py')], input=commands, capture_output=True, text=True, env={k:v for k,v in os.environ.items() if k!='PYTHONPATH'})
+            python = subprocess.run([sys.executable, str(imported/'bridge.py')], input=commands, capture_output=True, text=True, env={**{k:v for k,v in os.environ.items() if k!='PYTHONPATH'}, 'PYTHONIOENCODING':'cp1252'})
             self.assertEqual(python.returncode, 0, python.stderr)
+            self.assertTrue(python.stdout.isascii())
             answers = [json.loads(l) for l in python.stdout.splitlines()]
             self.assertEqual(answers[1]['result']['selection'], [0,2])
             self.assertEqual(answers[2]['state']['text'], '')
             self.assertEqual(answers[3]['outcome'], 'REJECTED_BY_GATE')
             if shutil.which('node'):
-                js = subprocess.run(['node', str(imported/'bridge-client.js')], input=commands, capture_output=True, text=True, env={**os.environ, 'PYTHON':sys.executable})
+                js = subprocess.run(['node', str(imported/'bridge-client.js')], input=commands, capture_output=True, text=True, env={**os.environ, 'PYTHON':sys.executable, 'PYTHONIOENCODING':'cp1252'})
                 self.assertEqual(js.returncode, 0, js.stderr)
                 self.assertEqual(js.stdout, python.stdout)
 
