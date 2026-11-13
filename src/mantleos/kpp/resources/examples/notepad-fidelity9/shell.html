@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anchor Notepad — Logical Shell</title>
+  <link rel="stylesheet" href="/shell.css" />
+  <script src="/shell.js" defer></script>
+</head>
+<body>
+  <div class="application">
+    <header class="masthead">
+      <div class="brand"><span class="glyph">◧</span><div><strong>Anchor Notepad</strong><span class="subhead">Logical execution preview · 9 Anchors / 9 Gate families</span></div></div>
+      <div class="pill">VIRTUAL HOST · NO MODEL CALLS</div>
+    </header>
+    <div class="menu" role="toolbar" aria-label="File and edit actions">
+      <button id="new" type="button">New</button>
+      <button id="open" type="button">Open</button>
+      <button id="save" type="button">Save</button>
+      <button id="saveas" type="button">Save As</button>
+      <button id="download" type="button">Download text</button>
+      <span class="sep"></span>
+      <button id="undo" type="button">↶ Undo</button>
+      <button id="redo" type="button">↷ Redo</button>
+      <button id="copy" type="button">Copy</button>
+      <button id="cut" type="button">Cut</button>
+      <button id="paste" type="button">Paste</button>
+      <button id="selectall" type="button">Select all</button>
+    </div>
+    <div class="workarea">
+      <section class="editor-pane">
+        <div class="editor-heading"><span id="filename">Untitled · virtual</span><span id="dirty" aria-label="Saved status">Saved</span></div>
+        <label for="editor" class="sr-only">Document text</label>
+        <textarea id="editor" spellcheck="false" aria-label="Notepad document text"></textarea>
+        <div class="find-bar">
+          <label>Find <input id="query" placeholder="Text to find" /></label>
+          <label>Replace <input id="replacement" placeholder="Replacement text" /></label>
+          <label class="check"><input id="matchcase" type="checkbox" /> Match case</label>
+          <button id="find" type="button">Find next</button>
+          <button id="replace" type="button">Replace selection</button>
+          <button id="replaceall" type="button">Replace all</button>
+        </div>
+        <footer class="statusbar"><span id="docstatus">Ready</span><span id="counts">Rev 0 · 0 undo / 0 redo</span></footer>
+      </section>
+      <aside class="inspector">
+        <div class="panel-heading"><strong>Anchor reasoning trace</strong><span>Independent reference interpreter</span></div>
+        <p class="hint">The shell projects the results of in-memory Anchor/Gate logic. It does not use the real Python Notepad and does not call an LLM.</p>
+        <div class="trace" id="trace" aria-live="polite">Choose an editor action to see the applied rule and Gates.</div>
+        <div class="inspector-actions"><button id="packet" type="button">Copy LLM stimulus packet</button><button id="reset" type="button">Reset demo</button></div>
+        <div class="miniheader">Last model-ready packet</div>
+        <textarea id="packetview" readonly aria-label="LLM interpretation prompt" placeholder="After an action, click Copy LLM stimulus packet."></textarea>
+        <p class="hint small">The packet contains the Anchor rules, known state, stimulus, and Gate references—but no reference implementation or answer. Give it to an independent LLM to test mental execution.</p>
+      </aside>
+    </div>
+    <input type="file" id="filepicker" accept=".txt,text/plain" hidden />
+  </div>
+</body>
+</html>

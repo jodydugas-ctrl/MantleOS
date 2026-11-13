@@ -1,0 +1,770 @@
+{
+  "schema": "notepad.logical-traces/1",
+  "purpose": "Source-independent expected examples authored from the rule definitions, then compared with the Python implementation; not an independent LLM benchmark.",
+  "cases": [
+    {
+      "id": "read-clean",
+      "initial_text": "hello",
+      "steps": [
+        {
+          "action": "read",
+          "payload": null,
+          "outcome": "snapshot"
+        }
+      ],
+      "expected_final": {
+        "text": "hello",
+        "revision": 0,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "edit-changes",
+      "initial_text": "hello",
+      "steps": [
+        {
+          "action": "edit",
+          "payload": "hello world",
+          "outcome": "snapshot"
+        }
+      ],
+      "expected_final": {
+        "text": "hello world",
+        "revision": 1,
+        "dirty": true,
+        "undo_count": 1,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "edit-noop",
+      "initial_text": "hello",
+      "steps": [
+        {
+          "action": "edit",
+          "payload": "hello",
+          "outcome": "snapshot"
+        }
+      ],
+      "expected_final": {
+        "text": "hello",
+        "revision": 0,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "insert-unicode",
+      "initial_text": "a📝b",
+      "steps": [
+        {
+          "action": "insert",
+          "payload": {
+            "offset": 2,
+            "text": "✅"
+          },
+          "outcome": "snapshot"
+        }
+      ],
+      "expected_final": {
+        "text": "a📝✅b",
+        "revision": 1,
+        "dirty": true,
+        "undo_count": 1,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "delete-range",
+      "initial_text": "abcde",
+      "steps": [
+        {
+          "action": "delete",
+          "payload": {
+            "start": 1,
+            "end": 4
+          },
+          "outcome": "snapshot"
+        }
+      ],
+      "expected_final": {
+        "text": "ae",
+        "revision": 1,
+        "dirty": true,
+        "undo_count": 1,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "undo-preserves-baseline",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "edit",
+          "payload": "xyz",
+          "outcome": "snapshot"
+        },
+        {
+          "action": "undo",
+          "payload": null,
+          "outcome": "snapshot"
+        }
+      ],
+      "expected_final": {
+        "text": "abc",
+        "revision": 2,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 1
+      }
+    },
+    {
+      "id": "redo-restores-change",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "edit",
+          "payload": "xyz",
+          "outcome": "snapshot"
+        },
+        {
+          "action": "undo",
+          "payload": null,
+          "outcome": "snapshot"
+        },
+        {
+          "action": "redo",
+          "payload": null,
+          "outcome": "snapshot"
+        }
+      ],
+      "expected_final": {
+        "text": "xyz",
+        "revision": 3,
+        "dirty": true,
+        "undo_count": 1,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "undo-empty-denied",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "undo",
+          "payload": null,
+          "outcome": "rejected"
+        }
+      ],
+      "expected_final": {
+        "text": "abc",
+        "revision": 0,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "new-confirmed",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "new",
+          "payload": {
+            "discard": false
+          },
+          "outcome": "snapshot"
+        }
+      ],
+      "expected_final": {
+        "text": "",
+        "revision": 1,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "new-dirty-denied",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "edit",
+          "payload": "x",
+          "outcome": "snapshot"
+        },
+        {
+          "action": "new",
+          "payload": {
+            "discard": false
+          },
+          "outcome": "rejected"
+        }
+      ],
+      "expected_final": {
+        "text": "x",
+        "revision": 1,
+        "dirty": true,
+        "undo_count": 1,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "new-dirty-confirmed",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "edit",
+          "payload": "x",
+          "outcome": "snapshot"
+        },
+        {
+          "action": "new",
+          "payload": {
+            "discard": true
+          },
+          "outcome": "snapshot"
+        }
+      ],
+      "expected_final": {
+        "text": "",
+        "revision": 2,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "open-utf8",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "open",
+          "payload": {
+            "path": "@a",
+            "discard": false
+          },
+          "outcome": "snapshot"
+        }
+      ],
+      "expected_final": {
+        "text": "é📝",
+        "revision": 1,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0,
+        "path": "@a"
+      },
+      "files": {
+        "a": {
+          "text": "é📝"
+        }
+      }
+    },
+    {
+      "id": "open-when-dirty-denied",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "edit",
+          "payload": "z",
+          "outcome": "snapshot"
+        },
+        {
+          "action": "open",
+          "payload": {
+            "path": "@a",
+            "discard": false
+          },
+          "outcome": "rejected"
+        }
+      ],
+      "expected_final": {
+        "text": "z",
+        "revision": 1,
+        "dirty": true,
+        "undo_count": 1,
+        "redo_count": 0
+      },
+      "files": {
+        "a": {
+          "text": "file"
+        }
+      }
+    },
+    {
+      "id": "open-invalid-utf8-denied",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "open",
+          "payload": {
+            "path": "@a",
+            "discard": false
+          },
+          "outcome": "rejected"
+        }
+      ],
+      "expected_final": {
+        "text": "abc",
+        "revision": 0,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      },
+      "files": {
+        "a": {
+          "hex": "fffe"
+        }
+      }
+    },
+    {
+      "id": "save-needs-path",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "save",
+          "payload": null,
+          "outcome": "rejected"
+        }
+      ],
+      "expected_final": {
+        "text": "abc",
+        "revision": 0,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "save-clears-dirty",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "open",
+          "payload": {
+            "path": "@a",
+            "discard": false
+          },
+          "outcome": "snapshot"
+        },
+        {
+          "action": "edit",
+          "payload": "new file",
+          "outcome": "snapshot"
+        },
+        {
+          "action": "save",
+          "payload": null,
+          "outcome": "snapshot"
+        }
+      ],
+      "expected_final": {
+        "text": "new file",
+        "revision": 2,
+        "dirty": false,
+        "undo_count": 1,
+        "redo_count": 0,
+        "path": "@a"
+      },
+      "files": {
+        "a": {
+          "text": "old"
+        }
+      },
+      "expected_files": {
+        "a": "new file"
+      }
+    },
+    {
+      "id": "save-as-new-file",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "edit",
+          "payload": "abcdef",
+          "outcome": "snapshot"
+        },
+        {
+          "action": "save-as",
+          "payload": {
+            "path": "@a",
+            "overwrite": false
+          },
+          "outcome": "snapshot"
+        }
+      ],
+      "expected_final": {
+        "text": "abcdef",
+        "revision": 1,
+        "dirty": false,
+        "undo_count": 1,
+        "redo_count": 0,
+        "path": "@a"
+      },
+      "expected_files": {
+        "a": "abcdef"
+      }
+    },
+    {
+      "id": "save-as-existing-denied",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "save-as",
+          "payload": {
+            "path": "@a",
+            "overwrite": false
+          },
+          "outcome": "rejected"
+        }
+      ],
+      "expected_final": {
+        "text": "abc",
+        "revision": 0,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      },
+      "files": {
+        "a": {
+          "text": "existing"
+        }
+      },
+      "expected_files": {
+        "a": "existing"
+      }
+    },
+    {
+      "id": "select-all-unicode",
+      "initial_text": "x📝y",
+      "steps": [
+        {
+          "action": "select-all",
+          "payload": null,
+          "outcome": "selection",
+          "selection": [
+            0,
+            3
+          ]
+        }
+      ],
+      "expected_final": {
+        "text": "x📝y",
+        "revision": 0,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "copy-nonmutating",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "copy",
+          "payload": {
+            "start": 1,
+            "end": 3
+          },
+          "outcome": "snapshot"
+        }
+      ],
+      "expected_final": {
+        "text": "abc",
+        "revision": 0,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0,
+        "clipboard": "bc"
+      }
+    },
+    {
+      "id": "cut-undoable",
+      "initial_text": "abcde",
+      "steps": [
+        {
+          "action": "cut",
+          "payload": {
+            "start": 1,
+            "end": 4
+          },
+          "outcome": "snapshot"
+        }
+      ],
+      "expected_final": {
+        "text": "ae",
+        "revision": 1,
+        "dirty": true,
+        "undo_count": 1,
+        "redo_count": 0,
+        "clipboard": "bcd"
+      }
+    },
+    {
+      "id": "paste-undoable",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "paste",
+          "payload": {
+            "start": 1,
+            "end": 2
+          },
+          "outcome": "snapshot"
+        }
+      ],
+      "expected_final": {
+        "text": "aXc",
+        "revision": 1,
+        "dirty": true,
+        "undo_count": 1,
+        "redo_count": 0,
+        "clipboard": "X"
+      },
+      "clipboard": "X"
+    },
+    {
+      "id": "clipboard-failure-no-document-edit",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "cut",
+          "payload": {
+            "start": 1,
+            "end": 2
+          },
+          "outcome": "rejected"
+        }
+      ],
+      "expected_final": {
+        "text": "abc",
+        "revision": 0,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      },
+      "fail_clipboard_write": true
+    },
+    {
+      "id": "paste-failure-no-document-edit",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "paste",
+          "payload": {
+            "start": 0,
+            "end": 3
+          },
+          "outcome": "rejected"
+        }
+      ],
+      "expected_final": {
+        "text": "abc",
+        "revision": 0,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      },
+      "fail_clipboard_read": true
+    },
+    {
+      "id": "find-forward",
+      "initial_text": "Hello hello",
+      "steps": [
+        {
+          "action": "find",
+          "payload": {
+            "query": "HELLO",
+            "start": 1,
+            "match_case": false,
+            "wrap": true,
+            "backwards": false
+          },
+          "outcome": "match",
+          "match": [
+            6,
+            11
+          ]
+        }
+      ],
+      "expected_final": {
+        "text": "Hello hello",
+        "revision": 0,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "find-not-found",
+      "initial_text": "Hello",
+      "steps": [
+        {
+          "action": "find",
+          "payload": {
+            "query": "missing",
+            "start": 0,
+            "match_case": false,
+            "wrap": true,
+            "backwards": false
+          },
+          "outcome": "none"
+        }
+      ],
+      "expected_final": {
+        "text": "Hello",
+        "revision": 0,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "find-backwards",
+      "initial_text": "abc abc",
+      "steps": [
+        {
+          "action": "find",
+          "payload": {
+            "query": "abc",
+            "start": 7,
+            "match_case": true,
+            "wrap": false,
+            "backwards": true
+          },
+          "outcome": "match",
+          "match": [
+            4,
+            7
+          ]
+        }
+      ],
+      "expected_final": {
+        "text": "abc abc",
+        "revision": 0,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "replace-one",
+      "initial_text": "banana",
+      "steps": [
+        {
+          "action": "replace-one",
+          "payload": {
+            "query": "ana",
+            "replacement": "X",
+            "start": 1,
+            "end": 4,
+            "match_case": true
+          },
+          "outcome": "replace",
+          "count": 1
+        }
+      ],
+      "expected_final": {
+        "text": "bXna",
+        "revision": 1,
+        "dirty": true,
+        "undo_count": 1,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "replace-all-single-revision",
+      "initial_text": "foo foo",
+      "steps": [
+        {
+          "action": "replace-all",
+          "payload": {
+            "query": "foo",
+            "replacement": "bar",
+            "match_case": true
+          },
+          "outcome": "replace",
+          "count": 2
+        }
+      ],
+      "expected_final": {
+        "text": "bar bar",
+        "revision": 1,
+        "dirty": true,
+        "undo_count": 1,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "replace-all-noop",
+      "initial_text": "foo foo",
+      "steps": [
+        {
+          "action": "replace-all",
+          "payload": {
+            "query": "foo",
+            "replacement": "foo",
+            "match_case": true
+          },
+          "outcome": "replace",
+          "count": 2
+        }
+      ],
+      "expected_final": {
+        "text": "foo foo",
+        "revision": 0,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "replace-one-no-match-denied",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "replace-one",
+          "payload": {
+            "query": "z",
+            "replacement": "X",
+            "start": 0,
+            "end": 1,
+            "match_case": true
+          },
+          "outcome": "rejected"
+        }
+      ],
+      "expected_final": {
+        "text": "abc",
+        "revision": 0,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      }
+    },
+    {
+      "id": "unknown-rejected",
+      "initial_text": "abc",
+      "steps": [
+        {
+          "action": "eval",
+          "payload": {
+            "code": "anything"
+          },
+          "outcome": "rejected"
+        }
+      ],
+      "expected_final": {
+        "text": "abc",
+        "revision": 0,
+        "dirty": false,
+        "undo_count": 0,
+        "redo_count": 0
+      }
+    }
+  ]
+}

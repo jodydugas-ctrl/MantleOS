@@ -1,0 +1,14 @@
+{
+  "schema": "anchor.handoff-qualification/1",
+  "date": "2026-11-13",
+  "environment": "Linux, Python 3.12; local Xvfb; Chromium; Node JavaScript adapter",
+  "transport_tests": {"passed": 8, "failed": 0},
+  "shared_scorer_tests": {"passed": 9, "failed": 0},
+  "notepad_blueprint_verification": {"tests": 254, "skipped": 0, "failed": 0},
+  "reference_control": {"trials": 41, "matches": 41, "exact_field_comparisons_excluding_reason_text": 533, "matched_fields": 533},
+  "browser": "PASS: edit, replace-all, undo, redo, prompt packet, virtual save-as, browser download. Original smoke script uses a Playwright-to-local-HTTP transport adapter.",
+  "cold_receiving": "PASS: standalone receiver under Python -I -S; exact KPP EMIT_TEXT Python bridge; extracted Python/Node persistent command sessions agree.",
+  "core_suite_before_final_added_conformance_test": {"tests": 589, "skipped": 6, "failed": 0},
+  "limits": ["No external model submission supplied or scored", "No independent JavaScript semantic engine: adapter calls Python", "Windows and other Python versions unrun locally", "Six unrelated core-suite skips remain unverified", "No Baker acceptance granted"],
+  "source_adjustment": "One Tk caret assertion made version-portable; original test retained. Imported application implementation unchanged."
+}

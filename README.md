@@ -299,3 +299,5 @@ separates actual bridge/browser observations, synthetic tests and open acceptanc
 [The Community Chase update](docs/studio-community-update.md) records durable
 workflow drafts, shared spending continuity, exact committed release and measured
 startup work. The full n8n Community GUI/runtime chase remains BUILDING.
+
+[Complete portable Notepad handoff](src/mantleos/kpp/resources/specimens/Notepad-Fidelity9-HANDOFF.md) carries the Fidelity 9 source, contracts, tests and a receiver in one file. See [receiving and authoring instructions](docs/ANCHOR-HANDOFF.md).

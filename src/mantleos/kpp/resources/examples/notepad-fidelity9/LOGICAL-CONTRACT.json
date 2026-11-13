@@ -1,0 +1,738 @@
+{
+  "schema": "notepad.logical-contract/1",
+  "status": "PROPOSED_LOCAL_PREDICTIVE_CONTRACT",
+  "relation_to_kpp": "Supplementary explicit interpretation contract; not an adopted KPP schema or native executable Anchor program.",
+  "project": "Anchor Notepad",
+  "anchor_round": 9,
+  "anchor_count": 9,
+  "original_chase_target": "A desktop plain-text editor supporting new/open/edit/save/save-as, undo/redo, cut/copy/paste/select-all, find/replace, keyboard shortcuts, and unsaved-change protection.",
+  "anchor_definition_types": {
+    "BlackHole": "Receive the declared input.",
+    "Neutral": "Apply the declared relationship.",
+    "WhiteHole": "Enforce the declared boundary."
+  },
+  "anchors": [
+    {
+      "id": "BH-EDITOR-INPUT",
+      "type": "BlackHole",
+      "responsibility": "Receive editor, file, clipboard, selection, search and replacement intents verbatim; no authorization, state change or host effect from capture."
+    },
+    {
+      "id": "N-DOCUMENT",
+      "type": "Neutral",
+      "responsibility": "Sole owner of document text, clean baseline, revision and derived dirty status; expose trusted clean-load and save-confirmation hooks invoked only after guarded file actions."
+    },
+    {
+      "id": "WH-COMMAND-GUARD",
+      "type": "WhiteHole",
+      "responsibility": "Authorize exact, typed editing, history, file, clipboard and document-bound search/replace commands; reject unbound capabilities, invalid ranges and mismatches; route permitted state changes only to their Neutral owners."
+    },
+    {
+      "id": "N-EDIT-HISTORY",
+      "type": "Neutral",
+      "responsibility": "Sole owner of bounded, document-bound undo/redo transitions and its expected revision; use N-DOCUMENT to apply reversals without owning text."
+    },
+    {
+      "id": "N-EDITOR-SURFACE",
+      "type": "Neutral",
+      "responsibility": "Project Tk document/history/path snapshots; route menu, keyboard, file, clipboard and Find/Replace interactions through BlackHole/WhiteHole; hold only transient visual selection and find dialog input, not document text."
+    },
+    {
+      "id": "N-FILE-SESSION",
+      "type": "Neutral",
+      "responsibility": "Sole owner of active file path and last confirmed on-disk content digest. Read UTF-8, atomically write UTF-8, detect external conflicts, and coordinate fresh document/history baselines only upon authorized file operations."
+    },
+    {
+      "id": "N-CLIPBOARD-SELECTION",
+      "type": "Neutral",
+      "responsibility": "Interpret document-codepoint selection ranges and own the explicit, document/history-bound clipboard capability using injected host callbacks. Return selected text / host acknowledgement to WH, without owning document text, undo history, or a parallel clipboard buffer."
+    },
+    {
+      "id": "N-SEARCH-REPLACE",
+      "type": "Neutral",
+      "responsibility": "Document/history-bound literal search and replace semantics, Unicode codepoint match ranges, case/wrap/direction options, and pure replacement calculations. Own no document text, search result cache or undo history."
+    },
+    {
+      "id": "WH-BLUEPRINT-GATE",
+      "type": "WhiteHole",
+      "responsibility": "Build-time, fail-closed conformance gate for the complete nine-Anchor blueprint: check distinct Anchor identities and roles, source mapping, Neutral state owners, effect boundaries, dependency-ready mandatory obligations, preserved test identities and command allowlist; never dispatch runtime user intents or claim formal KPP satisfaction."
+    }
+  ],
+  "semantics": {
+    "state": "(document.text, document.clean_baseline, document.revision, history.undo_stack, history.redo_stack, history.expected_revision, file_session.active_path, file_session.expected_digest, transient_selection, host_environment)",
+    "dirty": "document.text != document.clean_baseline",
+    "index_units": "Unicode codepoints, half-open [start,end) ranges. bool is not an integer.",
+    "mutation": "Text revision increments once iff text value changes. An effective edit pushes one (before,after) undo entry, clears redo and synchronizes expected_revision; no-op edit leaves undo/redo unchanged.",
+    "history_limit": "Configured positive integer (default 100); discard oldest undo transitions beyond limit. The initial history is empty.",
+    "input_ingress": "BH-EDITOR-INPUT captures action and payload without authorization, execution, or state changes.",
+    "runtime_guard": "WH-COMMAND-GUARD rejects unsupported/invalid actions and authorizes exactly one path. Neutral owners perform approved computation/transitions.",
+    "host_effects": "External file and clipboard responses are input observations with explicit success/failure. No logical interpreter may assume a host effect succeeded or actually perform one.",
+    "unknowns": "Missing host outcome, unsupported Unicode regex equivalence, unspecified OS semantics, or incomplete initial state => UNDETERMINED rather than success.",
+    "postcondition": "After a successful transition, render document snapshot from N-DOCUMENT and any action-specific result. A rejected command leaves document/history untouched, but an external effect might already have occurred."
+  },
+  "state_ownership": [
+    {
+      "id": "document.text",
+      "owner": "N-DOCUMENT"
+    },
+    {
+      "id": "document.clean_baseline",
+      "owner": "N-DOCUMENT"
+    },
+    {
+      "id": "document.revision",
+      "owner": "N-DOCUMENT"
+    },
+    {
+      "id": "history.undo_stack",
+      "owner": "N-EDIT-HISTORY"
+    },
+    {
+      "id": "history.redo_stack",
+      "owner": "N-EDIT-HISTORY"
+    },
+    {
+      "id": "history.expected_revision",
+      "owner": "N-EDIT-HISTORY"
+    },
+    {
+      "id": "file_session.active_path",
+      "owner": "N-FILE-SESSION"
+    },
+    {
+      "id": "file_session.confirmed_disk_digest",
+      "owner": "N-FILE-SESSION"
+    },
+    {
+      "id": "clipboard.document_history_binding",
+      "owner": "N-CLIPBOARD-SELECTION"
+    },
+    {
+      "id": "clipboard.host_callback_capability",
+      "owner": "N-CLIPBOARD-SELECTION"
+    },
+    {
+      "id": "editor.transient_tk_selection",
+      "owner": "N-EDITOR-SURFACE"
+    },
+    {
+      "id": "search.document_history_binding",
+      "owner": "N-SEARCH-REPLACE"
+    },
+    {
+      "id": "editor.transient_find_dialog_inputs",
+      "owner": "N-EDITOR-SURFACE"
+    }
+  ],
+  "runtime_effects": [
+    {
+      "id": "open-file-read",
+      "requester": "N-EDITOR-SURFACE",
+      "guard": "WH-COMMAND-GUARD",
+      "executor": "N-FILE-SESSION",
+      "description": "Read a user-selected absolute UTF-8 file after dirty-discard authorization.",
+      "confirmation": "Full read and UTF-8 decode succeed before any document, history or association change."
+    },
+    {
+      "id": "save-file-write",
+      "requester": "N-EDITOR-SURFACE",
+      "guard": "WH-COMMAND-GUARD",
+      "executor": "N-FILE-SESSION",
+      "description": "Write a selected, authorized destination via a sibling temporary file and os.replace; require explicit overwrite grant for unrelated existing targets.",
+      "confirmation": "Successful host replacement and unchanged in-memory document revision precede clean-baseline acknowledgement."
+    },
+    {
+      "id": "clipboard-read",
+      "requester": "N-EDITOR-SURFACE",
+      "guard": "WH-COMMAND-GUARD",
+      "executor": "N-CLIPBOARD-SELECTION",
+      "description": "Read plain text via the explicitly injected Tk host adapter only for a valid guarded Paste selection. Never read on malformed or unbound requests.",
+      "confirmation": "Host callback returns actual plain text, and document/history remain current, before WH replaces text once and records undo."
+    },
+    {
+      "id": "clipboard-write",
+      "requester": "N-EDITOR-SURFACE",
+      "guard": "WH-COMMAND-GUARD",
+      "executor": "N-CLIPBOARD-SELECTION",
+      "description": "Write exactly the selected Unicode text via the injected Tk host adapter only for a valid guarded Copy/Cut request.",
+      "confirmation": "Host callback returns without error, and document/history remain current, before WH deletes Cut selection and records undo. Copy never changes document/history."
+    }
+  ],
+  "gate_conditions": [
+    {
+      "gate_id": "G-CMD-01",
+      "action": "edit",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ],
+      "input_shape": {
+        "type": "string"
+      },
+      "preconditions": [
+        "captured intent has exact action edit",
+        "payload is str (not other type)",
+        "bound history, if provided, matches current document revision"
+      ],
+      "transition": "Set document.text=payload; if different, revision+=1, record (old,new) on undo stack, truncate to history limit, clear redo; otherwise no state change.",
+      "result": "DocumentSnapshot",
+      "external_effects": [],
+      "rejection": "CommandRejected; document and history state preserved; no successful transition recorded",
+      "notes": [],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-CMD-02",
+      "action": "insert",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ],
+      "input_shape": {
+        "type": "object",
+        "exact_fields": {
+          "offset": "nonnegative integer, not bool",
+          "text": "string"
+        }
+      },
+      "preconditions": [
+        "0 <= offset <= len(text) measured in Unicode code points",
+        "history binding current"
+      ],
+      "transition": "new=text[:offset]+payload.text+text[offset:]; commit exactly once if changed; record history only on changed text.",
+      "result": "DocumentSnapshot",
+      "external_effects": [],
+      "rejection": "CommandRejected; document and history state preserved; no successful transition recorded",
+      "notes": [],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-CMD-03",
+      "action": "delete",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ],
+      "input_shape": {
+        "type": "object",
+        "exact_fields": {
+          "start": "nonnegative integer, not bool",
+          "end": "nonnegative integer, not bool"
+        }
+      },
+      "preconditions": [
+        "0 <= start <= end <= len(text)",
+        "history binding current"
+      ],
+      "transition": "new=text[:start]+text[end:]; commit exactly once if changed; record history only on changed text.",
+      "result": "DocumentSnapshot",
+      "external_effects": [],
+      "rejection": "CommandRejected; document and history state preserved; no successful transition recorded",
+      "notes": [],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-CMD-04",
+      "action": "read",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-DOCUMENT"
+      ],
+      "input_shape": {
+        "type": "null"
+      },
+      "preconditions": [
+        "payload is null"
+      ],
+      "transition": "No state changes.",
+      "result": "DocumentSnapshot",
+      "external_effects": [],
+      "rejection": "CommandRejected; document and history state preserved; no successful transition recorded",
+      "notes": [],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-CMD-05",
+      "action": "undo",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-EDIT-HISTORY",
+        "N-DOCUMENT"
+      ],
+      "input_shape": {
+        "type": "null"
+      },
+      "preconditions": [
+        "history exists and matches document",
+        "undo stack not empty",
+        "current text equals undo top resulting text"
+      ],
+      "transition": "Set text to undo top previous text, increment document revision once, pop undo to redo, update expected_revision; preserve clean baseline.",
+      "result": "DocumentSnapshot",
+      "external_effects": [],
+      "rejection": "CommandRejected; document and history state preserved; no successful transition recorded",
+      "notes": [],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-CMD-06",
+      "action": "redo",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-EDIT-HISTORY",
+        "N-DOCUMENT"
+      ],
+      "input_shape": {
+        "type": "null"
+      },
+      "preconditions": [
+        "history exists and matches document",
+        "redo stack not empty",
+        "current text equals redo top previous text"
+      ],
+      "transition": "Set text to redo top resulting text, increment document revision once, pop redo to undo, update expected_revision; preserve clean baseline.",
+      "result": "DocumentSnapshot",
+      "external_effects": [],
+      "rejection": "CommandRejected; document and history state preserved; no successful transition recorded",
+      "notes": [],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-CMD-07",
+      "action": "new",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-FILE-SESSION",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ],
+      "input_shape": {
+        "type": "object",
+        "exact_fields": {
+          "discard": "boolean"
+        }
+      },
+      "preconditions": [
+        "file session and history explicitly bound and current",
+        "if dirty, discard must be true"
+      ],
+      "transition": "Set document text to empty and clean baseline to empty; increment revision only if text changed; clear undo/redo and synchronize history; set path and expected disk digest to null.",
+      "result": "DocumentSnapshot",
+      "external_effects": [],
+      "rejection": "CommandRejected; document and history state preserved; no successful transition recorded",
+      "notes": [],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-CMD-08",
+      "action": "open",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-FILE-SESSION",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ],
+      "input_shape": {
+        "type": "object",
+        "exact_fields": {
+          "path": "absolute nonempty path string with no NUL",
+          "discard": "boolean"
+        }
+      },
+      "preconditions": [
+        "file session and history bound/current",
+        "if dirty, discard must be true",
+        "source path is readable; complete read+decode as UTF-8 succeeds before any state change (directory prohibited; symbolic-link source behavior depends on host)"
+      ],
+      "transition": "On successful host read, set document text and clean baseline to decoded UTF-8 text, revision increments if text differs; reset history; associate normalized path and SHA-256 of raw bytes.",
+      "result": "DocumentSnapshot",
+      "external_effects": [
+        "FS_READ"
+      ],
+      "rejection": "On read/decode failure, CommandRejected and leave document/history/file association unchanged",
+      "notes": [],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-CMD-09",
+      "action": "save",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-FILE-SESSION",
+        "N-DOCUMENT"
+      ],
+      "input_shape": {
+        "type": "null"
+      },
+      "preconditions": [
+        "file session/current history bound",
+        "active path exists",
+        "path not symlink",
+        "associated disk content matches expected hash",
+        "sibling temp write and replace successfully confirmed by host"
+      ],
+      "transition": "Only after confirmed write: keep document text and revision, set baseline=text and expected disk digest to hash of written UTF-8 bytes; preserve undo/redo history.",
+      "result": "DocumentSnapshot",
+      "external_effects": [
+        "FS_READ",
+        "FS_WRITE"
+      ],
+      "rejection": "Any file conflict or write failure is rejected; no confirmed clean baseline is recorded. Disk may have changed independently during non-atomic external events.",
+      "notes": [
+        "After successful disk replacement, document.mark_saved(expected_revision) requires unchanged document revision; a concurrent in-memory change can leave the write complete but baseline acknowledgment unconfirmed."
+      ],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-CMD-10",
+      "action": "save-as",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-FILE-SESSION",
+        "N-DOCUMENT"
+      ],
+      "input_shape": {
+        "type": "object",
+        "exact_fields": {
+          "path": "absolute nonempty path string with no NUL",
+          "overwrite": "boolean"
+        }
+      },
+      "preconditions": [
+        "file session/history bound",
+        "target not symlink",
+        "if existing target, overwrite=true",
+        "if target is current file, expected disk hash must match",
+        "host write/replace confirmed"
+      ],
+      "transition": "On confirmed write: update active path and expected hash, set clean baseline=text; document revision and history unchanged.",
+      "result": "DocumentSnapshot",
+      "external_effects": [
+        "FS_READ",
+        "FS_WRITE"
+      ],
+      "rejection": "When denied or host write fails, preserve document state and association; a failed host effect may have partially touched external filesystem.",
+      "notes": [
+        "After successful disk replacement, document.mark_saved(expected_revision) requires unchanged document revision; a concurrent in-memory change can leave the write complete but baseline acknowledgment unconfirmed."
+      ],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-CMD-11",
+      "action": "copy",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-CLIPBOARD-SELECTION",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ],
+      "input_shape": {
+        "type": "object",
+        "exact_fields": {
+          "start": "nonnegative integer",
+          "end": "nonnegative integer"
+        }
+      },
+      "preconditions": [
+        "clipboard and history bound/current",
+        "0<=start<end<=len(text)",
+        "host clipboard-write completes successfully",
+        "document and history still current after callback"
+      ],
+      "transition": "No document/history changes; clipboard host receives text[start:end].",
+      "result": "DocumentSnapshot",
+      "external_effects": [
+        "CLIPBOARD_WRITE"
+      ],
+      "rejection": "If host clipboard write fails or changes document, reject document edit; clipboard may already have changed",
+      "notes": [],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-CMD-12",
+      "action": "cut",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-CLIPBOARD-SELECTION",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ],
+      "input_shape": {
+        "type": "object",
+        "exact_fields": {
+          "start": "nonnegative integer",
+          "end": "nonnegative integer"
+        }
+      },
+      "preconditions": [
+        "clipboard/history bound/current",
+        "0<=start<end<=len(text)",
+        "successful clipboard write before edit",
+        "document/history unchanged during callback"
+      ],
+      "transition": "Clipboard receives selected text first, then delete selected range, increment revision once, record one undo transition; baseline unchanged.",
+      "result": "DocumentSnapshot",
+      "external_effects": [
+        "CLIPBOARD_WRITE"
+      ],
+      "rejection": "On clipboard failure no document edit; external clipboard might change even if stale-callback check rejects",
+      "notes": [],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-CMD-13",
+      "action": "paste",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-CLIPBOARD-SELECTION",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ],
+      "input_shape": {
+        "type": "object",
+        "exact_fields": {
+          "start": "nonnegative integer",
+          "end": "nonnegative integer"
+        }
+      },
+      "preconditions": [
+        "clipboard/history bound/current",
+        "0<=start<=end<=len(text)",
+        "host clipboard read returns plain string",
+        "document/history unchanged during callback"
+      ],
+      "transition": "Replace half-open range with host read string; increment revision exactly once if text changes, record one history transition.",
+      "result": "DocumentSnapshot",
+      "external_effects": [
+        "CLIPBOARD_READ"
+      ],
+      "rejection": "If host read fails/non-text or binding stale, reject without document mutation",
+      "notes": [],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-CMD-14",
+      "action": "select-all",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-CLIPBOARD-SELECTION",
+        "N-DOCUMENT"
+      ],
+      "input_shape": {
+        "type": "null"
+      },
+      "preconditions": [
+        "clipboard/history bound/current",
+        "payload is null"
+      ],
+      "transition": "No document/history/clipboard effect; return [0,len(text)) measured in Unicode codepoints.",
+      "result": "SelectionRange",
+      "external_effects": [],
+      "rejection": "CommandRejected; document and history state preserved; no successful transition recorded",
+      "notes": [],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-CMD-15",
+      "action": "find",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-SEARCH-REPLACE",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ],
+      "input_shape": {
+        "type": "object",
+        "exact_fields": {
+          "query": "nonempty string",
+          "start": "nonnegative integer",
+          "match_case": "boolean",
+          "wrap": "boolean",
+          "backwards": "boolean"
+        }
+      },
+      "preconditions": [
+        "search/history bound/current",
+        "0<=start<=len(text)",
+        "query nonempty"
+      ],
+      "transition": "Find literal, nonoverlapping regex-escaped query matches; match_case=false uses Python Unicode regex IGNORECASE. Forward chooses first start >= start, backward chooses last end <= start; wrap selects from opposite portion. No state change.",
+      "result": "MatchRange(start,end) or null",
+      "external_effects": [],
+      "rejection": "CommandRejected; document and history state preserved; no successful transition recorded",
+      "notes": [
+        "Unicode regex equivalence for unusual casefolds depends on specified Python regex profile; if interpreter lacks semantics, report UNDETERMINED, not an invented result"
+      ],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-CMD-16",
+      "action": "replace-one",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-SEARCH-REPLACE",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ],
+      "input_shape": {
+        "type": "object",
+        "exact_fields": {
+          "query": "nonempty string",
+          "replacement": "string",
+          "start": "nonnegative integer",
+          "end": "nonnegative integer",
+          "match_case": "boolean"
+        }
+      },
+      "preconditions": [
+        "search/history bound/current",
+        "0<=start<end<=len(text)",
+        "selected slice fully matches literal query under specified case semantics"
+      ],
+      "transition": "Replace selected range with replacement; commit one revision iff text changed; record one undo transition iff changed. Report match count=1 even if replacement leaves text unchanged.",
+      "result": "ReplaceResult(snapshot, count=1)",
+      "external_effects": [],
+      "rejection": "CommandRejected; document and history state preserved; no successful transition recorded",
+      "notes": [],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-CMD-17",
+      "action": "replace-all",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-SEARCH-REPLACE",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY"
+      ],
+      "input_shape": {
+        "type": "object",
+        "exact_fields": {
+          "query": "nonempty string",
+          "replacement": "string",
+          "match_case": "boolean"
+        }
+      },
+      "preconditions": [
+        "search/history bound/current",
+        "nonempty query"
+      ],
+      "transition": "Replace all nonoverlapping literal matches (Python Unicode regex case semantics); commit at most one document revision for the entire result; one history transition iff text changed; match count may be positive with no text change.",
+      "result": "ReplaceResult(snapshot, count=N)",
+      "external_effects": [],
+      "rejection": "CommandRejected; document and history state preserved; no successful transition recorded",
+      "notes": [
+        "Replacement is literal text, never an interpreted regex replacement template"
+      ],
+      "phase": "RUNTIME"
+    },
+    {
+      "gate_id": "G-UI-01",
+      "phase": "UI-PROJECTION",
+      "action": "surface-projection",
+      "participants": [
+        "N-EDITOR-SURFACE",
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-DOCUMENT"
+      ],
+      "input_shape": {
+        "type": "GUI event/paint request in Tk host profile"
+      },
+      "preconditions": [
+        "GUI event is mapped to one declared editor command and routed through BH then WH",
+        "only authoritative document snapshots may be projected as document text"
+      ],
+      "transition": "UI never owns a second authoritative document text. On guarded response, project snapshot and ephemeral selection/find-dialog state; prompting for discard/overwrite occurs in the UI before guarded intent is sent.",
+      "result": "Rendered editor text/dirty/path state or an explicitly reported rejected/undetermined UI action.",
+      "external_effects": [],
+      "rejection": "Blocked GUI intent is not silently dispatched to a Neutral state owner.",
+      "notes": [
+        "GUI modality, platform keyboard dispatch and real host paint require actual Tk observations; missing UI event details => UNDETERMINED."
+      ]
+    },
+    {
+      "gate_id": "G-BUILD-01",
+      "phase": "BUILD-CONFORMANCE",
+      "action": "candidate-review",
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "N-DOCUMENT",
+        "WH-COMMAND-GUARD",
+        "N-EDIT-HISTORY",
+        "N-EDITOR-SURFACE",
+        "N-FILE-SESSION",
+        "N-CLIPBOARD-SELECTION",
+        "N-SEARCH-REPLACE",
+        "WH-BLUEPRINT-GATE"
+      ],
+      "input_shape": {
+        "type": "Candidate source + reviewed spec + manifest + suite/environment"
+      },
+      "preconditions": [
+        "Candidate has nine distinct AnchorApplication IDs/types and preserved owner/effect/flow mappings",
+        "Required obligation IDs and inherited test identities retained",
+        "No admitted candidate without reviewed structural check and full unskipped local test execution"
+      ],
+      "transition": "WH-BLUEPRINT-GATE performs offline read-only conformance evaluation; does not mutate runtime document state or authorize filesystem/clipboard user effects; failure blocks readiness claim.",
+      "result": "Structural report plus separate test-run report (valid/invalid, executed/skipped/failed); not a Baker acceptance receipt.",
+      "external_effects": [],
+      "rejection": "When invalid or skipped/failed tests, report candidate not ready; do not claim full preservation.",
+      "notes": [
+        "Source-level checks are not semantic proof and cannot defend against a hostile developer editing the checker and manifest together."
+      ]
+    }
+  ],
+  "conformance": {
+    "expected_actions": [
+      "edit",
+      "insert",
+      "delete",
+      "read",
+      "undo",
+      "redo",
+      "new",
+      "open",
+      "save",
+      "save-as",
+      "copy",
+      "cut",
+      "paste",
+      "select-all",
+      "find",
+      "replace-one",
+      "replace-all"
+    ],
+    "required_gate_count": 19,
+    "requirements_not_equivalent_to_anchors": true,
+    "original_draft_obligations": 27,
+    "goal": "For known initial state + stimulus + explicit host observations, a separate LLM should derive result and state from these rules alone, or UNDETERMINED.",
+    "runtime_gate_count": 17,
+    "supporting_gate_count": 2
+  },
+  "limitations": [
+    "This contract is a reviewed design candidate, not a published KPP schema.",
+    "No actual LLM ensemble benchmark was run.",
+    "Local Python tests provide implementation evidence, not KPP formal Satisfaction or Baker acceptance."
+  ]
+}

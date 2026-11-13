@@ -1,0 +1,232 @@
+{
+  "schema": "notepad.gate-economy/1",
+  "status": "PROPOSED_PROJECT_PROJECTION_NOT_KPP_CANONICAL",
+  "source_contract": "LOGICAL-CONTRACT.json",
+  "source_condition_count": 19,
+  "anchor_count": 9,
+  "gate_family_count": 9,
+  "economy_rule": "Use the fewest independently necessary AnchorApplications AND GateConditions to cover all required variables, states, transitions, consequences, effects, failures, observable outputs and preservation truths. Before creating an additional Anchor or Gate, reconfigure and test the complete existing set for coverage and conflicts; do not reduce count by hiding distinct truth inside untestable prose.",
+  "immutable_source_rule_note": "This project extension does NOT rewrite the source-pinned N-RULE-ECONOMY singularity in KPP/MantleOS; replacing it requires a separately reviewed, versioned canonical source change.",
+  "relationship": "Nine reusable gate families are proposed groupings of the 19 existing condition clauses; all original IDs remain traceable and all conditions remain binding. An action can involve multiple gate families. The nine family count is a candidate, not mathematical proof of minimality.",
+  "gate_families": [
+    {
+      "id": "G-ADMISSION",
+      "purpose": "Admit exactly declared commands and payloads, no mutation before authorization.",
+      "actions": [
+        "edit",
+        "insert",
+        "delete",
+        "read",
+        "undo",
+        "redo",
+        "new",
+        "open",
+        "save",
+        "save-as",
+        "copy",
+        "cut",
+        "paste",
+        "select-all",
+        "find",
+        "replace-one",
+        "replace-all"
+      ],
+      "clauses": [
+        "G-CMD-04",
+        "G-CMD-14"
+      ],
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD"
+      ],
+      "must_not": "Unknown/invalid inputs cannot change authoritative state or claim effects."
+    },
+    {
+      "id": "G-COMMIT",
+      "purpose": "Only the authoritative document owner may commit text; preserve no-op and revision rules.",
+      "actions": [
+        "edit",
+        "insert",
+        "delete",
+        "cut",
+        "paste",
+        "replace-one",
+        "replace-all",
+        "undo",
+        "redo"
+      ],
+      "clauses": [
+        "G-CMD-01",
+        "G-CMD-02",
+        "G-CMD-03"
+      ],
+      "participants": [
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY",
+        "WH-COMMAND-GUARD"
+      ],
+      "must_not": "One user command cannot create multiple document revisions except an explicitly multi-command stimulus sequence."
+    },
+    {
+      "id": "G-HISTORY",
+      "purpose": "Undo/redo and editing history must remain bound to the document revision.",
+      "actions": [
+        "edit",
+        "insert",
+        "delete",
+        "undo",
+        "redo",
+        "cut",
+        "paste",
+        "replace-one",
+        "replace-all",
+        "new",
+        "open"
+      ],
+      "clauses": [
+        "G-CMD-05",
+        "G-CMD-06"
+      ],
+      "participants": [
+        "N-EDIT-HISTORY",
+        "N-DOCUMENT",
+        "WH-COMMAND-GUARD"
+      ],
+      "must_not": "Do not replay stale history, retain redo after a new effective edit, or clear history when saving."
+    },
+    {
+      "id": "G-SESSION",
+      "purpose": "User confirmation and baseline/file-session lifecycle are coherent.",
+      "actions": [
+        "new",
+        "open",
+        "save",
+        "save-as"
+      ],
+      "clauses": [
+        "G-CMD-07"
+      ],
+      "participants": [
+        "N-FILE-SESSION",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY",
+        "WH-COMMAND-GUARD"
+      ],
+      "must_not": "Do not discard dirty text without confirmation or treat a failed save as clean."
+    },
+    {
+      "id": "G-FILE-EFFECT",
+      "purpose": "File path, conflict, read/decode, and verified virtual host operations.",
+      "actions": [
+        "open",
+        "save",
+        "save-as"
+      ],
+      "clauses": [
+        "G-CMD-08",
+        "G-CMD-09",
+        "G-CMD-10"
+      ],
+      "participants": [
+        "N-FILE-SESSION",
+        "WH-COMMAND-GUARD"
+      ],
+      "must_not": "Never claim an external host read/write without observed success; virtual writes are not real saves."
+    },
+    {
+      "id": "G-CLIPBOARD-EFFECT",
+      "purpose": "Atomic selection/clipboard read/write semantics and callback ordering.",
+      "actions": [
+        "copy",
+        "cut",
+        "paste"
+      ],
+      "clauses": [
+        "G-CMD-11",
+        "G-CMD-12",
+        "G-CMD-13"
+      ],
+      "participants": [
+        "N-CLIPBOARD-SELECTION",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY",
+        "WH-COMMAND-GUARD"
+      ],
+      "must_not": "Do not modify text when a required clipboard operation fails."
+    },
+    {
+      "id": "G-SEARCH",
+      "purpose": "Literal selection, find and replace semantics including Unicode and one-undo replace-all.",
+      "actions": [
+        "find",
+        "replace-one",
+        "replace-all"
+      ],
+      "clauses": [
+        "G-CMD-15",
+        "G-CMD-16",
+        "G-CMD-17"
+      ],
+      "participants": [
+        "N-SEARCH-REPLACE",
+        "N-DOCUMENT",
+        "N-EDIT-HISTORY",
+        "WH-COMMAND-GUARD"
+      ],
+      "must_not": "Do not mutate document state for a find or miscount replacements."
+    },
+    {
+      "id": "G-UI-PROJECTION",
+      "purpose": "Presentation reflects document snapshots but owns no authoritative document text.",
+      "actions": [
+        "edit",
+        "insert",
+        "delete",
+        "read",
+        "undo",
+        "redo",
+        "new",
+        "open",
+        "save",
+        "save-as",
+        "copy",
+        "cut",
+        "paste",
+        "select-all",
+        "find",
+        "replace-one",
+        "replace-all"
+      ],
+      "clauses": [
+        "G-UI-01"
+      ],
+      "participants": [
+        "N-EDITOR-SURFACE",
+        "BH-EDITOR-INPUT",
+        "WH-COMMAND-GUARD",
+        "N-DOCUMENT"
+      ],
+      "must_not": "Never treat a UI buffer or unsaved display draft as authoritative committed state."
+    },
+    {
+      "id": "G-BUILD-CONFORMANCE",
+      "purpose": "Offline preservation and test evidence precede candidate readiness.",
+      "actions": [],
+      "clauses": [
+        "G-BUILD-01"
+      ],
+      "participants": [
+        "BH-EDITOR-INPUT",
+        "N-DOCUMENT",
+        "WH-COMMAND-GUARD",
+        "N-EDIT-HISTORY",
+        "N-EDITOR-SURFACE",
+        "N-FILE-SESSION",
+        "N-CLIPBOARD-SELECTION",
+        "N-SEARCH-REPLACE",
+        "WH-BLUEPRINT-GATE"
+      ],
+      "must_not": "Structural validation or a skipped suite never by itself establishes full runtime correctness."
+    }
+  ]
+}
