@@ -1,0 +1,53 @@
+{
+  "schema": "anchor.transition-trace/1",
+  "authority": "NONE",
+  "baker_acceptance": "NOT_GRANTED",
+  "contract_ref": "Notepad Fidelity 9 logical contract (illustrative, not executed)",
+  "initial_state": {
+    "text": "",
+    "revision": 0,
+    "dirty": false
+  },
+  "steps": [
+    {
+      "id": "S1",
+      "stimulus": {
+        "action": "insert",
+        "payload": {
+          "text": "Hello"
+        }
+      },
+      "before": {
+        "text": "",
+        "revision": 0,
+        "dirty": false
+      },
+      "gate": {
+        "family": "G-COMMIT",
+        "decision": "admit",
+        "clauses": [
+          "G-CMD-02"
+        ]
+      },
+      "transition": "changed",
+      "after": {
+        "text": "Hello",
+        "revision": 1,
+        "dirty": true
+      },
+      "effects": [],
+      "output": {
+        "kind": "snapshot"
+      },
+      "evidence": {
+        "kind": "none",
+        "ref": null
+      }
+    }
+  ],
+  "final_state": {
+    "text": "Hello",
+    "revision": 1,
+    "dirty": true
+  }
+}
