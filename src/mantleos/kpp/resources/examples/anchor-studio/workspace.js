@@ -25,4 +25,25 @@ ui('graph').addEventListener('pointermove',e=>{if(!dragging||Math.hypot(e.client
 ui('graph').addEventListener('pointerup',()=>{if(!dragging)return;const d=dragging;dragging=null;if(d.position){const p=currentProject();p.layout[d.id]=d.position;ui('project').value=JSON.stringify(p,null,2);markDraft();renderWorkspace();}else inspectApp(d.id);});
 ui('graph').addEventListener('pointercancel',()=>{dragging=null;renderWorkspace();});
 function studioStatus(s){ui('personaName').textContent=s.persona?.name||'Resident AppAI (verification pending)';ui('life').textContent=s.phase||'Unavailable';ui('heartCount').textContent=s.heartbeats??'—';ui('limbCount').textContent=s.limbs?.length??'—';const automatic=s.mind_route==='OPENROUTER_OWNER_CONFIGURED';ui('mindState').textContent=s.pending_mind?(automatic?'THINKING':'AWAITING HOST'):(automatic?'AUTOMATIC':'SUPERVISED');ui('mindRouteDescription').textContent=automatic?'Configured MIND · replies appear after durable commit.':'Supervised chat bridge · replies appear after durable commit.';const cards=ui('limbCards');cards.replaceChildren();for(const m of s.limb_runtime?.members||[]){const card=document.createElement('div');card.className='limb';card.textContent=m.id+' · '+(m.enabled?'enabled':'disabled');const detail=document.createElement('small');detail.textContent=m.identity;card.append(detail);cards.append(card);}}
+async function exportSavedRecipe(){
+ const button=ui('exportRecipe'),status=ui('recipeExportStatus');
+ button.disabled=true;
+ status.textContent='Reading the saved project…';
+ try{
+  const result=await api('recipe-export');
+  if(result.error)throw Error(result.error);
+  const url=URL.createObjectURL(new Blob([result.source],{type:'application/json;charset=utf-8'}));
+  const link=document.createElement('a');
+  link.href=url;
+  link.download=result.id+'.json';
+  link.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  status.textContent='Downloaded the Recipe from saved revision '+result.revision.slice(0,12)+'.';
+ }catch(error){
+  status.textContent=error.message;
+ }finally{
+  button.disabled=false;
+ }
+}
+ui('exportRecipe').addEventListener('click',exportSavedRecipe);
 renderWorkspace();

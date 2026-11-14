@@ -15,6 +15,25 @@ class StudioProjectTests(unittest.TestCase):
         recipe=json.loads((root/'src/mantleos/kpp/resources/recipes/journal-engram-design.json').read_text('utf8'))
         self.value=dict(schema=s.SCHEMA,id='Studio-Demo',recipe=recipe,layout={},unresolved=[],provenance=[],evidence=[])
 
+    def test_recipe_handoff_uses_saved_revision_and_resolved_design(self):
+        from mantleos import json_contract as contract, studio
+
+        with tempfile.TemporaryDirectory() as td:
+            nest = Path(td)
+            with self.assertRaisesRegex(ValueError, 'Save a project'):
+                studio.dispatch(nest, {'op': 'recipe_export'})
+            project = nest / 'project.json'
+            project.write_text(contract.canonical(self.value), encoding='utf-8')
+            result = studio.dispatch(nest, {'op': 'recipe_export'})
+            self.assertEqual(result['revision'], contract.digest(self.value))
+            self.assertEqual(contract.loads(result['source']), self.value['recipe'])
+            self.assertEqual(result['id'], self.value['recipe']['id'])
+            apps = self.value['recipe']['anchor_design']['applications']
+            self.value['unresolved'] = [{'from': apps[0]['id'], 'to': apps[1]['id']}]
+            project.write_text(contract.canonical(self.value), encoding='utf-8')
+            with self.assertRaisesRegex(ValueError, 'Resolve and save'):
+                studio.dispatch(nest, {'op': 'recipe_export'})
+
     def test_roundtrip_is_deterministic_and_not_accepted(self):
         with tempfile.TemporaryDirectory() as td:
             a=Path(td)/'a.anchorstudio';b=Path(td)/'b.anchorstudio'

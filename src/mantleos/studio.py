@@ -308,7 +308,8 @@ def dispatch(nest,request):
         return {'admitted': True}
     allowed={'status':status,'boot':boot,'phase':phase,'event':event,'intention':intention,
              'conversation':conversation,'submit':submit,'mind_pending':mind_pending,'pulse':pulse,'work':work,
-             'publish_intentions':publish_intentions,'result':committed_result,'project_get':project_get,'project_set':project_set,'flow_draft':flow_draft,'kpp_prepare':kpp_prepare,
+             'publish_intentions':publish_intentions,'result':committed_result,'project_get':project_get,'project_set':project_set,
+             'recipe_export':recipe_export,'flow_draft':flow_draft,'kpp_prepare':kpp_prepare,
              'demo_test':demo_test,'demo_accept':demo_accept,'project_bundle':project_bundle,'project_import':project_import}
     if op not in allowed:raise ValueError('Unsupported Studio operation')
     return allowed[op](nest,**args)
@@ -399,6 +400,17 @@ def project_set(nest,value,expected_revision):
         if old.get('revision')!=expected_revision:raise ValueError('Stale project revision')
         atomic_bytes(Path(nest)/'project.json',c.canonical(value).encode(),replace=True)
     return project_get(nest)
+
+
+def recipe_export(nest):
+    saved = project_get(nest)
+    if 'project' not in saved:
+        raise ValueError('Save a project before exporting its Recipe')
+    project = saved['project']
+    if project['unresolved']:
+        raise ValueError('Resolve and save the project relationships before exporting the Recipe')
+    recipe = project['recipe']
+    return {'id': recipe['id'], 'revision': saved['revision'], 'source': c.canonical(recipe) + '\n'}
 
 
 def project_bundle(nest):

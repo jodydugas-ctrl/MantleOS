@@ -83,6 +83,7 @@ async function resultFor(request_id){const result=await call('result',{request_i
 route('get','/studio/result/:id',req=>resultFor(req.params.id));
 route('get','/studio/mind-status',()=>mind?mind.call('status'):({route:'SUPERVISED_HOST_ONLY'}));
 route('get','/studio/project',()=>call('project_get'));
+route('get','/studio/recipe-export',()=>call('recipe_export'));
 app.get('/studio/download',async(req,res)=>{try{const r=await call('project_bundle');res.setHeader('Content-Disposition','attachment; filename=Anchor-Studio-Demo.anchorstudio');res.type('application/zip').send(Buffer.from(r.base64,'base64'));}catch(e){res.status(400).json({error:e.message});}});
 route('post','/studio/project-import',req=>call('project_import',{encoded:req.body.encoded,expected_revision:req.body.revision}));
 route('post','/studio/kpp-prepare',()=>call('kpp_prepare'));

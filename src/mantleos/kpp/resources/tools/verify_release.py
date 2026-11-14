@@ -3,6 +3,8 @@ import hashlib
 import json
 from pathlib import Path
 
+from export_kpp import studio_output
+
 root=Path(__file__).resolve().parents[1]
 manifest=json.loads((root/'SHA256SUMS.json').read_text(encoding='utf-8'))
 if manifest.get('schema')!='kpp.release-files/1' or not isinstance(manifest.get('files'),dict):
@@ -19,7 +21,7 @@ SKIP={'.git','__pycache__','.pytest_cache','.venv','dist','build','workspaces'}
 observed=set()
 for path in root.rglob('*'):
     rel=path.relative_to(root)
-    if any(part in SKIP or part.endswith('.egg-info') for part in rel.parts):
+    if studio_output(rel) or any(part in SKIP or part.endswith('.egg-info') for part in rel.parts):
         continue
     if path.is_symlink():
         raise SystemExit('UNEXPECTED SYMLINK '+rel.as_posix())

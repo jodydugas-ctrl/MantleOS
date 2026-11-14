@@ -84,6 +84,10 @@ their own terms, including reserved rights. See [component notices](THIRD-PARTY-
 and [licensing details](docs/PROJECT.md#provenance-and-licensing).
 
 
+[AnchorForge Studio](examples/anchorforge-studio/) is an optional local browser
+GUI for the AnchorForge Organ. Inspect documents with native KPP, draft Recipe
+and review pairs, and read the Chase step for an existing workspace.
+
 The [Notepad Save organ demonstration](docs/ORGAN-SAVE.md) connects recipe-owned
 organs, fresh source observations, real browser checks and reviewed source
 replacement/restoration. Run `python tools/check_organ_save.py --output NEW_DIR

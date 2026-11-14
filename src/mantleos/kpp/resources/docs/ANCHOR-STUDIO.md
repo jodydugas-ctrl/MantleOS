@@ -103,6 +103,13 @@ evidence is historical, acceptance is cleared, and import never deploys flows or
 executes fixture code. Save excludes live memories, original persona, credentials,
 operational flows and transcripts. Owners must review fixture contents for privacy.
 
+In **Contracts → AnchorForge handoff**, **Download saved KPP Recipe** exports the
+Recipe from the saved project revision after its relationships are resolved.
+Open that JSON file in the [AnchorForge Studio workbench](https://github.com/jodydugas-ctrl/Kitchen-Party-Protocol/tree/main/examples/anchorforge-studio)
+to generate a KPP work packet or propose append-only obligations. The extended
+Recipe and its matching review are separate downloads for Baker review.
+
+
 ## Recovery and source review
 
 First stop the controller and prove workers have exited. Keep consistent SQLite
