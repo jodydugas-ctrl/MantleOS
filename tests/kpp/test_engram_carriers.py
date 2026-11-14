@@ -8,6 +8,7 @@ from mantleos import cartridge, chromamem, engram, lifecycle
 from mantleos.kpp import engram_carriers as ec
 from mantleos.kpp import artifacts
 from mantleos.kpp.pantry import view, discover
+from mantleos.transactions import atomic_bytes
 
 ROOT=next(p for p in Path(__file__).resolve().parents if (p/'src/mantleos').is_dir())
 PANTRY=ec.PERSONA.parent.parent
@@ -71,6 +72,16 @@ class EngramCarrierTests(unittest.TestCase):
             self.assertEqual(result.returncode,0,result.stderr.decode(errors='replace'))
             outputs.append(json.loads(result.stdout)['identity'])
         self.assertNotEqual(*outputs)
+
+    def test_atomic_carrier_replacement_preserves_exact_bytes(self):
+        carrier = self.work / 'replace.vcw'
+        carrier.write_bytes(b'old\r\nbytes')
+        expected = (self.work / 'sample.vcw').read_bytes()
+        atomic_bytes(carrier, expected)
+        self.assertEqual(carrier.read_bytes(), expected)
+        self.assertEqual(list(self.work.glob('.replace.vcw.*')), [])
+        cartridge.unpack(carrier, self.work / 'replaced-vcw')
+        cartridge.verify(self.work / 'replaced-vcw')
 
     def test_corrupt_carriers(self):
         bad=self.work/'corrupt.png'

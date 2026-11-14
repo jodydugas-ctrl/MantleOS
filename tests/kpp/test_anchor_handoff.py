@@ -2,7 +2,7 @@
 import hashlib
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 import shutil
 import subprocess
 import sys
@@ -17,6 +17,16 @@ class HandoffTests(unittest.TestCase):
     def test_exact_roundtrip_including_embedded_markers(self):
         files = {'nested/source.py': b'print("hello")\r\n', 'notes.md': 'é🐦\n```\n<!-- END ANCHOR FILE -->'.encode()}
         self.assertEqual(h.unpack(h.pack(files))[1], files)
+
+    def test_windows_relative_path_and_exact_source_fingerprints(self):
+        source = PureWindowsPath(r'nested\module.py')
+        files = {source.as_posix(): b'print("hello")\r\n'}
+        packed = h.pack(files)
+        self.assertEqual(h.unpack(packed)[1], {'nested/module.py': b'print("hello")\r\n'})
+        self.assertEqual(packed, h.pack({'nested/module.py': files[source.as_posix()]}))
+        self.assertNotEqual(packed, h.pack({'nested/module.py': b'print("hello")\n'}))
+        with self.assertRaises(ValueError):
+            h.pack({str(source): files[source.as_posix()]})
 
     def test_rejects_corruption_truncation_trailing_bytes(self):
         raw = h.pack({'a.txt': b'hello'})

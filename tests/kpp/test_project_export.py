@@ -52,7 +52,11 @@ class ProjectExportTests(unittest.TestCase):
         self.assertIn('LicenseRef-MantleOS-Reserved', metadata['project']['license'])
         for name in ('LICENSE', 'THIRD-PARTY-NOTICES.md', 'shared/licenses/MantleOS/LICENSE'):
             self.assertIn(name, files)
-        self.assertEqual(files['.gitattributes'].splitlines()[-1], b'* -text')
+        attributes = [line for line in files['.gitattributes'].splitlines()
+                      if line and not line.startswith(b'#')]
+        self.assertEqual(attributes[0], b'* -text')
+        self.assertIn(b'*.[vV][cC][wW] binary', attributes)
+        self.assertIn(b'*.[pP][nN][gG] binary', attributes)
 
     def test_export_is_reproducible_from_the_new_primary_project(self):
         exporter = load(ROOT / 'tools/export_kpp.py', 'project_export_roundtrip')
