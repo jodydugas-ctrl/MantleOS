@@ -2,8 +2,8 @@
 from concurrent.futures import ThreadPoolExecutor
 from collections import Counter, defaultdict
 import json
-import os
-from pathlib import Path
+from pathlib import Path, PurePosixPath
+import posixpath
 import sqlite3
 import subprocess
 import sys
@@ -66,15 +66,15 @@ def connect_graph(nodes):
             name = n["attributes"].get("module", "")
             if n["path"].endswith((".py", ".pyi", ".pyw")):
                 level = n["attributes"].get("level", 0)
-                parent = Path(n["path"]).parent
+                parent = PurePosixPath(n["path"]).parent
                 if level:
                     for _ in range(level - 1): parent = parent.parent
                     base = parent / name.replace(".", "/")
                 else:
-                    base = Path(name.replace(".", "/"))
-                candidates = [str(base).replace("\\", "/") + ".py", (base / "__init__.py").as_posix()]
+                    base = PurePosixPath(name.replace(".", "/"))
+                candidates = [base.as_posix() + ".py", (base / "__init__.py").as_posix()]
             elif name.startswith("."):
-                base = os.path.normpath(str(Path(n["path"]).parent / name)).replace("\\", "/")
+                base = posixpath.normpath(str(PurePosixPath(n["path"]).parent / name))
                 candidates = [base] + [base + x for x in (".ts", ".tsx", ".js", ".jsx")] + [base + "/index.ts", base + "/index.js"]
             else:
                 candidates = []

@@ -1,6 +1,8 @@
 """Pure contract evidence tests; no LLM, host effects or application execution."""
 from copy import deepcopy
-from hashlib import sha256
+import json
+from pathlib import Path
+import tempfile
 import unittest
 from mantleos import anchor_logic_evidence as e
 
@@ -37,6 +39,31 @@ class TestAnchorLogicalEvidence(unittest.TestCase):
         self.assertEqual((8,8),(report['field_checks_excluding_reason_text'],report['field_matches_excluding_reason_text']))
         self.assertEqual('NOT_PERFORMED',report['implementation_verification'])
         self.assertIn('UNVERIFIED',report['model_independence'])
+
+    def test_cli_scores_lf_and_crlf_identically_and_preserves_unicode(self):
+        text = 'Café 🐦\r\nline\u0085next\u2028paragraph\u2029end'
+        self.first['state']['value'] = text
+        self.key['answers'][0]['expected']['state']['value'] = text
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            reports = []
+            for newline, label in (('\n', 'lf'), ('\r\n', 'crlf')):
+                public = root / 'challenge.json'
+                key = root / 'sealed.json'
+                responses = root / 'responses.jsonl'
+                report = root / f'{label}-report.json'
+                for path, data in ((public, self.public), (key, self.key)):
+                    raw = json.dumps(data, indent=2, ensure_ascii=False) + '\n'
+                    path.write_bytes(raw.replace('\n', newline).encode('utf-8'))
+                rows = [e.canonical(row) for row in (self.first, self.second)]
+                responses.write_bytes((newline.join(rows) + newline).encode('utf-8'))
+                self.assertEqual(e.parse_responses(responses)['T01']['state']['value'], text)
+                self.assertEqual(e.main(['--challenge', str(public), '--key', str(key),
+                                         '--responses', str(responses), '--out', str(report)]), 0)
+                reports.append(report.read_bytes())
+            self.assertEqual(reports[0], reports[1])
+            self.assertNotIn(b'\r\n', reports[0])
+            self.assertEqual(json.loads(reports[0])['prediction_match_trials'], 2)
 
     def test_wrong_state_is_detected(self):
         changed=deepcopy(self.first); changed['state']['value']='wrong'

@@ -1,2 +1,12 @@
 # Preserve exact pinned source bytes, including inherited line endings.
 * -text
+
+# Image and cartridge payloads are opaque binary, regardless of extension case.
+*.[pP][nN][gG] binary
+*.[jJ][pP][gG] binary
+*.[jJ][pP][eE][gG] binary
+*.[wW][eE][bB][pP] binary
+*.[gG][iI][fF] binary
+*.[bB][mM][pP] binary
+*.[vV][cC][wW] binary
+*.[rR][vV][cC][aA][rR] binary

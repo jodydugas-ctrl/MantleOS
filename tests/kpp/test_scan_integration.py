@@ -33,6 +33,24 @@ class SharedScanIntegration(unittest.TestCase):
         self.assertEqual(serial['graph'],explicit['graph'])
         self.assertFalse(serial['graph']['scope']['specimen_executed'])
 
+    def test_nested_import_bindings_use_portable_paths(self):
+        sources = {
+            'lib/tools.py': 'def hello(): return 1\n',
+            'lib/main.py': 'from .tools import hello\n',
+            'lib/tools.js': 'export function hello() { return 1; }\n',
+            'lib/sub/main.js': 'import {hello} from "../tools.js";\n',
+        }
+        for name, source in sources.items():
+            path = self.source / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(source, encoding='utf-8', newline='\n')
+        graph = native.scan(self.source, self.root / 'imports')['graph']
+        paths = {node['id']: node['path'] for node in graph['nodes']}
+        bindings = {(paths[e['src']], paths[e['dst']]) for e in graph['edges']
+                    if e['kind'] == 'possible_import'}
+        self.assertEqual(bindings, {('lib/main.py', 'lib/tools.py'),
+                                    ('lib/sub/main.js', 'lib/tools.js')})
+
     def test_barrier_proves_captured_file_extraction_overlap(self):
         barrier=Barrier(2,timeout=5);original=native.extract
         def extract(path,*args,**kwargs):

@@ -49,7 +49,9 @@ def parse_json(path):
 def parse_responses(path):
     """Parse bounded JSONL, rejecting duplicate keys and duplicate trial IDs."""
     result = {}
-    for index, line in enumerate(_read(path).splitlines(), 1):
+    # JSONL uses LF (with an optional preceding CR). Unicode line separators
+    # inside JSON strings are data, so splitlines() would corrupt a record.
+    for index, line in enumerate(_read(path).split('\n'), 1):
         if not line.strip():
             continue
         value = json.loads(line, object_pairs_hook=_unique,
@@ -221,7 +223,7 @@ def main(argv=None):
     parser.add_argument('--out',required=True)
     args=parser.parse_args(argv)
     result=evaluate(parse_json(args.challenge),parse_json(args.key),parse_responses(args.responses))
-    with Path(args.out).open('x',encoding='utf-8') as f:
+    with Path(args.out).open('x', encoding='utf-8', newline='\n') as f:
         f.write(json.dumps(result,indent=2,ensure_ascii=False)+'\n')
     print(json.dumps({k:v for k,v in result.items() if k!='trials'},sort_keys=True))
     return 0
