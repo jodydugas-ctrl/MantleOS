@@ -11,7 +11,7 @@ def specimen():
     step = {
         "id": "S1",
         "stimulus": {"action": "insert", "payload": {"text": "Hello"}},
-        "before": before,
+        "before": copy.deepcopy(before),
         "gate": {"family": "G-COMMIT", "decision": "admit", "clauses": ["G-CMD-02"]},
         "transition": "changed",
         "after": after,
